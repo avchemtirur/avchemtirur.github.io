@@ -1,134 +1,301 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>H4 Tile Adhesive & Waterproofing | AV Chem Tirur</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AV Chem Tirur — H4 Tile Adhesive & Waterproofing</title>
 
-<style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: #f0f2f5;
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --purple: #6A1B9A;
+      --purple-2: #8E24AA;
+      --yellow: #FDD835;
+      --bg: #f4f7fb;
+      --card: #ffffff;
+      --muted:#6b6b6b;
+      --max:1100px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:'Inter',system-ui,Arial,sans-serif;
+      background: linear-gradient(180deg,#fbfdff 0%, #f4f7fb 100%);
+      color:#121212;
+      -webkit-font-smoothing:antialiased;
     }
 
-    /* Header */
-    header {
-        background: linear-gradient(90deg, #008c4a, #00b894);
-        padding: 20px;
-        text-align: center;
-        color: white;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    /* HEADER - centered */
+    header{
+      background: linear-gradient(90deg,var(--purple),var(--purple-2));
+      color:var(--yellow);
+      padding:18px 12px;
+      position:sticky; top:0; z-index:60;
+      box-shadow:0 6px 18px rgba(0,0,0,0.12);
     }
+    .header-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      gap:14px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+    img.logo{
+      width:84px;height:84px;border-radius:12px;background:rgba(255,255,255,0.06);padding:8px;object-fit:contain;
+      box-shadow:0 8px 24px rgba(0,0,0,0.12);transition:transform .25s;
+    }
+    img.logo:hover{transform:scale(1.03) rotate(-4deg)}
+    header h1{margin:0;font-size:18px;font-weight:700;letter-spacing:0.2px}
 
-    header img {
-        width: 90px;
-        border-radius: 12px;
+    /* TOP CTA sticky bar (just below header) */
+    .top-cta{
+      position:sticky;
+      top:84px; /* header height approx */
+      z-index:55;
+      background:#fff;
+      border-bottom:4px solid var(--purple);
+      box-shadow:0 6px 18px rgba(10,10,10,0.04);
     }
+    .top-cta .inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:10px 14px;
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .cta-btn{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      padding:10px 16px;
+      border-radius:10px;
+      font-weight:800;
+      text-decoration:none;
+      font-size:15px;
+      box-shadow:0 8px 20px rgba(0,0,0,0.08);
+    }
+    .cta-call{ background:var(--purple); color:var(--yellow); }
+    .cta-ws{ background:var(--yellow); color:#000; font-weight:800; }
 
-    header h1 {
-        margin: 10px 0 0;
-        font-size: 22px;
-        font-weight: bold;
-    }
+    /* Main container */
+    .container{max-width:var(--max);margin:16px auto;padding:0 16px 80px}
 
-    /* Sections */
-    .section {
-        background: white;
-        margin: 15px;
-        padding: 18px;
-        border-radius: 10px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    .card{
+      background:var(--card);
+      border-radius:10px;
+      padding:18px;
+      margin-bottom:18px;
+      box-shadow:0 8px 28px rgba(15,15,15,0.04);
+      border-left:6px solid var(--yellow);
+      animation:fadeIn .5s ease both;
     }
+    @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+    .card h2{margin:0 0 10px 0;color:var(--purple);font-size:18px}
+    .muted{color:var(--muted);line-height:1.6}
+    ul{margin:8px 0 0 18px}
+    li{margin:6px 0}
 
-    h2 {
-        color: #008c4a;
-    }
+    .grid-2{display:grid;grid-template-columns:1fr 340px;gap:18px}
+    @media(max-width:900px){.grid-2{grid-template-columns:1fr}}
+    .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    @media(max-width:720px){.gallery{grid-template-columns:repeat(2,1fr)}}
+    .gallery img{width:100%;height:110px;object-fit:cover;border-radius:8px;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,0.08);transition:transform .2s}
+    .gallery img:hover{transform:scale(1.03)}
 
-    /* Footer */
-    footer {
-        background: #222;
-        color: white;
-        text-align: center;
-        padding: 15px;
-        margin-top: 20px;
-        font-size: 14px;
-    }
+    /* Price table */
+    .price-table{border-radius:8px;overflow:hidden;border:1px solid rgba(0,0,0,0.06)}
+    .price-row{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid rgba(0,0,0,0.04);background:linear-gradient(180deg,#fff,#fff)}
+    .price-row strong{color:var(--purple)}
+    .price-cta{display:inline-block;background:var(--purple);color:var(--yellow);padding:8px 12px;border-radius:8px;text-decoration:none;font-weight:800}
 
-    /* Floating Buttons */
-    .whatsapp-btn, .call-btn {
-        position: fixed;
-        bottom: 20px;
-        width: 55px;
-        height: 55px;
-        border-radius: 50%;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-size: 26px;
-        text-decoration: none;
-        z-index: 999;
-    }
+    /* Contact form */
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    @media(max-width:720px){.form-row{grid-template-columns:1fr}}
+    input,textarea,button{font-family:inherit;border:1px solid rgba(0,0,0,0.08);padding:10px 12px;border-radius:8px;outline:none}
+    textarea{min-height:120px;resize:vertical}
+    .btn{background:var(--purple);color:var(--yellow);padding:10px 14px;border-radius:8px;border:none;font-weight:800;cursor:pointer}
 
-    .whatsapp-btn {
-        right: 20px;
-        background: #25D366;
-    }
+    /* FAB (optional) */
+    .fab{position:fixed;right:18px;bottom:18px;display:flex;flex-direction:column;gap:12px;z-index:120}
+    .fab a{display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:50%;text-decoration:none;color:#fff;font-size:20px;box-shadow:0 12px 30px rgba(0,0,0,0.18)}
+    .fab .call{background:var(--purple)}
+    .fab .wa{background:var(--yellow);color:#000;border:3px solid rgba(0,0,0,0.04)}
 
-    .call-btn {
-        right: 85px;
-        background: #008C4A;
-    }
-</style>
+    footer{margin-top:20px;padding:18px 8px;text-align:center;background:#111;color:#fff;border-top:4px solid var(--purple);font-size:13px}
+
+    .small{font-size:13px;color:var(--muted)}
+    a.link{color:var(--purple);text-decoration:none;font-weight:700}
+  </style>
 </head>
-
 <body>
 
-<header>
-    <img src="AV.png" alt="Logo">
-    <h1>H4 Tile Adhesive & Waterproofing Solutions</h1>
-</header>
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <div style="text-align:center">
+        <img src="AV.png" alt="AV Chem logo" class="logo">
+      </div>
+      <div style="text-align:center">
+        <h1>H4 Tile Adhesive & Waterproofing</h1>
+        <div style="font-size:13px;color:rgba(255,255,255,0.92)">Quality adhesives • Waterproofing • Construction Chemicals</div>
+      </div>
+    </div>
+  </header>
 
-<div class="section">
-    <h2>About Us</h2>
-    <p>AV Chem – H4 Tile Adhesive & Waterproofing Solutions is a leading manufacturer & supplier of premium tile adhesives, waterproofing chemicals, floor coatings and construction materials in Kerala.</p>
-</div>
+  <!-- TOP CTA (sticky under header) -->
+  <div class="top-cta" role="region" aria-label="Quick actions">
+    <div class="inner">
+      <a class="cta-btn cta-call" href="tel:+917907344030">📞 Call Now</a>
+      <a class="cta-btn cta-ws" href="https://wa.me/919745838382?text=Hello%20AV%20Chem" target="_blank" rel="noopener">💬 WhatsApp Chat</a>
+      <span class="small" style="margin-left:8px;color:#444">Or scroll to contact for enquiry form</span>
+    </div>
+  </div>
 
-<div class="section">
-    <h2>Our Products</h2>
-    <ul>
-        <li>H4 Tile Adhesive – Ceramic / Vitrified / Granite / Marble</li>
-        <li>Premium Tile Adhesive for large tiles</li>
-        <li>H4 Waterproofing Solutions – Bathroom, Terrace, Roof, Wall & Tank</li>
-        <li>Leakage Repair & Crack Filling Services</li>
-        <li>H4 Waterproof Mix & Dry Mix Products</li>
-        <li>Floor Coating & Construction Chemicals</li>
-    </ul>
-</div>
+  <!-- MAIN -->
+  <main class="container">
 
-<div class="section">
-    <h2>Service Locations</h2>
-    <p>Tirur, Kottakkal, BP Angadi, Kuttippuram, Tanur, Ponnani & Nearby Areas.</p>
-</div>
+    <section class="card">
+      <h2>About Us</h2>
+      <p class="muted">AV Chem – H4 Tile Adhesive & Waterproofing Solutions is a leading manufacturer & supplier of premium tile adhesives, waterproofing chemicals, floor coatings and construction materials in Kerala. We focus on durability, easy application and excellent customer support.</p>
+    </section>
 
-<div class="section">
-    <h2>Contact Us</h2>
-    <p><b>Phone:</b> +91 79073 44030<br>
-       <b>WhatsApp:</b> +91 97458 38382<br>
-       <b>Factory Address:</b> Kannamkulam, Tirur, Malappuram</p>
-</div>
+    <div class="grid-2">
+      <div>
+        <section class="card" id="products">
+          <h2>Our Products</h2>
+          <ul>
+            <li>H4 Tile Adhesive – Ceramic / Vitrified / Granite / Marble</li>
+            <li>Premium Tile Adhesive for large tiles</li>
+            <li>H4 Waterproofing Solutions – Bathroom, Terrace, Roof, Wall & Tank</li>
+            <li>Leakage Repair & Crack Filling Services</li>
+            <li>H4 Waterproof Mix & Dry Mix Products</li>
+            <li>Floor Coating & Construction Chemicals</li>
+          </ul>
+        </section>
 
-<footer>
+        <section class="card" id="gallery">
+          <h2>Gallery</h2>
+          <div class="gallery">
+            <!-- replace these with real images in repo -->
+            <img src="AV.png" alt="sample1" data-large="AV.png">
+            <img src="AV.png" alt="sample2" data-large="AV.png">
+            <img src="AV.png" alt="sample3" data-large="AV.png">
+            <img src="AV.png" alt="sample4" data-large="AV.png">
+            <img src="AV.png" alt="sample5" data-large="AV.png">
+            <img src="AV.png" alt="sample6" data-large="AV.png">
+          </div>
+        </section>
+      </div>
+
+      <aside>
+        <section class="card">
+          <h2>Price Guide</h2>
+          <div class="price-table">
+            <div class="price-row">
+              <div><div style="font-size:14px">H4 Tile Adhesive - 20kg</div><div class="small">Standard tiles</div></div>
+              <div><strong>₹350</strong></div>
+            </div>
+            <div class="price-row" style="background:#fbfbfb">
+              <div><div style="font-size:14px">Premium Adhesive - 20kg</div><div class="small">Large/Heavy tiles</div></div>
+              <div><strong>₹420</strong></div>
+            </div>
+            <div class="price-row">
+              <div><div style="font-size:14px">H4 Waterproof Mix - 20kg</div><div class="small">Bathrooms / Roofs</div></div>
+              <div><strong>₹390</strong></div>
+            </div>
+            <div style="padding:12px;background:linear-gradient(90deg,#fff8d6,#fff);text-align:center">
+              <a class="price-cta" href="tel:+917907344030">Call for bulk rates</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="card" id="contact-box">
+          <h2>Quick Contact</h2>
+          <div class="muted" style="margin-bottom:10px">
+            <div><strong>Phone:</strong> <a href="tel:+917907344030">+91 79073 44030</a></div>
+            <div><strong>WhatsApp:</strong> <a href="https://wa.me/919745838382" target="_blank" rel="noopener">+91 97458 38382</a></div>
+            <div><strong>Factory:</strong> Kannamkulam, Tirur, Malappuram</div>
+          </div>
+
+          <div style="display:flex;gap:10px">
+            <a class="btn" href="tel:+917907344030">Call</a>
+            <a class="btn" style="background:var(--yellow);color:#000" href="https://wa.me/919745838382?text=Hello%20AV%20Chem">WhatsApp</a>
+          </div>
+        </section>
+      </aside>
+    </div>
+
+    <!-- CONTACT FORM -->
+    <section class="card">
+      <h2>Contact & Enquiry</h2>
+      <p class="muted">Send us a quick message and we will contact you back. (This opens your email client; to accept messages directly, see Formspree option in site code comments.)</p>
+
+      <form onsubmit="return sendMail(event)" style="margin-top:12px;">
+        <div class="form-row">
+          <input id="name" type="text" placeholder="Your name" required>
+          <input id="phone" type="tel" placeholder="Phone (required)" required>
+        </div>
+        <div style="margin-top:10px">
+          <input id="email" type="email" placeholder="Email (optional)">
+        </div>
+        <div style="margin-top:10px">
+          <textarea id="message" placeholder="Message / quantity / location"></textarea>
+        </div>
+        <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
+          <button class="btn" type="submit">Send message</button>
+          <small class="small">Or call: <a class="link" href="tel:+917907344030">+91 79073 44030</a></small>
+        </div>
+      </form>
+    </section>
+
+  </main>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" style="position:fixed;inset:0;display:none;background:rgba(0,0,0,0.75);align-items:center;justify-content:center;z-index:999">
+    <img id="lbimg" src="" alt="large" style="max-width:92%;max-height:80%;border-radius:8px;box-shadow:0 18px 60px rgba(0,0,0,0.6)">
+  </div>
+
+  <!-- FAB -->
+  <div class="fab" aria-hidden="false">
+    <a class="call" href="tel:+917907344030" title="Call us">📞</a>
+    <a class="wa" href="https://wa.me/919745838382?text=Hello%20AV%20Chem" target="_blank" rel="noopener" title="WhatsApp">💬</a>
+  </div>
+
+  <footer>
     © 2025 AV Chem Tirur – H4 Tile Adhesive & Waterproofing
-</footer>
+  </footer>
 
-<!-- WhatsApp floating button -->
-<a class="whatsapp-btn" href="https://wa.me/919745838382" target="_blank">💬</a>
+  <script>
+    // Gallery lightbox
+    document.querySelectorAll('.gallery img').forEach(img=>{
+      img.addEventListener('click', e=>{
+        var src = e.currentTarget.dataset.large || e.currentTarget.src;
+        document.getElementById('lbimg').src = src;
+        document.getElementById('lightbox').style.display = 'flex';
+      });
+    });
+    document.getElementById('lightbox').addEventListener('click', ()=>{ document.getElementById('lightbox').style.display='none'; });
 
-<!-- Call floating button -->
-<a class="call-btn" href="tel:+917907344030">📞</a>
-
+    // Contact form - mailto fallback
+    function sendMail(e){
+      e.preventDefault();
+      var name = encodeURIComponent(document.getElementById('name').value.trim());
+      var phone = encodeURIComponent(document.getElementById('phone').value.trim());
+      var email = encodeURIComponent(document.getElementById('email').value.trim());
+      var msg = encodeURIComponent(document.getElementById('message').value.trim());
+      var subject = encodeURIComponent('Website enquiry from ' + (name||phone));
+      var body = 'Name: ' + name + '%0A' + 'Phone: ' + phone + '%0A' + 'Email: ' + email + '%0A%0A' + msg;
+      window.location.href = 'mailto:avchemtirur@example.com?subject=' + subject + '&body=' + encodeURIComponent(body);
+      return false;
+    }
+  </script>
 </body>
 </html>
