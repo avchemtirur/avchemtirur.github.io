@@ -1,51 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>H4 Tile Adhesive & Waterproofing | AV Chem Tirur</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>H4 Tile Adhesive & Waterproofing | AV Chem Tirur</title>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: #f4f4f4;
-        }
-        header {
-            background: #008c4a;
-            color: white;
-            padding: 20px;
-            text-align: center;
-            font-size: 22px;
-            font-weight: bold;
-        }
-        .section {
-            padding: 20px;
-            background: white;
-            margin: 15px;
-            border-radius: 8px;
-        }
-        h2 {
-            color: #008c4a;
-        }
-        .footer {
-            text-align: center;
-            padding: 15px;
-            background: #222;
-            color: white;
-            margin-top: 20px;
-        }
-        ul {
-            line-height: 1.7;
-        }
-    </style>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f0f2f5;
+    }
+
+    /* Header */
+    header {
+        background: linear-gradient(90deg, #008c4a, #00b894);
+        padding: 20px;
+        text-align: center;
+        color: white;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    header img {
+        width: 90px;
+        border-radius: 12px;
+    }
+
+    header h1 {
+        margin: 10px 0 0;
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    /* Sections */
+    .section {
+        background: white;
+        margin: 15px;
+        padding: 18px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+        color: #008c4a;
+    }
+
+    /* Footer */
+    footer {
+        background: #222;
+        color: white;
+        text-align: center;
+        padding: 15px;
+        margin-top: 20px;
+        font-size: 14px;
+    }
+
+    /* Floating Buttons */
+    .whatsapp-btn, .call-btn {
+        position: fixed;
+        bottom: 20px;
+        width: 55px;
+        height: 55px;
+        border-radius: 50%;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 26px;
+        text-decoration: none;
+        z-index: 999;
+    }
+
+    .whatsapp-btn {
+        right: 20px;
+        background: #25D366;
+    }
+
+    .call-btn {
+        right: 85px;
+        background: #008C4A;
+    }
+</style>
 </head>
 
 <body>
 
 <header>
-    H4 Tile Adhesive & Waterproofing Solutions  
+    <img src="AV.png" alt="Logo">
+    <h1>H4 Tile Adhesive & Waterproofing Solutions</h1>
 </header>
 
 <div class="section">
@@ -77,9 +120,15 @@
        <b>Factory Address:</b> Kannamkulam, Tirur, Malappuram</p>
 </div>
 
-<div class="footer">
+<footer>
     © 2025 AV Chem Tirur – H4 Tile Adhesive & Waterproofing
-</div>
+</footer>
+
+<!-- WhatsApp floating button -->
+<a class="whatsapp-btn" href="https://wa.me/919745838382" target="_blank">💬</a>
+
+<!-- Call floating button -->
+<a class="call-btn" href="tel:+917907344030">📞</a>
 
 </body>
 </html>
