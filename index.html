@@ -3,10 +3,12 @@
 <head>
 <meta charset="UTF-8">
 
-<!-- SEO -->
-<title>H4 Tile Adhesive & Waterproofing | Avchem Chemical</title>
-<meta name="description" content="H4 Tile Adhesive by Avchem Chemical. Premium polymer modified tile adhesive for wall & floor applications.">
+<title>H4 Tile Adhesive | Avchem Chemical</title>
+<meta name="description" content="H4 Tile Adhesive by Avchem Chemical. Premium polymer modified tile adhesive.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Luxury serif font (Bodoni style – legal Google font) -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -20,33 +22,26 @@ body{
 .navbar{
   position:fixed;
   top:0;left:0;right:0;
-  height:60px;
+  height:70px;
   display:flex;
-  align-items:center;
-  padding:0 20px;
+  justify-content:flex-start;
+  align-items:flex-end;
+  padding:0 20px 14px; /* space below */
   background:rgba(0,0,0,.7);
   backdrop-filter:blur(10px);
   z-index:1000;
 }
 .nav-links{
   display:flex;
-  gap:26px;
-  font-size:17px; /* 20% bigger */
+  gap:28px;
+  font-size:17px;
 }
 .nav-links a{color:#fff;opacity:.9}
 
-/* LOGO RIGHT */
-.nav-logo{
-  margin-left:auto;
-}
-.nav-logo img{
-  height:40px; /* logo size controlled */
-}
-
 /* HERO */
 .hero{
-  min-height:80vh; /* 20% height reduced */
-  padding:90px 20px 30px;
+  min-height:80vh; /* 20% reduced */
+  padding:100px 20px 30px;
   background:
     radial-gradient(circle at left,#7a1fa2,transparent 60%),
     radial-gradient(circle at right,#1e3cff,transparent 60%),
@@ -60,13 +55,16 @@ body{
   justify-content:space-between;
   gap:30px;
 }
+
+/* TEXT */
 .hero-text{
   max-width:520px;
 }
 .hero-text h1{
-  font-size:40px;
+  font-family:'Playfair Display', serif;
+  font-size:48px; /* 20% bigger */
+  letter-spacing:2px;
   margin-bottom:14px;
-  letter-spacing:1px;
 }
 .hero-text p{
   font-size:15px;
@@ -87,9 +85,6 @@ body{
 .btn-outline{border:1px solid #fff;color:#fff}
 
 /* COVER IMAGE LEFT CENTER */
-.hero-image{
-  flex-shrink:0;
-}
 .hero-image img{
   max-width:260px;
   width:100%;
@@ -116,11 +111,11 @@ body{
   font-size:14px;
 }
 
-/* CONTACT / ENQUIRY */
-.dealer{
+/* CONTACT */
+.contact{
   padding:30px 20px;
 }
-.dealer-box{
+.contact-box{
   max-width:700px;
   margin:auto;
   background:#141428;
@@ -128,11 +123,10 @@ body{
   border-radius:16px;
   text-align:center;
 }
-.dealer-box h2{margin-bottom:18px}
-.dealer-actions a{
+.contact-actions a{
   display:inline-block;
   margin:10px;
-  padding:14px 28px;
+  padding:14px 30px;
   border-radius:30px;
   font-size:15px;
 }
@@ -143,38 +137,34 @@ body{
 footer{
   padding:30px 20px;
   text-align:center;
-  font-size:14px;
+  font-size:16px; /* 15% bigger */
   color:#bbb;
 }
-footer img{
-  height:58px; /* logo 15% bigger */
-  margin-bottom:12px;
+.footer-title{
+  font-family:'Playfair Display', serif;
+  font-size:20px;
+  margin-bottom:8px;
 }
-.contact-big{
-  font-size:17px; /* contact 20% bigger */
-  margin-top:8px;
+.footer-contact{
+  font-size:18px; /* 20% bigger */
+  margin-top:10px;
 }
 
 /* MOBILE */
 @media(max-width:768px){
   .hero-inner{flex-direction:column;text-align:center}
-  .nav-links{font-size:16px}
 }
 </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
+<!-- NAV -->
 <div class="navbar">
   <div class="nav-links">
     <a href="#">Home</a>
     <a href="#contact">Dealer Enquiry</a>
     <a href="#contact">Contact</a>
-  </div>
-
-  <div class="nav-logo">
-    <img src="AV.png" alt="Avchem Logo">
   </div>
 </div>
 
@@ -196,7 +186,7 @@ footer img{
       </div>
     </div>
 
-    <!-- COVER IMAGE -->
+    <!-- COVER -->
     <div class="hero-image">
       <img src="h4cover.png" alt="H4 Tile Adhesive Cover">
     </div>
@@ -215,11 +205,11 @@ footer img{
 </section>
 
 <!-- CONTACT -->
-<section class="dealer" id="contact">
-  <div class="dealer-box">
+<section class="contact" id="contact">
+  <div class="contact-box">
     <h2>Contact & Dealer Enquiry</h2>
 
-    <div class="dealer-actions">
+    <div class="contact-actions">
       <a class="whatsapp" href="https://wa.me/917907344030" target="_blank">
         WhatsApp Enquiry
       </a>
@@ -232,12 +222,11 @@ footer img{
 
 <!-- FOOTER -->
 <footer>
-  <img src="AV.png" alt="Avchem Logo">
-  <strong>Avchem Chemical & Manufacturer</strong><br>
+  <div class="footer-title">Avchem Chemical & Manufacturer</div>
   Kannam Kulam, BP Angadi, Tirur<br>
   Malappuram, Kerala
 
-  <div class="contact-big">
+  <div class="footer-contact">
     📞 +91 79073 44030<br>
     ✉️ avchemtirur@gmail.com
   </div>
