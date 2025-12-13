@@ -1,53 +1,61 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Avchem Chemical & Manufacturer | H4 Tile Adhesive</title>
+
+<!-- ===== SEO TITLE ===== -->
+<title>H4 Tile Adhesive | Avchem Chemical & Manufacturer Tirur</title>
+
+<!-- ===== SEO DESCRIPTION ===== -->
+<meta name="description" content="H4 Tile Adhesive by Avchem Chemical & Manufacturer, Tirur Malappuram. Premium polymer modified waterproof tile adhesive for wall & floor. Dealer enquiry available.">
+
+<!-- ===== SEO KEYWORDS ===== -->
+<meta name="keywords" content="H4 Tile Adhesive, Tile Adhesive Kerala, Waterproof Tile Adhesive, Avchem Chemical Tirur, Tile Adhesive Manufacturer Malappuram">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-*{box-sizing:border-box}
+*{box-sizing:border-box;margin:0;padding:0}
 body{
-    margin:0;
-    font-family:Arial, Helvetica, sans-serif;
-    background:#0b0b0f;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#000;
     color:#fff;
 }
-a{text-decoration:none}
 
 /* ===== NAVBAR ===== */
 .navbar{
     position:fixed;
-    top:0; left:0; right:0;
+    top:0;left:0;right:0;
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:14px 20px;
-    z-index:100;
-    background:rgba(0,0,0,.65);
-    backdrop-filter: blur(8px);
+    padding:12px 20px;
+    background:rgba(0,0,0,.6);
+    backdrop-filter:blur(10px);
+    z-index:1000;
 }
 .navbar img{
-    height:42px;
-    max-width:160px;
-    object-fit:contain;
+    height:38px;
 }
 .nav-links a{
     color:#fff;
-    margin-left:18px;
+    margin-left:16px;
+    text-decoration:none;
     font-size:13px;
-    opacity:.9;
+    opacity:.85;
 }
 .nav-links a:hover{opacity:1}
 
 /* ===== HERO ===== */
 .hero{
-    padding:90px 16px 40px;
+    min-height:100vh;
+    padding:110px 20px 40px;
     background:
-      radial-gradient(60% 60% at 10% 20%, rgba(170,60,150,.45), transparent 45%),
-      radial-gradient(60% 60% at 90% 80%, rgba(90,80,255,.45), transparent 45%),
+      radial-gradient(circle at left,#7b1fa2,transparent 60%),
+      radial-gradient(circle at right,#283593,transparent 60%),
       #000;
+    display:flex;
+    align-items:center;
 }
 .hero-inner{
     max-width:1200px;
@@ -56,151 +64,114 @@ a{text-decoration:none}
     gap:30px;
     align-items:center;
     justify-content:space-between;
+    flex-wrap:wrap;
 }
-.hero-text{max-width:520px}
+.hero-text{
+    max-width:520px;
+}
 .hero-text h1{
-    font-size:44px;
-    margin:0 0 10px;
+    font-size:42px;
+    margin-bottom:10px;
 }
 .hero-text p{
-    font-size:16px;
+    font-size:15px;
     line-height:1.6;
-    color:#d0d0d0;
+    color:#ddd;
 }
-.hero-buttons{margin-top:20px}
+.hero-buttons{margin-top:18px}
 .btn{
     display:inline-block;
     padding:12px 26px;
-    border-radius:26px;
-    font-size:14px;
+    border-radius:25px;
+    text-decoration:none;
+    color:#fff;
     margin-right:10px;
+    font-size:14px;
 }
-.btn-primary{
-    background:linear-gradient(90deg,#a12a8f,#7b3cff);
-    color:#fff;
-}
-.btn-outline{
-    border:1px solid #999;
-    color:#fff;
-}
+.btn-primary{background:#9c27b0}
+.btn-outline{border:1px solid #777}
 
 /* ===== HERO IMAGES ===== */
 .hero-image{
     display:flex;
-    gap:14px;
+    gap:18px;
 }
 .hero-image img{
-    width:160px;
+    width:200px;
     max-width:100%;
-    filter:drop-shadow(0 14px 28px rgba(0,0,0,.6));
+    filter:drop-shadow(0 10px 20px rgba(0,0,0,.6));
 }
 
 /* ===== FEATURES ===== */
 .features{
-    background:#0f0f16;
-    padding:40px 16px;
-}
-.features-inner{
-    max-width:1200px;
-    margin:auto;
+    padding:40px 20px;
     display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:14px;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:16px;
+    background:#0b0b0b;
 }
 .feature{
-    background:#141422;
-    border:1px solid #1f1f36;
-    border-radius:14px;
+    background:#111;
     padding:18px;
-    text-align:center;
-}
-.feature h4{margin:8px 0}
-.feature p{font-size:13px; color:#c9c9c9}
-
-/* ===== DEALER ENQUIRY ===== */
-.dealer{
-    padding:40px 16px;
-    background:#0b0b14;
-}
-.dealer-inner{
-    max-width:720px;
-    margin:auto;
-    background:#141422;
-    border:1px solid #1f1f36;
-    border-radius:16px;
-    padding:24px;
-}
-.dealer-inner h2{text-align:center; margin-top:0}
-.form-grid{
-    display:grid;
-    grid-template-columns:1fr;
-    gap:12px;
-}
-.form-grid input,
-.form-grid textarea,
-.form-grid select{
-    width:100%;
-    padding:11px 14px;
-    border-radius:10px;
-    border:1px solid #2a2a44;
-    background:#0f0f16;
-    color:#fff;
-}
-.form-actions{text-align:center; margin-top:16px}
-.form-actions button{
-    padding:12px 34px;
-    border-radius:26px;
-    border:0;
-    background:linear-gradient(90deg,#a12a8f,#7b3cff);
-    color:#fff;
-    font-size:15px;
-    cursor:pointer;
-}
-
-/* ===== CONTACT BAR ===== */
-.contact{
-    padding:18px 10px;
-    background:linear-gradient(90deg,#a12a8f,#7b3cff);
+    border-radius:12px;
     text-align:center;
     font-size:14px;
 }
-.contact a{color:#fff; margin:0 6px}
+
+/* ===== DEALER FORM ===== */
+.dealer{
+    padding:50px 20px;
+    background:#0a0a0a;
+}
+.dealer h2{text-align:center;margin-bottom:20px}
+.form-box{
+    max-width:520px;
+    margin:auto;
+    background:#111;
+    padding:20px;
+    border-radius:14px;
+}
+.form-box input,
+.form-box textarea,
+.form-box select{
+    width:100%;
+    margin-bottom:12px;
+    padding:12px;
+    border-radius:8px;
+    border:none;
+    background:#222;
+    color:#fff;
+}
+.form-box button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:25px;
+    background:#9c27b0;
+    color:#fff;
+    font-size:15px;
+}
 
 /* ===== FOOTER ===== */
-.site-footer{
-    background:#0a0a12;
-    padding:28px 16px;
+.footer{
+    background:#9c27b0;
+    padding:18px;
     text-align:center;
-    color:#bdbdbd;
-}
-.site-footer img{
-    width:80px;
-    margin-bottom:10px;
-}
-.site-footer h3{
-    margin:6px 0;
-    color:#fff;
-    font-size:16px;
-}
-.site-footer p{
     font-size:13px;
-    line-height:1.5;
 }
 
-/* ===== DESKTOP ===== */
-@media(min-width:900px){
-    .hero-text h1{font-size:56px}
-    .hero-image img{width:220px}
-    .features-inner{grid-template-columns:repeat(4,1fr)}
-    .form-grid{grid-template-columns:1fr 1fr}
-    .form-grid textarea{grid-column:1/-1}
+/* ===== MOBILE FIX ===== */
+@media(max-width:768px){
+    .hero-inner{flex-direction:column;text-align:center}
+    .hero-text h1{font-size:32px}
+    .hero-image img{width:160px}
 }
 </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
+<!-- ===== NAVBAR ===== -->
 <div class="navbar">
     <img src="avchem-logo.png" alt="Avchem Chemical Logo">
     <div class="nav-links">
@@ -211,96 +182,62 @@ a{text-decoration:none}
     </div>
 </div>
 
-<!-- HERO -->
+<!-- ===== HERO ===== -->
 <section class="hero">
-    <div class="hero-inner">
-
-        <div class="hero-text">
-            <h1>H4 TILE ADHESIVE</h1>
-            <p>
-                Premium polymer modified tile adhesive for wall & floor applications.
-                High bond strength, waterproof performance and long-lasting durability.
-            </p>
-            <div class="hero-buttons">
-                <a class="btn btn-primary" href="#dealer">Become a Dealer</a>
-                <a class="btn btn-outline" href="tel:+917907344030">Call Now</a>
-            </div>
+<div class="hero-inner">
+    <div class="hero-text">
+        <h1>H4 TILE ADHESIVE</h1>
+        <p>
+            Premium polymer modified tile adhesive for wall & floor applications.
+            High bond strength, waterproof performance and long-lasting durability.
+        </p>
+        <div class="hero-buttons">
+            <a href="#dealer" class="btn btn-primary">Become a Dealer</a>
+            <a href="tel:+919707344030" class="btn btn-outline">Call Now</a>
         </div>
-
-        <div class="hero-image">
-            <img src="bag-blue.png" alt="H4 Tile Adhesive Blue Bag">
-            <img src="bag-yellow.png" alt="H4 Tile Adhesive Yellow Bag">
-        </div>
-
     </div>
-</section>
 
-<!-- FEATURES -->
-<section id="features" class="features">
-    <div class="features-inner">
-        <div class="feature"><h4>High Bond Strength</h4><p>Large format tiles</p></div>
-        <div class="feature"><h4>Waterproof</h4><p>Wet & dry areas</p></div>
-        <div class="feature"><h4>Wall & Floor</h4><p>Multi-purpose</p></div>
-        <div class="feature"><h4>Manufacturer Direct</h4><p>Consistent quality</p></div>
+    <div class="hero-image">
+        <img src="bag-blue.png" alt="H4 Tile Adhesive Blue Bag">
+        <img src="bag-yellow.png" alt="H4 Tile Adhesive Yellow Bag">
     </div>
+</div>
 </section>
 
-<!-- DEALER ENQUIRY -->
-<section id="dealer" class="dealer">
-    <div class="dealer-inner">
-        <h2>Dealer Enquiry</h2>
-        <form onsubmit="sendEnquiry(event)">
-            <div class="form-grid">
-                <input id="name" placeholder="Your Name" required>
-                <input id="phone" placeholder="Mobile Number" required>
-                <input id="business" placeholder="Business / Shop Name">
-                <input id="location" placeholder="Location / District">
-                <select id="interest">
-                    <option>H4 Tile Adhesive</option>
-                    <option>Waterproofing</option>
-                    <option>Both</option>
-                </select>
-                <textarea id="message" rows="3" placeholder="Message / Requirement"></textarea>
-            </div>
-            <div class="form-actions">
-                <button type="submit">Send Enquiry</button>
-            </div>
-        </form>
-    </div>
+<!-- ===== FEATURES ===== -->
+<section class="features" id="features">
+    <div class="feature">High Bond Strength</div>
+    <div class="feature">Waterproof</div>
+    <div class="feature">Wall & Floor Application</div>
+    <div class="feature">Manufacturer Direct Supply</div>
 </section>
 
-<!-- CONTACT -->
-<section id="contact" class="contact">
-    📞 <a href="tel:+917907344030">+91 79073 44030</a> |
-    💬 <a href="https://wa.me/91974588382">WhatsApp</a> |
-    ✉️ <a href="mailto:avchemtirur@gmail.com">avchemtirur@gmail.com</a>
+<!-- ===== DEALER ===== -->
+<section class="dealer" id="dealer">
+<h2>Dealer Enquiry</h2>
+<div class="form-box">
+<form>
+<input type="text" placeholder="Your Name">
+<input type="tel" placeholder="Mobile Number">
+<input type="text" placeholder="Business / Shop Name">
+<input type="text" placeholder="Location / District">
+<select>
+<option>H4 Tile Adhesive</option>
+</select>
+<textarea rows="4" placeholder="Message / Requirement"></textarea>
+<button type="submit">Send Enquiry</button>
+</form>
+</div>
 </section>
 
-<!-- FOOTER -->
-<footer class="site-footer">
-    <img src="avchem-logo.png" alt="Avchem Logo">
-    <h3>Avchem Chemical & Manufacturer</h3>
-    <p>
-        Kannam Kulam, BP Angadi, Tirur<br>
-        District: Malappuram, Kerala
-    </p>
-</footer>
-
-<script>
-function sendEnquiry(e){
-    e.preventDefault();
-    const t =
-`Dealer Enquiry
-Name: ${name.value}
-Phone: ${phone.value}
-Business: ${business.value}
-Location: ${location.value}
-Interest: ${interest.value}
-Message: ${message.value}`;
-    window.open('https://wa.me/91974588382?text='+encodeURIComponent(t),'_blank');
-    window.location.href='mailto:avchemtirur@gmail.com?subject=Dealer Enquiry&body='+encodeURIComponent(t);
-}
-</script>
+<!-- ===== FOOTER ===== -->
+<div class="footer" id="contact">
+📞 +91 97073 44030 &nbsp; | &nbsp;
+📧 avchemtirur@gmail.com <br><br>
+<b>Avchem Chemical & Manufacturer</b><br>
+Kannam Kulam, BP Angadi, Tirur<br>
+District: Malappuram, Kerala
+</div>
 
 </body>
 </html>
