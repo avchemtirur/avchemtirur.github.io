@@ -5,22 +5,25 @@
     <title>H4 Tile Adhesive</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- ===== CSS STYLE ===== -->
     <style>
         body {
             margin: 0;
             font-family: Arial, sans-serif;
+            background: #ffffff;
         }
 
+        /* ===== HEADER ===== */
         .site-header {
             padding: 15px 30px;
-            background: #ffffff;
+            background: #fff;
+            border-bottom: 1px solid #eee;
         }
 
         .logo {
             height: 55px;
         }
 
+        /* ===== HERO SECTION ===== */
         .hero {
             background: #DCE8E6;
             padding: 60px 40px;
@@ -28,8 +31,8 @@
 
         .hero-inner {
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
             flex-wrap: wrap;
         }
 
@@ -46,35 +49,53 @@
         .hero-text p {
             font-size: 18px;
             color: #333;
+            line-height: 1.5;
         }
 
         .btn {
             display: inline-block;
-            margin-top: 15px;
+            margin-top: 18px;
             padding: 12px 26px;
             border-radius: 25px;
             text-decoration: none;
             background: #283593;
             color: #fff;
             margin-right: 10px;
+            font-size: 16px;
         }
 
         .btn-whatsapp {
             background: #25D366;
         }
 
-        .hero-image img {
-            width: 420px;
-            max-width: 100%;
+        /* ===== HERO IMAGES ===== */
+        .hero-image {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
         }
 
+        .hero-image img {
+            width: 220px;
+            max-width: 100%;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.25));
+        }
+
+        /* ===== MOBILE ===== */
         @media (max-width: 768px) {
-            .hero-text {
-                max-width: 100%;
-            }
             .hero-inner {
                 flex-direction: column;
                 text-align: center;
+            }
+
+            .hero-text {
+                max-width: 100%;
+            }
+
+            .hero-image {
+                margin-top: 30px;
+                flex-direction: column;
             }
         }
     </style>
@@ -94,8 +115,8 @@
         <div class="hero-text">
             <h1>Premium H4 Tile Adhesive & Waterproofing</h1>
             <p>
-                High-strength polymer modified adhesive for wall & floor tiles.  
-                Trusted across Kerala.
+                High-strength polymer modified tile adhesive for wall & floor tiles.  
+                Trusted across Kerala for strong bonding and durability.
             </p>
 
             <a href="tel:+917907344030" class="btn">Call Now</a>
@@ -105,7 +126,8 @@
         </div>
 
         <div class="hero-image">
-            <img src="AV.png" alt="H4 Tile Adhesive Bag">
+            <img src="bag-blue.png" alt="H4 Tile Adhesive Blue Bag">
+            <img src="bag-yellow.png" alt="H4 Tile Adhesive Yellow Bag">
         </div>
 
     </div>
