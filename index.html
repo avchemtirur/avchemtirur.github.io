@@ -1,31 +1,115 @@
-<!-- START: NEW HERO -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>H4 Tile Adhesive</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ===== CSS STYLE ===== -->
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .site-header {
+            padding: 15px 30px;
+            background: #ffffff;
+        }
+
+        .logo {
+            height: 55px;
+        }
+
+        .hero {
+            background: #DCE8E6;
+            padding: 60px 40px;
+        }
+
+        .hero-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .hero-text {
+            max-width: 50%;
+        }
+
+        .hero-text h1 {
+            font-size: 42px;
+            color: #1F3A37;
+            margin-bottom: 10px;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            color: #333;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 26px;
+            border-radius: 25px;
+            text-decoration: none;
+            background: #283593;
+            color: #fff;
+            margin-right: 10px;
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+        }
+
+        .hero-image img {
+            width: 420px;
+            max-width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .hero-text {
+                max-width: 100%;
+            }
+            .hero-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ===== HEADER ===== -->
 <header class="site-header">
-  <div class="header-inner">
     <img src="AV.png" alt="H4 Logo" class="logo">
-  </div>
-  <div class="top-cta">
-    <div class="top-cta-inner">
-      <a class="btn btn-primary" href="tel:+917907344030" aria-label="Call Now">Call Now</a>
-      <a class="btn btn-whatsapp" href="https://wa.me/919745838382" target="_blank" rel="noopener" aria-label="WhatsApp">WhatsApp Order</a>
-      <a class="btn btn-outline" href="#products" aria-label="View Products">Products</a>
-    </div>
-  </div>
 </header>
 
+<!-- ===== HERO SECTION ===== -->
 <section class="hero">
-  <div class="hero-inner">
-    <div class="hero-text">
-      <h1>Premium H4 Tile Adhesive & Waterproofing</h1>
-      <p class="lead">High-strength polymer modified adhesive for wall & floor tiles. Trusted across Kerala — fast bonding, waterproof & durable.</p>
-      <div class="hero-ctas">
-        <a class="btn btn-primary large" href="tel:+917907344030">Call Now</a>
-        <a class="btn btn-whatsapp large" href="https://wa.me/919745838382" target="_blank" rel="noopener">WhatsApp Order</a>
-      </div>
-    </div>
+    <div class="hero-inner">
 
-    <div class="hero-image">
-      <img src="AV.png" alt="H4 Bag" />
+        <div class="hero-text">
+            <h1>Premium H4 Tile Adhesive & Waterproofing</h1>
+            <p>
+                High-strength polymer modified adhesive for wall & floor tiles.  
+                Trusted across Kerala.
+            </p>
+
+            <a href="tel:+917907344030" class="btn">Call Now</a>
+            <a href="https://wa.me/91974588382" target="_blank" class="btn btn-whatsapp">
+                WhatsApp Order
+            </a>
+        </div>
+
+        <div class="hero-image">
+            <img src="AV.png" alt="H4 Tile Adhesive Bag">
+        </div>
+
     </div>
-  </div>
 </section>
-<!-- END: NEW HERO -->
+
+</body>
+</html>
