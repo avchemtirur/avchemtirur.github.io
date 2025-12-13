@@ -1,47 +1,45 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-
 <title>H4 Tile Adhesive | Avchem Chemical</title>
-<meta name="description" content="H4 Tile Adhesive by Avchem Chemical. Premium polymer modified tile adhesive.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Luxury serif font (Bodoni style – legal Google font) -->
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<!-- Luxury serif font for H4 -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{margin:0;padding:0;box-sizing:border-box}
 body{
-  font-family:Arial, Helvetica, sans-serif;
   background:#000;
   color:#fff;
+  font-family:Arial,Helvetica,sans-serif;
 }
 
-/* NAVBAR */
+/* NAV */
 .navbar{
   position:fixed;
   top:0;left:0;right:0;
-  height:70px;
-  display:flex;
-  justify-content:flex-start;
-  align-items:flex-end;
-  padding:0 20px 14px; /* space below */
+  height:65px;
   background:rgba(0,0,0,.7);
   backdrop-filter:blur(10px);
+  display:flex;
+  align-items:flex-end;
+  padding:0 22px 14px;
   z-index:1000;
 }
 .nav-links{
   display:flex;
-  gap:28px;
+  gap:26px;
   font-size:17px;
 }
-.nav-links a{color:#fff;opacity:.9}
+.nav-links a{color:#fff;text-decoration:none}
 
 /* HERO */
 .hero{
-  min-height:80vh; /* 20% reduced */
-  padding:100px 20px 30px;
+  min-height:80vh; /* 20% height reduced */
+  padding:95px 20px 20px;
   background:
     radial-gradient(circle at left,#7a1fa2,transparent 60%),
     radial-gradient(circle at right,#1e3cff,transparent 60%),
@@ -53,16 +51,17 @@ body{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:30px;
+  gap:40px;
 }
 
-/* TEXT */
+/* LEFT TEXT */
 .hero-text{
   max-width:520px;
+  margin-left:30px; /* 3 space gap left */
 }
 .hero-text h1{
-  font-family:'Playfair Display', serif;
-  font-size:48px; /* 20% bigger */
+  font-family:'Playfair Display',serif;
+  font-size:48px;
   letter-spacing:2px;
   margin-bottom:14px;
 }
@@ -84,7 +83,7 @@ body{
 .btn-primary{background:#9b2cff;color:#fff}
 .btn-outline{border:1px solid #fff;color:#fff}
 
-/* COVER IMAGE LEFT CENTER */
+/* RIGHT COVER IMAGE */
 .hero-image img{
   max-width:260px;
   width:100%;
@@ -93,7 +92,7 @@ body{
 
 /* FEATURES */
 .features{
-  padding:30px 20px;
+  padding:24px 20px;
   background:#0b0b15;
 }
 .feature-grid{
@@ -101,11 +100,11 @@ body{
   margin:auto;
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:16px;
+  gap:14px;
 }
 .feature{
   background:#141428;
-  padding:16px;
+  padding:14px;
   border-radius:12px;
   text-align:center;
   font-size:14px;
@@ -113,20 +112,20 @@ body{
 
 /* CONTACT */
 .contact{
-  padding:30px 20px;
+  padding:26px 20px;
 }
 .contact-box{
   max-width:700px;
   margin:auto;
   background:#141428;
-  padding:26px;
+  padding:24px;
   border-radius:16px;
   text-align:center;
 }
 .contact-actions a{
   display:inline-block;
   margin:10px;
-  padding:14px 30px;
+  padding:14px 32px;
   border-radius:30px;
   font-size:15px;
 }
@@ -135,24 +134,23 @@ body{
 
 /* FOOTER */
 footer{
-  padding:30px 20px;
+  padding:28px 20px;
   text-align:center;
-  font-size:16px; /* 15% bigger */
   color:#bbb;
 }
 .footer-title{
-  font-family:'Playfair Display', serif;
+  font-family:'Playfair Display',serif;
   font-size:20px;
-  margin-bottom:8px;
 }
 .footer-contact{
-  font-size:18px; /* 20% bigger */
+  font-size:18px;
   margin-top:10px;
 }
 
 /* MOBILE */
 @media(max-width:768px){
   .hero-inner{flex-direction:column;text-align:center}
+  .hero-text{margin-left:0}
 }
 </style>
 </head>
@@ -172,7 +170,7 @@ footer{
 <section class="hero">
   <div class="hero-inner">
 
-    <!-- TEXT -->
+    <!-- LEFT TEXT -->
     <div class="hero-text">
       <h1>H4 TILE ADHESIVE</h1>
       <p>
@@ -186,7 +184,7 @@ footer{
       </div>
     </div>
 
-    <!-- COVER -->
+    <!-- RIGHT COVER -->
     <div class="hero-image">
       <img src="h4cover.png" alt="H4 Tile Adhesive Cover">
     </div>
