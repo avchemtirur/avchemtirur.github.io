@@ -1,31 +1,58 @@
-<!-- START: NEW HERO -->
-<header class="site-header">
-  <div class="header-inner">
-    <img src="AV.png" alt="H4 Logo" class="logo">
-  </div>
-  <div class="top-cta">
-    <div class="top-cta-inner">
-      <a class="btn btn-primary" href="tel:+917907344030" aria-label="Call Now">Call Now</a>
-      <a class="btn btn-whatsapp" href="https://wa.me/919745838382" target="_blank" rel="noopener" aria-label="WhatsApp">WhatsApp Order</a>
-      <a class="btn btn-outline" href="#products" aria-label="View Products">Products</a>
-    </div>
-  </div>
-</header>
+/* Hero styles: Yellow & Purple theme, centered logo header */
+:root{
+  --purple:#7b2aa1;   /* adjust if needed */
+  --purple-2:#9b37c4;
+  --yellow:#f6c02b;
+  --bg:#f7f7f7;
+  --txt:#111;
+  --maxw:1100px;
+}
 
-<section class="hero">
-  <div class="hero-inner">
-    <div class="hero-text">
-      <h1>Premium H4 Tile Adhesive & Waterproofing</h1>
-      <p class="lead">High-strength polymer modified adhesive for wall & floor tiles. Trusted across Kerala — fast bonding, waterproof & durable.</p>
-      <div class="hero-ctas">
-        <a class="btn btn-primary large" href="tel:+917907344030">Call Now</a>
-        <a class="btn btn-whatsapp large" href="https://wa.me/919745838382" target="_blank" rel="noopener">WhatsApp Order</a>
-      </div>
-    </div>
+/* basic reset */
+*{box-sizing:border-box}
+body{font-family:Inter, system-ui, Arial, sans-serif; background:var(--bg); color:var(--txt); margin:0; -webkit-font-smoothing:antialiased;}
 
-    <div class="hero-image">
-      <img src="AV.png" alt="H4 Bag" />
-    </div>
-  </div>
-</section>
-<!-- END: NEW HERO -->
+/* header with centered logo */
+.site-header{background:linear-gradient(90deg,var(--purple),var(--purple-2)); color:#fff; position:sticky; top:0; z-index:60; box-shadow:0 2px 8px rgba(0,0,0,0.12);}
+.header-inner{max-width:var(--maxw); margin:0 auto; padding:18px 16px; display:flex; align-items:center; justify-content:center;}
+.logo{height:72px; width:auto; object-fit:contain; border-radius:12px; background:rgba(255,255,255,0.06); padding:8px; box-shadow:0 6px 18px rgba(0,0,0,0.15); transition:transform .25s ease;}
+.logo:hover{transform:scale(1.03)}
+
+/* top small CTA bar under header */
+.top-cta{background:#fff; border-bottom:4px solid rgba(0,0,0,0.04);}
+.top-cta-inner{max-width:var(--maxw); margin:0 auto; display:flex; gap:12px; padding:10px 16px; justify-content:center; align-items:center; flex-wrap:wrap;}
+.btn{display:inline-flex; align-items:center; gap:10px; padding:10px 14px; border-radius:8px; text-decoration:none; font-weight:600; font-size:14px;}
+.btn-primary{background:var(--yellow); color:#111; box-shadow:0 6px 18px rgba(0,0,0,0.08);}
+.btn-whatsapp{background:#25D366; color:#fff;}
+.btn-outline{background:transparent; border:1px solid rgba(0,0,0,0.08); color:#111;}
+
+/* Hero section */
+.hero{padding:36px 0 70px;}
+.hero-inner{max-width:var(--maxw); margin:0 auto; display:flex; gap:30px; align-items:center; padding:0 16px; justify-content:space-between; flex-wrap:wrap;}
+.hero-text{flex:1 1 420px; min-width:260px;}
+.hero-image{flex:0 0 380px; display:flex; justify-content:center; align-items:center;}
+.hero-image img{max-width:100%; width:380px; height:auto; object-fit:contain; border-radius:14px; box-shadow:0 24px 60px rgba(0,0,0,0.25); transform:translateY(-6px) rotate(-2deg);}
+
+/* text styles */
+.hero h1{font-size:42px; line-height:1.02; margin:0 0 12px; color:var(--purple-2); font-weight:800; letter-spacing: -1px;}
+.lead{font-size:16px; color:#2b2b2b; margin:0 0 18px; max-width:640px;}
+.hero-ctas{display:flex; gap:12px; align-items:center; flex-wrap:wrap;}
+.btn.large{padding:14px 20px; border-radius:12px; font-size:16px;}
+
+/* smaller screens */
+@media (max-width:880px){
+  .hero-inner{flex-direction:column-reverse; text-align:center; padding-bottom:18px;}
+  .hero-image{order:1; width:80%;}
+  .hero-text{order:2; padding-top:14px;}
+  .hero h1{font-size:32px;}
+  .logo{height:60px}
+}
+
+/* Sticky floating bottom buttons (optional) */
+.fab-wrap{position:fixed; right:18px; bottom:18px; z-index:999;}
+.fab{
+  display:inline-flex; align-items:center; justify-content:center; width:52px; height:52px; border-radius:50%;
+  box-shadow:0 10px 30px rgba(0,0,0,0.25); margin-left:10px; text-decoration:none; color:#fff; font-size:20px;
+}
+.fab.call{background:#1e8f49}
+.fab.whatsapp{background:#25D366}
