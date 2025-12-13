@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,33 +16,34 @@ body{
 }
 a{text-decoration:none}
 
-/* NAVBAR */
+/* ===== NAVBAR ===== */
 .navbar{
     position:fixed;
     top:0; left:0; right:0;
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:16px 40px;
-    z-index:20;
-    background:linear-gradient(180deg, rgba(0,0,0,.75), rgba(0,0,0,0));
+    padding:14px 20px;
+    z-index:100;
+    background:rgba(0,0,0,.65);
+    backdrop-filter: blur(8px);
 }
-.navbar img{height:44px}
+.navbar img{
+    height:42px;
+    max-width:160px;
+    object-fit:contain;
+}
 .nav-links a{
     color:#fff;
-    margin-left:22px;
-    font-size:14px;
+    margin-left:18px;
+    font-size:13px;
     opacity:.9;
 }
 .nav-links a:hover{opacity:1}
 
-/* HERO */
+/* ===== HERO ===== */
 .hero{
-    min-height:100vh;
-    padding:120px 40px 70px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    padding:90px 16px 40px;
     background:
       radial-gradient(60% 60% at 10% 20%, rgba(170,60,150,.45), transparent 45%),
       radial-gradient(60% 60% at 90% 80%, rgba(90,80,255,.45), transparent 45%),
@@ -49,168 +51,149 @@ a{text-decoration:none}
 }
 .hero-inner{
     max-width:1200px;
-    width:100%;
+    margin:auto;
     display:flex;
-    gap:40px;
+    gap:30px;
     align-items:center;
     justify-content:space-between;
 }
-.hero-text{max-width:52%}
+.hero-text{max-width:520px}
 .hero-text h1{
-    font-size:56px;
-    letter-spacing:1px;
-    margin:0 0 14px;
+    font-size:44px;
+    margin:0 0 10px;
 }
 .hero-text p{
-    color:#cfcfcf;
-    font-size:18px;
+    font-size:16px;
     line-height:1.6;
+    color:#d0d0d0;
 }
-.hero-buttons{margin-top:26px}
+.hero-buttons{margin-top:20px}
 .btn{
     display:inline-block;
-    padding:14px 34px;
-    border-radius:30px;
-    font-size:16px;
-    margin-right:14px;
+    padding:12px 26px;
+    border-radius:26px;
+    font-size:14px;
+    margin-right:10px;
 }
 .btn-primary{
     background:linear-gradient(90deg,#a12a8f,#7b3cff);
     color:#fff;
 }
 .btn-outline{
-    border:1px solid #8a8a8a;
+    border:1px solid #999;
     color:#fff;
 }
 
-/* HERO IMAGES */
+/* ===== HERO IMAGES ===== */
 .hero-image{
     display:flex;
-    gap:24px;
-    align-items:center;
+    gap:14px;
 }
 .hero-image img{
-    width:220px;
+    width:160px;
     max-width:100%;
-    filter:drop-shadow(0 16px 34px rgba(0,0,0,.6));
+    filter:drop-shadow(0 14px 28px rgba(0,0,0,.6));
 }
 
-/* FEATURES */
+/* ===== FEATURES ===== */
 .features{
     background:#0f0f16;
-    padding:60px 40px;
+    padding:40px 16px;
 }
 .features-inner{
     max-width:1200px;
     margin:auto;
     display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:20px;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
 }
 .feature{
     background:#141422;
     border:1px solid #1f1f36;
     border-radius:14px;
-    padding:22px;
+    padding:18px;
     text-align:center;
 }
-.feature h4{margin:10px 0 6px}
-.feature p{color:#c9c9c9; font-size:14px}
+.feature h4{margin:8px 0}
+.feature p{font-size:13px; color:#c9c9c9}
 
-/* DEALER ENQUIRY */
+/* ===== DEALER ENQUIRY ===== */
 .dealer{
-    padding:60px 40px;
+    padding:40px 16px;
     background:#0b0b14;
 }
 .dealer-inner{
-    max-width:800px;
+    max-width:720px;
     margin:auto;
     background:#141422;
     border:1px solid #1f1f36;
-    border-radius:18px;
-    padding:30px;
+    border-radius:16px;
+    padding:24px;
 }
-.dealer-inner h2{
-    margin-top:0;
-    text-align:center;
-}
+.dealer-inner h2{text-align:center; margin-top:0}
 .form-grid{
     display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:16px;
+    grid-template-columns:1fr;
+    gap:12px;
 }
 .form-grid input,
 .form-grid textarea,
 .form-grid select{
     width:100%;
-    padding:12px 14px;
+    padding:11px 14px;
     border-radius:10px;
     border:1px solid #2a2a44;
     background:#0f0f16;
     color:#fff;
 }
-.form-grid textarea{
-    grid-column:1/-1;
-    resize:vertical;
-}
-.form-actions{
-    text-align:center;
-    margin-top:20px;
-}
+.form-actions{text-align:center; margin-top:16px}
 .form-actions button{
-    padding:14px 36px;
-    border-radius:30px;
+    padding:12px 34px;
+    border-radius:26px;
     border:0;
-    cursor:pointer;
     background:linear-gradient(90deg,#a12a8f,#7b3cff);
     color:#fff;
-    font-size:16px;
+    font-size:15px;
+    cursor:pointer;
 }
 
-/* CONTACT */
+/* ===== CONTACT BAR ===== */
 .contact{
-    padding:40px;
+    padding:18px 10px;
     background:linear-gradient(90deg,#a12a8f,#7b3cff);
     text-align:center;
-    font-size:16px;
+    font-size:14px;
 }
-.contact a{
-    color:#fff;
-    font-weight:bold;
-    margin:0 10px;
-}
+.contact a{color:#fff; margin:0 6px}
 
-/* FOOTER */
+/* ===== FOOTER ===== */
 .site-footer{
     background:#0a0a12;
-    padding:40px 20px;
+    padding:28px 16px;
     text-align:center;
     color:#bdbdbd;
 }
 .site-footer img{
-    width:90px;
-    margin-bottom:15px;
+    width:80px;
+    margin-bottom:10px;
 }
 .site-footer h3{
-    margin:10px 0 6px;
+    margin:6px 0;
     color:#fff;
+    font-size:16px;
 }
 .site-footer p{
-    font-size:14px;
-    line-height:1.6;
+    font-size:13px;
+    line-height:1.5;
 }
 
-/* MOBILE */
-@media(max-width:900px){
-    .hero-inner{flex-direction:column; text-align:center}
-    .hero-text{max-width:100%}
-    .hero-image{margin-top:30px; flex-direction:column}
-    .features-inner{grid-template-columns:1fr 1fr}
-    .form-grid{grid-template-columns:1fr}
-}
-@media(max-width:480px){
-    .features-inner{grid-template-columns:1fr}
-    .hero-text h1{font-size:42px}
+/* ===== DESKTOP ===== */
+@media(min-width:900px){
+    .hero-text h1{font-size:56px}
+    .hero-image img{width:220px}
+    .features-inner{grid-template-columns:repeat(4,1fr)}
+    .form-grid{grid-template-columns:1fr 1fr}
+    .form-grid textarea{grid-column:1/-1}
 }
 </style>
 </head>
@@ -231,6 +214,7 @@ a{text-decoration:none}
 <!-- HERO -->
 <section class="hero">
     <div class="hero-inner">
+
         <div class="hero-text">
             <h1>H4 TILE ADHESIVE</h1>
             <p>
@@ -247,16 +231,17 @@ a{text-decoration:none}
             <img src="bag-blue.png" alt="H4 Tile Adhesive Blue Bag">
             <img src="bag-yellow.png" alt="H4 Tile Adhesive Yellow Bag">
         </div>
+
     </div>
 </section>
 
 <!-- FEATURES -->
 <section id="features" class="features">
     <div class="features-inner">
-        <div class="feature"><h4>High Bond Strength</h4><p>Suitable for large format tiles</p></div>
-        <div class="feature"><h4>Waterproof</h4><p>Ideal for wet & dry areas</p></div>
-        <div class="feature"><h4>Wall & Floor</h4><p>Multi-purpose application</p></div>
-        <div class="feature"><h4>Manufacturer Direct</h4><p>Consistent quality & supply</p></div>
+        <div class="feature"><h4>High Bond Strength</h4><p>Large format tiles</p></div>
+        <div class="feature"><h4>Waterproof</h4><p>Wet & dry areas</p></div>
+        <div class="feature"><h4>Wall & Floor</h4><p>Multi-purpose</p></div>
+        <div class="feature"><h4>Manufacturer Direct</h4><p>Consistent quality</p></div>
     </div>
 </section>
 
@@ -266,16 +251,16 @@ a{text-decoration:none}
         <h2>Dealer Enquiry</h2>
         <form onsubmit="sendEnquiry(event)">
             <div class="form-grid">
-                <input id="name" type="text" placeholder="Your Name" required>
-                <input id="phone" type="tel" placeholder="Mobile Number" required>
-                <input id="business" type="text" placeholder="Business / Shop Name">
-                <input id="location" type="text" placeholder="Location / District">
+                <input id="name" placeholder="Your Name" required>
+                <input id="phone" placeholder="Mobile Number" required>
+                <input id="business" placeholder="Business / Shop Name">
+                <input id="location" placeholder="Location / District">
                 <select id="interest">
-                    <option value="H4 Tile Adhesive">H4 Tile Adhesive</option>
-                    <option value="Waterproofing">Waterproofing</option>
-                    <option value="Both">Both</option>
+                    <option>H4 Tile Adhesive</option>
+                    <option>Waterproofing</option>
+                    <option>Both</option>
                 </select>
-                <textarea id="message" rows="4" placeholder="Message / Requirement"></textarea>
+                <textarea id="message" rows="3" placeholder="Message / Requirement"></textarea>
             </div>
             <div class="form-actions">
                 <button type="submit">Send Enquiry</button>
@@ -287,13 +272,13 @@ a{text-decoration:none}
 <!-- CONTACT -->
 <section id="contact" class="contact">
     📞 <a href="tel:+917907344030">+91 79073 44030</a> |
-    💬 <a href="https://wa.me/91974588382" target="_blank">WhatsApp</a> |
+    💬 <a href="https://wa.me/91974588382">WhatsApp</a> |
     ✉️ <a href="mailto:avchemtirur@gmail.com">avchemtirur@gmail.com</a>
 </section>
 
 <!-- FOOTER -->
 <footer class="site-footer">
-    <img src="avchem-logo.png" alt="Avchem Chemical Logo">
+    <img src="avchem-logo.png" alt="Avchem Logo">
     <h3>Avchem Chemical & Manufacturer</h3>
     <p>
         Kannam Kulam, BP Angadi, Tirur<br>
@@ -304,34 +289,16 @@ a{text-decoration:none}
 <script>
 function sendEnquiry(e){
     e.preventDefault();
-
-    const name = document.getElementById('name').value;
-    const phone = document.getElementById('phone').value;
-    const business = document.getElementById('business').value;
-    const location = document.getElementById('location').value;
-    const interest = document.getElementById('interest').value;
-    const message = document.getElementById('message').value;
-
-    const text =
+    const t =
 `Dealer Enquiry
-Name: ${name}
-Phone: ${phone}
-Business: ${business}
-Location: ${location}
-Interested In: ${interest}
-Message: ${message}`;
-
-    // WhatsApp
-    window.open(
-        'https://wa.me/91974588382?text=' + encodeURIComponent(text),
-        '_blank'
-    );
-
-    // Email
-    window.location.href =
-        'mailto:avchemtirur@gmail.com?subject=' +
-        encodeURIComponent('Dealer Enquiry - Avchem Chemical') +
-        '&body=' + encodeURIComponent(text);
+Name: ${name.value}
+Phone: ${phone.value}
+Business: ${business.value}
+Location: ${location.value}
+Interest: ${interest.value}
+Message: ${message.value}`;
+    window.open('https://wa.me/91974588382?text='+encodeURIComponent(t),'_blank');
+    window.location.href='mailto:avchemtirur@gmail.com?subject=Dealer Enquiry&body='+encodeURIComponent(t);
 }
 </script>
 
