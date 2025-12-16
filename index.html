@@ -24,7 +24,7 @@ body{
   position:absolute;
   top:0;
   width:100%;
-  padding:16px 28px;
+  padding:16px 24px;
   display:flex;
   justify-content:space-between;
   align-items:center;
@@ -43,9 +43,9 @@ body{
   border-radius:20px;
 }
 
-/* HERO */
+/* HERO (HEIGHT 30% REDUCED) */
 .hero{
-  min-height:100vh;
+  min-height:70vh;   /* 👈 height reduced */
   display:flex;
   align-items:center;
   justify-content:center;
@@ -58,12 +58,12 @@ body{
     #050505;
 }
 
-/* BRAND TITLE (BALETIC STYLE) */
+/* BRAND TITLE (BALETIC STYLE LOOK) */
 .brand-title{
   font-family:'Cormorant Garamond', serif;
-  font-size:48px;
+  font-size:46px;
   letter-spacing:2px;
-  margin-bottom:10px;
+  margin-bottom:12px;
 }
 
 /* SUB TEXT */
@@ -91,7 +91,7 @@ body{
   box-shadow:0 0 30px rgba(120,90,255,.9);
 }
 
-/* BOTTOM GLASS BUTTONS */
+/* BOTTOM GLASS BUTTON BAR */
 .bottom-bar{
   position:fixed;
   bottom:16px;
@@ -115,19 +115,32 @@ body{
 /* FOOTER */
 .footer{
   text-align:center;
-  padding:40px 10px 80px;
-  font-size:12px;
-  opacity:.8;
-}
-.footer img{
-  width:36px;
-  margin-bottom:8px;
+  padding:30px 10px 90px;
+  font-size:16px;        /* 👈 text 30% bigger */
+  opacity:.9;
 }
 
-/* MOBILE */
+/* LOGO FIX (VISIBLE ON DARK BG) */
+.footer img{
+  width:50px;            /* 👈 logo bigger */
+  display:block;
+  margin:0 auto 10px;
+  opacity:1;
+  filter:brightness(1.4);
+}
+
+/* MOBILE FIX */
 @media(max-width:768px){
-  .brand-title{font-size:28px;letter-spacing:1.2px}
-  .navbar a{font-size:12px}
+  .brand-title{
+    font-size:28px;
+    letter-spacing:1.2px;
+  }
+  .hero{
+    min-height:65vh;
+  }
+  .footer{
+    font-size:15px;
+  }
 }
 </style>
 </head>
@@ -167,9 +180,10 @@ body{
 
 <!-- FOOTER -->
 <div class="footer" id="contact">
-  <!-- logo.png place your logo file -->
+  <!-- ⚠️ logo.png same folder-ൽ upload ചെയ്തിരിക്കണം -->
   <img src="logo.png" alt="AV Chem Logo">
-  <div>AV Chem Chemical & Manufacturing</div>
+
+  <div><strong>AV Chem Chemical & Manufacturing</strong></div>
   <div>
     Mukkilapeedika, Kannamkulam,<br>
     BP Angadi, Tirur, Malappuram, Kerala
