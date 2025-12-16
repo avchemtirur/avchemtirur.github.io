@@ -5,7 +5,6 @@
 <title>AV Chem Chemical & Manufacturing</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- GOOGLE FONT -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -13,38 +12,40 @@
 
 body{
   font-family:'Inter',sans-serif;
-  background:#f7f9fc;
+  background:#ffffff;
   color:#0b2239;
 }
 
-/* NAVBAR */
+/* NAV */
 .nav{
-  position:absolute;
+  position:fixed;
   top:0;
   width:100%;
-  padding:22px 7%;
+  padding:18px 7%;
   display:flex;
   justify-content:space-between;
   align-items:center;
   z-index:10;
+  background:transparent;
 }
 
-.nav .brand{
+.brand{
   font-weight:600;
   font-size:18px;
+  color:#fff;
 }
 
 .nav a{
-  margin-left:22px;
+  margin-left:20px;
   font-size:13px;
   text-decoration:none;
-  color:#0b2239;
-  opacity:.8;
+  color:#fff;
+  opacity:.85;
 }
 
-/* HERO */
+/* HERO (50% HEIGHT) */
 .hero{
-  min-height:100vh;
+  height:50vh;
   display:flex;
   align-items:center;
   padding:0 7%;
@@ -53,70 +54,72 @@ body{
 
 /* LEFT CONTENT */
 .left{
-  flex:1;
+  max-width:480px;
   color:#fff;
 }
 
 .left h1{
-  font-size:42px;
-  margin-bottom:18px;
+  font-size:36px;
+  margin-bottom:14px;
 }
 
 .left p{
-  max-width:420px;
-  font-size:15px;
-  line-height:1.7;
+  font-size:14px;
+  line-height:1.6;
   opacity:.9;
 }
 
-.cta{
-  margin-top:28px;
-}
-
-.cta a{
+.left a{
   display:inline-block;
-  padding:12px 26px;
-  border-radius:30px;
-  background:#ffffff;
+  margin-top:22px;
+  padding:10px 24px;
+  border-radius:25px;
+  background:#fff;
   color:#1aa7b8;
-  font-size:14px;
+  font-size:13px;
   font-weight:600;
   text-decoration:none;
 }
 
-/* RIGHT AREA (ILLUSTRATION PLACEHOLDER) */
+/* IMAGE PLACEHOLDER (RIGHT) */
 .right{
   flex:1;
   display:flex;
   justify-content:center;
-  align-items:center;
 }
 
 .mock{
-  width:320px;
-  height:320px;
-  background:rgba(255,255,255,.25);
+  width:260px;
+  height:260px;
+  background:rgba(255,255,255,.35);
   border-radius:22px;
-  backdrop-filter:blur(10px);
 }
 
-/* FEATURES */
-.features{
+/* WHITE SECTION */
+.white-section{
   background:#fff;
-  padding:60px 7%;
+  padding:60px 7% 80px;
+}
+
+/* FEATURE BOXES */
+.features{
   display:flex;
   justify-content:space-between;
-  gap:24px;
+  gap:28px;
 }
 
 .feature{
   flex:1;
+  background:#ffffff;
+  padding:28px 20px;
   text-align:center;
+  border-radius:18px;
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
 }
 
 .icon{
-  width:54px;
-  height:54px;
+  width:56px;
+  height:56px;
   margin:0 auto 14px;
   border-radius:14px;
   background:linear-gradient(135deg,#1aa7b8,#2de1c2);
@@ -141,16 +144,26 @@ body{
 @media(max-width:900px){
   .hero{
     flex-direction:column;
+    height:auto;
+    padding:100px 7% 60px;
     text-align:center;
-    padding-top:120px;
   }
 
   .right{
-    margin-top:40px;
+    margin-top:30px;
   }
 
   .features{
     flex-direction:column;
+  }
+
+  .brand,.nav a{
+    color:#0b2239;
+  }
+
+  .nav{
+    background:#ffffff;
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
   }
 }
 </style>
@@ -170,47 +183,44 @@ body{
 
 <!-- HERO -->
 <section class="hero">
-
   <div class="left">
     <h1>H4 Tile Adhesive & Waterproof</h1>
     <p>
       Premium polymer modified tile adhesive and waterproof solutions.
-      Designed for strong bonding, durability and Kerala climate conditions.
+      Designed for strong bonding and long-lasting durability.
     </p>
-
-    <div class="cta">
-      <a href="tel:+917907344030">Call Now</a>
-    </div>
+    <a href="tel:+917907344030">Call Now</a>
   </div>
 
   <div class="right">
-    <!-- illustration / image space -->
+    <!-- image / illustration placeholder -->
     <div class="mock"></div>
   </div>
-
 </section>
 
-<!-- FEATURES -->
-<section class="features">
+<!-- WHITE SECTION -->
+<section class="white-section">
+  <div class="features">
 
-  <div class="feature">
-    <div class="icon">🧱</div>
-    <h3>Tile Adhesive</h3>
-    <p>High bond strength for wall & floor tiles</p>
+    <div class="feature">
+      <div class="icon">🧱</div>
+      <h3>Tile Adhesive</h3>
+      <p>High bond strength for wall & floor tiles</p>
+    </div>
+
+    <div class="feature">
+      <div class="icon">💧</div>
+      <h3>Waterproof</h3>
+      <p>Advanced waterproof protection system</p>
+    </div>
+
+    <div class="feature">
+      <div class="icon">📞</div>
+      <h3>Contact</h3>
+      <p>+91 79073 44030</p>
+    </div>
+
   </div>
-
-  <div class="feature">
-    <div class="icon">💧</div>
-    <h3>Waterproof</h3>
-    <p>Advanced waterproof protection</p>
-  </div>
-
-  <div class="feature">
-    <div class="icon">📞</div>
-    <h3>Contact</h3>
-    <p>+91 79073 44030</p>
-  </div>
-
 </section>
 
 </body>
