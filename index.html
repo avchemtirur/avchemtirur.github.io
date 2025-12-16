@@ -5,7 +5,8 @@
 <title>AV Chem Chemical & Manufacturing</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- GOOGLE FONTS -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -28,11 +29,13 @@ body{
   z-index:10;
 }
 
-/* BRAND NAME WITH LEFT GAP */
+/* AV CHEM SCRIPT FONT */
 .navbar .brand{
-  font-size:18px;
-  font-weight:500;
-  padding-left:4rem;   /* 👈 4 space gap from left */
+  font-family:'Great Vibes', cursive;
+  font-size:32px;
+  font-weight:400;
+  padding-left:4rem;   /* 👈 left gap */
+  color:#ffffff;
 }
 
 .navbar a{
@@ -54,75 +57,98 @@ body{
   overflow:hidden;
 }
 
-/* BLUE LAYERS */
+/* BLUE–PURPLE LAYERS */
 .hero::before{
   content:"";
   position:absolute;
   inset:0;
-  background:linear-gradient(135deg,
-    transparent 0%,
-    #1c6fa1 40%,
-    transparent 70%);
-  opacity:.8;
+  background:
+    radial-gradient(circle at 25% 50%, rgba(160,70,255,.55), transparent 55%);
 }
 
 .hero::after{
   content:"";
   position:absolute;
   inset:0;
-  background:linear-gradient(-135deg,
-    transparent 0%,
-    #0b4f6c 40%,
-    transparent 70%);
-  opacity:.7;
+  background:
+    radial-gradient(circle at 75% 55%, rgba(40,120,255,.55), transparent 55%);
 }
 
-/* MAIN CARD (ONLY LEFT CONTENT) */
+/* CONTENT CARD */
 .container{
   max-width:1100px;
   width:100%;
   background:#1a232c;
-  border-radius:18px;
-  padding:60px;
+  border-radius:20px;
+  padding:70px;
   position:relative;
   z-index:2;
 }
 
-/* CONTENT */
+/* MAIN HEADING */
 .container h1{
-  font-size:36px;
-  margin-bottom:14px;
+  font-size:42px;
+  margin-bottom:16px;
+  letter-spacing:1px;
 }
 
+/* DESCRIPTION */
 .container p{
-  font-size:14px;
+  font-size:15px;
   opacity:.85;
-  line-height:1.6;
-  max-width:480px;
+  line-height:1.7;
+  max-width:520px;
 }
 
-.container .btn{
-  display:inline-block;
-  margin-top:24px;
-  padding:10px 22px;
-  background:#fff;
-  color:#000;
-  border-radius:20px;
-  font-size:13px;
+/* BUTTONS */
+.btn-group{
+  margin-top:28px;
+  display:flex;
+  gap:16px;
+}
+
+.btn-primary{
+  padding:12px 26px;
+  background:linear-gradient(135deg,#7b3fe4,#9b5cff);
+  color:#fff;
   text-decoration:none;
+  border-radius:30px;
+  font-size:14px;
+  font-weight:500;
+}
+
+.btn-outline{
+  padding:12px 26px;
+  border:1px solid #fff;
+  color:#fff;
+  text-decoration:none;
+  border-radius:30px;
+  font-size:14px;
 }
 
 /* MOBILE */
 @media(max-width:768px){
   .navbar .brand{
-    padding-left:1.5rem;
-    font-size:16px;
-  }
-  .container{
-    padding:40px;
-  }
-  .container h1{
     font-size:26px;
+    padding-left:1.5rem;
+  }
+
+  .container{
+    padding:45px;
+  }
+
+  .container h1{
+    font-size:30px;
+  }
+
+  .btn-group{
+    flex-direction:column;
+    width:100%;
+  }
+
+  .btn-primary,
+  .btn-outline{
+    text-align:center;
   }
 }
 </style>
@@ -137,8 +163,7 @@ body{
   </div>
   <div>
     <a href="#">Home</a>
-    <a href="#">About</a>
-    <a href="#">Service</a>
+    <a href="#">Dealer Enquiry</a>
     <a href="#">Contact</a>
   </div>
 </div>
@@ -146,12 +171,17 @@ body{
 <!-- HERO -->
 <section class="hero">
   <div class="container">
-    <h1>H4 Tile Adhesive & Waterproof</h1>
+    <h1>H4 Tile Adhesive</h1>
     <p>
-      High bond strength tile adhesive and waterproof solutions  
-      specially designed for Kerala climate conditions.
+      Premium polymer modified tile adhesive for wall & floor applications.
+      High bond strength, waterproof performance and long-lasting durability,
+      specially designed for Kerala climate.
     </p>
-    <a class="btn" href="#">Read More</a>
+
+    <div class="btn-group">
+      <a href="#" class="btn-primary">Become a Dealer</a>
+      <a href="tel:+917907344030" class="btn-outline">Call Now</a>
+    </div>
   </div>
 </section>
 
