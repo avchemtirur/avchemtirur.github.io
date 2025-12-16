@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>AV Chem – Landing Page</title>
+<title>AV Chem Chemical & Manufacturing</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -27,10 +27,14 @@ body{
   align-items:center;
   z-index:10;
 }
+
+/* BRAND NAME WITH LEFT GAP */
 .navbar .brand{
-  font-size:20px;
+  font-size:18px;
   font-weight:500;
+  padding-left:4rem;   /* 👈 4 space gap from left */
 }
+
 .navbar a{
   color:#fff;
   text-decoration:none;
@@ -39,7 +43,7 @@ body{
   opacity:.85;
 }
 
-/* HERO */
+/* HERO BACKGROUND */
 .hero{
   min-height:100vh;
   display:flex;
@@ -55,11 +59,10 @@ body{
   content:"";
   position:absolute;
   inset:0;
-  background:
-    linear-gradient(135deg,
-      transparent 0%,
-      #1c6fa1 40%,
-      transparent 70%);
+  background:linear-gradient(135deg,
+    transparent 0%,
+    #1c6fa1 40%,
+    transparent 70%);
   opacity:.8;
 }
 
@@ -67,42 +70,38 @@ body{
   content:"";
   position:absolute;
   inset:0;
-  background:
-    linear-gradient(-135deg,
-      transparent 0%,
-      #0b4f6c 40%,
-      transparent 70%);
+  background:linear-gradient(-135deg,
+    transparent 0%,
+    #0b4f6c 40%,
+    transparent 70%);
   opacity:.7;
 }
 
-/* MAIN CARD */
+/* MAIN CARD (ONLY LEFT CONTENT) */
 .container{
   max-width:1100px;
   width:100%;
   background:#1a232c;
   border-radius:18px;
-  display:grid;
-  grid-template-columns:1.2fr .8fr;
-  overflow:hidden;
+  padding:60px;
   position:relative;
   z-index:2;
 }
 
-/* LEFT */
-.left{
-  padding:60px;
-}
-.left h1{
+/* CONTENT */
+.container h1{
   font-size:36px;
   margin-bottom:14px;
 }
-.left p{
+
+.container p{
   font-size:14px;
   opacity:.85;
   line-height:1.6;
-  max-width:420px;
+  max-width:480px;
 }
-.left .btn{
+
+.container .btn{
   display:inline-block;
   margin-top:24px;
   padding:10px 22px;
@@ -113,49 +112,17 @@ body{
   text-decoration:none;
 }
 
-/* RIGHT CARD */
-.right{
-  background:#fff;
-  color:#000;
-  padding:40px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.card{
-  width:100%;
-  max-width:260px;
-  text-align:center;
-}
-.card h3{
-  margin-bottom:20px;
-}
-.card input{
-  width:100%;
-  padding:10px;
-  margin-bottom:14px;
-  border:1px solid #ddd;
-  border-radius:6px;
-}
-.card button{
-  width:100%;
-  padding:10px;
-  background:#111;
-  color:#fff;
-  border:none;
-  border-radius:6px;
-}
-
 /* MOBILE */
-@media(max-width:900px){
+@media(max-width:768px){
+  .navbar .brand{
+    padding-left:1.5rem;
+    font-size:16px;
+  }
   .container{
-    grid-template-columns:1fr;
-  }
-  .right{
-    display:none;
-  }
-  .left{
     padding:40px;
+  }
+  .container h1{
+    font-size:26px;
   }
 }
 </style>
@@ -163,8 +130,11 @@ body{
 
 <body>
 
+<!-- NAVBAR -->
 <div class="navbar">
-  <div class="brand">AV Chem</div>
+  <div class="brand">
+    AV Chem Chemical & Manufacturing
+  </div>
   <div>
     <a href="#">Home</a>
     <a href="#">About</a>
@@ -173,25 +143,15 @@ body{
   </div>
 </div>
 
+<!-- HERO -->
 <section class="hero">
   <div class="container">
-    <div class="left">
-      <h1>H4 Tile Adhesive & Waterproof</h1>
-      <p>
-        High bond strength tile adhesive and waterproof solutions  
-        specially designed for Kerala climate conditions.
-      </p>
-      <a class="btn" href="#">Read More</a>
-    </div>
-
-    <div class="right">
-      <div class="card">
-        <h3>Your Company</h3>
-        <input type="text" placeholder="Username">
-        <input type="password" placeholder="Password">
-        <button>Login</button>
-      </div>
-    </div>
+    <h1>H4 Tile Adhesive & Waterproof</h1>
+    <p>
+      High bond strength tile adhesive and waterproof solutions  
+      specially designed for Kerala climate conditions.
+    </p>
+    <a class="btn" href="#">Read More</a>
   </div>
 </section>
 
