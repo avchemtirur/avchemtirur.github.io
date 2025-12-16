@@ -2,17 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>H4 Tile Adhesive & Waterproof</title>
+<title>AV Chem – Landing Page</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 
 body{
-  font-family:'Inter', sans-serif;
-  background:#000;
+  font-family:'Inter',sans-serif;
+  background:#0b1218;
   color:#fff;
 }
 
@@ -21,136 +21,142 @@ body{
   position:absolute;
   top:0;
   width:100%;
-  padding:16px 24px;
+  padding:18px 30px;
   display:flex;
   justify-content:space-between;
   align-items:center;
   z-index:10;
 }
+.navbar .brand{
+  font-size:20px;
+  font-weight:500;
+}
 .navbar a{
   color:#fff;
   text-decoration:none;
-  margin:0 10px;
+  margin-left:18px;
   font-size:13px;
   opacity:.85;
 }
-.navbar .sign{
-  border:1px solid rgba(255,255,255,.4);
-  padding:6px 14px;
-  border-radius:20px;
-}
 
-/* HERO – HEIGHT + WAVES */
+/* HERO */
 .hero{
-  min-height:77vh;           /* 👈 height increased */
+  min-height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
-  text-align:center;
-  padding:20px;
+  padding:40px 20px;
   position:relative;
   overflow:hidden;
-  background:#05070f;
 }
 
+/* BLUE LAYERS */
 .hero::before{
   content:"";
   position:absolute;
-  width:140%;
-  height:140%;
-  top:-40%;
-  left:-30%;
-  background:radial-gradient(circle at 30% 40%, rgba(160,70,255,.55), transparent 60%);
-  filter:blur(120px);
+  inset:0;
+  background:
+    linear-gradient(135deg,
+      transparent 0%,
+      #1c6fa1 40%,
+      transparent 70%);
+  opacity:.8;
 }
 
 .hero::after{
   content:"";
   position:absolute;
-  width:140%;
-  height:140%;
-  bottom:-40%;
-  right:-30%;
-  background:radial-gradient(circle at 70% 60%, rgba(40,120,255,.55), transparent 60%);
-  filter:blur(140px);
+  inset:0;
+  background:
+    linear-gradient(-135deg,
+      transparent 0%,
+      #0b4f6c 40%,
+      transparent 70%);
+  opacity:.7;
 }
 
-.hero > div{
-  position:relative;
-  z-index:1;
-}
-
-.brand-title{
-  font-family:'Cormorant Garamond', serif;
-  font-size:46px;
-  letter-spacing:2px;
-  margin-bottom:12px;
-}
-
-.hero p{
-  font-size:14px;
-  opacity:.85;
-  max-width:520px;
-  margin:0 auto 22px;
-}
-
-.btn-main{
-  padding:12px 28px;
-  border-radius:30px;
-  background:linear-gradient(135deg,#6a5cff,#9a5cff);
-  color:#fff;
-  text-decoration:none;
-  box-shadow:0 0 20px rgba(120,90,255,.8);
-}
-
-/* BOTTOM BAR */
-.bottom-bar{
-  position:fixed;
-  bottom:16px;
+/* MAIN CARD */
+.container{
+  max-width:1100px;
   width:100%;
-  display:flex;
-  justify-content:center;
-  gap:10px;
-}
-.bottom-bar a{
-  padding:8px 14px;
-  font-size:12px;
-  border-radius:20px;
-  background:rgba(255,255,255,.08);
-  color:#fff;
-  text-decoration:none;
-  border:1px solid rgba(255,255,255,.15);
+  background:#1a232c;
+  border-radius:18px;
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  overflow:hidden;
+  position:relative;
+  z-index:2;
 }
 
-/* FOOTER */
-.footer{
-  text-align:center;
-  padding:20px 10px 60px;   /* 👈 moved up */
+/* LEFT */
+.left{
+  padding:60px;
 }
-
-.footer img{
-  width:60px;               /* 👈 logo force visible */
-  display:block;
-  margin:0 auto 12px;
-  filter:brightness(1.6) contrast(1.2);
+.left h1{
+  font-size:36px;
+  margin-bottom:14px;
 }
-
-.avchem-name{
-  font-size:24px;           /* 👈 20% bigger */
-  font-weight:600;
-  margin-bottom:8px;
-}
-
-.avchem-address,
-.avchem-email{
+.left p{
   font-size:14px;
   opacity:.85;
+  line-height:1.6;
+  max-width:420px;
+}
+.left .btn{
+  display:inline-block;
+  margin-top:24px;
+  padding:10px 22px;
+  background:#fff;
+  color:#000;
+  border-radius:20px;
+  font-size:13px;
+  text-decoration:none;
 }
 
-@media(max-width:768px){
-  .brand-title{font-size:28px}
-  .hero{min-height:75vh}
-  .avchem-name{font-size:20px}
+/* RIGHT CARD */
+.right{
+  background:#fff;
+  color:#000;
+  padding:40px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.card{
+  width:100%;
+  max-width:260px;
+  text-align:center;
+}
+.card h3{
+  margin-bottom:20px;
+}
+.card input{
+  width:100%;
+  padding:10px;
+  margin-bottom:14px;
+  border:1px solid #ddd;
+  border-radius:6px;
+}
+.card button{
+  width:100%;
+  padding:10px;
+  background:#111;
+  color:#fff;
+  border:none;
+  border-radius:6px;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+  .container{
+    grid-template-columns:1fr;
+  }
+  .right{
+    display:none;
+  }
+  .left{
+    padding:40px;
+  }
 }
 </style>
 </head>
@@ -158,40 +164,36 @@ body{
 <body>
 
 <div class="navbar">
-  <div>◯ COMPANY</div>
+  <div class="brand">AV Chem</div>
   <div>
-    <a href="#">HOME</a>
-    <a href="#">ABOUT US</a>
-    <a href="#contact">CONTACT US</a>
-    <a href="#" class="sign">SIGN IN</a>
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Service</a>
+    <a href="#">Contact</a>
   </div>
 </div>
 
 <section class="hero">
-  <div>
-    <h1 class="brand-title">H4 Tile Adhesive & Waterproof</h1>
-    <p>High bond strength • Waterproof solutions • Kerala climate suitable</p>
-    <a href="#contact" class="btn-main">CONTACT NOW</a>
+  <div class="container">
+    <div class="left">
+      <h1>H4 Tile Adhesive & Waterproof</h1>
+      <p>
+        High bond strength tile adhesive and waterproof solutions  
+        specially designed for Kerala climate conditions.
+      </p>
+      <a class="btn" href="#">Read More</a>
+    </div>
+
+    <div class="right">
+      <div class="card">
+        <h3>Your Company</h3>
+        <input type="text" placeholder="Username">
+        <input type="password" placeholder="Password">
+        <button>Login</button>
+      </div>
+    </div>
   </div>
 </section>
-
-<div class="bottom-bar">
-  <a href="#">Waterproof</a>
-  <a href="#">High Bond Strength</a>
-  <a href="#">Order</a>
-  <a href="#">Dealer Enquiry</a>
-  <a href="#contact">Contact</a>
-</div>
-
-<div class="footer" id="contact">
-  <img src="logo.png" alt="AV Chem Logo">
-  <div class="avchem-name">AV Chem Chemical & Manufacturing</div>
-  <div class="avchem-address">
-    Mukkilapeedika, Kannamkulam,<br>
-    BP Angadi, Tirur, Malappuram, Kerala
-  </div>
-  <div class="avchem-email">📧 avchemtirur@gmail.com</div>
-</div>
 
 </body>
 </html>
