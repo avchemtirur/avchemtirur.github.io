@@ -2,265 +2,308 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>AV Chem Chemical & Manufacturing</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- FONT -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
+<!-- ICONS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-body{background:#fff;color:#222;}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  background:#fff;
+  color:#222;
+}
 
 /* NAVBAR */
-nav{
+.nav{
+  position:fixed;
+  top:0;
+  width:100%;
+  padding:14px 24px;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:14px 22px;
-  background:#22c1b5;
+  z-index:100;
+  background:rgba(0,0,0,0.25);
+  backdrop-filter:blur(8px);
 }
-nav .logo{
+
+.nav .brand{
   font-weight:700;
   color:#fff;
-  font-size:18px;
+  letter-spacing:1px;
 }
-nav ul{
-  list-style:none;
-  display:flex;
-  gap:18px;
-}
-nav ul li a{
+
+.nav a{
   color:#fff;
+  margin-left:18px;
   text-decoration:none;
   font-size:14px;
 }
 
 /* HERO */
 .hero{
-  background:linear-gradient(135deg,#20c997,#2dd4bf);
-  min-height:80vh;
-  padding:50px 20px;
-  display:flex;
+  min-height:100vh;
+  padding-top:90px;
+  padding-left:24px;
+  padding-right:24px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
   align-items:center;
-  justify-content:space-between;
-  flex-wrap:wrap;
+  gap:30px;
+  background:linear-gradient(135deg,#1cb5a8,#1e90ff);
 }
-.hero-text{
-  width:50%;
-  color:#fff;
-}
+
+/* TEXT */
 .hero-text h1{
-  font-size:32px;
-  font-weight:700;
-  margin-bottom:12px;
+  font-size:34px;
+  color:#fff;
+  margin-bottom:14px;
 }
+
 .hero-text p{
+  color:#eafefe;
+  max-width:480px;
   font-size:14px;
-  opacity:.95;
-  max-width:420px;
+  margin-bottom:22px;
 }
-.hero-buttons{
-  margin-top:18px;
+
+/* BUTTONS */
+.btn-group{
   display:flex;
   gap:12px;
   align-items:center;
 }
+
 .btn{
-  padding:10px 18px;
-  border-radius:25px;
+  padding:12px 20px;
+  border-radius:30px;
   border:none;
   cursor:pointer;
+  font-weight:600;
   font-size:14px;
 }
+
 .btn-dealer{
   background:#fff;
-  color:#20c997;
-  font-weight:600;
-}
-.btn-whatsapp{
-  background:#fff;
-  color:#25D366;
-  font-size:18px;
-  width:42px;
-  height:42px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  color:#1cb5a8;
 }
 
-/* HERO IMAGE */
+.btn-call{
+  background:transparent;
+  color:#fff;
+  border:1px solid #fff;
+}
+
+.btn-whatsapp{
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  background:#fff;
+  color:#25D366;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+}
+
+/* IMAGE AREA */
 .hero-image{
-  width:45%;
+  position:relative;
   display:flex;
   justify-content:center;
   align-items:center;
-  gap:20px;
 }
+
 .hero-image img{
-  width:180px;
-  animation:floatRotate 6s ease-in-out infinite;
+  max-width:240px;
+  position:absolute;
+  animation:rotateFloat 6s infinite ease-in-out;
 }
+
 .hero-image img:nth-child(2){
+  transform:translateX(90px);
   animation-delay:1.5s;
 }
 
-@keyframes floatRotate{
+@keyframes rotateFloat{
   0%{transform:translateY(0) rotate(0deg);}
-  50%{transform:translateY(-12px) rotate(3deg);}
+  50%{transform:translateY(-12px) rotate(2deg);}
   100%{transform:translateY(0) rotate(0deg);}
 }
 
-/* CARDS */
-.cards{
+/* WHITE SECTION */
+.services{
   background:#fff;
-  padding:40px 20px;
-  display:flex;
-  justify-content:center;
+  padding:60px 20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:20px;
-  flex-wrap:wrap;
 }
+
 .card{
   background:#fff;
-  width:260px;
-  padding:22px;
+  padding:26px;
   border-radius:16px;
-  box-shadow:0 10px 30px rgba(0,0,0,.08);
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
   text-align:center;
-}
-.card h3{
-  margin-top:10px;
-  font-size:16px;
-}
-.card p{
-  font-size:13px;
-  opacity:.7;
-  margin-top:6px;
 }
 
-/* DEALER SECTION */
-.dealer{
-  background:#f8f9fa;
-  padding:40px 20px;
-  text-align:center;
-}
-.dealer h2{
-  font-size:22px;
+.card i{
+  font-size:28px;
+  color:#1cb5a8;
   margin-bottom:12px;
 }
-.dealer a{
-  display:inline-block;
-  margin:10px;
-  padding:12px 20px;
-  border-radius:25px;
-  text-decoration:none;
-  color:#fff;
-  font-size:14px;
-}
-.whatsapp-btn{background:#25D366;}
-.call-btn{background:#20c997;}
 
-/* FOOTER */
-footer{
-  background:#111;
-  color:#fff;
-  padding:30px 20px;
-  text-align:center;
-}
-footer h3{
-  font-size:18px;
+.card h3{
+  font-size:16px;
   margin-bottom:8px;
 }
-footer p{
+
+.card p{
   font-size:13px;
-  opacity:.8;
+  color:#666;
+}
+
+/* FOOTER */
+.footer{
+  background:#0e2a2a;
+  color:#fff;
+  text-align:center;
+  padding:26px 14px;
+}
+
+.footer p{
+  font-size:14px;
+  line-height:1.6;
 }
 
 /* FLOATING WHATSAPP */
 .float-whatsapp{
   position:fixed;
-  right:18px;
   bottom:18px;
-  background:#25D366;
-  width:56px;
-  height:56px;
+  right:18px;
+  width:54px;
+  height:54px;
   border-radius:50%;
+  background:#25D366;
+  color:#fff;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:28px;
-  color:#fff;
-  text-decoration:none;
-  box-shadow:0 8px 20px rgba(0,0,0,.3);
+  font-size:26px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.3);
+  z-index:200;
 }
 
 /* MOBILE */
 @media(max-width:768px){
-  .hero-text,.hero-image{width:100%;}
-  .hero{min-height:auto;}
-  .hero-image{margin-top:30px;}
+  .hero{
+    grid-template-columns:1fr;
+    text-align:left;
+  }
+  .hero-image{
+    height:260px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<nav>
-  <div class="logo">AV Chem Chemical & Manufacturing</div>
-  <ul>
-    <li><a href="#">Home</a></li>
-    <li><a href="#">Dealer Enquiry</a></li>
-    <li><a href="#">Contact</a></li>
-  </ul>
-</nav>
+<!-- NAV -->
+<div class="nav">
+  <div class="brand">AV Chem Chemical & Manufacturing</div>
+  <div>
+    <a href="#">Home</a>
+    <a href="#">Dealer Enquiry</a>
+    <a href="#">Contact</a>
+  </div>
+</div>
 
+<!-- HERO -->
 <section class="hero">
+
   <div class="hero-text">
     <h1>H4 Tile Adhesive & Waterproof</h1>
-    <p>Premium polymer modified tile adhesive & waterproof solutions. Designed for strong bonding and long-lasting durability.</p>
+    <p>
+      Premium polymer modified tile adhesive and waterproof solutions.
+      Designed for strong bonding, durability and Kerala climate.
+    </p>
 
-    <div class="hero-buttons">
+    <div class="btn-group">
       <button class="btn btn-dealer">Become a Dealer</button>
-      <a class="btn-whatsapp" href="https://wa.me/917907344030" target="_blank">🟢</a>
+
+      <!-- WhatsApp icon near button -->
+      <a class="btn-whatsapp"
+         href="https://wa.me/917907344030"
+         target="_blank">
+         <i class="fab fa-whatsapp"></i>
+      </a>
+
+      <button class="btn btn-call"
+        onclick="location.href='tel:+917907344030'">
+        Call Now
+      </button>
     </div>
   </div>
 
+  <!-- IMAGES -->
   <div class="hero-image">
-    <img src="bag1.png" alt="H4 Tile Adhesive">
-    <img src="bag2.png" alt="H4 Waterproof">
+    <img src="bag-yellow.png" alt="H4 Tile Adhesive">
+    <img src="bag-blue.png" alt="H4 Waterproof">
   </div>
+
 </section>
 
-<section class="cards">
+<!-- SERVICES -->
+<section class="services">
+
   <div class="card">
+    <i class="fas fa-th-large"></i>
     <h3>Tile Adhesive</h3>
     <p>High bond strength for wall & floor tiles</p>
   </div>
+
   <div class="card">
+    <i class="fas fa-droplet"></i>
     <h3>Waterproof</h3>
     <p>Advanced waterproof protection system</p>
   </div>
+
   <div class="card">
+    <i class="fas fa-phone"></i>
     <h3>Contact</h3>
-    <p>📞 +91 79073 44030<br>✉ avchemtirur@gmail.com</p>
+    <p>+91 79073 44030<br>avchemtirur@gmail.com</p>
   </div>
+
 </section>
 
-<section class="dealer">
-  <h2>Dealer & Customer Enquiry</h2>
-  <a class="whatsapp-btn" href="https://wa.me/917907344030" target="_blank">WhatsApp Enquiry</a>
-  <a class="call-btn" href="tel:+917907344030">Call Now</a>
-</section>
+<!-- FOOTER -->
+<div class="footer">
+  <p>
+    AV Chem Chemical & Manufacturing<br>
+    Tirur, Malappuram, Kerala<br>
+    📧 avchemtirur@gmail.com | 📞 +91 79073 44030
+  </p>
+</div>
 
-<footer>
-  <h3>AV Chem Chemical & Manufacturing</h3>
-  <p>Mukkilapeedika, Kannamkulam, BP Angadi, Tirur, Malappuram, Kerala</p>
-  <p>📧 avchemtirur@gmail.com | 📞 +91 79073 44030</p>
-</footer>
-
-<a class="float-whatsapp" href="https://wa.me/917907344030" target="_blank">💬</a>
+<!-- FLOATING WHATSAPP -->
+<a class="float-whatsapp"
+   href="https://wa.me/917907344030"
+   target="_blank">
+   <i class="fab fa-whatsapp"></i>
+</a>
 
 </body>
 </html>
