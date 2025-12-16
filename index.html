@@ -7,209 +7,230 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body{
-    margin:0;
-    font-family: Arial, sans-serif;
-    background:#0b0b14;
-    color:#fff;
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+body{background:#05050b;color:#fff}
+
+/* ===== HEADER ===== */
+header{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:18px 40px;
 }
-button{
-    cursor:pointer;
-    border:none;
-    padding:10px 18px;
-    border-radius:8px;
-    font-weight:600;
+header nav a{
+  color:#ccc;margin:0 15px;text-decoration:none;font-size:14px;
+}
+header nav a:hover{color:#fff}
+.signin{
+  border:1px solid #555;padding:6px 16px;border-radius:20px;
+}
+
+/* ===== HERO ===== */
+.hero{
+  min-height:90vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  background:
+    radial-gradient(circle at left, #7c2cff55, transparent 40%),
+    radial-gradient(circle at right, #2563eb55, transparent 40%),
+    #05050b;
+}
+.hero h1{font-size:60px;letter-spacing:4px}
+.hero p{color:#aaa;margin:20px auto;max-width:650px}
+.hero button{
+  padding:12px 32px;border-radius:30px;
+  border:none;background:#6366f1;color:#fff;font-weight:600;
+}
+
+/* ===== ACTION BUTTONS ===== */
+.actions{
+  display:flex;gap:12px;justify-content:center;
+  padding:25px;flex-wrap:wrap;
 }
 .btn{
-    background:#1e1e2f;
-    color:#fff;
+  background:#111827;color:#fff;
+  padding:10px 18px;border:none;border-radius:10px;font-weight:600;
 }
-.btn-green{background:#00c853;color:#000;}
-.btn-red{background:#d50000;}
-.btn-purple{background:#7c4dff;}
+.btn:hover{background:#1f2937}
+
+/* ===== MODAL ===== */
 .modal{
-    display:none;
-    position:fixed;
-    top:0;left:0;
-    width:100%;height:100%;
-    background:rgba(0,0,0,0.85);
-    z-index:9999;
-    overflow:auto;
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.85);z-index:9999;overflow:auto;
 }
-.modal-content{
-    background:#111827;
-    margin:40px auto;
-    padding:20px;
-    border-radius:12px;
-    max-width:800px;
+.modal-box{
+  background:#0f172a;color:#e5e7eb;
+  max-width:850px;margin:40px auto;padding:22px;border-radius:16px;
 }
-.close{
-    float:right;
-    font-size:22px;
-    cursor:pointer;
-}
+.close{float:right;font-size:22px;cursor:pointer}
 input,select,textarea{
-    width:100%;
-    padding:10px;
-    margin:6px 0 12px;
-    border-radius:6px;
-    border:none;
+  width:100%;padding:10px;margin:6px 0 12px;
+  border-radius:8px;border:none;
 }
-label{font-size:14px;color:#bbb;}
-.section-btns{
-    display:flex;
-    gap:10px;
-    justify-content:center;
-    padding:20px;
-}
-.lang-btn{
-    width:100%;
-    margin-top:10px;
-}
-.thankyou{
-    text-align:center;
-    padding:30px;
+label{font-size:14px;color:#9ca3af}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.green{background:#22c55e;color:#000}
+.red{background:#ef4444}
+.center{text-align:center}
+
+@media(max-width:600px){
+  header{padding:15px}
+  .hero h1{font-size:42px}
+  .modal-box{margin:15px}
 }
 </style>
 </head>
 
 <body>
 
-<!-- ACTION BUTTONS -->
-<div class="section-btns">
-    <button class="btn" onclick="openLang('waterproof')">Waterproof</button>
-    <button class="btn" onclick="openLang('bond')">High Bond Strength</button>
-    <button class="btn" onclick="openOrder()">Order</button>
-    <button class="btn" onclick="openDealer()">Dealer Enquiry</button>
-    <button class="btn-purple" onclick="openContact()">Contact</button>
+<!-- ===== HEADER ===== -->
+<header>
+  <div>◯ COMPANY</div>
+  <nav>
+    <a href="#">HOME</a>
+    <a href="#">ABOUT US</a>
+    <a href="#">CONTACT US</a>
+  </nav>
+  <div class="signin">SIGN IN</div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div>
+    <h1>WELCOME</h1>
+    <p>Premium polymer modified tile adhesive & waterproof solutions with long-lasting durability.</p>
+    <button onclick="openOrder()">LEARN MORE</button>
+  </div>
+</section>
+
+<!-- ===== ACTION BUTTONS ===== -->
+<div class="actions">
+  <button class="btn" onclick="openLang('waterproof')">Waterproof</button>
+  <button class="btn" onclick="openLang('bond')">High Bond Strength</button>
+  <button class="btn" onclick="openOrder()">Order</button>
+  <button class="btn" onclick="openDealer()">Dealer Enquiry</button>
+  <button class="btn" onclick="openContact()">Contact</button>
 </div>
 
-<!-- LANGUAGE SELECT -->
+<!-- ===== LANGUAGE SELECT ===== -->
 <div id="langModal" class="modal">
-<div class="modal-content">
-<span class="close" onclick="closeModal('langModal')">×</span>
-<h3>Select Language</h3>
-<button class="btn lang-btn" onclick="openContent('ml')">മലയാളം</button>
-<button class="btn lang-btn" onclick="openContent('en')">English</button>
-</div>
+  <div class="modal-box">
+    <span class="close" onclick="closeM('langModal')">×</span>
+    <h3>Select Language</h3><br>
+    <button class="btn" style="width:100%" onclick="showContent('ml')">മലയാളം</button><br><br>
+    <button class="btn" style="width:100%" onclick="showContent('en')">English</button>
+  </div>
 </div>
 
-<!-- CONTENT MODAL -->
+<!-- ===== CONTENT ===== -->
 <div id="contentModal" class="modal">
-<div class="modal-content">
-<span class="close" onclick="closeModal('contentModal')">×</span>
-<div id="contentArea"></div>
-</div>
+  <div class="modal-box">
+    <span class="close" onclick="closeM('contentModal')">×</span>
+    <div id="contentArea"></div>
+  </div>
 </div>
 
-<!-- ORDER FORM -->
+<!-- ===== ORDER FORM ===== -->
 <div id="orderModal" class="modal">
-<div class="modal-content">
-<span class="close" onclick="closeModal('orderModal')">×</span>
-<h3>Customer Order Form</h3>
-
-<label>Name</label><input id="o_name">
-<label>Mobile</label><input id="o_mobile">
-<label>Product</label>
-<select id="o_product">
-<option>Tile Adhesive</option>
-<option>Waterproof</option>
-</select>
-<label>Quantity</label><input id="o_qty">
-<label>Remarks</label><textarea id="o_remark"></textarea>
-
-<button class="btn-green" onclick="sendOrder(true)">Confirm</button>
-<button class="btn-red" onclick="sendOrder(false)">Cancel</button>
+  <div class="modal-box">
+    <span class="close" onclick="closeM('orderModal')">×</span>
+    <h3>Customer Order Form</h3>
+    <input id="o_name" placeholder="Customer Name">
+    <input id="o_mobile" placeholder="Mobile Number">
+    <select id="o_product">
+      <option>Tile Adhesive</option>
+      <option>Waterproof</option>
+    </select>
+    <input id="o_qty" placeholder="Quantity">
+    <textarea id="o_remark" placeholder="Remarks"></textarea>
+    <div class="row">
+      <button class="btn green" onclick="sendOrder(true)">Confirm</button>
+      <button class="btn red" onclick="sendOrder(false)">Cancel</button>
+    </div>
+  </div>
 </div>
-</div>
 
-<!-- DEALER FORM -->
+<!-- ===== DEALER FORM ===== -->
 <div id="dealerModal" class="modal">
-<div class="modal-content">
-<span class="close" onclick="closeModal('dealerModal')">×</span>
-<h3>Dealer Enquiry</h3>
-
-<input id="d_name" placeholder="Your Name">
-<input id="d_address" placeholder="Address">
-<input id="d_email" placeholder="Email">
-<input id="d_phone" placeholder="Contact Number">
-<input id="d_whatsapp" placeholder="WhatsApp Number">
-<input id="d_landmark" placeholder="Landmark (Optional)">
-<input id="d_pincode" placeholder="Pincode">
-<input id="d_city" placeholder="City">
-<input id="d_district" placeholder="District">
-<input id="d_state" placeholder="State">
-
-<select id="d_item">
-<option>Tile Adhesive</option>
-<option>Waterproof</option>
-</select>
-<input id="d_qty" placeholder="Quantity">
-
-<button class="btn-green" onclick="sendDealer(true)">Confirm</button>
-<button class="btn-red" onclick="sendDealer(false)">Cancel</button>
+  <div class="modal-box">
+    <span class="close" onclick="closeM('dealerModal')">×</span>
+    <h3>Dealer Enquiry</h3>
+    <input id="d_name" placeholder="Your Name">
+    <input id="d_address" placeholder="Address">
+    <input id="d_email" placeholder="Email">
+    <input id="d_phone" placeholder="Contact Number">
+    <input id="d_whatsapp" placeholder="WhatsApp Number">
+    <input id="d_landmark" placeholder="Landmark (Optional)">
+    <input id="d_pincode" placeholder="Pincode">
+    <input id="d_city" placeholder="City">
+    <input id="d_district" placeholder="District">
+    <input id="d_state" placeholder="State">
+    <select id="d_item">
+      <option>Tile Adhesive</option>
+      <option>Waterproof</option>
+    </select>
+    <input id="d_qty" placeholder="Quantity">
+    <div class="row">
+      <button class="btn green" onclick="sendDealer(true)">Confirm</button>
+      <button class="btn red" onclick="sendDealer(false)">Cancel</button>
+    </div>
+  </div>
 </div>
-</div>
 
-<!-- THANK YOU -->
+<!-- ===== THANK YOU ===== -->
 <div id="thankModal" class="modal">
-<div class="modal-content thankyou">
-<h2>🙏 Thank You!</h2>
-<p>Your request has been sent successfully.</p>
-<button class="btn" onclick="closeModal('thankModal')">Close</button>
-</div>
+  <div class="modal-box center">
+    <h2>🙏 Thank You</h2>
+    <p>Your request has been sent successfully.</p><br>
+    <button class="btn" onclick="closeM('thankModal')">Close</button>
+  </div>
 </div>
 
 <script>
-let currentType="";
+const WA="919745838382";
+const CALL="+917907344030";
+let CURRENT="";
 
-function openLang(type){
-    currentType=type;
-    document.getElementById('langModal').style.display="block";
-}
-function openContent(lang){
-    closeModal('langModal');
-    let html="";
-    if(currentType==="waterproof"){
-        html = (lang==="ml") ? `<!-- Malayalam Waterproof Content -->
-        <h2>H4 Waterproof – 10 വർഷം വിശ്വാസത്തിന്റെ ഉറപ്പ്</h2>
-        <p>H4 Waterproof സാധാരണ waterproof അല്ല...</p>` :
-        `<h2>H4 Waterproof – 10 Years of Trusted Protection</h2>
-        <p>H4 Waterproof is not an ordinary product...</p>`;
-    }else{
-        html = (lang==="ml") ? `<h2>High Bond Strength</h2><p>അകത്ത് ഉണ്ടാകുന്ന പിടുത്തം...</p>` :
-        `<h2>High Bond Strength</h2><p>The bond you don't see...</p>`;
-    }
-    document.getElementById('contentArea').innerHTML=html;
-    document.getElementById('contentModal').style.display="block";
-}
-function openOrder(){document.getElementById('orderModal').style.display="block";}
-function openDealer(){document.getElementById('dealerModal').style.display="block";}
-function closeModal(id){document.getElementById(id).style.display="none";}
+function openLang(t){CURRENT=t;openM('langModal')}
+function openOrder(){openM('orderModal')}
+function openDealer(){openM('dealerModal')}
 function openContact(){
-    window.open("https://wa.me/919745838382","_blank");
-    window.location.href="tel:+917907344030";
+  window.open("https://wa.me/"+WA,"_blank");
+  window.location.href="tel:"+CALL;
 }
+function openM(id){document.getElementById(id).style.display="block"}
+function closeM(id){document.getElementById(id).style.display="none"}
 
-function sendOrder(confirm){
-let msg=`ORDER ${confirm?"CONFIRMED":"CANCELLED"}
+function sendOrder(c){
+let m=`CUSTOMER ORDER ${c?"CONFIRMED":"CANCELLED"}
 Name:${o_name.value}
 Mobile:${o_mobile.value}
 Product:${o_product.value}
 Qty:${o_qty.value}`;
-window.open("https://wa.me/919745838382?text="+encodeURIComponent(msg));
-closeModal('orderModal');
-if(confirm) document.getElementById('thankModal').style.display="block";
+window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(m));
+closeM('orderModal'); if(c)openM('thankModal');
 }
-
-function sendDealer(confirm){
-let msg=`DEALER ${confirm?"CONFIRM":"CANCEL"}
+function sendDealer(c){
+let m=`DEALER ${c?"CONFIRMED":"CANCELLED"}
 Name:${d_name.value}
+City:${d_city.value}
 Item:${d_item.value}
 Qty:${d_qty.value}`;
-window.open("https://wa.me/919745838382?text="+encodeURIComponent(msg));
-closeModal('dealerModal');
-if(confirm) document.getElementById('thankModal').style.display="block";
+window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(m));
+closeM('dealerModal'); if(c)openM('thankModal');
+}
+
+function showContent(l){
+closeM('langModal');
+contentArea.innerHTML =
+(CURRENT==="waterproof")
+? (l==="ml"
+? `<h2>H4 Waterproof – 10 വർഷം വിശ്വാസത്തിന്റെ ഉറപ്പ്</h2><p>വെള്ളത്തിനെതിരെ ശക്തമായ ഒരു കവചം.</p>`
+: `<h2>H4 Waterproof – 10 Years of Trusted Protection</h2><p>A strong shield against water.</p>`)
+: (l==="ml"
+? `<h2>High Bond Strength</h2><p>അകത്ത് ഉണ്ടാകുന്ന പിടുത്തമാണ് ശക്തി.</p>`
+: `<h2>High Bond Strength</h2><p>The bond you don’t see decides everything.</p>`);
+openM('contentModal');
 }
 </script>
 
