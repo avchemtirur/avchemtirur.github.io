@@ -5,14 +5,11 @@
 <title>H4 Tile Adhesive & Waterproof</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- GOOGLE FONTS -->
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
-/* RESET */
 *{margin:0;padding:0;box-sizing:border-box}
 
-/* BODY */
 body{
   font-family:'Inter', sans-serif;
   background:#000;
@@ -43,9 +40,9 @@ body{
   border-radius:20px;
 }
 
-/* HERO – PREMIUM BLUE + PURPLE WAVES */
+/* HERO – HEIGHT + WAVES */
 .hero{
-  min-height:70vh;
+  min-height:77vh;           /* 👈 height increased */
   display:flex;
   align-items:center;
   justify-content:center;
@@ -56,7 +53,6 @@ body{
   background:#05070f;
 }
 
-/* PURPLE WAVE */
 .hero::before{
   content:"";
   position:absolute;
@@ -64,15 +60,10 @@ body{
   height:140%;
   top:-40%;
   left:-30%;
-  background:
-    radial-gradient(circle at 30% 40%,
-      rgba(160,70,255,0.55),
-      transparent 60%);
+  background:radial-gradient(circle at 30% 40%, rgba(160,70,255,.55), transparent 60%);
   filter:blur(120px);
-  z-index:0;
 }
 
-/* BLUE WAVE */
 .hero::after{
   content:"";
   position:absolute;
@@ -80,21 +71,15 @@ body{
   height:140%;
   bottom:-40%;
   right:-30%;
-  background:
-    radial-gradient(circle at 70% 60%,
-      rgba(40,120,255,0.55),
-      transparent 60%);
+  background:radial-gradient(circle at 70% 60%, rgba(40,120,255,.55), transparent 60%);
   filter:blur(140px);
-  z-index:0;
 }
 
-/* HERO CONTENT */
 .hero > div{
   position:relative;
   z-index:1;
 }
 
-/* BRAND TITLE */
 .brand-title{
   font-family:'Cormorant Garamond', serif;
   font-size:46px;
@@ -102,7 +87,6 @@ body{
   margin-bottom:12px;
 }
 
-/* SUB TEXT */
 .hero p{
   font-size:14px;
   opacity:.85;
@@ -110,21 +94,13 @@ body{
   margin:0 auto 22px;
 }
 
-/* BUTTON */
 .btn-main{
-  display:inline-block;
   padding:12px 28px;
   border-radius:30px;
-  font-size:14px;
+  background:linear-gradient(135deg,#6a5cff,#9a5cff);
   color:#fff;
   text-decoration:none;
-  background:linear-gradient(135deg,#6a5cff,#9a5cff);
-  box-shadow:0 0 20px rgba(120,90,255,.7);
-  transition:.3s;
-}
-.btn-main:hover{
-  transform:translateY(-2px);
-  box-shadow:0 0 30px rgba(120,90,255,1);
+  box-shadow:0 0 20px rgba(120,90,255,.8);
 }
 
 /* BOTTOM BAR */
@@ -135,14 +111,12 @@ body{
   display:flex;
   justify-content:center;
   gap:10px;
-  z-index:20;
 }
 .bottom-bar a{
   padding:8px 14px;
   font-size:12px;
   border-radius:20px;
   background:rgba(255,255,255,.08);
-  backdrop-filter:blur(10px);
   color:#fff;
   text-decoration:none;
   border:1px solid rgba(255,255,255,.15);
@@ -151,23 +125,20 @@ body{
 /* FOOTER */
 .footer{
   text-align:center;
-  padding:30px 10px 90px;
+  padding:20px 10px 60px;   /* 👈 moved up */
 }
 
-/* LOGO */
 .footer img{
-  width:52px;               /* logo visible */
+  width:60px;               /* 👈 logo force visible */
   display:block;
-  margin:0 auto 10px;
-  opacity:1;
-  filter:brightness(1.4) contrast(1.1);
+  margin:0 auto 12px;
+  filter:brightness(1.6) contrast(1.2);
 }
 
-/* AV CHEM NAME – 30% BIGGER */
 .avchem-name{
-  font-size:20px;           /* 👈 30% bigger */
+  font-size:24px;           /* 👈 20% bigger */
   font-weight:600;
-  margin-bottom:6px;
+  margin-bottom:8px;
 }
 
 .avchem-address,
@@ -176,22 +147,16 @@ body{
   opacity:.85;
 }
 
-/* MOBILE */
 @media(max-width:768px){
-  .brand-title{
-    font-size:28px;
-    letter-spacing:1.2px;
-  }
-  .avchem-name{
-    font-size:18px;
-  }
+  .brand-title{font-size:28px}
+  .hero{min-height:75vh}
+  .avchem-name{font-size:20px}
 }
 </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
 <div class="navbar">
   <div>◯ COMPANY</div>
   <div>
@@ -202,18 +167,14 @@ body{
   </div>
 </div>
 
-<!-- HERO -->
 <section class="hero">
   <div>
     <h1 class="brand-title">H4 Tile Adhesive & Waterproof</h1>
-    <p>
-      High bond strength • Waterproof solutions • Kerala climate suitable
-    </p>
+    <p>High bond strength • Waterproof solutions • Kerala climate suitable</p>
     <a href="#contact" class="btn-main">CONTACT NOW</a>
   </div>
 </section>
 
-<!-- BOTTOM BUTTONS -->
 <div class="bottom-bar">
   <a href="#">Waterproof</a>
   <a href="#">High Bond Strength</a>
@@ -222,23 +183,14 @@ body{
   <a href="#contact">Contact</a>
 </div>
 
-<!-- FOOTER -->
 <div class="footer" id="contact">
-  <!-- ⚠️ logo.png same folder-ൽ upload ചെയ്യണം -->
   <img src="logo.png" alt="AV Chem Logo">
-
-  <div class="avchem-name">
-    AV Chem Chemical & Manufacturing
-  </div>
-
+  <div class="avchem-name">AV Chem Chemical & Manufacturing</div>
   <div class="avchem-address">
     Mukkilapeedika, Kannamkulam,<br>
     BP Angadi, Tirur, Malappuram, Kerala
   </div>
-
-  <div class="avchem-email">
-    📧 avchemtirur@gmail.com
-  </div>
+  <div class="avchem-email">📧 avchemtirur@gmail.com</div>
 </div>
 
 </body>
