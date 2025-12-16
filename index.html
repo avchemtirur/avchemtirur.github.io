@@ -1,204 +1,217 @@
 
-<!-- ================= H4 POPUPS & FORMS ================= -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>H4 Tile Adhesive</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-/* ---------- COMMON ---------- */
-.h4-btn{background:#1f2937;color:#fff;border:none;padding:10px 16px;border-radius:8px;font-weight:600}
-.h4-btn:hover{background:#374151}
-.h4-green{background:#22c55e;color:#000}
-.h4-red{background:#ef4444}
-.h4-purple{background:#8b5cf6}
-.h4-modal{
-  display:none;position:fixed;top:0;left:0;width:100%;height:100%;
-  background:rgba(0,0,0,.85);z-index:9999;overflow:auto
+body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background:#0b0b14;
+    color:#fff;
 }
-.h4-box{
-  background:#0f172a;color:#e5e7eb;
-  max-width:820px;margin:40px auto;padding:22px;border-radius:14px
+button{
+    cursor:pointer;
+    border:none;
+    padding:10px 18px;
+    border-radius:8px;
+    font-weight:600;
 }
-.h4-close{float:right;font-size:22px;cursor:pointer}
+.btn{
+    background:#1e1e2f;
+    color:#fff;
+}
+.btn-green{background:#00c853;color:#000;}
+.btn-red{background:#d50000;}
+.btn-purple{background:#7c4dff;}
+.modal{
+    display:none;
+    position:fixed;
+    top:0;left:0;
+    width:100%;height:100%;
+    background:rgba(0,0,0,0.85);
+    z-index:9999;
+    overflow:auto;
+}
+.modal-content{
+    background:#111827;
+    margin:40px auto;
+    padding:20px;
+    border-radius:12px;
+    max-width:800px;
+}
+.close{
+    float:right;
+    font-size:22px;
+    cursor:pointer;
+}
 input,select,textarea{
-  width:100%;padding:10px;margin:6px 0 12px;border-radius:8px;border:none
+    width:100%;
+    padding:10px;
+    margin:6px 0 12px;
+    border-radius:6px;
+    border:none;
 }
-label{font-size:14px;color:#9ca3af}
-.h4-actions{display:flex;gap:10px;flex-wrap:wrap}
-
-/* ---------- MOBILE ---------- */
-@media(max-width:600px){
-  .h4-box{margin:15px}
+label{font-size:14px;color:#bbb;}
+.section-btns{
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    padding:20px;
+}
+.lang-btn{
+    width:100%;
+    margin-top:10px;
+}
+.thankyou{
+    text-align:center;
+    padding:30px;
 }
 </style>
+</head>
 
-<!-- ===== BUTTON FUNCTIONS (attach these to your existing buttons) ===== -->
+<body>
+
+<!-- ACTION BUTTONS -->
+<div class="section-btns">
+    <button class="btn" onclick="openLang('waterproof')">Waterproof</button>
+    <button class="btn" onclick="openLang('bond')">High Bond Strength</button>
+    <button class="btn" onclick="openOrder()">Order</button>
+    <button class="btn" onclick="openDealer()">Dealer Enquiry</button>
+    <button class="btn-purple" onclick="openContact()">Contact</button>
+</div>
+
+<!-- LANGUAGE SELECT -->
+<div id="langModal" class="modal">
+<div class="modal-content">
+<span class="close" onclick="closeModal('langModal')">×</span>
+<h3>Select Language</h3>
+<button class="btn lang-btn" onclick="openContent('ml')">മലയാളം</button>
+<button class="btn lang-btn" onclick="openContent('en')">English</button>
+</div>
+</div>
+
+<!-- CONTENT MODAL -->
+<div id="contentModal" class="modal">
+<div class="modal-content">
+<span class="close" onclick="closeModal('contentModal')">×</span>
+<div id="contentArea"></div>
+</div>
+</div>
+
+<!-- ORDER FORM -->
+<div id="orderModal" class="modal">
+<div class="modal-content">
+<span class="close" onclick="closeModal('orderModal')">×</span>
+<h3>Customer Order Form</h3>
+
+<label>Name</label><input id="o_name">
+<label>Mobile</label><input id="o_mobile">
+<label>Product</label>
+<select id="o_product">
+<option>Tile Adhesive</option>
+<option>Waterproof</option>
+</select>
+<label>Quantity</label><input id="o_qty">
+<label>Remarks</label><textarea id="o_remark"></textarea>
+
+<button class="btn-green" onclick="sendOrder(true)">Confirm</button>
+<button class="btn-red" onclick="sendOrder(false)">Cancel</button>
+</div>
+</div>
+
+<!-- DEALER FORM -->
+<div id="dealerModal" class="modal">
+<div class="modal-content">
+<span class="close" onclick="closeModal('dealerModal')">×</span>
+<h3>Dealer Enquiry</h3>
+
+<input id="d_name" placeholder="Your Name">
+<input id="d_address" placeholder="Address">
+<input id="d_email" placeholder="Email">
+<input id="d_phone" placeholder="Contact Number">
+<input id="d_whatsapp" placeholder="WhatsApp Number">
+<input id="d_landmark" placeholder="Landmark (Optional)">
+<input id="d_pincode" placeholder="Pincode">
+<input id="d_city" placeholder="City">
+<input id="d_district" placeholder="District">
+<input id="d_state" placeholder="State">
+
+<select id="d_item">
+<option>Tile Adhesive</option>
+<option>Waterproof</option>
+</select>
+<input id="d_qty" placeholder="Quantity">
+
+<button class="btn-green" onclick="sendDealer(true)">Confirm</button>
+<button class="btn-red" onclick="sendDealer(false)">Cancel</button>
+</div>
+</div>
+
+<!-- THANK YOU -->
+<div id="thankModal" class="modal">
+<div class="modal-content thankyou">
+<h2>🙏 Thank You!</h2>
+<p>Your request has been sent successfully.</p>
+<button class="btn" onclick="closeModal('thankModal')">Close</button>
+</div>
+</div>
+
 <script>
-/* ===== SETTINGS ===== */
-const WA_NUMBER = "919745838382";
-const CALL_NUMBER = "+917907344030";
-let CURRENT_SECTION = "";
+let currentType="";
 
-/* ===== OPENERS ===== */
-function h4OpenLang(section){
-  CURRENT_SECTION = section;
-  document.getElementById("h4Lang").style.display="block";
+function openLang(type){
+    currentType=type;
+    document.getElementById('langModal').style.display="block";
 }
-function h4ShowContent(lang){
-  document.getElementById("h4Lang").style.display="none";
-  let c="";
-  if(CURRENT_SECTION==="waterproof"){
-    c = (lang==="ml") ? h4_wp_ml : h4_wp_en;
-  }else{
-    c = (lang==="ml") ? h4_bond_ml : h4_bond_en;
-  }
-  document.getElementById("h4ContentArea").innerHTML = c;
-  document.getElementById("h4Content").style.display="block";
+function openContent(lang){
+    closeModal('langModal');
+    let html="";
+    if(currentType==="waterproof"){
+        html = (lang==="ml") ? `<!-- Malayalam Waterproof Content -->
+        <h2>H4 Waterproof – 10 വർഷം വിശ്വാസത്തിന്റെ ഉറപ്പ്</h2>
+        <p>H4 Waterproof സാധാരണ waterproof അല്ല...</p>` :
+        `<h2>H4 Waterproof – 10 Years of Trusted Protection</h2>
+        <p>H4 Waterproof is not an ordinary product...</p>`;
+    }else{
+        html = (lang==="ml") ? `<h2>High Bond Strength</h2><p>അകത്ത് ഉണ്ടാകുന്ന പിടുത്തം...</p>` :
+        `<h2>High Bond Strength</h2><p>The bond you don't see...</p>`;
+    }
+    document.getElementById('contentArea').innerHTML=html;
+    document.getElementById('contentModal').style.display="block";
 }
-function h4OpenOrder(){document.getElementById("h4Order").style.display="block";}
-function h4OpenDealer(){document.getElementById("h4Dealer").style.display="block";}
-function h4Contact(){
-  window.open("https://wa.me/"+WA_NUMBER,"_blank");
-  window.location.href="tel:"+CALL_NUMBER;
+function openOrder(){document.getElementById('orderModal').style.display="block";}
+function openDealer(){document.getElementById('dealerModal').style.display="block";}
+function closeModal(id){document.getElementById(id).style.display="none";}
+function openContact(){
+    window.open("https://wa.me/919745838382","_blank");
+    window.location.href="tel:+917907344030";
 }
-function h4Close(id){document.getElementById(id).style.display="none";}
 
-/* ===== WHATSAPP SEND ===== */
-function h4SendOrder(confirm){
-  let msg =
-`CUSTOMER ORDER ${confirm?"CONFIRMED":"CANCELLED"}
-Name: ${o_name.value}
-Mobile: ${o_mobile.value}
-Product: ${o_product.value}
-Quantity: ${o_qty.value}
-Remarks: ${o_remark.value}`;
-  window.open("https://wa.me/"+WA_NUMBER+"?text="+encodeURIComponent(msg));
-  h4Close("h4Order");
-  if(confirm) document.getElementById("h4Thanks").style.display="block";
+function sendOrder(confirm){
+let msg=`ORDER ${confirm?"CONFIRMED":"CANCELLED"}
+Name:${o_name.value}
+Mobile:${o_mobile.value}
+Product:${o_product.value}
+Qty:${o_qty.value}`;
+window.open("https://wa.me/919745838382?text="+encodeURIComponent(msg));
+closeModal('orderModal');
+if(confirm) document.getElementById('thankModal').style.display="block";
 }
-function h4SendDealer(confirm){
-  let msg =
-`DEALER ENQUIRY ${confirm?"CONFIRMED":"CANCELLED"}
-Name: ${d_name.value}
-Phone: ${d_phone.value}
-WhatsApp: ${d_whatsapp.value}
-City: ${d_city.value}
-Item: ${d_item.value}
-Quantity: ${d_qty.value}`;
-  window.open("https://wa.me/"+WA_NUMBER+"?text="+encodeURIComponent(msg));
-  h4Close("h4Dealer");
-  if(confirm) document.getElementById("h4Thanks").style.display="block";
+
+function sendDealer(confirm){
+let msg=`DEALER ${confirm?"CONFIRM":"CANCEL"}
+Name:${d_name.value}
+Item:${d_item.value}
+Qty:${d_qty.value}`;
+window.open("https://wa.me/919745838382?text="+encodeURIComponent(msg));
+closeModal('dealerModal');
+if(confirm) document.getElementById('thankModal').style.display="block";
 }
 </script>
 
-<!-- ===== LANGUAGE SELECT ===== -->
-<div id="h4Lang" class="h4-modal">
-  <div class="h4-box">
-    <span class="h4-close" onclick="h4Close('h4Lang')">×</span>
-    <h3>Select Language</h3>
-    <button class="h4-btn" style="width:100%" onclick="h4ShowContent('ml')">മലയാളം</button><br><br>
-    <button class="h4-btn" style="width:100%" onclick="h4ShowContent('en')">English</button>
-  </div>
-</div>
-
-<!-- ===== CONTENT ===== -->
-<div id="h4Content" class="h4-modal">
-  <div class="h4-box">
-    <span class="h4-close" onclick="h4Close('h4Content')">×</span>
-    <div id="h4ContentArea"></div>
-  </div>
-</div>
-
-<!-- ===== ORDER FORM ===== -->
-<div id="h4Order" class="h4-modal">
-  <div class="h4-box">
-    <span class="h4-close" onclick="h4Close('h4Order')">×</span>
-    <h3>Customer Order</h3>
-    <input id="o_name" placeholder="Customer Name">
-    <input id="o_mobile" placeholder="Mobile Number">
-    <select id="o_product">
-      <option>Tile Adhesive</option>
-      <option>Waterproof</option>
-    </select>
-    <input id="o_qty" placeholder="Quantity">
-    <textarea id="o_remark" placeholder="Remarks"></textarea>
-    <div class="h4-actions">
-      <button class="h4-btn h4-green" onclick="h4SendOrder(true)">Confirm</button>
-      <button class="h4-btn h4-red" onclick="h4SendOrder(false)">Cancel</button>
-    </div>
-  </div>
-</div>
-
-<!-- ===== DEALER FORM ===== -->
-<div id="h4Dealer" class="h4-modal">
-  <div class="h4-box">
-    <span class="h4-close" onclick="h4Close('h4Dealer')">×</span>
-    <h3>Dealer Enquiry</h3>
-    <input id="d_name" placeholder="Your Name">
-    <input id="d_address" placeholder="Address">
-    <input id="d_email" placeholder="Email">
-    <input id="d_phone" placeholder="Contact Number">
-    <input id="d_whatsapp" placeholder="WhatsApp Number">
-    <input id="d_landmark" placeholder="Landmark (Optional)">
-    <input id="d_pincode" placeholder="Pincode">
-    <input id="d_city" placeholder="City">
-    <input id="d_district" placeholder="District">
-    <input id="d_state" placeholder="State">
-    <select id="d_item">
-      <option>Tile Adhesive</option>
-      <option>Waterproof</option>
-    </select>
-    <input id="d_qty" placeholder="Quantity">
-    <div class="h4-actions">
-      <button class="h4-btn h4-green" onclick="h4SendDealer(true)">Confirm</button>
-      <button class="h4-btn h4-red" onclick="h4SendDealer(false)">Cancel</button>
-    </div>
-  </div>
-</div>
-
-<!-- ===== THANK YOU ===== -->
-<div id="h4Thanks" class="h4-modal">
-  <div class="h4-box" style="text-align:center">
-    <h2>🙏 Thank You</h2>
-    <p>Your request has been sent successfully.</p>
-    <button class="h4-btn" onclick="h4Close('h4Thanks')">Close</button>
-  </div>
-</div>
-
-<!-- ===== CONTENT DATA ===== -->
-<script>
-const h4_wp_ml = `
-<h2>H4 Waterproof – 10 വർഷം വിശ്വാസത്തിന്റെ ഉറപ്പ്</h2>
-<p>H4 Waterproof സാധാരണ waterproof അല്ല. ഇത് വർഷങ്ങളോളം കെട്ടിടത്തെ സംരക്ഷിക്കുന്ന ഒരു നിശബ്ദ ശക്തിയാണ്.</p>
-<ul>
-<li>Deep penetration protection</li>
-<li>Crack & leakage resistance</li>
-<li>Kerala climate tested</li>
-<li>Low maintenance</li>
-</ul>
-<p><b>ഒരിക്കൽ ചെയ്താൽ വർഷങ്ങളോളം ആശ്വാസം.</b></p>
-`;
-
-const h4_wp_en = `
-<h2>H4 Waterproof – 10 Years of Trusted Protection</h2>
-<p>A silent shield that works beneath the surface to protect your structure for years.</p>
-<ul>
-<li>Deep internal protection</li>
-<li>Prevents cracks & leakage</li>
-<li>Weather resistant</li>
-<li>Low maintenance</li>
-</ul>
-<p><b>One application. Long-term peace.</b></p>
-`;
-
-const h4_bond_ml = `
-<h2>High Bond Strength</h2>
-<p>കാണാൻ പറ്റാത്തതാണ്, പക്ഷേ തെറ്റിയാൽ അതിന്റെ ഫലം വർഷങ്ങളോളം.</p>
-<p>H4 surface-നും material-നും ഇടയിൽ അദൃശ്യമായ ഒരു ശക്തമായ ബന്ധം സൃഷ്ടിക്കുന്നു.</p>
-`;
-
-const h4_bond_en = `
-<h2>High Bond Strength</h2>
-<p>You may not see it, but it decides how long your work lasts.</p>
-<p>H4 creates a deep, invisible bond that does not fail over time.</p>
-`;
-</script>
-
-<!-- ================= END ================= -->
+</body>
+</html>
