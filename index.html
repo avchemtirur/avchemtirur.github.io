@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,21 +6,42 @@
 <title>AV Chem Chemical & Manufacturing</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',sans-serif;background:#fff;color:#0b2239}
 
-/* NAVBAR */
-.nav{
-  position:fixed;top:0;width:100%;
-  padding:18px 7%;
-  display:flex;justify-content:space-between;align-items:center;
-  z-index:10;color:#fff
+body{
+  font-family:'Inter',sans-serif;
+  background:#ffffff;
+  color:#0b2239;
 }
-.brand{font-weight:700;font-size:18px}
-.nav a{margin-left:20px;font-size:13px;text-decoration:none;color:#fff}
+
+/* NAV */
+.nav{
+  position:fixed;
+  top:0;
+  width:100%;
+  padding:18px 7%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  z-index:10;
+}
+
+.brand{
+  font-weight:700;
+  font-size:18px;
+  color:#fff;
+}
+
+.nav a{
+  margin-left:20px;
+  font-size:13px;
+  text-decoration:none;
+  color:#fff;
+  opacity:.9;
+}
 
 /* HERO */
 .hero{
@@ -29,105 +51,160 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#0b2239}
   padding:0 7%;
   background:linear-gradient(135deg,#1aa7b8,#24c6b5,#2de1c2);
 }
-.left{max-width:480px;color:#fff}
-.left h1{font-size:36px;margin-bottom:14px}
-.left p{font-size:14px;line-height:1.6;opacity:.9}
-.left button{
-  margin-top:22px;padding:10px 26px;
-  border-radius:25px;border:none;
-  background:#fff;color:#1aa7b8;
-  font-weight:600;cursor:pointer
+
+/* LEFT */
+.left{
+  max-width:480px;
+  color:#fff;
 }
 
-/* RIGHT IMAGES */
+.left h1{
+  font-size:36px;
+  margin-bottom:14px;
+}
+
+.left p{
+  font-size:14px;
+  line-height:1.6;
+  opacity:.9;
+}
+
+.btn-group{
+  display:flex;
+  gap:14px;
+  margin-top:22px;
+  flex-wrap:wrap;
+}
+
+.call-btn{
+  padding:10px 24px;
+  border-radius:25px;
+  background:#fff;
+  color:#1aa7b8;
+  font-size:13px;
+  font-weight:600;
+  text-decoration:none;
+}
+
+.whatsapp-btn{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 22px;
+  border-radius:25px;
+  background:#fff;
+  color:#25D366;
+  font-size:13px;
+  font-weight:600;
+  text-decoration:none;
+}
+
+/* RIGHT – BAG SWAP */
 .right{
   flex:1;
   display:flex;
   justify-content:center;
-  gap:26px;
+  position:relative;
 }
-.bag{
-  width:200px;
-  margin-top:48px;
-  animation:floatRotate 6s ease-in-out infinite;
-}
-.bag.second{animation-delay:1.8s}
 
-@keyframes floatRotate{
-  0%{transform:translateY(0) rotate(0deg)}
-  50%{transform:translateY(-18px) rotate(4deg)}
-  100%{transform:translateY(0) rotate(0deg)}
+.bag-wrap{
+  position:relative;
+  width:260px;
+  height:360px;
+}
+
+.bag{
+  position:absolute;
+  width:100%;
+  top:0;
+  left:0;
+  opacity:0;
+  animation:swap 6s infinite;
+}
+
+.bag:nth-child(1){
+  animation-delay:0s;
+}
+.bag:nth-child(2){
+  animation-delay:3s;
+}
+
+@keyframes swap{
+  0%{opacity:0; transform:scale(.95) rotate(-2deg)}
+  10%{opacity:1; transform:scale(1) rotate(0deg)}
+  40%{opacity:1}
+  50%{opacity:0}
+  100%{opacity:0}
 }
 
 /* WHITE SECTION */
-.white-section{padding:70px 7%}
-.features{display:flex;gap:28px}
+.white-section{
+  background:#fff;
+  padding:60px 7% 80px;
+}
+
+.features{
+  display:flex;
+  justify-content:space-between;
+  gap:28px;
+}
+
 .feature{
   flex:1;
-  background:#fff;
-  padding:30px 20px;
-  border-radius:18px;
+  padding:28px 20px;
   text-align:center;
-  box-shadow:0 12px 30px rgba(0,0,0,.1)
+  border-radius:18px;
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
 }
+
 .icon{
-  width:56px;height:56px;
-  border-radius:14px;
+  width:56px;
+  height:56px;
   margin:0 auto 14px;
+  border-radius:14px;
   background:linear-gradient(135deg,#1aa7b8,#2de1c2);
-  display:flex;align-items:center;justify-content:center;
-  color:#fff;font-size:22px
-}
-.feature h3{font-size:15px;margin-bottom:6px}
-.feature p{font-size:13px;opacity:.75}
-
-/* WHATSAPP FLOAT */
-.whatsapp{
-  position:fixed;
-  right:18px;
-  bottom:18px;
-  width:56px;height:56px;
-  border-radius:50%;
-  background:#25D366;
-  display:flex;align-items:center;justify-content:center;
-  color:#fff;font-size:28px;
-  text-decoration:none;
-  box-shadow:0 6px 18px rgba(0,0,0,.3);
-  z-index:99
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  font-size:22px;
 }
 
-/* DEALER POPUP */
-.popup{
-  position:fixed;inset:0;
-  background:rgba(0,0,0,.55);
-  display:none;
-  align-items:center;justify-content:center;
-  z-index:100
+.feature h3{
+  font-size:15px;
+  margin-bottom:6px;
 }
-.popup-box{
-  background:#fff;
-  width:90%;max-width:380px;
-  padding:26px;border-radius:18px
-}
-.popup-box h2{text-align:center;margin-bottom:14px}
-.popup-box input, .popup-box textarea{
-  width:100%;margin-bottom:10px;
-  padding:10px;border-radius:8px;
-  border:1px solid #ccc
-}
-.popup-box button{
-  width:100%;padding:10px;
-  border:none;border-radius:20px;
-  background:#1aa7b8;color:#fff;
-  font-weight:600
+
+.feature p{
+  font-size:13px;
+  opacity:.7;
 }
 
 /* MOBILE */
 @media(max-width:900px){
-  .hero{flex-direction:column;padding:110px 7% 60px;height:auto;text-align:center}
-  .right{margin-top:30px}
-  .bag{width:160px}
-  .features{flex-direction:column}
+  .hero{
+    flex-direction:column;
+    height:auto;
+    padding:120px 7% 60px;
+    text-align:center;
+  }
+
+  .right{
+    margin-top:30px;
+  }
+
+  .features{
+    flex-direction:column;
+  }
+
+  .brand,.nav a{
+    color:#0b2239;
+  }
+
+  .nav{
+    background:#fff;
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+  }
 }
 </style>
 </head>
@@ -139,74 +216,66 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#0b2239}
   <div class="brand">AV Chem Chemical & Manufacturing</div>
   <div>
     <a href="#">Home</a>
-    <a href="#" onclick="openDealer()">Dealer Enquiry</a>
-    <a href="mailto:avchemtirur@gmail.com">Contact</a>
+    <a href="#">Dealer Enquiry</a>
+    <a href="#">Contact</a>
   </div>
 </div>
 
 <!-- HERO -->
 <section class="hero">
+
   <div class="left">
     <h1>H4 Tile Adhesive & Waterproof</h1>
     <p>
       Premium polymer modified tile adhesive and waterproof solutions.
       Designed for strong bonding and long-lasting durability.
     </p>
-    <button onclick="openDealer()">Become a Dealer</button>
+
+    <div class="btn-group">
+      <a class="call-btn" href="tel:+917907344030">Call Now</a>
+
+      <a class="whatsapp-btn"
+         href="https://wa.me/919745838382"
+         target="_blank">
+        🟢 WhatsApp
+      </a>
+    </div>
   </div>
 
+  <!-- BAG AUTO SWAP -->
   <div class="right">
-    <img src="h4-yellow.png" class="bag">
-    <img src="h4-blue.png" class="bag second">
+    <div class="bag-wrap">
+      <img src="bag-blue.png" class="bag" alt="H4 Blue Bag">
+      <img src="bag-purple.png" class="bag" alt="H4 Purple Bag">
+    </div>
   </div>
+
 </section>
 
 <!-- WHITE SECTION -->
 <section class="white-section">
   <div class="features">
+
     <div class="feature">
       <div class="icon">🧱</div>
       <h3>Tile Adhesive</h3>
-      <p>High bond strength wall & floor tiles</p>
+      <p>High bond strength for wall & floor tiles</p>
     </div>
+
     <div class="feature">
       <div class="icon">💧</div>
       <h3>Waterproof</h3>
-      <p>Advanced waterproof protection</p>
+      <p>Advanced waterproof protection system</p>
     </div>
+
     <div class="feature">
       <div class="icon">📞</div>
       <h3>Contact</h3>
-      <p>+91 79073 44030<br>avchemtirur@gmail.com</p>
+      <p>+91 97458 38382</p>
     </div>
+
   </div>
 </section>
-
-<!-- WHATSAPP -->
-<a class="whatsapp" 
-   href="https://wa.me/917907344030" 
-   target="_blank">🟢</a>
-
-<!-- DEALER POPUP -->
-<div class="popup" id="dealerPopup">
-  <div class="popup-box">
-    <h2>Dealer Enquiry</h2>
-    <input placeholder="Name">
-    <input placeholder="Phone">
-    <input placeholder="Place">
-    <textarea rows="3" placeholder="Message"></textarea>
-    <button onclick="closeDealer()">Submit</button>
-  </div>
-</div>
-
-<script>
-function openDealer(){
-  document.getElementById("dealerPopup").style.display="flex";
-}
-function closeDealer(){
-  document.getElementById("dealerPopup").style.display="none";
-}
-</script>
 
 </body>
 </html>
