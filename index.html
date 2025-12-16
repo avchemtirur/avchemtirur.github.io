@@ -5,7 +5,7 @@
 <title>AV Chem Chemical & Manufacturing</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -16,7 +16,7 @@ body{
   color:#0b2239;
 }
 
-/* NAV */
+/* NAVBAR */
 .nav{
   position:fixed;
   top:0;
@@ -30,20 +30,20 @@ body{
 }
 
 .brand{
-  font-weight:600;
+  font-weight:700;              /* BOLD */
   font-size:18px;
-  color:#fff;
+  color:#ffffff;
 }
 
 .nav a{
   margin-left:20px;
   font-size:13px;
   text-decoration:none;
-  color:#fff;
-  opacity:.85;
+  color:#ffffff;
+  opacity:.9;
 }
 
-/* HERO (50% HEIGHT) */
+/* HERO */
 .hero{
   height:50vh;
   display:flex;
@@ -55,7 +55,7 @@ body{
 /* LEFT CONTENT */
 .left{
   max-width:480px;
-  color:#fff;
+  color:#ffffff;
 }
 
 .left h1{
@@ -72,32 +72,39 @@ body{
 .left a{
   display:inline-block;
   margin-top:22px;
-  padding:10px 24px;
+  padding:10px 26px;
   border-radius:25px;
-  background:#fff;
+  background:#ffffff;
   color:#1aa7b8;
   font-size:13px;
   font-weight:600;
   text-decoration:none;
 }
 
-/* IMAGE PLACEHOLDER (RIGHT) */
+/* RIGHT IMAGE */
 .right{
   flex:1;
   display:flex;
   justify-content:center;
+  align-items:flex-start;
 }
 
-.mock{
-  width:260px;
-  height:260px;
-  background:rgba(255,255,255,.35);
-  border-radius:22px;
+.bag{
+  width:220px;
+  margin-top:48px; /* 👈 top-ൽ നിന്ന് 3 step താഴേക്ക് */
+  animation:float 4s ease-in-out infinite;
+}
+
+/* IMAGE ANIMATION */
+@keyframes float{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-14px)}
+  100%{transform:translateY(0)}
 }
 
 /* WHITE SECTION */
 .white-section{
-  background:#fff;
+  background:#ffffff;
   padding:60px 7% 80px;
 }
 
@@ -126,7 +133,7 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  color:#fff;
+  color:#ffffff;
   font-size:22px;
 }
 
@@ -157,13 +164,13 @@ body{
     flex-direction:column;
   }
 
-  .brand,.nav a{
-    color:#0b2239;
-  }
-
   .nav{
     background:#ffffff;
     box-shadow:0 4px 12px rgba(0,0,0,.08);
+  }
+
+  .brand,.nav a{
+    color:#0b2239;
   }
 }
 </style>
@@ -193,8 +200,8 @@ body{
   </div>
 
   <div class="right">
-    <!-- image / illustration placeholder -->
-    <div class="mock"></div>
+    <!-- BAG IMAGE -->
+    <img src="h4-bag.png" class="bag" alt="H4 Tile Adhesive Bag">
   </div>
 </section>
 
