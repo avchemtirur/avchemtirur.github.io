@@ -6,7 +6,7 @@
 <title>AV Chem Chemical & Manufacturing</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -27,6 +27,7 @@ body{
   justify-content:space-between;
   align-items:center;
   z-index:10;
+  background:transparent;
 }
 
 .brand{
@@ -40,7 +41,7 @@ body{
   font-size:13px;
   text-decoration:none;
   color:#fff;
-  opacity:.9;
+  opacity:.85;
 }
 
 /* HERO */
@@ -69,72 +70,61 @@ body{
   opacity:.9;
 }
 
-.btn-group{
-  display:flex;
-  gap:14px;
+.btns{
   margin-top:22px;
-  flex-wrap:wrap;
-}
-
-.call-btn{
-  padding:10px 24px;
-  border-radius:25px;
-  background:#fff;
-  color:#1aa7b8;
-  font-size:13px;
-  font-weight:600;
-  text-decoration:none;
-}
-
-.whatsapp-btn{
   display:flex;
-  align-items:center;
-  gap:8px;
+  gap:12px;
+}
+
+.btn{
   padding:10px 22px;
   border-radius:25px;
-  background:#fff;
-  color:#25D366;
   font-size:13px;
   font-weight:600;
   text-decoration:none;
 }
 
-/* RIGHT – BAG SWAP */
+.call{
+  background:#fff;
+  color:#1aa7b8;
+}
+
+.whatsapp{
+  background:#25D366;
+  color:#fff;
+}
+
+/* RIGHT BAG */
 .right{
   flex:1;
   display:flex;
   justify-content:center;
-  position:relative;
+  margin-top:40px;
 }
 
 .bag-wrap{
-  position:relative;
-  width:260px;
+  width:240px;
   height:360px;
+  position:relative;
 }
 
 .bag{
   position:absolute;
   width:100%;
-  top:0;
-  left:0;
+  height:auto;
   opacity:0;
   animation:swap 6s infinite;
 }
 
-.bag:nth-child(1){
-  animation-delay:0s;
-}
-.bag:nth-child(2){
-  animation-delay:3s;
-}
+.bag.blue{ animation-delay:0s; }
+.bag.purple{ animation-delay:3s; }
 
 @keyframes swap{
-  0%{opacity:0; transform:scale(.95) rotate(-2deg)}
-  10%{opacity:1; transform:scale(1) rotate(0deg)}
-  40%{opacity:1}
-  50%{opacity:0}
-  100%{opacity:0}
+  0%{opacity:0; transform:rotate(-2deg) scale(.95);}
+  10%{opacity:1; transform:rotate(0) scale(1);}
+  45%{opacity:1;}
+  50%{opacity:0;}
+  100%{opacity:0;}
 }
 
 /* WHITE SECTION */
@@ -145,12 +135,12 @@ body{
 
 .features{
   display:flex;
-  justify-content:space-between;
   gap:28px;
 }
 
 .feature{
   flex:1;
+  background:#fff;
   padding:28px 20px;
   text-align:center;
   border-radius:18px;
@@ -170,41 +160,23 @@ body{
   font-size:22px;
 }
 
-.feature h3{
-  font-size:15px;
-  margin-bottom:6px;
-}
-
-.feature p{
-  font-size:13px;
-  opacity:.7;
-}
+.feature h3{font-size:15px;margin-bottom:6px}
+.feature p{font-size:13px;opacity:.7}
 
 /* MOBILE */
 @media(max-width:900px){
   .hero{
     flex-direction:column;
     height:auto;
-    padding:120px 7% 60px;
+    padding:100px 7% 60px;
     text-align:center;
   }
-
-  .right{
-    margin-top:30px;
-  }
-
-  .features{
-    flex-direction:column;
-  }
-
-  .brand,.nav a{
-    color:#0b2239;
-  }
-
+  .features{flex-direction:column}
   .nav{
     background:#fff;
     box-shadow:0 4px 12px rgba(0,0,0,.08);
   }
+  .brand,.nav a{color:#0b2239}
 }
 </style>
 </head>
@@ -231,22 +203,18 @@ body{
       Designed for strong bonding and long-lasting durability.
     </p>
 
-    <div class="btn-group">
-      <a class="call-btn" href="tel:+917907344030">Call Now</a>
-
-      <a class="whatsapp-btn"
+    <div class="btns">
+      <a class="btn call" href="tel:+917907344030">Call Now</a>
+      <a class="btn whatsapp"
          href="https://wa.me/919745838382"
-         target="_blank">
-        🟢 WhatsApp
-      </a>
+         target="_blank">WhatsApp</a>
     </div>
   </div>
 
-  <!-- BAG AUTO SWAP -->
   <div class="right">
     <div class="bag-wrap">
-      <img src="bag-blue.png" class="bag" alt="H4 Blue Bag">
-      <img src="bag-purple.png" class="bag" alt="H4 Purple Bag">
+      <img src="bag-blue.png" class="bag blue" alt="H4 Blue Bag">
+      <img src="bag-purple.png" class="bag purple" alt="H4 Purple Bag">
     </div>
   </div>
 
