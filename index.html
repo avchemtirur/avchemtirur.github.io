@@ -5,17 +5,16 @@
 <title>AV Chem Chemical & Manufacturing</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- GOOGLE FONTS -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+<!-- GOOGLE FONT -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 
 body{
   font-family:'Inter',sans-serif;
-  background:#070b10;
-  color:#fff;
-  overflow-x:hidden;
+  background:#f7f9fc;
+  color:#0b2239;
 }
 
 /* NAVBAR */
@@ -23,23 +22,23 @@ body{
   position:absolute;
   top:0;
   width:100%;
-  padding:20px 30px;
+  padding:22px 7%;
   display:flex;
   justify-content:space-between;
+  align-items:center;
   z-index:10;
 }
 
-.brand{
-  font-family:'Great Vibes',cursive;
-  font-size:32px;
-  padding-left:4rem;
+.nav .brand{
+  font-weight:600;
+  font-size:18px;
 }
 
 .nav a{
-  color:#fff;
-  margin-left:18px;
+  margin-left:22px;
   font-size:13px;
   text-decoration:none;
+  color:#0b2239;
   opacity:.8;
 }
 
@@ -48,130 +47,110 @@ body{
   min-height:100vh;
   display:flex;
   align-items:center;
-  padding:120px 8%;
-  position:relative;
+  padding:0 7%;
+  background:linear-gradient(135deg,#1aa7b8,#24c6b5,#2de1c2);
 }
 
-/* GRADIENT BACKGROUND */
-.hero::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    radial-gradient(circle at 25% 55%, #9b3bd9 0%, transparent 45%),
-    radial-gradient(circle at 75% 55%, #0a4cff 0%, transparent 45%),
-    linear-gradient(135deg,#0c1420,#05080d);
-  z-index:-1;
-}
-
-/* CONTENT */
-.content{
-  max-width:520px;
-}
-
-.content h1{
-  font-size:48px;
-  margin-bottom:18px;
-}
-
-.content p{
-  font-size:15px;
-  opacity:.85;
-  line-height:1.7;
-}
-
-.buttons{
-  margin-top:30px;
-  display:flex;
-  gap:16px;
-}
-
-.btn{
-  padding:12px 28px;
-  border-radius:30px;
-  font-size:14px;
-  text-decoration:none;
+/* LEFT CONTENT */
+.left{
+  flex:1;
   color:#fff;
 }
 
-.primary{
-  background:linear-gradient(135deg,#8c4bff,#b56bff);
+.left h1{
+  font-size:42px;
+  margin-bottom:18px;
 }
 
-.outline{
-  border:1px solid #fff;
+.left p{
+  max-width:420px;
+  font-size:15px;
+  line-height:1.7;
+  opacity:.9;
 }
 
-/* IMAGE AREA */
-.images{
-  position:absolute;
-  right:6%;
-  bottom:80px;
-  display:flex;
-  gap:30px;
+.cta{
+  margin-top:28px;
 }
 
-.images img{
-  width:230px;
-  animation:float 4s ease-in-out infinite;
+.cta a{
+  display:inline-block;
+  padding:12px 26px;
+  border-radius:30px;
+  background:#ffffff;
+  color:#1aa7b8;
+  font-size:14px;
+  font-weight:600;
+  text-decoration:none;
 }
 
-.images img:last-child{
-  animation-delay:1.8s;
-}
-
-/* FLOAT ANIMATION */
-@keyframes float{
-  0%{transform:translateY(0)}
-  50%{transform:translateY(-18px)}
-  100%{transform:translateY(0)}
-}
-
-/* ICON SECTION */
-.features{
-  position:absolute;
-  bottom:20px;
-  width:100%;
+/* RIGHT AREA (ILLUSTRATION PLACEHOLDER) */
+.right{
+  flex:1;
   display:flex;
   justify-content:center;
-  gap:14px;
+  align-items:center;
+}
+
+.mock{
+  width:320px;
+  height:320px;
+  background:rgba(255,255,255,.25);
+  border-radius:22px;
+  backdrop-filter:blur(10px);
+}
+
+/* FEATURES */
+.features{
+  background:#fff;
+  padding:60px 7%;
+  display:flex;
+  justify-content:space-between;
+  gap:24px;
 }
 
 .feature{
-  background:rgba(255,255,255,.08);
-  padding:12px 22px;
+  flex:1;
+  text-align:center;
+}
+
+.icon{
+  width:54px;
+  height:54px;
+  margin:0 auto 14px;
   border-radius:14px;
+  background:linear-gradient(135deg,#1aa7b8,#2de1c2);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  font-size:22px;
+}
+
+.feature h3{
+  font-size:15px;
+  margin-bottom:6px;
+}
+
+.feature p{
   font-size:13px;
-  backdrop-filter:blur(6px);
+  opacity:.7;
 }
 
 /* MOBILE */
-@media(max-width:768px){
+@media(max-width:900px){
   .hero{
     flex-direction:column;
     text-align:center;
+    padding-top:120px;
   }
 
-  .brand{
-    padding-left:1.5rem;
-    font-size:26px;
-  }
-
-  .images{
-    position:relative;
-    right:auto;
-    bottom:auto;
+  .right{
     margin-top:40px;
-  }
-
-  .images img{
-    width:170px;
   }
 
   .features{
     flex-direction:column;
-    position:relative;
-    margin-top:30px;
   }
 }
 </style>
@@ -192,32 +171,44 @@ body{
 <!-- HERO -->
 <section class="hero">
 
-  <!-- LEFT CONTENT -->
-  <div class="content">
-    <h1>H4 Tile Adhesive</h1>
+  <div class="left">
+    <h1>H4 Tile Adhesive & Waterproof</h1>
     <p>
-      Premium polymer modified tile adhesive & waterproof solutions.
-      High bond strength, long-lasting durability, suitable for Kerala climate.
+      Premium polymer modified tile adhesive and waterproof solutions.
+      Designed for strong bonding, durability and Kerala climate conditions.
     </p>
 
-    <div class="buttons">
-      <a href="#" class="btn primary">Become a Dealer</a>
-      <a href="tel:+917907344030" class="btn outline">Call Now</a>
+    <div class="cta">
+      <a href="tel:+917907344030">Call Now</a>
     </div>
   </div>
 
-  <!-- RIGHT IMAGES -->
-  <div class="images">
-    <!-- Replace src with your uploaded images -->
-    <img src="h4-blue.png" alt="H4 Tile Adhesive">
-    <img src="h4-purple.png" alt="H4 Waterproof">
+  <div class="right">
+    <!-- illustration / image space -->
+    <div class="mock"></div>
   </div>
 
-  <!-- BOTTOM ICONS -->
-  <div class="features">
-    <div class="feature">🧱 Tile Adhesive</div>
-    <div class="feature">💧 Waterproof</div>
-    <div class="feature">📞 +91 79073 44030</div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+
+  <div class="feature">
+    <div class="icon">🧱</div>
+    <h3>Tile Adhesive</h3>
+    <p>High bond strength for wall & floor tiles</p>
+  </div>
+
+  <div class="feature">
+    <div class="icon">💧</div>
+    <h3>Waterproof</h3>
+    <p>Advanced waterproof protection</p>
+  </div>
+
+  <div class="feature">
+    <div class="icon">📞</div>
+    <h3>Contact</h3>
+    <p>+91 79073 44030</p>
   </div>
 
 </section>
