@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,20 +9,20 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
 body{background:#05050b;color:#fff}
 
-/* ===== HEADER ===== */
+/* ================= HEADER ================= */
 header{
   display:flex;justify-content:space-between;align-items:center;
-  padding:18px 40px;
+  padding:18px 30px;
 }
 header nav a{
-  color:#ccc;margin:0 15px;text-decoration:none;font-size:14px;
+  color:#ccc;margin:0 14px;text-decoration:none;font-size:14px;
 }
 header nav a:hover{color:#fff}
 .signin{
   border:1px solid #555;padding:6px 16px;border-radius:20px;
 }
 
-/* ===== HERO ===== */
+/* ================= HERO ================= */
 .hero{
   min-height:90vh;
   display:flex;
@@ -38,52 +37,87 @@ header nav a:hover{color:#fff}
 .hero h1{font-size:60px;letter-spacing:4px}
 .hero p{color:#aaa;margin:20px auto;max-width:650px}
 .hero button{
-  padding:12px 32px;border-radius:30px;
-  border:none;background:#6366f1;color:#fff;font-weight:600;
+  padding:14px 34px;border-radius:30px;
+  border:none;background:#6366f1;color:#fff;font-weight:700;
 }
 
-/* ===== ACTION BUTTONS ===== */
+/* ================= TOP ACTION BUTTONS ================= */
 .actions{
-  display:flex;gap:12px;justify-content:center;
-  padding:25px;flex-wrap:wrap;
+  display:flex;
+  gap:14px;
+  justify-content:center;
+  padding:30px 20px;
+  flex-wrap:wrap;
 }
 .btn{
-  background:#111827;color:#fff;
-  padding:10px 18px;border:none;border-radius:10px;font-weight:600;
+  background:#111827;
+  color:#fff;
+  padding:16px 28px;
+  border:none;
+  border-radius:16px;
+  font-weight:700;
+  font-size:16px;
+  min-width:160px;
 }
 .btn:hover{background:#1f2937}
 
-/* ===== MODAL ===== */
+/* ================= MODAL ================= */
 .modal{
-  display:none;position:fixed;inset:0;
-  background:rgba(0,0,0,.85);z-index:9999;overflow:auto;
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  z-index:9999;
+  overflow:auto;
 }
 .modal-box{
-  background:#0f172a;color:#e5e7eb;
-  max-width:850px;margin:40px auto;padding:22px;border-radius:16px;
+  background:#0f172a;
+  color:#e5e7eb;
+  max-width:860px;
+  margin:20px auto;
+  padding:22px;
+  border-radius:18px;
+
+  /* 🔥 HEIGHT FIX */
+  max-height:60vh;      /* 40% reduced */
+  overflow-y:auto;
 }
-.close{float:right;font-size:22px;cursor:pointer}
+.close{
+  float:right;
+  font-size:22px;
+  cursor:pointer;
+}
+.modal-box h2,.modal-box h3{
+  font-size:20px;
+  margin-bottom:10px;
+}
+
+/* ================= FORM ================= */
 input,select,textarea{
-  width:100%;padding:10px;margin:6px 0 12px;
-  border-radius:8px;border:none;
+  width:100%;
+  padding:10px;
+  margin:6px 0 12px;
+  border-radius:10px;
+  border:none;
 }
 label{font-size:14px;color:#9ca3af}
-.row{display:flex;gap:10px;flex-wrap:wrap}
+.row{display:flex;gap:12px;flex-wrap:wrap}
 .green{background:#22c55e;color:#000}
 .red{background:#ef4444}
 .center{text-align:center}
 
+/* ================= MOBILE ================= */
 @media(max-width:600px){
-  header{padding:15px}
   .hero h1{font-size:42px}
-  .modal-box{margin:15px}
+  .btn{width:100%;font-size:17px;padding:18px}
+  .modal-box{max-height:55vh}
 }
 </style>
 </head>
 
 <body>
 
-<!-- ===== HEADER ===== -->
+<!-- ================= HEADER ================= -->
 <header>
   <div>◯ COMPANY</div>
   <nav>
@@ -94,7 +128,7 @@ label{font-size:14px;color:#9ca3af}
   <div class="signin">SIGN IN</div>
 </header>
 
-<!-- ===== HERO ===== -->
+<!-- ================= HERO ================= -->
 <section class="hero">
   <div>
     <h1>WELCOME</h1>
@@ -103,7 +137,7 @@ label{font-size:14px;color:#9ca3af}
   </div>
 </section>
 
-<!-- ===== ACTION BUTTONS ===== -->
+<!-- ================= ACTION BUTTONS ================= -->
 <div class="actions">
   <button class="btn" onclick="openLang('waterproof')">Waterproof</button>
   <button class="btn" onclick="openLang('bond')">High Bond Strength</button>
@@ -112,17 +146,17 @@ label{font-size:14px;color:#9ca3af}
   <button class="btn" onclick="openContact()">Contact</button>
 </div>
 
-<!-- ===== LANGUAGE SELECT ===== -->
+<!-- ================= LANGUAGE SELECT ================= -->
 <div id="langModal" class="modal">
   <div class="modal-box">
     <span class="close" onclick="closeM('langModal')">×</span>
-    <h3>Select Language</h3><br>
+    <h3>Select Language</h3>
     <button class="btn" style="width:100%" onclick="showContent('ml')">മലയാളം</button><br><br>
     <button class="btn" style="width:100%" onclick="showContent('en')">English</button>
   </div>
 </div>
 
-<!-- ===== CONTENT ===== -->
+<!-- ================= CONTENT ================= -->
 <div id="contentModal" class="modal">
   <div class="modal-box">
     <span class="close" onclick="closeM('contentModal')">×</span>
@@ -130,11 +164,11 @@ label{font-size:14px;color:#9ca3af}
   </div>
 </div>
 
-<!-- ===== ORDER FORM ===== -->
+<!-- ================= ORDER FORM ================= -->
 <div id="orderModal" class="modal">
   <div class="modal-box">
     <span class="close" onclick="closeM('orderModal')">×</span>
-    <h3>Customer Order Form</h3>
+    <h3>Customer Order</h3>
     <input id="o_name" placeholder="Customer Name">
     <input id="o_mobile" placeholder="Mobile Number">
     <select id="o_product">
@@ -150,7 +184,7 @@ label{font-size:14px;color:#9ca3af}
   </div>
 </div>
 
-<!-- ===== DEALER FORM ===== -->
+<!-- ================= DEALER FORM ================= -->
 <div id="dealerModal" class="modal">
   <div class="modal-box">
     <span class="close" onclick="closeM('dealerModal')">×</span>
@@ -177,7 +211,7 @@ label{font-size:14px;color:#9ca3af}
   </div>
 </div>
 
-<!-- ===== THANK YOU ===== -->
+<!-- ================= THANK YOU ================= -->
 <div id="thankModal" class="modal">
   <div class="modal-box center">
     <h2>🙏 Thank You</h2>
@@ -206,18 +240,20 @@ let m=`CUSTOMER ORDER ${c?"CONFIRMED":"CANCELLED"}
 Name:${o_name.value}
 Mobile:${o_mobile.value}
 Product:${o_product.value}
-Qty:${o_qty.value}`;
+Quantity:${o_qty.value}`;
 window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(m));
-closeM('orderModal'); if(c)openM('thankModal');
+closeM('orderModal');
+if(c)openM('thankModal');
 }
 function sendDealer(c){
 let m=`DEALER ${c?"CONFIRMED":"CANCELLED"}
 Name:${d_name.value}
 City:${d_city.value}
 Item:${d_item.value}
-Qty:${d_qty.value}`;
+Quantity:${d_qty.value}`;
 window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(m));
-closeM('dealerModal'); if(c)openM('thankModal');
+closeM('dealerModal');
+if(c)openM('thankModal');
 }
 
 function showContent(l){
@@ -225,11 +261,15 @@ closeM('langModal');
 contentArea.innerHTML =
 (CURRENT==="waterproof")
 ? (l==="ml"
-? `<h2>H4 Waterproof – 10 വർഷം വിശ്വാസത്തിന്റെ ഉറപ്പ്</h2><p>വെള്ളത്തിനെതിരെ ശക്തമായ ഒരു കവചം.</p>`
-: `<h2>H4 Waterproof – 10 Years of Trusted Protection</h2><p>A strong shield against water.</p>`)
+? `<h2>H4 Waterproof – 10 വർഷം വിശ്വാസത്തിന്റെ ഉറപ്പ്</h2>
+<p>വെള്ളത്തിനെതിരെ ശക്തമായ ഒരു കവചം.</p>`
+: `<h2>H4 Waterproof – 10 Years of Trusted Protection</h2>
+<p>A strong shield against water.</p>`)
 : (l==="ml"
-? `<h2>High Bond Strength</h2><p>അകത്ത് ഉണ്ടാകുന്ന പിടുത്തമാണ് ശക്തി.</p>`
-: `<h2>High Bond Strength</h2><p>The bond you don’t see decides everything.</p>`);
+? `<h2>High Bond Strength</h2>
+<p>അകത്ത് ഉണ്ടാകുന്ന പിടുത്തമാണ് യഥാർത്ഥ ശക്തി.</p>`
+: `<h2>High Bond Strength</h2>
+<p>The bond you don’t see decides everything.</p>`);
 openM('contentModal');
 }
 </script>
