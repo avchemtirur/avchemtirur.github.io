@@ -189,24 +189,7 @@ body{
   height:360px;
 }
 
-.bag-box img{
-  position:absolute;
-  width:100%;
-  left:0;
-  top:0;
-  animation:fade 6s infinite;
-}
 
-.bag-box img:nth-child(2){
-  animation-delay:3s;
-}
-
-@keyframes fade{
-  0%{opacity:0; transform:scale(.95)}
-  15%{opacity:1; transform:scale(1)}
-  45%{opacity:1}
-  60%{opacity:0}
-  100%{opacity:0}
 }
 
 /* FEATURES */
@@ -280,6 +263,22 @@ body{
   }
 }
 </style>
+  .right{
+  flex:1;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.bag-box{
+  display:flex;
+  gap:20px;
+}
+
+.bag-box img{
+  width:160px;
+  height:auto;
+}
 </head>
 
 <body>
