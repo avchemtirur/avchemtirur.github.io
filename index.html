@@ -5,7 +5,8 @@
 <title>AV Chem Chemical & Manufacturing</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- GOOGLE FONTS -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@500;600;700&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
 
 <style>
 *{
@@ -18,7 +19,7 @@ body{
   font-family:'Inter',sans-serif;
 }
 
-/* NAV */
+/* ================= NAV ================= */
 .nav{
   position:fixed;
   top:0;
@@ -34,9 +35,11 @@ body{
 .brand{
   display:flex;
   align-items:center;
-  gap:8px;
-  font-size:13px;
-  font-weight:700;
+  gap:10px;
+  font-family:'Cormorant Garamond', serif;
+  font-size:16px;          /* 20% bigger */
+  font-weight:600;
+  letter-spacing:0.5px;
   color:#0b2239;
 }
 
@@ -51,7 +54,7 @@ body{
   font-size:14px;
 }
 
-/* HERO */
+/* ================= HERO ================= */
 .hero{
   min-height:60vh;
   padding:120px 6% 60px;
@@ -67,7 +70,10 @@ body{
 }
 
 .left h1{
-  font-size:36px;
+  font-family:'Playfair Display', serif;
+  font-size:38px;
+  font-weight:600;
+  letter-spacing:0.5px;
   margin-bottom:18px;
 }
 
@@ -100,7 +106,7 @@ body{
   color:#fff;
 }
 
-/* RIGHT IMAGE AREA */
+/* ================= RIGHT BAGS ================= */
 .right{
   width:380px;
   display:flex;
@@ -134,7 +140,7 @@ body{
   100%{opacity:0}
 }
 
-/* FEATURES */
+/* ================= FEATURES ================= */
 .features{
   padding:60px 6%;
   display:flex;
@@ -163,25 +169,7 @@ body{
   color:#fff;
 }
 
-/* FLOAT WHATSAPP */
-.float-whatsapp{
-  position:fixed;
-  bottom:22px;
-  right:22px;
-  width:56px;
-  height:56px;
-  background:#25D366;
-  color:#fff;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:26px;
-  text-decoration:none;
-  box-shadow:0 10px 25px rgba(0,0,0,.25);
-}
-
-/* MOBILE */
+/* ================= MOBILE ================= */
 @media(max-width:900px){
   .hero{
     flex-direction:column;
@@ -257,7 +245,6 @@ body{
     <p>+91 79073 44030</p>
   </div>
 </section>
-
 
 </body>
 </html>
