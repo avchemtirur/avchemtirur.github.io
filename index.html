@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>H4 Tile Adhesive & Waterproof</title>
+<title>AV Chem Chemical & Manufacturing</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -35,37 +35,38 @@ body{
 }
 
 .nav a{
-  margin-left:22px;
+  margin-left:20px;
   font-size:13px;
-  text-decoration:none;
   color:#fff;
-  opacity:.9;
+  text-decoration:none;
+  opacity:.85;
 }
 
 /* HERO */
 .hero{
-  height:80vh;
+  min-height:100vh;
+  padding:120px 7% 60px;
   display:flex;
   align-items:center;
-  padding:120px 7% 0;
+  justify-content:space-between;
   background:linear-gradient(135deg,#1aa7b8,#24c6b5,#2de1c2);
+  color:#fff;
 }
 
 /* LEFT */
 .left{
-  width:50%;
-  color:#fff;
+  max-width:480px;
 }
 
 .left h1{
   font-size:36px;
-  margin-bottom:14px;
+  margin-bottom:16px;
 }
 
 .left p{
   font-size:14px;
   line-height:1.6;
-  opacity:.95;
+  opacity:.9;
 }
 
 .btns{
@@ -73,9 +74,7 @@ body{
 }
 
 .btn{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
+  display:inline-block;
   padding:10px 22px;
   border-radius:25px;
   font-size:13px;
@@ -94,26 +93,16 @@ body{
   color:#fff;
 }
 
-/* RIGHT – BAGS */
+/* RIGHT IMAGE */
 .right{
-  width:50%;
   position:relative;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
-
-.bag-box{
   width:320px;
   height:420px;
-  position:relative;
 }
 
 .bag-box img{
   position:absolute;
   width:100%;
-  left:0;
-  top:0;
   animation:swap 6s infinite;
 }
 
@@ -122,31 +111,28 @@ body{
 }
 
 @keyframes swap{
-  0%{opacity:0;transform:scale(.9) rotate(-3deg)}
-  10%{opacity:1;transform:scale(1) rotate(0)}
+  0%{opacity:0;transform:scale(.95)}
+  10%{opacity:1;transform:scale(1)}
   45%{opacity:1}
-  50%{opacity:0}
+  55%{opacity:0}
   100%{opacity:0}
 }
 
 /* FEATURES */
-.white{
-  background:#fff;
-  padding:80px 7%;
-}
-
 .features{
+  background:#fff;
+  padding:60px 7%;
   display:flex;
-  gap:28px;
+  gap:24px;
 }
 
 .feature{
   flex:1;
   background:#fff;
-  padding:28px;
   border-radius:18px;
+  padding:30px 20px;
   text-align:center;
-  box-shadow:0 10px 30px rgba(0,0,0,.08);
+  box-shadow:0 12px 30px rgba(0,0,0,.1);
 }
 
 .icon{
@@ -158,53 +144,51 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  color:#fff;
   font-size:22px;
-}
-
-.feature h3{
-  font-size:15px;
-  margin-bottom:6px;
-}
-
-.feature p{
-  font-size:13px;
-  opacity:.7;
+  color:#fff;
 }
 
 /* FLOATING WHATSAPP */
 .float-whatsapp{
   position:fixed;
-  right:20px;
-  bottom:20px;
+  bottom:22px;
+  right:22px;
+  width:56px;
+  height:56px;
   background:#25D366;
   color:#fff;
-  padding:14px 16px;
   border-radius:50%;
-  font-size:22px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:26px;
   text-decoration:none;
   box-shadow:0 10px 25px rgba(0,0,0,.25);
+  z-index:20;
 }
 
 /* MOBILE */
 @media(max-width:900px){
   .hero{
     flex-direction:column;
-    height:auto;
-    padding:120px 7% 60px;
     text-align:center;
   }
 
-  .left,.right{
-    width:100%;
-  }
-
-  .bag-box{
+  .right{
     margin-top:40px;
   }
 
   .features{
     flex-direction:column;
+  }
+
+  .nav{
+    background:#fff;
+    box-shadow:0 4px 12px rgba(0,0,0,.1);
+  }
+
+  .brand,.nav a{
+    color:#0b2239;
   }
 }
 </style>
@@ -214,7 +198,7 @@ body{
 
 <!-- NAV -->
 <div class="nav">
-  <div class="brand">H4 Tile Adhesive & Waterproof</div>
+  <div class="brand">AV Chem Chemical & Manufacturing</div>
   <div>
     <a href="#">Home</a>
     <a href="#">Dealer Enquiry</a>
@@ -224,6 +208,7 @@ body{
 
 <!-- HERO -->
 <section class="hero">
+
   <div class="left">
     <h1>H4 Tile Adhesive & Waterproof</h1>
     <p>
@@ -232,7 +217,7 @@ body{
     </p>
 
     <div class="btns">
-      <a class="btn call" href="tel:+917907344030">Call Now</a>
+      <a class="btn call" href="tel:+919745833832">Call Now</a>
       <a class="btn whatsapp" href="https://wa.me/919745833832">WhatsApp</a>
     </div>
   </div>
@@ -243,30 +228,27 @@ body{
       <img src="images/h4-blue.png" alt="H4 Blue Bag">
     </div>
   </div>
+
 </section>
 
 <!-- FEATURES -->
-<section class="white">
-  <div class="features">
+<section class="features">
+  <div class="feature">
+    <div class="icon">🧱</div>
+    <h3>Tile Adhesive</h3>
+    <p>High bond strength for wall & floor tiles</p>
+  </div>
 
-    <div class="feature">
-      <div class="icon">🧱</div>
-      <h3>Tile Adhesive</h3>
-      <p>High bond strength for wall & floor tiles</p>
-    </div>
+  <div class="feature">
+    <div class="icon">💧</div>
+    <h3>Waterproof</h3>
+    <p>Advanced waterproof protection system</p>
+  </div>
 
-    <div class="feature">
-      <div class="icon">💧</div>
-      <h3>Waterproof</h3>
-      <p>Advanced waterproof protection system</p>
-    </div>
-
-    <div class="feature">
-      <div class="icon">📞</div>
-      <h3>Contact</h3>
-      <p>+91 97458 38382</p>
-    </div>
-
+  <div class="feature">
+    <div class="icon">📞</div>
+    <h3>Contact</h3>
+    <p>+91 97458 38382</p>
   </div>
 </section>
 
