@@ -8,7 +8,75 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
 
 <style>
-*{.modal{
+/* RESET */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Inter',sans-serif;
+  background:#f6fbfb;
+  color:#222;
+}
+
+/* NAV */
+.nav{
+  padding:16px 6%;
+  background:#1aa7b8;
+  color:#fff;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.nav a{
+  color:#fff;
+  text-decoration:none;
+  font-weight:600;
+  margin-left:16px;
+}
+
+/* HERO */
+.hero{
+  padding:80px 6%;
+  background:linear-gradient(135deg,#1aa7b8,#24c6b5);
+  color:#fff;
+}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:38px;
+}
+.hero p{
+  margin-top:16px;
+  font-size:18px;
+}
+
+/* FEATURES */
+.features{
+  padding:60px 6%;
+  display:flex;
+  gap:24px;
+}
+.feature{
+  flex:1;
+  background:#fff;
+  border-radius:18px;
+  padding:30px 20px;
+  text-align:center;
+  box-shadow:0 12px 30px rgba(0,0,0,.1);
+  cursor:pointer;
+}
+.feature:hover{
+  transform:translateY(-5px);
+}
+.icon{
+  font-size:26px;
+  margin-bottom:10px;
+}
+
+/* MODAL */
+.modal{
   position:fixed;
   inset:0;
   background:rgba(0,0,0,.6);
@@ -31,142 +99,78 @@
   margin:8px;
   font-size:16px;
   cursor:pointer;
+  background:#1aa7b8;
+  color:#fff;
 }
 .close{
   position:absolute;
   top:10px;
   right:14px;
   cursor:pointer;
+  font-size:18px;
 }
 
+/* WATERPROOF CONTENT */
 #waterproofContent{
   display:none;
   padding:60px 6%;
   background:#f7f9fa;
 }
-.wp{display:none; max-width:900px; margin:auto;}
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
-body{
-  font-family:'Inter',sans-serif;
-  background:#f6fbfb;
-  color:#222;
-}
-
-/* HEADER */
-.header{
-  padding:16px 6%;
-  background:#1aa7b8;
-  color:#fff;
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
-.header a{
-  color:#fff;
-  text-decoration:none;
-  font-size:16px;
-  font-weight:600;
-}
-
-/* LANGUAGE SELECT */
-.lang-select{
-  padding:40px 6%;
-  text-align:center;
-}
-
-.lang-btn{
-  display:inline-block;
-  margin:10px;
-  padding:14px 26px;
-  border-radius:30px;
-  background:#1aa7b8;
-  color:#fff;
-  font-size:18px;
-  font-weight:600;
-  cursor:pointer;
-  text-decoration:none;
-}
-
-.lang-btn.secondary{
-  background:#444;
-}
-
-/* CONTENT */
-.container{
+.wp{
+  display:none;
   max-width:900px;
   margin:auto;
-  padding:10px 6% 60px;
-  display:none;
 }
-
-.container h1{
-  font-family:'Playfair Display', serif;
-  font-size:34px;
+.wp h2{
+  font-family:'Playfair Display',serif;
+  font-size:32px;
   margin-bottom:20px;
-  color:#0b2239;
 }
-
-.container p, .container li{
+.wp p{
   font-size:17px;
   line-height:1.9;
   margin-bottom:14px;
 }
-
-.section{
-  margin-top:30px;
-}
-
-ul{
-  padding-left:18px;
-}
-
-.actions{
-  margin-top:30px;
-}
-
-.actions a{
-  display:inline-block;
-  padding:12px 24px;
-  border-radius:25px;
-  margin-right:10px;
-  text-decoration:none;
-  font-weight:600;
-}
-
-.call{
-  background:#1aa7b8;
-  color:#fff;
-}
-
-.whatsapp{
-  background:#25D366;
-  color:#fff;
-}
 </style>
 </head>
-
 
 <body>
 
 <!-- NAV -->
-<div class="nav">...</div>
+<div class="nav">
+  <strong>AV Chem Chemical</strong>
+  <div>
+    <a href="#">Home</a>
+    <a href="#">Dealer Enquiry</a>
+    <a href="tel:+917907344030">Contact</a>
+  </div>
+</div>
 
 <!-- HERO -->
-<section class="hero">...</section>
+<section class="hero">
+  <h1>H4 Tile Adhesive & Waterproof</h1>
+  <p>Premium polymer modified solutions for long-lasting protection.</p>
+</section>
 
 <!-- FEATURES -->
-<!-- FEATURES -->
-<a class="feature tap" onclick="openLang()
+<section class="features">
+  <div class="feature">
+    <div class="icon">🧱</div>
+    <h3>Tile Adhesive</h3>
+  </div>
 
-<!-- WATERPROOF POPUP + CONTENT (NEW) -->
-<!-- 👉 ഇവിടെ ADD ചെയ്യണം -->
+  <div class="feature" onclick="openLang()">
+    <div class="icon">💧</div>
+    <h3>Waterproof</h3>
+  </div>
 
- <!-- LANGUAGE POPUP -->
+  <div class="feature">
+    <div class="icon">📞</div>
+    <h3>Contact</h3>
+  </div>
+</section>
+
+<!-- LANGUAGE POPUP -->
 <div id="langModal" class="modal">
   <div class="modal-box">
     <h3>Select Language</h3>
@@ -179,17 +183,17 @@ ul{
 <!-- WATERPROOF CONTENT -->
 <section id="waterproofContent">
 
-<div id="wp-ml" class="wp">
-<h2>H4 Waterproof – 10 വർഷം വിശ്വാസത്തിന്റെ ഉറപ്പ്</h2>
-<p>H4 Waterproof സാധാരണ വാട്ടർപ്രൂഫിംഗ് അല്ല...</p>
-<p>📞 +91 79073 44030<br>📱 97458 38382</p>
-</div>
+  <div id="wp-ml" class="wp">
+    <h2>H4 Waterproof – 10 വർഷം വിശ്വാസത്തിന്റെ ഉറപ്പ്</h2>
+    <p>H4 Waterproof സാധാരണ വാട്ടർപ്രൂഫിംഗ് അല്ല. വർഷങ്ങളോളം കെട്ടിടത്തെ സംരക്ഷിക്കുന്ന പ്രീമിയം സൊല്യൂഷൻ.</p>
+    <p>📞 +91 79073 44030<br>📱 97458 38382</p>
+  </div>
 
-<div id="wp-en" class="wp">
-<h2>H4 Waterproof – 10 Years of Trusted Protection</h2>
-<p>H4 Waterproof is a premium waterproofing solution...</p>
-<p>📞 +91 79073 44030<br>📱 97458 38382</p>
-</div>
+  <div id="wp-en" class="wp">
+    <h2>H4 Waterproof – 10 Years of Trusted Protection</h2>
+    <p>H4 Waterproof is a premium waterproofing solution engineered for long-term building protection.</p>
+    <p>📞 +91 79073 44030<br>📱 97458 38382</p>
+  </div>
 
 </section>
 
@@ -205,12 +209,16 @@ function openMalayalam(){
   document.getElementById("waterproofContent").style.display="block";
   document.getElementById("wp-ml").style.display="block";
   document.getElementById("wp-en").style.display="none";
+  document.getElementById("waterproofContent").scrollIntoView({behavior:"smooth"});
 }
 function openEnglish(){
   closeLang();
   document.getElementById("waterproofContent").style.display="block";
   document.getElementById("wp-en").style.display="block";
   document.getElementById("wp-ml").style.display="none";
+  document.getElementById("waterproofContent").scrollIntoView({behavior:"smooth"});
 }
 </script>
+
+</body>
 </html>
