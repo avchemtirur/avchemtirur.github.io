@@ -2,11 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>AV Chem Chemical & Manufacturing</title>
+<title>H4 Waterproof | AV Chem Chemical</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Cormorant+Garamond:wght@500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
 
 <style>
 *{
@@ -17,259 +16,218 @@
 
 body{
   font-family:'Inter',sans-serif;
+  background:#f6fbfb;
+  color:#222;
 }
 
-/* ===== TAP EFFECT (AMAZON STYLE) ===== */
-.tap{
-  cursor:pointer;
-  transition:all .2s ease;
-}
-.tap:active{
-  transform:scale(.96);
-}
-
-/* ================= NAV ================= */
-.nav{
-  position:fixed;
-  top:0;
-  width:100%;
-  padding:14px 6%;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  background:#ffffff;
-  z-index:10;
-}
-
-/* BRAND */
-.brand{
+/* HEADER */
+.header{
+  padding:16px 6%;
+  background:#1aa7b8;
+  color:#fff;
   display:flex;
   align-items:center;
-  gap:10px;
-  font-family:'Cormorant Garamond', serif;
-  font-size:19px;      /* 20% bigger */
-  font-weight:600;
-  letter-spacing:.6px;
-  color:#0b2239;
-}
-.brand img{
-  width:26px;
+  gap:12px;
 }
 
-/* NAV LINKS – 30% BIGGER */
-.nav a{
-  margin-left:14px;
-  padding:6px 14px;
-  border-radius:20px;
-  color:#0b2239;
+.header a{
+  color:#fff;
   text-decoration:none;
+  font-size:16px;
+  font-weight:600;
+}
+
+/* LANGUAGE SELECT */
+.lang-select{
+  padding:40px 6%;
+  text-align:center;
+}
+
+.lang-btn{
+  display:inline-block;
+  margin:10px;
+  padding:14px 26px;
+  border-radius:30px;
+  background:#1aa7b8;
+  color:#fff;
   font-size:18px;
   font-weight:600;
-}
-.nav a:hover{
-  background:#eef7f7;
+  cursor:pointer;
+  text-decoration:none;
 }
 
-/* ================= HERO ================= */
-.hero{
-  min-height:60vh;
-  padding:120px 6% 60px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  background:linear-gradient(135deg,#1aa7b8,#24c6b5);
+.lang-btn.secondary{
+  background:#444;
+}
+
+/* CONTENT */
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:10px 6% 60px;
+  display:none;
+}
+
+.container h1{
+  font-family:'Playfair Display', serif;
+  font-size:34px;
+  margin-bottom:20px;
+  color:#0b2239;
+}
+
+.container p, .container li{
+  font-size:17px;
+  line-height:1.9;
+  margin-bottom:14px;
+}
+
+.section{
+  margin-top:30px;
+}
+
+ul{
+  padding-left:18px;
+}
+
+.actions{
+  margin-top:30px;
+}
+
+.actions a{
+  display:inline-block;
+  padding:12px 24px;
+  border-radius:25px;
+  margin-right:10px;
+  text-decoration:none;
+  font-weight:600;
+}
+
+.call{
+  background:#1aa7b8;
   color:#fff;
 }
 
-.left{
-  max-width:520px;
-}
-
-.left h1{
-  font-family:'Playfair Display', serif;
-  font-size:38px;
-  margin-bottom:18px;
-  letter-spacing:.5px;
-}
-
-.left p{
-  font-size:18px;
-  line-height:1.8;
-  opacity:.95;
-}
-
-.btns{
-  margin-top:24px;
-}
-
-.btn{
-  padding:10px 18px;
-  border-radius:25px;
-  font-size:14px;
-  font-weight:600;
-  text-decoration:none;
-  margin-right:10px;
-  display:inline-block;
-}
-.btn.call{
-  background:#fff;
-  color:#1aa7b8;
-}
-.btn.whatsapp{
+.whatsapp{
   background:#25D366;
   color:#fff;
-}
-
-/* ================= RIGHT BAGS ================= */
-.right{
-  width:380px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
-
-.bag-box{
-  position:relative;
-  width:280px;
-  height:360px;
-}
-
-.bag-box img{
-  position:absolute;
-  width:100%;
-  left:0;
-  top:0;
-  animation:fade 6s infinite;
-}
-.bag-box img:nth-child(2){
-  animation-delay:3s;
-}
-
-@keyframes fade{
-  0%{opacity:0; transform:scale(.95)}
-  15%{opacity:1; transform:scale(1)}
-  45%{opacity:1}
-  60%{opacity:0}
-  100%{opacity:0}
-}
-
-/* ================= FEATURES (CLICKABLE) ================= */
-.features{
-  padding:60px 6%;
-  display:flex;
-  gap:24px;
-}
-
-.feature{
-  flex:1;
-  background:#fff;
-  border-radius:18px;
-  padding:30px 20px;
-  text-align:center;
-  box-shadow:0 12px 30px rgba(0,0,0,.1);
-  text-decoration:none;
-  color:#0b2239;
-  transition:all .25s ease;
-}
-
-.feature:hover{
-  transform:translateY(-6px);
-  box-shadow:0 18px 40px rgba(0,0,0,.15);
-}
-
-.feature:active{
-  transform:scale(.97);
-}
-
-.icon{
-  width:56px;
-  height:56px;
-  margin:0 auto 14px;
-  border-radius:14px;
-  background:linear-gradient(135deg,#1aa7b8,#2de1c2);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:22px;
-  color:#fff;
-}
-
-/* ================= MOBILE ================= */
-@media(max-width:900px){
-  .hero{
-    flex-direction:column;
-    text-align:left;
-  }
-  .right{
-    margin-top:30px;
-  }
-  .features{
-    flex-direction:column;
-  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- NAV -->
-<div class="nav">
-  <div class="brand">
-    <img src="AV.png" alt="AV Logo">
-    AV Chem Chemical & Manufacturing
+<!-- HEADER -->
+<div class="header">
+  <a href="index.html">⬅ Home</a>
+  <strong>H4 Waterproof</strong>
+</div>
+
+<!-- LANGUAGE SELECT -->
+<div class="lang-select" id="langSelect">
+  <h2>Select Language / ഭാഷ തിരഞ്ഞെടുക്കുക</h2><br>
+  <span class="lang-btn" onclick="showMalayalam()">Malayalam</span>
+  <span class="lang-btn secondary" onclick="showEnglish()">English</span>
+</div>
+
+<!-- MALAYALAM CONTENT -->
+<div class="container" id="ml">
+  <h1>H4 Waterproof – 10 വർഷം വിശ്വാസത്തിന്റെ ഉറപ്പ്</h1>
+
+  <p>
+    H4 Waterproof എന്നത് സാധാരണ വാട്ടർപ്രൂഫിംഗ് അല്ല.
+    ഇത് വർഷങ്ങളോളം നിങ്ങളുടെ കെട്ടിടത്തെ സുരക്ഷിതമായി കാക്കാൻ രൂപകൽപ്പന ചെയ്ത
+    പ്രീമിയം ക്വാളിറ്റി വാട്ടർപ്രൂഫ് സൊല്യൂഷൻ ആണ്.
+  </p>
+
+  <div class="section">
+    <h3>🔹 ഗുണനിലവാരം</h3>
+    <ul>
+      <li>Polymer Modified Cementitious Technology</li>
+      <li>Deep Penetration Protection</li>
+      <li>ചൂട്, മഴ, ഈർപ്പം പ്രതിരോധിക്കും</li>
+      <li>Cracks & leakage പൂർണ്ണമായി തടയും</li>
+    </ul>
   </div>
-  <div>
-    <a class="tap" href="#">Home</a>
-    <a class="tap" href="#dealer">Dealer Enquiry</a>
-    <a class="tap" href="tel:+917907344030">Contact</a>
+
+  <div class="section">
+    <h3>🔹 പ്രധാന ഗുണങ്ങൾ</h3>
+    <ul>
+      <li>✅ 10 വർഷം വാറണ്ടി</li>
+      <li>✅ Roof, Bathroom, Tank, Balcony</li>
+      <li>✅ Strong adhesion</li>
+      <li>✅ Maintenance കുറവ്</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h3>🔹 എന്തുകൊണ്ട് H4 Waterproof?</h3>
+    <ul>
+      <li>2–3 വർഷം മാത്രം നിലനിൽക്കുന്ന സാധാരണ products അല്ല</li>
+      <li>Kerala climate-നായി tested</li>
+      <li>Easy application – contractor friendly</li>
+    </ul>
+  </div>
+
+  <div class="actions">
+    <a class="call" href="tel:+917907344030">Call</a>
+    <a class="whatsapp" href="https://wa.me/919745838382">WhatsApp</a>
   </div>
 </div>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="left">
-    <h1>H4 Tile Adhesive & Waterproof</h1>
-    <p>
-      Premium polymer modified tile adhesive and waterproof solutions.
-      Designed for strong bonding and long-lasting durability.
-    </p>
+<!-- ENGLISH CONTENT -->
+<div class="container" id="en">
+  <h1>H4 Waterproof – 10 Years of Trusted Protection</h1>
 
-    <div class="btns">
-      <a class="btn call tap" href="tel:+917907344030">Call Now</a>
-      <a class="btn whatsapp tap" href="https://wa.me/919745838382">WhatsApp</a>
-    </div>
+  <p>
+    H4 Waterproof is a premium waterproofing solution engineered to
+    protect buildings for many years.
+  </p>
+
+  <div class="section">
+    <h3>🔹 Superior Quality</h3>
+    <ul>
+      <li>Polymer Modified Cementitious Technology</li>
+      <li>Deep surface penetration</li>
+      <li>Resistant to water, heat & moisture</li>
+      <li>Seals cracks and leakage</li>
+    </ul>
   </div>
 
-  <div class="right">
-    <div class="bag-box">
-      <img src="bag-blue.png" alt="H4 Blue Bag">
-      <img src="bag-purple.png" alt="H4 Purple Bag">
-    </div>
+  <div class="section">
+    <h3>🔹 Key Benefits</h3>
+    <ul>
+      <li>✅ 10 Years Warranty</li>
+      <li>✅ Roofs, Bathrooms, Tanks & Balconies</li>
+      <li>✅ Strong bonding</li>
+      <li>✅ Low maintenance</li>
+    </ul>
   </div>
-</section>
 
-<!-- FEATURES -->
-<section class="features">
+  <div class="section">
+    <h3>🔹 Why H4 Waterproof?</h3>
+    <ul>
+      <li>Ordinary waterproofing lasts only 2–3 years</li>
+      <li>Deep internal protection</li>
+      <li>Specially tested for Kerala climate</li>
+    </ul>
+  </div>
 
-  <a class="feature tap" href="#tile">
-    <div class="icon">🧱</div>
-    <h3>Tile Adhesive</h3>
-    <p>High bond strength for wall & floor tiles</p>
-  </a>
+  <div class="actions">
+    <a class="call" href="tel:+917907344030">Call</a>
+    <a class="whatsapp" href="https://wa.me/919745838382">WhatsApp</a>
+  </div>
+</div>
 
-  <a class="feature tap" href="#waterproof">
-    <div class="icon">💧</div>
-    <h3>Waterproof</h3>
-    <p>Advanced waterproof protection system</p>
-  </a>
-
-  <a class="feature tap" href="tel:+917907344030">
-    <div class="icon">📞</div>
-    <h3>Contact</h3>
-    <p>+91 79073 44030</p>
-  </a>
-
-</section>
+<script>
+function showMalayalam(){
+  document.getElementById("langSelect").style.display="none";
+  document.getElementById("ml").style.display="block";
+}
+function showEnglish(){
+  document.getElementById("langSelect").style.display="none";
+  document.getElementById("en").style.display="block";
+}
+</script>
 
 </body>
 </html>
