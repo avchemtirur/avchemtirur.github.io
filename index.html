@@ -2,27 +2,22 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>AV Chem Chemical | H4 Tile Adhesive & Waterproof</title>
+<title>AV Chem Chemical | H4 Waterproof</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
 
 <style>
-/* RESET */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box}
 body{
   font-family:'Inter',sans-serif;
-  background:#f6fbfb;
+  background:#eef7f8;
   color:#222;
 }
 
 /* NAV */
 .nav{
-  background:#1aa7b8;
+  background:#0f6f78;
   color:#fff;
   padding:14px 6%;
   display:flex;
@@ -40,7 +35,7 @@ body{
 .hero{
   min-height:65vh;
   padding:0 6%;
-  background:linear-gradient(135deg,#1aa7b8,#24c6b5);
+  background:linear-gradient(135deg,#0f6f78,#1aa7b8);
   color:#fff;
   display:flex;
   flex-direction:column;
@@ -48,12 +43,12 @@ body{
 }
 .hero h1{
   font-family:'Playfair Display',serif;
-  font-size:38px;
+  font-size:40px;
   margin-bottom:14px;
 }
 .hero p{
   font-size:18px;
-  max-width:520px;
+  max-width:620px;
 }
 
 /* FEATURES */
@@ -66,21 +61,16 @@ body{
   flex:1;
   background:#fff;
   border-radius:18px;
-  padding:30px 20px;
+  padding:32px 20px;
   text-align:center;
   box-shadow:0 12px 30px rgba(0,0,0,.12);
   cursor:pointer;
   transition:.3s;
 }
-.feature:hover{
-  transform:translateY(-6px);
-}
-.icon{
-  font-size:28px;
-  margin-bottom:10px;
-}
+.feature:hover{transform:translateY(-6px)}
+.icon{font-size:30px;margin-bottom:10px}
 
-/* MODAL BACKDROP */
+/* MODAL */
 .modal{
   position:fixed;
   inset:0;
@@ -90,81 +80,83 @@ body{
   justify-content:center;
   z-index:999;
 }
-
-/* MODAL BOX – VIDEO STYLE */
 .modal-box{
   background:#fff;
-  padding:34px 26px;
-  border-radius:24px;
+  padding:36px 26px;
+  border-radius:26px;
   text-align:center;
-  position:relative;
   width:90%;
-  max-width:340px;
-  animation:pop .25s ease;
-}
-@keyframes pop{
-  from{transform:scale(.85);opacity:0}
-  to{transform:scale(1);opacity:1}
+  max-width:360px;
+  position:relative;
 }
 .modal-box h3{
-  font-size:20px;
+  font-size:22px;
   margin-bottom:22px;
-  font-weight:600;
 }
-
-/* VIDEO STYLE LANGUAGE BUTTONS */
 .modal-box button{
-  display:block;
   width:100%;
   padding:18px 0;
   border:none;
-  border-radius:45px;
+  border-radius:40px;
   font-size:18px;
   font-weight:600;
   margin:14px 0;
-  background:linear-gradient(135deg,#1aa7b8,#24c6b5);
+  background:linear-gradient(135deg,#0f6f78,#1aa7b8);
   color:#fff;
   cursor:pointer;
-  box-shadow:0 8px 22px rgba(0,0,0,.22);
+  box-shadow:0 8px 22px rgba(0,0,0,.25);
 }
-.modal-box button:active{
-  transform:scale(.96);
-}
-
 .close{
   position:absolute;
   top:12px;
-  right:16px;
-  cursor:pointer;
+  right:18px;
   font-size:22px;
+  cursor:pointer;
 }
 
-/* WATERPROOF CONTENT */
+/* BROCHURE CONTENT */
 #waterproofContent{
   display:none;
-  padding:60px 6%;
-  background:#f7f9fa;
+  padding:70px 6%;
+  background:#ffffff;
 }
-.wp{
+.brochure{
   display:none;
-  max-width:900px;
+  max-width:980px;
   margin:auto;
 }
-.wp h2{
+.brochure h2{
   font-family:'Playfair Display',serif;
-  font-size:32px;
-  margin-bottom:20px;
+  font-size:36px;
+  color:#0f6f78;
+  margin-bottom:18px;
 }
-.wp p{
+.brochure h3{
+  margin-top:36px;
+  margin-bottom:14px;
+  color:#1aa7b8;
+}
+.brochure p, .brochure li{
   font-size:17px;
   line-height:1.9;
-  margin-bottom:14px;
+  margin-bottom:12px;
+}
+.brochure ul{
+  padding-left:20px;
+}
+.contact-box{
+  margin-top:40px;
+  padding:22px;
+  border-radius:18px;
+  background:linear-gradient(135deg,#0f6f78,#1aa7b8);
+  color:#fff;
+  font-size:17px;
 }
 
 /* MOBILE */
-@media (max-width:768px){
-  .hero{min-height:60vh;}
-  .features{flex-direction:column;}
+@media(max-width:768px){
+  .features{flex-direction:column}
+  .hero h1{font-size:32px}
 }
 </style>
 </head>
@@ -184,7 +176,7 @@ body{
 <!-- HERO -->
 <section class="hero">
   <h1>H4 Tile Adhesive & Waterproof</h1>
-  <p>Premium polymer modified solutions for long-lasting protection.</p>
+  <p>Premium polymer modified solutions engineered for long-lasting building protection.</p>
 </section>
 
 <!-- FEATURES -->
@@ -193,12 +185,10 @@ body{
     <div class="icon">🧱</div>
     <h3>Tile Adhesive</h3>
   </div>
-
   <div class="feature" onclick="openLang()">
     <div class="icon">💧</div>
     <h3>Waterproof</h3>
   </div>
-
   <div class="feature">
     <div class="icon">📞</div>
     <h3>Contact</h3>
@@ -215,27 +205,106 @@ body{
   </div>
 </div>
 
-<!-- WATERPROOF CONTENT -->
+<!-- BROCHURE CONTENT -->
 <section id="waterproofContent">
 
-  <div id="wp-ml" class="wp">
-    <h2>H4 Waterproof – 10 വർഷം വിശ്വാസത്തിന്റെ ഉറപ്പ്</h2>
-    <p>
-      H4 Waterproof കേരളത്തിന്റെ കാലാവസ്ഥക്ക് അനുയോജ്യമായ
-      പ്രീമിയം വാട്ടർപ്രൂഫിംഗ് സൊല്യൂഷനാണ്.
-      ടെറസ്, ബാത്ത്റൂം, ടാങ്ക്, ബാൽക്കണി എന്നിവയ്ക്ക് മികച്ച സംരക്ഷണം.
-    </p>
-    <p>📞 +91 79073 44030<br>📱 97458 38382</p>
-  </div>
+<!-- MALAYALAM -->
+<div id="wp-ml" class="brochure">
+<h2>H4 Waterproof – 10 വർഷം വിശ്വാസത്തിന്റെ ഉറപ്പ്</h2>
 
-  <div id="wp-en" class="wp">
-    <h2>H4 Waterproof – 10 Years of Trusted Protection</h2>
-    <p>
-      H4 Waterproof is a premium waterproofing solution designed
-      for long-term protection in Indian climate conditions.
-    </p>
-    <p>📞 +91 79073 44030<br>📱 97458 38382</p>
-  </div>
+<p>
+H4 Waterproof എന്നത് സാധാരണ വാട്ടർപ്രൂഫിംഗ് അല്ല.  
+ഇത് വർഷങ്ങളോളം നിങ്ങളുടെ കെട്ടിടത്തെ സുരക്ഷിതമായി കാക്കാൻ രൂപകൽപ്പന ചെയ്ത
+പ്രീമിയം ക്വാളിറ്റി വാട്ടർപ്രൂഫ് സൊല്യൂഷൻ ആണ്.
+</p>
+
+<h3>🔹 H4 Waterproofന്റെ ഗുണനിലവാരം</h3>
+<ul>
+<li>Polymer Modified Cementitious Technology</li>
+<li>Deep Penetration Protection</li>
+<li>ചൂട്, മഴ, ഈർപ്പം എന്നിവയെ പ്രതിരോധിക്കുന്ന ശക്തമായ ഘടന</li>
+<li>Cracks & seepage പൂർണമായി തടയും</li>
+</ul>
+
+<h3>🔹 ഉപയോഗത്തിന്റെ പ്രധാന ഗുണങ്ങൾ</h3>
+<ul>
+<li>✅ 10 വർഷം വാറണ്ടി</li>
+<li>✅ Roof, Bathroom, Water Tank, Balcony</li>
+<li>✅ Strong adhesion</li>
+<li>✅ Peeling / cracking ഇല്ല</li>
+<li>✅ Old & new buildings</li>
+<li>✅ Low maintenance cost</li>
+</ul>
+
+<h3>🔹 എന്തുകൊണ്ട് H4 Waterproof മികച്ചത്?</h3>
+<ul>
+<li>സാധാരണ waterproof 2–3 വർഷം മാത്രം</li>
+<li>H4 deep internal protection</li>
+<li>No cheap fillers</li>
+<li>Contractor friendly</li>
+<li>Kerala climate tested</li>
+</ul>
+
+<h3>🔹 10 വർഷം വാറണ്ടി</h3>
+<p>
+ശരിയായ രീതിയിൽ apply ചെയ്താൽ  
+👉 10 വർഷം വരെ വെള്ളം ചോരില്ല
+</p>
+
+<div class="contact-box">
+📞 +91 79073 44030<br>
+📱 +91 97458 38382<br>
+✉️ avchemtirur@gmail.com
+</div>
+</div>
+
+<!-- ENGLISH -->
+<div id="wp-en" class="brochure">
+<h2>H4 Waterproof – 10 Years of Trusted Protection</h2>
+
+<p>
+H4 Waterproof is not an ordinary waterproofing product.  
+It is a premium-quality solution engineered to protect your building for many years.
+</p>
+
+<h3>🔹 Superior Quality</h3>
+<ul>
+<li>Advanced Polymer Modified Cementitious Technology</li>
+<li>Deep surface penetration</li>
+<li>Excellent resistance to water, heat & weather</li>
+<li>Seals cracks and seepage effectively</li>
+</ul>
+
+<h3>🔹 Key Benefits</h3>
+<ul>
+<li>✅ 10 Years Warranty</li>
+<li>✅ Roofs, Bathrooms, Water Tanks & Balconies</li>
+<li>✅ Strong bonding</li>
+<li>✅ No peeling or cracking</li>
+<li>✅ New & old constructions</li>
+<li>✅ Low maintenance</li>
+</ul>
+
+<h3>🔹 Why H4 Waterproof?</h3>
+<ul>
+<li>Ordinary products last only 2–3 years</li>
+<li>Deep internal protection</li>
+<li>No cheap fillers</li>
+<li>Easy application</li>
+<li>Kerala climate tested</li>
+</ul>
+
+<h3>🔹 10-Year Warranty</h3>
+<p>
+With proper application, leakage protection is assured for up to 10 years.
+</p>
+
+<div class="contact-box">
+📞 +91 79073 44030<br>
+📱 +91 97458 38382<br>
+✉️ avchemtirur@gmail.com
+</div>
+</div>
 
 </section>
 
