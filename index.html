@@ -31,7 +31,7 @@ body{
   font-weight:600;
 }
 
-/* HERO – SAME GRADIENT */
+/* HERO */
 .hero{
   min-height:65vh;
   padding:0 6%;
@@ -70,50 +70,48 @@ body{
 .feature:hover{transform:translateY(-6px);}
 .icon{font-size:28px;margin-bottom:10px;}
 
+/* LANGUAGE POPUP */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+.modal-box{
+  background:#fff;
+  padding:30px;
+  border-radius:18px;
+  text-align:center;
+  width:90%;
+  max-width:320px;
+}
+.modal-box h3{
+  margin-bottom:20px;
+}
+.modal-box button{
+  width:100%;
+  padding:14px;
+  margin:10px 0;
+  border:none;
+  border-radius:30px;
+  font-size:18px;
+  font-weight:600;
+  background:#1aa7b8;
+  color:#fff;
+  cursor:pointer;
+}
+
 /* WATERPROOF PAGE */
 #waterproofContent{
   display:none;
   min-height:100vh;
   background:linear-gradient(135deg,#1fb6b0,#20c4b2);
-  padding:40px 6% 80px;
+  padding:60px 6%;
   color:#fff;
 }
-
-/* TOP BAR */
-.brochure-top{
-  display:flex;
-  justify-content:flex-end;
-  margin-bottom:30px;
-}
-
-/* LANGUAGE DROPDOWN */
-.lang{position:relative;}
-.lang-btn{
-  background:rgba(255,255,255,.18);
-  padding:10px 20px;
-  border-radius:22px;
-  font-weight:700;
-  cursor:pointer;
-}
-.lang-menu{
-  position:absolute;
-  top:45px;
-  right:0;
-  background:#fff;
-  color:#333;
-  width:160px;
-  border-radius:14px;
-  box-shadow:0 10px 25px rgba(0,0,0,.25);
-  display:none;
-}
-.lang-menu div{
-  padding:14px 18px;
-  font-weight:600;
-  cursor:pointer;
-}
-.lang-menu div:hover{background:#eef7f8;}
-
-/* BROCHURE CARD */
 .wp{
   display:none;
   max-width:980px;
@@ -133,7 +131,7 @@ body{
   margin-bottom:12px;
 }
 .wp ul{padding-left:20px;}
-.highlight{font-weight:700;color:#fff;}
+.highlight{font-weight:700;}
 
 @media(max-width:768px){
   .features{flex-direction:column;}
@@ -167,7 +165,7 @@ body{
     <h3>Tile Adhesive</h3>
   </div>
 
-  <div class="feature" onclick="openWaterproof()">
+  <div class="feature" onclick="openLangPopup()">
     <div class="icon">💧</div>
     <h3>Waterproof</h3>
   </div>
@@ -178,37 +176,29 @@ body{
   </div>
 </section>
 
-<!-- WATERPROOF PAGE -->
-<section id="waterproofContent">
-
-  <div class="brochure-top">
-    <div class="lang">
-      <div class="lang-btn" onclick="toggleLang()">ENG ▼</div>
-      <div class="lang-menu" id="langMenu">
-        <div onclick="setLang('ml')">മലയാളം</div>
-        <div onclick="setLang('en')">English</div>
-      </div>
-    </div>
+<!-- LANGUAGE SELECT POPUP -->
+<div id="langPopup" class="modal">
+  <div class="modal-box">
+    <h3>Select Language</h3>
+    <button onclick="openMalayalam()">മലയാളം</button>
+    <button onclick="openEnglish()">English</button>
   </div>
+</div>
+
+<!-- WATERPROOF CONTENT -->
+<section id="waterproofContent">
 
   <!-- MALAYALAM -->
   <div id="wp-ml" class="wp">
     <h2>H4 Waterproof – 10 വർഷം വിശ്വാസത്തിന്റെ ഉറപ്പ്</h2>
     <p class="highlight">H4 Waterproof സാധാരണ വാട്ടർപ്രൂഫിംഗ് അല്ല.</p>
-    <p>വർഷങ്ങളോളം നിങ്ങളുടെ കെട്ടിടത്തെ സുരക്ഷിതമായി കാക്കാൻ രൂപകൽപ്പന ചെയ്ത പ്രീമിയം ക്വാളിറ്റി സൊല്യൂഷൻ.</p>
 
-    <h3>🔹 ഗുണനിലവാരം</h3>
     <ul>
       <li>Polymer Modified Cementitious Technology</li>
       <li>Deep Penetration Protection</li>
       <li>Crack & leakage prevention</li>
-    </ul>
-
-    <h3>🔹 പ്രധാന ഗുണങ്ങൾ</h3>
-    <ul>
-      <li>✅ 10 വർഷം വാറണ്ടി</li>
-      <li>✅ Roof, Bathroom, Tank, Balcony</li>
-      <li>✅ Maintenance ചെലവ് കുറവ്</li>
+      <li>10 വർഷം വാറണ്ടി</li>
+      <li>Roof, Bathroom, Tank, Balcony</li>
     </ul>
 
     <p class="highlight">H4 Waterproof – വെള്ളത്തിനെതിരെ ശക്തമായ ഒരു കവചം</p>
@@ -219,20 +209,13 @@ body{
   <div id="wp-en" class="wp">
     <h2>H4 Waterproof – 10 Years of Trusted Protection</h2>
     <p class="highlight">H4 Waterproof is not an ordinary waterproofing product.</p>
-    <p>It is engineered to protect your building for years with premium quality.</p>
 
-    <h3>🔹 Superior Quality</h3>
     <ul>
       <li>Polymer Modified Cementitious Technology</li>
       <li>Deep surface penetration</li>
       <li>Crack & seepage protection</li>
-    </ul>
-
-    <h3>🔹 Key Benefits</h3>
-    <ul>
-      <li>✅ 10 Years Warranty</li>
-      <li>✅ Roofs, Bathrooms, Tanks, Balconies</li>
-      <li>✅ Low maintenance</li>
+      <li>10 Years Warranty</li>
+      <li>Roof, Bathroom, Tank, Balcony</li>
     </ul>
 
     <p class="highlight">H4 Waterproof – A Strong Shield Against Water</p>
@@ -242,32 +225,22 @@ body{
 </section>
 
 <script>
-let currentLang="en";
-
-function openWaterproof(){
+function openLangPopup(){
+  document.getElementById("langPopup").style.display="flex";
+}
+function openMalayalam(){
+  document.getElementById("langPopup").style.display="none";
   document.getElementById("waterproofContent").style.display="block";
-  showContent();
+  document.getElementById("wp-ml").style.display="block";
+  document.getElementById("wp-en").style.display="none";
   document.getElementById("waterproofContent").scrollIntoView({behavior:"smooth"});
 }
-
-function toggleLang(){
-  const m=document.getElementById("langMenu");
-  m.style.display=m.style.display==="block"?"none":"block";
-}
-
-function setLang(lang){
-  currentLang=lang;
-  document.querySelector(".lang-btn").innerText =
-    lang==="ml"?"ML ▼":"ENG ▼";
-  document.getElementById("langMenu").style.display="none";
-  showContent();
-}
-
-function showContent(){
-  document.getElementById("wp-ml").style.display =
-    currentLang==="ml"?"block":"none";
-  document.getElementById("wp-en").style.display =
-    currentLang==="en"?"block":"none";
+function openEnglish(){
+  document.getElementById("langPopup").style.display="none";
+  document.getElementById("waterproofContent").style.display="block";
+  document.getElementById("wp-en").style.display="block";
+  document.getElementById("wp-ml").style.display="none";
+  document.getElementById("waterproofContent").scrollIntoView({behavior:"smooth"});
 }
 </script>
 
