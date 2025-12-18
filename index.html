@@ -24,11 +24,53 @@ body{
   justify-content:space-between;
   align-items:center;
 }
+.nav-left{
+  font-weight:700;
+}
+.nav-right{
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
 .nav a{
   color:#fff;
   text-decoration:none;
-  margin-left:18px;
   font-weight:600;
+}
+
+/* LANGUAGE DROPDOWN */
+.lang{
+  position:relative;
+}
+.lang-btn{
+  background:#ffffff;
+  color:#0f6f78;
+  padding:8px 16px;
+  border-radius:22px;
+  font-weight:700;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.lang-menu{
+  position:absolute;
+  top:44px;
+  right:0;
+  background:#fff;
+  width:160px;
+  border-radius:16px;
+  box-shadow:0 12px 30px rgba(0,0,0,.2);
+  display:none;
+  overflow:hidden;
+}
+.lang-menu div{
+  padding:14px 16px;
+  cursor:pointer;
+  font-weight:600;
+}
+.lang-menu div:hover{
+  background:#eef7f8;
 }
 
 /* HERO */
@@ -70,51 +112,7 @@ body{
 .feature:hover{transform:translateY(-6px)}
 .icon{font-size:30px;margin-bottom:10px}
 
-/* MODAL */
-.modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.65);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:999;
-}
-.modal-box{
-  background:#fff;
-  padding:36px 26px;
-  border-radius:26px;
-  text-align:center;
-  width:90%;
-  max-width:360px;
-  position:relative;
-}
-.modal-box h3{
-  font-size:22px;
-  margin-bottom:22px;
-}
-.modal-box button{
-  width:100%;
-  padding:18px 0;
-  border:none;
-  border-radius:40px;
-  font-size:18px;
-  font-weight:600;
-  margin:14px 0;
-  background:linear-gradient(135deg,#0f6f78,#1aa7b8);
-  color:#fff;
-  cursor:pointer;
-  box-shadow:0 8px 22px rgba(0,0,0,.25);
-}
-.close{
-  position:absolute;
-  top:12px;
-  right:18px;
-  font-size:22px;
-  cursor:pointer;
-}
-
-/* BROCHURE CONTENT */
+/* BROCHURE */
 #waterproofContent{
   display:none;
   padding:70px 6%;
@@ -136,14 +134,12 @@ body{
   margin-bottom:14px;
   color:#1aa7b8;
 }
-.brochure p, .brochure li{
+.brochure p,.brochure li{
   font-size:17px;
   line-height:1.9;
   margin-bottom:12px;
 }
-.brochure ul{
-  padding-left:20px;
-}
+.brochure ul{padding-left:20px}
 .contact-box{
   margin-top:40px;
   padding:22px;
@@ -165,11 +161,21 @@ body{
 
 <!-- NAV -->
 <div class="nav">
-  <strong>AV Chem Chemical</strong>
-  <div>
+  <div class="nav-left">AV Chem Chemical</div>
+
+  <div class="nav-right">
     <a href="#">Home</a>
     <a href="#">Dealer Enquiry</a>
     <a href="tel:+917907344030">Contact</a>
+
+    <!-- LANGUAGE -->
+    <div class="lang">
+      <div class="lang-btn" onclick="toggleLang()">ENG ▼</div>
+      <div class="lang-menu" id="langMenu">
+        <div onclick="setLang('ml')">മലയാളം</div>
+        <div onclick="setLang('en')">English</div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -185,27 +191,19 @@ body{
     <div class="icon">🧱</div>
     <h3>Tile Adhesive</h3>
   </div>
-  <div class="feature" onclick="openLang()">
+
+  <div class="feature" onclick="openWaterproof()">
     <div class="icon">💧</div>
     <h3>Waterproof</h3>
   </div>
+
   <div class="feature">
     <div class="icon">📞</div>
     <h3>Contact</h3>
   </div>
 </section>
 
-<!-- LANGUAGE POPUP -->
-<div id="langModal" class="modal">
-  <div class="modal-box">
-    <h3>Select Language</h3>
-    <button onclick="openMalayalam()">മലയാളം</button>
-    <button onclick="openEnglish()">English</button>
-    <span class="close" onclick="closeLang()">✕</span>
-  </div>
-</div>
-
-<!-- BROCHURE CONTENT -->
+<!-- WATERPROOF CONTENT -->
 <section id="waterproofContent">
 
 <!-- MALAYALAM -->
@@ -213,43 +211,26 @@ body{
 <h2>H4 Waterproof – 10 വർഷം വിശ്വാസത്തിന്റെ ഉറപ്പ്</h2>
 
 <p>
-H4 Waterproof എന്നത് സാധാരണ വാട്ടർപ്രൂഫിംഗ് അല്ല.  
+H4 Waterproof സാധാരണ വാട്ടർപ്രൂഫിംഗ് അല്ല.
 ഇത് വർഷങ്ങളോളം നിങ്ങളുടെ കെട്ടിടത്തെ സുരക്ഷിതമായി കാക്കാൻ രൂപകൽപ്പന ചെയ്ത
-പ്രീമിയം ക്വാളിറ്റി വാട്ടർപ്രൂഫ് സൊല്യൂഷൻ ആണ്.
+പ്രീമിയം ക്വാളിറ്റി സൊല്യൂഷൻ ആണ്.
 </p>
 
-<h3>🔹 H4 Waterproofന്റെ ഗുണനിലവാരം</h3>
+<h3>🔹 ഗുണനിലവാരം</h3>
 <ul>
 <li>Polymer Modified Cementitious Technology</li>
 <li>Deep Penetration Protection</li>
-<li>ചൂട്, മഴ, ഈർപ്പം എന്നിവയെ പ്രതിരോധിക്കുന്ന ശക്തമായ ഘടന</li>
 <li>Cracks & seepage പൂർണമായി തടയും</li>
+<li>Kerala climate-ന് specially optimized</li>
 </ul>
 
-<h3>🔹 ഉപയോഗത്തിന്റെ പ്രധാന ഗുണങ്ങൾ</h3>
+<h3>🔹 പ്രധാന ഗുണങ്ങൾ</h3>
 <ul>
 <li>✅ 10 വർഷം വാറണ്ടി</li>
 <li>✅ Roof, Bathroom, Water Tank, Balcony</li>
 <li>✅ Strong adhesion</li>
-<li>✅ Peeling / cracking ഇല്ല</li>
-<li>✅ Old & new buildings</li>
-<li>✅ Low maintenance cost</li>
+<li>✅ Low maintenance</li>
 </ul>
-
-<h3>🔹 എന്തുകൊണ്ട് H4 Waterproof മികച്ചത്?</h3>
-<ul>
-<li>സാധാരണ waterproof 2–3 വർഷം മാത്രം</li>
-<li>H4 deep internal protection</li>
-<li>No cheap fillers</li>
-<li>Contractor friendly</li>
-<li>Kerala climate tested</li>
-</ul>
-
-<h3>🔹 10 വർഷം വാറണ്ടി</h3>
-<p>
-ശരിയായ രീതിയിൽ apply ചെയ്താൽ  
-👉 10 വർഷം വരെ വെള്ളം ചോരില്ല
-</p>
 
 <div class="contact-box">
 📞 +91 79073 44030<br>
@@ -263,41 +244,24 @@ H4 Waterproof എന്നത് സാധാരണ വാട്ടർപ്ര�
 <h2>H4 Waterproof – 10 Years of Trusted Protection</h2>
 
 <p>
-H4 Waterproof is not an ordinary waterproofing product.  
-It is a premium-quality solution engineered to protect your building for many years.
+H4 Waterproof is a premium waterproofing solution engineered
+for long-term building protection.
 </p>
 
-<h3>🔹 Superior Quality</h3>
+<h3>🔹 Key Advantages</h3>
 <ul>
-<li>Advanced Polymer Modified Cementitious Technology</li>
-<li>Deep surface penetration</li>
-<li>Excellent resistance to water, heat & weather</li>
-<li>Seals cracks and seepage effectively</li>
+<li>Advanced Polymer Modified Technology</li>
+<li>Deep internal protection</li>
+<li>Excellent resistance to weather</li>
+<li>No peeling or cracking</li>
 </ul>
 
-<h3>🔹 Key Benefits</h3>
+<h3>🔹 Benefits</h3>
 <ul>
 <li>✅ 10 Years Warranty</li>
-<li>✅ Roofs, Bathrooms, Water Tanks & Balconies</li>
-<li>✅ Strong bonding</li>
-<li>✅ No peeling or cracking</li>
+<li>✅ Roofs, Bathrooms, Water Tanks</li>
 <li>✅ New & old constructions</li>
-<li>✅ Low maintenance</li>
 </ul>
-
-<h3>🔹 Why H4 Waterproof?</h3>
-<ul>
-<li>Ordinary products last only 2–3 years</li>
-<li>Deep internal protection</li>
-<li>No cheap fillers</li>
-<li>Easy application</li>
-<li>Kerala climate tested</li>
-</ul>
-
-<h3>🔹 10-Year Warranty</h3>
-<p>
-With proper application, leakage protection is assured for up to 10 years.
-</p>
 
 <div class="contact-box">
 📞 +91 79073 44030<br>
@@ -309,25 +273,33 @@ With proper application, leakage protection is assured for up to 10 years.
 </section>
 
 <script>
-function openLang(){
-  document.getElementById("langModal").style.display="flex";
+let currentLang="en";
+
+function toggleLang(){
+  document.getElementById("langMenu").style.display =
+  document.getElementById("langMenu").style.display==="block"?"none":"block";
 }
-function closeLang(){
-  document.getElementById("langModal").style.display="none";
+
+function setLang(lang){
+  currentLang=lang;
+  document.querySelector(".lang-btn").innerText =
+    lang==="ml"?"ML ▼":"ENG ▼";
+  document.getElementById("langMenu").style.display="none";
+
+  if(document.getElementById("waterproofContent").style.display==="block"){
+    showContent();
+  }
 }
-function openMalayalam(){
-  closeLang();
+
+function openWaterproof(){
   document.getElementById("waterproofContent").style.display="block";
-  document.getElementById("wp-ml").style.display="block";
-  document.getElementById("wp-en").style.display="none";
+  showContent();
   document.getElementById("waterproofContent").scrollIntoView({behavior:"smooth"});
 }
-function openEnglish(){
-  closeLang();
-  document.getElementById("waterproofContent").style.display="block";
-  document.getElementById("wp-en").style.display="block";
-  document.getElementById("wp-ml").style.display="none";
-  document.getElementById("waterproofContent").scrollIntoView({behavior:"smooth"});
+
+function showContent(){
+  document.getElementById("wp-ml").style.display = currentLang==="ml"?"block":"none";
+  document.getElementById("wp-en").style.display = currentLang==="en"?"block":"none";
 }
 </script>
 
