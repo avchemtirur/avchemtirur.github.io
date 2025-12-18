@@ -8,76 +8,34 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
+*{margin:0;padding:0;box-sizing:border-box;}
 body{
   font-family:'Inter',sans-serif;
-  background:#eef7f8;
+  background:#f6fbfb;
   color:#222;
 }
 
 /* NAV */
 .nav{
-  background:#0f6f78;
+  background:#1aa7b8;
   color:#fff;
   padding:14px 6%;
   display:flex;
   justify-content:space-between;
   align-items:center;
 }
-.nav-left{
-  font-weight:700;
-}
-.nav-right{
-  display:flex;
-  align-items:center;
-  gap:18px;
-}
 .nav a{
   color:#fff;
   text-decoration:none;
+  margin-left:18px;
   font-weight:600;
 }
 
-/* LANGUAGE DROPDOWN */
-.lang{
-  position:relative;
-}
-.lang-btn{
-  background:#ffffff;
-  color:#0f6f78;
-  padding:8px 16px;
-  border-radius:22px;
-  font-weight:700;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  gap:6px;
-}
-.lang-menu{
-  position:absolute;
-  top:44px;
-  right:0;
-  background:#fff;
-  width:160px;
-  border-radius:16px;
-  box-shadow:0 12px 30px rgba(0,0,0,.2);
-  display:none;
-  overflow:hidden;
-}
-.lang-menu div{
-  padding:14px 16px;
-  cursor:pointer;
-  font-weight:600;
-}
-.lang-menu div:hover{
-  background:#eef7f8;
-}
-
-/* HERO */
+/* HERO – SAME GRADIENT */
 .hero{
   min-height:65vh;
   padding:0 6%;
-  background:linear-gradient(135deg,#0f6f78,#1aa7b8);
+  background:linear-gradient(135deg,#1fb6b0,#20c4b2);
   color:#fff;
   display:flex;
   flex-direction:column;
@@ -85,12 +43,12 @@ body{
 }
 .hero h1{
   font-family:'Playfair Display',serif;
-  font-size:40px;
+  font-size:38px;
   margin-bottom:14px;
 }
 .hero p{
   font-size:18px;
-  max-width:620px;
+  max-width:520px;
 }
 
 /* FEATURES */
@@ -103,56 +61,83 @@ body{
   flex:1;
   background:#fff;
   border-radius:18px;
-  padding:32px 20px;
+  padding:30px 20px;
   text-align:center;
   box-shadow:0 12px 30px rgba(0,0,0,.12);
   cursor:pointer;
   transition:.3s;
 }
-.feature:hover{transform:translateY(-6px)}
-.icon{font-size:30px;margin-bottom:10px}
+.feature:hover{transform:translateY(-6px);}
+.icon{font-size:28px;margin-bottom:10px;}
 
-/* BROCHURE */
+/* WATERPROOF PAGE */
 #waterproofContent{
   display:none;
-  padding:70px 6%;
-  background:#ffffff;
+  min-height:100vh;
+  background:linear-gradient(135deg,#1fb6b0,#20c4b2);
+  padding:40px 6% 80px;
+  color:#fff;
 }
-.brochure{
+
+/* TOP BAR */
+.brochure-top{
+  display:flex;
+  justify-content:flex-end;
+  margin-bottom:30px;
+}
+
+/* LANGUAGE DROPDOWN */
+.lang{position:relative;}
+.lang-btn{
+  background:rgba(255,255,255,.18);
+  padding:10px 20px;
+  border-radius:22px;
+  font-weight:700;
+  cursor:pointer;
+}
+.lang-menu{
+  position:absolute;
+  top:45px;
+  right:0;
+  background:#fff;
+  color:#333;
+  width:160px;
+  border-radius:14px;
+  box-shadow:0 10px 25px rgba(0,0,0,.25);
+  display:none;
+}
+.lang-menu div{
+  padding:14px 18px;
+  font-weight:600;
+  cursor:pointer;
+}
+.lang-menu div:hover{background:#eef7f8;}
+
+/* BROCHURE CARD */
+.wp{
   display:none;
   max-width:980px;
   margin:auto;
+  background:rgba(255,255,255,.12);
+  padding:40px;
+  border-radius:22px;
 }
-.brochure h2{
+.wp h2{
   font-family:'Playfair Display',serif;
-  font-size:36px;
-  color:#0f6f78;
-  margin-bottom:18px;
+  font-size:34px;
+  margin-bottom:20px;
 }
-.brochure h3{
-  margin-top:36px;
-  margin-bottom:14px;
-  color:#1aa7b8;
-}
-.brochure p,.brochure li{
+.wp p, .wp li{
   font-size:17px;
   line-height:1.9;
   margin-bottom:12px;
 }
-.brochure ul{padding-left:20px}
-.contact-box{
-  margin-top:40px;
-  padding:22px;
-  border-radius:18px;
-  background:linear-gradient(135deg,#0f6f78,#1aa7b8);
-  color:#fff;
-  font-size:17px;
-}
+.wp ul{padding-left:20px;}
+.highlight{font-weight:700;color:#fff;}
 
-/* MOBILE */
 @media(max-width:768px){
-  .features{flex-direction:column}
-  .hero h1{font-size:32px}
+  .features{flex-direction:column;}
+  .wp{padding:26px;}
 }
 </style>
 </head>
@@ -161,28 +146,18 @@ body{
 
 <!-- NAV -->
 <div class="nav">
-  <div class="nav-left">AV Chem Chemical</div>
-
-  <div class="nav-right">
+  <strong>AV Chem Chemical</strong>
+  <div>
     <a href="#">Home</a>
     <a href="#">Dealer Enquiry</a>
     <a href="tel:+917907344030">Contact</a>
-
-    <!-- LANGUAGE -->
-    <div class="lang">
-      <div class="lang-btn" onclick="toggleLang()">ENG ▼</div>
-      <div class="lang-menu" id="langMenu">
-        <div onclick="setLang('ml')">മലയാളം</div>
-        <div onclick="setLang('en')">English</div>
-      </div>
-    </div>
   </div>
 </div>
 
 <!-- HERO -->
 <section class="hero">
   <h1>H4 Tile Adhesive & Waterproof</h1>
-  <p>Premium polymer modified solutions engineered for long-lasting building protection.</p>
+  <p>Premium polymer modified solutions for long-lasting protection.</p>
 </section>
 
 <!-- FEATURES -->
@@ -203,93 +178,71 @@ body{
   </div>
 </section>
 
-<!-- WATERPROOF CONTENT -->
+<!-- WATERPROOF PAGE -->
 <section id="waterproofContent">
 
-<!-- MALAYALAM -->
-<div id="wp-ml" class="brochure">
-<h2>H4 Waterproof – 10 വർഷം വിശ്വാസത്തിന്റെ ഉറപ്പ്</h2>
+  <div class="brochure-top">
+    <div class="lang">
+      <div class="lang-btn" onclick="toggleLang()">ENG ▼</div>
+      <div class="lang-menu" id="langMenu">
+        <div onclick="setLang('ml')">മലയാളം</div>
+        <div onclick="setLang('en')">English</div>
+      </div>
+    </div>
+  </div>
 
-<p>
-H4 Waterproof സാധാരണ വാട്ടർപ്രൂഫിംഗ് അല്ല.
-ഇത് വർഷങ്ങളോളം നിങ്ങളുടെ കെട്ടിടത്തെ സുരക്ഷിതമായി കാക്കാൻ രൂപകൽപ്പന ചെയ്ത
-പ്രീമിയം ക്വാളിറ്റി സൊല്യൂഷൻ ആണ്.
-</p>
+  <!-- MALAYALAM -->
+  <div id="wp-ml" class="wp">
+    <h2>H4 Waterproof – 10 വർഷം വിശ്വാസത്തിന്റെ ഉറപ്പ്</h2>
+    <p class="highlight">H4 Waterproof സാധാരണ വാട്ടർപ്രൂഫിംഗ് അല്ല.</p>
+    <p>വർഷങ്ങളോളം നിങ്ങളുടെ കെട്ടിടത്തെ സുരക്ഷിതമായി കാക്കാൻ രൂപകൽപ്പന ചെയ്ത പ്രീമിയം ക്വാളിറ്റി സൊല്യൂഷൻ.</p>
 
-<h3>🔹 ഗുണനിലവാരം</h3>
-<ul>
-<li>Polymer Modified Cementitious Technology</li>
-<li>Deep Penetration Protection</li>
-<li>Cracks & seepage പൂർണമായി തടയും</li>
-<li>Kerala climate-ന് specially optimized</li>
-</ul>
+    <h3>🔹 ഗുണനിലവാരം</h3>
+    <ul>
+      <li>Polymer Modified Cementitious Technology</li>
+      <li>Deep Penetration Protection</li>
+      <li>Crack & leakage prevention</li>
+    </ul>
 
-<h3>🔹 പ്രധാന ഗുണങ്ങൾ</h3>
-<ul>
-<li>✅ 10 വർഷം വാറണ്ടി</li>
-<li>✅ Roof, Bathroom, Water Tank, Balcony</li>
-<li>✅ Strong adhesion</li>
-<li>✅ Low maintenance</li>
-</ul>
+    <h3>🔹 പ്രധാന ഗുണങ്ങൾ</h3>
+    <ul>
+      <li>✅ 10 വർഷം വാറണ്ടി</li>
+      <li>✅ Roof, Bathroom, Tank, Balcony</li>
+      <li>✅ Maintenance ചെലവ് കുറവ്</li>
+    </ul>
 
-<div class="contact-box">
-📞 +91 79073 44030<br>
-📱 +91 97458 38382<br>
-✉️ avchemtirur@gmail.com
-</div>
-</div>
+    <p class="highlight">H4 Waterproof – വെള്ളത്തിനെതിരെ ശക്തമായ ഒരു കവചം</p>
+    <p>📞 79073 44030<br>📱 97458 38382<br>📧 avchemtirur@gmail.com</p>
+  </div>
 
-<!-- ENGLISH -->
-<div id="wp-en" class="brochure">
-<h2>H4 Waterproof – 10 Years of Trusted Protection</h2>
+  <!-- ENGLISH -->
+  <div id="wp-en" class="wp">
+    <h2>H4 Waterproof – 10 Years of Trusted Protection</h2>
+    <p class="highlight">H4 Waterproof is not an ordinary waterproofing product.</p>
+    <p>It is engineered to protect your building for years with premium quality.</p>
 
-<p>
-H4 Waterproof is a premium waterproofing solution engineered
-for long-term building protection.
-</p>
+    <h3>🔹 Superior Quality</h3>
+    <ul>
+      <li>Polymer Modified Cementitious Technology</li>
+      <li>Deep surface penetration</li>
+      <li>Crack & seepage protection</li>
+    </ul>
 
-<h3>🔹 Key Advantages</h3>
-<ul>
-<li>Advanced Polymer Modified Technology</li>
-<li>Deep internal protection</li>
-<li>Excellent resistance to weather</li>
-<li>No peeling or cracking</li>
-</ul>
+    <h3>🔹 Key Benefits</h3>
+    <ul>
+      <li>✅ 10 Years Warranty</li>
+      <li>✅ Roofs, Bathrooms, Tanks, Balconies</li>
+      <li>✅ Low maintenance</li>
+    </ul>
 
-<h3>🔹 Benefits</h3>
-<ul>
-<li>✅ 10 Years Warranty</li>
-<li>✅ Roofs, Bathrooms, Water Tanks</li>
-<li>✅ New & old constructions</li>
-</ul>
-
-<div class="contact-box">
-📞 +91 79073 44030<br>
-📱 +91 97458 38382<br>
-✉️ avchemtirur@gmail.com
-</div>
-</div>
+    <p class="highlight">H4 Waterproof – A Strong Shield Against Water</p>
+    <p>📞 79073 44030<br>📱 97458 38382<br>📧 avchemtirur@gmail.com</p>
+  </div>
 
 </section>
 
 <script>
 let currentLang="en";
-
-function toggleLang(){
-  document.getElementById("langMenu").style.display =
-  document.getElementById("langMenu").style.display==="block"?"none":"block";
-}
-
-function setLang(lang){
-  currentLang=lang;
-  document.querySelector(".lang-btn").innerText =
-    lang==="ml"?"ML ▼":"ENG ▼";
-  document.getElementById("langMenu").style.display="none";
-
-  if(document.getElementById("waterproofContent").style.display==="block"){
-    showContent();
-  }
-}
 
 function openWaterproof(){
   document.getElementById("waterproofContent").style.display="block";
@@ -297,9 +250,24 @@ function openWaterproof(){
   document.getElementById("waterproofContent").scrollIntoView({behavior:"smooth"});
 }
 
+function toggleLang(){
+  const m=document.getElementById("langMenu");
+  m.style.display=m.style.display==="block"?"none":"block";
+}
+
+function setLang(lang){
+  currentLang=lang;
+  document.querySelector(".lang-btn").innerText =
+    lang==="ml"?"ML ▼":"ENG ▼";
+  document.getElementById("langMenu").style.display="none";
+  showContent();
+}
+
 function showContent(){
-  document.getElementById("wp-ml").style.display = currentLang==="ml"?"block":"none";
-  document.getElementById("wp-en").style.display = currentLang==="en"?"block":"none";
+  document.getElementById("wp-ml").style.display =
+    currentLang==="ml"?"block":"none";
+  document.getElementById("wp-en").style.display =
+    currentLang==="en"?"block":"none";
 }
 </script>
 
