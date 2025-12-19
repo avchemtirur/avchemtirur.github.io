@@ -5,130 +5,237 @@
 <title>H4 Waterproof | AV Chem Chemical</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{
   font-family:'Inter',sans-serif;
-  background:linear-gradient(135deg,#1aa7b8,#24c6b5);
-  color:#fff;
-  padding:40px 6%;
+  background:#f4fdfb;
+  color:#1f2937;
+  padding:20px;
 }
 
-/* LANGUAGE */
-.lang-box{
-  position:absolute;
-  top:20px;
-  right:20px;
+/* TOP BAR */
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+.brand{
+  font-weight:700;
+  font-size:18px;
+  color:#0f766e;
 }
 .lang-btn{
-  background:#fff;
-  color:#333;
-  padding:8px 16px;
+  background:#ffffff;
   border-radius:20px;
+  padding:6px 14px;
   cursor:pointer;
   font-weight:600;
+  box-shadow:0 4px 12px rgba(0,0,0,.12);
 }
-.lang-list{
-  display:none;
-  background:#fff;
-  color:#333;
-  border-radius:12px;
-  margin-top:6px;
-  overflow:hidden;
-}
-.lang-list div{
-  padding:12px 18px;
-  cursor:pointer;
-}
-.lang-list div:hover{background:#f1f1f1}
 
 /* CARD */
 .card{
-  max-width:900px;
+  max-width:980px;
   margin:auto;
-  background:rgba(255,255,255,.15);
-  padding:32px;
-  border-radius:20px;
+  background:#ffffff;
+  border-radius:22px;
+  padding:40px;
+  box-shadow:0 20px 40px rgba(0,0,0,.1);
 }
-.card h2{
-  font-family:'Playfair Display',serif;
-  font-size:32px;
-  margin-bottom:16px;
+
+/* HEADINGS */
+h1{
+  font-size:34px;
+  color:#0f766e;
+  margin-bottom:10px;
 }
-.card p,li{
-  font-size:16px;
-  line-height:1.9;
+h2{
+  font-size:22px;
+  margin-top:35px;
+  margin-bottom:15px;
+  color:#047857;
 }
-ul{padding-left:20px;margin:14px 0}
+p{
+  line-height:1.8;
+  color:#1d4ed8;
+  margin-bottom:14px;
+}
+
+/* LIST */
+ul{
+  margin-left:18px;
+}
+li{
+  margin-bottom:10px;
+  color:#4c1d95;
+}
+
+/* ICON LIST */
+.icon-list li{
+  list-style:none;
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+}
+.icon{
+  font-size:20px;
+}
+
+/* FOOTER */
+.footer{
+  margin-top:35px;
+  padding-top:20px;
+  border-top:1px solid #e5e7eb;
+  font-weight:600;
+  color:#0f766e;
+}
+
+/* LANGUAGE */
+.lang{display:none}
+.lang.active{display:block}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  h1{font-size:26px}
+  .card{padding:25px}
+}
 </style>
 </head>
 
 <body>
 
-<div class="lang-box">
-  <div class="lang-btn" onclick="toggleLang()">Language ▼</div>
-  <div class="lang-list" id="langList">
-    <div onclick="setLang('ml')">Malayalam</div>
-    <div onclick="setLang('en')">English</div>
-  </div>
+<div class="top">
+  <div class="brand">H4 Waterproof</div>
+  <div class="lang-btn" onclick="toggleLang()">ML / EN</div>
 </div>
 
-<div id="ml" class="card">
-  <h2>H4 Waterproof – 10 വർഷം വിശ്വാസത്തിന്റെ ഉറപ്പ്</h2>
-  <p>
-    H4 Waterproof സാധാരണ വാട്ടർപ്രൂഫിംഗ് അല്ല.  
-    വർഷങ്ങളോളം കെട്ടിടത്തെ സംരക്ഷിക്കുന്ന പ്രീമിയം സൊല്യൂഷൻ.
-  </p>
+<div class="card">
 
-  <ul>
-    <li>Polymer Modified Cementitious Technology</li>
-    <li>Deep Penetration Protection</li>
-    <li>Crack & leakage prevention</li>
-    <li>10 വർഷം വാറണ്ടി</li>
-    <li>Roof, Bathroom, Tank, Balcony</li>
-  </ul>
+<!-- ================= ENGLISH ================= -->
+<div class="lang active" id="en">
 
-  <p>
-    📞 79073 44030<br>
-    📱 97458 38382<br>
-    ✉ avchemtirur@gmail.com
-  </p>
+<h1>H4 Waterproof – 10 Years of Trusted Protection</h1>
+
+<p>
+H4 Waterproof is not an ordinary waterproofing product.
+It is a <b>premium polymer modified cementitious waterproofing solution</b>,
+scientifically engineered to protect your building for many years.
+</p>
+
+<p>
+Designed to withstand <b>heavy rainfall, extreme heat and high humidity</b>,
+H4 Waterproof acts as a long-lasting protective shield for your structure.
+</p>
+
+<h2>🛡️ Premium Quality</h2>
+<ul class="icon-list">
+<li><span class="icon">🧪</span>Advanced Polymer Modified Cementitious Technology</li>
+<li><span class="icon">💧</span>Deep penetration protection from inside</li>
+<li><span class="icon">🧱</span>Seals micro cracks & prevents leakage</li>
+<li><span class="icon">🔗</span>Strong chemical bonding with concrete</li>
+<li><span class="icon">☀️</span>UV & weather resistant formulation</li>
+</ul>
+
+<h2>✅ Key Benefits</h2>
+<ul class="icon-list">
+<li><span class="icon">🕒</span>10-Year Warranty</li>
+<li><span class="icon">🏠</span>Roof, Bathroom, Tank, Balcony & Terrace</li>
+<li><span class="icon">🔧</span>No peeling, cracking or layer separation</li>
+<li><span class="icon">💦</span>Low water absorption – total damp protection</li>
+</ul>
+
+<h2>🏗️ Applications</h2>
+<ul class="icon-list">
+<li><span class="icon">🏠</span>Residential Buildings</li>
+<li><span class="icon">🏢</span>Commercial Buildings</li>
+<li><span class="icon">🚿</span>Bathrooms & Toilets</li>
+<li><span class="icon">🏊</span>Water Tanks & Terraces</li>
+</ul>
+
+<h2>⭐ Why H4 Waterproof?</h2>
+<p>
+Ordinary waterproof coatings last only 2–3 years.
+H4 Waterproof provides <b>deep internal protection</b> without cheap fillers,
+specially tested for Kerala climate.
+</p>
+
+<h2>📜 10-Year Warranty</h2>
+<p>
+Applied correctly, waterproofed areas remain leak-free for up to 10 years.
+This reflects <b>H4 brand confidence</b>, not just a marketing claim.
+</p>
+
 </div>
 
-<div id="en" class="card" style="display:none">
-  <h2>H4 Waterproof – 10 Years of Trusted Protection</h2>
-  <p>
-    H4 Waterproof is a premium waterproofing solution engineered
-    for long-term structural protection.
-  </p>
+<!-- ================= MALAYALAM ================= -->
+<div class="lang" id="ml">
 
-  <ul>
-    <li>Advanced polymer technology</li>
-    <li>Deep internal protection</li>
-    <li>Crack sealing & leakage prevention</li>
-    <li>10 years warranty</li>
-    <li>Roof, Bathroom, Tank, Balcony</li>
-  </ul>
+<h1>H4 Waterproof – 10 വർഷം വിശ്വാസത്തിന്റെ ഉറപ്പ്</h1>
 
-  <p>
-    📞 79073 44030<br>
-    📱 97458 38382<br>
-    ✉ avchemtirur@gmail.com
-  </p>
+<p>
+H4 Waterproof ഒരു സാധാരണ വാട്ടർപ്രൂഫിംഗ് മെറ്റീരിയൽ അല്ല.
+ഇത് <b>Premium Polymer Modified Cementitious Waterproofing System</b> ആണ്.
+</p>
+
+<p>
+കേരളത്തിന്റെ കടുത്ത ചൂടും മഴയും ഈർപ്പവും നേരിടാൻ
+special ആയി engineered ചെയ്ത ദീർഘകാല സംരക്ഷണ കവചം.
+</p>
+
+<h2>🛡️ പ്രീമിയം ഗുണനിലവാരം</h2>
+<ul class="icon-list">
+<li><span class="icon">🧪</span>Advanced Polymer Modified Technology</li>
+<li><span class="icon">💧</span>Concrete-ന്റെ ഉള്ളിലേക്ക് deep penetration</li>
+<li><span class="icon">🧱</span>Micro cracks വരെ seal ചെയ്യും</li>
+<li><span class="icon">🔗</span>Strong chemical bonding</li>
+<li><span class="icon">☀️</span>Weather & UV resistant</li>
+</ul>
+
+<h2>✅ പ്രധാന ഗുണങ്ങൾ</h2>
+<ul class="icon-list">
+<li><span class="icon">🕒</span>10 വർഷം വാറണ്ടി</li>
+<li><span class="icon">🏠</span>Roof, Bathroom, Tank, Balcony</li>
+<li><span class="icon">🔧</span>Peel off ഇല്ല, crack ഇല്ല</li>
+<li><span class="icon">💦</span>Dampness പൂർണമായി ഒഴിവാക്കുന്നു</li>
+</ul>
+
+<h2>🏗️ ഉപയോഗിക്കുന്ന സ്ഥലങ്ങൾ</h2>
+<ul class="icon-list">
+<li><span class="icon">🏠</span>വസതികൾ</li>
+<li><span class="icon">🏢</span>Commercial Buildings</li>
+<li><span class="icon">🚿</span>Bathroom & Toilet</li>
+<li><span class="icon">🏊</span>Water Tank & Terrace</li>
+</ul>
+
+<h2>⭐ H4 Waterproof വ്യത്യസ്തം</h2>
+<p>
+Surface coating മാത്രമല്ല,
+Concrete-ന്റെ ഉള്ളിലേക്ക് കയറുന്ന യഥാർത്ഥ സംരക്ഷണം.
+</p>
+
+<h2>📜 10 വർഷം വാറണ്ടി</h2>
+<p>
+ശരിയായ രീതിയിൽ apply ചെയ്താൽ
+10 വർഷം വരെ വെള്ളച്ചോർ ഇല്ല.
+ഇത് H4-ന്റെ ഉറപ്പാണ്.
+</p>
+
+</div>
+
+<div class="footer">
+📞 79073 44030 &nbsp; | &nbsp; 📱 97458 38382 &nbsp; | &nbsp; ✉️ avchemtirur@gmail.com
+</div>
+
 </div>
 
 <script>
 function toggleLang(){
-  let l=document.getElementById("langList");
-  l.style.display=l.style.display==="block"?"none":"block";
-}
-function setLang(x){
-  document.getElementById("ml").style.display="none";
-  document.getElementById("en").style.display="none";
-  document.getElementById(x).style.display="block";
-  document.getElementById("langList").style.display="none";
+  document.getElementById('en').classList.toggle('active');
+  document.getElementById('ml').classList.toggle('active');
 }
 </script>
 
