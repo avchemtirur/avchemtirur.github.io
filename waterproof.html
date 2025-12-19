@@ -5,259 +5,204 @@
 <title>H4 Waterproof</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Manjari:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<!-- Malayalam Font -->
+<link href="https://fonts.googleapis.com/css2?family=Manjari:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
 body{
   margin:0;
-  font-family:'Manjari', sans-serif;
-  background:#f4effa;
+  font-family:'Manjari', Arial, sans-serif;
+  background:#f6f1ff;
   color:#000;
 }
 
 .container{
-  max-width:1100px;
+  max-width:1200px;
   margin:auto;
   padding:20px;
 }
 
-/* Language Switch */
 .lang-switch{
   text-align:right;
-  margin-bottom:15px;
 }
 .lang-switch button{
-  margin-left:6px;
-  padding:6px 14px;
-  border:none;
-  border-radius:4px;
   background:#f4c400;
-  color:#000;
-  font-weight:bold;
+  border:none;
+  padding:6px 14px;
+  margin-left:6px;
+  font-weight:700;
+  border-radius:6px;
   cursor:pointer;
 }
 
-/* Headings */
 h1{
-  font-family:'Playfair Display', serif;
-  font-size:34px;
-  margin:10px 0;
+  font-size:28px;
+  margin-top:10px;
 }
-h2{
-  font-size:26px;
-  margin:40px 0 20px;
-  border-left:6px solid #f4c400;
+
+.order-btn{
+  margin:16px 0;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:#f4c400;
+  padding:10px 18px;
+  border-radius:8px;
+  font-weight:700;
+  cursor:pointer;
+  text-decoration:none;
+  color:#000;
+}
+
+.section-title{
+  margin:30px 0 16px;
+  font-size:20px;
+  border-left:4px solid #f4c400;
   padding-left:10px;
 }
 
-/* Order Button */
-.order-btn{
-  display:inline-block;
-  margin:20px 0 30px;
-  background:#f4c400;
-  color:#000;
-  padding:12px 24px;
-  border-radius:6px;
-  font-weight:bold;
-  cursor:pointer;
-  transition:0.3s;
-}
-.order-btn:hover{
-  background:#000;
-  color:#f4c400;
-}
-
-/* Grid Cards */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:20px;
+  gap:18px;
 }
 
 .card{
   background:#fff;
-  border-radius:8px;
-  padding:22px 20px;
-  text-align:center;
-  box-shadow:0 2px 6px rgba(0,0,0,0.1);
-  border-bottom:4px solid #f4c400;
-  transition:0.35s ease;
-}
-
-.card:hover{
-  transform:translateY(-8px);
-  box-shadow:0 8px 20px rgba(244,196,0,0.45);
-}
-
-.card img{
-  width:48px;
-  height:48px;
-  margin-bottom:12px;
-  filter:grayscale(100%) brightness(0);
-  transition:0.35s;
-}
-
-.card:hover img{
-  filter:invert(79%) sepia(89%) saturate(469%) hue-rotate(5deg) brightness(102%);
-}
-
-.card h3{
-  font-size:18px;
-  margin-bottom:8px;
-}
-
-.card p{
-  font-size:15px;
-  line-height:1.6;
-}
-
-/* Popup */
-.popup{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.5);
-  display:none;
-  justify-content:center;
-  align-items:center;
-}
-.popup-box{
-  background:#fff;
-  width:90%;
-  max-width:500px;
+  border-radius:10px;
   padding:20px;
-  border-radius:8px;
+  text-align:center;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+  transition:0.3s;
 }
-label{
-  display:block;
-  margin-top:10px;
-  font-weight:600;
+.card:hover{
+  transform:translateY(-4px);
 }
-input,select{
-  width:100%;
-  padding:8px;
-  margin-top:4px;
+.card:hover .icon{
+  fill:#f4c400;
 }
-.buttons{
-  display:flex;
-  gap:10px;
-  margin-top:15px;
+
+.icon{
+  width:46px;
+  height:46px;
+  fill:#000;
+  margin-bottom:10px;
+  transition:0.3s;
 }
-.buttons button{
-  flex:1;
-  padding:10px;
-  border:none;
-  border-radius:5px;
-  font-weight:bold;
-  cursor:pointer;
-}
-.confirm{background:#f4c400;color:#000;}
-.cancel{background:#ccc;color:#000;}
 
 .hidden{display:none;}
+
+.footer{
+  text-align:center;
+  margin:40px 0 10px;
+  font-size:14px;
+  color:#555;
+}
 </style>
 </head>
 
 <body>
-
 <div class="container">
 
 <div class="lang-switch">
-  <button onclick="showML()">Malayalam</button>
-  <button onclick="showEN()">English</button>
+  <button onclick="ml()">Malayalam</button>
+  <button onclick="en()">English</button>
 </div>
 
 <!-- MALAYALAM -->
 <div id="ml">
-<h1>H4 Waterproof – 10 വർഷത്തെ ശാശ്വത സംരക്ഷണം</h1>
+<h1>H4 Waterproof – 10 വർഷത്തെ ശാസ്ത്രീയ സംരക്ഷണം</h1>
 
-<div class="order-btn" onclick="openOrder()">📝 Order Sheet</div>
+<a class="order-btn" href="#order">📋 Order Sheet</a>
 
-<h2>H4 Waterproof ന്റെ ആനുകൂല്യങ്ങൾ</h2>
+<p>
+ഇത് ഒരു പെയിന്റ് അല്ല.  
+കോൺക്രീറ്റുമായി കെമിക്കൽ ബോണ്ടിംഗ് ഉണ്ടാക്കി  
+നാളുകളോളം സംരക്ഷണം നൽകുന്ന  
+പ്രീമിയം waterproofing സൊല്യൂഷൻ ആണ് H4.
+</p>
+
+<div class="section-title">H4 Waterproof ന്റെ ആനുകൂല്യങ്ങൾ</div>
 
 <div class="grid">
-  <div class="card">
-    <img src="https://img.icons8.com/ios-filled/100/umbrella.png">
-    <h3>ജലചോർച്ച തടയൽ</h3>
-    <p>കോൺക്രീറ്റിലേക്ക് കെമിക്കൽ ബോണ്ടിംഗ് വഴി സ്ഥിരമായ സംരക്ഷണം.</p>
-  </div>
-
-  <div class="card">
-    <img src="https://img.icons8.com/ios-filled/100/brick-wall.png">
-    <h3>വിള്ളൽ സംരക്ഷണം</h3>
-    <p>ചെറിയ വിള്ളലുകളിലൂടെയും വെള്ളം കടക്കില്ല.</p>
-  </div>
-
-  <div class="card">
-    <img src="https://img.icons8.com/ios-filled/100/temperature.png">
-    <h3>താപ നിയന്ത്രണം</h3>
-    <p>വീട്ടിലെ ചൂട് കുറയ്ക്കാൻ സഹായിക്കുന്നു.</p>
-  </div>
-
-  <div class="card">
-    <img src="https://img.icons8.com/ios-filled/100/bacteria.png">
-    <h3>പായൽ & പൂപ്പൽ തടയൽ</h3>
-    <p>ആരോഗ്യകരമായ മതിലുകൾ.</p>
-  </div>
+<div class="card">
+<svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12h20C22 6.5 17.5 2 12 2z"/></svg>
+<strong>ജലചോർച്ച തടയൽ</strong>
+<p>മഴവെള്ളം കെട്ടിടത്തിനുള്ളിലേക്ക് കടക്കില്ല.</p>
 </div>
 
-<h2>Waterproof ചെയ്യാവുന്ന ഭാഗങ്ങൾ</h2>
+<div class="card">
+<svg class="icon" viewBox="0 0 24 24"><path d="M3 4h18v4H3z"/></svg>
+<strong>വിള്ളൽ സംരക്ഷണം</strong>
+<p>ചെറിയ വിള്ളലുകൾ പോലും വെള്ളം കടക്കാതെ സംരക്ഷണം.</p>
+</div>
+
+<div class="card">
+<svg class="icon" viewBox="0 0 24 24"><path d="M15 14.7V5a3 3 0 0 0-6 0v9.7"/></svg>
+<strong>താപ നിയന്ത്രണം</strong>
+<p>വീടിനുള്ളിലെ ചൂട് കുറയ്ക്കാൻ സഹായിക്കുന്നു.</p>
+</div>
+
+<div class="card">
+<svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/></svg>
+<strong>പായൽ & പൂപ്പൽ തടയൽ</strong>
+<p>ഭിത്തികൾ എപ്പോഴും വൃത്തിയായി നിലനിർത്തും.</p>
+</div>
+</div>
+
+<div class="section-title">Waterproof ചെയ്യാവുന്ന ഭാഗങ്ങൾ</div>
 
 <div class="grid">
-  <div class="card"><img src="https://img.icons8.com/ios-filled/100/foundation.png"><h3>Foundation</h3><p>അടിത്തറ ശക്തമാക്കുന്നു.</p></div>
-  <div class="card"><img src="https://img.icons8.com/ios-filled/100/roofing.png"><h3>Roof / Terrace</h3><p>മഴയും ചൂടും തടയാൻ.</p></div>
-  <div class="card"><img src="https://img.icons8.com/ios-filled/100/wall.png"><h3>Walls</h3><p>നനവ് കയറാതെ സംരക്ഷണം.</p></div>
-  <div class="card"><img src="https://img.icons8.com/ios-filled/100/balcony.png"><h3>Balcony</h3><p>മഴ നേരിട്ട് പതിക്കുന്ന ഭാഗങ്ങൾ.</p></div>
-  <div class="card"><img src="https://img.icons8.com/ios-filled/100/basement.png"><h3>Basement</h3><p>ഭൂഗർഭ നനവ് തടയാൻ.</p></div>
-  <div class="card"><img src="https://img.icons8.com/ios-filled/100/water-tank.png"><h3>Water Tank</h3><p>ജലസംഭരണികൾ സുരക്ഷിതം.</p></div>
+<div class="card">
+<svg class="icon" viewBox="0 0 24 24"><path d="M4 10h16v10H4z"/></svg>
+<strong>Foundation</strong>
+</div>
+
+<div class="card">
+<svg class="icon" viewBox="0 0 24 24"><path d="M12 3l10 8H2z"/></svg>
+<strong>Roof / Terrace</strong>
+</div>
+
+<div class="card">
+<svg class="icon" viewBox="0 0 24 24"><path d="M3 3h18v18H3z"/></svg>
+<strong>Walls</strong>
+</div>
+
+<div class="card">
+<svg class="icon" viewBox="0 0 24 24"><path d="M3 10h18v2H3z"/></svg>
+<strong>Balcony</strong>
+</div>
+
+<div class="card">
+<svg class="icon" viewBox="0 0 24 24"><path d="M4 3h16v4H4z"/></svg>
+<strong>Water Tank</strong>
+</div>
 </div>
 </div>
 
 <!-- ENGLISH -->
 <div id="en" class="hidden">
 <h1>H4 Waterproof – A Decade of Protection</h1>
-<div class="order-btn" onclick="openOrder()">📝 Order Sheet</div>
+<p>
+H4 Waterproof is a premium chemical bonding waterproofing system
+that permanently protects your structure from water leakage.
+</p>
 </div>
 
+<div class="footer">
+© AV Chem Chemical & Manufacturing
 </div>
 
-<!-- ORDER POPUP -->
-<div class="popup" id="orderPopup">
-<div class="popup-box">
-<h2>Order Sheet</h2>
-
-<label>Name</label><input id="name">
-<label>Mobile</label><input id="mobile">
-<label>Waterproof Area</label>
-<select id="place">
-<option>Home</option>
-<option>Terrace</option>
-<option>Bathroom</option>
-<option>Balcony</option>
-<option>Water Tank</option>
-</select>
-
-<div class="buttons">
-<button class="confirm" onclick="submitOrder()">Confirm</button>
-<button class="cancel" onclick="closeOrder()">Cancel</button>
-</div>
-</div>
 </div>
 
 <script>
-var ml=document.getElementById("ml");
-var en=document.getElementById("en");
-var popup=document.getElementById("orderPopup");
-
-function showML(){ml.style.display="block";en.style.display="none";}
-function showEN(){ml.style.display="none";en.style.display="block";}
-function openOrder(){popup.style.display="flex";}
-function closeOrder(){popup.style.display="none";}
-
-function submitOrder(){
-let msg="H4 Waterproof Order\nName:"+name.value+"\nMobile:"+mobile.value+"\nArea:"+place.value;
-window.open("https://wa.me/917907344030?text="+encodeURIComponent(msg),"_blank");
-popup.style.display="none";
+function ml(){
+ document.getElementById("ml").style.display="block";
+ document.getElementById("en").style.display="none";
+}
+function en(){
+ document.getElementById("ml").style.display="none";
+ document.getElementById("en").style.display="block";
 }
 </script>
 
