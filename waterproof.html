@@ -1,81 +1,249 @@
 <!DOCTYPE html>
-<html>
+<html lang="ml">
 <head>
 <meta charset="UTF-8">
-<title>H4 Waterproof</title>
+<title>H4 Waterproof Order</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<link href="https://fonts.googleapis.com/css2?family=Manjari:wght@700&display=swap" rel="stylesheet">
 
 <style>
 body{
-  margin:0;
-  padding:20px;
-  font-family:Arial, sans-serif;
-  background:#ffffff;
-  color:#333;
+    margin:0;
+    font-family: Arial, sans-serif;
+    background:#ffffff;
+    color:#4b2a6b;
 }
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:20px;
+}
+.lang-switch{
+    text-align:right;
+    margin-bottom:20px;
+}
+.lang-switch button{
+    padding:8px 16px;
+    margin-left:5px;
+    border:none;
+    cursor:pointer;
+    font-weight:bold;
+    background:#0b2c6f;
+    color:#fff;
+    border-radius:4px;
+}
+
 h1{
-  font-family:'Manjari', sans-serif;
-  color:#0b2c6f;
-  font-size:30px;
+    color:#0b2c6f;
+    font-size:36px;
+    font-weight:900;
+}
+h2{
+    color:#0b2c6f;
+    margin-top:30px;
 }
 p{
-  font-size:16px;
+    font-size:16px;
+    line-height:1.7;
 }
+
 .form-box{
-  margin-top:20px;
-  background:#f5f5ff;
-  padding:15px;
-  border-radius:8px;
+    background:#f7f7ff;
+    padding:20px;
+    border-radius:8px;
+    margin-top:30px;
 }
 label{
-  display:block;
-  margin-top:10px;
+    display:block;
+    margin-top:12px;
+    font-weight:600;
 }
-input,select{
-  width:100%;
-  padding:8px;
-  margin-top:5px;
+input, select{
+    width:100%;
+    padding:10px;
+    margin-top:5px;
+    border:1px solid #ccc;
+    border-radius:4px;
 }
-button{
-  margin-top:15px;
-  padding:10px;
-  width:100%;
-  background:#0b2c6f;
-  color:#fff;
-  border:none;
-  font-size:16px;
+
+.buttons{
+    margin-top:20px;
+    display:flex;
+    gap:10px;
 }
+.buttons button{
+    flex:1;
+    padding:12px;
+    font-size:16px;
+    font-weight:bold;
+    border:none;
+    cursor:pointer;
+    border-radius:5px;
+}
+.confirm{
+    background:#0b2c6f;
+    color:#fff;
+}
+.cancel{
+    background:#999;
+    color:#fff;
+}
+
+.footer{
+    text-align:center;
+    margin-top:40px;
+    font-size:14px;
+    color:#666;
+}
+.hidden{display:none;}
 </style>
 </head>
 
 <body>
+<div class="container">
 
-<h1>H4 Waterproof – 10 വർഷത്തെ ശാശ്വത സംരക്ഷണം</h1>
+<div class="lang-switch">
+    <button onclick="showMalayalam()">Malayalam</button>
+    <button onclick="showEnglish()">English</button>
+</div>
+
+<!-- MALAYALAM CONTENT -->
+<div id="ml">
+
+<h1>H4 Waterproof – ശാസ്ത്രത്തിന്റെ കരുത്തിൽ 10 വർഷത്തെ ഉറപ്പ്</h1>
 
 <p>
 ഇത് ഒരു സാധാരണ വാട്ടർപ്രൂഫിംഗ് അല്ല.  
-കെമിക്കൽ ബോണ്ടിംഗ് ടെക്നോളജി ഉപയോഗിച്ച്  
-ദീർഘകാല സംരക്ഷണം നൽകുന്ന ഒരു പ്രീമിയം സൊല്യൂഷൻ ആണ്.
+കെമിക്കൽ ബോണ്ടിംഗ് ടെക്നോളജി ഉപയോഗിച്ച് കോൺക്രീറ്റുമായി ഒന്നാകുന്ന  
+ഒരു ദീർഘകാല സംരക്ഷണ കവചമാണ് H4 Waterproof.
 </p>
 
+<h2>📋 ഓർഡർ ഫോം</h2>
+
 <div class="form-box">
-<label>പേര്</label>
-<input>
+<label>പേര് *</label>
+<input id="name">
 
-<label>മൊബൈൽ നമ്പർ</label>
-<input>
+<label>വിലാസം *</label>
+<input id="address">
 
-<label>Waterproof ചെയ്യേണ്ട സ്ഥലം</label>
-<select>
-  <option>Home</option>
-  <option>Terrace</option>
-  <option>Bathroom</option>
+<label>ഏരിയ പേര് *</label>
+<input id="area">
+
+<label>സ്ട്രീറ്റ് പേര് *</label>
+<input id="street">
+
+<label>ലാൻഡ്മാർക്ക് (Optional)</label>
+<input id="landmark">
+
+<label>മൊബൈൽ നമ്പർ *</label>
+<input id="mobile">
+
+<label>WhatsApp നമ്പർ (Optional)</label>
+<input id="whatsapp">
+
+<label>പിൻകോഡ് *</label>
+<input id="pincode">
+
+<label>ജില്ല *</label>
+<input id="district">
+
+<label>സംസ്ഥാനം *</label>
+<input id="state">
+
+<label>Waterproof ചെയ്യേണ്ട സ്ഥലം *</label>
+<select id="place">
+<option>Home</option>
+<option>Terrace</option>
+<option>Bathroom</option>
+<option>Water Tank</option>
+<option>Balcony</option>
+<option>Exterior Wall</option>
 </select>
 
-<button>Confirm</button>
+<div class="buttons">
+<button class="confirm" onclick="sendWhatsApp('confirm')">Confirm</button>
+<button class="cancel" onclick="sendWhatsApp('cancel')">Cancel</button>
 </div>
+</div>
+</div>
+
+<!-- ENGLISH CONTENT -->
+<div id="en" class="hidden">
+
+<h1>H4 Waterproof – A Decade of Protection</h1>
+
+<p>
+H4 Waterproof is an advanced chemical bonding waterproofing system  
+designed to permanently protect your structure from leakage.
+</p>
+
+<h2>📋 Order Form</h2>
+
+<div class="form-box">
+<label>Name *</label><input id="ename">
+<label>Address *</label><input id="eaddress">
+<label>Area *</label><input id="earea">
+<label>Street *</label><input id="estreet">
+<label>Landmark (Optional)</label><input id="elandmark">
+<label>Mobile *</label><input id="emobile">
+<label>WhatsApp (Optional)</label><input id="ewhatsapp">
+<label>Pincode *</label><input id="epincode">
+<label>District *</label><input id="edistrict">
+<label>State *</label><input id="estate">
+
+<label>Waterproof Location *</label>
+<select id="eplace">
+<option>Home</option>
+<option>Terrace</option>
+<option>Bathroom</option>
+<option>Water Tank</option>
+<option>Balcony</option>
+<option>Exterior Wall</option>
+</select>
+
+<div class="buttons">
+<button class="confirm" onclick="sendWhatsApp('confirm')">Confirm</button>
+<button class="cancel" onclick="sendWhatsApp('cancel')">Cancel</button>
+</div>
+</div>
+</div>
+
+<div class="footer">
+© AV Chem Chemical & Manufacturing
+</div>
+
+</div>
+
+<script>
+function showMalayalam(){
+    document.getElementById("ml").style.display="block";
+    document.getElementById("en").style.display="none";
+}
+function showEnglish(){
+    document.getElementById("ml").style.display="none";
+    document.getElementById("en").style.display="block";
+}
+
+function sendWhatsApp(action){
+    let msg =
+    "H4 Waterproof Order\n\n" +
+    "Status: " + action.toUpperCase() + "\n\n" +
+    "Name: " + (name.value||ename.value) + "\n" +
+    "Address: " + (address.value||eaddress.value) + "\n" +
+    "Area: " + (area.value||earea.value) + "\n" +
+    "Street: " + (street.value||estreet.value) + "\n" +
+    "Landmark: " + (landmark.value||elandmark.value) + "\n" +
+    "Mobile: " + (mobile.value||emobile.value) + "\n" +
+    "WhatsApp: " + (whatsapp.value||ewhatsapp.value) + "\n" +
+    "Pincode: " + (pincode.value||epincode.value) + "\n" +
+    "District: " + (district.value||edistrict.value) + "\n" +
+    "State: " + (state.value||estate.value) + "\n" +
+    "Place: " + (place.value||eplace.value);
+
+    let phone="917907344030"; 
+    window.open("https://wa.me/"+phone+"?text="+encodeURIComponent(msg),"_blank");
+}
+</script>
 
 </body>
 </html>
