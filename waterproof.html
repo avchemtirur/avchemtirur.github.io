@@ -12,7 +12,7 @@
 body{
   margin:0;
   font-family:'Manjari', sans-serif;
-  background:#f4effa; /* light purple */
+  background:#f4effa;
   color:#000;
 }
 
@@ -22,7 +22,7 @@ body{
   padding:20px;
 }
 
-/* Language switch */
+/* Language Switch */
 .lang-switch{
   text-align:right;
   margin-bottom:15px;
@@ -32,7 +32,7 @@ body{
   padding:6px 14px;
   border:none;
   border-radius:4px;
-  background:#f4c400; /* yellow accent */
+  background:#f4c400;
   color:#000;
   font-weight:bold;
   cursor:pointer;
@@ -51,7 +51,7 @@ h2{
   padding-left:10px;
 }
 
-/* Order button */
+/* Order Button */
 .order-btn{
   display:inline-block;
   margin:20px 0 30px;
@@ -61,9 +61,14 @@ h2{
   border-radius:6px;
   font-weight:bold;
   cursor:pointer;
+  transition:0.3s;
+}
+.order-btn:hover{
+  background:#000;
+  color:#f4c400;
 }
 
-/* Grid cards */
+/* Grid Cards */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
@@ -73,16 +78,28 @@ h2{
 .card{
   background:#fff;
   border-radius:8px;
-  padding:20px;
+  padding:22px 20px;
   text-align:center;
   box-shadow:0 2px 6px rgba(0,0,0,0.1);
   border-bottom:4px solid #f4c400;
+  transition:0.35s ease;
+}
+
+.card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 8px 20px rgba(244,196,0,0.45);
 }
 
 .card img{
   width:48px;
   height:48px;
-  margin-bottom:10px;
+  margin-bottom:12px;
+  filter:grayscale(100%) brightness(0);
+  transition:0.35s;
+}
+
+.card:hover img{
+  filter:invert(79%) sepia(89%) saturate(469%) hue-rotate(5deg) brightness(102%);
 }
 
 .card h3{
@@ -164,16 +181,19 @@ input,select{
     <h3>ജലചോർച്ച തടയൽ</h3>
     <p>കോൺക്രീറ്റിലേക്ക് കെമിക്കൽ ബോണ്ടിംഗ് വഴി സ്ഥിരമായ സംരക്ഷണം.</p>
   </div>
+
   <div class="card">
     <img src="https://img.icons8.com/ios-filled/100/brick-wall.png">
     <h3>വിള്ളൽ സംരക്ഷണം</h3>
     <p>ചെറിയ വിള്ളലുകളിലൂടെയും വെള്ളം കടക്കില്ല.</p>
   </div>
+
   <div class="card">
     <img src="https://img.icons8.com/ios-filled/100/temperature.png">
     <h3>താപ നിയന്ത്രണം</h3>
     <p>വീട്ടിലെ ചൂട് കുറയ്ക്കാൻ സഹായിക്കുന്നു.</p>
   </div>
+
   <div class="card">
     <img src="https://img.icons8.com/ios-filled/100/bacteria.png">
     <h3>പായൽ & പൂപ്പൽ തടയൽ</h3>
@@ -184,69 +204,19 @@ input,select{
 <h2>Waterproof ചെയ്യാവുന്ന ഭാഗങ്ങൾ</h2>
 
 <div class="grid">
-  <div class="card">
-    <img src="https://img.icons8.com/ios-filled/100/foundation.png">
-    <h3>Foundation</h3>
-    <p>അടിത്തറ ശക്തമാക്കുന്നു.</p>
-  </div>
-  <div class="card">
-    <img src="https://img.icons8.com/ios-filled/100/roofing.png">
-    <h3>Roof / Terrace</h3>
-    <p>മഴയും ചൂടും തടയാൻ.</p>
-  </div>
-  <div class="card">
-    <img src="https://img.icons8.com/ios-filled/100/wall.png">
-    <h3>Walls</h3>
-    <p>നനവ് കയറാതെ സംരക്ഷണം.</p>
-  </div>
-  <div class="card">
-    <img src="https://img.icons8.com/ios-filled/100/balcony.png">
-    <h3>Balcony</h3>
-    <p>മഴ നേരിട്ട് പതിക്കുന്ന ഭാഗങ്ങൾ.</p>
-  </div>
-  <div class="card">
-    <img src="https://img.icons8.com/ios-filled/100/basement.png">
-    <h3>Basement</h3>
-    <p>ഭൂഗർഭ നനവ് തടയാൻ.</p>
-  </div>
-  <div class="card">
-    <img src="https://img.icons8.com/ios-filled/100/water-tank.png">
-    <h3>Water Tank</h3>
-    <p>ജലസംഭരണികൾ സുരക്ഷിതം.</p>
-  </div>
+  <div class="card"><img src="https://img.icons8.com/ios-filled/100/foundation.png"><h3>Foundation</h3><p>അടിത്തറ ശക്തമാക്കുന്നു.</p></div>
+  <div class="card"><img src="https://img.icons8.com/ios-filled/100/roofing.png"><h3>Roof / Terrace</h3><p>മഴയും ചൂടും തടയാൻ.</p></div>
+  <div class="card"><img src="https://img.icons8.com/ios-filled/100/wall.png"><h3>Walls</h3><p>നനവ് കയറാതെ സംരക്ഷണം.</p></div>
+  <div class="card"><img src="https://img.icons8.com/ios-filled/100/balcony.png"><h3>Balcony</h3><p>മഴ നേരിട്ട് പതിക്കുന്ന ഭാഗങ്ങൾ.</p></div>
+  <div class="card"><img src="https://img.icons8.com/ios-filled/100/basement.png"><h3>Basement</h3><p>ഭൂഗർഭ നനവ് തടയാൻ.</p></div>
+  <div class="card"><img src="https://img.icons8.com/ios-filled/100/water-tank.png"><h3>Water Tank</h3><p>ജലസംഭരണികൾ സുരക്ഷിതം.</p></div>
 </div>
 </div>
 
 <!-- ENGLISH -->
 <div id="en" class="hidden">
 <h1>H4 Waterproof – A Decade of Protection</h1>
-
 <div class="order-btn" onclick="openOrder()">📝 Order Sheet</div>
-
-<h2>Advantages of H4 Waterproof</h2>
-
-<div class="grid">
-  <div class="card">
-    <img src="https://img.icons8.com/ios-filled/100/umbrella.png">
-    <h3>Leak Protection</h3>
-    <p>Permanent chemical bonding waterproofing.</p>
-  </div>
-  <div class="card">
-    <img src="https://img.icons8.com/ios-filled/100/brick-wall.png">
-    <h3>Crack Bridging</h3>
-    <p>Stops water through micro cracks.</p>
-  </div>
-  <div class="card">
-    <img src="https://img.icons8.com/ios-filled/100/temperature.png">
-    <h3>Thermal Control</h3>
-    <p>Reduces indoor heat.</p>
-  </div>
-  <div class="card">
-    <img src="https://img.icons8.com/ios-filled/100/bacteria.png">
-    <h3>Mould Resistance</h3>
-    <p>Keeps walls clean.</p>
-  </div>
-</div>
 </div>
 
 </div>
@@ -285,16 +255,8 @@ function openOrder(){popup.style.display="flex";}
 function closeOrder(){popup.style.display="none";}
 
 function submitOrder(){
-let msg=
-"H4 Waterproof Order\n"+
-"Name: "+name.value+"\n"+
-"Mobile: "+mobile.value+"\n"+
-"Area: "+place.value;
-
-window.open(
-"https://wa.me/917907344030?text="+encodeURIComponent(msg),
-"_blank"
-);
+let msg="H4 Waterproof Order\nName:"+name.value+"\nMobile:"+mobile.value+"\nArea:"+place.value;
+window.open("https://wa.me/917907344030?text="+encodeURIComponent(msg),"_blank");
 popup.style.display="none";
 }
 </script>
