@@ -2,155 +2,177 @@
 <html lang="ml">
 <head>
 <meta charset="UTF-8">
-<title>H4 Waterproof Order</title>
+<title>H4 Waterproof</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Malayalam Font -->
+<link href="https://fonts.googleapis.com/css2?family=Manjari:wght@700&display=swap" rel="stylesheet">
 
 <style>
 body{
-    margin:0;
-    font-family: Arial, sans-serif;
-    background:#ffffff;
-    color:#4b2a6b;
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#fff;
+  color:#4b2a6b;
 }
 .container{
-    max-width:1100px;
-    margin:auto;
-    padding:20px;
+  max-width:1100px;
+  margin:auto;
+  padding:20px;
 }
-.lang-switch{
-    text-align:right;
-    margin-bottom:20px;
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
-.lang-switch button{
-    padding:8px 16px;
-    margin-left:5px;
-    border:none;
-    cursor:pointer;
-    font-weight:bold;
-    background:#0b2c6f;
-    color:#fff;
-    border-radius:4px;
+.lang button{
+  margin-left:5px;
+  padding:6px 14px;
+  background:#0b2c6f;
+  color:#fff;
+  border:none;
+  border-radius:4px;
+  cursor:pointer;
+  font-weight:bold;
+}
+.order-btn{
+  background:#0b2c6f;
+  color:#fff;
+  padding:10px 16px;
+  border-radius:6px;
+  cursor:pointer;
+  font-weight:bold;
 }
 
 h1{
-    color:#0b2c6f;
-    font-size:36px;
-    font-weight:900;
+  font-family:'Manjari', sans-serif;
+  color:#0b2c6f;
+  font-size:32px;
 }
 h2{
-    color:#0b2c6f;
-    margin-top:30px;
+  color:#0b2c6f;
+  margin-top:30px;
 }
 p{
-    font-size:16px;
-    line-height:1.7;
+  line-height:1.7;
+  font-size:16px;
 }
 
-.form-box{
-    background:#f7f7ff;
-    padding:20px;
-    border-radius:8px;
-    margin-top:30px;
-}
-label{
-    display:block;
-    margin-top:12px;
-    font-weight:600;
-}
-input, select{
-    width:100%;
-    padding:10px;
-    margin-top:5px;
-    border:1px solid #ccc;
-    border-radius:4px;
-}
+.hidden{display:none;}
 
+/* ORDER POPUP */
+.popup{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.5);
+  display:none;
+  justify-content:center;
+  align-items:center;
+}
+.popup-box{
+  background:#fff;
+  padding:20px;
+  width:90%;
+  max-width:500px;
+  border-radius:10px;
+}
+label{display:block;margin-top:10px;font-weight:600;}
+input,select{
+  width:100%;
+  padding:8px;
+  margin-top:4px;
+}
 .buttons{
-    margin-top:20px;
-    display:flex;
-    gap:10px;
+  display:flex;
+  gap:10px;
+  margin-top:15px;
 }
 .buttons button{
-    flex:1;
-    padding:12px;
-    font-size:16px;
-    font-weight:bold;
-    border:none;
-    cursor:pointer;
-    border-radius:5px;
+  flex:1;
+  padding:10px;
+  font-weight:bold;
+  border:none;
+  cursor:pointer;
+  border-radius:5px;
 }
-.confirm{
-    background:#0b2c6f;
-    color:#fff;
-}
-.cancel{
-    background:#999;
-    color:#fff;
-}
-
-.footer{
-    text-align:center;
-    margin-top:40px;
-    font-size:14px;
-    color:#666;
-}
-.hidden{display:none;}
+.confirm{background:#0b2c6f;color:#fff;}
+.cancel{background:#999;color:#fff;}
 </style>
 </head>
 
 <body>
+
 <div class="container">
 
-<div class="lang-switch">
-    <button onclick="showMalayalam()">Malayalam</button>
-    <button onclick="showEnglish()">English</button>
+<div class="topbar">
+  <div class="lang">
+    <button onclick="setML()">Malayalam</button>
+    <button onclick="setEN()">English</button>
+  </div>
+  <div class="order-btn" onclick="openOrder()">📝 Order Sheet</div>
 </div>
 
 <!-- MALAYALAM CONTENT -->
 <div id="ml">
-
-<h1>H4 Waterproof – ശാസ്ത്രത്തിന്റെ കരുത്തിൽ 10 വർഷത്തെ ഉറപ്പ്</h1>
+<h1>H4 Waterproof – കെമിസ്ട്രിയുടെ കരുത്തിൽ 10 വർഷത്തെ സംരക്ഷണം</h1>
 
 <p>
-ഇത് ഒരു സാധാരണ വാട്ടർപ്രൂഫിംഗ് അല്ല.  
-കെമിക്കൽ ബോണ്ടിംഗ് ടെക്നോളജി ഉപയോഗിച്ച് കോൺക്രീറ്റുമായി ഒന്നാകുന്ന  
-ഒരു ദീർഘകാല സംരക്ഷണ കവചമാണ് H4 Waterproof.
+മഴയുടെ ചുവപ്പും വെയിലിന്റെ ചുട്ടുപഴുപ്പും നിങ്ങളുടെ സ്വപ്നഭവനത്തിൽ ഇനി കലർത്തരുത്.
+AV Chem Chemical & Manufacturing അവതരിപ്പിക്കുന്നു – H4 Waterproof.
 </p>
 
-<h2>📋 ഓർഡർ ഫോം</h2>
+<h2>🛡️ 10 വർഷത്തെ ഗ്യാരണ്ടി</h2>
+<p>
+ഇത് ഒരു പെയിന്റ് അല്ല.  
+ഇതൊരു കെമിക്കൽ ബോണ്ടിംഗ് സംവിധാനം ആണ്.
+</p>
 
-<div class="form-box">
-<label>പേര് *</label>
-<input id="name">
+<h2>💎 H4 നൽകുന്ന അധിക ഗുണങ്ങൾ</h2>
+<p>
+താപ ഇൻസുലേഷൻ, വിള്ളൽ മൂടൽ, തുരുമ്പ് പ്രതിരോധം,
+പായൽ–പൂപ്പൽ നിയന്ത്രണം.
+</p>
 
-<label>വിലാസം *</label>
-<input id="address">
+<p><b>ഒരു തവണ ഉറപ്പ് എടുക്കൂ – അടുത്ത പത്തുവർഷം ഞങ്ങൾ സംരക്ഷിക്കും.</b></p>
+</div>
 
-<label>ഏരിയ പേര് *</label>
-<input id="area">
+<!-- ENGLISH CONTENT -->
+<div id="en" class="hidden">
+<h1>H4 Waterproof – A Decade of Protection</h1>
 
-<label>സ്ട്രീറ്റ് പേര് *</label>
-<input id="street">
+<p>
+H4 Waterproof is an advanced chemical bonding waterproofing system
+designed to permanently protect your structure.
+</p>
 
-<label>ലാൻഡ്മാർക്ക് (Optional)</label>
-<input id="landmark">
+<h2>Why H4?</h2>
+<p>
+Thermal insulation, crack bridging, corrosion protection,
+mould resistance.
+</p>
 
-<label>മൊബൈൽ നമ്പർ *</label>
-<input id="mobile">
+<p><b>Apply once. Stay protected for 10 years.</b></p>
+</div>
 
-<label>WhatsApp നമ്പർ (Optional)</label>
-<input id="whatsapp">
+</div>
 
-<label>പിൻകോഡ് *</label>
-<input id="pincode">
+<!-- ORDER FORM POPUP -->
+<div class="popup" id="orderPopup">
+<div class="popup-box">
+<h2>Order Sheet</h2>
 
-<label>ജില്ല *</label>
-<input id="district">
+<label>Name</label><input id="name">
+<label>Address</label><input id="address">
+<label>Area</label><input id="area">
+<label>Street</label><input id="street">
+<label>Landmark</label><input id="landmark">
+<label>Mobile</label><input id="mobile">
+<label>WhatsApp</label><input id="whatsapp">
+<label>Pincode</label><input id="pincode">
+<label>District</label><input id="district">
+<label>State</label><input id="state">
 
-<label>സംസ്ഥാനം *</label>
-<input id="state">
-
-<label>Waterproof ചെയ്യേണ്ട സ്ഥലം *</label>
+<label>Waterproof Location</label>
 <select id="place">
 <option>Home</option>
 <option>Terrace</option>
@@ -161,87 +183,36 @@ input, select{
 </select>
 
 <div class="buttons">
-<button class="confirm" onclick="sendWhatsApp('confirm')">Confirm</button>
-<button class="cancel" onclick="sendWhatsApp('cancel')">Cancel</button>
+<button class="confirm" onclick="submitOrder()">Confirm</button>
+<button class="cancel" onclick="closeOrder()">Cancel</button>
 </div>
 </div>
-</div>
-
-<!-- ENGLISH CONTENT -->
-<div id="en" class="hidden">
-
-<h1>H4 Waterproof – A Decade of Protection</h1>
-
-<p>
-H4 Waterproof is an advanced chemical bonding waterproofing system  
-designed to permanently protect your structure from leakage.
-</p>
-
-<h2>📋 Order Form</h2>
-
-<div class="form-box">
-<label>Name *</label><input id="ename">
-<label>Address *</label><input id="eaddress">
-<label>Area *</label><input id="earea">
-<label>Street *</label><input id="estreet">
-<label>Landmark (Optional)</label><input id="elandmark">
-<label>Mobile *</label><input id="emobile">
-<label>WhatsApp (Optional)</label><input id="ewhatsapp">
-<label>Pincode *</label><input id="epincode">
-<label>District *</label><input id="edistrict">
-<label>State *</label><input id="estate">
-
-<label>Waterproof Location *</label>
-<select id="eplace">
-<option>Home</option>
-<option>Terrace</option>
-<option>Bathroom</option>
-<option>Water Tank</option>
-<option>Balcony</option>
-<option>Exterior Wall</option>
-</select>
-
-<div class="buttons">
-<button class="confirm" onclick="sendWhatsApp('confirm')">Confirm</button>
-<button class="cancel" onclick="sendWhatsApp('cancel')">Cancel</button>
-</div>
-</div>
-</div>
-
-<div class="footer">
-© AV Chem Chemical & Manufacturing
-</div>
-
 </div>
 
 <script>
-function showMalayalam(){
-    document.getElementById("ml").style.display="block";
-    document.getElementById("en").style.display="none";
-}
-function showEnglish(){
-    document.getElementById("ml").style.display="none";
-    document.getElementById("en").style.display="block";
-}
+var ml=document.getElementById("ml");
+var en=document.getElementById("en");
+var popup=document.getElementById("orderPopup");
 
-function sendWhatsApp(action){
-    let msg =
-    "H4 Waterproof Order\n\n" +
-    "Status: " + action.toUpperCase() + "\n\n" +
-    "Name: " + (name.value||ename.value) + "\n" +
-    "Address: " + (address.value||eaddress.value) + "\n" +
-    "Area: " + (area.value||earea.value) + "\n" +
-    "Street: " + (street.value||estreet.value) + "\n" +
-    "Landmark: " + (landmark.value||elandmark.value) + "\n" +
-    "Mobile: " + (mobile.value||emobile.value) + "\n" +
-    "WhatsApp: " + (whatsapp.value||ewhatsapp.value) + "\n" +
-    "Pincode: " + (pincode.value||epincode.value) + "\n" +
-    "District: " + (district.value||edistrict.value) + "\n" +
-    "State: " + (state.value||estate.value) + "\n" +
-    "Place: " + (place.value||eplace.value);
+function setML(){ml.style.display="block";en.style.display="none";}
+function setEN(){ml.style.display="none";en.style.display="block";}
 
-    let phone="917907344030"; 
-    window.open("https://wa.me/"+phone+"?text="+encodeURIComponent(msg),"_blank");
+function openOrder(){popup.style.display="flex";}
+function closeOrder(){popup.style.display="none";}
+
+function submitOrder(){
+let msg=
+"H4 Waterproof Order\n"+
+"Name: "+name.value+"\n"+
+"Mobile: "+mobile.value+"\n"+
+"Place: "+place.value;
+
+window.open(
+"https://wa.me/917907344030?text="+encodeURIComponent(msg),
+"_blank"
+);
+
+popup.style.display="none";
 }
 </script>
 
