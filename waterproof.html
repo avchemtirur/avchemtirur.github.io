@@ -5,66 +5,81 @@
 <title>H4 Waterproof</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Malayalam Font -->
-<link href="https://fonts.googleapis.com/css2?family=Manjari:wght@700&display=swap" rel="stylesheet">
+<!-- FONTS -->
+<link href="https://fonts.googleapis.com/css2?family=Uroob&family=Manjari:wght@400;700&family=Playfair+Display:wght@700&family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
 body{
   margin:0;
-  font-family:Arial, sans-serif;
-  background:#fff;
-  color:#4b2a6b;
+  background:#ffffff;
 }
 .container{
   max-width:1100px;
   margin:auto;
   padding:20px;
 }
-.topbar{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+
+/* Language buttons */
+.lang-switch{
+  text-align:right;
+  margin-bottom:20px;
 }
-.lang button{
-  margin-left:5px;
+.lang-switch button{
   padding:6px 14px;
+  margin-left:6px;
   background:#0b2c6f;
   color:#fff;
   border:none;
-  border-radius:4px;
+  border-radius:5px;
   cursor:pointer;
   font-weight:bold;
 }
+
+/* Malayalam */
+.malayalam-title{
+  font-family:'Uroob', sans-serif;
+  font-size:36px;
+  font-weight:700;
+  color:#0b2c6f;
+}
+.malayalam-body{
+  font-family:'Manjari', sans-serif;
+  font-size:17px;
+  line-height:1.9;
+  color:#4b2a6b;
+}
+
+/* English */
+.english-title{
+  font-family:'Playfair Display', serif;
+  font-size:34px;
+  font-weight:700;
+  color:#0b2c6f;
+}
+.english-body{
+  font-family:'Cormorant Garamond', serif;
+  font-size:18px;
+  line-height:1.8;
+  color:#333;
+}
+
+/* Order button */
 .order-btn{
+  display:inline-block;
+  margin:20px 0 30px;
   background:#0b2c6f;
   color:#fff;
-  padding:10px 16px;
-  border-radius:6px;
-  cursor:pointer;
+  padding:12px 24px;
+  border-radius:8px;
   font-weight:bold;
+  cursor:pointer;
 }
 
-h1{
-  font-family:'Manjari', sans-serif;
-  color:#0b2c6f;
-  font-size:32px;
-}
-h2{
-  color:#0b2c6f;
-  margin-top:30px;
-}
-p{
-  line-height:1.7;
-  font-size:16px;
-}
-
-.hidden{display:none;}
-
-/* ORDER POPUP */
+/* Popup */
 .popup{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.5);
+  background:rgba(0,0,0,0.5);
   display:none;
   justify-content:center;
   align-items:center;
@@ -76,7 +91,11 @@ p{
   max-width:500px;
   border-radius:10px;
 }
-label{display:block;margin-top:10px;font-weight:600;}
+label{
+  display:block;
+  margin-top:10px;
+  font-weight:600;
+}
 input,select{
   width:100%;
   padding:8px;
@@ -92,11 +111,13 @@ input,select{
   padding:10px;
   font-weight:bold;
   border:none;
-  cursor:pointer;
   border-radius:5px;
+  cursor:pointer;
 }
 .confirm{background:#0b2c6f;color:#fff;}
 .cancel{background:#999;color:#fff;}
+
+.hidden{display:none;}
 </style>
 </head>
 
@@ -104,54 +125,50 @@ input,select{
 
 <div class="container">
 
-<div class="topbar">
-  <div class="lang">
-    <button onclick="setML()">Malayalam</button>
-    <button onclick="setEN()">English</button>
-  </div>
-  <div class="order-btn" onclick="openOrder()">📝 Order Sheet</div>
+<div class="lang-switch">
+  <button onclick="showML()">Malayalam</button>
+  <button onclick="showEN()">English</button>
 </div>
 
-<!-- MALAYALAM CONTENT -->
+<!-- MALAYALAM -->
 <div id="ml">
-<h1>H4 Waterproof – കെമിസ്ട്രിയുടെ കരുത്തിൽ 10 വർഷത്തെ സംരക്ഷണം</h1>
+<h1 class="malayalam-title">
+H4 Waterproof – കെമിസ്ട്രിയുടെ കരുത്തിൽ നിർമ്മിച്ച, പതിറ്റാണ്ടുകളുടെ സംരക്ഷണം!
+</h1>
 
-<p>
-മഴയുടെ ചുവപ്പും വെയിലിന്റെ ചുട്ടുപഴുപ്പും നിങ്ങളുടെ സ്വപ്നഭവനത്തിൽ ഇനി കലർത്തരുത്.
-AV Chem Chemical & Manufacturing അവതരിപ്പിക്കുന്നു – H4 Waterproof.
+<div class="order-btn" onclick="openOrder()">📝 Order Sheet</div>
+
+<p class="malayalam-body">
+വീട്, മാത്രമല്ല; അടുത്ത 10 വർഷത്തെ നിങ്ങളുടെ സമാധാനം.  
+മഴയുടെ ചുവപ്പും വെയിലിന്റെ ചുട്ടുപഴുപ്പും ഇനി നിങ്ങളുടെ സ്വപ്നഭവനത്തിൽ കലരരുത്.
 </p>
 
-<h2>🛡️ 10 വർഷത്തെ ഗ്യാരണ്ടി</h2>
-<p>
+<p class="malayalam-body">
 ഇത് ഒരു പെയിന്റ് അല്ല.  
 ഇതൊരു കെമിക്കൽ ബോണ്ടിംഗ് സംവിധാനം ആണ്.
 </p>
 
-<h2>💎 H4 നൽകുന്ന അധിക ഗുണങ്ങൾ</h2>
-<p>
-താപ ഇൻസുലേഷൻ, വിള്ളൽ മൂടൽ, തുരുമ്പ് പ്രതിരോധം,
-പായൽ–പൂപ്പൽ നിയന്ത്രണം.
+<p class="malayalam-body">
+<strong>ഒരു തവണ ഉറപ്പ് തേടൂ – അടുത്ത പത്തുവർഷം ഞങ്ങൾ സംരക്ഷിക്കും.</strong>
 </p>
-
-<p><b>ഒരു തവണ ഉറപ്പ് എടുക്കൂ – അടുത്ത പത്തുവർഷം ഞങ്ങൾ സംരക്ഷിക്കും.</b></p>
 </div>
 
-<!-- ENGLISH CONTENT -->
+<!-- ENGLISH -->
 <div id="en" class="hidden">
-<h1>H4 Waterproof – A Decade of Protection</h1>
+<h1 class="english-title">
+H4 Waterproof – A Decade of Protection
+</h1>
 
-<p>
+<div class="order-btn" onclick="openOrder()">📝 Order Sheet</div>
+
+<p class="english-body">
 H4 Waterproof is an advanced chemical bonding waterproofing system
-designed to permanently protect your structure.
+designed to permanently protect your structure from leakage.
 </p>
 
-<h2>Why H4?</h2>
-<p>
-Thermal insulation, crack bridging, corrosion protection,
-mould resistance.
+<p class="english-body">
+Apply once and stay protected for the next 10 years.
 </p>
-
-<p><b>Apply once. Stay protected for 10 years.</b></p>
 </div>
 
 </div>
@@ -159,6 +176,7 @@ mould resistance.
 <!-- ORDER FORM POPUP -->
 <div class="popup" id="orderPopup">
 <div class="popup-box">
+
 <h2>Order Sheet</h2>
 
 <label>Name</label><input id="name">
@@ -186,6 +204,7 @@ mould resistance.
 <button class="confirm" onclick="submitOrder()">Confirm</button>
 <button class="cancel" onclick="closeOrder()">Cancel</button>
 </div>
+
 </div>
 </div>
 
@@ -194,9 +213,8 @@ var ml=document.getElementById("ml");
 var en=document.getElementById("en");
 var popup=document.getElementById("orderPopup");
 
-function setML(){ml.style.display="block";en.style.display="none";}
-function setEN(){ml.style.display="none";en.style.display="block";}
-
+function showML(){ml.style.display="block";en.style.display="none";}
+function showEN(){ml.style.display="none";en.style.display="block";}
 function openOrder(){popup.style.display="flex";}
 function closeOrder(){popup.style.display="none";}
 
@@ -205,13 +223,12 @@ let msg=
 "H4 Waterproof Order\n"+
 "Name: "+name.value+"\n"+
 "Mobile: "+mobile.value+"\n"+
-"Place: "+place.value;
+"Location: "+place.value;
 
 window.open(
 "https://wa.me/917907344030?text="+encodeURIComponent(msg),
 "_blank"
 );
-
 popup.style.display="none";
 }
 </script>
