@@ -1,0 +1,238 @@
+ <!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<title>H4 Tile Adhesive | AV Chem Chemical</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Inter',sans-serif;
+  background:#ffffff;
+  color:#0b4ea2; /* BLUE normal text */
+  padding:30px 6%;
+}
+
+/* TOP BAR */
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:30px;
+}
+.brand{
+  font-weight:700;
+  color:#1b7f3b; /* GREEN */
+}
+.lang-btn{
+  background:#f2f2f2;
+  color:#333;
+  padding:8px 14px;
+  border-radius:20px;
+  font-weight:600;
+  cursor:pointer;
+}
+.lang-menu{
+  display:none;
+  position:absolute;
+  background:#fff;
+  border-radius:12px;
+  box-shadow:0 10px 25px rgba(0,0,0,.15);
+  margin-top:8px;
+  overflow:hidden;
+}
+.lang-menu div{
+  padding:10px 16px;
+  cursor:pointer;
+}
+.lang-menu div:hover{
+  background:#f5f5f5;
+}
+
+/* CARD */
+.card{
+  max-width:950px;
+  margin:auto;
+  border-radius:20px;
+  padding:35px;
+  background:#ffffff;
+  box-shadow:0 12px 30px rgba(0,0,0,.08);
+}
+
+/* HEADINGS */
+h1,h2,h3{
+  font-family:'Playfair Display',serif;
+  color:#1b7f3b; /* GREEN headlines */
+  margin-bottom:18px;
+}
+
+/* TEXT */
+p{
+  line-height:1.9;
+  margin-bottom:14px;
+  font-size:16px;
+}
+
+/* LIST */
+ul{padding-left:18px;margin-bottom:15px}
+li{
+  margin-bottom:8px;
+}
+li::marker{
+  color:#7b2cbf; /* PURPLE */
+}
+
+/* HIGHLIGHT */
+.highlight{
+  color:#7b2cbf; /* PURPLE */
+  font-weight:700;
+}
+
+/* CONTACT */
+.contact{
+  margin-top:22px;
+  padding-top:15px;
+  border-top:1px solid #eee;
+  font-weight:600;
+  color:#1b7f3b;
+}
+
+@media(max-width:768px){
+  body{padding:20px}
+  .card{padding:25px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="top">
+  <div class="brand">H4 Tile Adhesive</div>
+
+  <div style="position:relative">
+    <div class="lang-btn" onclick="toggleLang()">ML ▼</div>
+    <div class="lang-menu" id="langMenu">
+      <div onclick="showML()">മലയാളം</div>
+      <div onclick="showEN()">English</div>
+    </div>
+  </div>
+</div>
+
+<!-- MALAYALAM CONTENT -->
+<div class="card" id="ml">
+
+<h1>H4 Tile Adhesive – ശക്തമായ ഒട്ടിപ്പിന്റെ പുതിയ തലമുറ</h1>
+
+<p>
+<span class="highlight">H4 Tile Adhesive</span> സാധാരണ സിമന്റ് മോർട്ടാർ അല്ല.  
+വലിയ ടൈലുകൾ, മാർബിള്‍, ഗ്രാനൈറ്റ് എന്നിവ ശക്തമായി ഒട്ടിക്കാൻ
+രൂപകൽപ്പന ചെയ്ത <span class="highlight">Premium Polymer Modified Tile Adhesive</span> ആണ്.
+</p>
+
+<h2>🔹 ഗുണനിലവാരം</h2>
+<ul>
+<li>Polymer Modified Cementitious Technology</li>
+<li>High Bond Strength</li>
+<li>Water & Moisture Resistant</li>
+<li>Crack Resistant Performance</li>
+</ul>
+
+<h2>🔹 പ്രധാന ഗുണങ്ങൾ</h2>
+<ul>
+<li>4×4, 6×4, Large slabs വരെ ഒട്ടിക്കാൻ അനുയോജ്യം</li>
+<li>Floor & Wall – ഇരുവർക്കും</li>
+<li>Tile slipping ഇല്ല</li>
+<li>Smooth finish & uniform thickness</li>
+<li>Contractor friendly – apply ചെയ്യാൻ എളുപ്പം</li>
+</ul>
+
+<h2>🔹 മറ്റുള്ളവയെക്കാൾ H4 എന്തുകൊണ്ട് മികച്ചത്?</h2>
+<ul>
+<li>സാധാരണ tile bond സമയത്തോടെ പൊട്ടും</li>
+<li><span class="highlight">H4 long-term durability</span> നൽകുന്നു</li>
+<li>Cheap fillers ഇല്ല</li>
+<li>Kerala climate-നായി tested & optimized</li>
+</ul>
+
+<p class="highlight">
+H4 Tile Adhesive – ഒരിക്കൽ ഒട്ടിച്ചാൽ വർഷങ്ങളോളം ഉറപ്പ്
+</p>
+
+<div class="contact">
+📞 79073 44030<br>
+📱 97458 38382<br>
+✉️ avchemtirur@gmail.com
+</div>
+
+</div>
+
+<!-- ENGLISH CONTENT -->
+<div class="card" id="en" style="display:none">
+
+<h1>H4 Tile Adhesive – Next-Generation Strong Bonding</h1>
+
+<p>
+<span class="highlight">H4 Tile Adhesive</span> is not ordinary cement mortar.  
+It is a <span class="highlight">premium polymer-modified tile adhesive</span>
+engineered for strong and durable bonding of tiles, marble, and granite.
+</p>
+
+<h2>🔹 Superior Quality</h2>
+<ul>
+<li>Advanced Polymer Modified Cementitious Technology</li>
+<li>High Bond Strength</li>
+<li>Water & Moisture Resistant</li>
+<li>Crack Resistant Performance</li>
+</ul>
+
+<h2>🔹 Key Benefits</h2>
+<ul>
+<li>Ideal for large format tiles & slabs</li>
+<li>Suitable for floor and wall applications</li>
+<li>No tile slipping</li>
+<li>Smooth & uniform finish</li>
+<li>Easy application for contractors</li>
+</ul>
+
+<h2>🔹 Why Choose H4 Tile Adhesive?</h2>
+<ul>
+<li>Ordinary adhesives fail over time</li>
+<li><span class="highlight">H4 ensures long-term durability</span></li>
+<li>No cheap fillers</li>
+<li>Tested for Kerala climate conditions</li>
+</ul>
+
+<p class="highlight">
+H4 Tile Adhesive – Built for strength, designed to last
+</p>
+
+<div class="contact">
+📞 79073 44030<br>
+📱 97458 38382<br>
+✉️ avchemtirur@gmail.com
+</div>
+
+</div>
+
+<script>
+function toggleLang(){
+  const m=document.getElementById("langMenu");
+  m.style.display = m.style.display==="block" ? "none" : "block";
+}
+function showML(){
+  document.getElementById("ml").style.display="block";
+  document.getElementById("en").style.display="none";
+  document.getElementById("langMenu").style.display="none";
+}
+function showEN(){
+  document.getElementById("en").style.display="block";
+  document.getElementById("ml").style.display="none";
+  document.getElementById("langMenu").style.display="none";
+}
+</script>
+
+</body>
+</html>
