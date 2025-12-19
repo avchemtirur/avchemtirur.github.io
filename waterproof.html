@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ml">
 <head>
@@ -6,14 +5,14 @@
 <title>H4 Waterproof</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Malayalam Font -->
-<link href="https://fonts.googleapis.com/css2?family=Manjari:wght@400;700&display=swap" rel="stylesheet">
+<!-- Malayalam Bold Font -->
+<link href="https://fonts.googleapis.com/css2?family=Manjari:wght@700&display=swap" rel="stylesheet">
 
 <style>
 body{
   margin:0;
-  font-family:'Manjari', sans-serif;
   background:#f6f1fb;
+  font-family:'Manjari', sans-serif;
   color:#000;
 }
 .container{
@@ -21,10 +20,34 @@ body{
   margin:auto;
   padding:20px;
 }
-h1{
-  font-size:28px;
-  font-weight:700;
+
+/* language switch */
+.lang-switch{
+  display:flex;
+  gap:10px;
+  margin-bottom:10px;
 }
+.lang-switch button{
+  padding:6px 12px;
+  border:none;
+  background:#000;
+  color:#fff;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+/* headings */
+h1{
+  font-size:30px;
+  font-weight:700;
+  margin-bottom:10px;
+}
+p{
+  font-size:15px;
+  line-height:1.7;
+}
+
+/* order button */
 .order-btn{
   background:#f4c400;
   color:#000;
@@ -35,181 +58,175 @@ h1{
   cursor:pointer;
   margin:15px 0;
 }
+
+/* image cards */
 .section-title{
   margin:30px 0 15px;
-  font-size:20px;
+  font-size:22px;
   font-weight:700;
 }
-.grid{
+.image-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:16px;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:20px;
 }
-.card{
+.image-card{
   background:#fff;
-  border-radius:10px;
-  padding:18px;
-  box-shadow:0 4px 12px rgba(0,0,0,0.06);
-  transition:all .3s ease;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 6px 16px rgba(0,0,0,0.12);
 }
-.card:hover{
-  transform:translateY(-6px);
+.image-card img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
 }
-.icon{
-  width:40px;
-  height:40px;
-  margin-bottom:10px;
-  color:#000;
-  transition:.3s;
-}
-.card:hover .icon{
-  color:#f4c400;
-  transform:scale(1.15);
-}
-.card h3{
-  font-size:16px;
-  margin:8px 0;
-}
-.card p{
-  font-size:14px;
-  color:#444;
+.image-card h3{
+  padding:12px;
+  font-size:18px;
 }
 
-/* reveal animation */
-.reveal{opacity:0;transform:translateY(40px);transition:.7s;}
-.reveal.active{opacity:1;transform:none;}
+/* order form */
+.form-box{
+  background:#fff;
+  border-radius:12px;
+  padding:20px;
+  margin-top:30px;
+  box-shadow:0 6px 16px rgba(0,0,0,0.1);
+}
+label{
+  display:block;
+  margin-top:12px;
+  font-size:14px;
+}
+input,select{
+  width:100%;
+  padding:10px;
+  margin-top:6px;
+  border-radius:6px;
+  border:1px solid #ccc;
+}
+.buttons{
+  display:flex;
+  gap:10px;
+  margin-top:20px;
+}
+.confirm{
+  background:#000;
+  color:#fff;
+}
+.cancel{
+  background:#999;
+  color:#fff;
+}
+.buttons button{
+  flex:1;
+  padding:12px;
+  border:none;
+  border-radius:6px;
+  font-weight:700;
+  cursor:pointer;
+}
 
 .footer{
   text-align:center;
+  margin:40px 0 10px;
   font-size:13px;
   color:#555;
-  margin:40px 0 10px;
 }
+
+.hidden{display:none;}
 </style>
 </head>
 
 <body>
 <div class="container">
 
-<h1>H4 Waterproof – 10 വർഷത്തെ ശാശ്വത സംരക്ഷണം</h1>
+<!-- Language Switch LEFT -->
+<div class="lang-switch">
+  <button onclick="showMalayalam()">Malayalam</button>
+  <button onclick="showEnglish()">English</button>
+</div>
 
-<button class="order-btn">📋 Order Sheet</button>
+<!-- MALAYALAM -->
+<div id="ml">
+
+<h1>H4 Waterproof – കെമിസ്ട്രിയുടെ കരുത്തിൽ 10 വർഷത്തെ സംരക്ഷണം</h1>
 
 <p>
 മഴയും ചൂടും മൂലം ഉണ്ടാകുന്ന ചോർച്ചകൾക്ക് ശാശ്വത പരിഹാരമാണ്
 <b>H4 Waterproof</b>.
+ഇത് ഒരു പെയിന്റ് അല്ല – കെമിക്കൽ ബോണ്ടിംഗ് സിസ്റ്റമാണ്.
 </p>
 
-<!-- BENEFITS -->
-<div class="section-title reveal">H4 Waterproof ന്റെ ആനുകൂല്യങ്ങൾ</div>
-<div class="grid reveal">
+<button class="order-btn" onclick="document.getElementById('order').scrollIntoView()">📋 Order Sheet</button>
 
-<div class="card">
-<div class="icon">
-<svg viewBox="0 0 24 24" fill="none">
-<path d="M12 2C7 2 3 6 3 11H21C21 6 17 2 12 2Z" stroke="currentColor" stroke-width="2"/>
-<line x1="12" y1="11" x2="12" y2="20" stroke="currentColor" stroke-width="2"/>
-</svg>
-</div>
-<h3>ജലപ്രവേശനം തടയും</h3>
-<p>മഴവെള്ളം കെട്ടിനിൽക്കുന്നത് തടയുന്നു.</p>
-</div>
+<div class="section-title">Waterproof ചെയ്യുന്ന പ്രധാന ഭാഗങ്ങൾ</div>
 
-<div class="card">
-<div class="icon">
-<svg viewBox="0 0 24 24" fill="none">
-<path d="M3 12H21" stroke="currentColor" stroke-width="2"/>
-<path d="M6 6L18 18" stroke="currentColor" stroke-width="2"/>
-</svg>
-</div>
-<h3>വിള്ളൽ സംരക്ഷണം</h3>
-<p>ചെറിയ വിള്ളലുകൾ പോലും സംരക്ഷിക്കുന്നു.</p>
-</div>
+<div class="image-grid">
+  <div class="image-card">
+    <img src="roof.jpg">
+    <h3>Roof / Terrace</h3>
+  </div>
 
-<div class="card">
-<div class="icon">
-<svg viewBox="0 0 24 24" fill="none">
-<path d="M12 2V22" stroke="currentColor" stroke-width="2"/>
-<circle cx="12" cy="17" r="3" stroke="currentColor" stroke-width="2"/>
-</svg>
-</div>
-<h3>ചൂട് നിയന്ത്രണം</h3>
-<p>വീടിനുള്ളിലെ ചൂട് കുറയ്ക്കുന്നു.</p>
-</div>
+  <div class="image-card">
+    <img src="foundation.jpg">
+    <h3>Foundation</h3>
+  </div>
 
-<div class="card">
-<div class="icon">
-<svg viewBox="0 0 24 24" fill="none">
-<circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
-<path d="M8 12L11 15L16 9" stroke="currentColor" stroke-width="2"/>
-</svg>
-</div>
-<h3>പായൽ തടയൽ</h3>
-<p>ഫംഗസ്, പായൽ വളർച്ച തടയും.</p>
+  <div class="image-card">
+    <img src="walls.jpg">
+    <h3>Walls</h3>
+  </div>
+
+  <div class="image-card">
+    <img src="balcony.jpg">
+    <h3>Balcony</h3>
+  </div>
 </div>
 
 </div>
 
-<!-- APPLICATION AREAS -->
-<div class="section-title reveal">Waterproof ചെയ്യാവുന്ന ഭാഗങ്ങൾ</div>
-<div class="grid reveal">
+<!-- ENGLISH -->
+<div id="en" class="hidden">
 
-<div class="card">
-<div class="icon">
-<svg viewBox="0 0 24 24" fill="none">
-<rect x="4" y="10" width="16" height="10" stroke="currentColor" stroke-width="2"/>
-</svg>
-</div>
-<h3>Foundation</h3>
-</div>
+<h1>H4 Waterproof – A Decade of Protection</h1>
 
-<div class="card">
-<div class="icon">
-<svg viewBox="0 0 24 24" fill="none">
-<path d="M3 12L12 4L21 12" stroke="currentColor" stroke-width="2"/>
-</svg>
-</div>
-<h3>Roof / Terrace</h3>
+<p>
+H4 Waterproof is an advanced chemical bonding waterproofing solution
+designed for long-term protection against leakage and dampness.
+</p>
+
 </div>
 
-<div class="card">
-<div class="icon">
-<svg viewBox="0 0 24 24" fill="none">
-<rect x="3" y="3" width="18" height="18" stroke="currentColor" stroke-width="2"/>
-</svg>
-</div>
-<h3>Walls</h3>
-</div>
+<!-- ORDER FORM -->
+<div id="order" class="form-box">
+<h2>Order Sheet</h2>
 
-<div class="card">
-<div class="icon">
-<svg viewBox="0 0 24 24" fill="none">
-<path d="M4 10H20" stroke="currentColor" stroke-width="2"/>
-<path d="M6 10V20" stroke="currentColor" stroke-width="2"/>
-</svg>
-</div>
-<h3>Balcony</h3>
-</div>
+<label>Name</label>
+<input>
 
-<div class="card">
-<div class="icon">
-<svg viewBox="0 0 24 24" fill="none">
-<path d="M6 4H18V20H6Z" stroke="currentColor" stroke-width="2"/>
-</svg>
-</div>
-<h3>Basement</h3>
-</div>
+<label>Address</label>
+<input>
 
-<div class="card">
-<div class="icon">
-<svg viewBox="0 0 24 24" fill="none">
-<rect x="6" y="2" width="12" height="20" stroke="currentColor" stroke-width="2"/>
-<line x1="6" y1="8" x2="18" y2="8" stroke="currentColor" stroke-width="2"/>
-</svg>
-</div>
-<h3>Water Tank</h3>
-</div>
+<label>Mobile Number</label>
+<input>
 
+<label>WhatsApp (Optional)</label>
+<input>
+
+<label>Waterproof Location</label>
+<select>
+  <option>Home</option>
+  <option>Terrace</option>
+  <option>Bathroom</option>
+  <option>Water Tank</option>
+</select>
+
+<div class="buttons">
+  <button class="confirm">Confirm</button>
+  <button class="cancel">Cancel</button>
+</div>
 </div>
 
 <div class="footer">
@@ -219,15 +236,14 @@ h1{
 </div>
 
 <script>
-function revealOnScroll(){
-  document.querySelectorAll('.reveal').forEach(el=>{
-    if(el.getBoundingClientRect().top < window.innerHeight-60){
-      el.classList.add('active');
-    }
-  });
+function showMalayalam(){
+  ml.style.display="block";
+  en.style.display="none";
 }
-window.addEventListener('scroll',revealOnScroll);
-revealOnScroll();
+function showEnglish(){
+  ml.style.display="none";
+  en.style.display="block";
+}
 </script>
 
 </body>
