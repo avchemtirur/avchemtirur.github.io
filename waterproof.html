@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ml">
 <head>
@@ -11,92 +12,78 @@
 <style>
 body{
   margin:0;
-  font-family:'Manjari', Arial, sans-serif;
-  background:#f6f1ff;
+  font-family:'Manjari', sans-serif;
+  background:#f6f1fb;
   color:#000;
 }
-
 .container{
   max-width:1200px;
   margin:auto;
   padding:20px;
 }
-
-.lang-switch{
-  text-align:right;
-}
-.lang-switch button{
-  background:#f4c400;
-  border:none;
-  padding:6px 14px;
-  margin-left:6px;
-  font-weight:700;
-  border-radius:6px;
-  cursor:pointer;
-}
-
 h1{
   font-size:28px;
-  margin-top:10px;
+  font-weight:700;
 }
-
 .order-btn{
-  margin:16px 0;
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
   background:#f4c400;
+  color:#000;
   padding:10px 18px;
-  border-radius:8px;
+  border:none;
+  border-radius:6px;
   font-weight:700;
   cursor:pointer;
-  text-decoration:none;
-  color:#000;
+  margin:15px 0;
 }
-
 .section-title{
-  margin:30px 0 16px;
+  margin:30px 0 15px;
   font-size:20px;
-  border-left:4px solid #f4c400;
-  padding-left:10px;
+  font-weight:700;
 }
-
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:18px;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:16px;
 }
-
 .card{
   background:#fff;
   border-radius:10px;
-  padding:20px;
-  text-align:center;
-  box-shadow:0 4px 12px rgba(0,0,0,0.08);
-  transition:0.3s;
+  padding:18px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.06);
+  transition:all .3s ease;
 }
 .card:hover{
-  transform:translateY(-4px);
+  transform:translateY(-6px);
+}
+.icon{
+  width:40px;
+  height:40px;
+  margin-bottom:10px;
+  color:#000;
+  transition:.3s;
 }
 .card:hover .icon{
-  fill:#f4c400;
+  color:#f4c400;
+  transform:scale(1.15);
+}
+.card h3{
+  font-size:16px;
+  margin:8px 0;
+}
+.card p{
+  font-size:14px;
+  color:#444;
 }
 
-.icon{
-  width:46px;
-  height:46px;
-  fill:#000;
-  margin-bottom:10px;
-  transition:0.3s;
-}
-
-.hidden{display:none;}
+/* reveal animation */
+.reveal{opacity:0;transform:translateY(40px);transition:.7s;}
+.reveal.active{opacity:1;transform:none;}
 
 .footer{
   text-align:center;
-  margin:40px 0 10px;
-  font-size:14px;
+  font-size:13px;
   color:#555;
+  margin:40px 0 10px;
 }
 </style>
 </head>
@@ -104,89 +91,125 @@ h1{
 <body>
 <div class="container">
 
-<div class="lang-switch">
-  <button onclick="ml()">Malayalam</button>
-  <button onclick="en()">English</button>
-</div>
+<h1>H4 Waterproof – 10 വർഷത്തെ ശാശ്വത സംരക്ഷണം</h1>
 
-<!-- MALAYALAM -->
-<div id="ml">
-<h1>H4 Waterproof – 10 വർഷത്തെ ശാസ്ത്രീയ സംരക്ഷണം</h1>
-
-<a class="order-btn" href="#order">📋 Order Sheet</a>
+<button class="order-btn">📋 Order Sheet</button>
 
 <p>
-ഇത് ഒരു പെയിന്റ് അല്ല.  
-കോൺക്രീറ്റുമായി കെമിക്കൽ ബോണ്ടിംഗ് ഉണ്ടാക്കി  
-നാളുകളോളം സംരക്ഷണം നൽകുന്ന  
-പ്രീമിയം waterproofing സൊല്യൂഷൻ ആണ് H4.
+മഴയും ചൂടും മൂലം ഉണ്ടാകുന്ന ചോർച്ചകൾക്ക് ശാശ്വത പരിഹാരമാണ്
+<b>H4 Waterproof</b>.
 </p>
 
-<div class="section-title">H4 Waterproof ന്റെ ആനുകൂല്യങ്ങൾ</div>
+<!-- BENEFITS -->
+<div class="section-title reveal">H4 Waterproof ന്റെ ആനുകൂല്യങ്ങൾ</div>
+<div class="grid reveal">
 
-<div class="grid">
 <div class="card">
-<svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12h20C22 6.5 17.5 2 12 2z"/></svg>
-<strong>ജലചോർച്ച തടയൽ</strong>
-<p>മഴവെള്ളം കെട്ടിടത്തിനുള്ളിലേക്ക് കടക്കില്ല.</p>
+<div class="icon">
+<svg viewBox="0 0 24 24" fill="none">
+<path d="M12 2C7 2 3 6 3 11H21C21 6 17 2 12 2Z" stroke="currentColor" stroke-width="2"/>
+<line x1="12" y1="11" x2="12" y2="20" stroke="currentColor" stroke-width="2"/>
+</svg>
 </div>
-
-<div class="card">
-<svg class="icon" viewBox="0 0 24 24"><path d="M3 4h18v4H3z"/></svg>
-<strong>വിള്ളൽ സംരക്ഷണം</strong>
-<p>ചെറിയ വിള്ളലുകൾ പോലും വെള്ളം കടക്കാതെ സംരക്ഷണം.</p>
-</div>
-
-<div class="card">
-<svg class="icon" viewBox="0 0 24 24"><path d="M15 14.7V5a3 3 0 0 0-6 0v9.7"/></svg>
-<strong>താപ നിയന്ത്രണം</strong>
-<p>വീടിനുള്ളിലെ ചൂട് കുറയ്ക്കാൻ സഹായിക്കുന്നു.</p>
+<h3>ജലപ്രവേശനം തടയും</h3>
+<p>മഴവെള്ളം കെട്ടിനിൽക്കുന്നത് തടയുന്നു.</p>
 </div>
 
 <div class="card">
-<svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/></svg>
-<strong>പായൽ & പൂപ്പൽ തടയൽ</strong>
-<p>ഭിത്തികൾ എപ്പോഴും വൃത്തിയായി നിലനിർത്തും.</p>
+<div class="icon">
+<svg viewBox="0 0 24 24" fill="none">
+<path d="M3 12H21" stroke="currentColor" stroke-width="2"/>
+<path d="M6 6L18 18" stroke="currentColor" stroke-width="2"/>
+</svg>
 </div>
-</div>
-
-<div class="section-title">Waterproof ചെയ്യാവുന്ന ഭാഗങ്ങൾ</div>
-
-<div class="grid">
-<div class="card">
-<svg class="icon" viewBox="0 0 24 24"><path d="M4 10h16v10H4z"/></svg>
-<strong>Foundation</strong>
+<h3>വിള്ളൽ സംരക്ഷണം</h3>
+<p>ചെറിയ വിള്ളലുകൾ പോലും സംരക്ഷിക്കുന്നു.</p>
 </div>
 
 <div class="card">
-<svg class="icon" viewBox="0 0 24 24"><path d="M12 3l10 8H2z"/></svg>
-<strong>Roof / Terrace</strong>
+<div class="icon">
+<svg viewBox="0 0 24 24" fill="none">
+<path d="M12 2V22" stroke="currentColor" stroke-width="2"/>
+<circle cx="12" cy="17" r="3" stroke="currentColor" stroke-width="2"/>
+</svg>
+</div>
+<h3>ചൂട് നിയന്ത്രണം</h3>
+<p>വീടിനുള്ളിലെ ചൂട് കുറയ്ക്കുന്നു.</p>
 </div>
 
 <div class="card">
-<svg class="icon" viewBox="0 0 24 24"><path d="M3 3h18v18H3z"/></svg>
-<strong>Walls</strong>
+<div class="icon">
+<svg viewBox="0 0 24 24" fill="none">
+<circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+<path d="M8 12L11 15L16 9" stroke="currentColor" stroke-width="2"/>
+</svg>
+</div>
+<h3>പായൽ തടയൽ</h3>
+<p>ഫംഗസ്, പായൽ വളർച്ച തടയും.</p>
+</div>
+
+</div>
+
+<!-- APPLICATION AREAS -->
+<div class="section-title reveal">Waterproof ചെയ്യാവുന്ന ഭാഗങ്ങൾ</div>
+<div class="grid reveal">
+
+<div class="card">
+<div class="icon">
+<svg viewBox="0 0 24 24" fill="none">
+<rect x="4" y="10" width="16" height="10" stroke="currentColor" stroke-width="2"/>
+</svg>
+</div>
+<h3>Foundation</h3>
 </div>
 
 <div class="card">
-<svg class="icon" viewBox="0 0 24 24"><path d="M3 10h18v2H3z"/></svg>
-<strong>Balcony</strong>
+<div class="icon">
+<svg viewBox="0 0 24 24" fill="none">
+<path d="M3 12L12 4L21 12" stroke="currentColor" stroke-width="2"/>
+</svg>
+</div>
+<h3>Roof / Terrace</h3>
 </div>
 
 <div class="card">
-<svg class="icon" viewBox="0 0 24 24"><path d="M4 3h16v4H4z"/></svg>
-<strong>Water Tank</strong>
+<div class="icon">
+<svg viewBox="0 0 24 24" fill="none">
+<rect x="3" y="3" width="18" height="18" stroke="currentColor" stroke-width="2"/>
+</svg>
 </div>
-</div>
+<h3>Walls</h3>
 </div>
 
-<!-- ENGLISH -->
-<div id="en" class="hidden">
-<h1>H4 Waterproof – A Decade of Protection</h1>
-<p>
-H4 Waterproof is a premium chemical bonding waterproofing system
-that permanently protects your structure from water leakage.
-</p>
+<div class="card">
+<div class="icon">
+<svg viewBox="0 0 24 24" fill="none">
+<path d="M4 10H20" stroke="currentColor" stroke-width="2"/>
+<path d="M6 10V20" stroke="currentColor" stroke-width="2"/>
+</svg>
+</div>
+<h3>Balcony</h3>
+</div>
+
+<div class="card">
+<div class="icon">
+<svg viewBox="0 0 24 24" fill="none">
+<path d="M6 4H18V20H6Z" stroke="currentColor" stroke-width="2"/>
+</svg>
+</div>
+<h3>Basement</h3>
+</div>
+
+<div class="card">
+<div class="icon">
+<svg viewBox="0 0 24 24" fill="none">
+<rect x="6" y="2" width="12" height="20" stroke="currentColor" stroke-width="2"/>
+<line x1="6" y1="8" x2="18" y2="8" stroke="currentColor" stroke-width="2"/>
+</svg>
+</div>
+<h3>Water Tank</h3>
+</div>
+
 </div>
 
 <div class="footer">
@@ -196,14 +219,15 @@ that permanently protects your structure from water leakage.
 </div>
 
 <script>
-function ml(){
- document.getElementById("ml").style.display="block";
- document.getElementById("en").style.display="none";
+function revealOnScroll(){
+  document.querySelectorAll('.reveal').forEach(el=>{
+    if(el.getBoundingClientRect().top < window.innerHeight-60){
+      el.classList.add('active');
+    }
+  });
 }
-function en(){
- document.getElementById("ml").style.display="none";
- document.getElementById("en").style.display="block";
-}
+window.addEventListener('scroll',revealOnScroll);
+revealOnScroll();
 </script>
 
 </body>
