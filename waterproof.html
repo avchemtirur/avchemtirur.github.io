@@ -5,74 +5,94 @@
 <title>H4 Waterproof</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- FONTS -->
-<link href="https://fonts.googleapis.com/css2?family=Uroob&family=Manjari:wght@400;700&family=Playfair+Display:wght@700&family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Manjari:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
 <style>
 body{
   margin:0;
-  background:#ffffff;
+  font-family:'Manjari', sans-serif;
+  background:#f4effa; /* light purple */
+  color:#000;
 }
+
 .container{
   max-width:1100px;
   margin:auto;
   padding:20px;
 }
 
-/* Language buttons */
+/* Language switch */
 .lang-switch{
   text-align:right;
-  margin-bottom:20px;
+  margin-bottom:15px;
 }
 .lang-switch button{
-  padding:6px 14px;
   margin-left:6px;
-  background:#0b2c6f;
-  color:#fff;
+  padding:6px 14px;
   border:none;
-  border-radius:5px;
-  cursor:pointer;
+  border-radius:4px;
+  background:#f4c400; /* yellow accent */
+  color:#000;
   font-weight:bold;
+  cursor:pointer;
 }
 
-/* Malayalam */
-.malayalam-title{
-  font-family:'Uroob', sans-serif;
-  font-size:36px;
-  font-weight:700;
-  color:#0b2c6f;
-}
-.malayalam-body{
-  font-family:'Manjari', sans-serif;
-  font-size:17px;
-  line-height:1.9;
-  color:#4b2a6b;
-}
-
-/* English */
-.english-title{
+/* Headings */
+h1{
   font-family:'Playfair Display', serif;
   font-size:34px;
-  font-weight:700;
-  color:#0b2c6f;
+  margin:10px 0;
 }
-.english-body{
-  font-family:'Cormorant Garamond', serif;
-  font-size:18px;
-  line-height:1.8;
-  color:#333;
+h2{
+  font-size:26px;
+  margin:40px 0 20px;
+  border-left:6px solid #f4c400;
+  padding-left:10px;
 }
 
 /* Order button */
 .order-btn{
   display:inline-block;
   margin:20px 0 30px;
-  background:#0b2c6f;
-  color:#fff;
+  background:#f4c400;
+  color:#000;
   padding:12px 24px;
-  border-radius:8px;
+  border-radius:6px;
   font-weight:bold;
   cursor:pointer;
+}
+
+/* Grid cards */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+}
+
+.card{
+  background:#fff;
+  border-radius:8px;
+  padding:20px;
+  text-align:center;
+  box-shadow:0 2px 6px rgba(0,0,0,0.1);
+  border-bottom:4px solid #f4c400;
+}
+
+.card img{
+  width:48px;
+  height:48px;
+  margin-bottom:10px;
+}
+
+.card h3{
+  font-size:18px;
+  margin-bottom:8px;
+}
+
+.card p{
+  font-size:15px;
+  line-height:1.6;
 }
 
 /* Popup */
@@ -86,10 +106,10 @@ body{
 }
 .popup-box{
   background:#fff;
-  padding:20px;
   width:90%;
   max-width:500px;
-  border-radius:10px;
+  padding:20px;
+  border-radius:8px;
 }
 label{
   display:block;
@@ -109,13 +129,13 @@ input,select{
 .buttons button{
   flex:1;
   padding:10px;
-  font-weight:bold;
   border:none;
   border-radius:5px;
+  font-weight:bold;
   cursor:pointer;
 }
-.confirm{background:#0b2c6f;color:#fff;}
-.cancel{background:#999;color:#fff;}
+.confirm{background:#f4c400;color:#000;}
+.cancel{background:#ccc;color:#000;}
 
 .hidden{display:none;}
 </style>
@@ -132,79 +152,125 @@ input,select{
 
 <!-- MALAYALAM -->
 <div id="ml">
-<h1 class="malayalam-title">
-H4 Waterproof – കെമിസ്ട്രിയുടെ കരുത്തിൽ നിർമ്മിച്ച, പതിറ്റാണ്ടുകളുടെ സംരക്ഷണം!
-</h1>
+<h1>H4 Waterproof – 10 വർഷത്തെ ശാശ്വത സംരക്ഷണം</h1>
 
 <div class="order-btn" onclick="openOrder()">📝 Order Sheet</div>
 
-<p class="malayalam-body">
-വീട്, മാത്രമല്ല; അടുത്ത 10 വർഷത്തെ നിങ്ങളുടെ സമാധാനം.  
-മഴയുടെ ചുവപ്പും വെയിലിന്റെ ചുട്ടുപഴുപ്പും ഇനി നിങ്ങളുടെ സ്വപ്നഭവനത്തിൽ കലരരുത്.
-</p>
+<h2>H4 Waterproof ന്റെ ആനുകൂല്യങ്ങൾ</h2>
 
-<p class="malayalam-body">
-ഇത് ഒരു പെയിന്റ് അല്ല.  
-ഇതൊരു കെമിക്കൽ ബോണ്ടിംഗ് സംവിധാനം ആണ്.
-</p>
+<div class="grid">
+  <div class="card">
+    <img src="https://img.icons8.com/ios-filled/100/umbrella.png">
+    <h3>ജലചോർച്ച തടയൽ</h3>
+    <p>കോൺക്രീറ്റിലേക്ക് കെമിക്കൽ ബോണ്ടിംഗ് വഴി സ്ഥിരമായ സംരക്ഷണം.</p>
+  </div>
+  <div class="card">
+    <img src="https://img.icons8.com/ios-filled/100/brick-wall.png">
+    <h3>വിള്ളൽ സംരക്ഷണം</h3>
+    <p>ചെറിയ വിള്ളലുകളിലൂടെയും വെള്ളം കടക്കില്ല.</p>
+  </div>
+  <div class="card">
+    <img src="https://img.icons8.com/ios-filled/100/temperature.png">
+    <h3>താപ നിയന്ത്രണം</h3>
+    <p>വീട്ടിലെ ചൂട് കുറയ്ക്കാൻ സഹായിക്കുന്നു.</p>
+  </div>
+  <div class="card">
+    <img src="https://img.icons8.com/ios-filled/100/bacteria.png">
+    <h3>പായൽ & പൂപ്പൽ തടയൽ</h3>
+    <p>ആരോഗ്യകരമായ മതിലുകൾ.</p>
+  </div>
+</div>
 
-<p class="malayalam-body">
-<strong>ഒരു തവണ ഉറപ്പ് തേടൂ – അടുത്ത പത്തുവർഷം ഞങ്ങൾ സംരക്ഷിക്കും.</strong>
-</p>
+<h2>Waterproof ചെയ്യാവുന്ന ഭാഗങ്ങൾ</h2>
+
+<div class="grid">
+  <div class="card">
+    <img src="https://img.icons8.com/ios-filled/100/foundation.png">
+    <h3>Foundation</h3>
+    <p>അടിത്തറ ശക്തമാക്കുന്നു.</p>
+  </div>
+  <div class="card">
+    <img src="https://img.icons8.com/ios-filled/100/roofing.png">
+    <h3>Roof / Terrace</h3>
+    <p>മഴയും ചൂടും തടയാൻ.</p>
+  </div>
+  <div class="card">
+    <img src="https://img.icons8.com/ios-filled/100/wall.png">
+    <h3>Walls</h3>
+    <p>നനവ് കയറാതെ സംരക്ഷണം.</p>
+  </div>
+  <div class="card">
+    <img src="https://img.icons8.com/ios-filled/100/balcony.png">
+    <h3>Balcony</h3>
+    <p>മഴ നേരിട്ട് പതിക്കുന്ന ഭാഗങ്ങൾ.</p>
+  </div>
+  <div class="card">
+    <img src="https://img.icons8.com/ios-filled/100/basement.png">
+    <h3>Basement</h3>
+    <p>ഭൂഗർഭ നനവ് തടയാൻ.</p>
+  </div>
+  <div class="card">
+    <img src="https://img.icons8.com/ios-filled/100/water-tank.png">
+    <h3>Water Tank</h3>
+    <p>ജലസംഭരണികൾ സുരക്ഷിതം.</p>
+  </div>
+</div>
 </div>
 
 <!-- ENGLISH -->
 <div id="en" class="hidden">
-<h1 class="english-title">
-H4 Waterproof – A Decade of Protection
-</h1>
+<h1>H4 Waterproof – A Decade of Protection</h1>
 
 <div class="order-btn" onclick="openOrder()">📝 Order Sheet</div>
 
-<p class="english-body">
-H4 Waterproof is an advanced chemical bonding waterproofing system
-designed to permanently protect your structure from leakage.
-</p>
+<h2>Advantages of H4 Waterproof</h2>
 
-<p class="english-body">
-Apply once and stay protected for the next 10 years.
-</p>
+<div class="grid">
+  <div class="card">
+    <img src="https://img.icons8.com/ios-filled/100/umbrella.png">
+    <h3>Leak Protection</h3>
+    <p>Permanent chemical bonding waterproofing.</p>
+  </div>
+  <div class="card">
+    <img src="https://img.icons8.com/ios-filled/100/brick-wall.png">
+    <h3>Crack Bridging</h3>
+    <p>Stops water through micro cracks.</p>
+  </div>
+  <div class="card">
+    <img src="https://img.icons8.com/ios-filled/100/temperature.png">
+    <h3>Thermal Control</h3>
+    <p>Reduces indoor heat.</p>
+  </div>
+  <div class="card">
+    <img src="https://img.icons8.com/ios-filled/100/bacteria.png">
+    <h3>Mould Resistance</h3>
+    <p>Keeps walls clean.</p>
+  </div>
+</div>
 </div>
 
 </div>
 
-<!-- ORDER FORM POPUP -->
+<!-- ORDER POPUP -->
 <div class="popup" id="orderPopup">
 <div class="popup-box">
-
 <h2>Order Sheet</h2>
 
 <label>Name</label><input id="name">
-<label>Address</label><input id="address">
-<label>Area</label><input id="area">
-<label>Street</label><input id="street">
-<label>Landmark</label><input id="landmark">
 <label>Mobile</label><input id="mobile">
-<label>WhatsApp</label><input id="whatsapp">
-<label>Pincode</label><input id="pincode">
-<label>District</label><input id="district">
-<label>State</label><input id="state">
-
-<label>Waterproof Location</label>
+<label>Waterproof Area</label>
 <select id="place">
 <option>Home</option>
 <option>Terrace</option>
 <option>Bathroom</option>
-<option>Water Tank</option>
 <option>Balcony</option>
-<option>Exterior Wall</option>
+<option>Water Tank</option>
 </select>
 
 <div class="buttons">
 <button class="confirm" onclick="submitOrder()">Confirm</button>
 <button class="cancel" onclick="closeOrder()">Cancel</button>
 </div>
-
 </div>
 </div>
 
@@ -223,7 +289,7 @@ let msg=
 "H4 Waterproof Order\n"+
 "Name: "+name.value+"\n"+
 "Mobile: "+mobile.value+"\n"+
-"Location: "+place.value;
+"Area: "+place.value;
 
 window.open(
 "https://wa.me/917907344030?text="+encodeURIComponent(msg),
