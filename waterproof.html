@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>H4 Waterproof | AV Chem Chemical</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Inter',sans-serif;
+  background:linear-gradient(135deg,#1aa7b8,#24c6b5);
+  color:#fff;
+  padding:40px 6%;
+}
+
+/* LANGUAGE */
+.lang-box{
+  position:absolute;
+  top:20px;
+  right:20px;
+}
+.lang-btn{
+  background:#fff;
+  color:#333;
+  padding:8px 16px;
+  border-radius:20px;
+  cursor:pointer;
+  font-weight:600;
+}
+.lang-list{
+  display:none;
+  background:#fff;
+  color:#333;
+  border-radius:12px;
+  margin-top:6px;
+  overflow:hidden;
+}
+.lang-list div{
+  padding:12px 18px;
+  cursor:pointer;
+}
+.lang-list div:hover{background:#f1f1f1}
+
+/* CARD */
+.card{
+  max-width:900px;
+  margin:auto;
+  background:rgba(255,255,255,.15);
+  padding:32px;
+  border-radius:20px;
+}
+.card h2{
+  font-family:'Playfair Display',serif;
+  font-size:32px;
+  margin-bottom:16px;
+}
+.card p,li{
+  font-size:16px;
+  line-height:1.9;
+}
+ul{padding-left:20px;margin:14px 0}
+</style>
+</head>
+
+<body>
+
+<div class="lang-box">
+  <div class="lang-btn" onclick="toggleLang()">Language ▼</div>
+  <div class="lang-list" id="langList">
+    <div onclick="setLang('ml')">Malayalam</div>
+    <div onclick="setLang('en')">English</div>
+  </div>
+</div>
+
+<div id="ml" class="card">
+  <h2>H4 Waterproof – 10 വർഷം വിശ്വാസത്തിന്റെ ഉറപ്പ്</h2>
+  <p>
+    H4 Waterproof സാധാരണ വാട്ടർപ്രൂഫിംഗ് അല്ല.  
+    വർഷങ്ങളോളം കെട്ടിടത്തെ സംരക്ഷിക്കുന്ന പ്രീമിയം സൊല്യൂഷൻ.
+  </p>
+
+  <ul>
+    <li>Polymer Modified Cementitious Technology</li>
+    <li>Deep Penetration Protection</li>
+    <li>Crack & leakage prevention</li>
+    <li>10 വർഷം വാറണ്ടി</li>
+    <li>Roof, Bathroom, Tank, Balcony</li>
+  </ul>
+
+  <p>
+    📞 79073 44030<br>
+    📱 97458 38382<br>
+    ✉ avchemtirur@gmail.com
+  </p>
+</div>
+
+<div id="en" class="card" style="display:none">
+  <h2>H4 Waterproof – 10 Years of Trusted Protection</h2>
+  <p>
+    H4 Waterproof is a premium waterproofing solution engineered
+    for long-term structural protection.
+  </p>
+
+  <ul>
+    <li>Advanced polymer technology</li>
+    <li>Deep internal protection</li>
+    <li>Crack sealing & leakage prevention</li>
+    <li>10 years warranty</li>
+    <li>Roof, Bathroom, Tank, Balcony</li>
+  </ul>
+
+  <p>
+    📞 79073 44030<br>
+    📱 97458 38382<br>
+    ✉ avchemtirur@gmail.com
+  </p>
+</div>
+
+<script>
+function toggleLang(){
+  let l=document.getElementById("langList");
+  l.style.display=l.style.display==="block"?"none":"block";
+}
+function setLang(x){
+  document.getElementById("ml").style.display="none";
+  document.getElementById("en").style.display="none";
+  document.getElementById(x).style.display="block";
+  document.getElementById("langList").style.display="none";
+}
+</script>
+
+</body>
+</html>
