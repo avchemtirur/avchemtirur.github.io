@@ -5,6 +5,7 @@
 <title>H4 Waterproof</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- Malayalam Bold Font -->
 <link href="https://fonts.googleapis.com/css2?family=Manjari:wght@700&display=swap" rel="stylesheet">
 
 <style>
@@ -20,7 +21,7 @@ body{
   padding:20px;
 }
 
-/* language */
+/* Language */
 .lang-switch{
   display:flex;
   gap:10px;
@@ -35,26 +36,32 @@ body{
   cursor:pointer;
 }
 
-/* headings */
-h1{font-size:28px;}
+/* Headings */
+h1{font-size:28px;margin-bottom:10px}
 p{font-size:15px;line-height:1.7}
 
-/* order button */
+/* Order Button */
 .order-btn{
   background:#f4c400;
   border:none;
-  padding:10px 18px;
-  border-radius:6px;
+  padding:12px 20px;
+  border-radius:8px;
   font-weight:700;
   cursor:pointer;
   margin:15px 0;
+  transition:.3s;
+}
+.order-btn:hover{
+  transform:scale(1.05);
 }
 
-/* cards */
+/* Section */
 .section-title{
   font-size:22px;
-  margin:30px 0 15px;
+  margin:35px 0 15px;
 }
+
+/* Cards */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
@@ -62,43 +69,61 @@ p{font-size:15px;line-height:1.7}
 }
 .card{
   background:#fff;
-  padding:20px;
-  border-radius:14px;
-  box-shadow:0 6px 16px rgba(0,0,0,.1);
+  padding:22px;
+  border-radius:16px;
+  box-shadow:0 8px 20px rgba(0,0,0,.12);
   text-align:center;
-  transform:translateY(30px);
   opacity:0;
-  transition:.6s;
+  transform:translateY(40px);
+  transition:.6s ease;
 }
 .card.show{
-  transform:translateY(0);
   opacity:1;
+  transform:translateY(0);
 }
-.icon svg{
-  width:64px;
-  height:64px;
-  fill:#000;
-  transition:.3s;
-}
-.card:hover svg{
-  fill:#f4c400;
-  transform:scale(1.1);
-}
-.card h3{
-  margin:12px 0 6px;
-}
-.card p{
-  font-size:14px;
-  color:#444;
+.card:hover{
+  transform:translateY(-6px);
 }
 
-/* order form */
-.form-box{
-  background:#fff;
-  padding:20px;
-  border-radius:14px;
-  margin-top:40px;
+/* ICON */
+.icon{
+  width:70px;
+  height:70px;
+  margin:auto;
 }
+.icon svg{
+  width:100%;
+  height:100%;
+  transition:.4s;
+}
+.card:hover svg{
+  transform:scale(1.15);
+}
+
+/* Popup */
+.popup{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:99;
+}
+.popup-box{
+  background:#fff;
+  padding:25px;
+  border-radius:16px;
+  width:95%;
+  max-width:420px;
+  animation:zoom .3s ease;
+}
+@keyframes zoom{
+  from{transform:scale(.85);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+
+/* Form */
 label{display:block;margin-top:12px}
 input,select{
   width:100%;
@@ -112,8 +137,12 @@ input,select{
   gap:10px;
   margin-top:20px;
 }
-.confirm{background:#000;color:#fff;flex:1}
-.cancel{background:#999;color:#fff;flex:1}
+.confirm{
+  background:#000;color:#fff;flex:1;
+}
+.cancel{
+  background:#999;color:#fff;flex:1;
+}
 .confirm,.cancel{
   padding:12px;
   border:none;
@@ -121,14 +150,13 @@ input,select{
   font-weight:700;
 }
 
-/* footer */
+/* Footer */
 .footer{
   text-align:center;
   margin:40px 0 10px;
   font-size:13px;
   color:#555;
 }
-
 .hidden{display:none;}
 </style>
 </head>
@@ -136,7 +164,7 @@ input,select{
 <body>
 <div class="container">
 
-<!-- language -->
+<!-- Language -->
 <div class="lang-switch">
   <button onclick="ml.style.display='block';en.style.display='none'">Malayalam</button>
   <button onclick="ml.style.display='none';en.style.display='block'">English</button>
@@ -147,51 +175,67 @@ input,select{
 <h1>H4 Waterproof – കെമിസ്ട്രിയുടെ കരുത്തിൽ 10 വർഷത്തെ സംരക്ഷണം</h1>
 <p>
 H4 Waterproof ഒരു സാധാരണ കോട്ടിംഗ് അല്ല.  
-ഇത് കോൺക്രീറ്റുമായി കെമിക്കൽ ബോണ്ടിംഗ് ഉണ്ടാക്കി  
-ദീർഘകാല സംരക്ഷണം നൽകുന്ന സംവിധാനമാണ്.
+കോൺക്രീറ്റുമായി കെമിക്കൽ ബോണ്ടിംഗ് ഉണ്ടാക്കി  
+ദീർഘകാല സംരക്ഷണം നൽകുന്ന അഡ്വാൻസ് സൊല്യൂഷൻ.
 </p>
 
-<button class="order-btn" onclick="order.scrollIntoView()">📋 Order Sheet</button>
+<button class="order-btn" onclick="popup.style.display='flex'">📋 Order Sheet</button>
 
 <div class="section-title">Waterproof ചെയ്യുന്ന ഭാഗങ്ങൾ</div>
 
 <div class="grid">
 
+<!-- ROOF -->
 <div class="card reveal">
 <div class="icon">
-<svg viewBox="0 0 24 24"><path d="M12 3l9 7h-3v9h-5v-6h-2v6H6v-9H3z"/></svg>
+<svg viewBox="0 0 64 64">
+<path fill="#4CAF50" d="M8 30L32 10l24 20v22H40V36H24v16H8z"/>
+</svg>
 </div>
 <h3>Roof / Terrace</h3>
 <p>മഴയും ചൂടും തടയുന്നു.</p>
 </div>
 
+<!-- FOUNDATION -->
 <div class="card reveal">
 <div class="icon">
-<svg viewBox="0 0 24 24"><path d="M3 21h18v-2H3v2zm2-4h14V3H5v14z"/></svg>
+<svg viewBox="0 0 64 64">
+<rect x="10" y="10" width="44" height="44" rx="4" fill="#795548"/>
+</svg>
 </div>
 <h3>Foundation</h3>
-<p>തറയിലെ ഈർപ്പം തടയും.</p>
+<p>തറയിലെ ഈർപ്പം ഒഴിവാക്കുന്നു.</p>
 </div>
 
+<!-- WALLS -->
 <div class="card reveal">
 <div class="icon">
-<svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/></svg>
+<svg viewBox="0 0 64 64">
+<rect x="14" y="8" width="36" height="48" fill="#2196F3"/>
+</svg>
 </div>
 <h3>Walls</h3>
-<p>ഭിത്തി ചോർച്ച ഒഴിവാക്കുന്നു.</p>
+<p>ഭിത്തി ചോർച്ച തടയും.</p>
 </div>
 
+<!-- BALCONY -->
 <div class="card reveal">
 <div class="icon">
-<svg viewBox="0 0 24 24"><path d="M4 10h16v2H4zM6 12v6h12v-6"/></svg>
+<svg viewBox="0 0 64 64">
+<rect x="8" y="26" width="48" height="8" fill="#FF9800"/>
+<rect x="14" y="34" width="36" height="18" fill="#FFC107"/>
+</svg>
 </div>
 <h3>Balcony</h3>
 <p>വെള്ളം കെട്ടിനിൽക്കില്ല.</p>
 </div>
 
+<!-- WATER TANK -->
 <div class="card reveal">
 <div class="icon">
-<svg viewBox="0 0 24 24"><path d="M7 3h10v18H7z"/></svg>
+<svg viewBox="0 0 64 64">
+<rect x="18" y="8" width="28" height="40" rx="6" fill="#03A9F4"/>
+</svg>
 </div>
 <h3>Water Tank</h3>
 <p>ചോർച്ചയില്ലാത്ത സുരക്ഷ.</p>
@@ -204,18 +248,20 @@ H4 Waterproof ഒരു സാധാരണ കോട്ടിംഗ് അല്
 <div id="en" class="hidden">
 <h1>H4 Waterproof – A Decade of Protection</h1>
 <p>
-H4 Waterproof is a chemical bonding waterproofing solution
-designed for long-term structural protection.
+H4 Waterproof is an advanced chemical bonding waterproofing solution
+designed for long-term protection.
 </p>
 </div>
 
-<!-- ORDER -->
-<div id="order" class="form-box">
+<!-- POPUP ORDER -->
+<div class="popup" id="popup">
+<div class="popup-box">
 <h2>Order Sheet</h2>
+
 <label>Name</label><input>
 <label>Address</label><input>
-<label>Mobile</label><input>
-<label>WhatsApp (optional)</label><input>
+<label>Mobile Number</label><input>
+<label>WhatsApp (Optional)</label><input>
 <label>Waterproof Location</label>
 <select>
 <option>Home</option>
@@ -226,19 +272,19 @@ designed for long-term structural protection.
 
 <div class="buttons">
 <button class="confirm">Confirm</button>
-<button class="cancel">Cancel</button>
+<button class="cancel" onclick="popup.style.display='none'">Cancel</button>
+</div>
 </div>
 </div>
 
 <div class="footer">© AV Chem Chemical & Manufacturing</div>
-
 </div>
 
 <script>
 const cards=document.querySelectorAll('.reveal');
-const io=new IntersectionObserver(e=>{
-e.forEach(i=>{
-if(i.isIntersecting)i.target.classList.add('show');
+const io=new IntersectionObserver(entries=>{
+entries.forEach(e=>{
+if(e.isIntersecting)e.target.classList.add('show');
 });
 },{threshold:.2});
 cards.forEach(c=>io.observe(c));
