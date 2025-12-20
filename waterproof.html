@@ -22,14 +22,14 @@ body{
   padding:20px;
 }
 
-/* Language button LEFT */
+/* Language buttons – LEFT */
 .lang{
   display:flex;
   gap:10px;
   margin-bottom:15px;
 }
 .lang button{
-  padding:6px 14px;
+  padding:6px 16px;
   border:none;
   border-radius:20px;
   background:#000;
@@ -38,66 +38,85 @@ body{
   font-weight:700;
 }
 
+/* Headings */
 h1{
   font-weight:800;
 }
-
-.section-title{
-  margin:30px 0 15px;
+h2{
   font-weight:800;
+  margin-top:40px;
 }
 
-/* Cards */
+/* ICON GRID – 3x3 */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:18px;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+@media(max-width:768px){
+  .grid{ grid-template-columns:repeat(2,1fr); }
+}
+@media(max-width:480px){
+  .grid{ grid-template-columns:1fr; }
 }
 
 .card{
   background:#fff;
-  border-radius:12px;
-  padding:20px;
+  border-radius:14px;
+  padding:24px;
   text-align:center;
-  box-shadow:0 6px 18px rgba(0,0,0,.08);
-  border-bottom:4px solid #f4c400;
+  box-shadow:0 8px 20px rgba(0,0,0,.1);
+  border-bottom:5px solid #f4c400;
   transition:.3s;
 }
 .card:hover{
-  transform:translateY(-8px);
+  transform:translateY(-10px);
 }
 
-/* ICONS */
+/* ICON SIZE */
 .icon{
-  width:70px;
-  height:70px;
+  width:90px;
+  height:90px;
   margin:auto;
-  margin-bottom:10px;
-}
-.card:hover svg{
-  transform:scale(1.1);
+  margin-bottom:15px;
 }
 
-svg{
-  transition:.3s;
+svg{ width:100%; height:100%; }
+
+/* ICON TEXT */
+.card b{
+  font-size:18px;
+  display:block;
+  margin-bottom:6px;
+}
+.card p{
+  font-size:15px;
 }
 
+/* ORDER BUTTON */
 .order-btn{
   display:block;
-  margin:40px auto;
-  padding:14px 34px;
+  margin:40px auto 20px;
+  padding:16px 40px;
   background:#f4c400;
   border:none;
   border-radius:30px;
-  font-size:16px;
+  font-size:18px;
   font-weight:800;
   cursor:pointer;
+}
+
+/* FULL TEXT SECTION */
+.content{
+  margin-top:40px;
+  line-height:1.9;
 }
 
 footer{
   text-align:center;
   font-size:13px;
-  margin-top:40px;
+  margin:40px 0;
   color:#555;
 }
 </style>
@@ -115,19 +134,17 @@ footer{
 <h1>H4 Waterproof – 10 വർഷത്തെ വിശ്വസനീയ സംരക്ഷണം</h1>
 
 <p>
-ഇത് ഒരു പെയിന്റ് അല്ല.  
-ഇത് കോൺക്രീറ്റുമായി കെമിക്കൽ ബോണ്ടിംഗ് ചെയ്യുന്ന ഒരു ശാശ്വത സംരക്ഷണ സംവിധാനം ആണ്.
+വീട് മാത്രമല്ല; അടുത്ത 10 വർഷത്തെ നിങ്ങളുടെ സമാധാനം.  
+ഇത് ഒരു പെയിന്റ് അല്ല – കോൺക്രീറ്റുമായി കെമിക്കൽ ബോണ്ടിംഗ് ചെയ്യുന്ന ഒരു സംരക്ഷണ സംവിധാനം ആണ്.
 </p>
 
-<h2 class="section-title">H4 Waterproof ന്റെ ഗുണങ്ങൾ</h2>
+<h2>H4 Waterproof ന്റെ ഗുണങ്ങൾ</h2>
 
 <div class="grid">
 
 <div class="card">
 <div class="icon">
-<svg viewBox="0 0 64 64">
-<path d="M32 4C20 20 8 28 8 40a24 24 0 0048 0C56 28 44 20 32 4z" fill="#4FC3F7"/>
-</svg>
+<svg viewBox="0 0 64 64"><path d="M32 4C20 20 8 28 8 40a24 24 0 0048 0C56 28 44 20 32 4z" fill="#4FC3F7"/></svg>
 </div>
 <b>Water Protection</b>
 <p>മഴയും ഈർപ്പവും തടയും</p>
@@ -135,10 +152,7 @@ footer{
 
 <div class="card">
 <div class="icon">
-<svg viewBox="0 0 64 64">
-<rect x="12" y="28" width="40" height="28" rx="6" fill="#4CAF50"/>
-<circle cx="32" cy="42" r="4" fill="#fff"/>
-</svg>
+<svg viewBox="0 0 64 64"><rect x="12" y="28" width="40" height="28" rx="6" fill="#4CAF50"/><circle cx="32" cy="42" r="4" fill="#fff"/></svg>
 </div>
 <b>No Leakage</b>
 <p>ചോർച്ച ഇല്ല</p>
@@ -146,81 +160,102 @@ footer{
 
 <div class="card">
 <div class="icon">
-<svg viewBox="0 0 64 64">
-<rect x="8" y="24" width="48" height="28" fill="#FF8F00"/>
-</svg>
+<svg viewBox="0 0 64 64"><rect x="8" y="24" width="48" height="28" fill="#FF9800"/></svg>
 </div>
 <b>Wall Safety</b>
-<p>ഭിത്തി ശക്തമാക്കും</p>
+<p>ഭിത്തി സുരക്ഷ</p>
 </div>
 
 <div class="card">
 <div class="icon">
-<svg viewBox="0 0 64 64">
-<path d="M32 6l20 8v14c0 12-8 22-20 30C20 50 12 40 12 28V14z" fill="#FFD54F"/>
-</svg>
+<svg viewBox="0 0 64 64"><path d="M32 6l20 8v14c0 12-8 22-20 30C20 50 12 40 12 28V14z" fill="#FFD54F"/></svg>
 </div>
 <b>Long Life</b>
 <p>10 വർഷം ദൈർഘ്യം</p>
 </div>
 
-</div>
-
-<h2 class="section-title">ഉപയോഗിക്കാവുന്ന ഭാഗങ്ങൾ</h2>
-
-<div class="grid">
-
 <div class="card">
 <div class="icon">
-<svg viewBox="0 0 64 64">
-<polygon points="32,8 56,28 8,28" fill="#FBC02D"/>
-</svg>
+<svg viewBox="0 0 64 64"><polygon points="32,8 56,28 8,28" fill="#FBC02D"/></svg>
 </div>
-Roof / Terrace
+<b>Roof / Terrace</b>
 </div>
 
 <div class="card">
 <div class="icon">
-<svg viewBox="0 0 64 64">
-<rect x="10" y="30" width="44" height="18" fill="#8D6E63"/>
-</svg>
+<svg viewBox="0 0 64 64"><rect x="10" y="30" width="44" height="18" fill="#8D6E63"/></svg>
 </div>
-Foundation
+<b>Foundation</b>
 </div>
 
 <div class="card">
 <div class="icon">
-<svg viewBox="0 0 64 64">
-<rect x="14" y="16" width="36" height="32" fill="#E57373"/>
-</svg>
+<svg viewBox="0 0 64 64"><rect x="14" y="16" width="36" height="32" fill="#E57373"/></svg>
 </div>
-Walls
+<b>Walls</b>
 </div>
 
 <div class="card">
 <div class="icon">
-<svg viewBox="0 0 64 64">
-<rect x="18" y="18" width="28" height="24" fill="#64B5F6"/>
-</svg>
+<svg viewBox="0 0 64 64"><rect x="18" y="18" width="28" height="24" fill="#64B5F6"/></svg>
 </div>
-Balcony
+<b>Balcony</b>
 </div>
 
 <div class="card">
 <div class="icon">
-<svg viewBox="0 0 64 64">
-<ellipse cx="32" cy="32" rx="18" ry="22" fill="#4DD0E1"/>
-</svg>
+<svg viewBox="0 0 64 64"><ellipse cx="32" cy="32" rx="18" ry="22" fill="#4DD0E1"/></svg>
 </div>
-Water Tank
+<b>Water Tank</b>
 </div>
 
 </div>
 
+<!-- ORDER BUTTON -->
 <button class="order-btn">Order Sheet</button>
 
+<!-- GAP -->
+<br><br>
+
+<!-- FULL TEXT CONTENT -->
+<div class="content">
+
+<h2>H4 Waterproof: കെമിസ്ട്രിയുടെ കരുത്തിൽ നിർമ്മിച്ച സംരക്ഷണം</h2>
+
+<p>
+പരമ്പരാഗത വാട്ടർപ്രൂഫിംഗ് സിസ്റ്റങ്ങൾ 2–3 വർഷത്തിനുള്ളിൽ പൊട്ടുകയും പൊളിക്കുകയും ചെയ്യും.  
+H4 Waterproof കോൺക്രീറ്റിന്റെ ആന്തരിക ഘടനയിൽ കെമിക്കൽ ബോണ്ടിംഗ് നടത്തി ശാശ്വത സംരക്ഷണം നൽകുന്നു.
+</p>
+
+<p>
+🔹 താപ ഇൻസുലേഷൻ  
+🔹 Crack Bridging Ability  
+🔹 Anti-Carbonation Protection  
+🔹 Mould & Algae Resistance
+</p>
+
+<p>
+ഒരു തവണ H4 പ്രയോഗിച്ചാൽ, അടുത്ത പത്ത് വർഷം മഴക്കാലം നിങ്ങളുടെ ഉറക്കം കെടുത്തില്ല.
+</p>
+
+<h2>Contact Us</h2>
+
+<p>
+📞 Phone: +91 7907344030  
+📱 WhatsApp: 9745838382  
+📧 Email: avchemtirur@gmail.com
+</p>
+
+<p>
+📍 AV Chem Chemical & Manufacturing  
+Mukkilapeedika, Kannamkulam PO,  
+BP Angadi – 676102, Tirur, Malappuram, Kerala
+</p>
+
+</div>
+
 <footer>
-© AV Chem Chemical & Manufacturing
+© AV Chem Chemical & Manufacturing. All Rights Reserved.
 </footer>
 
 </div>
