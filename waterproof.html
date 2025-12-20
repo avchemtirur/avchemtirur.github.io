@@ -5,15 +5,14 @@
 <title>H4 Waterproof</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Malayalam Bold Font -->
+<!-- Malayalam Font -->
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Malayalam:wght@400;700;800&display=swap" rel="stylesheet">
 
 <style>
 body{
   margin:0;
-  font-family:'Noto Serif Malayalam', serif;
   background:#f6f1fb;
-  color:#000;
+  font-family:'Noto Serif Malayalam', serif;
 }
 
 .container{
@@ -22,7 +21,7 @@ body{
   padding:20px;
 }
 
-/* Language buttons – LEFT */
+/* Language Buttons */
 .lang{
   display:flex;
   gap:10px;
@@ -37,68 +36,54 @@ body{
   cursor:pointer;
   font-weight:700;
 }
+.lang button.active{
+  background:#f4c400;
+  color:#000;
+}
 
 /* Headings */
-h1{
+h1,h2,h3{
   font-weight:800;
-}
-h2{
-  font-weight:800;
-  margin-top:40px;
 }
 
-/* ICON GRID – 3x3 */
+/* ICON GRID */
 .grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:20px;
 }
-
 @media(max-width:768px){
-  .grid{ grid-template-columns:repeat(2,1fr); }
+  .grid{grid-template-columns:repeat(2,1fr);}
 }
 @media(max-width:480px){
-  .grid{ grid-template-columns:1fr; }
+  .grid{grid-template-columns:1fr;}
 }
 
 .card{
   background:#fff;
   border-radius:14px;
-  padding:24px;
+  padding:22px;
   text-align:center;
   box-shadow:0 8px 20px rgba(0,0,0,.1);
   border-bottom:5px solid #f4c400;
-  transition:.3s;
-}
-.card:hover{
-  transform:translateY(-10px);
 }
 
-/* ICON SIZE */
 .icon{
-  width:90px;
-  height:90px;
+  width:80px;
+  height:80px;
   margin:auto;
-  margin-bottom:15px;
+  margin-bottom:10px;
 }
 
-svg{ width:100%; height:100%; }
-
-/* ICON TEXT */
 .card b{
-  font-size:18px;
-  display:block;
-  margin-bottom:6px;
-}
-.card p{
-  font-size:15px;
+  font-size:17px;
 }
 
-/* ORDER BUTTON */
+/* Order Button */
 .order-btn{
   display:block;
-  margin:40px auto 20px;
-  padding:16px 40px;
+  margin:35px auto;
+  padding:14px 36px;
   background:#f4c400;
   border:none;
   border-radius:30px;
@@ -107,10 +92,14 @@ svg{ width:100%; height:100%; }
   cursor:pointer;
 }
 
-/* FULL TEXT SECTION */
-.content{
+/* CONTENT SECTIONS */
+.lang-content{
+  display:none;
   margin-top:40px;
   line-height:1.9;
+}
+.lang-content.active{
+  display:block;
 }
 
 footer{
@@ -125,131 +114,126 @@ footer{
 <body>
 <div class="container">
 
-<!-- Language -->
+<!-- LANGUAGE BUTTON -->
 <div class="lang">
-  <button>Malayalam</button>
-  <button>English</button>
+  <button id="btn-ml" class="active" onclick="switchLang('ml')">Malayalam</button>
+  <button id="btn-en" onclick="switchLang('en')">English</button>
 </div>
 
 <h1>H4 Waterproof – 10 വർഷത്തെ വിശ്വസനീയ സംരക്ഷണം</h1>
 
-<p>
-വീട് മാത്രമല്ല; അടുത്ത 10 വർഷത്തെ നിങ്ങളുടെ സമാധാനം.  
-ഇത് ഒരു പെയിന്റ് അല്ല – കോൺക്രീറ്റുമായി കെമിക്കൽ ബോണ്ടിംഗ് ചെയ്യുന്ന ഒരു സംരക്ഷണ സംവിധാനം ആണ്.
-</p>
-
 <h2>H4 Waterproof ന്റെ ഗുണങ്ങൾ</h2>
 
 <div class="grid">
-
-<div class="card">
-<div class="icon">
-<svg viewBox="0 0 64 64"><path d="M32 4C20 20 8 28 8 40a24 24 0 0048 0C56 28 44 20 32 4z" fill="#4FC3F7"/></svg>
-</div>
-<b>Water Protection</b>
-<p>മഴയും ഈർപ്പവും തടയും</p>
-</div>
-
-<div class="card">
-<div class="icon">
-<svg viewBox="0 0 64 64"><rect x="12" y="28" width="40" height="28" rx="6" fill="#4CAF50"/><circle cx="32" cy="42" r="4" fill="#fff"/></svg>
-</div>
-<b>No Leakage</b>
-<p>ചോർച്ച ഇല്ല</p>
+  <div class="card"><div class="icon">💧</div><b>Water Protection</b></div>
+  <div class="card"><div class="icon">🔒</div><b>No Leakage</b></div>
+  <div class="card"><div class="icon">🧱</div><b>Wall Safety</b></div>
+  <div class="card"><div class="icon">🛡️</div><b>Long Life</b></div>
+  <div class="card"><div class="icon">🏠</div><b>Roof / Terrace</b></div>
+  <div class="card"><div class="icon">🏗️</div><b>Foundation</b></div>
+  <div class="card"><div class="icon">🧱</div><b>Walls</b></div>
+  <div class="card"><div class="icon">🏢</div><b>Balcony</b></div>
+  <div class="card"><div class="icon">🚰</div><b>Water Tank</b></div>
 </div>
 
-<div class="card">
-<div class="icon">
-<svg viewBox="0 0 64 64"><rect x="8" y="24" width="48" height="28" fill="#FF9800"/></svg>
-</div>
-<b>Wall Safety</b>
-<p>ഭിത്തി സുരക്ഷ</p>
-</div>
-
-<div class="card">
-<div class="icon">
-<svg viewBox="0 0 64 64"><path d="M32 6l20 8v14c0 12-8 22-20 30C20 50 12 40 12 28V14z" fill="#FFD54F"/></svg>
-</div>
-<b>Long Life</b>
-<p>10 വർഷം ദൈർഘ്യം</p>
-</div>
-
-<div class="card">
-<div class="icon">
-<svg viewBox="0 0 64 64"><polygon points="32,8 56,28 8,28" fill="#FBC02D"/></svg>
-</div>
-<b>Roof / Terrace</b>
-</div>
-
-<div class="card">
-<div class="icon">
-<svg viewBox="0 0 64 64"><rect x="10" y="30" width="44" height="18" fill="#8D6E63"/></svg>
-</div>
-<b>Foundation</b>
-</div>
-
-<div class="card">
-<div class="icon">
-<svg viewBox="0 0 64 64"><rect x="14" y="16" width="36" height="32" fill="#E57373"/></svg>
-</div>
-<b>Walls</b>
-</div>
-
-<div class="card">
-<div class="icon">
-<svg viewBox="0 0 64 64"><rect x="18" y="18" width="28" height="24" fill="#64B5F6"/></svg>
-</div>
-<b>Balcony</b>
-</div>
-
-<div class="card">
-<div class="icon">
-<svg viewBox="0 0 64 64"><ellipse cx="32" cy="32" rx="18" ry="22" fill="#4DD0E1"/></svg>
-</div>
-<b>Water Tank</b>
-</div>
-
-</div>
-
-<!-- ORDER BUTTON -->
 <button class="order-btn">Order Sheet</button>
 
-<!-- GAP -->
-<br><br>
-
-<!-- FULL TEXT CONTENT -->
-<div class="content">
+<!-- ================= MALAYALAM CONTENT ================= -->
+<div id="ml" class="lang-content active">
 
 <h2>H4 Waterproof: കെമിസ്ട്രിയുടെ കരുത്തിൽ നിർമ്മിച്ച സംരക്ഷണം</h2>
 
+<p><b>വീട്, മാത്രമല്ല; അടുത്ത 10 വർഷത്തെ നിങ്ങളുടെ സമാധാനം.</b></p>
+
 <p>
-പരമ്പരാഗത വാട്ടർപ്രൂഫിംഗ് സിസ്റ്റങ്ങൾ 2–3 വർഷത്തിനുള്ളിൽ പൊട്ടുകയും പൊളിക്കുകയും ചെയ്യും.  
-H4 Waterproof കോൺക്രീറ്റിന്റെ ആന്തരിക ഘടനയിൽ കെമിക്കൽ ബോണ്ടിംഗ് നടത്തി ശാശ്വത സംരക്ഷണം നൽകുന്നു.
+AV Chem Chemical & Manufacturing അവതരിപ്പിക്കുന്നു –  
+ശാസ്ത്രത്തിന്റെ അതിരുകൾ വിട്ട് നിൽക്കുന്ന ഒരു സംരക്ഷണ കവചം: <b>H4 Waterproof</b>.
+</p>
+
+<p><b>ഇത് ഒരു പെയിന്റ് അല്ല. ഇതൊരു കെമിക്കൽ ബോണ്ടിംഗ് സംവിധാനം ആണ്.</b></p>
+
+<h3>🛡️ 10 വർഷത്തെ 100% ഗ്യാരണ്ടി</h3>
+
+<p>
+പരമ്പരാഗത വാട്ടർപ്രൂഫിംഗ് 2–3 വർഷത്തിനുള്ളിൽ പരാജയപ്പെടും.  
+H4 കോൺക്രീറ്റിന്റെ ആന്തരിക ഘടനയിൽ ചേർന്ന് ശാശ്വത സംരക്ഷണം നൽകുന്നു.
+</p>
+
+<h3>💎 4 അഡ്വാൻസ്ഡ് ബെനിഫിറ്റ്സ്</h3>
+
+<ul>
+<li>🌡️ താപ ഇൻസുലേഷൻ</li>
+<li>🧱 Crack Bridging Ability</li>
+<li>🏭 Anti-Carbonation Protection</li>
+<li>🚫 പായൽ & പൂപ്പൽ തടയൽ</li>
+</ul>
+
+<h3>📋 ഉപയോഗിക്കാവുന്ന സ്ഥലങ്ങൾ</h3>
+
+<p>
+ടെറസ്, റൂഫ്, സൺഷെയ്ഡ്, ബാലക്കണി, എക്സ്റ്റീരിയർ വാൾസ്, വാട്ടർ ടാങ്കുകൾ
+</p>
+
+<h3>📞 Contact Us</h3>
+
+<p>
+📞 7907344030 / 9745838382<br>
+📧 avchemtirur@gmail.com
 </p>
 
 <p>
-🔹 താപ ഇൻസുലേഷൻ  
-🔹 Crack Bridging Ability  
-🔹 Anti-Carbonation Protection  
-🔹 Mould & Algae Resistance
-</p>
-
-<p>
-ഒരു തവണ H4 പ്രയോഗിച്ചാൽ, അടുത്ത പത്ത് വർഷം മഴക്കാലം നിങ്ങളുടെ ഉറക്കം കെടുത്തില്ല.
-</p>
-
-<h2>Contact Us</h2>
-
-<p>
-📞 Phone: +91 7907344030  
-📱 WhatsApp: 9745838382  
-📧 Email: avchemtirur@gmail.com
-</p>
-
-<p>
-📍 AV Chem Chemical & Manufacturing  
-Mukkilapeedika, Kannamkulam PO,  
+📍 AV Chem Chemical & Manufacturing<br>
+Mukkilapeedika, Kannamkulam PO,<br>
 BP Angadi – 676102, Tirur, Malappuram, Kerala
+</p>
+
+</div>
+
+<!-- ================= ENGLISH CONTENT ================= -->
+<div id="en" class="lang-content">
+
+<h2>H4 Waterproof: A Decade of Protection</h2>
+
+<p><b>Your home is safe… for the next 10 years!</b></p>
+
+<p>
+Introducing H4 Waterproof from AV Chem Chemical & Manufacturing –  
+an advanced chemical bonding waterproofing solution.
+</p>
+
+<h3>🛡️ Our 10-Year Warranty</h3>
+
+<p>
+Ordinary waterproofing cracks in 2–3 years.  
+H4 fuses with concrete, forming a long-lasting protective barrier.
+</p>
+
+<h3>💡 Extra Benefits</h3>
+
+<ul>
+<li>Thermal insulation – cooler interiors</li>
+<li>Crack bridging elasticity</li>
+<li>Anti-carbonation protection</li>
+<li>Mould & algae resistance</li>
+</ul>
+
+<h3>📋 Suitable For</h3>
+
+<p>
+Terraces, sunshades, exterior walls, balconies and water tanks.
+</p>
+
+<h3>📞 Contact Us</h3>
+
+<p>
+📞 +91 7907344030<br>
+📱 WhatsApp: 9745838382<br>
+📧 avchemtirur@gmail.com
+</p>
+
+<p>
+📍 AV Chem Chemical & Manufacturing<br>
+Tirur, Malappuram, Kerala
 </p>
 
 </div>
@@ -259,5 +243,18 @@ BP Angadi – 676102, Tirur, Malappuram, Kerala
 </footer>
 
 </div>
+
+<script>
+function switchLang(lang){
+  document.getElementById('ml').classList.remove('active');
+  document.getElementById('en').classList.remove('active');
+  document.getElementById(lang).classList.add('active');
+
+  document.getElementById('btn-ml').classList.remove('active');
+  document.getElementById('btn-en').classList.remove('active');
+  document.getElementById('btn-'+lang).classList.add('active');
+}
+</script>
+
 </body>
 </html>
