@@ -1,48 +1,56 @@
 <!DOCTYPE html>
-<html lang="ml">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>H4 Waterproof</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Malayalam Font -->
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Malayalam:wght@400;700;800&display=swap" rel="stylesheet">
+<title>H4 Waterproof</title>
+
+<!-- Malayalam Bold Font -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;700;800&display=swap" rel="stylesheet">
 
 <style>
 body{
   margin:0;
-  background:#f6f1fb;
-  font-family:'Noto Serif Malayalam', serif;
+  font-family:'Noto Sans Malayalam', sans-serif;
+  background:#f6f2fb;
+  color:#222;
 }
 
 .container{
-  max-width:1200px;
+  max-width:1100px;
   margin:auto;
   padding:20px;
 }
 
-/* Language Buttons */
-.lang{
+/* Language buttons */
+.lang-switch{
   display:flex;
   gap:10px;
-  margin-bottom:15px;
+  justify-content:flex-start;
+  margin-bottom:10px;
 }
-.lang button{
-  padding:6px 16px;
+.lang-switch button{
   border:none;
-  border-radius:20px;
+  padding:6px 14px;
+  border-radius:6px;
+  cursor:pointer;
   background:#000;
   color:#fff;
-  cursor:pointer;
-  font-weight:700;
+  font-weight:600;
 }
-.lang button.active{
-  background:#f4c400;
+.lang-switch button.active{
+  background:#f5c400;
   color:#000;
 }
 
 /* Headings */
-h1,h2,h3{
+h1{
+  font-size:28px;
+  font-weight:800;
+}
+h2{
+  margin-top:30px;
   font-weight:800;
 }
 
@@ -51,62 +59,68 @@ h1,h2,h3{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:20px;
-}
-@media(max-width:768px){
-  .grid{grid-template-columns:repeat(2,1fr);}
-}
-@media(max-width:480px){
-  .grid{grid-template-columns:1fr;}
+  margin-top:20px;
 }
 
 .card{
   background:#fff;
-  border-radius:14px;
-  padding:22px;
+  border-radius:12px;
+  padding:30px 10px;
   text-align:center;
-  box-shadow:0 8px 20px rgba(0,0,0,.1);
-  border-bottom:5px solid #f4c400;
+  box-shadow:0 8px 20px rgba(0,0,0,.08);
+  border-bottom:5px solid #f5c400;
 }
 
-.icon{
-  width:80px;
-  height:80px;
-  margin:auto;
-  margin-bottom:10px;
+.icon-img{
+  width:140px;       /* 🔥 4× SIZE */
+  height:140px;
+  object-fit:contain;
+  margin-bottom:15px;
+  transition:transform .3s ease;
+}
+
+.card:hover .icon-img{
+  transform:scale(1.15);
 }
 
 .card b{
-  font-size:17px;
+  display:block;
+  font-size:20px;
+  font-weight:800;
 }
 
-/* Order Button */
+/* Order button */
 .order-btn{
   display:block;
-  margin:35px auto;
-  padding:14px 36px;
-  background:#f4c400;
+  margin:40px auto 20px;
+  padding:12px 30px;
+  font-size:18px;
   border:none;
   border-radius:30px;
-  font-size:18px;
+  background:#f5c400;
   font-weight:800;
   cursor:pointer;
 }
 
-/* CONTENT SECTIONS */
-.lang-content{
-  display:none;
+/* Content section */
+.content{
   margin-top:40px;
-  line-height:1.9;
-}
-.lang-content.active{
-  display:block;
+  line-height:1.8;
+  font-size:16px;
 }
 
-footer{
+.footer{
+  margin:40px 0 20px;
   text-align:center;
   font-size:13px;
-  margin:40px 0;
   color:#555;
+}
+
+/* Responsive */
+@media(max-width:768px){
+  .grid{
+    grid-template-columns:repeat(2,1fr);
+  }
 }
 </style>
 </head>
@@ -114,71 +128,84 @@ footer{
 <body>
 <div class="container">
 
-<!-- LANGUAGE BUTTON -->
-<div class="lang">
-  <button id="btn-ml" class="active" onclick="switchLang('ml')">Malayalam</button>
-  <button id="btn-en" onclick="switchLang('en')">English</button>
+<!-- Language -->
+<div class="lang-switch">
+  <button class="active" onclick="setLang('ml')">Malayalam</button>
+  <button onclick="setLang('en')">English</button>
 </div>
 
-<h1>H4 Waterproof – 10 വർഷത്തെ വിശ്വസനീയ സംരക്ഷണം</h1>
+<!-- TITLE -->
+<h1 data-ml="H4 Waterproof – 10 വർഷത്തെ വിശ്വാസനീയ സംരക്ഷണം."
+    data-en="H4 Waterproof – A Decade of Trusted Protection">
+H4 Waterproof – 10 വർഷത്തെ വിശ്വാസനീയ സംരക്ഷണം.
+</h1>
 
-<h2>H4 Waterproof ന്റെ ഗുണങ്ങൾ</h2>
-
+<!-- ICON GRID -->
 <div class="grid">
-  <div class="card"><div class="icon">💧</div><b>Water Protection</b></div>
-  <div class="card"><div class="icon">🔒</div><b>No Leakage</b></div>
-  <div class="card"><div class="icon">🧱</div><b>Wall Safety</b></div>
-  <div class="card"><div class="icon">🛡️</div><b>Long Life</b></div>
-  <div class="card"><div class="icon">🏠</div><b>Roof / Terrace</b></div>
-  <div class="card"><div class="icon">🏗️</div><b>Foundation</b></div>
-  <div class="card"><div class="icon">🧱</div><b>Walls</b></div>
-  <div class="card"><div class="icon">🏢</div><b>Balcony</b></div>
-  <div class="card"><div class="icon">🚰</div><b>Water Tank</b></div>
+
+<div class="card">
+<img src="icons/water-protection.png" class="icon-img">
+<b>Water Protection</b>
 </div>
 
+<div class="card">
+<img src="icons/no-leakage.png" class="icon-img">
+<b>No Leakage</b>
+</div>
+
+<div class="card">
+<img src="icons/wall-safety.png" class="icon-img">
+<b>Wall Safety</b>
+</div>
+
+<div class="card">
+<img src="icons/long-life.png" class="icon-img">
+<b>Long Life</b>
+</div>
+
+<div class="card">
+<img src="icons/roof-terrace.png" class="icon-img">
+<b>Roof / Terrace</b>
+</div>
+
+<div class="card">
+<img src="icons/foundation.png" class="icon-img">
+<b>Foundation</b>
+</div>
+
+<div class="card">
+<img src="icons/walls.png" class="icon-img">
+<b>Walls</b>
+</div>
+
+<div class="card">
+<img src="icons/balcony.png" class="icon-img">
+<b>Balcony</b>
+</div>
+
+<div class="card">
+<img src="icons/water-tank.png" class="icon-img">
+<b>Water Tank</b>
+</div>
+
+</div>
+
+<!-- ORDER -->
 <button class="order-btn">Order Sheet</button>
 
-<!-- ================= MALAYALAM CONTENT ================= -->
-<div id="ml" class="lang-content active">
+<!-- TEXT CONTENT -->
+<div class="content" id="content">
 
-<h2>H4 Waterproof: കെമിസ്ട്രിയുടെ കരുത്തിൽ നിർമ്മിച്ച സംരക്ഷണം</h2>
-
-<p><b>വീട്, മാത്രമല്ല; അടുത്ത 10 വർഷത്തെ നിങ്ങളുടെ സമാധാനം.</b></p>
-
+<h2>H4 Waterproof</h2>
 <p>
-AV Chem Chemical & Manufacturing അവതരിപ്പിക്കുന്നു –  
-ശാസ്ത്രത്തിന്റെ അതിരുകൾ വിട്ട് നിൽക്കുന്ന ഒരു സംരക്ഷണ കവചം: <b>H4 Waterproof</b>.
+കെമിസ്ട്രിയുടെ കരുത്തിൽ നിർമ്മിച്ച, പതിറ്റാണ്ടുകളുടെ സംരക്ഷണം.  
+ഇത് ഒരു പെയിന്റ് അല്ല – കെമിക്കൽ ബോണ്ടിംഗ് സംവിധാനം ആണ്.
 </p>
 
-<p><b>ഇത് ഒരു പെയിന്റ് അല്ല. ഇതൊരു കെമിക്കൽ ബോണ്ടിംഗ് സംവിധാനം ആണ്.</b></p>
-
-<h3>🛡️ 10 വർഷത്തെ 100% ഗ്യാരണ്ടി</h3>
-
 <p>
-പരമ്പരാഗത വാട്ടർപ്രൂഫിംഗ് 2–3 വർഷത്തിനുള്ളിൽ പരാജയപ്പെടും.  
-H4 കോൺക്രീറ്റിന്റെ ആന്തരിക ഘടനയിൽ ചേർന്ന് ശാശ്വത സംരക്ഷണം നൽകുന്നു.
-</p>
-
-<h3>💎 4 അഡ്വാൻസ്ഡ് ബെനിഫിറ്റ്സ്</h3>
-
-<ul>
-<li>🌡️ താപ ഇൻസുലേഷൻ</li>
-<li>🧱 Crack Bridging Ability</li>
-<li>🏭 Anti-Carbonation Protection</li>
-<li>🚫 പായൽ & പൂപ്പൽ തടയൽ</li>
-</ul>
-
-<h3>📋 ഉപയോഗിക്കാവുന്ന സ്ഥലങ്ങൾ</h3>
-
-<p>
-ടെറസ്, റൂഫ്, സൺഷെയ്ഡ്, ബാലക്കണി, എക്സ്റ്റീരിയർ വാൾസ്, വാട്ടർ ടാങ്കുകൾ
-</p>
-
-<h3>📞 Contact Us</h3>
-
-<p>
-📞 7907344030 / 9745838382<br>
-📧 avchemtirur@gmail.com
+🛡️ <b>10 വർഷത്തെ 100% ഗ്യാരണ്ടി</b><br>
+Crack Bridging Ability • Anti-Carbonation Protection •  
+Mould & Algae Resistance
 </p>
 
 <p>
@@ -187,72 +214,28 @@ Mukkilapeedika, Kannamkulam PO,<br>
 BP Angadi – 676102, Tirur, Malappuram, Kerala
 </p>
 
-</div>
-
-<!-- ================= ENGLISH CONTENT ================= -->
-<div id="en" class="lang-content">
-
-<h2>H4 Waterproof: A Decade of Protection</h2>
-
-<p><b>Your home is safe… for the next 10 years!</b></p>
-
 <p>
-Introducing H4 Waterproof from AV Chem Chemical & Manufacturing –  
-an advanced chemical bonding waterproofing solution.
-</p>
-
-<h3>🛡️ Our 10-Year Warranty</h3>
-
-<p>
-Ordinary waterproofing cracks in 2–3 years.  
-H4 fuses with concrete, forming a long-lasting protective barrier.
-</p>
-
-<h3>💡 Extra Benefits</h3>
-
-<ul>
-<li>Thermal insulation – cooler interiors</li>
-<li>Crack bridging elasticity</li>
-<li>Anti-carbonation protection</li>
-<li>Mould & algae resistance</li>
-</ul>
-
-<h3>📋 Suitable For</h3>
-
-<p>
-Terraces, sunshades, exterior walls, balconies and water tanks.
-</p>
-
-<h3>📞 Contact Us</h3>
-
-<p>
-📞 +91 7907344030<br>
-📱 WhatsApp: 9745838382<br>
+📞 7907344030 / 9745838382<br>
 📧 avchemtirur@gmail.com
 </p>
 
-<p>
-📍 AV Chem Chemical & Manufacturing<br>
-Tirur, Malappuram, Kerala
-</p>
-
 </div>
 
-<footer>
+<div class="footer">
 © AV Chem Chemical & Manufacturing. All Rights Reserved.
-</footer>
+</div>
 
 </div>
 
 <script>
-function switchLang(lang){
-  document.getElementById('ml').classList.remove('active');
-  document.getElementById('en').classList.remove('active');
-  document.getElementById(lang).classList.add('active');
+function setLang(lang){
+  document.querySelectorAll('.lang-switch button')
+    .forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
 
-  document.getElementById('btn-ml').classList.remove('active');
-  document.getElementById('btn-en').classList.remove('active');
-  document.getElementById('btn-'+lang).classList.add('active');
+  document.querySelectorAll('[data-ml]').forEach(el=>{
+    el.innerText = lang==='ml' ? el.dataset.ml : el.dataset.en;
+  });
 }
 </script>
 
