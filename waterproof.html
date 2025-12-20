@@ -19,7 +19,12 @@ body {
 
 .container { max-width:1100px; margin:auto; padding:20px; }
 
-.lang-switch { display:flex; gap:10px; margin-bottom:10px; }
+/* Language buttons moved down with space */
+.lang-switch { 
+    display:flex; 
+    gap:10px; 
+    margin-bottom:60px; /* 4 lines spacing below language buttons */
+}
 .lang-switch button { border:none; padding:6px 14px; border-radius:6px; cursor:pointer; background:#000; color:#fff; font-weight:600; }
 .lang-switch button.active { background:#f5c400; color:#000; }
 
@@ -28,7 +33,7 @@ h1, h2, h3, h4 {
     font-weight: normal !important; /* ഹെഡ്‌ലൈൻ bold അല്ല */
 }
 
-h1 { font-size:1.8rem; margin-top:10px; }
+h1 { font-size:1.8rem; margin-top:10px; text-align: center; }
 h2 { margin-top:30px; font-size:1.5rem; }
 h3 { font-size:1.3rem; margin-top:25px; }
 h4 { font-size:1.1rem; margin-top:20px; }
@@ -62,6 +67,8 @@ h4 { font-size:1.1rem; margin-top:20px; }
 }
 .about-section h2 { color: #222; border-left: 5px solid #f5c400; padding-left: 15px; }
 .about-section p { margin-bottom: 20px; font-weight: 700; } /* പാരാഗ്രാഫുകൾ ബോൾഡ് */
+.about-section ul { margin-bottom: 20px; padding-left: 20px; }
+.about-section li { margin-bottom: 10px; font-weight: 700; }
 
 .footer { margin:40px 0 20px; text-align:center; font-size:0.9rem; color:#555; }
 
@@ -135,6 +142,7 @@ h4 { font-size:1.1rem; margin-top:20px; }
 @media(max-width:768px){ 
     .grid { grid-template-columns:repeat(2,1fr); } 
     .popup-content { width: 95%; padding: 20px; }
+    h1 { font-size:1.5rem; }
 }
 </style>
 </head>
@@ -151,15 +159,15 @@ H4 Waterproof – 10 വർഷത്തെ വിശ്വാസനീയ സം
 </h1>
 
 <div class="grid">
-<div class="card"><img src="images/water-protection.png" class="icon-img"><b data-ml="ജലസംരക്ഷണം" data-en="Water Protection">ജലസംരക്ഷണം</b></div>
-<div class="card"><img src="images/no-leakage.png" class="icon-img"><b data-ml="ലീക്കേജ് ഇല്ല" data-en="No Leakage">ലീക്കേജ് ഇല്ല</b></div>
-<div class="card"><img src="images/wall-safety.png" class="icon-img"><b data-ml="മതിൽ സുരക്ഷ" data-en="Wall Safety">മതിൽ സുരക്ഷ</b></div>
-<div class="card"><img src="images/long-life.png" class="icon-img"><b data-ml="ദീർഘായുസ്" data-en="Long Life">ദീർഘായുസ്</b></div>
-<div class="card"><img src="images/roof-terrace.png" class="icon-img"><b data-ml="മേൽക്കൂര / ടെറസ്" data-en="Roo f / Terrace">മേൽക്കൂര / ടെറസ്</b></div>
-<div class="card"><img src="images/foundation.png" class="icon-img"><b data-ml="അടിത്തറ" data-en="Foundation">അടിത്തറ</b></div>
-<div class="card"><img src="images/walls.png" class="icon-img"><b data-ml="മതിലുകൾ" data-en="Walls">മതിലുകൾ</b></div>
-<div class="card"><img src="images/balcony.png" class="icon-img"><b data-ml="ബാൽക്കണി" data-en="Balcony">ബാൽക്കണി</b></div>
-<div class="card"><img src="images/water-tank.png" class="icon-img"><b data-ml="വാട്ടർ ടാങ്ക്" data-en="Water Tank">വാട്ടർ ടാങ്ക്</b></div>
+<div class="card"><img src="images/water-protection.png" class="icon-img" alt="Water Protection"><b data-ml="ജലസംരക്ഷണം" data-en="Water Protection">ജലസംരക്ഷണം</b></div>
+<div class="card"><img src="images/no-leakage.png" class="icon-img" alt="No Leakage"><b data-ml="ലീക്കേജ് ഇല്ല" data-en="No Leakage">ലീക്കേജ് ഇല്ല</b></div>
+<div class="card"><img src="images/wall-safety.png" class="icon-img" alt="Wall Safety"><b data-ml="മതിൽ സുരക്ഷ" data-en="Wall Safety">മതിൽ സുരക്ഷ</b></div>
+<div class="card"><img src="images/long-life.png" class="icon-img" alt="Long Life"><b data-ml="ദീർഘായുസ്" data-en="Long Life">ദീർഘായുസ്</b></div>
+<div class="card"><img src="images/roof-terrace.png" class="icon-img" alt="Roof Terrace"><b data-ml="മേൽക്കൂര / ടെറസ്" data-en="Roof / Terrace">മേൽക്കൂര / ടെറസ്</b></div>
+<div class="card"><img src="images/foundation.png" class="icon-img" alt="Foundation"><b data-ml="അടിത്തറ" data-en="Foundation">അടിത്തറ</b></div>
+<div class="card"><img src="images/walls.png" class="icon-img" alt="Walls"><b data-ml="മതിലുകൾ" data-en="Walls">മതിലുകൾ</b></div>
+<div class="card"><img src="images/balcony.png" class="icon-img" alt="Balcony"><b data-ml="ബാൽക്കണി" data-en="Balcony">ബാൽക്കണി</b></div>
+<div class="card"><img src="images/water-tank.png" class="icon-img" alt="Water Tank"><b data-ml="വാട്ടർ ടാങ്ക്" data-en="Water Tank">വാട്ടർ ടാങ്ക്</b></div>
 </div>
 
 <button class="order-btn" onclick="openPopup()" data-ml="ഓർഡർ ഷീറ്റ്" data-en="Order Sheet">ഓർഡർ ഷീറ്റ്</button>
@@ -180,78 +188,49 @@ H4 Waterproof – 10 വർഷത്തെ വിശ്വാസനീയ സം
     </div>
 </div>
 
-<!-- About section continues here (same as before) -->
+<!-- About section with full content -->
 <div class="about-section" id="about-content">
     <h2 data-ml="H4 Waterproof: കെമിസ്ട്രിയുടെ കരുത്തിൽ നിർമ്മിച്ച, പതിറ്റാണ്ടുകളുടെ സംരക്ഷണം!" data-en="H4 Waterproof: A Decade of Protection, Powered by Science.">H4 Waterproof: കെമിസ്ട്രിയുടെ കരുത്തിൽ നിർമ്മിച്ച, പതിറ്റാണ്ടുകളുടെ സംരക്ഷണം!</h2>
-    <!-- ... ബാക്കി ഉള്ളടക്കം നിങ്ങളുടെ യഥാർത്ഥ പേജിൽ ഉള്ളത് പോലെ ... -->
-</div>
-
-<div class="footer">© AV Chem Chemical & Manufacturing. All Rights Reserved.</div>
-</div>
-
-<script>
-// ഭാഷ മാറ്റുന്ന ഫംഗ്ഷൻ
-function setLang(lang){
-    // Active button മാറ്റുന്നു
-    document.querySelectorAll('.lang-switch button').forEach(b=>b.classList.remove('active'));
-    event.target.classList.add('active');
     
-    // എല്ലാ data-ml, data-en എന്നിവയും മാറ്റുന്നു
-    document.querySelectorAll('[data-ml]').forEach(el=>{
-        if(el.tagName === 'INPUT' && el.hasAttribute('data-ml-placeholder')) {
-            // Input placeholder മാറ്റുന്നു
-            el.placeholder = lang==='ml' ? el.getAttribute('data-ml-placeholder') : el.getAttribute('data-en-placeholder');
-        } else {
-            // മറ്റു എല്ലാ എലമെന്റുകളും മാറ്റുന്നു
-            el.innerHTML = lang==='ml' ? el.dataset.ml : el.dataset.en;
-        }
-    });
-}
-
-// Popup തുറക്കുന്നു
-function openPopup() {
-    document.getElementById('orderPopup').style.display = 'flex';
-}
-
-// Popup അടയ്ക്കുന്നു
-function closePopup() {
-    document.getElementById('orderPopup').style.display = 'none';
-}
-
-// ഫോം സമർപ്പിക്കുമ്പോൾ
-function submitOrder(event) {
-    event.preventDefault();
+    <p data-ml="(ഒരു വെബ്‌സൈറ്റ് പ്രധാന പേജിനായി സമ്പൂർണ്ണ ഉള്ളടക്കം)" data-en="(Complete content for a website main page)">(ഒരു വെബ്‌സൈറ്റ് പ്രധാന പേജിനായി സമ്പൂർണ്ണ ഉള്ളടക്കം)</p>
     
-    // ഫോം ഡാറ്റ എടുക്കുന്നു
-    const form = event.target;
-    const name = form[0].value;
-    const phone = form[1].value;
-    const email = form[2].value;
-    const location = form[3].value;
+    <p data-ml="വീട്, മാത്രമല്ല; അടുത്ത 10 വർഷത്തെ നിങ്ങളുടെ സമാധാനം." data-en="Your home is safe… for the next 10 years!">വീട്, മാത്രമല്ല; അടുത്ത 10 വർഷത്തെ നിങ്ങളുടെ സമാധാനം.</p>
     
-    // ഇവിടെ നിങ്ങൾക്ക് ഡാറ്റ സംഭരിക്കാം (ഇമെയിൽ അയക്കാം, ഡാറ്റാബേസിൽ സേവ് ചെയ്യാം, എന്നിവ)
-    console.log('Order Details:', { name, phone, email, location });
+    <p data-ml="മഴയുടെ ചുവപ്പും വെയിലിന്റെ ചുട്ടുപഴുപ്പും നിങ്ങളുടെ സ്വപ്നഭവനത്തിൽ ഇനി കലർത്തരുത്. AV Chem Chemical & Manufacturing അവതരിപ്പിക്കുന്നു, ശാസ്ത്രത്തിന്റെ അതിരുകൾ വിട്ട് നിൽക്കുന്ന ഒരു സംരക്ഷണ കവചം: H4 Waterproof." data-en="Introducing H4 Waterproof from AV Chem Chemical & Manufacturing – the advanced technological shield designed to protect your dream home from rain and sun.">മഴയുടെ ചുവപ്പും വെയിലിന്റെ ചുട്ടുപഴുപ്പും നിങ്ങളുടെ സ്വപ്നഭവനത്തിൽ ഇനി കലർത്തരുത്. AV Chem Chemical & Manufacturing അവതരിപ്പിക്കുന്നു, ശാസ്ത്രത്തിന്റെ അതിരുകൾ വിട്ട് നിൽക്കുന്ന ഒരു സംരക്ഷണ കവചം: H4 Waterproof.</p>
     
-    // സന്ദേശം കാണിക്കുന്നു
-    alert(lang === 'ml' ? 'ഓർഡർ വിജയകരമായി സമർപ്പിച്ചു! ഞങ്ങൾ ഉടനെ ബന്ധപ്പെടും.' : 'Order submitted successfully! We will contact you soon.');
+    <p data-ml="ഇത് ഒരു പെയിന്റ് അല്ല. ഇതൊരു കെമിക്കൽ ബോണ്ടിംഗ് സംവിധാനം ആണ്." data-en="This is not a paint. This is a chemical bonding system.">ഇത് ഒരു പെയിന്റ് അല്ല. ഇതൊരു കെമിക്കൽ ബോണ്ടിംഗ് സംവിധാനം ആണ്.</p>
     
-    // Popup അടയ്ക്കുന്നു
-    closePopup();
+    <hr style="margin: 30px 0; border: 1px solid #eee;">
     
-    // ഫോം ശൂന്യമാക്കുന്നു
-    form.reset();
-}
-
-// പുറത്ത് ക്ലിക്ക് ചെയ്താൽ popup അടയ്ക്കുന്നു
-window.onclick = function(event) {
-    const modal = document.getElementById('orderPopup');
-    if (event.target === modal) {
-        closePopup();
-    }
-}
-
-// പ്രാരംഭ ഭാഷ സെറ്റ് ചെയ്യുന്നു
-let lang = 'ml';
-</script>
-</body>
-</html>
+    <h3 data-ml="🛡️ ഞങ്ങളുടെ അഡ്വാൻസ് വാഗ്ദാനം: 10 വർഷത്തെ 100% ഗ്യാരണ്ടി" data-en="🛡️ Our Promise: The 10-Year Warranty">🛡️ ഞങ്ങളുടെ അഡ്വാൻസ് വാഗ്ദാനം: 10 വർഷത്തെ 100% ഗ്യാരണ്ടി</h3>
+    
+    <p data-ml="എല്ലാ വാട്ടർപ്രൂഫിംഗും ഒരുപോലെയാണോ? ഒരിക്കലുമില്ല." data-en="Are all waterproofing solutions the same? Never.">എല്ലാ വാട്ടർപ്രൂഫിംഗും ഒരുപോലെയാണോ? ഒരിക്കലുമില്ല.</p>
+    
+    <p data-ml="പരമ്പരാഗത ലായനികൾ കാലക്രമേണ വറ്റി പൊടിയും, ചുരുളും, പൊളിയും. 2-3 വർഷത്തിനുള്ളിൽ നിങ്ങൾ ആ ചോർച്ചയുടെ ശബ്ദം വീണ്ടും കേൾക്കും. H4 വ്യത്യസ്തമാണ്. ഞങ്ങളുടെ ഗവേഷണത്തിന്റെ കേന്ദ്രബിന്ദു, 'പെർമനന്റ് കെമിക്കൽ ഇന്റഗ്രേഷൻ' ആണ്. ഇത് കോൺക്രീറ്റിന്റെ ആന്തരിക ഘടനയിൽ ദ്രവിച്ച് ചേർന്ന്, ഒന്നായി മാറുന്നു. കോൺക്രീറ്റിന് ജലവിരുദ്ധമായ ഒരു രണ്ടാം ചർമ്മം നൽകുന്നു." data-en="Traditional solutions dry up, crack, and peel over time. Within 2-3 years, you'll hear that leakage sound again. H4 is different. Our research focuses on 'Permanent Chemical Integration'. It dissolves and integrates into the internal structure of concrete, becoming one with it. It gives concrete a waterproof second skin.">പരമ്പരാഗത ലായനികൾ കാലക്രമേണ വറ്റി പൊടിയും, ചുരുളും, പൊളിയും. 2-3 വർഷത്തിനുള്ളിൽ നിങ്ങൾ ആ ചോർച്ചയുടെ ശബ്ദം വീണ്ടും കേൾക്കും. H4 വ്യത്യസ്തമാണ്. ഞങ്ങളുടെ ഗവേഷണത്തിന്റെ കേന്ദ്രബിന്ദു, 'പെർമനന്റ് കെമിക്കൽ ഇന്റഗ്രേഷൻ' ആണ്. ഇത് കോൺക്രീറ്റിന്റെ ആന്തരിക ഘടനയിൽ ദ്രവിച്ച് ചേർന്ന്, ഒന്നായി മാറുന്നു. കോൺക്രീറ്റിന് ജലവിരുദ്ധമായ ഒരു രണ്ടാം ചർമ്മം നൽകുന്നു.</p>
+    
+    <p data-ml="അതുകൊണ്ടാണ് ഞങ്ങൾക്ക് ധൈര്യമായി ഇത് പറയാൻ: അടുത്ത പത്തുവർഷം, മഴക്കാലം നിങ്ങളുടെ ഉറക്കം കെടുത്തില്ല." data-en="That's why we can confidently say: For the next ten years, monsoon will not disturb your sleep.">അതുകൊണ്ടാണ് ഞങ്ങൾക്ക് ധൈര്യമായി ഇത് പറയാൻ: അടുത്ത പത്തുവർഷം, മഴക്കാലം നിങ്ങളുടെ ഉറക്കം കെടുത്തില്ല.</p>
+    
+    <hr style="margin: 30px 0; border: 1px solid #eee;">
+    
+    <h3 data-ml="🔬 H4-ന്റെ രസതന്ത്രം: സാധാരണ ചായം അല്ല, ഒരു സംവിധാനം" data-en="🔬 H4 Chemistry: Not Ordinary Paint, But a System">🔬 H4-ന്റെ രസതന്ത്രം: സാധാരണ ചായം അല്ല, ഒരു സംവിധാനം</h3>
+    
+    <p data-ml="H4-ന്റെ ശക്തി അതിന്റെ തന്മാത്രാ ഘടനയിൽ ഒളിഞ്ഞിരിക്കുന്നു. ഇത് ജലത്തെ ഉപരിതലത്തിൽ തന്നെ തിരികെ തള്ളുകയാണ് (Water Repellency). എന്നാൽ അതിനപ്പുറം, കെമിക്കൽ ബോണ്ടിംഗ് മൂലം ഇത് ശാശ്വതമായ സംരക്ഷണം നൽകുന്നു." data-en="H4's strength lies in its molecular structure. It repels water at the surface (Water Repellency). But beyond that, through chemical bonding, it provides permanent protection.">H4-ന്റെ ശക്തി അതിന്റെ തന്മാത്രാ ഘടനയിൽ ഒളിഞ്ഞിരിക്കുന്നു. ഇത് ജലത്തെ ഉപരിതലത്തിൽ തന്നെ തിരികെ തള്ളുകയാണ് (Water Repellency). എന്നാൽ അതിനപ്പുറം, കെമിക്കൽ ബോണ്ടിംഗ് മൂലം ഇത് ശാശ്വതമായ സംരക്ഷണം നൽകുന്നു.</p>
+    
+    <p data-ml="അഡ്വാൻസ് ടിപ്പ്: പുതിയ കെമിക്കൽ ടെക്നോളജി പലപ്പോഴും പ്രയോഗിക്കാൻ പ്രത്യേക പരിശീലനം വേണ്ടിവരും. എന്നാൽ H4, പാരമ്പര്യമായ ബ്രഷ്/റോളർ രീതിയിൽ തന്നെ പ്രയോഗിക്കാവുന്ന യൂസർ-ഫ്രണ്ട്ലി ടെക്നോളജി ആണ്. നിങ്ങളുടെ പ്രാദേശിക പെയിന്റർ തന്നെ ഇത് എളുപ്പത്തിൽ പ്രയോഗിക്കും." data-en="Advanced Tip: New chemical technologies often require special training to apply. But H4 is user-friendly technology that can be applied using traditional brush/roller methods. Your local painter can easily apply it.">അഡ്വാൻസ് ടിപ്പ്: പുതിയ കെമിക്കൽ ടെക്നോളജി പലപ്പോഴും പ്രയോഗിക്കാൻ പ്രത്യേക പരിശീലനം വേണ്ടിവരും. എന്നാൽ H4, പാരമ്പര്യമായ ബ്രഷ്/റോളർ രീതിയിൽ തന്നെ പ്രയോഗിക്കാവുന്ന യൂസർ-ഫ്രണ്ട്ലി ടെക്നോളജി ആണ്. നിങ്ങളുടെ പ്രാദേശിക പെയിന്റർ തന്നെ ഇത് എളുപ്പത്തിൽ പ്രയോഗിക്കും.</p>
+    
+    <hr style="margin: 30px 0; border: 1px solid #eee;">
+    
+    <h3 data-ml="💎 'ജലം തടയൽ' മാത്രമല്ല, H4 നൽകുന്ന 4 അധിക മാസ് ബെനിഫിറ്റ്സ്:" data-en="💎 Not Just 'Water Protection', 4 Additional Mass Benefits from H4:">💎 'ജലം തടയൽ' മാത്രമല്ല, H4 നൽകുന്ന 4 അധിക മാസ് ബെനിഫിറ്റ്സ്:</h3>
+    
+    <p data-ml="കെമിസ്ട്രിയുടെ മാന്ത്രികത വെറും സംരക്ഷണത്തിനപ്പുറം നിങ്ങളുടെ വീടിന് നാല് സൂപ്പർപവറുകൾ നൽകുന്നു." data-en="The magic of chemistry gives your home four superpowers beyond mere protection.">കെമിസ്ട്രിയുടെ മാന്ത്രികത വെറും സംരക്ഷണത്തിനപ്പുറം നിങ്ങളുടെ വീടിന് നാല് സൂപ്പർപവറുകൾ നൽകുന്നു.</p>
+    
+    <h4 data-ml="🌡️ 1. താപനിലയെ നിയന്ത്രിക്കുന്നു (ആധുനിക താപ ഇൻസുലേഷൻ):" data-en="🌡️ 1. Controls Temperature (Modern Thermal Insulation):">🌡️ 1. താപനിലയെ നിയന്ത്രിക്കുന്നു (ആധുനിക താപ ഇൻസുലേഷൻ):</h4>
+    <p data-ml="H4-യിലെ അത്യാധുനിക റിഫ്ലെക്ടീവ് പിഗ്മെന്റുകൾ സൂര്യരശ്മികളുടെ താപത്തിന്റെ 90% വരെ പ്രതിഫലിപ്പിക്കുന്നു. ഇത് വേനൽക്കാലത്ത് വീടിനുള്ളിലെ താപനില 3°C മുതൽ 8°C വരെ കുറയ്ക്കാനും, ശൈത്യകാലത്ത് ചൂട് അകത്തുതന്നെ നിലനിർത്താനും സഹായിക്കുന്നു. ഫലം: എയർകണ്ടീഷനർ ബിൽ കുറവ്, ഊർജ്ജ സംരക്ഷണം, ആരോഗ്യകരമായ അന്തരീക്ഷം." data-en="Advanced reflective pigments in H4 reflect up to 90% of the sun's heat. This helps reduce indoor temperatures by 3°C to 8°C during summer and retain heat inside during winter. Result: Lower AC bills, energy conservation, and a healthy environment.">H4-യിലെ അത്യാധുനിക റിഫ്ലെക്ടീവ് പിഗ്മെന്റുകൾ സൂര്യരശ്മികളുടെ താപത്തിന്റെ 90% വരെ പ്രതിഫലിപ്പിക്കുന്നു. ഇത് വേനൽക്കാലത്ത് വീടിനുള്ളിലെ താപനില 3°C മുതൽ 8°C വരെ കുറയ്ക്കാനും, ശൈത്യകാലത്ത് ചൂട് അകത്തുതന്നെ നിലനിർത്താനും സഹായിക്കുന്നു. ഫലം: എയർകണ്ടീഷനർ ബിൽ കുറവ്, ഊർജ്ജ സംരക്ഷണം, ആരോഗ്യകരമായ അന്തരീക്ഷം.</p>
+    
+    <h4 data-ml="🧱 2. വിള്ളലുകൾ സ്വയം അടയ്ക്കുന്നു (ഉയർന്ന ഇലാസ്തികത):" data-en="🧱 2. Self-Sealing Cracks (High Elasticity):">🧱 2. വിള്ളലുകൾ സ്വയം അടയ്ക്കുന്നു (ഉയർന്ന ഇലാസ്തികത):</h4>
+    <p data-ml="ചെറിയ വിള്ളലുകൾ കോൺക്രീറ്റിന്റെ സ്വാഭാവികതയാണ്. സാധാരണ പെയിന്റുകൾ ഇവിടെ വിടരുന്നു. പക്ഷേ, H4-യ്ക്ക് എലാസ്റ്റോമെറിക് ഗുണം ഉണ്ട്. ഇത് ഒരു ഇലാസ്തിക കവചം പോലെ വിള്ളലുകൾക്ക് കുറുകെ വലിച്ചുനീട്ടി അവയെ മൂടുന്നു. വിള്ളൽ വീണാലും, H4-യുടെ സംരക്ഷണ പാളി വിള്ളലിലൂടെ വെള്ളം കടക്കാൻ അനുവദിക്കില്ല. (Crack Bridging Ability)" data-en="Small cracks are natural in concrete. Ordinary paints crack here. But H4 has elastomeric properties. Like an elastic shield, it stretches across cracks and covers them. Even if cracks appear, H4's protective layer won't allow water to pass through. (Crack Bridging Ability)">ചെറിയ വിള്ളലുകൾ കോൺക്രീറ്റിന്റെ സ്വാഭാവികതയാണ്. സാധാരണ പെയിന്റുകൾ ഇവിടെ വിടരുന്നു. പക്ഷേ, H4-യ്ക്ക് എലാസ്റ്റോമെറിക് ഗുണം ഉണ്ട്. ഇത് ഒരു ഇലാസ്തിക കവചം പോലെ വിള്ളലുകൾക്ക് കുറുകെ വലിച്ചുനീട്ടി അവയെ മൂടുന്നു. വിള്ളൽ വീണാലും, H4-യുടെ സംരക്ഷണ പാളി വിള്ളലിലൂടെ വെള്ളം കടക്കാൻ അനുവദിക്കില്ല. (Crack Bridging Ability)</p>
+    
+    <h4 data-ml="🏭 3. കാർബണേഷൻ & തുരുമ്പ് എതിരെ കവചം (Anti-Carbonation & Corrosion Protection):" data-en="🏭 3. Shield Against Carbonation & Rust (Anti-Carbonation & Corrosion Protection):">🏭 3. കാർബണേഷൻ & തുരുമ്പ് എതിരെ കവചം (Anti-Carbonation & Corrosion Protection):</h4>
+    <p data-ml="നഗരങ്ങളിലെ മലിനവായു, കാർബൺ ഡൈ ഓക്സൈഡ് എന്നിവ കോൺക്രീറ്റിലെ ഉരുക്ക് ഉറകളെ തുരുമ്പിപ്പിക്കുന്നു (കാർബണേഷൻ). ഇത് കോൺക്രീറ്റിന്റെ ശക്തി കുറയ്ക്കുന്നു. H4 ഒരു അവിഭാജ്യ അവരോധക പാളിയായി പ്രവർത്തിച്ച് ഈ അപകടകരമായ വാതകങ്ങളും ഈർപ്പവും കോൺക്രീറ്റിൽ എത്താതെ തടയുന്നു. നിങ്ങളുടെ വീടിന്റെ ഘടനാപരമായ ആരോഗ്യം ഉറപ്പാക്കുന്നു." data-en="Polluted air and carbon dioxide in cities rust the steel reinforcements in concrete (carbonation). This reduces the strength of concrete. H4 acts as an integral barrier layer, preventing these dangerous gases and moisture from reaching the concrete. Ensures the structural health of your home.">നഗരങ്ങളിലെ മലിനവായു, കാർബൺ ഡൈ ഓക്സൈഡ് എന്നിവ കോൺക്രീറ്റിലെ ഉരുക്ക് ഉറകളെ തുരുമ്പിപ്പിക്കുന്നു (കാർബണേഷൻ). ഇത് കോൺക്രീറ്റിന്റെ ശക്തി കുറയ്ക്കുന്നു. H4 ഒരു അവിഭാജ്യ അവരോധക പാളിയായി പ്രവർത്തിച്ച് ഈ അപകടകരമായ വാതകങ്ങളും ഈർപ്പവും കോൺക്രീറ്റിൽ എത്താതെ തടയുന്നു. നിങ്ങളുടെ വീടിന്റെ ഘടനാപരമായ ആരോഗ്യം ഉറപ്പാക്കുന്നു.</p>
+    
+    <h4 data-ml="🚫 4. പായൽ, പൂപ്പൽ, ബാക്ടീരിയ എന്നിവയുടെ വർദ്ധനവ് തടയുന്നു:" data-en="🚫 4. Prevents Growth of Al
