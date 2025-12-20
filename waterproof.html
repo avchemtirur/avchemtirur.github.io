@@ -15,13 +15,26 @@ body{
 }
 .container{max-width:1200px;margin:auto;padding:20px}
 
-h1{font-size:28px}
+.lang{
+  position:fixed;
+  top:10px;left:10px;
+}
+.lang button{
+  border:none;
+  padding:6px 12px;
+  border-radius:6px;
+  margin-right:6px;
+  background:#000;
+  color:#fff;
+}
+
+h1{font-size:26px;margin-top:50px}
 .section-title{font-size:22px;margin:35px 0 15px}
 
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:20px;
+  gap:18px;
 }
 
 .card{
@@ -35,24 +48,23 @@ h1{font-size:28px}
 }
 .card:hover{
   transform:translateY(-6px);
-  box-shadow:0 14px 30px rgba(0,0,0,.25);
 }
 
 .card img{
-  width:90px;
+  width:80px;
   height:auto;
-  margin-bottom:12px;
-  transition:.3s;
+  margin-bottom:10px;
 }
-.card:hover img{transform:scale(1.08)}
 
 .order-btn{
+  display:block;
+  margin:40px auto;
   background:#f4c400;
   border:none;
-  padding:12px 22px;
-  border-radius:8px;
+  padding:14px 30px;
+  border-radius:10px;
+  font-size:16px;
   font-weight:700;
-  margin:15px 0;
 }
 
 .popup{
@@ -94,10 +106,16 @@ input,select{
 </head>
 
 <body>
+
+<!-- Language Buttons -->
+<div class="lang">
+  <button onclick="setLang('ml')">Malayalam</button>
+  <button onclick="setLang('en')">English</button>
+</div>
+
 <div class="container">
 
-<h1>H4 Waterproof – 10 വർഷത്തെ വിശ്വസ്ത സംരക്ഷണം</h1>
-<button class="order-btn" onclick="popup.style.display='flex'">Order Sheet</button>
+<h1 id="title">H4 Waterproof – 10 വർഷത്തെ വിശ്വസ്ത സംരക്ഷണം</h1>
 
 <div class="section-title">H4 Waterproof ന്റെ ഗുണങ്ങൾ</div>
 <div class="grid">
@@ -105,25 +123,25 @@ input,select{
 <div class="card">
 <img src="images/umbrella.png">
 <h3>Water Protection</h3>
-<p>വെള്ളം കയറുന്നത് പൂര്‍ണമായി തടയുന്നു</p>
+<p>വെള്ളം കയറുന്നത് തടയുന്നു</p>
 </div>
 
 <div class="card">
-<img src="images/water-splash.png">
+<img src="images/water.png">
 <h3>No Leakage</h3>
-<p>ചോർച്ചയ്ക്ക് പൂർണ്ണ സംരക്ഷണം</p>
+<p>ചോർച്ച തടയുന്നു</p>
 </div>
 
 <div class="card">
-<img src="images/brick-wall.png">
+<img src="images/wall.png">
 <h3>Wall Safety</h3>
-<p>ഭിത്തികൾ ശക്തമാക്കുന്നു</p>
+<p>ഭിത്തികൾ സംരക്ഷിക്കുന്നു</p>
 </div>
 
 <div class="card">
-<img src="images/globe-lock.png">
+<img src="images/shield.png">
 <h3>Long Life</h3>
-<p>10 വർഷം ദീർഘകാല സംരക്ഷണം</p>
+<p>10 വർഷം സംരക്ഷണം</p>
 </div>
 
 </div>
@@ -131,23 +149,31 @@ input,select{
 <div class="section-title">Waterproof ഉപയോഗിക്കുന്ന ഭാഗങ്ങൾ</div>
 <div class="grid">
 
-<div class="card"><img src="images/balcony.png"><h3>Roof / Terrace</h3></div>
+<div class="card"><img src="images/roof.png"><h3>Roof / Terrace</h3></div>
 <div class="card"><img src="images/foundation.png"><h3>Foundation</h3></div>
-<div class="card"><img src="images/brick-wall.png"><h3>Walls</h3></div>
+<div class="card"><img src="images/wall.png"><h3>Walls</h3></div>
 <div class="card"><img src="images/balcony.png"><h3>Balcony</h3></div>
-<div class="card"><img src="images/globe-lock.png"><h3>Basement</h3></div>
-<div class="card"><img src="images/water-tank.png"><h3>Water Tank</h3></div>
-<div class="card"><img src="images/umbrella.png"><h3>Damp Proofing</h3></div>
+<div class="card"><img src="images/tank.png"><h3>Water Tank</h3></div>
 
 </div>
 
+<!-- ORDER BUTTON BOTTOM -->
+<button class="order-btn" onclick="popup.style.display='flex'">
+Order Sheet
+</button>
+
+<!-- POPUP -->
 <div class="popup" id="popup">
 <div class="popup-box">
 <h2>Order Sheet</h2>
 <input placeholder="Name">
 <input placeholder="Address">
-<input placeholder="Mobile">
-<select><option>Roof</option><option>Foundation</option></select>
+<input placeholder="Mobile Number">
+<select>
+<option>Roof</option>
+<option>Foundation</option>
+<option>Wall</option>
+</select>
 <div class="buttons">
 <button class="confirm">Confirm</button>
 <button class="cancel" onclick="popup.style.display='none'">Cancel</button>
@@ -158,5 +184,18 @@ input,select{
 <div class="footer">© AV Chem Chemical & Manufacturing</div>
 
 </div>
+
+<script>
+function setLang(lang){
+  if(lang==='en'){
+    document.getElementById('title').innerText =
+    'H4 Waterproof – A Decade of Protection';
+  }else{
+    document.getElementById('title').innerText =
+    'H4 Waterproof – 10 വർഷത്തെ വിശ്വസ്ത സംരക്ഷണം';
+  }
+}
+</script>
+
 </body>
 </html>
