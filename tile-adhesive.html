@@ -1,236 +1,334 @@
- <!DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="ml">
 <head>
 <meta charset="UTF-8">
-<title>H4 Tile Adhesive | AV Chem Chemical</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>H4 Tile Adhesive</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@500;700;800&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
 body{
-  font-family:'Inter',sans-serif;
-  background:#ffffff;
-  color:#0b4ea2; /* BLUE normal text */
-  padding:30px 6%;
+ margin:0;
+ font-family:'Noto Sans Malayalam',sans-serif;
+ background:#f6f2fb;
+ color:#222;
 }
 
-/* TOP BAR */
-.top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:30px;
-}
-.brand{
-  font-weight:700;
-  color:#1b7f3b; /* GREEN */
-}
-.lang-btn{
-  background:#f2f2f2;
-  color:#333;
-  padding:8px 14px;
-  border-radius:20px;
-  font-weight:600;
-  cursor:pointer;
-}
-.lang-menu{
-  display:none;
-  position:absolute;
-  background:#fff;
-  border-radius:12px;
-  box-shadow:0 10px 25px rgba(0,0,0,.15);
-  margin-top:8px;
-  overflow:hidden;
-}
-.lang-menu div{
-  padding:10px 16px;
-  cursor:pointer;
-}
-.lang-menu div:hover{
-  background:#f5f5f5;
+.top-space{margin-top:40px}
+
+.container{
+ max-width:1100px;
+ margin:auto;
+ padding:20px;
 }
 
-/* CARD */
-.card{
-  max-width:950px;
-  margin:auto;
-  border-radius:20px;
-  padding:35px;
-  background:#ffffff;
-  box-shadow:0 12px 30px rgba(0,0,0,.08);
+/* LANGUAGE */
+.lang-switch{
+ display:flex;
+ gap:10px;
+ margin-bottom:20px;
+}
+.lang-switch button{
+ border:none;
+ padding:8px 18px;
+ border-radius:20px;
+ background:#000;
+ color:#fff;
+ font-weight:800;
+ cursor:pointer;
+}
+.lang-switch button.active{
+ background:#f5c400;
+ color:#000;
 }
 
 /* HEADINGS */
-h1,h2,h3{
-  font-family:'Playfair Display',serif;
-  color:#1b7f3b; /* GREEN headlines */
-  margin-bottom:18px;
+h1{
+ font-size:36px;
+ font-weight:800;
+}
+h2,h3{
+ font-weight:800;
 }
 
-/* TEXT */
-p{
-  line-height:1.9;
-  margin-bottom:14px;
-  font-size:16px;
+/* GRID */
+.grid{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:22px;
+ margin-top:35px;
 }
 
-/* LIST */
-ul{padding-left:18px;margin-bottom:15px}
-li{
-  margin-bottom:8px;
+.card{
+ background:#fff;
+ border-radius:14px;
+ padding:30px 15px;
+ text-align:center;
+ box-shadow:0 10px 25px rgba(0,0,0,.08);
+ border-bottom:6px solid #f5c400;
+ transition:.3s;
 }
-li::marker{
-  color:#7b2cbf; /* PURPLE */
-}
-
-/* HIGHLIGHT */
-.highlight{
-  color:#7b2cbf; /* PURPLE */
-  font-weight:700;
+.card:hover{
+ transform:translateY(-6px);
 }
 
-/* CONTACT */
-.contact{
-  margin-top:22px;
-  padding-top:15px;
-  border-top:1px solid #eee;
-  font-weight:600;
-  color:#1b7f3b;
+.icon-img{
+ width:160px;
+ height:160px;
+ object-fit:contain;
+ margin-bottom:15px;
+ transition:.3s;
+}
+.card:hover .icon-img{
+ transform:scale(1.15);
 }
 
+.card b{
+ display:block;
+ font-size:22px;
+ font-weight:800;
+}
+
+/* BUTTON */
+.order-btn{
+ display:block;
+ margin:45px auto;
+ padding:14px 36px;
+ font-size:20px;
+ font-weight:800;
+ border:none;
+ border-radius:30px;
+ background:#f5c400;
+ cursor:pointer;
+}
+
+/* ABOUT */
+.about{
+ margin-top:60px;
+ padding:35px;
+ background:#fff;
+ border-radius:14px;
+ box-shadow:0 5px 15px rgba(0,0,0,.05);
+ line-height:1.9;
+ font-size:18px;
+ font-weight:600;
+}
+
+/* POPUP */
+.popup{
+ position:fixed;
+ inset:0;
+ background:rgba(0,0,0,.6);
+ display:none;
+ justify-content:center;
+ align-items:center;
+ z-index:1000;
+}
+.popup.active{display:flex}
+
+.popup-box{
+ background:#fff;
+ width:90%;
+ max-width:420px;
+ padding:25px;
+ border-radius:14px;
+ animation:pop .4s ease;
+}
+@keyframes pop{
+ from{transform:scale(.7);opacity:0}
+ to{transform:scale(1);opacity:1}
+}
+.popup-box input,
+.popup-box textarea{
+ width:100%;
+ margin:8px 0;
+ padding:10px;
+ border-radius:6px;
+ border:1px solid #ccc;
+}
+.popup-box button{
+ width:100%;
+ margin-top:10px;
+ padding:12px;
+ border:none;
+ font-weight:800;
+ border-radius:20px;
+ background:#f5c400;
+}
+
+/* FOOTER */
+.footer{
+ margin:50px 0 20px;
+ text-align:center;
+ font-size:14px;
+ color:#555;
+}
+
+/* RESPONSIVE */
 @media(max-width:768px){
-  body{padding:20px}
-  .card{padding:25px}
+ .grid{grid-template-columns:repeat(2,1fr)}
 }
 </style>
 </head>
 
 <body>
 
-<div class="top">
-  <div class="brand">H4 Tile Adhesive</div>
+<div class="top-space"></div>
 
-  <div style="position:relative">
-    <div class="lang-btn" onclick="toggleLang()">ML ▼</div>
-    <div class="lang-menu" id="langMenu">
-      <div onclick="showML()">മലയാളം</div>
-      <div onclick="showEN()">English</div>
-    </div>
-  </div>
+<div class="container">
+
+<!-- LANGUAGE -->
+<div class="lang-switch">
+<button class="active" onclick="setLang('ml',this)">Malayalam</button>
+<button onclick="setLang('en',this)">English</button>
 </div>
 
-<!-- MALAYALAM CONTENT -->
-<div class="card" id="ml">
+<h1
+data-ml="H4 Tile Adhesive – ശക്തമായ പിടി, ദീർഘകാല വിശ്വാസം"
+data-en="H4 Tile Adhesive – Strong Bond, Long Lasting Performance">
+H4 Tile Adhesive – ശക്തമായ പിടി, ദീർഘകാല വിശ്വാസം
+</h1>
 
-<h1>H4 Tile Adhesive – ശക്തമായ ഒട്ടിപ്പിന്റെ പുതിയ തലമുറ</h1>
+<!-- GRID -->
+<div class="grid">
 
-<p>
-<span class="highlight">H4 Tile Adhesive</span> സാധാരണ സിമന്റ് മോർട്ടാർ അല്ല.  
-വലിയ ടൈലുകൾ, മാർബിള്‍, ഗ്രാനൈറ്റ് എന്നിവ ശക്തമായി ഒട്ടിക്കാൻ
-രൂപകൽപ്പന ചെയ്ത <span class="highlight">Premium Polymer Modified Tile Adhesive</span> ആണ്.
-</p>
+<div class="card">
+<img src="images/tile.png" class="icon-img">
+<b data-ml="ടൈൽ ഒട്ടിക്കാൻ" data-en="Tile Fixing">ടൈൽ ഒട്ടിക്കാൻ</b>
+</div>
 
-<h2>🔹 ഗുണനിലവാരം</h2>
-<ul>
-<li>Polymer Modified Cementitious Technology</li>
-<li>High Bond Strength</li>
-<li>Water & Moisture Resistant</li>
-<li>Crack Resistant Performance</li>
-</ul>
+<div class="card">
+<img src="images/marble.png" class="icon-img">
+<b data-ml="മാർബിൾ" data-en="Marble">മാർബിൾ</b>
+</div>
 
-<h2>🔹 പ്രധാന ഗുണങ്ങൾ</h2>
-<ul>
-<li>4×4, 6×4, Large slabs വരെ ഒട്ടിക്കാൻ അനുയോജ്യം</li>
-<li>Floor & Wall – ഇരുവർക്കും</li>
-<li>Tile slipping ഇല്ല</li>
-<li>Smooth finish & uniform thickness</li>
-<li>Contractor friendly – apply ചെയ്യാൻ എളുപ്പം</li>
-</ul>
+<div class="card">
+<img src="images/granite.png" class="icon-img">
+<b data-ml="ഗ്രാനൈറ്റ്" data-en="Granite">ഗ്രാനൈറ്റ്</b>
+</div>
 
-<h2>🔹 മറ്റുള്ളവയെക്കാൾ H4 എന്തുകൊണ്ട് മികച്ചത്?</h2>
-<ul>
-<li>സാധാരണ tile bond സമയത്തോടെ പൊട്ടും</li>
-<li><span class="highlight">H4 long-term durability</span> നൽകുന്നു</li>
-<li>Cheap fillers ഇല്ല</li>
-<li>Kerala climate-നായി tested & optimized</li>
-</ul>
+<div class="card">
+<img src="images/large-tile.png" class="icon-img">
+<b data-ml="മാർബോണൈറ്റ് / വലിയ ടൈൽ" data-en="Large Size / Marbonite">
+മാർബോണൈറ്റ് / വലിയ ടൈൽ
+</b>
+</div>
 
-<p class="highlight">
-H4 Tile Adhesive – ഒരിക്കൽ ഒട്ടിച്ചാൽ വർഷങ്ങളോളം ഉറപ്പ്
-</p>
+<div class="card">
+<img src="images/bathroom.png" class="icon-img">
+<b data-ml="ബാത്റൂം ടൈൽ" data-en="Bathroom Tile">ബാത്റൂം ടൈൽ</b>
+</div>
 
-<div class="contact">
-📞 79073 44030<br>
-📱 97458 38382<br>
-✉️ avchemtirur@gmail.com
+<div class="card">
+<img src="images/floor.png" class="icon-img">
+<b data-ml="ഫ്ലോർ ടൈൽ" data-en="Floor Tile">ഫ്ലോർ ടൈൽ</b>
+</div>
+
+<div class="card">
+<img src="images/wall.png" class="icon-img">
+<b data-ml="വാൾ ടൈൽ" data-en="Wall Tile">വാൾ ടൈൽ</b>
+</div>
+
+<div class="card">
+<img src="images/strength.png" class="icon-img">
+<b data-ml="ശക്തമായ ബോണ്ടിംഗ്" data-en="High Bond Strength">
+ശക്തമായ ബോണ്ടിംഗ്
+</b>
+</div>
+
+<div class="card">
+<img src="images/water-resistant.png" class="icon-img">
+<b data-ml="ജല പ്രതിരോധം" data-en="Water Resistant">
+ജല പ്രതിരോധം
+</b>
 </div>
 
 </div>
 
-<!-- ENGLISH CONTENT -->
-<div class="card" id="en" style="display:none">
+<button class="order-btn"
+onclick="openOrder()"
+data-ml="ഓർഡർ ഷീറ്റ്"
+data-en="Order Sheet">
+ഓർഡർ ഷീറ്റ്
+</button>
 
-<h1>H4 Tile Adhesive – Next-Generation Strong Bonding</h1>
-
-<p>
-<span class="highlight">H4 Tile Adhesive</span> is not ordinary cement mortar.  
-It is a <span class="highlight">premium polymer-modified tile adhesive</span>
-engineered for strong and durable bonding of tiles, marble, and granite.
-</p>
-
-<h2>🔹 Superior Quality</h2>
-<ul>
-<li>Advanced Polymer Modified Cementitious Technology</li>
-<li>High Bond Strength</li>
-<li>Water & Moisture Resistant</li>
-<li>Crack Resistant Performance</li>
-</ul>
-
-<h2>🔹 Key Benefits</h2>
-<ul>
-<li>Ideal for large format tiles & slabs</li>
-<li>Suitable for floor and wall applications</li>
-<li>No tile slipping</li>
-<li>Smooth & uniform finish</li>
-<li>Easy application for contractors</li>
-</ul>
-
-<h2>🔹 Why Choose H4 Tile Adhesive?</h2>
-<ul>
-<li>Ordinary adhesives fail over time</li>
-<li><span class="highlight">H4 ensures long-term durability</span></li>
-<li>No cheap fillers</li>
-<li>Tested for Kerala climate conditions</li>
-</ul>
-
-<p class="highlight">
-H4 Tile Adhesive – Built for strength, designed to last
-</p>
-
-<div class="contact">
-📞 79073 44030<br>
-📱 97458 38382<br>
-✉️ avchemtirur@gmail.com
+<!-- POPUP -->
+<div class="popup" id="orderPopup">
+<div class="popup-box">
+<h3>Tile Adhesive Order</h3>
+<input placeholder="Name">
+<input placeholder="Phone">
+<textarea placeholder="Address"></textarea>
+<button onclick="closeOrder()">Submit</button>
 </div>
+</div>
+
+<!-- ABOUT -->
+<div class="about">
+<h2 data-ml="എന്തുകൊണ്ട് H4 Tile Adhesive?" data-en="Why H4 Tile Adhesive?">
+എന്തുകൊണ്ട് H4 Tile Adhesive?
+</h2>
+
+<p data-ml="
+H4 Tile Adhesive എന്നത് സാധാരണ സിമന്റ് മിശ്രിതം അല്ല.
+ഇത് Polymer Modified Cementitious Adhesive ആണ്.
+വലിയ ടൈലുകൾ, മാർബിൾ, ഗ്രാനൈറ്റ്, മാർബോണൈറ്റ് പോലുള്ള
+ഹെവി ടൈലുകൾ പോലും ശക്തമായി ഒട്ടിക്കാൻ
+ശാസ്ത്രീയമായി രൂപകൽപ്പന ചെയ്തതാണ്.
+"
+data-en="
+H4 Tile Adhesive is a premium polymer modified cementitious adhesive
+designed for fixing large tiles, marble, granite and heavy tiles
+with excellent bonding strength and durability.
+">
+H4 Tile Adhesive എന്നത് സാധാരണ സിമന്റ് മിശ്രിതം അല്ല.
+ഇത് Polymer Modified Cementitious Adhesive ആണ്.
+വലിയ ടൈലുകൾ, മാർബിൾ, ഗ്രാനൈറ്റ്, മാർബോണൈറ്റ് പോലുള്ള
+ഹെവി ടൈലുകൾ പോലും ശക്തമായി ഒട്ടിക്കാൻ
+ശാസ്ത്രീയമായി രൂപകൽപ്പന ചെയ്തതാണ്.
+</p>
+
+<p data-ml="
+✔️ Vertical slip ഇല്ല  
+✔️ Crack resistance  
+✔️ Strong chemical bonding  
+✔️ Bathroom & wet area suitable  
+✔️ Long life performance
+"
+data-en="
+✔️ No vertical slip  
+✔️ Crack resistance  
+✔️ Strong chemical bonding  
+✔️ Ideal for wet areas  
+✔️ Long lasting durability
+">
+✔️ Vertical slip ഇല്ല <br>
+✔️ Crack resistance <br>
+✔️ Strong chemical bonding <br>
+✔️ Bathroom & wet area suitable <br>
+✔️ Long life performance
+</p>
+</div>
+
+<div class="footer">© AV Chem Chemical & Manufacturing</div>
 
 </div>
 
 <script>
-function toggleLang(){
-  const m=document.getElementById("langMenu");
-  m.style.display = m.style.display==="block" ? "none" : "block";
+function setLang(lang,btn){
+ document.querySelectorAll('.lang-switch button').forEach(b=>b.classList.remove('active'));
+ btn.classList.add('active');
+ document.querySelectorAll('[data-ml]').forEach(el=>{
+  el.innerHTML = lang==='ml'?el.dataset.ml:el.dataset.en;
+ });
 }
-function showML(){
-  document.getElementById("ml").style.display="block";
-  document.getElementById("en").style.display="none";
-  document.getElementById("langMenu").style.display="none";
+function openOrder(){
+ document.getElementById('orderPopup').classList.add('active');
 }
-function showEN(){
-  document.getElementById("en").style.display="block";
-  document.getElementById("ml").style.display="none";
-  document.getElementById("langMenu").style.display="none";
+function closeOrder(){
+ document.getElementById('orderPopup').classList.remove('active');
 }
 </script>
 
