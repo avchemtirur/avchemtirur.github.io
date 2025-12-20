@@ -1,113 +1,212 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ml">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>H4 Waterproof</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;700;800&display=swap" rel="stylesheet">
+
 <style>
-body { margin:0; font-family:'Noto Sans Malayalam', sans-serif; background:#f6f2fb; color:#222; }
-.container { max-width:1100px; margin:auto; padding:20px; }
-.lang-switch { display:flex; gap:10px; margin-bottom:10px; }
-.lang-switch button { border:none; padding:6px 14px; border-radius:6px; cursor:pointer; background:#000; color:#fff; font-weight:600; }
-.lang-switch button.active { background:#f5c400; color:#000; }
-h1 { font-size:28px; font-weight:800; }
-h2 { margin-top:30px; font-weight:800; }
-.grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:20px; }
-.card { background:#fff; border-radius:12px; padding:30px 10px; text-align:center; box-shadow:0 8px 20px rgba(0,0,0,.08); border-bottom:5px solid #f5c400; }
-.icon-img { width:140px; height:140px; object-fit:contain; margin-bottom:15px; transition:transform .3s ease; }
-.card:hover .icon-img { transform:scale(1.15); }
-.card b { display:block; font-size:20px; font-weight:800; }
-.order-btn { display:block; margin:40px auto 20px; padding:12px 30px; font-size:18px; border:none; border-radius:30px; background:#f5c400; font-weight:800; cursor:pointer; }
-.content { margin-top:40px; line-height:1.8; font-size:16px; }
-.about-section { margin-top: 50px; padding: 30px; background: #fff; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); line-height: 1.7; }
-.about-section h2 { color: #222; border-left: 5px solid #f5c400; padding-left: 15px; }
-.about-section h3 { color: #333; margin-top: 25px; }
-.about-section p { margin-bottom: 20px; }
-.footer { margin:40px 0 20px; text-align:center; font-size:13px; color:#555; }
-@media(max-width:768px){ .grid { grid-template-columns:repeat(2,1fr); } }
+body{
+  margin:0;
+  font-family:'Noto Sans Malayalam', sans-serif;
+  background:#f6f2fb;
+  color:#222;
+}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:20px;
+}
+
+/* Language */
+.lang-switch{
+  display:flex;
+  gap:10px;
+}
+.lang-switch button{
+  border:none;
+  padding:6px 14px;
+  border-radius:6px;
+  background:#000;
+  color:#fff;
+  cursor:pointer;
+}
+.lang-switch button.active{
+  background:#f5c400;
+  color:#000;
+}
+
+/* Headline */
+h1{
+  font-size:32px;          /* 🔥 15% bigger */
+  font-weight:800;
+  margin-top:15px;
+}
+
+/* Grid */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+  margin-top:25px;
+}
+
+.card{
+  background:#fff;
+  border-radius:14px;
+  padding:30px 15px;
+  text-align:center;
+  box-shadow:0 8px 20px rgba(0,0,0,.08);
+  border-bottom:5px solid #f5c400;
+}
+
+.icon-img{
+  width:160px;     /* 🔥 4× icon */
+  height:160px;
+  object-fit:contain;
+  margin-bottom:15px;
+  transition:.3s;
+}
+
+.card:hover .icon-img{
+  transform:scale(1.12);
+}
+
+.card b{
+  font-size:22px;
+  font-weight:800;
+}
+
+/* Order button */
+.order-btn{
+  margin:40px auto;
+  display:block;
+  padding:14px 34px;
+  font-size:18px;
+  border:none;
+  border-radius:30px;
+  background:#f5c400;
+  font-weight:800;
+  cursor:pointer;
+}
+
+/* Content */
+.about{
+  font-size:18px;     /* 🔥 10% bigger */
+  line-height:1.9;
+  margin-top:40px;
+  background:#fff;
+  padding:30px;
+  border-radius:14px;
+}
+
+/* Modal */
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.5);
+  align-items:center;
+  justify-content:center;
+}
+.modal-box{
+  background:#fff;
+  width:90%;
+  max-width:400px;
+  padding:20px;
+  border-radius:12px;
+}
+.modal-box input,textarea{
+  width:100%;
+  padding:10px;
+  margin-bottom:10px;
+}
+
+.close{
+  text-align:right;
+  cursor:pointer;
+  font-weight:700;
+}
+
+.footer{
+  text-align:center;
+  font-size:13px;
+  margin:30px 0;
+  color:#555;
+}
+
+@media(max-width:768px){
+  .grid{ grid-template-columns:repeat(2,1fr); }
+}
 </style>
 </head>
+
 <body>
 <div class="container">
+
 <div class="lang-switch">
-<button class="active" onclick="setLang('ml')">Malayalam</button>
-<button onclick="setLang('en')">English</button>
+  <button class="active" onclick="setLang('ml')">Malayalam</button>
+  <button onclick="setLang('en')">English</button>
 </div>
 
-<h1 data-ml="H4 Waterproof – 10 വർഷത്തെ വിശ്വാസനീയ സംരക്ഷണം."
+<h1 data-ml="H4 Waterproof – 10 വർഷത്തെ വിശ്വാസനീയ സംരക്ഷണം"
     data-en="H4 Waterproof – A Decade of Trusted Protection">
-H4 Waterproof – 10 വർഷത്തെ വിശ്വാസനീയ സംരക്ഷണം.
+H4 Waterproof – 10 വർഷത്തെ വിശ്വാസനീയ സംരക്ഷണം
 </h1>
 
 <div class="grid">
-<div class="card"><img src="https://img.icons8.com/color/96/water-protection.png" class="icon-img"><b data-ml="ജലസംരക്ഷണം" data-en="Water Protection">ജലസംരക്ഷണം</b></div>
-<div class="card"><img src="https://img.icons8.com/color/96/no-leak.png" class="icon-img"><b data-ml="ലീക്കേജ് ഇല്ല" data-en="No Leakage">ലീക്കേജ് ഇല്ല</b></div>
-<div class="card"><img src="https://img.icons8.com/color/96/wall.png" class="icon-img"><b data-ml="മതിൽ സുരക്ഷ" data-en="Wall Safety">മതിൽ സുരക്ഷ</b></div>
-<div class="card"><img src="https://img.icons8.com/color/96/long-life.png" class="icon-img"><b data-ml="ദീർഘായുസ്" data-en="Long Life">ദീർഘായുസ്</b></div>
-<div class="card"><img src="https://img.icons8.com/color/96/roof.png" class="icon-img"><b data-ml="മേൽക്കൂര / ടെറസ്" data-en="Roof / Terrace">മേൽക്കൂര / ടെറസ്</b></div>
-<div class="card"><img src="https://img.icons8.com/color/96/foundation.png" class="icon-img"><b data-ml="അടിത്തറ" data-en="Foundation">അടിത്തറ</b></div>
-<div class="card"><img src="https://img.icons8.com/color/96/walls.png" class="icon-img"><b data-ml="മതിലുകൾ" data-en="Walls">മതിലുകൾ</b></div>
-<div class="card"><img src="https://img.icons8.com/color/96/balcony.png" class="icon-img"><b data-ml="ബാൽക്കണി" data-en="Balcony">ബാൽക്കണി</b></div>
-<div class="card"><img src="https://img.icons8.com/color/96/water-tank.png" class="icon-img"><b data-ml="വാട്ടർ ടാങ്ക്" data-en="Water Tank">വാട്ടർ ടാങ്ക്</b></div>
+  <div class="card"><img src="images/water-protection.png" class="icon-img"><b>Water Protection</b></div>
+  <div class="card"><img src="images/no-leakage.png" class="icon-img"><b>No Leakage</b></div>
+  <div class="card"><img src="images/wall-safety.png" class="icon-img"><b>Wall Safety</b></div>
+  <div class="card"><img src="images/long-life.png" class="icon-img"><b>Long Life</b></div>
+  <div class="card"><img src="images/roof-terrace.png" class="icon-img"><b>Roof / Terrace</b></div>
+  <div class="card"><img src="images/foundation.png" class="icon-img"><b>Foundation</b></div>
+  <div class="card"><img src="images/walls.png" class="icon-img"><b>Walls</b></div>
+  <div class="card"><img src="images/balcony.png" class="icon-img"><b>Balcony</b></div>
+  <div class="card"><img src="images/water-tank.png" class="icon-img"><b>Water Tank</b></div>
 </div>
 
-<button class="order-btn" data-ml="ഓർഡർ ഷീറ്റ്" data-en="Order Sheet">ഓർഡർ ഷീറ്റ്</button>
+<button class="order-btn" onclick="openOrder()">Order Sheet</button>
 
-<!-- NEW DETAILED "ABOUT PRODUCT" SECTION STARTS HERE -->
-<div class="about-section" id="about-content">
-    <h2 data-ml="H4 Waterproof: കെമിസ്ട്രിയുടെ കരുത്തിൽ നിർമ്മിച്ച, പതിറ്റാണ്ടുകളുടെ സംരക്ഷണം!" data-en="H4 Waterproof: A Decade of Protection, Powered by Science.">H4 Waterproof: കെമിസ്ട്രിയുടെ കരുത്തിൽ നിർമ്മിച്ച, പതിറ്റാണ്ടുകളുടെ സംരക്ഷണം!</h2>
-    <p data-ml="വീട്, മാത്രമല്ല; അടുത്ത 10 വർഷത്തെ നിങ്ങളുടെ സമാധാനം." data-en="Your home is safe… for the next 10 years!">വീട്, മാത്രമല്ല; അടുത്ത 10 വർഷത്തെ നിങ്ങളുടെ സമാധാനം.</p>
-    <p data-ml="മഴയുടെ ചുവപ്പും വെയിലിന്റെ ചുട്ടുപഴുപ്പും നിങ്ങളുടെ സ്വപ്നഭവനത്തിൽ ഇനി കലർത്തരുത്. AV Chem Chemical & Manufacturing അവതരിപ്പിക്കുന്നു, ശാസ്ത്രത്തിന്റെ അതിരുകൾ വിട്ട് നിൽക്കുന്ന ഒരു സംരക്ഷണ കവചം: H4 Waterproof. ഇത് ഒരു പെയിന്റ് അല്ല. ഇതൊരു കെമിക്കൽ ബോണ്ടിംഗ് സംവിധാനം ആണ്." data-en="Introducing H4 Waterproof from AV Chem Chemical & Manufacturing – the advanced technological shield designed to protect your dream home from rain and sun.">മഴയുടെ ചുവപ്പും വെയിലിന്റെ ചുട്ടുപഴുപ്പും നിങ്ങളുടെ സ്വപ്നഭവനത്തിൽ ഇനി കലർത്തരുത്. AV Chem Chemical & Manufacturing അവതരിപ്പിക്കുന്നു, ശാസ്ത്രത്തിന്റെ അതിരുകൾ വിട്ട് നിൽക്കുന്ന ഒരു സംരക്ഷണ കവചം: H4 Waterproof. ഇത് ഒരു പെയിന്റ് അല്ല. ഇതൊരു കെമിക്കൽ ബോണ്ടിംഗ് സംവിധാനം ആണ്.</p>
-
-    <h3 data-ml="🛡️ ഞങ്ങളുടെ അഡ്വാൻസ് വാഗ്ദാനം: 10 വർഷത്തെ 100% ഗ്യാരണ്ടി" data-en="🛡️Our Promise: The 10-Year Warranty">🛡️ ഞങ്ങളുടെ അഡ്വാൻസ് വാഗ്ദാനം: 10 വർഷത്തെ 100% ഗ്യാരണ്ടി</h3>
-    <p data-ml="എല്ലാ വാട്ടർപ്രൂഫിംഗും ഒരുപോലെയാണോ? ഒരിക്കലുമില്ല. പരമ്പരാഗത ലായനികൾ കാലക്രമേണ വറ്റി പൊടിയും, ചുരുളും, പൊളിയും. 2-3 വർഷത്തിനുള്ളിൽ നിങ്ങൾ ആ ചോർച്ചയുടെ ശബ്ദം വീണ്ടും കേൾക്കും. H4 വ്യത്യസ്തമാണ്. ഞങ്ങളുടെ ഗവേഷണത്തിന്റെ കേന്ദ്രബിന്ദു, 'പെർമനന്റ് കെമിക്കൽ ഇന്റഗ്രേഷൻ' ആണ്. ഇത് കോൺക്രീറ്റിന്റെ ആന്തരിക ഘടനയിൽ ദ്രവിച്ച് ചേർന്ന്, ഒന്നായി മാറുന്നു. കോൺക്രീറ്റിന് ജലവിരുദ്ധമായ ഒരു രണ്ടാം ചർമ്മം നൽകുന്നു. അതുകൊണ്ടാണ് ഞങ്ങൾക്ക് ധൈര്യമായി ഇത് പറയാൻ: അടുത്ത പത്തുവർഷം, മഴക്കാലം നിങ്ങളുടെ ഉറക്കം കെടുത്തില്ല." data-en="You may have seen ordinary waterproofing solutions crack and peel after 2-3 years.H4 is different. Our'High-Performance Chemical Bonding' technology, developed in our laboratories, fuses with the concrete to form a durable, long-lasting barrier. That's why we confidently say: you won't have to worry about leaks for the next decade.">എല്ലാ വാട്ടർപ്രൂഫിംഗും ഒരുപോലെയാണോ? ഒരിക്കലുമില്ല. പരമ്പരാഗത ലായനികൾ കാലക്രമേണ വറ്റി പൊടിയും, ചുരുളും, പൊളിയും. 2-3 വർഷത്തിനുള്ളിൽ നിങ്ങൾ ആ ചോർച്ചയുടെ ശബ്ദം വീണ്ടും കേൾക്കും. H4 വ്യത്യസ്തമാണ്. ഞങ്ങളുടെ ഗവേഷണത്തിന്റെ കേന്ദ്രബിന്ദു, 'പെർമനന്റ് കെമിക്കൽ ഇന്റഗ്രേഷൻ' ആണ്. ഇത് കോൺക്രീറ്റിന്റെ ആന്തരിക ഘടനയിൽ ദ്രവിച്ച് ചേർന്ന്, ഒന്നായി മാറുന്നു. കോൺക്രീറ്റിന് ജലവിരുദ്ധമായ ഒരു രണ്ടാം ചർമ്മം നൽകുന്നു. അതുകൊണ്ടാണ് ഞങ്ങൾക്ക് ധൈര്യമായി ഇത് പറയാൻ: അടുത്ത പത്തുവർഷം, മഴക്കാലം നിങ്ങളുടെ ഉറക്കം കെടുത്തില്ല.</p>
-
-    <h3 data-ml="🔬 H4-ന്റെ രസതന്ത്രം: സാധാരണ ചായം അല്ല, ഒരു സംവിധാനം" data-en="💡Why H4 is More Than Just Waterproofing (Extra Benefits)">🔬 H4-ന്റെ രസതന്ത്രം: സാധാരണ ചായം അല്ല, ഒരു സംവിധാനം</h3>
-    <p data-ml="H4-ന്റെ ശക്തി അതിന്റെ തന്മാത്രാ ഘടനയിൽ ഒളിഞ്ഞിരിക്കുന്നു. ഇത് ജലത്തെ ഉപരിതലത്തിൽ തന്നെ തിരികെ തള്ളുകയാണ് (Water Repellency). എന്നാൽ അതിനപ്പുറം, കെമിക്കൽ ബോണ്ടിംഗ് മൂലം ഇത് ശാശ്വതമായ സംരക്ഷണം നൽകുന്നു. അഡ്വാൻസ് ടിപ്പ്: പുതിയ കെമിക്കൽ ടെക്നോളജി പലപ്പോഴും പ്രയോഗിക്കാൻ പ്രത്യേക പരിശീലനം വേണ്ടിവരും. എന്നാൽ H4, പാരമ്പര്യമായ ബ്രഷ്/റോളർ രീതിയിൽ തന്നെ പ്രയോഗിക്കാവുന്ന യൂസർ-ഫ്രണ്ട്ലി ടെക്നോളജി ആണ്. നിങ്ങളുടെ പ്രാദേശിക പെയിന്റർ തന്നെ ഇത് എളുപ്പത്തിൽ പ്രയോഗിക്കും." data-en="H4 doesn't just keep water out;it provides multiple additional benefits for your home through the magic of chemistry:">H4-ന്റെ ശക്തി അതിന്റെ തന്മാത്രാ ഘടനയിൽ ഒളിഞ്ഞിരിക്കുന്നു. ഇത് ജലത്തെ ഉപരിതലത്തിൽ തന്നെ തിരികെ തള്ളുകയാണ് (Water Repellency). എന്നാൽ അതിനപ്പുറം, കെമിക്കൽ ബോണ്ടിംഗ് മൂലം ഇത് ശാശ്വതമായ സംരക്ഷണം നൽകുന്നു. അഡ്വാൻസ് ടിപ്പ്: പുതിയ കെമിക്കൽ ടെക്നോളജി പലപ്പോഴും പ്രയോഗിക്കാൻ പ്രത്യേക പരിശീലനം വേണ്ടിവരും. എന്നാൽ H4, പാരമ്പര്യമായ ബ്രഷ്/റോളർ രീതിയിൽ തന്നെ പ്രയോഗിക്കാവുന്ന യൂസർ-ഫ്രണ്ട്ലി ടെക്നോളജി ആണ്. നിങ്ങളുടെ പ്രാദേശിക പെയിന്റർ തന്നെ ഇത് എളുപ്പത്തിൽ പ്രയോഗിക്കും.</p>
-
-    <h4 data-ml="🌡️ 1. താപനിലയെ നിയന്ത്രിക്കുന്നു (ആധുനിക താപ ഇൻസുലേഷൻ):" data-en="Thermal Insulation Property:">🌡️ 1. താപനിലയെ നിയന്ത്രിക്കുന്നു (ആധുനിക താപ ഇൻസുലേഷൻ):</h4>
-    <p data-ml="H4-യിലെഅത്യാധുനിക റിഫ്ലെക്ടീവ് പിഗ്മെന്റുകൾ സൂര്യരശ്മികളുടെ താപത്തിന്റെ 90% വരെ പ്രതിഫലിപ്പിക്കുന്നു. ഇത് വേനൽക്കാലത്ത് വീടിനുള്ളിലെ താപനില 3°C മുതൽ 8°C വരെ കുറയ്ക്കാനും, ശൈത്യകാലത്ത് ചൂട് അകത്തുതന്നെ നിലനിർത്താനും സഹായിക്കുന്നു. ഫലം: എയർകണ്ടീഷനർ ബിൽ കുറവ്, ഊർജ്ജ സംരക്ഷണം, ആരോഗ്യകരമായ അന്തരീക്ഷം." data-en="Special'Reflective Pigments' in H4 reflect sunlight and heat, helping to reduce indoor temperatures by 3 to 5 degrees Celsius during summer, which can help lower AC bills.">H4-യിലെഅത്യാധുനിക റിഫ്ലെക്ടീവ് പിഗ്മെന്റുകൾ സൂര്യരശ്മികളുടെ താപത്തിന്റെ 90% വരെ പ്രതിഫലിപ്പിക്കുന്നു. ഇത് വേനൽക്കാലത്ത് വീടിനുള്ളിലെ താപനില 3°C മുതൽ 8°C വരെ കുറയ്ക്കാനും, ശൈത്യകാലത്ത് ചൂട് അകത്തുതന്നെ നിലനിർത്താനും സഹായിക്കുന്നു. ഫലം: എയർകണ്ടീഷനർ ബിൽ കുറവ്, ഊർജ്ജ സംരക്ഷണം, ആരോഗ്യകരമായ അന്തരീക്ഷം.</p>
-
-    <h4 data-ml="🧱 2. വിള്ളലുകൾ സ്വയം അടയ്ക്കുന്നു (ഉയർന്ന ഇലാസ്തികത):" data-en="Crack Bridging Ability:">🧱 2. വിള്ളലുകൾ സ്വയം അടയ്ക്കുന്നു (ഉയർന്ന ഇലാസ്തികത):</h4>
-    <p data-ml="ചെറിയ വിള്ളലുകൾ കോൺക്രീറ്റിന്റെസ്വാഭാവികതയാണ്. സാധാരണ പെയിന്റുകൾ ഇവിടെ വിടരുന്നു. പക്ഷേ, H4-യ്ക്ക് എലാസ്റ്റോമെറിക് ഗുണം ഉണ്ട്. ഇത് ഒരു ഇലാസ്തിക കവചം പോലെ വിള്ളലുകൾക്ക് കുറുകെ വലിച്ചുനീട്ടി അവയെ മൂടുന്നു. വിള്ളൽ വീണാലും, H4-യുടെ സംരക്ഷണ പാളി വിള്ളലിലൂടെ വെള്ളം കടക്കാൻ അനുവദിക്കില്ല. (Crack Bridging Ability)" data-en="Unlike ordinary paints that dry and crack,H4 possesses 'high elasticity'. It can stretch and shrink along with small cracks in the wall, preventing water from seeping through.">ചെറിയ വിള്ളലുകൾ കോൺക്രീറ്റിന്റെസ്വാഭാവികതയാണ്. സാധാരണ പെയിന്റുകൾ ഇവിടെ വിടരുന്നു. പക്ഷേ, H4-യ്ക്ക് എലാസ്റ്റോമെറിക് ഗുണം ഉണ്ട്. ഇത് ഒരു ഇലാസ്തിക കവചം പോലെ വിള്ളലുകൾക്ക് കുറുകെ വലിച്ചുനീട്ടി അവയെ മൂടുന്നു. വിള്ളൽ വീണാലും, H4-യുടെ സംരക്ഷണ പാളി വിള്ളലിലൂടെ വെള്ളം കടക്കാൻ അനുവദിക്കില്ല. (Crack Bridging Ability)</p>
-
-    <h4 data-ml="🏭 3. കാർബണേഷൻ & തുരുമ്പ് എതിരെ കവചം (Anti-Carbonation & Corrosion Protection):" data-en="Anti-Carbonation Protection:">🏭 3. കാർബണേഷൻ & തുരുമ്പ് എതിരെ കവചം (Anti-Carbonation & Corrosion Protection):</h4>
-    <p data-ml="നഗരങ്ങളിലെമലിനവായു, കാർബൺ ഡൈ ഓക്സൈഡ് എന്നിവ കോൺക്രീറ്റിലെ ഉരുക്ക് ഉറകളെ തുരുമ്പിപ്പിക്കുന്നു (കാർബണേഷൻ). ഇത് കോൺക്രീറ്റിന്റെ ശക്തി കുറയ്ക്കുന്നു. H4 ഒരു അവിഭാജ്യ അവരോധക പാളിയായി പ്രവർത്തിച്ച് ഈ അപകടകരമായ വാതകങ്ങളും ഈർപ്പവും കോൺക്രീറ്റിൽ എത്താതെ തടയുന്നു. നിങ്ങളുടെ വീടിന്റെ ഘടനാപരമായ ആരോഗ്യം ഉറപ്പാക്കുന്നു." data-en="H4 acts as a shield,protecting concrete reinforcement bars from corrosion caused by carbon dioxide from vehicle exhaust and other pollution, maintaining structural strength.">നഗരങ്ങളിലെമലിനവായു, കാർബൺ ഡൈ ഓക്സൈഡ് എന്നിവ കോൺക്രീറ്റിലെ ഉരുക്ക് ഉറകളെ തുരുമ്പിപ്പിക്കുന്നു (കാർബണേഷൻ). ഇത് കോൺക്രീറ്റിന്റെ ശക്തി കുറയ്ക്കുന്നു. H4 ഒരു അവിഭാജ്യ അവരോധക പാളിയായി പ്രവർത്തിച്ച് ഈ അപകടകരമായ വാതകങ്ങളും ഈർപ്പവും കോൺക്രീറ്റിൽ എത്താതെ തടയുന്നു. നിങ്ങളുടെ വീടിന്റെ ഘടനാപരമായ ആരോഗ്യം ഉറപ്പാക്കുന്നു.</p>
-
-    <h4 data-ml="🚫 4. പായൽ, പൂപ്പൽ, ബാക്ടീരിയ എന്നിവയുടെ വർദ്ധനവ് തടയുന്നു:" data-en="Mould & Algae Resistance:">🚫 4. പായൽ, പൂപ്പൽ, ബാക്ടീരിയ എന്നിവയുടെ വർദ്ധനവ് തടയുന്നു:</h4>
-    <p data-ml="നിരന്തരമായ ഈർപ്പംപായലിനും പൂപ്പലിനും ആദർശ വാതകരണമാണ്. H4, ഉപരിതലത്തിൽ ജലം തങ്ങാൻ അനുവദിക്കാത്തതിനാൽ, ഈ ജീവികളുടെ വളർച്ചയ്ക്ക് അനുകൂലമല്ലാത്ത ഒരു പരിതസ്ഥിതി സൃഷ്ടിക്കുന്നു. നിങ്ങളുടെ ഭിത്തികൾ എക്കാലത്തും വൃത്തിയായതും പുതിയതുമായി നിലനിർത്തുന്നു." data-en="By preventing moisture retention,H4 stops the growth of mould and algae on walls, keeping your home looking fresh and new.">നിരന്തരമായ ഈർപ്പംപായലിനും പൂപ്പലിനും ആദർശ വാതകരണമാണ്. H4, ഉപരിതലത്തിൽ ജലം തങ്ങാൻ അനുവദിക്കാത്തതിനാൽ, ഈ ജീവികളുടെ വളർച്ചയ്ക്ക് അനുകൂലമല്ലാത്ത ഒരു പരിതസ്ഥിതി സൃഷ്ടിക്കുന്നു. നിങ്ങളുടെ ഭിത്തികൾ എക്കാലത്തും വൃത്തിയായതും പുതിയതുമായി നിലനിർത്തുന്നു.</p>
-
-    <h3 data-ml="📋 എവിടെയെല്ലാം? എങ്ങനെ ഉപയോഗിക്കാം?" data-en="User-Friendly Technology">📋 എവിടെയെല്ലാം? എങ്ങനെ ഉപയോഗിക്കാം?</h3>
-    <p data-ml="· അനുയോജ്യമായ ഉപരിതലങ്ങൾ: ടെറസ്, റൂഫ് ടോപ്പ്, സൺഷെയ്ഡ്, ബാലക്കണി, എക്സ്റ്റീരിയർ വാൾസ്, വാട്ടർ ടാങ്കുകൾ, കോൺക്രീറ്റ് ടെറസ് ഗാർഡൻ. · പ്രത്യേക ശ്രദ്ധ: പുതിയ കോൺക്രീറ്റിന് കുറഞ്ഞത് 21 ദിവസം പ്രായമാകാൻ അനുവദിക്കുക. പ്രയോഗത്തിന് മുമ്പ് ഉപരിതലം വൃത്തിയും ഉണങ്ങിയതുമായിരിക്കണം." data-en="· For Surfaces: Ideal for terraces, sunshades, exterior walls, and water tanks.">· അനുയോജ്യമായ ഉപരിതലങ്ങൾ: ടെറസ്, റൂഫ് ടോപ്പ്, സൺഷെയ്ഡ്, ബാലക്കണി, എക്സ്റ്റീരിയർ വാൾസ്, വാട്ടർ ടാങ്കുകൾ, കോൺക്രീറ്റ് ടെറസ് ഗാർഡൻ. · പ്രത്യേക ശ്രദ്ധ: പുതിയ കോൺക്രീറ്റിന് കുറഞ്ഞത് 21 ദിവസം പ്രായമാകാൻ അനുവദിക്കുക. പ്രയോഗത്തിന് മുമ്പ് ഉപരിതലം വൃത്തിയും ഉണങ്ങിയതുമായിരിക്കണം.</p>
-
-    <h3 data-ml="🏢 AV Chem Chemical & Manufacturing: വിശ്വാസത്തിന്റെ രസതന്ത്രം," data-en="AV Chem Chemical & Manufacturing – The Chemistry of Trust">🏢 AV Chem Chemical & Manufacturing: വിശ്വാസത്തിന്റെ രസതന്ത്രം,</h3>
-    <p data-ml="പലരും വില കുറയ്ക്കാൻ ഗുണനിലവാരം കുറയ്ക്കും. ഞങ്ങൾ വിശ്വാസം കെട്ടിപ്പടുക്കാൻ നിലവാരം ഉയർത്തുന്നു. H4-ന്റെ ഓരോ കെനിയിലും ലോകത്തിന്റെ വിവിധ ഭാഗങ്ങളിൽ നിന്നുള്ള ഉയർന്ന നിലവാരമുള്ള അസംസ്കൃത വസ്തുക്കളും ഞങ്ങളുടെ ഗവേഷണ ശാലയിലെ നിരന്തരമായ നിയന്ത്രണവും അടങ്ങിയിരിക്കുന്നു. ഞങ്ങളുടെ 10 വർഷത്തെ ഗ്യാരണ്ടി ഒരു കാഗിതിപ്പുസ്തകം അല്ല, ഇത് ഞങ്ങളുടെ ഉൽപ്പന്നത്തിലുള്ള ദൃഢമായ വിശ്വാസത്തിന്റെ പ്രതീകമാണ്. 'ഒരു തവണ നിങ്ങൾ ഉറപ്പ് തേടുക. അടുത്ത പത്തുവർഷം ഞങ്ങൾ സംരക്ഷിക്കും.'" data-en="While many compromise on quality for profit,we choose world-class raw materials. Our confidence in offering a 10-year warranty comes from this commitment to quality. Apply H4 once, and sleep peacefully for 10 years!">പലരും വില കുറയ്ക്കാൻ ഗുണനിലവാരം കുറയ്ക്കും. ഞങ്ങൾ വിശ്വാസം കെട്ടിപ്പടുക്കാൻ നിലവാരം ഉയർത്തുന്നു. H4-ന്റെ ഓരോ കെനിയിലും ലോകത്തിന്റെ വിവിധ ഭാഗങ്ങളിൽ നിന്നുള്ള ഉയർന്ന നിലവാരമുള്ള അസംസ്കൃത വസ്തുക്കളും ഞങ്ങളുടെ ഗവേഷണ ശാലയിലെ നിരന്തരമായ നിയന്ത്രണവും അടങ്ങിയിരിക്കുന്നു. ഞങ്ങളുടെ 10 വർഷത്തെ ഗ്യാരണ്ടി ഒരു കാഗിതിപ്പുസ്തകം അല്ല, ഇത് ഞങ്ങളുടെ ഉൽപ്പന്നത്തിലുള്ള ദൃഢമായ വിശ്വാസത്തിന്റെ പ്രതീകമാണ്. 'ഒരു തവണ നിങ്ങൾ ഉറപ്പ് തേടുക. അടുത്ത പത്തുവർഷം ഞങ്ങൾ സംരക്ഷിക്കും.'</p>
-
-    <h3 data-ml="📞 സൗജന്യ കൺസൾട്ടേഷനിനായി ഞങ്ങളെ സമീപിക്കുക" data-en="📞 Contact Us for a Free Consultation">📞 സൗജന്യ കൺസൾട്ടേഷനിനായി ഞങ്ങളെ സമീപിക്കുക</h3>
-    <p data-ml="നിങ്ങളുടെ വീടിനോ കാമ്പിലോ ഏറ്റവും അനുയോജ്യമായ H4 Waterproofing സൊല്യൂഷൻ പ്ലാൻ ചെയ്യാൻ ഞങ്ങളുടെ പ്രത്യേകജ്ഞരെ വിളിക്കൂ" data-en="Call to discuss your home's waterproofing needs:">നിങ്ങളുടെ വീടിനോ കാമ്പിലോ ഏറ്റവും അനുയോജ്യമായ H4 Waterproofing സൊല്യൂഷൻ പ്ലാൻ ചെയ്യാൻ ഞങ്ങളുടെ പ്രത്യേകജ്ഞരെ വിളിക്കൂ</p>
-    <p>📞 <b data-ml="ഫോൺ:" data-en="Phone:">ഫോൺ:</b> +917907344030<br>
-       <span data-ml="ഫോൺ 9745838382" data-en="Whatsap  Number 9745838382">ഫോൺ 9745838382</span><br>
-       📧 <b data-ml="ഇമെയിൽ:" data-en="Email:">ഇമെയിൽ:</b> avchemtirur@gmail.com</p>
-    <p>📍 <b>AV Chem Chemical & Manufacturing</b><br>
-    <span data-ml="Mukkilapeedika, kannamkulam, po. BP angadi pin code 676102 tirur malappuram dis Kerala state" data-en="">Mukkilapeedika, kannamkulam, po. BP angadi pin code 676102 tirur malappuram dis Kerala state</span></p>
+<div class="about">
+<b>H4 Waterproof</b> – കെമിസ്ട്രിയുടെ കരുത്തിൽ നിർമ്മിച്ച, പതിറ്റാണ്ടുകളുടെ സംരക്ഷണം.  
+ഇത് ഒരു പെയിന്റ് അല്ല – കെമിക്കൽ ബോണ്ടിംഗ് സംവിധാനം ആണ്.
 </div>
-<!-- NEW DETAILED "ABOUT PRODUCT" SECTION ENDS HERE -->
 
-<div class="footer">© AV Chem Chemical & Manufacturing. All Rights Reserved.</div>
+<div class="footer">© AV Chem Chemical & Manufacturing</div>
+</div>
+
+<!-- Order Modal -->
+<div class="modal" id="orderModal">
+  <div class="modal-box">
+    <div class="close" onclick="closeOrder()">✖</div>
+    <h3>Order Sheet</h3>
+    <input placeholder="Name">
+    <input placeholder="Mobile">
+    <textarea placeholder="Address"></textarea>
+    <button class="order-btn">Submit</button>
+  </div>
 </div>
 
 <script>
+function openOrder(){
+  document.getElementById('orderModal').style.display='flex';
+}
+function closeOrder(){
+  document.getElementById('orderModal').style.display='none';
+}
+
 function setLang(lang){
-  // Update active button
   document.querySelectorAll('.lang-switch button').forEach(b=>b.classList.remove('active'));
   event.target.classList.add('active');
-  
-  // Update all elements with data-ml and data-en attributes
   document.querySelectorAll('[data-ml]').forEach(el=>{
-      el.innerHTML = lang==='ml' ? el.dataset.ml : el.dataset.en;
+    el.innerText = lang==='ml'?el.dataset.ml:el.dataset.en;
   });
 }
 </script>
+
 </body>
 </html>
