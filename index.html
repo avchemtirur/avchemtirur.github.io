@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,101 +6,235 @@
 <title>AV Chem Chemical | H4</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;800&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{
-  font-family:'Inter',sans-serif;
-  background:linear-gradient(135deg,#1aa7b8,#24c6b5);
+  font-family:'Poppins',sans-serif;
+  background:#0f172a;
   color:#fff;
+  overflow-x:hidden;
 }
 
-/* NAV */
-.nav{
-  padding:14px 6%;
+/* TOP BAR */
+.topbar{
   display:flex;
   justify-content:space-between;
   align-items:center;
+  padding:16px 6%;
+  border-bottom:3px solid #38bdf8;
 }
-.nav a{color:#fff;text-decoration:none;margin-left:18px;font-weight:600}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-weight:800;
+  font-size:20px;
+}
+.brand img{height:42px}
+
+.menu a{
+  color:#fff;
+  margin-left:22px;
+  text-decoration:none;
+  font-weight:600;
+  cursor:pointer;
+}
 
 /* HERO */
 .hero{
-  min-height:60vh;
-  padding:0 6%;
+  padding:60px 6%;
   display:flex;
-  flex-direction:column;
-  justify-content:center;
+  align-items:center;
+  justify-content:space-between;
+  gap:40px;
 }
-.hero h1{
-  font-family:'Playfair Display',serif;
-  font-size:38px;
-}
-.hero p{font-size:18px;margin-top:10px}
-
-/* BUTTONS */
-.features{
-  background:#f6fbfb;
-  padding:40px 6%;
-  display:flex;
-  gap:20px;
-}
-.feature{
+.hero-left{
   flex:1;
-  background:#fff;
-  color:#222;
-  border-radius:16px;
-  padding:26px;
-  text-align:center;
-  box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+.hero-left h1{
+  font-size:42px;
+  font-weight:800;
+}
+.lang{
+  margin-top:14px;
+}
+.lang button{
+  padding:6px 14px;
+  border:none;
+  margin-right:8px;
+  font-weight:600;
   cursor:pointer;
 }
-.icon{font-size:28px;margin-bottom:8px}
+.hero-right{
+  flex:1;
+  position:relative;
+  text-align:center;
+}
+.hero-right img{
+  height:120px;
+  margin:0 6px;
+  animation:float 3s infinite ease-in-out;
+}
+@keyframes float{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-10px)}
+  100%{transform:translateY(0)}
+}
 
-@media(max-width:768px){
-  .features{flex-direction:column}
+/* BUTTON GRID */
+.grid{
+  padding:40px 6%;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+}
+.card{
+  background:#111827;
+  border-radius:16px;
+  padding:30px;
+  text-align:center;
+  cursor:pointer;
+  transition:.3s;
+}
+.card:hover{transform:scale(1.05);background:#1f2933}
+.card h3{font-size:22px}
+
+/* POPUP */
+.popup{
+  position:fixed;
+  top:0;left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,.9);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+.popup-content{
+  background:#fff;
+  color:#000;
+  width:100%;
+  height:100%;
+  padding:30px;
+}
+.popup-content h2{text-align:center;margin-bottom:20px}
+.popup-content input{
+  width:100%;
+  padding:12px;
+  margin-bottom:12px;
+}
+.popup-content button{
+  padding:12px 20px;
+  margin-right:10px;
+  font-weight:700;
+}
+
+/* CONTACT */
+.contact{
+  padding:40px;
+  text-align:center;
 }
 </style>
 </head>
 
 <body>
 
-<div class="nav">
-  <strong>AV Chem Chemical</strong>
-  <div>
-    <a href="#">Home</a>
-    <a href="#">Dealer Enquiry</a>
-    <a href="tel:+917907344030">Contact</a>
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="brand">
+    <img src="avlogo.png">
+    AV Chem Chemical & Manufacturing
+  </div>
+  <div class="menu">
+    <a onclick="home()">Home</a>
+    <a onclick="dealer()">Dealer Enquiry</a>
+    <a onclick="contact()">Contact</a>
   </div>
 </div>
 
-<section class="hero">
-  <h1>H4 Tile Adhesive & Waterproof</h1>
-  <p>Premium polymer modified construction solutions</p>
-</section>
-
-<section class="features">
-  <div class="feature" onclick="window.location.href='tile-adhesive.html'">
-  <div class="icon">🧱</div>
-  <h3>Tile Adhesive</h3>
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <h1 id="title">H4 Tile Adhesive & Waterproof</h1>
+    <div class="lang">
+      <button onclick="ml()">Malayalam</button>
+      <button onclick="en()">English</button>
+    </div>
   </div>
 
-  <div class="feature" onclick="openWaterproof()">
-    <div class="icon">💧</div>
-    <h3>Waterproof</h3>
-  </div>
-
-  <div class="feature">
-    <div class="icon">📞</div>
-    <h3>Contact</h3>
+  <div class="hero-right">
+    <img src="h4logo.png">
+    <img src="bag-yellow.png">
+    <img src="bag-purple.png">
+    <img src="red.png">
+    <img src="blue.png">
   </div>
 </section>
+
+<!-- BUTTONS -->
+<section class="grid">
+  <div class="card" onclick="openFolder('tile')"><h3>Tile Adhesive</h3></div>
+  <div class="card" onclick="openFolder('waterproof')"><h3>Waterproof</h3></div>
+  <div class="card" onclick="openFolder('shieldx')"><h3>H4 ShieldX</h3></div>
+  <div class="card" onclick="contact()"><h3>Contact</h3></div>
+</section>
+
+<!-- DEALER POPUP -->
+<div class="popup" id="dealer">
+  <div class="popup-content">
+    <h2>Dealer Enquiry</h2>
+    <input id="name" placeholder="Customer Name">
+    <input id="city" placeholder="City">
+    <input id="pin" placeholder="Pincode">
+    <input id="mobile" placeholder="Mobile Number">
+    <input id="product" placeholder="Product">
+    <input id="qty" placeholder="Quantity">
+
+    <button onclick="send()">Confirm</button>
+    <button onclick="closePopup()">Cancel</button>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="popup" id="contact">
+  <div class="popup-content contact">
+    <h2>Contact Us</h2>
+    <p>📞 Call: +91 79073 44030</p>
+    <p>💬 WhatsApp: +91 97459 39392</p>
+    <p>✉️ Email: avchemtirur@gmail.com</p>
+    <p>
+      AV Chem Chemical & Manufacturing<br>
+      Mukilapeedika, Kannamkulam PO<br>
+      BP Angadi, Tirur<br>
+      Malappuram, Kerala – 676102
+    </p>
+    <button onclick="closePopup()">Close</button>
+  </div>
+</div>
 
 <script>
-function openWaterproof(){
-  window.open("waterproof.html","_blank");
+function dealer(){document.getElementById("dealer").style.display="flex"}
+function contact(){document.getElementById("contact").style.display="flex"}
+function closePopup(){document.querySelectorAll(".popup").forEach(p=>p.style.display="none")}
+
+function send(){
+let msg=`Dealer Enquiry
+Name: ${name.value}
+City: ${city.value}
+Pincode: ${pin.value}
+Mobile: ${mobile.value}
+Product: ${product.value}
+Quantity: ${qty.value}`;
+window.open(`https://wa.me/917907344030?text=${encodeURIComponent(msg)}`);
 }
+
+function openFolder(f){window.location.href=f+".html"}
+
+function ml(){document.getElementById("title").innerText="H4 ടൈൽ അഡ്‌ഹീസീവ് & വാട്ടർപ്രൂഫ്"}
+function en(){document.getElementById("title").innerText="H4 Tile Adhesive & Waterproof"}
 </script>
 
 </body>
