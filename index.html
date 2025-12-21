@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,126 +5,142 @@
 <title>AV Chem Chemical | H4</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- Fallback premium fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;800&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
+
 body{
   font-family:'Poppins',sans-serif;
-  background:#0f172a;
-  color:#fff;
-  overflow-x:hidden;
+  background:linear-gradient(135deg,#0f766e,#22c55e);
+  color:#ffffff;
 }
 
-/* TOP BAR */
-.topbar{
+/* HEADER */
+.header{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:16px 6%;
-  border-bottom:3px solid #38bdf8;
+  padding:14px 6%;
+  border-bottom:4px solid rgba(255,255,255,.4);
 }
+
 .brand{
   display:flex;
   align-items:center;
-  gap:12px;
-  font-weight:800;
-  font-size:20px;
+  gap:10px;
+  font-size:18px;
+  font-weight:700;
+  font-family:'RELIGATH','Poppins',sans-serif;
 }
-.brand img{height:42px}
 
 .menu a{
   color:#fff;
-  margin-left:22px;
+  margin-left:18px;
   text-decoration:none;
   font-weight:600;
-  cursor:pointer;
 }
 
 /* HERO */
 .hero{
-  padding:60px 6%;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:40px;
+  padding:80px 6% 50px;
+  position:relative;
 }
-.hero-left{
-  flex:1;
+
+.hero-border{
+  width:100%;
+  border-top:4px solid rgba(255,255,255,.6);
+  margin-bottom:30px;
 }
-.hero-left h1{
+
+.hero h1{
   font-size:42px;
+  font-family:'RIOPE','Poppins',sans-serif;
   font-weight:800;
 }
+
+.hero p{
+  margin-top:12px;
+  font-size:16px;
+  max-width:520px;
+}
+
 .lang{
-  margin-top:14px;
+  margin-top:16px;
 }
 .lang button{
   padding:6px 14px;
   border:none;
-  margin-right:8px;
+  margin-right:6px;
+  border-radius:4px;
   font-weight:600;
   cursor:pointer;
 }
-.hero-right{
-  flex:1;
-  position:relative;
-  text-align:center;
-}
-.hero-right img{
-  height:120px;
-  margin:0 6px;
-  animation:float 3s infinite ease-in-out;
-}
-@keyframes float{
-  0%{transform:translateY(0)}
-  50%{transform:translateY(-10px)}
-  100%{transform:translateY(0)}
-}
 
-/* BUTTON GRID */
-.grid{
-  padding:40px 6%;
+/* FOLDER GRID */
+.folders{
+  background:#ffffff;
+  padding:50px 6%;
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:20px;
 }
-.card{
-  background:#111827;
+
+.folder{
+  background:#f8fafc;
   border-radius:16px;
   padding:30px;
   text-align:center;
+  color:#0f172a;
+  font-weight:700;
   cursor:pointer;
-  transition:.3s;
+  box-shadow:0 10px 25px rgba(0,0,0,.15);
+  transition:.4s;
 }
-.card:hover{transform:scale(1.05);background:#1f2933}
-.card h3{font-size:22px}
+
+.folder:hover{
+  transform:translateY(-8px) scale(1.05);
+  box-shadow:0 20px 40px rgba(0,0,0,.25);
+}
+
+.folder span{
+  display:block;
+  font-size:36px;
+  margin-bottom:10px;
+}
 
 /* POPUP */
 .popup{
   position:fixed;
-  top:0;left:0;
-  width:100%;
-  height:100%;
+  inset:0;
   background:rgba(0,0,0,.9);
   display:none;
   align-items:center;
   justify-content:center;
   z-index:999;
 }
+
 .popup-content{
   background:#fff;
   color:#000;
   width:100%;
   height:100%;
   padding:30px;
+  overflow:auto;
 }
-.popup-content h2{text-align:center;margin-bottom:20px}
+
+.popup-content h2{
+  text-align:center;
+  margin-bottom:20px;
+}
+
 .popup-content input{
   width:100%;
   padding:12px;
   margin-bottom:12px;
 }
+
 .popup-content button{
   padding:12px 20px;
   margin-right:10px;
@@ -133,19 +148,18 @@ body{
 }
 
 /* CONTACT */
-.contact{
-  padding:40px;
-  text-align:center;
+.contact p{
+  margin:10px 0;
+  font-size:16px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- TOP BAR -->
-<div class="topbar">
+<!-- HEADER -->
+<div class="header">
   <div class="brand">
-    <img src="avlogo.png">
     AV Chem Chemical & Manufacturing
   </div>
   <div class="menu">
@@ -157,29 +171,41 @@ body{
 
 <!-- HERO -->
 <section class="hero" id="home">
-  <div class="hero-left">
-    <h1 id="title">H4 Tile Adhesive & Waterproof</h1>
-    <div class="lang">
-      <button onclick="ml()">Malayalam</button>
-      <button onclick="en()">English</button>
-    </div>
-  </div>
+  <div class="hero-border"></div>
 
-  <div class="hero-right">
-    <img src="h4logo.png">
-    <img src="bag-yellow.png">
-    <img src="bag-purple.png">
-    <img src="red.png">
-    <img src="blue.png">
+  <h1 id="title">H4 Tile Adhesive & Waterproof</h1>
+  <p id="desc">
+    Premium polymer modified tile adhesive and waterproof solutions.
+    Designed for strong bonding and long-lasting durability.
+  </p>
+
+  <div class="lang">
+    <button onclick="ml()">Malayalam</button>
+    <button onclick="en()">English</button>
   </div>
 </section>
 
-<!-- BUTTONS -->
-<section class="grid">
-  <div class="card" onclick="openFolder('tile')"><h3>Tile Adhesive</h3></div>
-  <div class="card" onclick="openFolder('waterproof')"><h3>Waterproof</h3></div>
-  <div class="card" onclick="openFolder('shieldx')"><h3>H4 ShieldX</h3></div>
-  <div class="card" onclick="contact()"><h3>Contact</h3></div>
+<!-- FOLDERS -->
+<section class="folders">
+  <div class="folder" onclick="openPage('tile.html')">
+    <span>🧱</span>
+    Tile Adhesive
+  </div>
+
+  <div class="folder" onclick="openPage('waterproof.html')">
+    <span>💧</span>
+    Waterproof
+  </div>
+
+  <div class="folder" onclick="openPage('shieldx.html')">
+    <span>🛡️</span>
+    H4 ShieldX
+  </div>
+
+  <div class="folder" onclick="contact()">
+    <span>📞</span>
+    Contact
+  </div>
 </section>
 
 <!-- DEALER POPUP -->
@@ -192,13 +218,12 @@ body{
     <input id="mobile" placeholder="Mobile Number">
     <input id="product" placeholder="Product">
     <input id="qty" placeholder="Quantity">
-
     <button onclick="send()">Confirm</button>
     <button onclick="closePopup()">Cancel</button>
   </div>
 </div>
 
-<!-- CONTACT -->
+<!-- CONTACT POPUP -->
 <div class="popup" id="contact">
   <div class="popup-content contact">
     <h2>Contact Us</h2>
@@ -219,6 +244,7 @@ body{
 function dealer(){document.getElementById("dealer").style.display="flex"}
 function contact(){document.getElementById("contact").style.display="flex"}
 function closePopup(){document.querySelectorAll(".popup").forEach(p=>p.style.display="none")}
+function openPage(p){window.location.href=p}
 
 function send(){
 let msg=`Dealer Enquiry
@@ -231,10 +257,15 @@ Quantity: ${qty.value}`;
 window.open(`https://wa.me/917907344030?text=${encodeURIComponent(msg)}`);
 }
 
-function openFolder(f){window.location.href=f+".html"}
+function ml(){
+document.getElementById("title").innerText="H4 ടൈൽ അഡ്‌ഹീസീവ് & വാട്ടർപ്രൂഫ്";
+document.getElementById("desc").innerText="ശക്തമായ ബോണ്ടിംഗിനും ദീർഘകാല ദൈർഘ്യത്തിനും രൂപകൽപ്പന ചെയ്ത പ്രീമിയം സൊലൂഷൻ.";
+}
 
-function ml(){document.getElementById("title").innerText="H4 ടൈൽ അഡ്‌ഹീസീവ് & വാട്ടർപ്രൂഫ്"}
-function en(){document.getElementById("title").innerText="H4 Tile Adhesive & Waterproof"}
+function en(){
+document.getElementById("title").innerText="H4 Tile Adhesive & Waterproof";
+document.getElementById("desc").innerText="Premium polymer modified tile adhesive and waterproof solutions. Designed for strong bonding and long-lasting durability.";
+}
 </script>
 
 </body>
