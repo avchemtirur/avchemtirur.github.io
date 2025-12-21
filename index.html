@@ -2,226 +2,258 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>AV Chem Chemical | H4</title>
+<title>H4 Tile Adhesive & Waterproof | Avchem Chemical</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;800&display=swap" rel="stylesheet">
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-
 body{
-  font-family:'Poppins',sans-serif;
-  background:linear-gradient(135deg,#0f766e,#22c55e);
+  font-family:Poppins,sans-serif;
+  background:#000;
   color:#fff;
+  overflow:hidden;
 }
 
-/* ===== BORDER HEADER ===== */
-.header{
-  border-bottom:4px solid rgba(255,255,255,.7);
-}
-
-/* TOP LINE */
-.header-top{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:10px 6%;
-  font-weight:800;
-}
-.header-top img{height:34px}
-
-/* BOTTOM LINE MENU */
-.header-menu{
-  display:flex;
-  gap:28px;
-  padding:10px 6%;
-  font-size:110%;
-}
-.header-menu span{
-  cursor:pointer;
-  font-weight:700;
-}
-
-/* HERO */
-.hero{
-  padding:50px 6% 30px;
-}
-.hero h1{
-  font-size:42px;
-  font-weight:800;
-}
-.hero p{
-  max-width:520px;
-  margin-top:10px;
-}
-
-.lang{
-  margin-top:14px;
-}
-.lang button{
-  padding:6px 14px;
-  border:none;
-  margin-right:6px;
-  font-weight:600;
-  cursor:pointer;
-}
-
-/* CARDS */
-.cards{
-  background:#fff;
-  padding:40px 6%;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:20px;
-}
-
-.card{
-  background:#f8fafc;
-  border-radius:14px;
-  padding:28px;
-  text-align:center;
-  color:#0f172a;
-  font-weight:700;
-  cursor:pointer;
-  box-shadow:0 10px 25px rgba(0,0,0,.15);
-  transition:.3s;
-}
-.card:hover{transform:translateY(-6px) scale(1.05)}
-.card span{font-size:34px}
-
-/* WHITE LAYER */
-.layer{
+/* BACKGROUND VIDEO STYLE */
+.bg{
   position:fixed;
   inset:0;
-  background:#fff;
-  color:#000;
+  background:
+   radial-gradient(circle at left,#7a1fa2,transparent 55%),
+   radial-gradient(circle at right,#1e3cff,transparent 55%),
+   #000;
+  z-index:-1;
+}
+
+/* NAV */
+nav{
+  height:60px;
+  display:flex;
+  justify-content:center;
+  align-items:flex-end;
+  gap:32px;
+  padding-bottom:10px;
+}
+nav button{
+  background:none;
+  border:none;
+  color:#fff;
+  font-size:18px;
+  cursor:pointer;
+}
+
+/* PAGES */
+.page{
   display:none;
-  z-index:999;
+  height:calc(100vh - 60px);
   padding:20px;
 }
+.page.active{display:block}
 
-.back{
-  font-weight:700;
+/* HOME */
+.home{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+
+/* TEXT ANIMATION */
+.title{
+  font-family:'Playfair Display',serif;
+  font-size:44px;
+  animation:fadeUp 1.2s ease;
+}
+.subtitle{
+  margin-top:10px;
+  opacity:.85;
+  animation:fadeUp 1.8s ease;
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* FOLDERS */
+.folders{
+  margin-top:40px;
+  display:flex;
+  gap:26px;
+}
+.folder{
+  width:140px;
+  height:100px;
+  border-radius:14px;
+  background:linear-gradient(135deg,#9b2cff,#4a5cff);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:14px;
   cursor:pointer;
-  margin-bottom:20px;
-  display:inline-block;
+  transition:.3s;
+}
+.folder:hover{transform:scale(1.08)}
+
+/* DEALER FORM */
+.form-box{
+  max-width:420px;
+  margin:auto;
+  background:#141428;
+  padding:20px;
+  border-radius:18px;
+}
+input,select{
+  width:100%;
+  margin-bottom:10px;
+  padding:12px;
+  border-radius:10px;
+  border:none;
+}
+.form-actions{
+  display:flex;
+  gap:12px;
+}
+.form-actions button{
+  flex:1;
+  padding:12px;
+  border:none;
+  border-radius:30px;
+  font-size:15px;
+  cursor:pointer;
+}
+.confirm{background:#25D366;color:#000}
+.cancel{background:#9b2cff;color:#fff}
+
+/* CONTACT */
+.contact-box{
+  text-align:center;
+  margin-top:40px;
+}
+.contact-box a{
+  display:block;
+  margin:10px 0;
+  color:#fff;
+  font-size:18px;
 }
 
-/* FORM */
-input{
-  width:100%;
-  padding:12px;
-  margin-bottom:12px;
+/* BACK BUTTON */
+.back{
+  margin-top:20px;
+  background:none;
+  border:1px solid #fff;
+  color:#fff;
+  padding:8px 18px;
+  border-radius:20px;
+  cursor:pointer;
 }
-button{
-  padding:12px 20px;
-  font-weight:700;
+
+@media(max-width:768px){
+  body{overflow:auto}
+  .folders{flex-direction:column}
 }
 </style>
 </head>
 
 <body>
+<div class="bg"></div>
 
-<!-- HEADER -->
-<div class="header">
+<!-- NAV -->
+<nav>
+  <button onclick="openPage('home')">Home</button>
+  <button onclick="openPage('dealer')">Dealer Enquiry</button>
+  <button onclick="openPage('contact')">Contact</button>
+</nav>
 
-  <div class="header-top">
-    <img src="avlogo.png">
-    AV Chem Chemical & Manufacturing
+<!-- HOME -->
+<section class="page home active" id="home">
+  <div class="title">H4 Tile Adhesive & Waterproof</div>
+  <div class="subtitle">
+    Avchem Chemical & Manufacturing<br><br>
+    മുഖ്യാലപ്പീടിക, കന്നംകുളം PO<br>
+    BP Angadi, Pin 676102<br>
+    Tirur, Kerala
   </div>
 
-  <div class="header-menu">
-    <span onclick="openHome()">Home</span>
-    <span onclick="openDealer()">Dealer Enquiry</span>
-    <span onclick="openContact()">Contact</span>
-  </div>
-
-</div>
-
-<!-- HERO -->
-<section class="hero" id="home">
-  <h1 id="title">H4 Tile Adhesive & Waterproof</h1>
-  <p id="desc">
-    Premium polymer modified tile adhesive and waterproof solutions.
-    Designed for strong bonding and long-lasting durability.
-  </p>
-
-  <div class="lang">
-    <button onclick="ml()">Malayalam</button>
-    <button onclick="en()">English</button>
+  <div class="folders">
+    <div class="folder" onclick="openWhatsApp('Tile Adhesive')">Tile Adhesive</div>
+    <div class="folder" onclick="openWhatsApp('Waterproof')">Waterproof</div>
+    <div class="folder" onclick="openWhatsApp('H4 ShieldX')">H4 ShieldX</div>
   </div>
 </section>
 
-<!-- CARDS -->
-<section class="cards">
-  <div class="card" onclick="alert('Tile page')">
-    <span>🧱</span><br>Tile Adhesive
-  </div>
-  <div class="card" onclick="alert('Waterproof page')">
-    <span>💧</span><br>Waterproof
-  </div>
-  <div class="card" onclick="alert('ShieldX page')">
-    <span>🛡️</span><br>H4 ShieldX
-  </div>
-  <div class="card" onclick="openContact()">
-    <span>📞</span><br>Contact
+<!-- DEALER -->
+<section class="page" id="dealer">
+  <div class="form-box">
+    <h2 style="text-align:center">Dealer Enquiry</h2>
+
+    <input id="name" placeholder="Customer Name">
+    <input id="city" placeholder="City">
+    <input id="mobile" placeholder="Mobile Number">
+    <input id="whatsapp" placeholder="WhatsApp Number (optional)">
+    <input id="dist" placeholder="District">
+    <input id="state" placeholder="State">
+
+    <select id="product">
+      <option>Tile Adhesive</option>
+      <option>Waterproof</option>
+      <option>H4 ShieldX</option>
+    </select>
+
+    <input id="qty" placeholder="Quantity (Bag / Kg)">
+
+    <div class="form-actions">
+      <button class="confirm" onclick="sendWhatsApp('CONFIRM')">Confirm</button>
+      <button class="cancel" onclick="sendWhatsApp('CANCEL')">Cancel</button>
+    </div>
+
+    <button class="back" onclick="openPage('home')">Back</button>
   </div>
 </section>
 
-<!-- DEALER LAYER -->
-<div class="layer" id="dealer">
-  <div class="back" onclick="closeLayer()">⬅ Back</div>
-  <h2>Dealer Enquiry</h2>
-  <input id="name" placeholder="Customer Name">
-  <input id="city" placeholder="City">
-  <input id="pin" placeholder="Pincode">
-  <input id="mobile" placeholder="Mobile Number">
-  <input id="product" placeholder="Product">
-  <input id="qty" placeholder="Quantity">
-  <button onclick="send()">Send</button>
-</div>
-
-<!-- CONTACT LAYER -->
-<div class="layer" id="contact">
-  <div class="back" onclick="closeLayer()">⬅ Back</div>
-  <h2>Contact</h2>
-  <p>📞 Call: +91 79073 44030</p>
-  <p>💬 WhatsApp: +91 97458 38382</p>
-  <p>✉️ avchemtirur@gmail.com</p>
-  <p>
-    Mukilapeedika, Kannamkulam PO<br>
-    BP Angadi, Tirur<br>
-    Malappuram, Kerala – 676102
-  </p>
-</div>
+<!-- CONTACT -->
+<section class="page" id="contact">
+  <div class="contact-box">
+    <a href="tel:+917907344030">📞 +91 79073 44030</a>
+    <a href="https://wa.me/919745838382" target="_blank">💬 WhatsApp: +91 97458 38382</a>
+    <a href="mailto:avchemtirur@gmail.com">✉️ avchemtirur@gmail.com</a>
+    <button class="back" onclick="openPage('home')">Back</button>
+  </div>
+</section>
 
 <script>
-function openDealer(){document.getElementById("dealer").style.display="block"}
-function openContact(){document.getElementById("contact").style.display="block"}
-function closeLayer(){document.querySelectorAll(".layer").forEach(l=>l.style.display="none")}
-function openHome(){window.scrollTo(0,0)}
+function openPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
 
-function send(){
-let msg=`Dealer Enquiry
+function openWhatsApp(product){
+  window.open(
+    `https://wa.me/919745838382?text=Enquiry for ${product}`,
+    '_blank'
+  );
+}
+
+function sendWhatsApp(type){
+  let msg =
+`Dealer Enquiry (${type})
 Name: ${name.value}
 City: ${city.value}
-Pincode: ${pin.value}
 Mobile: ${mobile.value}
+WhatsApp: ${whatsapp.value}
+District: ${dist.value}
+State: ${state.value}
 Product: ${product.value}
 Quantity: ${qty.value}`;
-window.open(`https://wa.me/919745838382?text=${encodeURIComponent(msg)}`);
-}
 
-function ml(){
-title.innerText="H4 ടൈൽ അഡ്‌ഹീസീവ് & വാട്ടർപ്രൂഫ്";
-desc.innerText="ശക്തമായ ബോണ്ടിംഗിനും ദീർഘകാല ദൈർഘ്യത്തിനും രൂപകൽപ്പന ചെയ്ത പ്രീമിയം സൊലൂഷൻ.";
-}
-function en(){
-title.innerText="H4 Tile Adhesive & Waterproof";
-desc.innerText="Premium polymer modified tile adhesive and waterproof solutions. Designed for strong bonding and long-lasting durability.";
+  window.open(
+    `https://wa.me/919745838382?text=${encodeURIComponent(msg)}`,
+    '_blank'
+  );
 }
 </script>
-
 </body>
 </html>
