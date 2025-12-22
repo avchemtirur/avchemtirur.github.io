@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,38 +7,63 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
-body,html{height:100%;overflow:hidden;color:#fff}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{
+ width:100%;height:100%;
+ font-family:Arial,Helvetica,sans-serif;
+ background:#050607;
+ color:#fff;
+ overflow:hidden;
+}
 
-/* VIDEO BACKGROUND */
-.video-bg{
- position:fixed;top:0;left:0;width:100%;height:100%;
- background:radial-gradient(circle at left,#7a1fa2,#000),
-            radial-gradient(circle at right,#1e3cff,#000);
+/* BACKGROUND – SAME IMAGE STYLE */
+.bg{
+ position:fixed;inset:0;
+ background:
+  radial-gradient(60% 40% at 30% 50%, #0f3c44, transparent 70%),
+  radial-gradient(60% 40% at 70% 50%, #132b4d, transparent 70%),
+  #050607;
  z-index:-2;
 }
-.video-overlay{
- position:fixed;top:0;left:0;width:100%;height:100%;
- background:rgba(0,0,0,0.6);
- z-index:-1;
+.bg::after{
+ content:"";
+ position:absolute;inset:0;
+ background:rgba(0,0,0,.55);
 }
 
 /* TOP BAR */
-.navbar{
+.nav{
  position:fixed;top:0;width:100%;
- display:flex;justify-content:space-between;align-items:center;
- padding:14px 24px;
- background:rgba(0,0,0,0.5);
- backdrop-filter:blur(10px);
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ padding:14px 26px;
+ backdrop-filter:blur(12px);
+ background:rgba(0,0,0,.45);
  z-index:10;
 }
-.navbar a{
- color:#fff;text-decoration:none;margin-left:20px;
- font-size:16px;cursor:pointer;
+.nav a{
+ color:#fff;text-decoration:none;
+ margin-left:22px;
+ font-size:17px;
+ cursor:pointer;
 }
-.navbar a:hover{color:#b26cff}
+.nav a:hover{opacity:.7}
 
-/* CENTER HERO */
+/* LANGUAGE */
+.lang{
+ display:flex;gap:8px;
+}
+.lang button{
+ background:#111;color:#fff;
+ border:1px solid #333;
+ padding:6px 12px;
+ border-radius:20px;
+ cursor:pointer;
+ font-size:13px;
+}
+
+/* HERO */
 .hero{
  height:100vh;
  display:flex;
@@ -48,10 +74,10 @@ body,html{height:100%;overflow:hidden;color:#fff}
 }
 .hero img{
  width:140px;
- margin-bottom:20px;
- animation:zoom 2s infinite alternate;
+ margin-bottom:16px;
+ animation:logoPulse 2s ease-in-out infinite alternate;
 }
-@keyframes zoom{
+@keyframes logoPulse{
  from{transform:scale(1)}
  to{transform:scale(1.08)}
 }
@@ -61,8 +87,8 @@ body,html{height:100%;overflow:hidden;color:#fff}
  animation:textGlow 2s infinite alternate;
 }
 @keyframes textGlow{
- from{text-shadow:0 0 10px #9b2cff}
- to{text-shadow:0 0 25px #3cfffa}
+ from{text-shadow:0 0 10px #2bb0ff}
+ to{text-shadow:0 0 22px #7ce7ff}
 }
 
 /* FOLDERS */
@@ -70,90 +96,120 @@ body,html{height:100%;overflow:hidden;color:#fff}
  position:absolute;
  bottom:90px;
  display:flex;
- gap:30px;
+ gap:34px;
 }
 .folder{
- width:120px;height:90px;
- background:linear-gradient(135deg,#222,#111);
- border-radius:10px;
+ width:126px;
+ height:96px;
+ background:linear-gradient(135deg,#111,#050505);
+ border-radius:12px;
  text-align:center;
- padding-top:25px;
+ padding-top:30px;
  cursor:pointer;
- transition:0.4s;
+ transition:.4s;
 }
 .folder:hover{
- transform:translateY(-10px) scale(1.05);
- box-shadow:0 0 20px #9b2cff;
+ transform:translateY(-10px) scale(1.08);
+ box-shadow:0 0 20px rgba(124,231,255,.5);
 }
-.folder span{font-size:14px}
+.folder span{
+ font-size:15px;
+}
 
 /* PANELS */
 .panel{
  position:fixed;
  inset:0;
- background:rgba(0,0,0,0.85);
+ background:rgba(0,0,0,.85);
  display:none;
  flex-direction:column;
  justify-content:center;
  align-items:center;
- padding:20px;
+ padding:24px;
  z-index:20;
+ animation:fade .4s ease;
 }
-.panel h2{margin-bottom:20px}
+@keyframes fade{
+ from{opacity:0;transform:scale(.96)}
+ to{opacity:1;transform:scale(1)}
+}
+.panel h2{
+ font-size:28px;
+ margin-bottom:18px;
+}
 .panel input,.panel select{
- width:260px;padding:10px;margin:6px;border-radius:6px;border:none;
+ width:300px;
+ padding:12px;
+ margin:6px 0;
+ border-radius:8px;
+ border:none;
+ font-size:16px;
 }
 .panel button{
- margin-top:10px;padding:10px 22px;border:none;border-radius:20px;
- background:#9b2cff;color:#fff;cursor:pointer;
+ margin-top:14px;
+ padding:12px 26px;
+ border:none;
+ border-radius:26px;
+ background:#2bb0ff;
+ color:#000;
+ font-size:16px;
+ cursor:pointer;
 }
 .back{
- margin-top:20px;
- background:#333;
+ background:#333;color:#fff;
 }
 
-/* LANGUAGE */
-.lang{
- position:fixed;
- bottom:20px;right:20px;
+/* CONTACT BUTTONS */
+.contact-btn{
+ width:280px;
+ margin:8px 0;
 }
-.lang button{
- background:#222;color:#fff;border:none;padding:8px 14px;
- border-radius:20px;margin-left:5px;cursor:pointer;
+
+/* FOOTER BACK */
+.footer-back{
+ position:absolute;
+ bottom:24px;
+}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+ .hero h1{font-size:30px}
 }
 </style>
 </head>
 
 <body>
 
-<div class="video-bg"></div>
-<div class="video-overlay"></div>
+<div class="bg"></div>
 
 <!-- NAV -->
-<div class="navbar">
- <div></div>
+<div class="nav">
+ <div class="lang">
+  <button onclick="setLang('en')">EN</button>
+  <button onclick="setLang('ml')">ML</button>
+ </div>
  <div>
-  <a onclick="openHome()">Home</a>
-  <a onclick="openDealer()">Dealer Enquiry</a>
-  <a onclick="openContact()">Contact</a>
+  <a onclick="showHome()">Home</a>
+  <a onclick="showDealer()">Dealer Enquiry</a>
+  <a onclick="showContact()">Contact</a>
  </div>
 </div>
 
-<!-- HERO -->
+<!-- HOME -->
 <div class="hero" id="home">
- <img src="h4logo.png" alt="H4 Logo">
- <h1>H4 Tile Adhesive & Waterproof</h1>
+ <img src="h4logo.png">
+ <h1 id="title">H4 Tile Adhesive & Waterproof</h1>
 
  <div class="folders">
-  <div class="folder"><span>Tile Adhesive</span></div>
-  <div class="folder"><span>Waterproof</span></div>
-  <div class="folder"><span>H4 ShieldX</span></div>
+  <div class="folder" onclick="openFolder('Tile Adhesive')"><span>Tile Adhesive</span></div>
+  <div class="folder" onclick="openFolder('Waterproof')"><span>Waterproof</span></div>
+  <div class="folder" onclick="openFolder('H4 ShieldX')"><span>H4 ShieldX</span></div>
  </div>
 </div>
 
 <!-- DEALER -->
 <div class="panel" id="dealer">
- <h2>Dealer Enquiry</h2>
+ <h2 id="dealerTitle">Dealer Enquiry</h2>
  <input placeholder="Customer Name">
  <input placeholder="City">
  <input placeholder="Mobile Number">
@@ -170,42 +226,53 @@ body,html{height:100%;overflow:hidden;color:#fff}
   <option>Kg</option>
  </select>
  <button onclick="sendWA()">Confirm</button>
- <button class="back" onclick="closeAll()">Back</button>
+ <div class="footer-back">
+  <button class="back" onclick="closeAll()">Back</button>
+ </div>
 </div>
 
 <!-- CONTACT -->
 <div class="panel" id="contact">
- <h2>Contact</h2>
- <button onclick="location.href='tel:+917907344030'">📞 Call</button>
- <button onclick="location.href='https://wa.me/919745838382'">💬 WhatsApp</button>
- <button onclick="location.href='mailto:avchemtirur@gmail.com'">✉ Email</button>
- <button class="back" onclick="closeAll()">Back</button>
-</div>
-
-<!-- LANGUAGE -->
-<div class="lang">
- <button onclick="alert('English Enabled')">EN</button>
- <button onclick="alert('Malayalam Enabled')">ML</button>
+ <h2 id="contactTitle">Contact</h2>
+ <button class="contact-btn" onclick="location.href='tel:+917907344030'">📞 +91 79073 44030</button>
+ <button class="contact-btn" onclick="location.href='https://wa.me/919745838382'">💬 WhatsApp</button>
+ <button class="contact-btn" onclick="location.href='mailto:avchemtirur@gmail.com'">✉ avchemtirur@gmail.com</button>
+ <div class="footer-back">
+  <button class="back" onclick="closeAll()">Back</button>
+ </div>
 </div>
 
 <script>
-function openDealer(){
- closeAll();
- document.getElementById('dealer').style.display='flex';
-}
-function openContact(){
- closeAll();
- document.getElementById('contact').style.display='flex';
-}
-function openHome(){
- closeAll();
-}
 function closeAll(){
  document.querySelectorAll('.panel').forEach(p=>p.style.display='none');
 }
+function showHome(){closeAll();}
+function showDealer(){
+ closeAll();
+ document.getElementById('dealer').style.display='flex';
+}
+function showContact(){
+ closeAll();
+ document.getElementById('contact').style.display='flex';
+}
 function sendWA(){
- let msg="Dealer Enquiry from Website";
- window.open("https://wa.me/919745838382?text="+encodeURIComponent(msg));
+ window.open("https://wa.me/919745838382?text=Dealer%20Enquiry");
+}
+function openFolder(name){
+ alert(name+" selected");
+}
+
+/* LANGUAGE */
+function setLang(l){
+ if(l==='ml'){
+  document.getElementById('title').innerText="H4 ടൈൽ അഡ്ഹീസീവ് & വാട്ടർപ്രൂഫ്";
+  document.getElementById('dealerTitle').innerText="ഡീലർ എൻക്വറി";
+  document.getElementById('contactTitle').innerText="ബന്ധപ്പെടുക";
+ }else{
+  document.getElementById('title').innerText="H4 Tile Adhesive & Waterproof";
+  document.getElementById('dealerTitle').innerText="Dealer Enquiry";
+  document.getElementById('contactTitle').innerText="Contact";
+ }
 }
 </script>
 
