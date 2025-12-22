@@ -1,8 +1,9 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>AV Chem - Trust Your Life and Home</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -11,6 +12,12 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        html, body {
+            width: 100%;
+            min-height: 100vh;
+            overflow-x: hidden;
+            zoom: 1;
         }
         body {
             background: linear-gradient(135deg, #0a2540 0%, #1a365d 100%);
@@ -34,7 +41,7 @@
         }
         .logo-large {
             height: 120px;
-            position: absolute;
+            position: fixed;
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%) scale(1.5);
@@ -53,12 +60,13 @@
         .nav-btn {
             background: none;
             border: 2px solid #00b4d8;
-            color: #00b4d8;
+            color: #ffffff;
             padding: 10px 20px;
             border-radius: 30px;
             cursor: pointer;
             font-weight: bold;
             transition: all 0.3s ease;
+            white-space: nowrap;
         }
         .nav-btn:hover {
             background: #00b4d8;
@@ -71,7 +79,7 @@
         .lang-btn {
             background: #1a365d;
             border: none;
-            color: #a0c8f8;
+            color: #ffffff;
             padding: 8px 15px;
             border-radius: 5px;
             cursor: pointer;
@@ -84,50 +92,32 @@
             padding: 40px;
             text-align: center;
             position: relative;
+            width: 100%;
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
         .main-title-container {
             position: relative;
             display: inline-block;
             margin-bottom: 20px;
+            width: 100%;
         }
         .main-title {
             font-size: 3.5rem;
-            background: linear-gradient(90deg, #00b4d8, #90e0ef, #00b4d8);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            background-size: 200% auto;
-            animation: shine 3s linear infinite, glow 2s infinite alternate;
-            text-shadow: 0 0 20px rgba(0, 180, 216, 0.5);
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(0, 180, 216, 0.7);
             font-weight: 800;
             letter-spacing: 1px;
-            filter: brightness(1.2);
-        }
-        @keyframes shine {
-            0% { background-position: 0% center; }
-            100% { background-position: 200% center; }
-        }
-        @keyframes glow {
-            from { text-shadow: 0 0 10px #00b4d8, 0 0 20px rgba(0, 180, 216, 0.5); }
-            to { text-shadow: 0 0 20px #00b4d8, 0 0 30px rgba(0, 180, 216, 0.8), 0 0 40px rgba(0, 180, 216, 0.4); }
-        }
-        .title-highlight {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            animation: highlight 3s ease-in-out infinite;
-        }
-        @keyframes highlight {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
+            margin-bottom: 10px;
         }
         .subtitle {
             font-size: 1.5rem;
-            color: #a0c8f8;
+            color: #ffffff;
             margin-bottom: 40px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
         .folder-container {
             display: flex;
@@ -135,6 +125,7 @@
             gap: 60px;
             margin: 60px 0;
             flex-wrap: wrap;
+            width: 100%;
         }
         .folder {
             width: 200px;
@@ -185,22 +176,23 @@
         .folder-name {
             font-size: 1.3rem;
             font-weight: bold;
-            color: #90e0ef;
+            color: #ffffff;
             margin-top: 10px;
             padding: 10px;
             background: rgba(10, 37, 64, 0.7);
             border-radius: 10px;
             transition: all 0.3s ease;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
         }
         .folder.open .folder-name {
             background: rgba(0, 180, 216, 0.3);
-            color: #fff;
+            color: #ffffff;
             transform: scale(1.1);
         }
         .caption {
             font-size: 1.8rem;
             margin-top: 30px;
-            color: #fff;
+            color: #ffffff;
             animation: fadeIn 3s;
             font-weight: bold;
             text-shadow: 0 2px 10px rgba(0,0,0,0.5);
@@ -245,14 +237,17 @@
             padding: 40px;
             max-width: 900px;
             margin: 0 auto;
-            text-align: left;
             background: rgba(10, 37, 64, 0.9);
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             min-height: 60vh;
+            width: 90%;
         }
         .page.active {
-            display: block;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             animation: slideUp 0.5s ease;
         }
         @keyframes slideUp {
@@ -262,7 +257,7 @@
         .back-btn {
             background: #1a365d;
             border: none;
-            color: #90e0ef;
+            color: #ffffff;
             padding: 10px 25px;
             border-radius: 30px;
             cursor: pointer;
@@ -279,11 +274,12 @@
         }
         .form-group {
             margin-bottom: 20px;
+            width: 100%;
         }
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            color: #a0c8f8;
+            color: #ffffff;
             font-weight: 500;
         }
         .form-group input, .form-group select {
@@ -292,7 +288,7 @@
             border-radius: 10px;
             border: 2px solid #1a4b8c;
             background: #0a2540;
-            color: #fff;
+            color: #ffffff;
             font-size: 1rem;
             transition: border 0.3s;
         }
@@ -304,6 +300,7 @@
             display: flex;
             gap: 20px;
             margin-top: 30px;
+            width: 100%;
         }
         .form-btn {
             flex: 1;
@@ -313,10 +310,10 @@
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s;
+            color: #ffffff;
         }
         .confirm {
             background: linear-gradient(90deg, #00b4d8, #0077b6);
-            color: white;
         }
         .confirm:hover {
             transform: translateY(-3px);
@@ -324,7 +321,6 @@
         }
         .cancel {
             background: #1a365d;
-            color: #90e0ef;
             border: 2px solid #1a4b8c;
         }
         .cancel:hover {
@@ -335,6 +331,8 @@
             flex-direction: column;
             gap: 25px;
             margin-top: 30px;
+            width: 100%;
+            max-width: 600px;
         }
         .contact-item {
             display: flex;
@@ -345,6 +343,7 @@
             border-radius: 15px;
             transition: all 0.3s;
             border: 1px solid #1a4b8c;
+            width: 100%;
         }
         .contact-item:hover {
             background: rgba(0, 180, 216, 0.2);
@@ -362,7 +361,7 @@
             flex: 1;
         }
         .contact-details a {
-            color: #90e0ef;
+            color: #ffffff;
             text-decoration: none;
             font-size: 1.4rem;
             display: block;
@@ -375,13 +374,14 @@
             text-decoration: underline;
         }
         .contact-label {
-            color: #a0c8f8;
+            color: #ffffff;
             font-size: 0.9rem;
+            opacity: 0.8;
         }
         .footer {
             text-align: center;
             padding: 30px;
-            color: #a0c8f8;
+            color: #ffffff;
             border-top: 1px solid #1a4b8c;
             margin-top: 40px;
         }
@@ -397,6 +397,152 @@
         }
         .contact-page-active .contact-details a {
             font-size: 1.6rem;
+        }
+        
+        /* Home Page Specific */
+        .home-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+            padding: 40px 20px;
+        }
+        .av-logo {
+            height: 100px;
+            margin-bottom: 30px;
+        }
+        .company-name {
+            font-size: 2.5rem;
+            color: #ffffff;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        .address {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: #ffffff;
+            max-width: 600px;
+            margin: 0 auto;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .bags-container {
+                right: 20px;
+            }
+            .bag {
+                width: 100px;
+                height: 130px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .main-title {
+                font-size: 2.8rem;
+            }
+            .folder-container {
+                gap: 40px;
+            }
+            .folder {
+                width: 180px;
+            }
+            .folder-icon {
+                width: 180px;
+                height: 140px;
+            }
+            .bags-container {
+                position: relative;
+                right: auto;
+                top: auto;
+                transform: none;
+                flex-direction: row;
+                justify-content: center;
+                margin-top: 40px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .top-bar {
+                padding: 15px 20px;
+                flex-wrap: wrap;
+            }
+            .nav-links {
+                gap: 10px;
+                margin-top: 10px;
+                width: 100%;
+                justify-content: center;
+            }
+            .nav-btn {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+            .language-switch {
+                margin-top: 10px;
+            }
+            .main-content {
+                padding: 20px;
+            }
+            .main-title {
+                font-size: 2.2rem;
+            }
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            .folder-container {
+                gap: 20px;
+                margin: 40px 0;
+            }
+            .folder {
+                width: 150px;
+            }
+            .folder-icon {
+                width: 150px;
+                height: 120px;
+            }
+            .folder-icon i {
+                font-size: 50px;
+            }
+            .caption {
+                font-size: 1.5rem;
+            }
+            .page {
+                padding: 20px;
+                width: 95%;
+            }
+            .company-name {
+                font-size: 2rem;
+            }
+            .address {
+                font-size: 1.1rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .main-title {
+                font-size: 1.8rem;
+            }
+            .folder-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            .form-buttons {
+                flex-direction: column;
+            }
+            .contact-item {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px;
+            }
+            .contact-icon {
+                margin-bottom: 10px;
+            }
         }
     </style>
 </head>
@@ -416,7 +562,7 @@
     </div>
 
     <!-- Main Content -->
-    <div class="main-content">
+    <div class="main-content" id="main-content">
         <div class="main-title-container">
             <h1 class="main-title" id="main-title">H4 Tile Adhesive & Water Proof</h1>
             <div class="title-highlight"></div>
@@ -425,19 +571,19 @@
         
         <!-- Animated Folders -->
         <div class="folder-container">
-            <div class="folder" onclick="openFolder(0)">
+            <div class="folder" id="folder-tile" onclick="openFolder('tile')">
                 <div class="folder-icon">
                     <i class="fas fa-shield-alt"></i>
                 </div>
                 <div class="folder-name">Tile Adhesive</div>
             </div>
-            <div class="folder" onclick="openFolder(1)">
+            <div class="folder" id="folder-water" onclick="openFolder('water')">
                 <div class="folder-icon">
                     <i class="fas fa-tint"></i>
                 </div>
                 <div class="folder-name">Water Proof</div>
             </div>
-            <div class="folder" onclick="openFolder(2)">
+            <div class="folder" id="folder-shield" onclick="openFolder('shield')">
                 <div class="folder-icon">
                     <i class="fas fa-layer-group"></i>
                 </div>
@@ -456,19 +602,21 @@
 
     <!-- Home Page -->
     <div id="home-page" class="page">
-        <img src="https://via.placeholder.com/200x100/00b4d8/ffffff?text=AVL+Logo" alt="AVL Logo" style="margin-bottom: 30px;">
-        <h2 style="color: #00b4d8; margin-bottom: 20px;">AV Chem Chemical & Manufacturing</h2>
-        <p style="line-height: 1.8; font-size: 1.1rem; color: #a0c8f8;">
-            Mukkilapeedika, Kannamkulam PO,<br>
-            BP Angadi, Pin Code: 676102,<br>
-            Tirur, Malappuram, Kerala, India.
-        </p>
-        <button class="back-btn" onclick="showPage('main')"><i class="fas fa-arrow-left"></i> Back</button>
+        <div class="home-content">
+            <img src="https://via.placeholder.com/200x100/00b4d8/ffffff?text=AV+Logo" alt="AV Logo" class="av-logo">
+            <h2 class="company-name">AV Chem Chemical & Manufacturing</h2>
+            <div class="address">
+                Mukkilapeedika, Kannamkulam PO,<br>
+                BP Angadi, Pin Code: 676102,<br>
+                Tirur, Malappuram, Kerala, India.
+            </div>
+            <button class="back-btn" onclick="showPage('main')"><i class="fas fa-arrow-left"></i> Back</button>
+        </div>
     </div>
 
     <!-- Dealer Enquiry Page -->
     <div id="dealer-page" class="page">
-        <h2 style="color: #00b4d8; margin-bottom: 30px;">Dealer Enquiry Form</h2>
+        <h2 style="color: #ffffff; margin-bottom: 30px; text-align: center;">Dealer Enquiry Form</h2>
         <div class="form-group">
             <label for="name">Customer Name</label>
             <input type="text" id="name" placeholder="Enter your full name">
@@ -517,7 +665,7 @@
 
     <!-- Contact Page -->
     <div id="contact-page" class="page">
-        <h2 style="color: #00b4d8; margin-bottom: 30px; text-align: center; font-size: 2.5rem;">Contact Us</h2>
+        <h2 style="color: #ffffff; margin-bottom: 30px; text-align: center; font-size: 2.5rem;">Contact Us</h2>
         <div class="contact-info">
             <div class="contact-item">
                 <i class="fas fa-phone contact-icon"></i>
@@ -565,22 +713,96 @@
             
             // Remove large logo after animation
             setTimeout(() => {
-                document.body.removeChild(largeLogo);
+                if (largeLogo.parentNode) {
+                    document.body.removeChild(largeLogo);
+                }
                 // Update main title
                 document.getElementById('main-title').textContent = 'H4 Tile Adhesive & Water Proof';
+                
+                // Set all text to white
+                setAllTextWhite();
             }, 2000);
-            
-            // Reset all folders to closed state
-            closeAllFolders();
         };
+        
+        // Set all text to white color
+        function setAllTextWhite() {
+            // Select all text elements and set color to white
+            const textElements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, span, div, a, button, label, li, td, th');
+            textElements.forEach(el => {
+                if (!el.classList.contains('nav-btn') && !el.classList.contains('lang-btn') && 
+                    !el.classList.contains('form-btn') && !el.classList.contains('back-btn')) {
+                    el.style.color = '#ffffff';
+                }
+            });
+        }
+        
+        // Track currently open folder
+        let currentOpenFolder = null;
         
         // Close all folders
         function closeAllFolders() {
-            document.querySelectorAll('.folder').forEach(folder => {
+            const folders = document.querySelectorAll('.folder');
+            folders.forEach(folder => {
                 folder.classList.remove('open');
             });
+            currentOpenFolder = null;
+            
+            // Reset main title and subtitle
+            document.getElementById('main-title').textContent = 'H4 Tile Adhesive & Water Proof';
+            document.getElementById('subtitle').textContent = 'Introducing Verifiable Compute. Ready for the Agentic AI Era.';
         }
-
+        
+        // Open folder function
+        function openFolder(folderType) {
+            const folders = {
+                'tile': document.getElementById('folder-tile'),
+                'water': document.getElementById('folder-water'),
+                'shield': document.getElementById('folder-shield')
+            };
+            
+            const titles = {
+                'tile': 'H4 Tile Adhesive',
+                'water': 'H4 Water Proof',
+                'shield': 'H4 ShieldX Technology'
+            };
+            
+            const subtitles = {
+                'tile': 'Advanced adhesive technology for lasting bonds and durability.',
+                'water': 'Complete protection against water damage with advanced sealing.',
+                'shield': 'Ultra shield coating for maximum protection and durability.'
+            };
+            
+            // If clicking the same folder, close it
+            if (currentOpenFolder === folderType) {
+                closeAllFolders();
+                return;
+            }
+            
+            // Close all folders first
+            closeAllFolders();
+            
+            // Open the clicked folder
+            folders[folderType].classList.add('open');
+            currentOpenFolder = folderType;
+            
+            // Update title and subtitle
+            document.getElementById('main-title').textContent = titles[folderType];
+            document.getElementById('subtitle').textContent = subtitles[folderType];
+            
+            // Show bag animations
+            const bags = document.querySelectorAll('.bag');
+            if (folderType === 'tile') {
+                bags[0].style.animation = 'float 2s ease-in-out infinite';
+                bags[1].style.animation = 'float 2s ease-in-out infinite 0.5s';
+            } else if (folderType === 'water') {
+                bags[0].style.animation = 'float 1.5s ease-in-out infinite';
+                bags[1].style.animation = 'float 1.5s ease-in-out infinite 0.3s';
+            } else if (folderType === 'shield') {
+                bags[0].style.animation = 'float 2.5s ease-in-out infinite';
+                bags[1].style.animation = 'float 2.5s ease-in-out infinite 0.7s';
+            }
+        }
+        
         // Show specific page and hide others
         function showPage(pageId) {
             // Close all folders when switching pages
@@ -594,20 +816,25 @@
             
             // Show selected page
             if (pageId === 'main') {
-                document.querySelector('.main-content').style.display = 'block';
+                document.getElementById('main-content').style.display = 'flex';
                 document.getElementById('footer').style.display = 'block';
                 document.getElementById('top-logo').src = "https://via.placeholder.com/150x50/00b4d8/ffffff?text=H4+Logo";
                 
                 // Reset main title
                 document.getElementById('main-title').textContent = 'H4 Tile Adhesive & Water Proof';
                 document.getElementById('subtitle').textContent = 'Introducing Verifiable Compute. Ready for the Agentic AI Era.';
+                
+                // Reset bag animations to default
+                const bags = document.querySelectorAll('.bag');
+                bags[0].style.animation = 'float 3s ease-in-out infinite';
+                bags[1].style.animation = 'float 3s ease-in-out infinite 0.5s';
             } else {
-                document.querySelector('.main-content').style.display = 'none';
+                document.getElementById('main-content').style.display = 'none';
                 document.getElementById('footer').style.display = 'none';
                 
                 if (pageId === 'home') {
                     document.getElementById('home-page').classList.add('active');
-                    document.getElementById('top-logo').src = "https://via.placeholder.com/150x50/00b4d8/ffffff?text=AVL+Logo";
+                    document.getElementById('top-logo').src = "https://via.placeholder.com/150x50/00b4d8/ffffff?text=AV+Logo";
                 } else if (pageId === 'dealer') {
                     document.getElementById('dealer-page').classList.add('active');
                 } else if (pageId === 'contact') {
@@ -615,56 +842,11 @@
                     document.getElementById('contact-page').classList.add('contact-page-active');
                 }
             }
-        }
-
-        // Folder open animation - FIXED VERSION
-        function openFolder(index) {
-            const folders = document.querySelectorAll('.folder');
-            const isCurrentlyOpen = folders[index].classList.contains('open');
             
-            // Close all folders first
-            folders.forEach((folder, i) => {
-                folder.classList.remove('open');
-            });
-            
-            // If the clicked folder wasn't already open, open it
-            if (!isCurrentlyOpen) {
-                folders[index].classList.add('open');
-                
-                // Change main title and subtitle based on folder
-                const titles = ['H4 Tile Adhesive', 'H4 Water Proof', 'H4 ShieldX Technology'];
-                const subtitles = ['Advanced adhesive technology for lasting bonds and durability.', 'Complete protection against water damage with advanced sealing.', 'Ultra shield coating for maximum protection and durability.'];
-                
-                document.getElementById('main-title').textContent = titles[index];
-                document.getElementById('subtitle').textContent = subtitles[index];
-                
-                // Change logo to H4 logo
-                document.getElementById('top-logo').src = "https://via.placeholder.com/150x50/00b4d8/ffffff?text=H4+Logo";
-                
-                // Show bag animations based on folder
-                const bags = document.querySelectorAll('.bag');
-                if (index === 0) { // Tile Adhesive
-                    bags[0].style.animation = 'float 2s ease-in-out infinite';
-                    bags[1].style.animation = 'float 2s ease-in-out infinite 0.5s';
-                } else if (index === 1) { // Water Proof
-                    bags[0].style.animation = 'float 1.5s ease-in-out infinite';
-                    bags[1].style.animation = 'float 1.5s ease-in-out infinite 0.3s';
-                } else if (index === 2) { // H4 ShieldX
-                    bags[0].style.animation = 'float 2.5s ease-in-out infinite';
-                    bags[1].style.animation = 'float 2.5s ease-in-out infinite 0.7s';
-                }
-            } else {
-                // If folder was already open, reset to default
-                document.getElementById('main-title').textContent = 'H4 Tile Adhesive & Water Proof';
-                document.getElementById('subtitle').textContent = 'Introducing Verifiable Compute. Ready for the Agentic AI Era.';
-                
-                // Reset bag animations
-                const bags = document.querySelectorAll('.bag');
-                bags[0].style.animation = 'float 3s ease-in-out infinite';
-                bags[1].style.animation = 'float 3s ease-in-out infinite 0.5s';
-            }
+            // Ensure all text is white
+            setAllTextWhite();
         }
-
+        
         // Submit enquiry form
         function submitEnquiry() {
             const name = document.getElementById('name').value;
@@ -697,7 +879,7 @@
             
             alert('Your enquiry has been submitted. WhatsApp will open with the details.');
         }
-
+        
         // Language switching
         function setLanguage(lang) {
             const enBtn = document.querySelector('.lang-btn:nth-child(1)');
@@ -715,6 +897,17 @@
                 document.querySelectorAll('.folder-name')[1].textContent = 'വാട്ടർ പ്രൂഫ്';
                 document.querySelectorAll('.folder-name')[2].textContent = 'എച്ച്4 ഷീൽഡ് എക്സ്';
                 
+                // Home page Malayalam
+                if (document.querySelector('.company-name')) {
+                    document.querySelector('.company-name').textContent = 'എവി കെം കെമിക്കൽ & മാനുഫാക്ചറിംഗ്';
+                }
+                if (document.querySelector('.address')) {
+                    document.querySelector('.address').innerHTML = 
+                        'മുക്കിലപ്പീടിക, കണ്ണംകുളം പി.ഒ.,<br>' +
+                        'ബി.പി. അങ്ങാടി, പിൻ കോഡ്: 676102,<br>' +
+                        'തിരൂർ, മലപ്പുറം, കേരളം, ഇന്ത്യ.';
+                }
+                
                 enBtn.classList.remove('active');
                 mlBtn.classList.add('active');
             } else {
@@ -729,10 +922,27 @@
                 document.querySelectorAll('.folder-name')[1].textContent = 'Water Proof';
                 document.querySelectorAll('.folder-name')[2].textContent = 'H4 ShieldX';
                 
+                // Home page English
+                if (document.querySelector('.company-name')) {
+                    document.querySelector('.company-name').textContent = 'AV Chem Chemical & Manufacturing';
+                }
+                if (document.querySelector('.address')) {
+                    document.querySelector('.address').innerHTML = 
+                        'Mukkilapeedika, Kannamkulam PO,<br>' +
+                        'BP Angadi, Pin Code: 676102,<br>' +
+                        'Tirur, Malappuram, Kerala, India.';
+                }
+                
                 enBtn.classList.add('active');
                 mlBtn.classList.remove('active');
             }
+            
+            // Ensure all text is white after language change
+            setAllTextWhite();
         }
+        
+        // Prevent auto zoom on mobile
+        document.addEventListener('touchstart', function() {}, {passive: true});
     </script>
 </body>
 </html>
