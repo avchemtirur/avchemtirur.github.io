@@ -2,258 +2,212 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>H4 Tile Adhesive & Waterproof | Avchem Chemical</title>
+<title>H4 Tile Adhesive & Waterproof</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{
-  font-family:Inter,sans-serif;
-  background:#000;
-  color:#fff;
-  overflow:hidden;
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+body,html{height:100%;overflow:hidden;color:#fff}
+
+/* VIDEO BACKGROUND */
+.video-bg{
+ position:fixed;top:0;left:0;width:100%;height:100%;
+ background:radial-gradient(circle at left,#7a1fa2,#000),
+            radial-gradient(circle at right,#1e3cff,#000);
+ z-index:-2;
+}
+.video-overlay{
+ position:fixed;top:0;left:0;width:100%;height:100%;
+ background:rgba(0,0,0,0.6);
+ z-index:-1;
 }
 
-/* BACKGROUND */
-.bg{
-  position:fixed;
-  inset:0;
-  background:
-    radial-gradient(circle at center,#0f2027 0%,transparent 40%),
-    radial-gradient(circle at left,#1a2980 0%,transparent 55%),
-    radial-gradient(circle at right,#7b4397 0%,transparent 55%),
-    #000;
-  z-index:-1;
+/* TOP BAR */
+.navbar{
+ position:fixed;top:0;width:100%;
+ display:flex;justify-content:space-between;align-items:center;
+ padding:14px 24px;
+ background:rgba(0,0,0,0.5);
+ backdrop-filter:blur(10px);
+ z-index:10;
 }
+.navbar a{
+ color:#fff;text-decoration:none;margin-left:20px;
+ font-size:16px;cursor:pointer;
+}
+.navbar a:hover{color:#b26cff}
 
-/* NAV */
-nav{
-  height:60px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:40px;
-}
-nav button{
-  background:none;
-  border:none;
-  color:#fff;
-  font-size:18px;
-  cursor:pointer;
-}
-
-/* PAGES */
-.page{
-  display:none;
-  height:calc(100vh - 60px);
-  padding:20px;
-}
-.page.active{display:block}
-
-/* HERO */
+/* CENTER HERO */
 .hero{
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
+ height:100vh;
+ display:flex;
+ flex-direction:column;
+ justify-content:center;
+ align-items:center;
+ text-align:center;
+}
+.hero img{
+ width:140px;
+ margin-bottom:20px;
+ animation:zoom 2s infinite alternate;
+}
+@keyframes zoom{
+ from{transform:scale(1)}
+ to{transform:scale(1.08)}
 }
 .hero h1{
-  font-size:42px;
-  animation:fadeUp 1.2s ease;
+ font-size:36px;
+ letter-spacing:1px;
+ animation:textGlow 2s infinite alternate;
 }
-.hero p{
-  margin-top:10px;
-  opacity:.8;
-  animation:fadeUp 1.8s ease;
-}
-
-/* ANIMATION */
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(20px)}
-  to{opacity:1;transform:translateY(0)}
+@keyframes textGlow{
+ from{text-shadow:0 0 10px #9b2cff}
+ to{text-shadow:0 0 25px #3cfffa}
 }
 
 /* FOLDERS */
 .folders{
-  display:flex;
-  gap:28px;
-  margin-top:40px;
+ position:absolute;
+ bottom:90px;
+ display:flex;
+ gap:30px;
 }
 .folder{
-  width:150px;
-  height:110px;
-  border-radius:16px;
-  background:linear-gradient(135deg,#3a7bd5,#00d2ff);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:15px;
-  cursor:pointer;
-  transition:.35s;
+ width:120px;height:90px;
+ background:linear-gradient(135deg,#222,#111);
+ border-radius:10px;
+ text-align:center;
+ padding-top:25px;
+ cursor:pointer;
+ transition:0.4s;
 }
 .folder:hover{
-  transform:scale(1.12);
-  box-shadow:0 0 25px #00d2ff;
+ transform:translateY(-10px) scale(1.05);
+ box-shadow:0 0 20px #9b2cff;
 }
+.folder span{font-size:14px}
 
-/* DEALER FORM */
-.form-box{
-  max-width:420px;
-  margin:auto;
-  background:#111827;
-  padding:20px;
-  border-radius:18px;
+/* PANELS */
+.panel{
+ position:fixed;
+ inset:0;
+ background:rgba(0,0,0,0.85);
+ display:none;
+ flex-direction:column;
+ justify-content:center;
+ align-items:center;
+ padding:20px;
+ z-index:20;
 }
-input,select{
-  width:100%;
-  margin-bottom:10px;
-  padding:12px;
-  border-radius:10px;
-  border:none;
+.panel h2{margin-bottom:20px}
+.panel input,.panel select{
+ width:260px;padding:10px;margin:6px;border-radius:6px;border:none;
 }
-.form-actions{
-  display:flex;
-  gap:12px;
+.panel button{
+ margin-top:10px;padding:10px 22px;border:none;border-radius:20px;
+ background:#9b2cff;color:#fff;cursor:pointer;
 }
-.form-actions button{
-  flex:1;
-  padding:12px;
-  border:none;
-  border-radius:30px;
-  cursor:pointer;
-}
-.confirm{background:#25D366;color:#000}
-.cancel{background:#7b4397;color:#fff}
-
-/* CONTACT */
-.contact-box{
-  text-align:center;
-  margin-top:40px;
-}
-.contact-box a{
-  display:block;
-  margin:10px 0;
-  font-size:18px;
-  color:#fff;
-}
-
-/* BACK */
 .back{
-  margin-top:20px;
-  background:none;
-  border:1px solid #fff;
-  color:#fff;
-  padding:8px 18px;
-  border-radius:20px;
-  cursor:pointer;
+ margin-top:20px;
+ background:#333;
 }
 
-@media(max-width:768px){
-  body{overflow:auto}
-  .folders{flex-direction:column}
+/* LANGUAGE */
+.lang{
+ position:fixed;
+ bottom:20px;right:20px;
+}
+.lang button{
+ background:#222;color:#fff;border:none;padding:8px 14px;
+ border-radius:20px;margin-left:5px;cursor:pointer;
 }
 </style>
 </head>
 
 <body>
-<div class="bg"></div>
+
+<div class="video-bg"></div>
+<div class="video-overlay"></div>
 
 <!-- NAV -->
-<nav>
-  <button onclick="openPage('home')">Home</button>
-  <button onclick="openPage('dealer')">Dealer Enquiry</button>
-  <button onclick="openPage('contact')">Contact</button>
-</nav>
+<div class="navbar">
+ <div></div>
+ <div>
+  <a onclick="openHome()">Home</a>
+  <a onclick="openDealer()">Dealer Enquiry</a>
+  <a onclick="openContact()">Contact</a>
+ </div>
+</div>
 
-<!-- HOME -->
-<section class="page active hero" id="home">
-  <h1>H4 Tile Adhesive & Waterproof</h1>
-  <p>
-    Avchem Chemical & Manufacturing<br><br>
-    മുഖ്യാലപ്പീടിക, കന്നംകുളം PO<br>
-    BP Angadi, Pin 676102<br>
-    Tirur, Kerala
-  </p>
+<!-- HERO -->
+<div class="hero" id="home">
+ <img src="h4logo.png" alt="H4 Logo">
+ <h1>H4 Tile Adhesive & Waterproof</h1>
 
-  <div class="folders">
-    <div class="folder" onclick="openWhatsApp('Tile Adhesive')">Tile Adhesive</div>
-    <div class="folder" onclick="openWhatsApp('Waterproof')">Waterproof</div>
-    <div class="folder" onclick="openWhatsApp('H4 ShieldX')">H4 ShieldX</div>
-  </div>
-</section>
+ <div class="folders">
+  <div class="folder"><span>Tile Adhesive</span></div>
+  <div class="folder"><span>Waterproof</span></div>
+  <div class="folder"><span>H4 ShieldX</span></div>
+ </div>
+</div>
 
 <!-- DEALER -->
-<section class="page" id="dealer">
-  <div class="form-box">
-    <h2 style="text-align:center">Dealer Enquiry</h2>
-
-    <input id="name" placeholder="Customer Name">
-    <input id="city" placeholder="City">
-    <input id="mobile" placeholder="Mobile Number">
-    <input id="whatsapp" placeholder="WhatsApp Number (optional)">
-    <input id="dist" placeholder="District">
-    <input id="state" placeholder="State">
-
-    <select id="product">
-      <option>Tile Adhesive</option>
-      <option>Waterproof</option>
-      <option>H4 ShieldX</option>
-    </select>
-
-    <input id="qty" placeholder="Quantity (Bag / Kg)">
-
-    <div class="form-actions">
-      <button class="confirm" onclick="sendWA('CONFIRM')">Confirm</button>
-      <button class="cancel" onclick="sendWA('CANCEL')">Cancel</button>
-    </div>
-
-    <button class="back" onclick="openPage('home')">Back</button>
-  </div>
-</section>
+<div class="panel" id="dealer">
+ <h2>Dealer Enquiry</h2>
+ <input placeholder="Customer Name">
+ <input placeholder="City">
+ <input placeholder="Mobile Number">
+ <input placeholder="WhatsApp Number">
+ <input placeholder="District">
+ <input placeholder="State">
+ <select>
+  <option>Tile Adhesive</option>
+  <option>Waterproof</option>
+  <option>H4 ShieldX</option>
+ </select>
+ <select>
+  <option>Bag</option>
+  <option>Kg</option>
+ </select>
+ <button onclick="sendWA()">Confirm</button>
+ <button class="back" onclick="closeAll()">Back</button>
+</div>
 
 <!-- CONTACT -->
-<section class="page" id="contact">
-  <div class="contact-box">
-    <a href="tel:+917907344030">📞 +91 79073 44030</a>
-    <a href="https://wa.me/919745838382">💬 WhatsApp: +91 97458 38382</a>
-    <a href="mailto:avchemtirur@gmail.com">✉️ avchemtirur@gmail.com</a>
-    <button class="back" onclick="openPage('home')">Back</button>
-  </div>
-</section>
+<div class="panel" id="contact">
+ <h2>Contact</h2>
+ <button onclick="location.href='tel:+917907344030'">📞 Call</button>
+ <button onclick="location.href='https://wa.me/919745838382'">💬 WhatsApp</button>
+ <button onclick="location.href='mailto:avchemtirur@gmail.com'">✉ Email</button>
+ <button class="back" onclick="closeAll()">Back</button>
+</div>
+
+<!-- LANGUAGE -->
+<div class="lang">
+ <button onclick="alert('English Enabled')">EN</button>
+ <button onclick="alert('Malayalam Enabled')">ML</button>
+</div>
 
 <script>
-function openPage(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+function openDealer(){
+ closeAll();
+ document.getElementById('dealer').style.display='flex';
 }
-
-function openWhatsApp(product){
-  window.open(
-    `https://wa.me/919745838382?text=Enquiry for ${product}`,
-    '_blank'
-  );
+function openContact(){
+ closeAll();
+ document.getElementById('contact').style.display='flex';
 }
-
-function sendWA(type){
-  let msg =
-`Dealer Enquiry (${type})
-Name: ${name.value}
-City: ${city.value}
-Mobile: ${mobile.value}
-WhatsApp: ${whatsapp.value}
-District: ${dist.value}
-State: ${state.value}
-Product: ${product.value}
-Quantity: ${qty.value}`;
-
-  window.open(
-    `https://wa.me/919745838382?text=${encodeURIComponent(msg)}`,
-    '_blank'
-  );
+function openHome(){
+ closeAll();
+}
+function closeAll(){
+ document.querySelectorAll('.panel').forEach(p=>p.style.display='none');
+}
+function sendWA(){
+ let msg="Dealer Enquiry from Website";
+ window.open("https://wa.me/919745838382?text="+encodeURIComponent(msg));
 }
 </script>
+
 </body>
 </html>
