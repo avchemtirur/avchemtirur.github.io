@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>AV Chem - Trust Your Life and Home</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Chilanka&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         html, body {
             width: 100%;
@@ -22,6 +22,7 @@
         body {
             background: linear-gradient(135deg, #0a2540 0%, #1a365d 100%);
             color: #fff;
+            font-family: 'Chilanka', cursive;
             min-height: 100vh;
             overflow-x: hidden;
         }
@@ -40,18 +41,21 @@
             transition: transform 0.5s ease;
         }
         .logo-large {
-            height: 120px;
+            height: 200px;
             position: fixed;
             left: 50%;
             top: 50%;
-            transform: translate(-50%, -50%) scale(1.5);
-            animation: logoAnimation 2s ease forwards;
+            transform: translate(-50%, -50%) scale(2);
+            animation: logoAnimation 2.5s ease forwards;
             z-index: 1001;
+            border-radius: 10px;
+            box-shadow: 0 0 50px rgba(0, 180, 216, 0.8);
         }
         @keyframes logoAnimation {
-            0% { transform: translate(-50%, -50%) scale(1.5); opacity: 1; }
-            70% { transform: translate(-50%, -50%) scale(1.5); opacity: 1; }
-            100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+            0% { transform: translate(-50%, -50%) scale(2); opacity: 1; }
+            60% { transform: translate(-50%, -50%) scale(2); opacity: 1; }
+            80% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.8; }
+            100% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
         }
         .nav-links {
             display: flex;
@@ -67,6 +71,8 @@
             font-weight: bold;
             transition: all 0.3s ease;
             white-space: nowrap;
+            font-family: 'Chilanka', cursive;
+            font-size: 16px;
         }
         .nav-btn:hover {
             background: #00b4d8;
@@ -83,6 +89,7 @@
             padding: 8px 15px;
             border-radius: 5px;
             cursor: pointer;
+            font-family: 'Chilanka', cursive;
         }
         .lang-btn.active {
             background: #00b4d8;
@@ -106,36 +113,79 @@
             width: 100%;
         }
         .main-title {
-            font-size: 3.5rem;
+            font-size: 4rem;
             color: #ffffff;
-            text-shadow: 0 0 20px rgba(0, 180, 216, 0.7);
+            text-shadow: 
+                0 0 10px #00b4d8,
+                0 0 20px #00b4d8,
+                0 0 30px #00b4d8,
+                0 0 40px #0077b6;
             font-weight: 800;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             margin-bottom: 10px;
+            animation: premiumGlow 3s infinite alternate;
+            font-family: 'Chilanka', cursive;
+        }
+        @keyframes premiumGlow {
+            0% { 
+                text-shadow: 
+                    0 0 10px #00b4d8,
+                    0 0 20px #00b4d8,
+                    0 0 30px #00b4d8;
+                transform: scale(1);
+            }
+            50% { 
+                text-shadow: 
+                    0 0 15px #00b4d8,
+                    0 0 30px #00b4d8,
+                    0 0 45px #0077b6,
+                    0 0 60px #0077b6;
+                transform: scale(1.02);
+            }
+            100% { 
+                text-shadow: 
+                    0 0 10px #00b4d8,
+                    0 0 20px #00b4d8,
+                    0 0 30px #00b4d8;
+                transform: scale(1);
+            }
         }
         .subtitle {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             color: #ffffff;
             margin-bottom: 40px;
             text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            font-family: 'Chilanka', cursive;
+            animation: fadeInUp 1s ease-out;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         .folder-container {
             display: flex;
             justify-content: center;
-            gap: 60px;
+            gap: 80px;
             margin: 60px 0;
             flex-wrap: wrap;
             width: 100%;
+            animation: fadeInUp 1s ease-out 0.5s both;
         }
         .folder {
-            width: 200px;
+            width: 220px;
             text-align: center;
             cursor: pointer;
-            transition: transform 0.5s ease;
+            transition: all 0.5s ease;
         }
         .folder-icon {
-            width: 200px;
-            height: 150px;
+            width: 220px;
+            height: 170px;
             background: linear-gradient(145deg, #1a4b8c, #0a2540);
             border-radius: 15px 15px 0 0;
             display: flex;
@@ -143,59 +193,70 @@
             justify-content: center;
             position: relative;
             margin-bottom: 15px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.6);
             transition: all 0.5s ease;
             transform-origin: bottom;
             overflow: hidden;
+            border: 3px solid transparent;
         }
         .folder-icon i {
-            font-size: 70px;
+            font-size: 80px;
             color: #00b4d8;
-            transition: transform 0.5s ease;
+            transition: all 0.5s ease;
+            filter: drop-shadow(0 0 10px rgba(0, 180, 216, 0.5));
         }
         .folder:hover .folder-icon {
-            transform: translateY(-20px) scale(1.1);
-            box-shadow: 0 15px 30px rgba(0, 180, 216, 0.4);
+            transform: translateY(-25px) scale(1.15);
+            box-shadow: 0 25px 50px rgba(0, 180, 216, 0.5);
+            border-color: #00b4d8;
         }
         .folder:hover .folder-icon i {
-            transform: scale(1.2);
-        }
-        .folder.open .folder-icon {
-            transform: translateY(-20px) scale(1.1);
-            box-shadow: 0 20px 40px rgba(0, 180, 216, 0.6);
-            animation: openFolder 0.5s forwards;
-        }
-        .folder.open .folder-icon i {
             transform: scale(1.3);
+            filter: drop-shadow(0 0 20px rgba(0, 180, 216, 0.8));
         }
-        @keyframes openFolder {
+        .folder.active .folder-icon {
+            transform: translateY(-25px) scale(1.15);
+            box-shadow: 0 25px 50px rgba(0, 180, 216, 0.6);
+            border-color: #00b4d8;
+            animation: folderOpen 0.5s forwards;
+        }
+        .folder.active .folder-icon i {
+            transform: scale(1.3);
+            filter: drop-shadow(0 0 20px rgba(0, 180, 216, 0.8));
+        }
+        @keyframes folderOpen {
             0% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-10px) scale(1.05); }
-            100% { transform: translateY(-20px) scale(1.1); }
+            50% { transform: translateY(-12px) scale(1.08); }
+            100% { transform: translateY(-25px) scale(1.15); }
         }
         .folder-name {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             font-weight: bold;
             color: #ffffff;
             margin-top: 10px;
-            padding: 10px;
-            background: rgba(10, 37, 64, 0.7);
-            border-radius: 10px;
+            padding: 12px;
+            background: rgba(10, 37, 64, 0.8);
+            border-radius: 12px;
             transition: all 0.3s ease;
             text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+            font-family: 'Chilanka', cursive;
+            border: 2px solid transparent;
         }
-        .folder.open .folder-name {
-            background: rgba(0, 180, 216, 0.3);
+        .folder.active .folder-name {
+            background: rgba(0, 180, 216, 0.4);
             color: #ffffff;
-            transform: scale(1.1);
+            transform: scale(1.15);
+            border-color: #00b4d8;
+            box-shadow: 0 10px 20px rgba(0, 180, 216, 0.3);
         }
         .caption {
-            font-size: 1.8rem;
+            font-size: 2rem;
             margin-top: 30px;
             color: #ffffff;
             animation: fadeIn 3s;
             font-weight: bold;
             text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            font-family: 'Chilanka', cursive;
         }
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -203,34 +264,46 @@
         }
         .bags-container {
             position: absolute;
-            right: 50px;
+            right: 100px;
             top: 50%;
             transform: translateY(-50%);
             display: flex;
             flex-direction: column;
-            gap: 30px;
+            gap: 50px;
             z-index: 10;
         }
         .bag {
-            width: 120px;
-            height: 150px;
+            width: 180px;
+            height: 220px;
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
             animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+            transition: all 0.3s ease;
+        }
+        .bag:hover {
+            transform: scale(1.1);
+            filter: drop-shadow(0 15px 30px rgba(0,0,0,0.7));
         }
         .bag-yellow {
-            background-image: url('https://via.placeholder.com/120x150/FFD700/000?text=Yellow+Bag');
+            background-image: url('https://via.placeholder.com/180x220/FFD700/000?text=YELLOW+BAG');
             animation-delay: 0s;
+            border: 3px solid #FFD700;
+            border-radius: 10px;
         }
         .bag-purple {
-            background-image: url('https://via.placeholder.com/120x150/9C27B0/fff?text=Purple+Bag');
+            background-image: url('https://via.placeholder.com/180x220/9C27B0/fff?text=PURPLE+BAG');
             animation-delay: 0.5s;
+            border: 3px solid #9C27B0;
+            border-radius: 10px;
         }
         @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
+            0% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-15px) rotate(1deg); }
+            50% { transform: translateY(-25px) rotate(0deg); }
+            75% { transform: translateY(-15px) rotate(-1deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
         }
         .page {
             display: none;
@@ -258,7 +331,7 @@
             background: #1a365d;
             border: none;
             color: #ffffff;
-            padding: 10px 25px;
+            padding: 12px 30px;
             border-radius: 30px;
             cursor: pointer;
             margin-top: 30px;
@@ -266,11 +339,15 @@
             align-items: center;
             gap: 10px;
             transition: all 0.3s;
+            font-family: 'Chilanka', cursive;
+            font-size: 16px;
+            border: 2px solid #1a4b8c;
         }
         .back-btn:hover {
             background: #00b4d8;
             color: #0a2540;
             transform: translateX(-5px);
+            border-color: #00b4d8;
         }
         .form-group {
             margin-bottom: 20px;
@@ -281,6 +358,8 @@
             margin-bottom: 8px;
             color: #ffffff;
             font-weight: 500;
+            font-family: 'Chilanka', cursive;
+            font-size: 18px;
         }
         .form-group input, .form-group select {
             width: 100%;
@@ -291,10 +370,12 @@
             color: #ffffff;
             font-size: 1rem;
             transition: border 0.3s;
+            font-family: 'Chilanka', cursive;
         }
         .form-group input:focus, .form-group select:focus {
             border-color: #00b4d8;
             outline: none;
+            box-shadow: 0 0 10px rgba(0, 180, 216, 0.5);
         }
         .form-buttons {
             display: flex;
@@ -311,6 +392,8 @@
             cursor: pointer;
             transition: all 0.3s;
             color: #ffffff;
+            font-family: 'Chilanka', cursive;
+            font-size: 18px;
         }
         .confirm {
             background: linear-gradient(90deg, #00b4d8, #0077b6);
@@ -368,6 +451,7 @@
             margin-bottom: 5px;
             font-weight: 600;
             transition: color 0.3s;
+            font-family: 'Chilanka', cursive;
         }
         .contact-details a:hover {
             color: #00b4d8;
@@ -377,6 +461,7 @@
             color: #ffffff;
             font-size: 0.9rem;
             opacity: 0.8;
+            font-family: 'Chilanka', cursive;
         }
         .footer {
             text-align: center;
@@ -410,49 +495,40 @@
             padding: 40px 20px;
         }
         .av-logo {
-            height: 100px;
+            height: 120px;
             margin-bottom: 30px;
+            animation: logoFloat 4s ease-in-out infinite;
+        }
+        @keyframes logoFloat {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
         }
         .company-name {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             color: #ffffff;
             margin-bottom: 20px;
             text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            font-family: 'Chilanka', cursive;
         }
         .address {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             line-height: 1.8;
             color: #ffffff;
             max-width: 600px;
             margin: 0 auto;
             text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+            font-family: 'Chilanka', cursive;
         }
         
         /* Responsive Design */
-        @media (max-width: 1200px) {
+        @media (max-width: 1400px) {
             .bags-container {
-                right: 20px;
-            }
-            .bag {
-                width: 100px;
-                height: 130px;
+                right: 50px;
             }
         }
         
-        @media (max-width: 992px) {
-            .main-title {
-                font-size: 2.8rem;
-            }
-            .folder-container {
-                gap: 40px;
-            }
-            .folder {
-                width: 180px;
-            }
-            .folder-icon {
-                width: 180px;
-                height: 140px;
-            }
+        @media (max-width: 1200px) {
             .bags-container {
                 position: relative;
                 right: auto;
@@ -461,6 +537,31 @@
                 flex-direction: row;
                 justify-content: center;
                 margin-top: 40px;
+                gap: 80px;
+            }
+            .bag {
+                width: 160px;
+                height: 200px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .main-title {
+                font-size: 3rem;
+            }
+            .folder-container {
+                gap: 40px;
+            }
+            .folder {
+                width: 200px;
+            }
+            .folder-icon {
+                width: 200px;
+                height: 150px;
+            }
+            .bag {
+                width: 140px;
+                height: 180px;
             }
         }
         
@@ -486,47 +587,52 @@
                 padding: 20px;
             }
             .main-title {
-                font-size: 2.2rem;
+                font-size: 2.5rem;
             }
             .subtitle {
-                font-size: 1.2rem;
+                font-size: 1.4rem;
             }
             .folder-container {
-                gap: 20px;
+                gap: 30px;
                 margin: 40px 0;
             }
             .folder {
-                width: 150px;
+                width: 170px;
             }
             .folder-icon {
-                width: 150px;
-                height: 120px;
+                width: 170px;
+                height: 130px;
             }
             .folder-icon i {
-                font-size: 50px;
+                font-size: 60px;
             }
             .caption {
-                font-size: 1.5rem;
+                font-size: 1.6rem;
             }
             .page {
                 padding: 20px;
                 width: 95%;
             }
             .company-name {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
             .address {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
+            }
+            .bag {
+                width: 120px;
+                height: 160px;
             }
         }
         
         @media (max-width: 576px) {
             .main-title {
-                font-size: 1.8rem;
+                font-size: 2rem;
             }
             .folder-container {
                 flex-direction: column;
                 align-items: center;
+                gap: 40px;
             }
             .nav-links {
                 flex-direction: column;
@@ -543,10 +649,20 @@
             .contact-icon {
                 margin-bottom: 10px;
             }
+            .bags-container {
+                gap: 40px;
+            }
+            .bag {
+                width: 100px;
+                height: 140px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Large H4 Logo Animation -->
+    <div id="logo-animation"></div>
+
     <!-- Top Navigation Bar -->
     <div class="top-bar">
         <img src="https://via.placeholder.com/150x50/00b4d8/ffffff?text=H4+Logo" alt="H4 Logo" class="logo" id="top-logo">
@@ -571,19 +687,19 @@
         
         <!-- Animated Folders -->
         <div class="folder-container">
-            <div class="folder" id="folder-tile" onclick="openFolder('tile')">
+            <div class="folder" id="folder-tile" onclick="toggleFolder('tile')">
                 <div class="folder-icon">
                     <i class="fas fa-shield-alt"></i>
                 </div>
                 <div class="folder-name">Tile Adhesive</div>
             </div>
-            <div class="folder" id="folder-water" onclick="openFolder('water')">
+            <div class="folder" id="folder-water" onclick="toggleFolder('water')">
                 <div class="folder-icon">
                     <i class="fas fa-tint"></i>
                 </div>
                 <div class="folder-name">Water Proof</div>
             </div>
-            <div class="folder" id="folder-shield" onclick="openFolder('shield')">
+            <div class="folder" id="folder-shield" onclick="toggleFolder('shield')">
                 <div class="folder-icon">
                     <i class="fas fa-layer-group"></i>
                 </div>
@@ -603,7 +719,7 @@
     <!-- Home Page -->
     <div id="home-page" class="page">
         <div class="home-content">
-            <img src="https://via.placeholder.com/200x100/00b4d8/ffffff?text=AV+Logo" alt="AV Logo" class="av-logo">
+            <img src="https://via.placeholder.com/250x120/00b4d8/ffffff?text=AV+Logo" alt="AV Logo" class="av-logo">
             <h2 class="company-name">AV Chem Chemical & Manufacturing</h2>
             <div class="address">
                 Mukkilapeedika, Kannamkulam PO,<br>
@@ -616,7 +732,7 @@
 
     <!-- Dealer Enquiry Page -->
     <div id="dealer-page" class="page">
-        <h2 style="color: #ffffff; margin-bottom: 30px; text-align: center;">Dealer Enquiry Form</h2>
+        <h2 style="color: #ffffff; margin-bottom: 30px; text-align: center; font-family: 'Chilanka', cursive;">Dealer Enquiry Form</h2>
         <div class="form-group">
             <label for="name">Customer Name</label>
             <input type="text" id="name" placeholder="Enter your full name">
@@ -665,7 +781,7 @@
 
     <!-- Contact Page -->
     <div id="contact-page" class="page">
-        <h2 style="color: #ffffff; margin-bottom: 30px; text-align: center; font-size: 2.5rem;">Contact Us</h2>
+        <h2 style="color: #ffffff; margin-bottom: 30px; text-align: center; font-size: 2.5rem; font-family: 'Chilanka', cursive;">Contact Us</h2>
         <div class="contact-info">
             <div class="contact-item">
                 <i class="fas fa-phone contact-icon"></i>
@@ -694,34 +810,34 @@
 
     <!-- Footer -->
     <div class="footer" id="footer">
-        <p>&copy; 2023 AV Chem Chemical & Manufacturing. All rights reserved.</p>
-        <p style="margin-top: 10px;">Trust your life and home with our quality products.</p>
+        <p style="font-family: 'Chilanka', cursive;">&copy; 2023 AV Chem Chemical & Manufacturing. All rights reserved.</p>
+        <p style="margin-top: 10px; font-family: 'Chilanka', cursive;">Trust your life and home with our quality products.</p>
     </div>
 
     <script>
         // Show large H4 logo animation on page load
         window.onload = function() {
-            showPage('main');
-            
             // Create large logo animation
-            const logo = document.getElementById('top-logo');
             const largeLogo = document.createElement('img');
-            largeLogo.src = logo.src;
+            largeLogo.src = 'https://via.placeholder.com/400x200/00b4d8/ffffff?text=H4+LOGO';
             largeLogo.className = 'logo-large';
             largeLogo.alt = 'H4 Logo Large';
-            document.body.appendChild(largeLogo);
+            document.getElementById('logo-animation').appendChild(largeLogo);
             
             // Remove large logo after animation
             setTimeout(() => {
                 if (largeLogo.parentNode) {
-                    document.body.removeChild(largeLogo);
+                    document.getElementById('logo-animation').removeChild(largeLogo);
                 }
-                // Update main title
-                document.getElementById('main-title').textContent = 'H4 Tile Adhesive & Water Proof';
+                // Show main content
+                showPage('main');
                 
                 // Set all text to white
                 setAllTextWhite();
-            }, 2000);
+                
+                // Start premium animation
+                startPremiumAnimation();
+            }, 2500);
         };
         
         // Set all text to white color
@@ -736,30 +852,52 @@
             });
         }
         
-        // Track currently open folder
-        let currentOpenFolder = null;
-        
-        // Close all folders
-        function closeAllFolders() {
-            const folders = document.querySelectorAll('.folder');
-            folders.forEach(folder => {
-                folder.classList.remove('open');
-            });
-            currentOpenFolder = null;
+        // Start premium animation for main title
+        function startPremiumAnimation() {
+            const mainTitle = document.getElementById('main-title');
+            const colors = ['#00b4d8', '#90e0ef', '#0077b6', '#0096c7'];
+            let colorIndex = 0;
             
-            // Reset main title and subtitle
-            document.getElementById('main-title').textContent = 'H4 Tile Adhesive & Water Proof';
-            document.getElementById('subtitle').textContent = 'Introducing Verifiable Compute. Ready for the Agentic AI Era.';
+            setInterval(() => {
+                mainTitle.style.textShadow = `
+                    0 0 10px ${colors[colorIndex]},
+                    0 0 20px ${colors[colorIndex]},
+                    0 0 30px ${colors[colorIndex]},
+                    0 0 40px ${colors[(colorIndex + 1) % colors.length]}
+                `;
+                colorIndex = (colorIndex + 1) % colors.length;
+            }, 1000);
         }
         
-        // Open folder function
-        function openFolder(folderType) {
-            const folders = {
-                'tile': document.getElementById('folder-tile'),
-                'water': document.getElementById('folder-water'),
-                'shield': document.getElementById('folder-shield')
-            };
+        // Track currently active folder
+        let activeFolder = null;
+        
+        // Toggle folder function - FIXED VERSION
+        function toggleFolder(folderType) {
+            const folderElement = document.getElementById(`folder-${folderType}`);
             
+            // If clicking the same folder, close it
+            if (activeFolder === folderType) {
+                folderElement.classList.remove('active');
+                activeFolder = null;
+                
+                // Reset main title and subtitle
+                document.getElementById('main-title').textContent = 'H4 Tile Adhesive & Water Proof';
+                document.getElementById('subtitle').textContent = 'Introducing Verifiable Compute. Ready for the Agentic AI Era.';
+                
+                return;
+            }
+            
+            // Remove active class from all folders
+            document.querySelectorAll('.folder').forEach(folder => {
+                folder.classList.remove('active');
+            });
+            
+            // Add active class to clicked folder
+            folderElement.classList.add('active');
+            activeFolder = folderType;
+            
+            // Update title and subtitle based on folder
             const titles = {
                 'tile': 'H4 Tile Adhesive',
                 'water': 'H4 Water Proof',
@@ -772,24 +910,10 @@
                 'shield': 'Ultra shield coating for maximum protection and durability.'
             };
             
-            // If clicking the same folder, close it
-            if (currentOpenFolder === folderType) {
-                closeAllFolders();
-                return;
-            }
-            
-            // Close all folders first
-            closeAllFolders();
-            
-            // Open the clicked folder
-            folders[folderType].classList.add('open');
-            currentOpenFolder = folderType;
-            
-            // Update title and subtitle
             document.getElementById('main-title').textContent = titles[folderType];
             document.getElementById('subtitle').textContent = subtitles[folderType];
             
-            // Show bag animations
+            // Animate bags based on folder
             const bags = document.querySelectorAll('.bag');
             if (folderType === 'tile') {
                 bags[0].style.animation = 'float 2s ease-in-out infinite';
@@ -805,8 +929,11 @@
         
         // Show specific page and hide others
         function showPage(pageId) {
-            // Close all folders when switching pages
-            closeAllFolders();
+            // Remove active class from all folders
+            document.querySelectorAll('.folder').forEach(folder => {
+                folder.classList.remove('active');
+            });
+            activeFolder = null;
             
             // Hide all pages
             document.querySelectorAll('.page').forEach(page => {
@@ -820,7 +947,7 @@
                 document.getElementById('footer').style.display = 'block';
                 document.getElementById('top-logo').src = "https://via.placeholder.com/150x50/00b4d8/ffffff?text=H4+Logo";
                 
-                // Reset main title
+                // Reset main title and subtitle
                 document.getElementById('main-title').textContent = 'H4 Tile Adhesive & Water Proof';
                 document.getElementById('subtitle').textContent = 'Introducing Verifiable Compute. Ready for the Agentic AI Era.';
                 
@@ -828,6 +955,9 @@
                 const bags = document.querySelectorAll('.bag');
                 bags[0].style.animation = 'float 3s ease-in-out infinite';
                 bags[1].style.animation = 'float 3s ease-in-out infinite 0.5s';
+                
+                // Restart premium animation
+                startPremiumAnimation();
             } else {
                 document.getElementById('main-content').style.display = 'none';
                 document.getElementById('footer').style.display = 'none';
