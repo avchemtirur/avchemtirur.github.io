@@ -16,12 +16,13 @@ body{background:#000;color:#fff}
   padding:12px;
 }
 .lang button{
-  width:50px;height:36px;
-  border-radius:6px;   /* SQUARE */
+  width:60px;
+  height:35px;
   border:2px solid #00ffff;
   background:transparent;
   color:#00ffff;
   margin-bottom:6px;
+  cursor:pointer;
   font-weight:bold;
 }
 .menu div{
@@ -29,44 +30,43 @@ body{background:#000;color:#fff}
   margin:6px 0;
   cursor:pointer;
 }
-.menu div:hover{color:#00ffff}
 
 /* TITLE */
-.center{text-align:center;margin:20px}
-.center h1{font-size:32px}
+.center{text-align:center;margin:20px;}
+.center h1{font-size:30px}
 
 /* SECTIONS */
-.section{display:none;padding:20px;text-align:center}
+.section{display:none;padding:20px;text-align:center;}
 .section.active{display:block}
 
 /* HOME */
-#home img{width:130px;margin:12px}
-.address p{line-height:1.7;font-size:16px}
+#home img{width:120px;margin:10px}
+.address p{line-height:1.6}
 
 /* FOLDERS */
 .folders{
   display:flex;
   justify-content:center;
-  gap:12px;
+  gap:14px;
   margin-top:25px;
 }
 .folder{
-  width:100px;
-  padding:18px 8px;
+  width:120px;
+  padding:18px 10px;
   border:2px solid #00ffff;
-  border-radius:14px;
+  border-radius:6px;
   cursor:pointer;
-  transition:0.3s;
+  transition:.3s;
 }
 .folder:hover{
-  background:rgba(0,255,255,0.15);
-  transform:scale(1.08);
+  transform:scale(1.1);
+  background:rgba(0,255,255,.15);
 }
 
 /* PRODUCT */
 .product img{
-  width:120px;
-  margin:15px;
+  width:140px;
+  margin:10px;
   animation:float 3s infinite ease-in-out;
 }
 @keyframes float{
@@ -85,20 +85,17 @@ input,select{
 }
 button{
   padding:12px 26px;
+  margin:10px;
   border:none;
   border-radius:25px;
   font-size:16px;
-  margin:10px;
   cursor:pointer;
 }
 .confirm{background:#00c853;color:#fff}
 .cancel{background:#d50000;color:#fff}
 
 /* CONTACT */
-.contactBox p{
-  font-size:20px;
-  margin:14px 0;
-}
+.contactBox p{font-size:20px;margin:14px 0}
 a{color:#00ffff;text-decoration:none}
 </style>
 </head>
@@ -131,7 +128,7 @@ a{color:#00ffff;text-decoration:none}
     <p>Mukkilapeedika</p>
     <p>Kannam Kulam</p>
     <p>PO BP Angadi</p>
-    <p>Pin Code: 676102</p>
+    <p>Pin Code 676102</p>
     <p>Tirur</p>
     <p>Malappuram</p>
     <p>Kerala</p>
@@ -149,16 +146,14 @@ a{color:#00ffff;text-decoration:none}
 <div id="tile" class="section product">
   <h2>H4 Tile Adhesive</h2>
   <img src="bag-yellow.png">
-  <img src="bag-purple.png">
-  <br>
+  <img src="bag-purple.png"><br>
   <button class="cancel" onclick="openSection('home')">Back</button>
 </div>
 
 <!-- WATER -->
 <div id="water" class="section product">
   <h2>H4 Waterproof</h2>
-  <img src="bag-purple.png">
-  <br>
+  <img src="bag-purple.png"><br>
   <button class="cancel" onclick="openSection('home')">Back</button>
 </div>
 
@@ -166,26 +161,24 @@ a{color:#00ffff;text-decoration:none}
 <div id="shield" class="section product">
   <h2>H4 ShieldX</h2>
   <p>Advanced Protection Technology</p>
-  <br>
   <button class="cancel" onclick="openSection('home')">Back</button>
 </div>
 
 <!-- DEALER -->
 <div id="dealer" class="section">
   <h2>Dealer Enquiry</h2>
-  <input id="name" placeholder="Customer Name">
-  <input id="city" placeholder="City">
-  <input id="mobile" placeholder="Mobile Number">
-  <select id="product">
+  <input placeholder="Customer Name">
+  <input placeholder="City">
+  <input placeholder="Mobile Number">
+  <input placeholder="WhatsApp Number">
+  <input placeholder="District">
+  <input placeholder="State">
+  <select>
     <option>Tile Adhesive</option>
     <option>Waterproof</option>
     <option>H4 ShieldX</option>
   </select>
-  <select id="unit">
-    <option>Bag</option>
-    <option>KG</option>
-  </select>
-  <input id="qty" type="number" min="1" max="1000000" placeholder="Quantity">
+  <input type="number" placeholder="Quantity (Kg / Bag)" min="1" max="1000000">
   <br>
   <button class="confirm" onclick="sendWA()">Confirm</button>
   <button class="cancel" onclick="openSection('home')">Cancel</button>
@@ -194,16 +187,19 @@ a{color:#00ffff;text-decoration:none}
 <!-- CONTACT -->
 <div id="contact" class="section">
   <div class="contactBox">
-    <p>📞 <a href="tel:+917907344030">+91 79073 44030</a></p>
-    <p>💬 <a href="https://wa.me/919745838382">+91 97458 38382</a></p>
-    <p>✉️ <a href="mailto:avchemtirur@gmail.com">avchemtirur@gmail.com</a></p>
+    <p><a href="tel:+917907344030">📞 +91 79073 44030</a></p>
+    <p><a href="https://wa.me/919745838382">💬 WhatsApp</a></p>
+    <p><a href="mailto:avchemtirur@gmail.com">✉ avchemtirur@gmail.com</a></p>
   </div>
   <button class="cancel" onclick="openSection('home')">Back</button>
 </div>
 
+<!-- JAVASCRIPT (THIS WAS MISSING ❗) -->
 <script>
 function openSection(id){
-  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(s=>{
+    s.classList.remove('active');
+  });
   document.getElementById(id).classList.add('active');
 }
 
@@ -212,22 +208,17 @@ function openProduct(id){
 }
 
 function sendWA(){
-  let msg =
-  "Dealer Enquiry%0A"+
-  "Name: "+name.value+"%0A"+
-  "City: "+city.value+"%0A"+
-  "Mobile: "+mobile.value+"%0A"+
-  "Product: "+product.value+"%0A"+
-  "Quantity: "+qty.value+" "+unit.value;
-
-  window.open("https://wa.me/919745838382?text="+msg);
+  window.open(
+    "https://wa.me/919745838382?text=Dealer%20Enquiry%20from%20Website",
+    "_blank"
+  );
 }
 
-function setLang(l){
-  if(l==='ml'){
-    title.innerText="H4 ടൈൽ അഡ്ഹേസീവ് & വാട്ടർപ്രൂഫ്";
+function setLang(lang){
+  if(lang==='ml'){
+    document.getElementById('title').innerText="H4 ടൈൽ അഡ്ഹീസീവ് & വാട്ടർപ്രൂഫ്";
   }else{
-    title.innerText="H4 Tile Adhesive & Waterproof";
+    document.getElementById('title').innerText="H4 Tile Adhesive & Waterproof";
   }
 }
 </script>
