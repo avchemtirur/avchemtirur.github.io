@@ -5,26 +5,26 @@
 <title>H4 Tile Adhesive & Waterproof | Avchem Chemical</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{
-  font-family:Poppins,sans-serif;
+  font-family:Inter,sans-serif;
   background:#000;
   color:#fff;
   overflow:hidden;
 }
 
-/* BACKGROUND VIDEO STYLE */
+/* BACKGROUND */
 .bg{
   position:fixed;
   inset:0;
   background:
-   radial-gradient(circle at left,#7a1fa2,transparent 55%),
-   radial-gradient(circle at right,#1e3cff,transparent 55%),
-   #000;
+    radial-gradient(circle at center,#0f2027 0%,transparent 40%),
+    radial-gradient(circle at left,#1a2980 0%,transparent 55%),
+    radial-gradient(circle at right,#7b4397 0%,transparent 55%),
+    #000;
   z-index:-1;
 }
 
@@ -33,9 +33,8 @@ nav{
   height:60px;
   display:flex;
   justify-content:center;
-  align-items:flex-end;
-  gap:32px;
-  padding-bottom:10px;
+  align-items:center;
+  gap:40px;
 }
 nav button{
   background:none;
@@ -53,26 +52,25 @@ nav button{
 }
 .page.active{display:block}
 
-/* HOME */
-.home{
+/* HERO */
+.hero{
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
   text-align:center;
 }
-
-/* TEXT ANIMATION */
-.title{
-  font-family:'Playfair Display',serif;
-  font-size:44px;
+.hero h1{
+  font-size:42px;
   animation:fadeUp 1.2s ease;
 }
-.subtitle{
+.hero p{
   margin-top:10px;
-  opacity:.85;
+  opacity:.8;
   animation:fadeUp 1.8s ease;
 }
+
+/* ANIMATION */
 @keyframes fadeUp{
   from{opacity:0;transform:translateY(20px)}
   to{opacity:1;transform:translateY(0)}
@@ -80,29 +78,32 @@ nav button{
 
 /* FOLDERS */
 .folders{
-  margin-top:40px;
   display:flex;
-  gap:26px;
+  gap:28px;
+  margin-top:40px;
 }
 .folder{
-  width:140px;
-  height:100px;
-  border-radius:14px;
-  background:linear-gradient(135deg,#9b2cff,#4a5cff);
+  width:150px;
+  height:110px;
+  border-radius:16px;
+  background:linear-gradient(135deg,#3a7bd5,#00d2ff);
   display:flex;
   justify-content:center;
   align-items:center;
-  font-size:14px;
+  font-size:15px;
   cursor:pointer;
-  transition:.3s;
+  transition:.35s;
 }
-.folder:hover{transform:scale(1.08)}
+.folder:hover{
+  transform:scale(1.12);
+  box-shadow:0 0 25px #00d2ff;
+}
 
 /* DEALER FORM */
 .form-box{
   max-width:420px;
   margin:auto;
-  background:#141428;
+  background:#111827;
   padding:20px;
   border-radius:18px;
 }
@@ -122,11 +123,10 @@ input,select{
   padding:12px;
   border:none;
   border-radius:30px;
-  font-size:15px;
   cursor:pointer;
 }
 .confirm{background:#25D366;color:#000}
-.cancel{background:#9b2cff;color:#fff}
+.cancel{background:#7b4397;color:#fff}
 
 /* CONTACT */
 .contact-box{
@@ -136,11 +136,11 @@ input,select{
 .contact-box a{
   display:block;
   margin:10px 0;
-  color:#fff;
   font-size:18px;
+  color:#fff;
 }
 
-/* BACK BUTTON */
+/* BACK */
 .back{
   margin-top:20px;
   background:none;
@@ -169,14 +169,14 @@ input,select{
 </nav>
 
 <!-- HOME -->
-<section class="page home active" id="home">
-  <div class="title">H4 Tile Adhesive & Waterproof</div>
-  <div class="subtitle">
+<section class="page active hero" id="home">
+  <h1>H4 Tile Adhesive & Waterproof</h1>
+  <p>
     Avchem Chemical & Manufacturing<br><br>
     മുഖ്യാലപ്പീടിക, കന്നംകുളം PO<br>
     BP Angadi, Pin 676102<br>
     Tirur, Kerala
-  </div>
+  </p>
 
   <div class="folders">
     <div class="folder" onclick="openWhatsApp('Tile Adhesive')">Tile Adhesive</div>
@@ -206,8 +206,8 @@ input,select{
     <input id="qty" placeholder="Quantity (Bag / Kg)">
 
     <div class="form-actions">
-      <button class="confirm" onclick="sendWhatsApp('CONFIRM')">Confirm</button>
-      <button class="cancel" onclick="sendWhatsApp('CANCEL')">Cancel</button>
+      <button class="confirm" onclick="sendWA('CONFIRM')">Confirm</button>
+      <button class="cancel" onclick="sendWA('CANCEL')">Cancel</button>
     </div>
 
     <button class="back" onclick="openPage('home')">Back</button>
@@ -218,7 +218,7 @@ input,select{
 <section class="page" id="contact">
   <div class="contact-box">
     <a href="tel:+917907344030">📞 +91 79073 44030</a>
-    <a href="https://wa.me/919745838382" target="_blank">💬 WhatsApp: +91 97458 38382</a>
+    <a href="https://wa.me/919745838382">💬 WhatsApp: +91 97458 38382</a>
     <a href="mailto:avchemtirur@gmail.com">✉️ avchemtirur@gmail.com</a>
     <button class="back" onclick="openPage('home')">Back</button>
   </div>
@@ -237,7 +237,7 @@ function openWhatsApp(product){
   );
 }
 
-function sendWhatsApp(type){
+function sendWA(type){
   let msg =
 `Dealer Enquiry (${type})
 Name: ${name.value}
