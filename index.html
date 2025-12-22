@@ -1,231 +1,221 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>H4 Tile Adhesive & Waterproof</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>H4 Tile Adhesive & Waterproof</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial}
-html,body{height:100%;background:#000;color:#fff}
-
-/* ===== BACKGROUND (Verify to Trust AI style) ===== */
-.bg{
- position:fixed;inset:0;
- background:
- radial-gradient(circle at center,#1a3a44 0%,#020405 55%,#000 100%);
- z-index:-2;
-}
-.wave{
- position:absolute;inset:0;
- background:
- radial-gradient(circle at 30% 50%,rgba(0,180,200,.25),transparent 60%),
- radial-gradient(circle at 70% 55%,rgba(0,120,255,.25),transparent 60%);
- z-index:-1;
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;}
+body{
+  background:#000;
+  color:#fff;
+  overflow-x:hidden;
 }
 
-/* ===== TOP BAR ===== */
-.top{
- position:fixed;top:0;width:100%;
- display:flex;justify-content:space-between;align-items:center;
- padding:14px 24px;
- background:rgba(0,0,0,.45);
- backdrop-filter:blur(12px);
- z-index:10;
+/* TOP BAR */
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px;
 }
-.top a{color:#fff;margin-left:18px;text-decoration:none;font-size:17px}
-.top a:hover{color:#7fdfff}
-
-/* ===== LANGUAGE ===== */
 .lang button{
- background:#111;border:1px solid #2f6c77;
- color:#9defff;padding:6px 14px;
- border-radius:20px;cursor:pointer;margin-right:6px;
+  margin-bottom:5px;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  border:1px solid #00ffff;
+  background:transparent;
+  color:#00ffff;
+}
+.menu{
+  text-align:right;
+}
+.menu div{
+  margin:6px 0;
+  cursor:pointer;
+  font-size:18px;
+}
+.menu div:hover{color:#00ffff}
+
+/* CENTER TITLE */
+.center{
+  text-align:center;
+  margin-top:30px;
+}
+.center h1{
+  font-size:32px;
+  animation:fadeZoom 2s ease;
+}
+@keyframes fadeZoom{
+  from{opacity:0;transform:scale(1.3)}
+  to{opacity:1;transform:scale(1)}
 }
 
-/* ===== HERO ===== */
-.hero{
- height:100vh;
- display:flex;flex-direction:column;
- justify-content:center;align-items:center;
- text-align:center;
-}
-.hero img{
- width:190px;
- animation:logoZoom 3s ease forwards;
-}
-@keyframes logoZoom{
- 0%{transform:scale(1.6);opacity:0}
- 60%{transform:scale(1)}
- 100%{transform:scale(.85)}
-}
-.hero h1{
- margin-top:20px;
- font-size:40px;
- color:#e9fdff;
- text-shadow:0 0 25px #7fdfff;
- animation:fadeText 3s forwards;
-}
-@keyframes fadeText{
- from{opacity:0;letter-spacing:6px}
- to{opacity:1;letter-spacing:1px}
-}
+/* HOME CONTENT */
+#home,#dealer,#contact{display:none;padding:20px;text-align:center;}
+#home img{width:120px;margin-bottom:10px;}
+.address p{line-height:1.6}
 
-/* ===== FOLDERS ===== */
+/* FOLDERS */
 .folders{
- position:absolute;bottom:100px;
- display:flex;gap:36px;
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin-top:25px;
 }
 .folder{
- width:135px;height:95px;
- background:linear-gradient(135deg,#0b1d22,#02090b);
- border:1px solid #2f6c77;
- border-radius:14px;
- display:flex;align-items:center;justify-content:center;
- cursor:pointer;
- transition:.4s;
+  width:95px;
+  padding:15px 5px;
+  border:1px solid #00ffff;
+  border-radius:12px;
+  text-align:center;
+  cursor:pointer;
+  transition:0.3s;
 }
-.folder:hover{
- transform:translateY(-10px) scale(1.08);
- box-shadow:0 0 25px #7fdfff;
-}
-.folder span{font-size:15px}
+.folder:hover{transform:scale(1.08);background:rgba(0,255,255,0.1)}
 
-/* ===== PANELS ===== */
-.panel{
- position:fixed;inset:0;
- background:rgba(0,0,0,.92);
- display:none;flex-direction:column;
- justify-content:center;align-items:center;
- z-index:20;
+/* BAGS */
+.bags{
+  display:flex;
+  justify-content:center;
+  gap:15px;
+  margin-top:20px;
 }
-.panel h2{
- font-size:30px;
- margin-bottom:18px;
- text-shadow:0 0 20px #7fdfff;
+.bags img{
+  width:110px;
+  animation:float 3s infinite ease-in-out;
 }
-.panel input,.panel select{
- width:300px;
- padding:14px;
- margin:6px;
- border:none;border-radius:8px;
- font-size:17px;
-}
-.panel button{
- margin-top:10px;
- padding:12px 26px;
- font-size:17px;
- border:none;border-radius:30px;
- background:#2f6c77;color:#fff;
- cursor:pointer;
-}
-.back{background:#222}
-
-/* ===== CONTACT CENTER ===== */
-.contactBox{
- background:rgba(10,25,30,.6);
- padding:30px 40px;
- border-radius:20px;
- text-align:center;
-}
-.contactBox button{
- display:block;
- width:260px;
- margin:10px auto;
- font-size:18px;
+@keyframes float{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-10px)}
+  100%{transform:translateY(0)}
 }
 
-/* ===== RESPONSIVE ===== */
-@media(max-width:768px){
- .hero h1{font-size:30px}
- .folder{width:120px}
+/* FORMS */
+input,select{
+  width:90%;
+  padding:12px;
+  margin:8px 0;
+  border-radius:8px;
+  border:none;
 }
+.btn{
+  padding:12px 25px;
+  margin:10px;
+  border:none;
+  border-radius:25px;
+  font-size:16px;
+  cursor:pointer;
+}
+.confirm{background:#00c853;color:#fff}
+.cancel{background:#d50000;color:#fff}
+
+/* CONTACT */
+.contact-box p{
+  font-size:20px;
+  margin:12px 0;
+}
+a{color:#00ffff;text-decoration:none}
 </style>
 </head>
 
 <body>
 
-<div class="bg"></div>
-<div class="wave"></div>
-
 <!-- TOP BAR -->
-<div class="top">
- <div class="lang">
-  <button onclick="setLang('en')">EN</button>
-  <button onclick="setLang('ml')">ML</button>
- </div>
- <div>
-  <a onclick="showHome()">Home</a>
-  <a onclick="showDealer()">Dealer Enquiry</a>
-  <a onclick="showContact()">Contact</a>
- </div>
+<div class="topbar">
+  <div class="lang">
+    <button onclick="setLang('en')">EN</button><br>
+    <button onclick="setLang('ml')">ML</button>
+  </div>
+  <div class="menu">
+    <div onclick="show('home')">Home</div>
+    <div onclick="show('dealer')">Dealer Enquiry</div>
+    <div onclick="show('contact')">Contact</div>
+  </div>
 </div>
 
-<!-- HERO -->
-<div class="hero" id="home">
- <img src="h4logo.png">
- <h1 id="titleText">H4 Tile Adhesive & Waterproof</h1>
+<!-- CENTER TITLE -->
+<div class="center">
+  <h1 id="title">H4 Tile Adhesive & Waterproof</h1>
+</div>
 
- <div class="folders">
-  <div class="folder" onclick="openFolder('Tile Adhesive')"><span>Tile Adhesive</span></div>
-  <div class="folder" onclick="openFolder('Waterproof')"><span>Waterproof</span></div>
-  <div class="folder" onclick="openFolder('H4 ShieldX')"><span>H4 ShieldX</span></div>
- </div>
+<!-- HOME -->
+<div id="home">
+  <img src="avlogo.png">
+  <div class="address">
+    <p><b>AV Chem Chemical & Manufacturing</b></p>
+    <p>Mukkilapeedika, Kannam Kulam</p>
+    <p>PO BP Angadi, Tirur</p>
+    <p>Malappuram, Kerala, India</p>
+  </div>
+
+  <div class="folders">
+    <div class="folder" onclick="openFolder('Tile Adhesive')">Tile Adhesive</div>
+    <div class="folder" onclick="openFolder('Waterproof')">Waterproof</div>
+    <div class="folder" onclick="openFolder('H4 ShieldX')">H4 ShieldX</div>
+  </div>
+
+  <div class="bags">
+    <img src="bag-yellow.png">
+    <img src="bag-purple.png">
+  </div>
 </div>
 
 <!-- DEALER -->
-<div class="panel" id="dealer">
- <h2>Dealer Enquiry</h2>
- <input placeholder="Customer Name">
- <input placeholder="City">
- <input placeholder="Mobile Number">
- <input placeholder="WhatsApp Number">
- <input placeholder="District">
- <input placeholder="State">
- <select>
-  <option>Tile Adhesive</option>
-  <option>Waterproof</option>
-  <option>H4 ShieldX</option>
- </select>
- <select>
-  <option>Bag</option>
-  <option>Kg</option>
- </select>
- <button onclick="sendWA()">Confirm</button>
- <button class="back" onclick="closeAll()">Back</button>
+<div id="dealer">
+  <h2>Dealer Enquiry</h2>
+  <input placeholder="Customer Name">
+  <input placeholder="City">
+  <input placeholder="Mobile Number">
+  <input placeholder="WhatsApp Number (optional)">
+  <input placeholder="District">
+  <input placeholder="State">
+  <select>
+    <option>Tile Adhesive</option>
+    <option>Waterproof</option>
+    <option>H4 ShieldX</option>
+  </select>
+  <select>
+    <option>Bag</option>
+    <option>Kg</option>
+  </select><br>
+  <button class="btn confirm" onclick="sendWA()">Confirm</button>
+  <button class="btn cancel" onclick="show('home')">Cancel</button>
 </div>
 
 <!-- CONTACT -->
-<div class="panel" id="contact">
- <div class="contactBox">
-  <h2>Contact</h2>
-  <button onclick="location.href='tel:+917907344030'">📞 +91 79073 44030</button>
-  <button onclick="location.href='https://wa.me/919745838382'">💬 WhatsApp</button>
-  <button onclick="location.href='mailto:avchemtirur@gmail.com'">✉ avchemtirur@gmail.com</button>
-  <button class="back" onclick="closeAll()">Back</button>
- </div>
+<div id="contact">
+  <div class="contact-box">
+    <p>📞 <a href="tel:+917907344030">+91 79073 44030</a></p>
+    <p>💬 <a href="https://wa.me/919745838382">+91 97458 38382</a></p>
+    <p>✉️ <a href="mailto:avchemtirur@gmail.com">avchemtirur@gmail.com</a></p>
+  </div>
+  <button class="btn cancel" onclick="show('home')">Back</button>
 </div>
 
 <script>
-function closeAll(){
- document.querySelectorAll('.panel').forEach(p=>p.style.display='none');
+function show(id){
+  document.querySelectorAll('#home,#dealer,#contact').forEach(d=>d.style.display='none');
+  document.getElementById(id).style.display='block';
 }
-function showDealer(){closeAll();dealer.style.display='flex'}
-function showContact(){closeAll();contact.style.display='flex'}
-function showHome(){closeAll()}
+show('home');
+
 function openFolder(name){
- alert(name+" opened");
+  alert(name + " opened");
 }
+
 function sendWA(){
- window.open("https://wa.me/919745838382?text=Dealer Enquiry from Website");
+  window.open("https://wa.me/919745838382?text=Dealer%20Enquiry%20from%20Website");
 }
+
 function setLang(l){
- if(l=='ml'){
-  titleText.innerText="H4 ടൈൽ അഡ്ഹീസീവ് & വാട്ടർപ്രൂഫ്";
- }else{
-  titleText.innerText="H4 Tile Adhesive & Waterproof";
- }
+  if(l==='ml'){
+    document.getElementById('title').innerText="H4 ടൈൽ അഡ്ഹേസീവ് & വാട്ടർപ്രൂഫ്";
+  }else{
+    document.getElementById('title').innerText="H4 Tile Adhesive & Waterproof";
+  }
 }
 </script>
 
