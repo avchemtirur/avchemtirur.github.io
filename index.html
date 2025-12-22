@@ -2,1077 +2,232 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>AV Chem - Trust Your Life and Home</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Chilanka&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        html, body {
-            width: 100%;
-            min-height: 100vh;
-            overflow-x: hidden;
-            zoom: 1;
-        }
-        body {
-            background: linear-gradient(135deg, #0a2540 0%, #1a365d 100%);
-            color: #fff;
-            font-family: 'Chilanka', cursive;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-        .top-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 40px;
-            background: rgba(10, 37, 64, 0.95);
-            border-bottom: 2px solid #00b4d8;
-            position: relative;
-            z-index: 1000;
-        }
-        .logo {
-            height: 50px;
-            transition: transform 0.5s ease;
-        }
-        .logo-large {
-            height: 200px;
-            position: fixed;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%) scale(2);
-            animation: logoAnimation 2.5s ease forwards;
-            z-index: 1001;
-            border-radius: 10px;
-            box-shadow: 0 0 50px rgba(0, 180, 216, 0.8);
-        }
-        @keyframes logoAnimation {
-            0% { transform: translate(-50%, -50%) scale(2); opacity: 1; }
-            60% { transform: translate(-50%, -50%) scale(2); opacity: 1; }
-            80% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.8; }
-            100% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
-        }
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-        .nav-btn {
-            background: none;
-            border: 2px solid #00b4d8;
-            color: #ffffff;
-            padding: 10px 20px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-            font-family: 'Chilanka', cursive;
-            font-size: 16px;
-        }
-        .nav-btn:hover {
-            background: #00b4d8;
-            color: #0a2540;
-        }
-        .language-switch {
-            display: flex;
-            gap: 10px;
-        }
-        .lang-btn {
-            background: #1a365d;
-            border: none;
-            color: #ffffff;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-family: 'Chilanka', cursive;
-        }
-        .lang-btn.active {
-            background: #00b4d8;
-            color: #0a2540;
-        }
-        .main-content {
-            padding: 40px;
-            text-align: center;
-            position: relative;
-            width: 100%;
-            min-height: 70vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        .main-title-container {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 20px;
-            width: 100%;
-        }
-        .main-title {
-            font-size: 4rem;
-            color: #ffffff;
-            text-shadow: 
-                0 0 10px #00b4d8,
-                0 0 20px #00b4d8,
-                0 0 30px #00b4d8,
-                0 0 40px #0077b6;
-            font-weight: 800;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-            animation: premiumGlow 3s infinite alternate;
-            font-family: 'Chilanka', cursive;
-        }
-        @keyframes premiumGlow {
-            0% { 
-                text-shadow: 
-                    0 0 10px #00b4d8,
-                    0 0 20px #00b4d8,
-                    0 0 30px #00b4d8;
-                transform: scale(1);
-            }
-            50% { 
-                text-shadow: 
-                    0 0 15px #00b4d8,
-                    0 0 30px #00b4d8,
-                    0 0 45px #0077b6,
-                    0 0 60px #0077b6;
-                transform: scale(1.02);
-            }
-            100% { 
-                text-shadow: 
-                    0 0 10px #00b4d8,
-                    0 0 20px #00b4d8,
-                    0 0 30px #00b4d8;
-                transform: scale(1);
-            }
-        }
-        .subtitle {
-            font-size: 1.8rem;
-            color: #ffffff;
-            margin-bottom: 40px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-            font-family: 'Chilanka', cursive;
-            animation: fadeInUp 1s ease-out;
-        }
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .folder-container {
-            display: flex;
-            justify-content: center;
-            gap: 80px;
-            margin: 60px 0;
-            flex-wrap: wrap;
-            width: 100%;
-            animation: fadeInUp 1s ease-out 0.5s both;
-        }
-        .folder {
-            width: 220px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.5s ease;
-        }
-        .folder-icon {
-            width: 220px;
-            height: 170px;
-            background: linear-gradient(145deg, #1a4b8c, #0a2540);
-            border-radius: 15px 15px 0 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            margin-bottom: 15px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.6);
-            transition: all 0.5s ease;
-            transform-origin: bottom;
-            overflow: hidden;
-            border: 3px solid transparent;
-        }
-        .folder-icon i {
-            font-size: 80px;
-            color: #00b4d8;
-            transition: all 0.5s ease;
-            filter: drop-shadow(0 0 10px rgba(0, 180, 216, 0.5));
-        }
-        .folder:hover .folder-icon {
-            transform: translateY(-25px) scale(1.15);
-            box-shadow: 0 25px 50px rgba(0, 180, 216, 0.5);
-            border-color: #00b4d8;
-        }
-        .folder:hover .folder-icon i {
-            transform: scale(1.3);
-            filter: drop-shadow(0 0 20px rgba(0, 180, 216, 0.8));
-        }
-        .folder.active .folder-icon {
-            transform: translateY(-25px) scale(1.15);
-            box-shadow: 0 25px 50px rgba(0, 180, 216, 0.6);
-            border-color: #00b4d8;
-            animation: folderOpen 0.5s forwards;
-        }
-        .folder.active .folder-icon i {
-            transform: scale(1.3);
-            filter: drop-shadow(0 0 20px rgba(0, 180, 216, 0.8));
-        }
-        @keyframes folderOpen {
-            0% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-12px) scale(1.08); }
-            100% { transform: translateY(-25px) scale(1.15); }
-        }
-        .folder-name {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #ffffff;
-            margin-top: 10px;
-            padding: 12px;
-            background: rgba(10, 37, 64, 0.8);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
-            font-family: 'Chilanka', cursive;
-            border: 2px solid transparent;
-        }
-        .folder.active .folder-name {
-            background: rgba(0, 180, 216, 0.4);
-            color: #ffffff;
-            transform: scale(1.15);
-            border-color: #00b4d8;
-            box-shadow: 0 10px 20px rgba(0, 180, 216, 0.3);
-        }
-        .caption {
-            font-size: 2rem;
-            margin-top: 30px;
-            color: #ffffff;
-            animation: fadeIn 3s;
-            font-weight: bold;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-            font-family: 'Chilanka', cursive;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        .bags-container {
-            position: absolute;
-            right: 100px;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            gap: 50px;
-            z-index: 10;
-        }
-        .bag {
-            width: 180px;
-            height: 220px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            animation: float 3s ease-in-out infinite;
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
-            transition: all 0.3s ease;
-        }
-        .bag:hover {
-            transform: scale(1.1);
-            filter: drop-shadow(0 15px 30px rgba(0,0,0,0.7));
-        }
-        .bag-yellow {
-            background-image: url('https://via.placeholder.com/180x220/FFD700/000?text=YELLOW+BAG');
-            animation-delay: 0s;
-            border: 3px solid #FFD700;
-            border-radius: 10px;
-        }
-        .bag-purple {
-            background-image: url('https://via.placeholder.com/180x220/9C27B0/fff?text=PURPLE+BAG');
-            animation-delay: 0.5s;
-            border: 3px solid #9C27B0;
-            border-radius: 10px;
-        }
-        @keyframes float {
-            0% { transform: translateY(0px) rotate(0deg); }
-            25% { transform: translateY(-15px) rotate(1deg); }
-            50% { transform: translateY(-25px) rotate(0deg); }
-            75% { transform: translateY(-15px) rotate(-1deg); }
-            100% { transform: translateY(0px) rotate(0deg); }
-        }
-        .page {
-            display: none;
-            padding: 40px;
-            max-width: 900px;
-            margin: 0 auto;
-            background: rgba(10, 37, 64, 0.9);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            min-height: 60vh;
-            width: 90%;
-        }
-        .page.active {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            animation: slideUp 0.5s ease;
-        }
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .back-btn {
-            background: #1a365d;
-            border: none;
-            color: #ffffff;
-            padding: 12px 30px;
-            border-radius: 30px;
-            cursor: pointer;
-            margin-top: 30px;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.3s;
-            font-family: 'Chilanka', cursive;
-            font-size: 16px;
-            border: 2px solid #1a4b8c;
-        }
-        .back-btn:hover {
-            background: #00b4d8;
-            color: #0a2540;
-            transform: translateX(-5px);
-            border-color: #00b4d8;
-        }
-        .form-group {
-            margin-bottom: 20px;
-            width: 100%;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #ffffff;
-            font-weight: 500;
-            font-family: 'Chilanka', cursive;
-            font-size: 18px;
-        }
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 12px;
-            border-radius: 10px;
-            border: 2px solid #1a4b8c;
-            background: #0a2540;
-            color: #ffffff;
-            font-size: 1rem;
-            transition: border 0.3s;
-            font-family: 'Chilanka', cursive;
-        }
-        .form-group input:focus, .form-group select:focus {
-            border-color: #00b4d8;
-            outline: none;
-            box-shadow: 0 0 10px rgba(0, 180, 216, 0.5);
-        }
-        .form-buttons {
-            display: flex;
-            gap: 20px;
-            margin-top: 30px;
-            width: 100%;
-        }
-        .form-btn {
-            flex: 1;
-            padding: 15px;
-            border: none;
-            border-radius: 10px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            color: #ffffff;
-            font-family: 'Chilanka', cursive;
-            font-size: 18px;
-        }
-        .confirm {
-            background: linear-gradient(90deg, #00b4d8, #0077b6);
-        }
-        .confirm:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 180, 216, 0.4);
-        }
-        .cancel {
-            background: #1a365d;
-            border: 2px solid #1a4b8c;
-        }
-        .cancel:hover {
-            background: #0a2540;
-        }
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-            margin-top: 30px;
-            width: 100%;
-            max-width: 600px;
-        }
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            padding: 25px;
-            background: rgba(26, 54, 93, 0.7);
-            border-radius: 15px;
-            transition: all 0.3s;
-            border: 1px solid #1a4b8c;
-            width: 100%;
-        }
-        .contact-item:hover {
-            background: rgba(0, 180, 216, 0.2);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 180, 216, 0.2);
-            border-color: #00b4d8;
-        }
-        .contact-icon {
-            font-size: 40px;
-            color: #00b4d8;
-            width: 70px;
-            text-align: center;
-        }
-        .contact-details {
-            flex: 1;
-        }
-        .contact-details a {
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 1.4rem;
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 600;
-            transition: color 0.3s;
-            font-family: 'Chilanka', cursive;
-        }
-        .contact-details a:hover {
-            color: #00b4d8;
-            text-decoration: underline;
-        }
-        .contact-label {
-            color: #ffffff;
-            font-size: 0.9rem;
-            opacity: 0.8;
-            font-family: 'Chilanka', cursive;
-        }
-        .footer {
-            text-align: center;
-            padding: 30px;
-            color: #ffffff;
-            border-top: 1px solid #1a4b8c;
-            margin-top: 40px;
-        }
-        .contact-page-active .contact-info {
-            margin-top: 50px;
-        }
-        .contact-page-active .contact-item {
-            padding: 30px;
-            margin-bottom: 20px;
-        }
-        .contact-page-active .contact-icon {
-            font-size: 50px;
-        }
-        .contact-page-active .contact-details a {
-            font-size: 1.6rem;
-        }
-        
-        /* Home Page Specific */
-        .home-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            width: 100%;
-            padding: 40px 20px;
-        }
-        .av-logo {
-            height: 120px;
-            margin-bottom: 30px;
-            animation: logoFloat 4s ease-in-out infinite;
-        }
-        @keyframes logoFloat {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-        .company-name {
-            font-size: 2.8rem;
-            color: #ffffff;
-            margin-bottom: 20px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-            font-family: 'Chilanka', cursive;
-        }
-        .address {
-            font-size: 1.5rem;
-            line-height: 1.8;
-            color: #ffffff;
-            max-width: 600px;
-            margin: 0 auto;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
-            font-family: 'Chilanka', cursive;
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 1400px) {
-            .bags-container {
-                right: 50px;
-            }
-        }
-        
-        @media (max-width: 1200px) {
-            .bags-container {
-                position: relative;
-                right: auto;
-                top: auto;
-                transform: none;
-                flex-direction: row;
-                justify-content: center;
-                margin-top: 40px;
-                gap: 80px;
-            }
-            .bag {
-                width: 160px;
-                height: 200px;
-            }
-        }
-        
-        @media (max-width: 992px) {
-            .main-title {
-                font-size: 3rem;
-            }
-            .folder-container {
-                gap: 40px;
-            }
-            .folder {
-                width: 200px;
-            }
-            .folder-icon {
-                width: 200px;
-                height: 150px;
-            }
-            .bag {
-                width: 140px;
-                height: 180px;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .top-bar {
-                padding: 15px 20px;
-                flex-wrap: wrap;
-            }
-            .nav-links {
-                gap: 10px;
-                margin-top: 10px;
-                width: 100%;
-                justify-content: center;
-            }
-            .nav-btn {
-                padding: 8px 15px;
-                font-size: 0.9rem;
-            }
-            .language-switch {
-                margin-top: 10px;
-            }
-            .main-content {
-                padding: 20px;
-            }
-            .main-title {
-                font-size: 2.5rem;
-            }
-            .subtitle {
-                font-size: 1.4rem;
-            }
-            .folder-container {
-                gap: 30px;
-                margin: 40px 0;
-            }
-            .folder {
-                width: 170px;
-            }
-            .folder-icon {
-                width: 170px;
-                height: 130px;
-            }
-            .folder-icon i {
-                font-size: 60px;
-            }
-            .caption {
-                font-size: 1.6rem;
-            }
-            .page {
-                padding: 20px;
-                width: 95%;
-            }
-            .company-name {
-                font-size: 2.2rem;
-            }
-            .address {
-                font-size: 1.2rem;
-            }
-            .bag {
-                width: 120px;
-                height: 160px;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .main-title {
-                font-size: 2rem;
-            }
-            .folder-container {
-                flex-direction: column;
-                align-items: center;
-                gap: 40px;
-            }
-            .nav-links {
-                flex-direction: column;
-                align-items: center;
-            }
-            .form-buttons {
-                flex-direction: column;
-            }
-            .contact-item {
-                flex-direction: column;
-                text-align: center;
-                padding: 20px;
-            }
-            .contact-icon {
-                margin-bottom: 10px;
-            }
-            .bags-container {
-                gap: 40px;
-            }
-            .bag {
-                width: 100px;
-                height: 140px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<title>H4 Tile Adhesive & Waterproof</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial}
+html,body{height:100%;background:#000;color:#fff}
+
+/* ===== BACKGROUND (Verify to Trust AI style) ===== */
+.bg{
+ position:fixed;inset:0;
+ background:
+ radial-gradient(circle at center,#1a3a44 0%,#020405 55%,#000 100%);
+ z-index:-2;
+}
+.wave{
+ position:absolute;inset:0;
+ background:
+ radial-gradient(circle at 30% 50%,rgba(0,180,200,.25),transparent 60%),
+ radial-gradient(circle at 70% 55%,rgba(0,120,255,.25),transparent 60%);
+ z-index:-1;
+}
+
+/* ===== TOP BAR ===== */
+.top{
+ position:fixed;top:0;width:100%;
+ display:flex;justify-content:space-between;align-items:center;
+ padding:14px 24px;
+ background:rgba(0,0,0,.45);
+ backdrop-filter:blur(12px);
+ z-index:10;
+}
+.top a{color:#fff;margin-left:18px;text-decoration:none;font-size:17px}
+.top a:hover{color:#7fdfff}
+
+/* ===== LANGUAGE ===== */
+.lang button{
+ background:#111;border:1px solid #2f6c77;
+ color:#9defff;padding:6px 14px;
+ border-radius:20px;cursor:pointer;margin-right:6px;
+}
+
+/* ===== HERO ===== */
+.hero{
+ height:100vh;
+ display:flex;flex-direction:column;
+ justify-content:center;align-items:center;
+ text-align:center;
+}
+.hero img{
+ width:190px;
+ animation:logoZoom 3s ease forwards;
+}
+@keyframes logoZoom{
+ 0%{transform:scale(1.6);opacity:0}
+ 60%{transform:scale(1)}
+ 100%{transform:scale(.85)}
+}
+.hero h1{
+ margin-top:20px;
+ font-size:40px;
+ color:#e9fdff;
+ text-shadow:0 0 25px #7fdfff;
+ animation:fadeText 3s forwards;
+}
+@keyframes fadeText{
+ from{opacity:0;letter-spacing:6px}
+ to{opacity:1;letter-spacing:1px}
+}
+
+/* ===== FOLDERS ===== */
+.folders{
+ position:absolute;bottom:100px;
+ display:flex;gap:36px;
+}
+.folder{
+ width:135px;height:95px;
+ background:linear-gradient(135deg,#0b1d22,#02090b);
+ border:1px solid #2f6c77;
+ border-radius:14px;
+ display:flex;align-items:center;justify-content:center;
+ cursor:pointer;
+ transition:.4s;
+}
+.folder:hover{
+ transform:translateY(-10px) scale(1.08);
+ box-shadow:0 0 25px #7fdfff;
+}
+.folder span{font-size:15px}
+
+/* ===== PANELS ===== */
+.panel{
+ position:fixed;inset:0;
+ background:rgba(0,0,0,.92);
+ display:none;flex-direction:column;
+ justify-content:center;align-items:center;
+ z-index:20;
+}
+.panel h2{
+ font-size:30px;
+ margin-bottom:18px;
+ text-shadow:0 0 20px #7fdfff;
+}
+.panel input,.panel select{
+ width:300px;
+ padding:14px;
+ margin:6px;
+ border:none;border-radius:8px;
+ font-size:17px;
+}
+.panel button{
+ margin-top:10px;
+ padding:12px 26px;
+ font-size:17px;
+ border:none;border-radius:30px;
+ background:#2f6c77;color:#fff;
+ cursor:pointer;
+}
+.back{background:#222}
+
+/* ===== CONTACT CENTER ===== */
+.contactBox{
+ background:rgba(10,25,30,.6);
+ padding:30px 40px;
+ border-radius:20px;
+ text-align:center;
+}
+.contactBox button{
+ display:block;
+ width:260px;
+ margin:10px auto;
+ font-size:18px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+ .hero h1{font-size:30px}
+ .folder{width:120px}
+}
+</style>
 </head>
+
 <body>
-    <!-- Large H4 Logo Animation -->
-    <div id="logo-animation"></div>
 
-    <!-- Top Navigation Bar -->
-    <div class="top-bar">
-        <img src="https://via.placeholder.com/150x50/00b4d8/ffffff?text=H4+Logo" alt="H4 Logo" class="logo" id="top-logo">
-        <div class="nav-links">
-            <button class="nav-btn" onclick="showPage('home')">Home</button>
-            <button class="nav-btn" onclick="showPage('dealer')">Dealer Enquiry</button>
-            <button class="nav-btn" onclick="showPage('contact')">Contact</button>
-        </div>
-        <div class="language-switch">
-            <button class="lang-btn active" onclick="setLanguage('en')">English</button>
-            <button class="lang-btn" onclick="setLanguage('ml')">Malayalam</button>
-        </div>
-    </div>
+<div class="bg"></div>
+<div class="wave"></div>
 
-    <!-- Main Content -->
-    <div class="main-content" id="main-content">
-        <div class="main-title-container">
-            <h1 class="main-title" id="main-title">H4 Tile Adhesive & Water Proof</h1>
-            <div class="title-highlight"></div>
-        </div>
-        <p class="subtitle" id="subtitle">Introducing Verifiable Compute. Ready for the Agentic AI Era.</p>
-        
-        <!-- Animated Folders -->
-        <div class="folder-container">
-            <div class="folder" id="folder-tile" onclick="toggleFolder('tile')">
-                <div class="folder-icon">
-                    <i class="fas fa-shield-alt"></i>
-                </div>
-                <div class="folder-name">Tile Adhesive</div>
-            </div>
-            <div class="folder" id="folder-water" onclick="toggleFolder('water')">
-                <div class="folder-icon">
-                    <i class="fas fa-tint"></i>
-                </div>
-                <div class="folder-name">Water Proof</div>
-            </div>
-            <div class="folder" id="folder-shield" onclick="toggleFolder('shield')">
-                <div class="folder-icon">
-                    <i class="fas fa-layer-group"></i>
-                </div>
-                <div class="folder-name">H4 ShieldX</div>
-            </div>
-        </div>
-        
-        <!-- Bags on right side -->
-        <div class="bags-container">
-            <div class="bag bag-yellow"></div>
-            <div class="bag bag-purple"></div>
-        </div>
-        
-        <p class="caption" id="caption">Trust your life and home</p>
-    </div>
+<!-- TOP BAR -->
+<div class="top">
+ <div class="lang">
+  <button onclick="setLang('en')">EN</button>
+  <button onclick="setLang('ml')">ML</button>
+ </div>
+ <div>
+  <a onclick="showHome()">Home</a>
+  <a onclick="showDealer()">Dealer Enquiry</a>
+  <a onclick="showContact()">Contact</a>
+ </div>
+</div>
 
-    <!-- Home Page -->
-    <div id="home-page" class="page">
-        <div class="home-content">
-            <img src="https://via.placeholder.com/250x120/00b4d8/ffffff?text=AV+Logo" alt="AV Logo" class="av-logo">
-            <h2 class="company-name">AV Chem Chemical & Manufacturing</h2>
-            <div class="address">
-                Mukkilapeedika, Kannamkulam PO,<br>
-                BP Angadi, Pin Code: 676102,<br>
-                Tirur, Malappuram, Kerala, India.
-            </div>
-            <button class="back-btn" onclick="showPage('main')"><i class="fas fa-arrow-left"></i> Back</button>
-        </div>
-    </div>
+<!-- HERO -->
+<div class="hero" id="home">
+ <img src="h4logo.png">
+ <h1 id="titleText">H4 Tile Adhesive & Waterproof</h1>
 
-    <!-- Dealer Enquiry Page -->
-    <div id="dealer-page" class="page">
-        <h2 style="color: #ffffff; margin-bottom: 30px; text-align: center; font-family: 'Chilanka', cursive;">Dealer Enquiry Form</h2>
-        <div class="form-group">
-            <label for="name">Customer Name</label>
-            <input type="text" id="name" placeholder="Enter your full name">
-        </div>
-        <div class="form-group">
-            <label for="city">City</label>
-            <input type="text" id="city" placeholder="Enter your city">
-        </div>
-        <div class="form-group">
-            <label for="mobile">Mobile Number</label>
-            <input type="tel" id="mobile" placeholder="Enter your mobile number">
-        </div>
-        <div class="form-group">
-            <label for="whatsapp">WhatsApp Number (optional)</label>
-            <input type="tel" id="whatsapp" placeholder="Enter WhatsApp number">
-        </div>
-        <div class="form-group">
-            <label for="district">District</label>
-            <input type="text" id="district" placeholder="Enter your district">
-        </div>
-        <div class="form-group">
-            <label for="state">State</label>
-            <input type="text" id="state" placeholder="Enter your state">
-        </div>
-        <div class="form-group">
-            <label for="product">Product</label>
-            <select id="product">
-                <option value="tile">Tile Adhesive</option>
-                <option value="waterproof">Water Proof</option>
-                <option value="h4">H4 ShieldX</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="quantity">Quantity</label>
-            <select id="quantity">
-                <option value="bag">Bag</option>
-                <option value="kg">Kilogram (KG)</option>
-            </select>
-        </div>
-        <div class="form-buttons">
-            <button class="form-btn confirm" onclick="submitEnquiry()">Confirm</button>
-            <button class="form-btn cancel" onclick="showPage('main')">Cancel</button>
-        </div>
-        <button class="back-btn" onclick="showPage('main')"><i class="fas fa-arrow-left"></i> Back</button>
-    </div>
+ <div class="folders">
+  <div class="folder" onclick="openFolder('Tile Adhesive')"><span>Tile Adhesive</span></div>
+  <div class="folder" onclick="openFolder('Waterproof')"><span>Waterproof</span></div>
+  <div class="folder" onclick="openFolder('H4 ShieldX')"><span>H4 ShieldX</span></div>
+ </div>
+</div>
 
-    <!-- Contact Page -->
-    <div id="contact-page" class="page">
-        <h2 style="color: #ffffff; margin-bottom: 30px; text-align: center; font-size: 2.5rem; font-family: 'Chilanka', cursive;">Contact Us</h2>
-        <div class="contact-info">
-            <div class="contact-item">
-                <i class="fas fa-phone contact-icon"></i>
-                <div class="contact-details">
-                    <a href="tel:+917907344030">+91 79073 44030</a>
-                    <div class="contact-label">Tap to call directly</div>
-                </div>
-            </div>
-            <div class="contact-item">
-                <i class="fab fa-whatsapp contact-icon"></i>
-                <div class="contact-details">
-                    <a href="https://wa.me/919745838382" target="_blank">+91 97458 38382</a>
-                    <div class="contact-label">Tap to open WhatsApp chat</div>
-                </div>
-            </div>
-            <div class="contact-item">
-                <i class="fas fa-envelope contact-icon"></i>
-                <div class="contact-details">
-                    <a href="mailto:avchemtirur@gmail.com">avchemtirur@gmail.com</a>
-                    <div class="contact-label">Tap to send email</div>
-                </div>
-            </div>
-        </div>
-        <button class="back-btn" onclick="showPage('main')"><i class="fas fa-arrow-left"></i> Back</button>
-    </div>
+<!-- DEALER -->
+<div class="panel" id="dealer">
+ <h2>Dealer Enquiry</h2>
+ <input placeholder="Customer Name">
+ <input placeholder="City">
+ <input placeholder="Mobile Number">
+ <input placeholder="WhatsApp Number">
+ <input placeholder="District">
+ <input placeholder="State">
+ <select>
+  <option>Tile Adhesive</option>
+  <option>Waterproof</option>
+  <option>H4 ShieldX</option>
+ </select>
+ <select>
+  <option>Bag</option>
+  <option>Kg</option>
+ </select>
+ <button onclick="sendWA()">Confirm</button>
+ <button class="back" onclick="closeAll()">Back</button>
+</div>
 
-    <!-- Footer -->
-    <div class="footer" id="footer">
-        <p style="font-family: 'Chilanka', cursive;">&copy; 2023 AV Chem Chemical & Manufacturing. All rights reserved.</p>
-        <p style="margin-top: 10px; font-family: 'Chilanka', cursive;">Trust your life and home with our quality products.</p>
-    </div>
+<!-- CONTACT -->
+<div class="panel" id="contact">
+ <div class="contactBox">
+  <h2>Contact</h2>
+  <button onclick="location.href='tel:+917907344030'">📞 +91 79073 44030</button>
+  <button onclick="location.href='https://wa.me/919745838382'">💬 WhatsApp</button>
+  <button onclick="location.href='mailto:avchemtirur@gmail.com'">✉ avchemtirur@gmail.com</button>
+  <button class="back" onclick="closeAll()">Back</button>
+ </div>
+</div>
 
-    <script>
-        // Show large H4 logo animation on page load
-        window.onload = function() {
-            // Create large logo animation
-            const largeLogo = document.createElement('img');
-            largeLogo.src = 'https://via.placeholder.com/400x200/00b4d8/ffffff?text=H4+LOGO';
-            largeLogo.className = 'logo-large';
-            largeLogo.alt = 'H4 Logo Large';
-            document.getElementById('logo-animation').appendChild(largeLogo);
-            
-            // Remove large logo after animation
-            setTimeout(() => {
-                if (largeLogo.parentNode) {
-                    document.getElementById('logo-animation').removeChild(largeLogo);
-                }
-                // Show main content
-                showPage('main');
-                
-                // Set all text to white
-                setAllTextWhite();
-                
-                // Start premium animation
-                startPremiumAnimation();
-            }, 2500);
-        };
-        
-        // Set all text to white color
-        function setAllTextWhite() {
-            // Select all text elements and set color to white
-            const textElements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, span, div, a, button, label, li, td, th');
-            textElements.forEach(el => {
-                if (!el.classList.contains('nav-btn') && !el.classList.contains('lang-btn') && 
-                    !el.classList.contains('form-btn') && !el.classList.contains('back-btn')) {
-                    el.style.color = '#ffffff';
-                }
-            });
-        }
-        
-        // Start premium animation for main title
-        function startPremiumAnimation() {
-            const mainTitle = document.getElementById('main-title');
-            const colors = ['#00b4d8', '#90e0ef', '#0077b6', '#0096c7'];
-            let colorIndex = 0;
-            
-            setInterval(() => {
-                mainTitle.style.textShadow = `
-                    0 0 10px ${colors[colorIndex]},
-                    0 0 20px ${colors[colorIndex]},
-                    0 0 30px ${colors[colorIndex]},
-                    0 0 40px ${colors[(colorIndex + 1) % colors.length]}
-                `;
-                colorIndex = (colorIndex + 1) % colors.length;
-            }, 1000);
-        }
-        
-        // Track currently active folder
-        let activeFolder = null;
-        
-        // Toggle folder function - FIXED VERSION
-        function toggleFolder(folderType) {
-            const folderElement = document.getElementById(`folder-${folderType}`);
-            
-            // If clicking the same folder, close it
-            if (activeFolder === folderType) {
-                folderElement.classList.remove('active');
-                activeFolder = null;
-                
-                // Reset main title and subtitle
-                document.getElementById('main-title').textContent = 'H4 Tile Adhesive & Water Proof';
-                document.getElementById('subtitle').textContent = 'Introducing Verifiable Compute. Ready for the Agentic AI Era.';
-                
-                return;
-            }
-            
-            // Remove active class from all folders
-            document.querySelectorAll('.folder').forEach(folder => {
-                folder.classList.remove('active');
-            });
-            
-            // Add active class to clicked folder
-            folderElement.classList.add('active');
-            activeFolder = folderType;
-            
-            // Update title and subtitle based on folder
-            const titles = {
-                'tile': 'H4 Tile Adhesive',
-                'water': 'H4 Water Proof',
-                'shield': 'H4 ShieldX Technology'
-            };
-            
-            const subtitles = {
-                'tile': 'Advanced adhesive technology for lasting bonds and durability.',
-                'water': 'Complete protection against water damage with advanced sealing.',
-                'shield': 'Ultra shield coating for maximum protection and durability.'
-            };
-            
-            document.getElementById('main-title').textContent = titles[folderType];
-            document.getElementById('subtitle').textContent = subtitles[folderType];
-            
-            // Animate bags based on folder
-            const bags = document.querySelectorAll('.bag');
-            if (folderType === 'tile') {
-                bags[0].style.animation = 'float 2s ease-in-out infinite';
-                bags[1].style.animation = 'float 2s ease-in-out infinite 0.5s';
-            } else if (folderType === 'water') {
-                bags[0].style.animation = 'float 1.5s ease-in-out infinite';
-                bags[1].style.animation = 'float 1.5s ease-in-out infinite 0.3s';
-            } else if (folderType === 'shield') {
-                bags[0].style.animation = 'float 2.5s ease-in-out infinite';
-                bags[1].style.animation = 'float 2.5s ease-in-out infinite 0.7s';
-            }
-        }
-        
-        // Show specific page and hide others
-        function showPage(pageId) {
-            // Remove active class from all folders
-            document.querySelectorAll('.folder').forEach(folder => {
-                folder.classList.remove('active');
-            });
-            activeFolder = null;
-            
-            // Hide all pages
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-                page.classList.remove('contact-page-active');
-            });
-            
-            // Show selected page
-            if (pageId === 'main') {
-                document.getElementById('main-content').style.display = 'flex';
-                document.getElementById('footer').style.display = 'block';
-                document.getElementById('top-logo').src = "https://via.placeholder.com/150x50/00b4d8/ffffff?text=H4+Logo";
-                
-                // Reset main title and subtitle
-                document.getElementById('main-title').textContent = 'H4 Tile Adhesive & Water Proof';
-                document.getElementById('subtitle').textContent = 'Introducing Verifiable Compute. Ready for the Agentic AI Era.';
-                
-                // Reset bag animations to default
-                const bags = document.querySelectorAll('.bag');
-                bags[0].style.animation = 'float 3s ease-in-out infinite';
-                bags[1].style.animation = 'float 3s ease-in-out infinite 0.5s';
-                
-                // Restart premium animation
-                startPremiumAnimation();
-            } else {
-                document.getElementById('main-content').style.display = 'none';
-                document.getElementById('footer').style.display = 'none';
-                
-                if (pageId === 'home') {
-                    document.getElementById('home-page').classList.add('active');
-                    document.getElementById('top-logo').src = "https://via.placeholder.com/150x50/00b4d8/ffffff?text=AV+Logo";
-                } else if (pageId === 'dealer') {
-                    document.getElementById('dealer-page').classList.add('active');
-                } else if (pageId === 'contact') {
-                    document.getElementById('contact-page').classList.add('active');
-                    document.getElementById('contact-page').classList.add('contact-page-active');
-                }
-            }
-            
-            // Ensure all text is white
-            setAllTextWhite();
-        }
-        
-        // Submit enquiry form
-        function submitEnquiry() {
-            const name = document.getElementById('name').value;
-            const city = document.getElementById('city').value;
-            const mobile = document.getElementById('mobile').value;
-            const product = document.getElementById('product').options[document.getElementById('product').selectedIndex].text;
-            const quantity = document.getElementById('quantity').value;
-            
-            if (!name || !city || !mobile) {
-                alert('Please fill in all required fields.');
-                return;
-            }
-            
-            // Prepare WhatsApp message
-            const message = `Dealer Enquiry%0A%0AName: ${name}%0ACity: ${city}%0AMobile: ${mobile}%0AProduct: ${product}%0AQuantity: ${quantity}`;
-            const whatsappUrl = `https://wa.me/919745838382?text=${message}`;
-            
-            // Open WhatsApp in new tab
-            window.open(whatsappUrl, '_blank');
-            
-            // Reset form
-            document.getElementById('name').value = '';
-            document.getElementById('city').value = '';
-            document.getElementById('mobile').value = '';
-            document.getElementById('whatsapp').value = '';
-            document.getElementById('district').value = '';
-            document.getElementById('state').value = '';
-            document.getElementById('product').selectedIndex = 0;
-            document.getElementById('quantity').selectedIndex = 0;
-            
-            alert('Your enquiry has been submitted. WhatsApp will open with the details.');
-        }
-        
-        // Language switching
-        function setLanguage(lang) {
-            const enBtn = document.querySelector('.lang-btn:nth-child(1)');
-            const mlBtn = document.querySelector('.lang-btn:nth-child(2)');
-            
-            if (lang === 'ml') {
-                // Malayalam translations
-                document.getElementById('main-title').textContent = 'എച്ച്4 ടൈൽ അഡ്ഹസീവ് & വാട്ടർ പ്രൂഫ്';
-                document.getElementById('subtitle').textContent = 'പരിശോധനായോഗ്യ കമ്പ്യൂട്ട് അവതരിപ്പിക്കുന്നു. ഏജന്റ് AI യുഗത്തിന് തയ്യാറാണ്.';
-                document.querySelector('.caption').textContent = 'നിങ്ങളുടെ ജീവിതവും വീടും വിശ്വസിക്കുക';
-                document.querySelector('.nav-links button:nth-child(1)').textContent = 'ഹോം';
-                document.querySelector('.nav-links button:nth-child(2)').textContent = 'ഡീലർ അന്വേഷണം';
-                document.querySelector('.nav-links button:nth-child(3)').textContent = 'ബന്ധപ്പെടുക';
-                document.querySelectorAll('.folder-name')[0].textContent = 'ടൈൽ അഡ്ഹസീവ്';
-                document.querySelectorAll('.folder-name')[1].textContent = 'വാട്ടർ പ്രൂഫ്';
-                document.querySelectorAll('.folder-name')[2].textContent = 'എച്ച്4 ഷീൽഡ് എക്സ്';
-                
-                // Home page Malayalam
-                if (document.querySelector('.company-name')) {
-                    document.querySelector('.company-name').textContent = 'എവി കെം കെമിക്കൽ & മാനുഫാക്ചറിംഗ്';
-                }
-                if (document.querySelector('.address')) {
-                    document.querySelector('.address').innerHTML = 
-                        'മുക്കിലപ്പീടിക, കണ്ണംകുളം പി.ഒ.,<br>' +
-                        'ബി.പി. അങ്ങാടി, പിൻ കോഡ്: 676102,<br>' +
-                        'തിരൂർ, മലപ്പുറം, കേരളം, ഇന്ത്യ.';
-                }
-                
-                enBtn.classList.remove('active');
-                mlBtn.classList.add('active');
-            } else {
-                // English translations (default)
-                document.getElementById('main-title').textContent = 'H4 Tile Adhesive & Water Proof';
-                document.getElementById('subtitle').textContent = 'Introducing Verifiable Compute. Ready for the Agentic AI Era.';
-                document.querySelector('.caption').textContent = 'Trust your life and home';
-                document.querySelector('.nav-links button:nth-child(1)').textContent = 'Home';
-                document.querySelector('.nav-links button:nth-child(2)').textContent = 'Dealer Enquiry';
-                document.querySelector('.nav-links button:nth-child(3)').textContent = 'Contact';
-                document.querySelectorAll('.folder-name')[0].textContent = 'Tile Adhesive';
-                document.querySelectorAll('.folder-name')[1].textContent = 'Water Proof';
-                document.querySelectorAll('.folder-name')[2].textContent = 'H4 ShieldX';
-                
-                // Home page English
-                if (document.querySelector('.company-name')) {
-                    document.querySelector('.company-name').textContent = 'AV Chem Chemical & Manufacturing';
-                }
-                if (document.querySelector('.address')) {
-                    document.querySelector('.address').innerHTML = 
-                        'Mukkilapeedika, Kannamkulam PO,<br>' +
-                        'BP Angadi, Pin Code: 676102,<br>' +
-                        'Tirur, Malappuram, Kerala, India.';
-                }
-                
-                enBtn.classList.add('active');
-                mlBtn.classList.remove('active');
-            }
-            
-            // Ensure all text is white after language change
-            setAllTextWhite();
-        }
-        
-        // Prevent auto zoom on mobile
-        document.addEventListener('touchstart', function() {}, {passive: true});
-    </script>
+<script>
+function closeAll(){
+ document.querySelectorAll('.panel').forEach(p=>p.style.display='none');
+}
+function showDealer(){closeAll();dealer.style.display='flex'}
+function showContact(){closeAll();contact.style.display='flex'}
+function showHome(){closeAll()}
+function openFolder(name){
+ alert(name+" opened");
+}
+function sendWA(){
+ window.open("https://wa.me/919745838382?text=Dealer Enquiry from Website");
+}
+function setLang(l){
+ if(l=='ml'){
+  titleText.innerText="H4 ടൈൽ അഡ്ഹീസീവ് & വാട്ടർപ്രൂഫ്";
+ }else{
+  titleText.innerText="H4 Tile Adhesive & Waterproof";
+ }
+}
+</script>
+
 </body>
 </html>
