@@ -12,74 +12,92 @@ body{
   color:#fff;
   font-family:Arial,Helvetica,sans-serif;
 }
-:root{--a:#00ffff}
+:root{--c:#00e5ff}
 
 .section{display:none;padding:20px;text-align:center}
 .section.active{display:block}
 
 .topbar{
-  display:flex;justify-content:space-between;
+  display:flex;
+  justify-content:space-between;
   padding:12px;
 }
 .lang button{
-  width:60px;padding:8px;
-  border:2px solid var(--a);
+  width:60px;
+  padding:8px;
+  border:2px solid var(--c);
   background:transparent;
-  color:var(--a);
+  color:var(--c);
   font-weight:bold;
 }
-.menu div{cursor:pointer;font-size:18px;margin:6px 0}
+.menu div{
+  cursor:pointer;
+  font-size:18px;
+  margin:6px 0;
+}
 
 h1{font-size:32px}
+h2{margin-top:0}
 
 .folders{
-  display:flex;justify-content:center;
-  gap:12px;margin-top:20px;
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  margin-top:25px;
 }
 .folder{
-  width:110px;padding:16px;
-  border:2px solid var(--a);
-  border-radius:8px;cursor:pointer;
+  width:120px;
+  padding:16px;
+  border:2px solid var(--c);
+  border-radius:8px;
+  cursor:pointer;
 }
 
 input,select{
-  width:90%;padding:14px;
-  margin:8px 0;font-size:18px;
-  border-radius:6px;border:2px solid #ccc;
+  width:90%;
+  padding:14px;
+  margin:8px 0;
+  font-size:18px;
+  border-radius:6px;
+  border:2px solid #ccc;
 }
 input.error,select.error{border-color:red}
 
 button{
-  padding:14px 30px;font-size:18px;
-  border:none;border-radius:30px;
+  padding:14px 32px;
+  font-size:18px;
+  border:none;
+  border-radius:30px;
   cursor:pointer;
 }
 .confirm{background:#00c853;color:#fff}
 .back{background:#d50000;color:#fff;margin-top:15px}
 .confirm:disabled{background:#555}
+
+.contactColor{color:var(--c)}
 </style>
 </head>
 
 <body>
 
-<!-- TOP -->
+<!-- TOP BAR -->
 <div class="topbar">
   <div class="lang">
     <button onclick="setLang('en')">EN</button><br>
     <button onclick="setLang('ml')">ML</button>
   </div>
   <div class="menu">
-    <div onclick="openSec('home')">Home</div>
+    <div onclick="openSec('main')">Home</div>
     <div onclick="openSec('dealer')">Dealer Enquiry</div>
     <div onclick="openSec('contact')">Contact</div>
   </div>
 </div>
 
-<!-- HOME -->
-<div id="home" class="section active">
+<!-- MAIN SCREEN -->
+<div id="main" class="section active">
   <h1 id="title">H4 Tile Adhesive & Waterproof</h1>
-  <p id="tagline" style="color:var(--a);font-size:20px">
-    Molecular Bonding. Peaceful Dwelling.
+  <p style="color:var(--c);font-size:20px">
+    Molecular Bonding. Peaceful Dwelling...
   </p>
 
   <div class="folders">
@@ -89,36 +107,51 @@ button{
   </div>
 </div>
 
+<!-- HOME PAGE -->
+<div id="home" class="section">
+  <h2 class="contactColor">AV Chem Chemical & Manufacturing</h2>
+  <p class="contactColor">
+    Mukkilapeedika<br>
+    Kannam Kulam<br>
+    PO BP Angadi<br>
+    Pin Code 676102<br>
+    Tirur<br>
+    Malappuram<br>
+    Kerala<br>
+    India
+  </p>
+  <button class="back" onclick="openSec('main')">Back</button>
+</div>
+
 <!-- PRODUCT INFO -->
 <div id="tile" class="section">
   <h2>Tile Adhesive</h2>
-  <p>High Strength Tile Bonding</p>
-  <button class="back" onclick="openSec('home')">Back</button>
+  <p>Marble & Granite / Marbonit</p>
+  <button class="back" onclick="openSec('main')">Back</button>
 </div>
 
 <div id="water" class="section">
   <h2>Waterproof</h2>
-  <p>Long Lasting Protection</p>
-  <button class="back" onclick="openSec('home')">Back</button>
+  <p>Bathroom / Building / House / Hotel</p>
+  <button class="back" onclick="openSec('main')">Back</button>
 </div>
 
 <div id="shield" class="section">
   <h2>H4 ShieldX</h2>
-  <p>Advanced Shield Technology</p>
-  <button class="back" onclick="openSec('home')">Back</button>
+  <p>Advanced Protection Technology</p>
+  <button class="back" onclick="openSec('main')">Back</button>
 </div>
 
-<!-- DEALER -->
+<!-- DEALER ENQUIRY -->
 <div id="dealer" class="section">
 <h2>Dealer Enquiry</h2>
 
 <input id="name" placeholder="Customer Name">
-<input id="city" placeholder="City">
 <input id="mobile" placeholder="Mobile Number">
 <input id="address" placeholder="Address">
 <input id="pincode" placeholder="Pincode">
 
-<select id="product" onchange="loadOptions()">
+<select id="product" onchange="loadUsage()">
   <option value="">Select Product</option>
   <option>Tile Adhesive</option>
   <option>Waterproof</option>
@@ -128,25 +161,33 @@ button{
 <select id="usage"></select>
 <input id="otherBox" placeholder="Enter Other Details" style="display:none">
 
+<select id="qtyType">
+  <option value="">Quantity Type</option>
+  <option>Kg</option>
+  <option>Bag</option>
+</select>
+<input id="qty" placeholder="Quantity">
+
 <button id="confirm" class="confirm" disabled onclick="sendWhatsApp()">Confirm</button><br>
-<button class="back" onclick="openSec('home')">Cancel</button>
+<button class="back" onclick="openSec('main')">Cancel</button>
 </div>
 
 <!-- CONTACT -->
 <div id="contact" class="section">
 <h2>Contact</h2>
-<p style="color:var(--a);font-size:20px">
-📞 <a href="tel:+917907344030" style="color:var(--a)">+91 79073 44030</a><br><br>
-💬 <a href="https://wa.me/919745838382" style="color:var(--a)">WhatsApp</a><br><br>
-✉️ <a href="mailto:avchemtirur@gmail.com" style="color:var(--a)">avchemtirur@gmail.com</a>
+<p class="contactColor" style="font-size:20px">
+📞 <a class="contactColor" href="tel:+917907344030">+91 79073 44030</a><br><br>
+💬 <a class="contactColor" href="https://wa.me/919745838382">WhatsApp</a><br><br>
+✉️ <a class="contactColor" href="mailto:avchemtirur@gmail.com">avchemtirur@gmail.com</a>
 </p>
-<button class="back" onclick="openSec('home')">Back</button>
+<button class="back" onclick="openSec('main')">Back</button>
 </div>
 
 <script>
 function openSec(id){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
+  if(id==="main") openSec("home"), setTimeout(()=>openSec("main"),10);
 }
 
 function setLang(l){
@@ -155,26 +196,26 @@ function setLang(l){
     "H4 Tile Adhesive & Waterproof";
 }
 
-function loadOptions(){
-  const p=document.getElementById("product").value;
-  const u=document.getElementById("usage");
-  const o=document.getElementById("otherBox");
+function loadUsage(){
+  const p=product.value;
+  const u=usage;
+  const o=otherBox;
   u.innerHTML=""; o.style.display="none";
 
-  let arr=[];
-  if(p==="Tile Adhesive") arr=["Marble & Granite","Marbonit","Wall","Floor","Building","House","Other"];
-  if(p==="Waterproof") arr=["Bathroom","House","Building","Store","Hotel","Other"];
-  if(p==="H4 ShieldX") arr=["Bathroom","Hall","Room","Building","Store","Hotel","Other"];
+  let list=[];
+  if(p==="Tile Adhesive") list=["Marble & Granite","Marbonit","Other"];
+  if(p==="Waterproof") list=["Bathroom","House","Building","Store","Hotel","Other"];
+  if(p==="H4 ShieldX") list=["Bathroom","Hall","Room","Building","Store","Hotel","Other"];
 
-  arr.forEach(v=>{
-    let opt=document.createElement("option");
-    opt.text=v; u.add(opt);
+  list.forEach(v=>{
+    let op=document.createElement("option");
+    op.text=v; u.add(op);
   });
 
   u.onchange=()=>{ if(u.value==="Other") o.style.display="block"; }
 }
 
-["name","mobile","address","pincode"].forEach(id=>{
+["name","mobile","address","pincode","qty"].forEach(id=>{
   document.getElementById(id).addEventListener("input",validate);
 });
 
@@ -185,22 +226,21 @@ function validate(){
     if(!f.value){f.classList.add("error"); ok=false;}
     else f.classList.remove("error");
   });
-  document.getElementById("confirm").disabled=!ok;
+  confirm.disabled=!ok;
 }
 
 function sendWhatsApp(){
   let msg=`Dealer Enquiry%0A
 Name: ${name.value}%0A
-City: ${city.value}%0A
 Mobile: ${mobile.value}%0A
 Address: ${address.value}%0A
 Pincode: ${pincode.value}%0A
 Product: ${product.value}%0A
 Usage: ${usage.value}%0A
-Other: ${otherBox.value}`;
+Quantity: ${qty.value} ${qtyType.value}`;
 
   window.open(`https://wa.me/919745838282?text=${msg}`);
-  alert("Thank you! Our team will contact you shortly.");
+  alert("✨ Thank you! Our H4 team will contact you shortly.");
 }
 </script>
 
