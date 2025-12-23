@@ -9,10 +9,13 @@
 body{
   margin:0;
   font-family:Arial,Helvetica,sans-serif;
-  background:linear-gradient(135deg,#0a1a2a,#000);
   color:#fff;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,0.04) 1px,transparent 1px),
+    linear-gradient(90deg,#0b2a3a,#000);
+  background-size:4px 4px,100% 100%;
 }
-:root{--c:#00e5ff}
+:root{--c:#00e5d4}
 
 .section{display:none;padding:20px;text-align:center}
 .section.active{display:block}
@@ -37,13 +40,12 @@ body{
 }
 
 h1{font-size:32px}
-.sub{color:var(--c);font-size:20px}
+.sub{color:var(--c);font-size:20px;margin-bottom:20px}
 
 .folders{
   display:flex;
   justify-content:center;
   gap:12px;
-  margin-top:25px;
 }
 .folder{
   width:120px;
@@ -72,7 +74,7 @@ button{
 }
 .confirm{background:#00c853;color:#fff}
 .confirm:disabled{background:#555}
-.back{background:#d50000;color:#fff;margin-top:15px}
+.cancel{background:#d50000;color:#fff;margin-top:10px}
 
 .contactColor{color:var(--c)}
 </style>
@@ -83,11 +85,11 @@ button{
 <!-- TOP BAR -->
 <div class="topbar">
   <div class="lang">
-    <button onclick="setLang('en')">EN</button><br>
-    <button onclick="setLang('ml')">ML</button>
+    <button>EN</button><br>
+    <button>ML</button>
   </div>
   <div class="menu">
-    <div onclick="openSec('main')">Home</div>
+    <div onclick="openSec('home')">Home</div>
     <div onclick="openSec('dealer')">Dealer Enquiry</div>
     <div onclick="openSec('contact')">Contact</div>
   </div>
@@ -95,7 +97,7 @@ button{
 
 <!-- MAIN -->
 <div id="main" class="section active">
-  <h1 id="title">H4 Tile Adhesive & Waterproof</h1>
+  <h1>H4 Tile Adhesive & Waterproof</h1>
   <div class="sub">Molecular Bonding. Peaceful Dwelling...</div>
 
   <div class="folders">
@@ -118,26 +120,7 @@ button{
     Kerala<br>
     India
   </p>
-  <button class="back" onclick="openSec('main')">Back</button>
-</div>
-
-<!-- PRODUCTS -->
-<div id="tile" class="section">
-  <h2>Tile Adhesive</h2>
-  <p>Marble & Granite / Marbonit</p>
-  <button class="back" onclick="openSec('main')">Back</button>
-</div>
-
-<div id="water" class="section">
-  <h2>Waterproof</h2>
-  <p>Bathroom / Building / House / Hotel</p>
-  <button class="back" onclick="openSec('main')">Back</button>
-</div>
-
-<div id="shield" class="section">
-  <h2>H4 ShieldX</h2>
-  <p>Advanced Protection Technology</p>
-  <button class="back" onclick="openSec('main')">Back</button>
+  <button class="cancel" onclick="openSec('main')">Back</button>
 </div>
 
 <!-- DEALER -->
@@ -147,22 +130,19 @@ button{
 <input id="name" placeholder="Customer Name">
 <input id="mobile" placeholder="Mobile Number">
 <input id="address" placeholder="Address">
-<input id="city" placeholder="City">
-<input id="district" placeholder="District">
-<input id="state" placeholder="State">
 <input id="pincode" placeholder="Pincode">
 
-<select id="product" onchange="productChanged()">
+<select id="product" onchange="productChange()">
   <option value="">Select Product</option>
   <option>Tile Adhesive</option>
   <option>Waterproof</option>
   <option>H4 ShieldX</option>
 </select>
 
-<select id="usage" style="display:none"></select>
-<input id="otherUsage" placeholder="Enter Other Details" style="display:none">
+<select id="usage" style="display:none" onchange="usageChange()"></select>
+<input id="other" placeholder="Enter other detail" style="display:none">
 
-<select id="qtyType" style="display:none" onchange="showQty()">
+<select id="unit" style="display:none" onchange="unitChange()">
   <option value="">Kg / Bag</option>
   <option>Kg</option>
   <option>Bag</option>
@@ -171,59 +151,56 @@ button{
 <input id="qty" placeholder="Quantity" style="display:none">
 
 <button id="confirm" class="confirm" disabled onclick="sendWA()">Confirm</button><br>
-<button class="back" onclick="openSec('main')">Cancel</button>
+<button class="cancel" onclick="openSec('main')">Cancel</button>
 </div>
 
 <!-- CONTACT -->
 <div id="contact" class="section">
 <h2>Contact</h2>
 <p class="contactColor" style="font-size:20px">
-📞 <a class="contactColor" href="tel:+917907344030">+91 79073 44030</a><br><br>
-💬 <a class="contactColor" href="https://wa.me/919745838382">WhatsApp</a><br><br>
-✉️ <a class="contactColor" href="mailto:avchemtirur@gmail.com">avchemtirur@gmail.com</a>
+📞 +91 79073 44030<br><br>
+💬 WhatsApp<br><br>
+✉️ avchemtirur@gmail.com
 </p>
-<button class="back" onclick="openSec('main')">Back</button>
+<button class="cancel" onclick="openSec('main')">Back</button>
 </div>
 
 <script>
 function openSec(id){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  if(id==="main") document.getElementById("home").classList.remove("active");
 }
 
-function setLang(l){
-  title.innerText = l==="ml"
-  ? "H4 ടൈൽ അഡ്‌ഹീസീവ് & വാട്ടർപ്രൂഫ്"
-  : "H4 Tile Adhesive & Waterproof";
-}
-
-function productChanged(){
+function productChange(){
   usage.style.display="block";
-  qtyType.style.display="block";
+  unit.style.display="block";
+  other.style.display="none";
   usage.innerHTML="";
-  otherUsage.style.display="none";
 
   let list=[];
-  if(product.value==="Tile Adhesive") list=["Marble & Granite","Marbonit","Other"];
-  if(product.value==="Waterproof") list=["Bathroom","House","Building","Hotel","Other"];
+  if(product.value==="Tile Adhesive") list=["Marble / Granite","Marbonit","Other"];
+  if(product.value==="Waterproof") list=["Bathroom","Building","House","Hotel","Other"];
   if(product.value==="H4 ShieldX") list=["Bathroom","Hall","Room","Building","Hotel","Other"];
 
   list.forEach(v=>{
     let o=document.createElement("option");
     o.text=v; usage.add(o);
   });
-
-  usage.onchange=()=>{ if(usage.value==="Other") otherUsage.style.display="block"; };
 }
 
-function showQty(){ qty.style.display="block"; }
+function usageChange(){
+  other.style.display = usage.value==="Other" ? "block":"none";
+}
+
+function unitChange(){
+  qty.style.display="block";
+}
 
 document.querySelectorAll("input,select").forEach(e=>e.oninput=validate);
 
 function validate(){
   let ok=true;
-  ["name","mobile","address","city","district","state"].forEach(id=>{
+  ["name","mobile","address","pincode"].forEach(id=>{
     let f=document.getElementById(id);
     if(!f.value){f.classList.add("error");ok=false;}
     else f.classList.remove("error");
@@ -232,17 +209,14 @@ function validate(){
 }
 
 function sendWA(){
-  let msg=`Dealer Enquiry%0A
-Name: ${name.value}%0A
-Mobile: ${mobile.value}%0A
-City: ${city.value}%0A
-District: ${district.value}%0A
-State: ${state.value}%0A
-Product: ${product.value}%0A
-Usage: ${usage.value}%0A
-Qty: ${qty.value} ${qtyType.value}`;
+  let msg=`Dealer Enquiry
+Name: ${name.value}
+Mobile: ${mobile.value}
+Product: ${product.value}
+Usage: ${usage.value}
+Qty: ${qty.value} ${unit.value}`;
 
-  window.open("https://wa.me/919745838282?text="+msg);
+  window.open("https://wa.me/919745838282?text="+encodeURIComponent(msg));
   alert("✨ Thank you! Our H4 team will contact you shortly.");
 }
 </script>
