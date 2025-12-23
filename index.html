@@ -8,9 +8,9 @@
 <style>
 body{
   margin:0;
-  background:#000;
-  color:#fff;
   font-family:Arial,Helvetica,sans-serif;
+  background:linear-gradient(135deg,#0a1a2a,#000);
+  color:#fff;
 }
 :root{--c:#00e5ff}
 
@@ -37,7 +37,7 @@ body{
 }
 
 h1{font-size:32px}
-h2{margin-top:0}
+.sub{color:var(--c);font-size:20px}
 
 .folders{
   display:flex;
@@ -71,8 +71,8 @@ button{
   cursor:pointer;
 }
 .confirm{background:#00c853;color:#fff}
-.back{background:#d50000;color:#fff;margin-top:15px}
 .confirm:disabled{background:#555}
+.back{background:#d50000;color:#fff;margin-top:15px}
 
 .contactColor{color:var(--c)}
 </style>
@@ -93,12 +93,10 @@ button{
   </div>
 </div>
 
-<!-- MAIN SCREEN -->
+<!-- MAIN -->
 <div id="main" class="section active">
   <h1 id="title">H4 Tile Adhesive & Waterproof</h1>
-  <p style="color:var(--c);font-size:20px">
-    Molecular Bonding. Peaceful Dwelling...
-  </p>
+  <div class="sub">Molecular Bonding. Peaceful Dwelling...</div>
 
   <div class="folders">
     <div class="folder" onclick="openSec('tile')">Tile Adhesive</div>
@@ -107,7 +105,7 @@ button{
   </div>
 </div>
 
-<!-- HOME PAGE -->
+<!-- HOME -->
 <div id="home" class="section">
   <h2 class="contactColor">AV Chem Chemical & Manufacturing</h2>
   <p class="contactColor">
@@ -123,7 +121,7 @@ button{
   <button class="back" onclick="openSec('main')">Back</button>
 </div>
 
-<!-- PRODUCT INFO -->
+<!-- PRODUCTS -->
 <div id="tile" class="section">
   <h2>Tile Adhesive</h2>
   <p>Marble & Granite / Marbonit</p>
@@ -142,33 +140,37 @@ button{
   <button class="back" onclick="openSec('main')">Back</button>
 </div>
 
-<!-- DEALER ENQUIRY -->
+<!-- DEALER -->
 <div id="dealer" class="section">
 <h2>Dealer Enquiry</h2>
 
 <input id="name" placeholder="Customer Name">
 <input id="mobile" placeholder="Mobile Number">
 <input id="address" placeholder="Address">
+<input id="city" placeholder="City">
+<input id="district" placeholder="District">
+<input id="state" placeholder="State">
 <input id="pincode" placeholder="Pincode">
 
-<select id="product" onchange="loadUsage()">
+<select id="product" onchange="productChanged()">
   <option value="">Select Product</option>
   <option>Tile Adhesive</option>
   <option>Waterproof</option>
   <option>H4 ShieldX</option>
 </select>
 
-<select id="usage"></select>
-<input id="otherBox" placeholder="Enter Other Details" style="display:none">
+<select id="usage" style="display:none"></select>
+<input id="otherUsage" placeholder="Enter Other Details" style="display:none">
 
-<select id="qtyType">
-  <option value="">Quantity Type</option>
+<select id="qtyType" style="display:none" onchange="showQty()">
+  <option value="">Kg / Bag</option>
   <option>Kg</option>
   <option>Bag</option>
 </select>
-<input id="qty" placeholder="Quantity">
 
-<button id="confirm" class="confirm" disabled onclick="sendWhatsApp()">Confirm</button><br>
+<input id="qty" placeholder="Quantity" style="display:none">
+
+<button id="confirm" class="confirm" disabled onclick="sendWA()">Confirm</button><br>
 <button class="back" onclick="openSec('main')">Cancel</button>
 </div>
 
@@ -187,59 +189,60 @@ button{
 function openSec(id){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  if(id==="main") openSec("home"), setTimeout(()=>openSec("main"),10);
+  if(id==="main") document.getElementById("home").classList.remove("active");
 }
 
 function setLang(l){
-  document.getElementById("title").innerText =
-    l==="ml" ? "H4 ടൈൽ അഡ്‌ഹീസീവ് & വാട്ടർപ്രൂഫ്" :
-    "H4 Tile Adhesive & Waterproof";
+  title.innerText = l==="ml"
+  ? "H4 ടൈൽ അഡ്‌ഹീസീവ് & വാട്ടർപ്രൂഫ്"
+  : "H4 Tile Adhesive & Waterproof";
 }
 
-function loadUsage(){
-  const p=product.value;
-  const u=usage;
-  const o=otherBox;
-  u.innerHTML=""; o.style.display="none";
+function productChanged(){
+  usage.style.display="block";
+  qtyType.style.display="block";
+  usage.innerHTML="";
+  otherUsage.style.display="none";
 
   let list=[];
-  if(p==="Tile Adhesive") list=["Marble & Granite","Marbonit","Other"];
-  if(p==="Waterproof") list=["Bathroom","House","Building","Store","Hotel","Other"];
-  if(p==="H4 ShieldX") list=["Bathroom","Hall","Room","Building","Store","Hotel","Other"];
+  if(product.value==="Tile Adhesive") list=["Marble & Granite","Marbonit","Other"];
+  if(product.value==="Waterproof") list=["Bathroom","House","Building","Hotel","Other"];
+  if(product.value==="H4 ShieldX") list=["Bathroom","Hall","Room","Building","Hotel","Other"];
 
   list.forEach(v=>{
-    let op=document.createElement("option");
-    op.text=v; u.add(op);
+    let o=document.createElement("option");
+    o.text=v; usage.add(o);
   });
 
-  u.onchange=()=>{ if(u.value==="Other") o.style.display="block"; }
+  usage.onchange=()=>{ if(usage.value==="Other") otherUsage.style.display="block"; };
 }
 
-["name","mobile","address","pincode","qty"].forEach(id=>{
-  document.getElementById(id).addEventListener("input",validate);
-});
+function showQty(){ qty.style.display="block"; }
+
+document.querySelectorAll("input,select").forEach(e=>e.oninput=validate);
 
 function validate(){
   let ok=true;
-  ["name","mobile","address","pincode"].forEach(id=>{
+  ["name","mobile","address","city","district","state"].forEach(id=>{
     let f=document.getElementById(id);
-    if(!f.value){f.classList.add("error"); ok=false;}
+    if(!f.value){f.classList.add("error");ok=false;}
     else f.classList.remove("error");
   });
   confirm.disabled=!ok;
 }
 
-function sendWhatsApp(){
+function sendWA(){
   let msg=`Dealer Enquiry%0A
 Name: ${name.value}%0A
 Mobile: ${mobile.value}%0A
-Address: ${address.value}%0A
-Pincode: ${pincode.value}%0A
+City: ${city.value}%0A
+District: ${district.value}%0A
+State: ${state.value}%0A
 Product: ${product.value}%0A
 Usage: ${usage.value}%0A
-Quantity: ${qty.value} ${qtyType.value}`;
+Qty: ${qty.value} ${qtyType.value}`;
 
-  window.open(`https://wa.me/919745838282?text=${msg}`);
+  window.open("https://wa.me/919745838282?text="+msg);
   alert("✨ Thank you! Our H4 team will contact you shortly.");
 }
 </script>
