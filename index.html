@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,211 +6,201 @@
 <title>H4 Tile Adhesive & Waterproof</title>
 
 <style>
-*{box-sizing:border-box}
 body{
   margin:0;
   background:#000;
   color:#fff;
   font-family:Arial,Helvetica,sans-serif;
 }
+:root{--a:#00ffff}
 
-:root{
-  --accent:#00ffff;
-}
+.section{display:none;padding:20px;text-align:center}
+.section.active{display:block}
 
 .topbar{
-  display:flex;
-  justify-content:space-between;
+  display:flex;justify-content:space-between;
   padding:12px;
 }
 .lang button{
-  width:60px;
-  padding:8px;
-  margin-bottom:6px;
-  border:2px solid var(--accent);
+  width:60px;padding:8px;
+  border:2px solid var(--a);
   background:transparent;
-  color:var(--accent);
+  color:var(--a);
   font-weight:bold;
 }
-.menu div{
-  font-size:18px;
-  cursor:pointer;
-  margin:6px 0;
-}
-
-.section{
-  display:none;
-  padding:20px;
-  text-align:center;
-}
-.section.active{display:block}
+.menu div{cursor:pointer;font-size:18px;margin:6px 0}
 
 h1{font-size:32px}
-h2{margin-top:0}
-
-input,select{
-  width:90%;
-  padding:14px;
-  margin:8px 0;
-  font-size:18px;
-  border-radius:6px;
-  border:2px solid #ccc;
-}
 
 .folders{
-  display:flex;
-  justify-content:center;
-  gap:14px;
-  margin-top:20px;
+  display:flex;justify-content:center;
+  gap:12px;margin-top:20px;
 }
 .folder{
-  width:110px;
-  padding:16px;
-  border:2px solid var(--accent);
-  border-radius:8px;
-  cursor:pointer;
+  width:110px;padding:16px;
+  border:2px solid var(--a);
+  border-radius:8px;cursor:pointer;
 }
-.folder:hover{
-  background:rgba(0,255,255,0.15);
+
+input,select{
+  width:90%;padding:14px;
+  margin:8px 0;font-size:18px;
+  border-radius:6px;border:2px solid #ccc;
 }
+input.error,select.error{border-color:red}
 
 button{
-  padding:14px 30px;
-  font-size:18px;
-  border:none;
-  border-radius:30px;
+  padding:14px 30px;font-size:18px;
+  border:none;border-radius:30px;
   cursor:pointer;
 }
-.back{
-  background:#d50000;
-  color:#fff;
-  margin-top:20px;
-}
-.confirm{
-  background:#00c853;
-  color:#fff;
-}
-
-.contactColor{
-  color:var(--accent);
-  font-size:20px;
-  line-height:1.7;
-}
+.confirm{background:#00c853;color:#fff}
+.back{background:#d50000;color:#fff;margin-top:15px}
+.confirm:disabled{background:#555}
 </style>
 </head>
 
 <body>
 
-<!-- TOP BAR -->
+<!-- TOP -->
 <div class="topbar">
   <div class="lang">
     <button onclick="setLang('en')">EN</button><br>
     <button onclick="setLang('ml')">ML</button>
   </div>
   <div class="menu">
-    <div onclick="openSection('home')">Home</div>
-    <div onclick="openSection('dealer')">Dealer Enquiry</div>
-    <div onclick="openSection('contact')">Contact</div>
+    <div onclick="openSec('home')">Home</div>
+    <div onclick="openSec('dealer')">Dealer Enquiry</div>
+    <div onclick="openSec('contact')">Contact</div>
   </div>
 </div>
 
 <!-- HOME -->
 <div id="home" class="section active">
   <h1 id="title">H4 Tile Adhesive & Waterproof</h1>
-
-  <img src="avlogo.png" width="60"><br><br>
-
-  <div class="contactColor" id="homeText">
-    AV Chem Chemical & Manufacturing<br>
-    Mukkilapeedika<br>
-    Kannam Kulam<br>
-    PO BP Angadi<br>
-    Pin Code 676102<br>
-    Tirur<br>
-    Malappuram<br>
-    Kerala<br>
-    India
-  </div>
+  <p id="tagline" style="color:var(--a);font-size:20px">
+    Molecular Bonding. Peaceful Dwelling.
+  </p>
 
   <div class="folders">
-    <div class="folder" onclick="openSection('tile')">Tile Adhesive</div>
-    <div class="folder" onclick="openSection('water')">Waterproof</div>
-    <div class="folder" onclick="openSection('shield')">H4 ShieldX</div>
+    <div class="folder" onclick="openSec('tile')">Tile Adhesive</div>
+    <div class="folder" onclick="openSec('water')">Waterproof</div>
+    <div class="folder" onclick="openSec('shield')">H4 ShieldX</div>
   </div>
 </div>
 
-<!-- TILE -->
+<!-- PRODUCT INFO -->
 <div id="tile" class="section">
   <h2>Tile Adhesive</h2>
-  <p>Marble • Granite • Wall • Floor</p>
-  <button class="back" onclick="openSection('home')">Back</button>
+  <p>High Strength Tile Bonding</p>
+  <button class="back" onclick="openSec('home')">Back</button>
 </div>
 
-<!-- WATER -->
 <div id="water" class="section">
   <h2>Waterproof</h2>
-  <p>Bathroom • Roof • Building</p>
-  <button class="back" onclick="openSection('home')">Back</button>
+  <p>Long Lasting Protection</p>
+  <button class="back" onclick="openSec('home')">Back</button>
 </div>
 
-<!-- SHIELD -->
 <div id="shield" class="section">
   <h2>H4 ShieldX</h2>
-  <p>Advanced Protection Technology</p>
-  <button class="back" onclick="openSection('home')">Back</button>
+  <p>Advanced Shield Technology</p>
+  <button class="back" onclick="openSec('home')">Back</button>
 </div>
 
 <!-- DEALER -->
 <div id="dealer" class="section">
 <h2>Dealer Enquiry</h2>
 
-<input placeholder="Customer Name">
-<input placeholder="City">
-<input placeholder="Mobile Number">
-<input placeholder="WhatsApp Number">
-<input placeholder="District">
-<input placeholder="State">
-<input placeholder="Pincode">
+<input id="name" placeholder="Customer Name">
+<input id="city" placeholder="City">
+<input id="mobile" placeholder="Mobile Number">
+<input id="address" placeholder="Address">
+<input id="pincode" placeholder="Pincode">
 
-<select>
+<select id="product" onchange="loadOptions()">
+  <option value="">Select Product</option>
   <option>Tile Adhesive</option>
   <option>Waterproof</option>
   <option>H4 ShieldX</option>
 </select>
 
-<input placeholder="Quantity (Kg / Bag)">
+<select id="usage"></select>
+<input id="otherBox" placeholder="Enter Other Details" style="display:none">
 
-<br>
-<button class="confirm">Confirm</button>
-<br>
-<button class="back" onclick="openSection('home')">Back</button>
+<button id="confirm" class="confirm" disabled onclick="sendWhatsApp()">Confirm</button><br>
+<button class="back" onclick="openSec('home')">Cancel</button>
 </div>
 
 <!-- CONTACT -->
 <div id="contact" class="section">
 <h2>Contact</h2>
-
-<p class="contactColor">
-📞 <a href="tel:+917907344030" style="color:var(--accent)">+91 79073 44030</a><br><br>
-💬 <a href="https://wa.me/919745838382" style="color:var(--accent)">WhatsApp</a><br><br>
-✉️ <a href="mailto:avchemtirur@gmail.com" style="color:var(--accent)">avchemtirur@gmail.com</a>
+<p style="color:var(--a);font-size:20px">
+📞 <a href="tel:+917907344030" style="color:var(--a)">+91 79073 44030</a><br><br>
+💬 <a href="https://wa.me/919745838382" style="color:var(--a)">WhatsApp</a><br><br>
+✉️ <a href="mailto:avchemtirur@gmail.com" style="color:var(--a)">avchemtirur@gmail.com</a>
 </p>
-
-<button class="back" onclick="openSection('home')">Back</button>
+<button class="back" onclick="openSec('home')">Back</button>
 </div>
 
 <script>
-function openSection(id){
+function openSec(id){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
 
 function setLang(l){
-  if(l==="ml"){
-    document.getElementById("title").innerText="H4 ടൈൽ അഡ്‌ഹീസീവ് & വാട്ടർപ്രൂഫ്";
-  }else{
-    document.getElementById("title").innerText="H4 Tile Adhesive & Waterproof";
-  }
+  document.getElementById("title").innerText =
+    l==="ml" ? "H4 ടൈൽ അഡ്‌ഹീസീവ് & വാട്ടർപ്രൂഫ്" :
+    "H4 Tile Adhesive & Waterproof";
+}
+
+function loadOptions(){
+  const p=document.getElementById("product").value;
+  const u=document.getElementById("usage");
+  const o=document.getElementById("otherBox");
+  u.innerHTML=""; o.style.display="none";
+
+  let arr=[];
+  if(p==="Tile Adhesive") arr=["Marble & Granite","Marbonit","Wall","Floor","Building","House","Other"];
+  if(p==="Waterproof") arr=["Bathroom","House","Building","Store","Hotel","Other"];
+  if(p==="H4 ShieldX") arr=["Bathroom","Hall","Room","Building","Store","Hotel","Other"];
+
+  arr.forEach(v=>{
+    let opt=document.createElement("option");
+    opt.text=v; u.add(opt);
+  });
+
+  u.onchange=()=>{ if(u.value==="Other") o.style.display="block"; }
+}
+
+["name","mobile","address","pincode"].forEach(id=>{
+  document.getElementById(id).addEventListener("input",validate);
+});
+
+function validate(){
+  let ok=true;
+  ["name","mobile","address","pincode"].forEach(id=>{
+    let f=document.getElementById(id);
+    if(!f.value){f.classList.add("error"); ok=false;}
+    else f.classList.remove("error");
+  });
+  document.getElementById("confirm").disabled=!ok;
+}
+
+function sendWhatsApp(){
+  let msg=`Dealer Enquiry%0A
+Name: ${name.value}%0A
+City: ${city.value}%0A
+Mobile: ${mobile.value}%0A
+Address: ${address.value}%0A
+Pincode: ${pincode.value}%0A
+Product: ${product.value}%0A
+Usage: ${usage.value}%0A
+Other: ${otherBox.value}`;
+
+  window.open(`https://wa.me/919745838282?text=${msg}`);
+  alert("Thank you! Our team will contact you shortly.");
 }
 </script>
 
