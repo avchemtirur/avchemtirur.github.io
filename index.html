@@ -7,10 +7,18 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#000;color:#fff;font-family:Arial,Helvetica,sans-serif}
+body{
+  background:#000;
+  color:#fff;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
 
 /* TOP BAR */
-.topbar{display:flex;justify-content:space-between;padding:12px}
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  padding:12px;
+}
 .lang button{
   width:60px;height:35px;
   border:2px solid #00ffff;
@@ -19,56 +27,65 @@ body{background:#000;color:#fff;font-family:Arial,Helvetica,sans-serif}
   margin-bottom:6px;
   font-weight:bold;
 }
-.menu div{font-size:18px;margin:6px 0;cursor:pointer}
+.menu div{
+  font-size:18px;
+  margin:6px 0;
+  cursor:pointer;
+}
 
 /* TITLE */
 .center{text-align:center;margin:20px}
-.center h1{font-size:32px;font-weight:800}
+.center h1{
+  font-size:34px;
+  font-weight:900;
+  letter-spacing:1px;
+}
 
 /* SECTIONS */
 .section{display:none;padding:20px;text-align:center}
 .section.active{display:block}
 
-/* MAIN SCREEN */
-.company{font-size:18px;margin-top:10px}
-.address p{line-height:1.6;font-size:16px}
+/* HOME DETAILS COLOR (CONTACT COLOR STYLE) */
+.homeDetails{
+  color:#00ffff; /* CONTACT COLOR */
+  font-size:20px;
+  line-height:1.8;
+}
+.homeDetails img{width:120px;margin-bottom:15px}
+
+/* MAIN SCREEN TEXT */
+.techText{
+  margin-top:30px;
+  font-size:22px;
+  font-weight:700;
+  letter-spacing:1px;
+  color:#00ffff;
+}
+.techSub{
+  font-size:18px;
+  margin-top:6px;
+  color:#00ffff;
+}
 
 /* FOLDERS */
-.folders{display:flex;justify-content:center;gap:14px;margin-top:25px}
+.folders{
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  margin-top:30px;
+}
 .folder{
-  width:120px;padding:18px;
+  width:120px;
+  padding:18px;
   border:2px solid #00ffff;
   border-radius:6px;
   cursor:pointer;
   transition:.3s;
 }
-.folder:hover{transform:scale(1.1);background:rgba(0,255,255,.15)}
-
-/* HOME DETAILS (SECOND IMAGE MODEL) */
-.homeDetails{
-  color:#00ff7f;
-  font-size:20px;
-  line-height:1.8;
+.folder:hover{
+  transform:scale(1.1);
+  background:rgba(0,255,255,.15);
 }
-.homeDetails img{width:130px;margin-bottom:15px}
-
-/* BUTTONS */
-button{
-  padding:12px 26px;
-  border:none;
-  border-radius:25px;
-  font-size:16px;
-  cursor:pointer;
-}
-.backGreen{
-  background:#00c853;
-  color:#fff;
-  margin-top:20px;
-}
-
-/* CONTACT */
-.contactBox p{font-size:20px;margin:14px 0}
-a{color:#00ffff;text-decoration:none}
 
 /* PRODUCT */
 .product img{
@@ -82,13 +99,27 @@ a{color:#00ffff;text-decoration:none}
   100%{transform:translateY(0)}
 }
 
-/* FORM */
-input,select{
-  width:90%;padding:12px;
-  margin:8px 0;border-radius:8px;border:none;font-size:16px
+/* BUTTONS */
+button{
+  padding:12px 26px;
+  border:none;
+  border-radius:25px;
+  font-size:16px;
+  cursor:pointer;
 }
-.confirm{background:#00c853;color:#fff}
-.cancel{background:#d50000;color:#fff;margin-top:10px}
+.backRed{
+  background:#d50000;
+  color:#fff;
+  margin-top:25px;
+}
+
+/* CONTACT */
+.contactBox p{
+  font-size:20px;
+  margin:14px 0;
+  color:#00ffff;
+}
+a{color:#00ffff;text-decoration:none}
 </style>
 </head>
 
@@ -114,17 +145,9 @@ input,select{
 
 <!-- MAIN SCREEN -->
 <div id="main" class="section active">
-  <div class="company">AV Chem Chemical & Manufacturing</div>
-  <div class="address">
-    <p>Mukkilapeedika</p>
-    <p>Kannam Kulam</p>
-    <p>PO BP Angadi</p>
-    <p>Pin Code 676102</p>
-    <p>Tirur</p>
-    <p>Malappuram</p>
-    <p>Kerala</p>
-    <p>India</p>
-  </div>
+
+  <div class="techText">H4Hydro-Shield Tech</div>
+  <div class="techSub">Rest-Guarantee</div>
 
   <div class="folders">
     <div class="folder" onclick="openSection('tile')">Tile Adhesive</div>
@@ -133,7 +156,7 @@ input,select{
   </div>
 </div>
 
-<!-- HOME DETAILS (SECOND IMAGE MODEL) -->
+<!-- HOME DETAILS -->
 <div id="home" class="section">
   <div class="homeDetails">
     <img src="avlogo.png"><br>
@@ -147,7 +170,7 @@ input,select{
     Kerala<br>
     India
   </div>
-  <button class="backGreen" onclick="openSection('main')">Back</button>
+  <button class="backRed" onclick="openSection('main')">Back</button>
 </div>
 
 <!-- TILE -->
@@ -155,21 +178,21 @@ input,select{
   <h2>H4 Tile Adhesive</h2>
   <img src="bag-yellow.png">
   <img src="bag-purple.png"><br>
-  <button class="cancel" onclick="openSection('main')">Back</button>
+  <button class="backRed" onclick="openSection('main')">Back</button>
 </div>
 
 <!-- WATER -->
 <div id="water" class="section product">
   <h2>H4 Waterproof</h2>
   <img src="bag-purple.png"><br>
-  <button class="cancel" onclick="openSection('main')">Back</button>
+  <button class="backRed" onclick="openSection('main')">Back</button>
 </div>
 
 <!-- SHIELD -->
 <div id="shield" class="section">
   <h2>H4 ShieldX</h2>
   <p>Advanced Protection Technology</p>
-  <button class="cancel" onclick="openSection('main')">Back</button>
+  <button class="backRed" onclick="openSection('main')">Back</button>
 </div>
 
 <!-- DEALER -->
@@ -188,8 +211,7 @@ input,select{
   </select>
   <input type="number" placeholder="Quantity (Kg / Bag)">
   <br>
-  <button class="confirm">Confirm</button>
-  <button class="cancel" onclick="openSection('main')">Cancel</button>
+  <button class="backRed" onclick="openSection('main')">Back</button>
 </div>
 
 <!-- CONTACT -->
@@ -199,7 +221,7 @@ input,select{
     <p><a href="https://wa.me/919745838382">💬 WhatsApp</a></p>
     <p><a href="mailto:avchemtirur@gmail.com">✉ avchemtirur@gmail.com</a></p>
   </div>
-  <button class="cancel" onclick="openSection('main')">Back</button>
+  <button class="backRed" onclick="openSection('main')">Back</button>
 </div>
 
 <script>
