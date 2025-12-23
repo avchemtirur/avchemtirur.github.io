@@ -6,80 +6,69 @@
 <title>H4 Tile Adhesive & Waterproof</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{
-  background:#000;
-  color:#fff;
-  font-family:Arial,Helvetica,sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#000;color:#fff;font-family:Arial,Helvetica,sans-serif}
 
 /* TOP BAR */
-.topbar{
-  display:flex;
-  justify-content:space-between;
-  padding:12px;
-}
+.topbar{display:flex;justify-content:space-between;padding:12px}
 .lang button{
-  width:60px;
-  height:35px;
+  width:60px;height:35px;
   border:2px solid #00ffff;
   background:transparent;
   color:#00ffff;
   margin-bottom:6px;
-  cursor:pointer;
   font-weight:bold;
 }
-.menu div{
-  font-size:18px;
-  margin:6px 0;
-  cursor:pointer;
-}
+.menu div{font-size:18px;margin:6px 0;cursor:pointer}
 
 /* TITLE */
-.center{text-align:center;margin:20px;}
-.center h1{
-  font-size:32px;
-  letter-spacing:1px;
-  font-weight:800;
-}
+.center{text-align:center;margin:20px}
+.center h1{font-size:32px;font-weight:800}
 
 /* SECTIONS */
-.section{display:none;padding:20px;text-align:center;}
+.section{display:none;padding:20px;text-align:center}
 .section.active{display:block}
 
-/* HOME */
-#home img{width:120px;margin:10px}
-
-/* SIMPLE FONT FOR COMPANY */
-.company{
-  font-size:18px;
-  font-weight:normal;
-  margin-top:10px;
-}
-.address p{
-  line-height:1.6;
-  font-size:16px;
-}
+/* MAIN SCREEN */
+.company{font-size:18px;margin-top:10px}
+.address p{line-height:1.6;font-size:16px}
 
 /* FOLDERS */
-.folders{
-  display:flex;
-  justify-content:center;
-  gap:14px;
-  margin-top:25px;
-}
+.folders{display:flex;justify-content:center;gap:14px;margin-top:25px}
 .folder{
-  width:120px;
-  padding:18px 10px;
+  width:120px;padding:18px;
   border:2px solid #00ffff;
   border-radius:6px;
   cursor:pointer;
   transition:.3s;
 }
-.folder:hover{
-  transform:scale(1.1);
-  background:rgba(0,255,255,.15);
+.folder:hover{transform:scale(1.1);background:rgba(0,255,255,.15)}
+
+/* HOME DETAILS (SECOND IMAGE MODEL) */
+.homeDetails{
+  color:#00ff7f;
+  font-size:20px;
+  line-height:1.8;
 }
+.homeDetails img{width:130px;margin-bottom:15px}
+
+/* BUTTONS */
+button{
+  padding:12px 26px;
+  border:none;
+  border-radius:25px;
+  font-size:16px;
+  cursor:pointer;
+}
+.backGreen{
+  background:#00c853;
+  color:#fff;
+  margin-top:20px;
+}
+
+/* CONTACT */
+.contactBox p{font-size:20px;margin:14px 0}
+a{color:#00ffff;text-decoration:none}
 
 /* PRODUCT */
 .product img{
@@ -95,30 +84,11 @@ body{
 
 /* FORM */
 input,select{
-  width:90%;
-  padding:12px;
-  margin:8px 0;
-  border-radius:8px;
-  border:none;
-  font-size:16px;
-}
-button{
-  padding:12px 26px;
-  margin:10px;
-  border:none;
-  border-radius:25px;
-  font-size:16px;
-  cursor:pointer;
+  width:90%;padding:12px;
+  margin:8px 0;border-radius:8px;border:none;font-size:16px
 }
 .confirm{background:#00c853;color:#fff}
-.cancel{background:#d50000;color:#fff}
-
-/* CONTACT */
-.contactBox p{
-  font-size:20px;
-  margin:14px 0;
-}
-a{color:#00ffff;text-decoration:none}
+.cancel{background:#d50000;color:#fff;margin-top:10px}
 </style>
 </head>
 
@@ -127,8 +97,8 @@ a{color:#00ffff;text-decoration:none}
 <!-- TOP BAR -->
 <div class="topbar">
   <div class="lang">
-    <button onclick="setLang('en')">EN</button><br>
-    <button onclick="setLang('ml')">ML</button>
+    <button>EN</button><br>
+    <button>ML</button>
   </div>
   <div class="menu">
     <div onclick="openSection('home')">Home</div>
@@ -139,17 +109,12 @@ a{color:#00ffff;text-decoration:none}
 
 <!-- TITLE -->
 <div class="center">
-  <h1 id="title">H4 Tile Adhesive & Waterproof</h1>
+  <h1>H4 Tile Adhesive & Waterproof</h1>
 </div>
 
-<!-- HOME -->
-<div id="home" class="section active">
-  <img src="avlogo.png">
-
-  <div class="company">
-    AV Chem Chemical & Manufacturing
-  </div>
-
+<!-- MAIN SCREEN -->
+<div id="main" class="section active">
+  <div class="company">AV Chem Chemical & Manufacturing</div>
   <div class="address">
     <p>Mukkilapeedika</p>
     <p>Kannam Kulam</p>
@@ -162,10 +127,27 @@ a{color:#00ffff;text-decoration:none}
   </div>
 
   <div class="folders">
-    <div class="folder" onclick="openProduct('tile')">Tile Adhesive</div>
-    <div class="folder" onclick="openProduct('water')">Waterproof</div>
-    <div class="folder" onclick="openProduct('shield')">H4 ShieldX</div>
+    <div class="folder" onclick="openSection('tile')">Tile Adhesive</div>
+    <div class="folder" onclick="openSection('water')">Waterproof</div>
+    <div class="folder" onclick="openSection('shield')">H4 ShieldX</div>
   </div>
+</div>
+
+<!-- HOME DETAILS (SECOND IMAGE MODEL) -->
+<div id="home" class="section">
+  <div class="homeDetails">
+    <img src="avlogo.png"><br>
+    AV Chem Chemical & Manufacturing<br>
+    Mukkilapeedika<br>
+    Kannam Kulam<br>
+    PO BP Angadi<br>
+    Pin Code 676102<br>
+    Tirur<br>
+    Malappuram<br>
+    Kerala<br>
+    India
+  </div>
+  <button class="backGreen" onclick="openSection('main')">Back</button>
 </div>
 
 <!-- TILE -->
@@ -173,45 +155,41 @@ a{color:#00ffff;text-decoration:none}
   <h2>H4 Tile Adhesive</h2>
   <img src="bag-yellow.png">
   <img src="bag-purple.png"><br>
-  <button class="cancel" onclick="openSection('home')">Back</button>
+  <button class="cancel" onclick="openSection('main')">Back</button>
 </div>
 
 <!-- WATER -->
 <div id="water" class="section product">
   <h2>H4 Waterproof</h2>
   <img src="bag-purple.png"><br>
-  <button class="cancel" onclick="openSection('home')">Back</button>
+  <button class="cancel" onclick="openSection('main')">Back</button>
 </div>
 
 <!-- SHIELD -->
-<div id="shield" class="section product">
+<div id="shield" class="section">
   <h2>H4 ShieldX</h2>
   <p>Advanced Protection Technology</p>
-  <button class="cancel" onclick="openSection('home')">Back</button>
+  <button class="cancel" onclick="openSection('main')">Back</button>
 </div>
 
 <!-- DEALER -->
 <div id="dealer" class="section">
   <h2>Dealer Enquiry</h2>
-
-  <input id="cname" placeholder="Customer Name">
-  <input id="city" placeholder="City">
-  <input id="mobile" placeholder="Mobile Number">
-  <input id="whatsapp" placeholder="WhatsApp Number">
-  <input id="district" placeholder="District">
-  <input id="state" placeholder="State">
-
-  <select id="product">
+  <input placeholder="Customer Name">
+  <input placeholder="City">
+  <input placeholder="Mobile Number">
+  <input placeholder="WhatsApp Number">
+  <input placeholder="District">
+  <input placeholder="State">
+  <select>
     <option>Tile Adhesive</option>
     <option>Waterproof</option>
     <option>H4 ShieldX</option>
   </select>
-
-  <input id="qty" type="number" min="1" max="1000000" placeholder="Quantity (Kg / Bag)">
-
+  <input type="number" placeholder="Quantity (Kg / Bag)">
   <br>
-  <button class="confirm" onclick="sendWA()">Confirm</button>
-  <button class="cancel" onclick="openSection('home')">Cancel</button>
+  <button class="confirm">Confirm</button>
+  <button class="cancel" onclick="openSection('main')">Cancel</button>
 </div>
 
 <!-- CONTACT -->
@@ -221,43 +199,13 @@ a{color:#00ffff;text-decoration:none}
     <p><a href="https://wa.me/919745838382">💬 WhatsApp</a></p>
     <p><a href="mailto:avchemtirur@gmail.com">✉ avchemtirur@gmail.com</a></p>
   </div>
-  <button class="cancel" onclick="openSection('home')">Back</button>
+  <button class="cancel" onclick="openSection('main')">Back</button>
 </div>
 
-<!-- JAVASCRIPT -->
 <script>
 function openSection(id){
-  document.querySelectorAll('.section').forEach(s=>{
-    s.classList.remove('active');
-  });
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-}
-
-function openProduct(id){
-  openSection(id);
-}
-
-function sendWA(){
-  let msg =
-  "Dealer Enquiry%0A%0A" +
-  "Name: " + document.getElementById('cname').value + "%0A" +
-  "City: " + document.getElementById('city').value + "%0A" +
-  "Mobile: " + document.getElementById('mobile').value + "%0A" +
-  "WhatsApp: " + document.getElementById('whatsapp').value + "%0A" +
-  "District: " + document.getElementById('district').value + "%0A" +
-  "State: " + document.getElementById('state').value + "%0A" +
-  "Product: " + document.getElementById('product').value + "%0A" +
-  "Quantity: " + document.getElementById('qty').value;
-
-  window.open("https://wa.me/919745838382?text=" + msg, "_blank");
-}
-
-function setLang(lang){
-  if(lang==='ml'){
-    document.getElementById('title').innerText="H4 ടൈൽ അഡ്ഹീസീവ് & വാട്ടർപ്രൂഫ്";
-  }else{
-    document.getElementById('title').innerText="H4 Tile Adhesive & Waterproof";
-  }
 }
 </script>
 
