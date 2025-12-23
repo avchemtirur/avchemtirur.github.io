@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,6 +15,10 @@ body{
   font-family:Arial,Helvetica,sans-serif;
 }
 
+:root{
+  --accent:#00ffff;
+}
+
 .topbar{
   display:flex;
   justify-content:space-between;
@@ -23,9 +28,9 @@ body{
   width:60px;
   padding:8px;
   margin-bottom:6px;
-  border:2px solid #00ffff;
+  border:2px solid var(--accent);
   background:transparent;
-  color:#00ffff;
+  color:var(--accent);
   font-weight:bold;
 }
 .menu div{
@@ -52,11 +57,6 @@ input,select{
   border-radius:6px;
   border:2px solid #ccc;
 }
-input:focus,select:focus{
-  outline:none;
-  border-color:#00ffff;
-}
-.error{border-color:red!important}
 
 .folders{
   display:flex;
@@ -67,14 +67,12 @@ input:focus,select:focus{
 .folder{
   width:110px;
   padding:16px;
-  border:2px solid #00ffff;
+  border:2px solid var(--accent);
   border-radius:8px;
   cursor:pointer;
-  transition:0.3s;
 }
 .folder:hover{
   background:rgba(0,255,255,0.15);
-  transform:scale(1.05);
 }
 
 button{
@@ -84,15 +82,20 @@ button{
   border-radius:30px;
   cursor:pointer;
 }
-.confirm{
-  background:#00c853;
-  color:#fff;
-  display:none;
-}
 .back{
   background:#d50000;
   color:#fff;
   margin-top:20px;
+}
+.confirm{
+  background:#00c853;
+  color:#fff;
+}
+
+.contactColor{
+  color:var(--accent);
+  font-size:20px;
+  line-height:1.7;
 }
 </style>
 </head>
@@ -102,8 +105,8 @@ button{
 <!-- TOP BAR -->
 <div class="topbar">
   <div class="lang">
-    <button>EN</button><br>
-    <button>ML</button>
+    <button onclick="setLang('en')">EN</button><br>
+    <button onclick="setLang('ml')">ML</button>
   </div>
   <div class="menu">
     <div onclick="openSection('home')">Home</div>
@@ -114,11 +117,11 @@ button{
 
 <!-- HOME -->
 <div id="home" class="section active">
-  <h1>H4 Tile Adhesive & Waterproof</h1>
+  <h1 id="title">H4 Tile Adhesive & Waterproof</h1>
 
   <img src="avlogo.png" width="60"><br><br>
 
-  <p style="color:#00ff88;line-height:1.7">
+  <div class="contactColor" id="homeText">
     AV Chem Chemical & Manufacturing<br>
     Mukkilapeedika<br>
     Kannam Kulam<br>
@@ -128,41 +131,58 @@ button{
     Malappuram<br>
     Kerala<br>
     India
-  </p>
+  </div>
 
   <div class="folders">
-    <div class="folder" onclick="openProduct('tile')">Tile Adhesive</div>
-    <div class="folder" onclick="openProduct('water')">Waterproof</div>
-    <div class="folder" onclick="openProduct('shield')">H4 ShieldX</div>
+    <div class="folder" onclick="openSection('tile')">Tile Adhesive</div>
+    <div class="folder" onclick="openSection('water')">Waterproof</div>
+    <div class="folder" onclick="openSection('shield')">H4 ShieldX</div>
   </div>
+</div>
+
+<!-- TILE -->
+<div id="tile" class="section">
+  <h2>Tile Adhesive</h2>
+  <p>Marble • Granite • Wall • Floor</p>
+  <button class="back" onclick="openSection('home')">Back</button>
+</div>
+
+<!-- WATER -->
+<div id="water" class="section">
+  <h2>Waterproof</h2>
+  <p>Bathroom • Roof • Building</p>
+  <button class="back" onclick="openSection('home')">Back</button>
+</div>
+
+<!-- SHIELD -->
+<div id="shield" class="section">
+  <h2>H4 ShieldX</h2>
+  <p>Advanced Protection Technology</p>
+  <button class="back" onclick="openSection('home')">Back</button>
 </div>
 
 <!-- DEALER -->
 <div id="dealer" class="section">
 <h2>Dealer Enquiry</h2>
 
-<input id="name" placeholder="Customer Name" oninput="next(this,'city')">
-<input id="city" placeholder="City" oninput="next(this,'mobile')">
-<input id="mobile" placeholder="Mobile Number" oninput="next(this,'whatsapp')">
-<input id="whatsapp" placeholder="WhatsApp Number" oninput="next(this,'district')">
-<input id="district" placeholder="District" oninput="next(this,'state')">
-<input id="state" placeholder="State" oninput="next(this,'pincode')">
-<input id="pincode" placeholder="Pincode" oninput="next(this,'product')">
+<input placeholder="Customer Name">
+<input placeholder="City">
+<input placeholder="Mobile Number">
+<input placeholder="WhatsApp Number">
+<input placeholder="District">
+<input placeholder="State">
+<input placeholder="Pincode">
 
-<select id="product" onchange="productChange()">
-  <option value="">Select Product</option>
+<select>
   <option>Tile Adhesive</option>
   <option>Waterproof</option>
   <option>H4 ShieldX</option>
 </select>
 
-<select id="usage" style="display:none" onchange="usageChange()"></select>
-<input id="otherUsage" placeholder="Enter Other Usage" style="display:none">
-
-<input id="quantity" placeholder="Quantity (Kg / Bag)" oninput="validate()">
+<input placeholder="Quantity (Kg / Bag)">
 
 <br>
-<button class="confirm" id="confirmBtn" onclick="sendWhatsApp()">Confirm</button>
+<button class="confirm">Confirm</button>
 <br>
 <button class="back" onclick="openSection('home')">Back</button>
 </div>
@@ -171,10 +191,10 @@ button{
 <div id="contact" class="section">
 <h2>Contact</h2>
 
-<p style="font-size:22px;color:#00ffff">
-📞 <a href="tel:+917907344030" style="color:#00ffff">+91 79073 44030</a><br><br>
-💬 <a href="https://wa.me/919745838382" style="color:#00ffff">WhatsApp</a><br><br>
-✉️ <a href="mailto:avchemtirur@gmail.com" style="color:#00ffff">avchemtirur@gmail.com</a>
+<p class="contactColor">
+📞 <a href="tel:+917907344030" style="color:var(--accent)">+91 79073 44030</a><br><br>
+💬 <a href="https://wa.me/919745838382" style="color:var(--accent)">WhatsApp</a><br><br>
+✉️ <a href="mailto:avchemtirur@gmail.com" style="color:var(--accent)">avchemtirur@gmail.com</a>
 </p>
 
 <button class="back" onclick="openSection('home')">Back</button>
@@ -186,49 +206,12 @@ function openSection(id){
   document.getElementById(id).classList.add('active');
 }
 
-function openProduct(type){
-  alert(type+" opened");
-}
-
-function next(el,id){
-  document.getElementById(id)?.focus();
-  validate();
-}
-
-function productChange(){
-  let p=product.value;
-  usage.style.display="block";
-  usage.innerHTML="<option value=''>Select Usage</option>";
-  let opts=[];
-  if(p==="Tile Adhesive")opts=["Marble & Granite","Wall","Floor","House","Other"];
-  if(p==="Waterproof")opts=["Bathroom","Building","Hotel","Other"];
-  if(p==="H4 ShieldX")opts=["Room","Hall","Store","Other"];
-  opts.forEach(o=>usage.innerHTML+=`<option>${o}</option>`);
-}
-
-function usageChange(){
-  otherUsage.style.display = usage.value==="Other"?"block":"none";
-}
-
-function validate(){
-  if(mobile.value && quantity.value){
-    confirmBtn.style.display="inline-block";
+function setLang(l){
+  if(l==="ml"){
+    document.getElementById("title").innerText="H4 ടൈൽ അഡ്‌ഹീസീവ് & വാട്ടർപ്രൂഫ്";
   }else{
-    confirmBtn.style.display="none";
+    document.getElementById("title").innerText="H4 Tile Adhesive & Waterproof";
   }
-}
-
-function sendWhatsApp(){
-  alert("Thank you! Enquiry sending…");
-  let msg=
-`H4 Dealer Enquiry
-Name: ${name.value}
-City: ${city.value}
-Mobile: ${mobile.value}
-Product: ${product.value}
-Usage: ${usage.value || otherUsage.value}
-Quantity: ${quantity.value}`;
-  window.open("https://wa.me/919745838382?text="+encodeURIComponent(msg));
 }
 </script>
 
