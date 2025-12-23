@@ -110,7 +110,7 @@ button{
 <!-- HOME -->
 <div id="home" class="section">
   <h2 class="contactColor">AV Chem Chemical & Manufacturing</h2>
-  <p class="contactColor">
+  <p class="contactColor" style="line-height:1.7;font-size:18px">
     Mukkilapeedika<br>
     Kannam Kulam<br>
     PO BP Angadi<br>
@@ -174,8 +174,9 @@ function openSec(id){
 function productChange(){
   usage.style.display="block";
   unit.style.display="block";
-  other.style.display="none";
   usage.innerHTML="";
+  other.style.display="none";
+  qty.style.display="none";
 
   let list=[];
   if(product.value==="Tile Adhesive") list=["Marble / Granite","Marbonit","Other"];
@@ -200,24 +201,30 @@ document.querySelectorAll("input,select").forEach(e=>e.oninput=validate);
 
 function validate(){
   let ok=true;
-  ["name","mobile","address","pincode"].forEach(id=>{
+  ["name","mobile","address","pincode","product","unit","qty"].forEach(id=>{
     let f=document.getElementById(id);
-    if(!f.value){f.classList.add("error");ok=false;}
-    else f.classList.remove("error");
+    if(!f || !f.value){
+      if(f) f.classList.add("error");
+      ok=false;
+    }else f.classList.remove("error");
   });
   confirm.disabled=!ok;
 }
 
 function sendWA(){
-  let msg=`Dealer Enquiry
+  let msg =
+`✨ Dealer Enquiry – H4 ✨
 Name: ${name.value}
 Mobile: ${mobile.value}
+Address: ${address.value}
+Pincode: ${pincode.value}
 Product: ${product.value}
 Usage: ${usage.value}
-Qty: ${qty.value} ${unit.value}`;
+Quantity: ${qty.value} ${unit.value}`;
 
-  window.open("https://wa.me/919745838282?text="+encodeURIComponent(msg));
-  alert("✨ Thank you! Our H4 team will contact you shortly.");
+  window.open("https://wa.me/919745838382?text="+encodeURIComponent(msg));
+  alert("Thank you! Our H4 team will contact you shortly.");
+  openSec('main');
 }
 </script>
 
