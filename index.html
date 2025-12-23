@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,19 +15,11 @@ body{
   font-family:Arial,Helvetica,sans-serif;
 }
 
+/* TOP BAR */
 .topbar{
   display:flex;
-  justify-content:space-between;
+  justify-content:flex-end;
   padding:12px;
-}
-.lang button{
-  width:60px;
-  padding:8px;
-  margin-bottom:6px;
-  border:2px solid #00ffff;
-  background:transparent;
-  color:#00ffff;
-  font-weight:bold;
 }
 .menu div{
   font-size:18px;
@@ -34,6 +27,7 @@ body{
   margin:6px 0;
 }
 
+/* SECTIONS */
 .section{
   display:none;
   padding:20px;
@@ -43,6 +37,7 @@ body{
 
 h1{font-size:32px;margin-top:30px}
 
+/* FOLDERS */
 .folders{
   display:flex;
   justify-content:center;
@@ -62,6 +57,7 @@ h1{font-size:32px;margin-top:30px}
   transform:scale(1.05);
 }
 
+/* FORM */
 input,select{
   width:90%;
   padding:14px;
@@ -69,6 +65,8 @@ input,select{
   font-size:18px;
   border-radius:6px;
 }
+
+/* BUTTONS */
 button{
   padding:14px 30px;
   font-size:18px;
@@ -80,7 +78,6 @@ button{
 .ok{background:#1ecf72;color:#000}
 
 .cyan{color:#00ffff}
-.green{color:#1ecf72}
 </style>
 </head>
 
@@ -88,20 +85,16 @@ button{
 
 <!-- TOP BAR -->
 <div class="topbar">
-  <div class="lang">
-    <button onclick="setLang('en')">EN</button><br>
-    <button onclick="setLang('ml')">ML</button>
-  </div>
   <div class="menu">
-    <div onclick="show('main')">Home</div>
+    <div onclick="show('home')">Home</div>
     <div onclick="show('dealer')">Dealer Enquiry</div>
     <div onclick="show('contact')">Contact</div>
   </div>
 </div>
 
-<!-- MAIN -->
+<!-- MAIN SCREEN -->
 <div id="main" class="section active">
-  <h1 id="title">H4 Tile Adhesive & Waterproof</h1>
+  <h1>H4 Tile Adhesive & Waterproof</h1>
 
   <div class="folders">
     <div class="folder" onclick="openProduct('tile')">Tile Adhesive</div>
@@ -112,8 +105,9 @@ button{
 
 <!-- HOME DETAILS -->
 <div id="home" class="section">
-  <h2 class="cyan">AV Chem Chemical & Manufacturing</h2>
+  <img src="avlogo.png" width="120"><br><br>
   <p class="cyan">
+    <b>AV Chem Chemical & Manufacturing</b><br><br>
     Mukkilapeedika<br>
     Kannam Kulam<br>
     PO BP Angadi<br>
@@ -123,15 +117,23 @@ button{
     Kerala<br>
     India
   </p>
+  <br>
   <button class="back" onclick="show('main')">Back</button>
 </div>
 
-<!-- DEALER -->
+<!-- DEALER ENQUIRY -->
 <div id="dealer" class="section">
   <h2>Dealer Enquiry</h2>
 
   <input placeholder="Customer Name">
-  <input id="mobile" placeholder="Mobile Number" maxlength="10">
+
+  <input id="mobile"
+         placeholder="Mobile Number"
+         type="tel"
+         inputmode="numeric"
+         pattern="[0-9]*"
+         maxlength="10">
+
   <input placeholder="City">
   <input placeholder="District">
   <input placeholder="State">
@@ -143,8 +145,12 @@ button{
     <option>H4 ShieldX</option>
   </select>
 
-  <input id="qty" placeholder="Quantity (Kg / Bag)">
+  <input id="qty"
+         placeholder="Quantity (Kg / Bag)"
+         type="number"
+         inputmode="numeric">
 
+  <br>
   <button class="ok" onclick="sendWA()">Confirm</button>
   <br><br>
   <button class="back" onclick="show('main')">Back</button>
@@ -159,11 +165,13 @@ button{
   </p>
 
   <p class="cyan">
-    💬 <a class="cyan" href="https://wa.me/919745838382" target="_blank">WhatsApp 9745838382</a>
+    💬 <a class="cyan" href="https://wa.me/919745838382" target="_blank">
+    WhatsApp 9745838382</a>
   </p>
 
   <p class="cyan">
-    ✉ <a class="cyan" href="mailto:avchemtirur@gmail.com">avchemtirur@gmail.com</a>
+    ✉ <a class="cyan" href="mailto:avchemtirur@gmail.com">
+    avchemtirur@gmail.com</a>
   </p>
 
   <button class="back" onclick="show('main')">Back</button>
@@ -172,8 +180,7 @@ button{
 <script>
 function show(id){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-  if(id==="Home") document.getElementById('home').classList.add('active');
-  else document.getElementById(id).classList.add('active');
+  document.getElementById(id).classList.add('active');
 }
 
 function openProduct(type){
@@ -196,14 +203,6 @@ function sendWA(){
     "\nQuantity: "+document.getElementById("qty").value
   );
   window.open("https://wa.me/919745838382?text="+msg,"_blank");
-}
-
-function setLang(l){
-  if(l==="ml"){
-    document.getElementById("title").innerText="H4 ടൈൽ അട്ഹീസീവ് & വാട്ടർപ്രൂഫ്";
-  }else{
-    document.getElementById("title").innerText="H4 Tile Adhesive & Waterproof";
-  }
 }
 </script>
 
