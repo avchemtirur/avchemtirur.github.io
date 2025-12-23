@@ -2,138 +2,137 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>H4 Tile Adhesive</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>H4 Tile Adhesive & Waterproof</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial;}
-
+*{box-sizing:border-box}
 body{
-  min-height:100vh;
+  margin:0;
+  background:#000;
   color:#fff;
-  background:
-    radial-gradient(circle at 70% 30%, rgba(0,255,255,.18), transparent 45%),
-    radial-gradient(circle at 30% 70%, rgba(0,180,180,.25), transparent 45%),
-    linear-gradient(135deg,#020b0e,#03161a,#020b0e);
+  font-family:Arial,Helvetica,sans-serif;
 }
 
-/* MENU */
-.menu{
+.topbar{
   display:flex;
-  justify-content:flex-end;
-  gap:20px;
-  padding:18px;
+  justify-content:space-between;
+  padding:12px;
+}
+.lang button{
+  width:60px;
+  padding:8px;
+  margin-bottom:6px;
+  border:2px solid #00ffff;
+  background:transparent;
+  color:#00ffff;
+  font-weight:bold;
+}
+.menu div{
   font-size:18px;
-}
-.menu span{cursor:pointer}
-
-/* SECTION */
-.section{display:none;text-align:center;padding:40px 15px}
-.show{display:block}
-
-h1{font-size:32px;margin-bottom:8px}
-.tag{color:#22e6d3;margin-bottom:25px}
-
-/* HOME BOXES */
-.box-row{
-  display:flex;
-  justify-content:center;
-  gap:18px;
-}
-.box{
-  width:100px;
-  height:100px;
-  border:2px solid #22e6d3;
-  border-radius:14px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
   cursor:pointer;
+  margin:6px 0;
 }
 
-/* FORM */
-input,select{
-  width:100%;
-  max-width:360px;
-  padding:14px;
-  margin:10px auto;
-  border-radius:10px;
-  border:none;
-  font-size:16px;
-  display:block;
-}
-.error{border:2px solid red}
-
-.btn{
-  width:160px;
-  padding:14px;
-  border:none;
-  border-radius:30px;
-  font-size:16px;
-  cursor:pointer;
-  margin:12px;
-}
-.ok{background:#1ecf72;color:#000}
-.cancel{background:#e00000;color:#fff}
-
-/* MODAL */
-.modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.8);
+.section{
   display:none;
-  align-items:center;
-  justify-content:center;
-}
-.modal-box{
-  background:#03161a;
-  padding:30px;
-  border-radius:14px;
+  padding:20px;
   text-align:center;
 }
-.modal.show{display:flex}
+.section.active{display:block}
+
+h1{font-size:32px;margin-top:30px}
+
+.folders{
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  margin-top:30px;
+}
+.folder{
+  width:120px;
+  padding:18px;
+  border:2px solid #00ffff;
+  border-radius:8px;
+  cursor:pointer;
+  transition:.3s;
+}
+.folder:hover{
+  background:rgba(0,255,255,.15);
+  transform:scale(1.05);
+}
+
+input,select{
+  width:90%;
+  padding:14px;
+  margin:8px 0;
+  font-size:18px;
+  border-radius:6px;
+}
+button{
+  padding:14px 30px;
+  font-size:18px;
+  border:none;
+  border-radius:30px;
+  cursor:pointer;
+}
+.back{background:#e00000;color:#fff}
+.ok{background:#1ecf72;color:#000}
+
+.cyan{color:#00ffff}
+.green{color:#1ecf72}
 </style>
 </head>
 
 <body>
 
-<!-- MENU -->
-<div class="menu">
-  <span onclick="show('home')">Home</span>
-  <span onclick="show('dealer')">Dealer Enquiry</span>
-  <span onclick="show('contact')">Contact</span>
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="lang">
+    <button onclick="setLang('en')">EN</button><br>
+    <button onclick="setLang('ml')">ML</button>
+  </div>
+  <div class="menu">
+    <div onclick="show('main')">Home</div>
+    <div onclick="show('dealer')">Dealer Enquiry</div>
+    <div onclick="show('contact')">Contact</div>
+  </div>
 </div>
 
-<!-- HOME -->
-<div id="home" class="section show">
-  <h1>H4 Tile Adhesive & Waterproof</h1>
-  <div class="tag">Molecular Bonding. Peaceful Dwelling...</div>
+<!-- MAIN -->
+<div id="main" class="section active">
+  <h1 id="title">H4 Tile Adhesive & Waterproof</h1>
 
-  <p style="line-height:1.8;margin-bottom:30px">
-    AV Chem Chemical & Manufacturing<br>
-    Mukkilapeedika, Kannam Kulam<br>
-    PO BP Angadi, Pin 676102<br>
-    Tirur, Malappuram<br>
-    Kerala, India
-  </p>
-
-  <div class="box-row">
-    <div class="box" onclick="openModal('Tile Adhesive')">Tile Adhesive</div>
-    <div class="box" onclick="openModal('Waterproof')">Waterproof</div>
-    <div class="box" onclick="openModal('H4 ShieldX')">H4 ShieldX</div>
+  <div class="folders">
+    <div class="folder" onclick="openProduct('tile')">Tile Adhesive</div>
+    <div class="folder" onclick="openProduct('water')">Waterproof</div>
+    <div class="folder" onclick="openProduct('shield')">H4 ShieldX</div>
   </div>
+</div>
+
+<!-- HOME DETAILS -->
+<div id="home" class="section">
+  <h2 class="cyan">AV Chem Chemical & Manufacturing</h2>
+  <p class="cyan">
+    Mukkilapeedika<br>
+    Kannam Kulam<br>
+    PO BP Angadi<br>
+    Pin Code 676102<br>
+    Tirur<br>
+    Malappuram<br>
+    Kerala<br>
+    India
+  </p>
+  <button class="back" onclick="show('main')">Back</button>
 </div>
 
 <!-- DEALER -->
 <div id="dealer" class="section">
-  <h1>Dealer Enquiry</h1>
+  <h2>Dealer Enquiry</h2>
 
   <input placeholder="Customer Name">
-  <input id="mobile" placeholder="Mobile Number" maxlength="10"
-         inputmode="numeric" oninput="checkMobile()">
-
+  <input id="mobile" placeholder="Mobile Number" maxlength="10">
   <input placeholder="City">
-  <input placeholder="Pincode" inputmode="numeric">
   <input placeholder="District">
   <input placeholder="State">
 
@@ -144,72 +143,67 @@ input,select{
     <option>H4 ShieldX</option>
   </select>
 
-  <select id="qtyType" onchange="showQty()">
-    <option value="">Select Quantity Type</option>
-    <option>Kg</option>
-    <option>20kg Bag</option>
-    <option>40kg Bag</option>
-  </select>
+  <input id="qty" placeholder="Quantity (Kg / Bag)">
 
-  <input id="qty" placeholder="Quantity (1 – 10000000)"
-         inputmode="numeric" style="display:none">
-
-  <button class="btn ok" onclick="sendWA()">Confirm</button>
-  <button class="btn cancel" onclick="show('home')">Cancel</button>
+  <button class="ok" onclick="sendWA()">Confirm</button>
+  <br><br>
+  <button class="back" onclick="show('main')">Back</button>
 </div>
 
 <!-- CONTACT -->
 <div id="contact" class="section">
-  <h1>Contact</h1>
-  <p>📞 +91 79073 44030</p>
-  <p>💬 WhatsApp 9745838382</p>
-  <p>✉️ avchemtirur@gmail.com</p>
-</div>
+  <h2>Contact</h2>
 
-<!-- PRODUCT MODAL -->
-<div id="modal" class="modal">
-  <div class="modal-box">
-    <h2 id="modalTitle"></h2><br>
-    <button class="btn ok" onclick="closeModal()">Close</button>
-  </div>
+  <p class="cyan">
+    📞 <a class="cyan" href="tel:+917907344030">+91 79073 44030</a>
+  </p>
+
+  <p class="cyan">
+    💬 <a class="cyan" href="https://wa.me/919745838382" target="_blank">WhatsApp 9745838382</a>
+  </p>
+
+  <p class="cyan">
+    ✉ <a class="cyan" href="mailto:avchemtirur@gmail.com">avchemtirur@gmail.com</a>
+  </p>
+
+  <button class="back" onclick="show('main')">Back</button>
 </div>
 
 <script>
 function show(id){
-  document.querySelectorAll('.section').forEach(s=>s.classList.remove('show'));
-  document.getElementById(id).classList.add('show');
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  if(id==="Home") document.getElementById('home').classList.add('active');
+  else document.getElementById(id).classList.add('active');
 }
 
-function openModal(text){
-  document.getElementById("modalTitle").innerText=text;
-  document.getElementById("modal").classList.add("show");
-}
-function closeModal(){
-  document.getElementById("modal").classList.remove("show");
-}
-
-function checkMobile(){
-  const m=document.getElementById("mobile");
-  if(m.value.length!==10) m.classList.add("error");
-  else m.classList.remove("error");
-}
-
-function showQty(){
-  document.getElementById("qty").style.display="block";
+function openProduct(type){
+  let url="#";
+  if(type==="tile") url="tile-adhesive.html";
+  if(type==="water") url="waterproof.html";
+  if(type==="shield") url="h4-shieldx.html";
+  window.open(url,"_blank");
 }
 
 function sendWA(){
-  const m=document.getElementById("mobile");
-  if(m.value.length!==10){
+  const m=document.getElementById("mobile").value;
+  if(m.length!==10){
     alert("Enter valid 10 digit mobile number");
     return;
   }
   const msg=encodeURIComponent(
-    "Dealer Enquiry\nMobile: "+m.value+
-    "\nProduct: "+product.value+
-    "\nQuantity: "+qtyType.value+" "+qty.value
+    "Dealer Enquiry\nMobile: "+m+
+    "\nProduct: "+document.getElementById("product").value+
+    "\nQuantity: "+document.getElementById("qty").value
   );
   window.open("https://wa.me/919745838382?text="+msg,"_blank");
+}
+
+function setLang(l){
+  if(l==="ml"){
+    document.getElementById("title").innerText="H4 ടൈൽ അട്ഹീസീവ് & വാട്ടർപ്രൂഫ്";
+  }else{
+    document.getElementById("title").innerText="H4 Tile Adhesive & Waterproof";
+  }
 }
 </script>
 
