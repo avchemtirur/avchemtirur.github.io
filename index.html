@@ -11,9 +11,14 @@ body{
   font-family:Arial,Helvetica,sans-serif;
   color:#fff;
   background:
-    linear-gradient(180deg,rgba(255,255,255,0.04) 1px,transparent 1px),
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.04),
+      rgba(255,255,255,0.04) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
     linear-gradient(90deg,#0b2a3a,#000);
-  background-size:4px 4px,100% 100%;
 }
 :root{--c:#00e5d4}
 
@@ -22,37 +27,33 @@ body{
 
 .topbar{
   display:flex;
-  justify-content:space-between;
-  padding:12px;
-}
-.lang button{
-  width:60px;
-  padding:8px;
-  border:2px solid var(--c);
-  background:transparent;
-  color:var(--c);
-  font-weight:bold;
+  justify-content:flex-end;
+  padding:14px;
 }
 .menu div{
   cursor:pointer;
   font-size:18px;
-  margin:6px 0;
+  margin:8px 0;
 }
 
 h1{font-size:32px}
-.sub{color:var(--c);font-size:20px;margin-bottom:20px}
+.sub{color:var(--c);font-size:20px;margin-bottom:24px}
 
 .folders{
   display:flex;
   justify-content:center;
-  gap:12px;
+  gap:16px;
 }
 .folder{
   width:120px;
-  padding:16px;
+  height:120px;
   border:2px solid var(--c);
-  border-radius:8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:10px;
   cursor:pointer;
+  font-size:18px;
 }
 
 input,select{
@@ -82,12 +83,7 @@ button{
 
 <body>
 
-<!-- TOP BAR -->
 <div class="topbar">
-  <div class="lang">
-    <button>EN</button><br>
-    <button>ML</button>
-  </div>
   <div class="menu">
     <div onclick="openSec('home')">Home</div>
     <div onclick="openSec('dealer')">Dealer Enquiry</div>
@@ -101,9 +97,9 @@ button{
   <div class="sub">Molecular Bonding. Peaceful Dwelling...</div>
 
   <div class="folders">
-    <div class="folder" onclick="openSec('tile')">Tile Adhesive</div>
-    <div class="folder" onclick="openSec('water')">Waterproof</div>
-    <div class="folder" onclick="openSec('shield')">H4 ShieldX</div>
+    <div class="folder" onclick="openSec('dealer')">Tile Adhesive</div>
+    <div class="folder" onclick="openSec('dealer')">Waterproof</div>
+    <div class="folder" onclick="openSec('dealer')">H4 ShieldX</div>
   </div>
 </div>
 
@@ -128,7 +124,8 @@ button{
 <h2>Dealer Enquiry</h2>
 
 <input id="name" placeholder="Customer Name">
-<input id="mobile" placeholder="Mobile Number">
+<input id="mobile" placeholder="Mobile Number" maxlength="10" oninput="mobileCheck()">
+<input id="mobile2" placeholder="Confirm Mobile Number" style="display:none" oninput="confirmMobile()">
 <input id="address" placeholder="Address">
 <input id="pincode" placeholder="Pincode">
 
@@ -138,9 +135,6 @@ button{
   <option>Waterproof</option>
   <option>H4 ShieldX</option>
 </select>
-
-<select id="usage" style="display:none" onchange="usageChange()"></select>
-<input id="other" placeholder="Enter other detail" style="display:none">
 
 <select id="unit" style="display:none" onchange="unitChange()">
   <option value="">Kg / Bag</option>
@@ -171,44 +165,44 @@ function openSec(id){
   document.getElementById(id).classList.add('active');
 }
 
-function productChange(){
-  usage.style.display="block";
-  unit.style.display="block";
-  usage.innerHTML="";
-  other.style.display="none";
-  qty.style.display="none";
-
-  let list=[];
-  if(product.value==="Tile Adhesive") list=["Marble / Granite","Marbonit","Other"];
-  if(product.value==="Waterproof") list=["Bathroom","Building","House","Hotel","Other"];
-  if(product.value==="H4 ShieldX") list=["Bathroom","Hall","Room","Building","Hotel","Other"];
-
-  list.forEach(v=>{
-    let o=document.createElement("option");
-    o.text=v; usage.add(o);
-  });
+function mobileCheck(){
+  if(mobile.value.length===10){
+    mobile.classList.remove("error");
+    mobile2.style.display="block";
+    mobile2.focus();
+  }else{
+    mobile.classList.add("error");
+  }
 }
 
-function usageChange(){
-  other.style.display = usage.value==="Other" ? "block":"none";
+function confirmMobile(){
+  if(mobile2.value!==mobile.value){
+    mobile2.classList.add("error");
+  }else{
+    mobile2.classList.remove("error");
+  }
+  validate();
+}
+
+function productChange(){
+  unit.style.display="block";
 }
 
 function unitChange(){
   qty.style.display="block";
+  validate();
 }
 
-document.querySelectorAll("input,select").forEach(e=>e.oninput=validate);
-
 function validate(){
-  let ok=true;
-  ["name","mobile","address","pincode","product","unit","qty"].forEach(id=>{
-    let f=document.getElementById(id);
-    if(!f || !f.value){
-      if(f) f.classList.add("error");
-      ok=false;
-    }else f.classList.remove("error");
-  });
-  confirm.disabled=!ok;
+  let ok = name.value &&
+           mobile.value.length===10 &&
+           mobile2.value===mobile.value &&
+           address.value &&
+           pincode.value &&
+           product.value &&
+           unit.value &&
+           qty.value;
+  confirm.disabled = !ok;
 }
 
 function sendWA(){
@@ -219,7 +213,6 @@ Mobile: ${mobile.value}
 Address: ${address.value}
 Pincode: ${pincode.value}
 Product: ${product.value}
-Usage: ${usage.value}
 Quantity: ${qty.value} ${unit.value}`;
 
   window.open("https://wa.me/919745838382?text="+encodeURIComponent(msg));
