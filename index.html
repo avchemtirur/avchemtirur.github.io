@@ -11,8 +11,7 @@ body{
   font-family:Arial,Helvetica,sans-serif;
   color:#fff;
   background:
-    url("bg.jpg") center/cover no-repeat,
-    linear-gradient(90deg,#0b2a3a,#000);
+    url("bg.jpg") center/cover no-repeat fixed;
 }
 
 :root{--c:#00e5d4}
@@ -23,43 +22,41 @@ body{
 .topbar{
   display:flex;
   justify-content:flex-end;
-  padding:14px;
-}
-.menu div{
-  cursor:pointer;
+  gap:25px;
+  padding:15px;
   font-size:18px;
-  margin:8px 0;
 }
 
+.topbar div{cursor:pointer}
+
 h1{font-size:30px}
-.sub{color:var(--c);font-size:18px;margin-bottom:20px}
+.sub{color:var(--c);font-size:18px;margin-bottom:25px}
 
 .folders{
   display:flex;
   justify-content:center;
-  gap:14px;
+  gap:15px;
 }
 .folder{
-  width:95px;
-  height:95px;
+  width:90px;
+  height:90px;
   border:2px solid var(--c);
+  border-radius:10px;
   display:flex;
   align-items:center;
   justify-content:center;
-  border-radius:10px;
   cursor:pointer;
-  font-size:16px;
+  font-size:15px;
 }
 
-input{
+input,select{
   width:90%;
   padding:14px;
   margin:8px 0;
-  font-size:18px;
+  font-size:17px;
   border-radius:6px;
-  border:2px solid #ccc;
+  border:none;
 }
-input.error{border-color:red}
 
 button{
   padding:14px 32px;
@@ -70,20 +67,22 @@ button{
 }
 .confirm{background:#00c853;color:#fff}
 .cancel{background:#d50000;color:#fff;margin-top:10px}
+
+a{color:var(--c);text-decoration:none;font-size:20px}
 </style>
 </head>
 
 <body>
 
+<!-- TOP MENU -->
 <div class="topbar">
-  <div class="menu">
-    <div onclick="openSec('main')">Home</div>
-    <div onclick="openSec('dealer')">Dealer Enquiry</div>
-  </div>
+  <div onclick="openSec('home')">Home</div>
+  <div onclick="openSec('dealer')">Dealer Enquiry</div>
+  <div onclick="openSec('contact')">Contact</div>
 </div>
 
-<!-- MAIN -->
-<div id="main" class="section active">
+<!-- HOME -->
+<div id="home" class="section active">
   <h1>H4 Tile Adhesive & Waterproof</h1>
   <div class="sub">Molecular Bonding. Peaceful Dwelling…</div>
 
@@ -97,25 +96,25 @@ button{
 <!-- TILE -->
 <div id="tile" class="section">
   <h2>H4 Tile Adhesive</h2>
-  <p>Premium bonding technology for long life tiles.</p>
-  <button class="cancel" onclick="openSec('main')">Back</button>
+  <p>High strength bonding for tiles & stones.</p>
+  <button class="cancel" onclick="openSec('home')">Back</button>
 </div>
 
 <!-- WATER -->
 <div id="water" class="section">
   <h2>H4 Waterproof</h2>
-  <p>Advanced waterproof protection for buildings.</p>
-  <button class="cancel" onclick="openSec('main')">Back</button>
+  <p>Advanced waterproof protection system.</p>
+  <button class="cancel" onclick="openSec('home')">Back</button>
 </div>
 
 <!-- SHIELD -->
 <div id="shield" class="section">
   <h2>H4 ShieldX</h2>
-  <p>Surface protection & durability system.</p>
-  <button class="cancel" onclick="openSec('main')">Back</button>
+  <p>Surface protection & durability solution.</p>
+  <button class="cancel" onclick="openSec('home')">Back</button>
 </div>
 
-<!-- DEALER -->
+<!-- DEALER ENQUIRY -->
 <div id="dealer" class="section">
 <h2>Dealer Enquiry</h2>
 
@@ -125,8 +124,33 @@ button{
 <input id="dist" placeholder="District">
 <input id="state" placeholder="State">
 
+<select id="product">
+  <option value="">Select Product</option>
+  <option>Tile Adhesive</option>
+  <option>Waterproof</option>
+  <option>H4 ShieldX</option>
+</select>
+
+<select id="unit">
+  <option>Kg</option>
+  <option>Bag</option>
+</select>
+
+<input id="qty" placeholder="Quantity">
+
 <button class="confirm" onclick="sendWA()">Confirm</button><br>
-<button class="cancel" onclick="openSec('main')">Cancel</button>
+<button class="cancel" onclick="openSec('home')">Cancel</button>
+</div>
+
+<!-- CONTACT -->
+<div id="contact" class="section">
+<h2>Contact</h2>
+
+<p><a href="tel:+917907344030">📞 +91 79073 44030</a></p>
+<p><a href="https://wa.me/919745838382">💬 WhatsApp</a></p>
+<p><a href="mailto:avchemtirur@gmail.com">✉️ avchemtirur@gmail.com</a></p>
+
+<button class="cancel" onclick="openSec('home')">Back</button>
 </div>
 
 <script>
@@ -139,11 +163,10 @@ function sendWA(){
   if(
     name.value=="" ||
     mobile.value.length!==10 ||
-    city.value=="" ||
-    dist.value=="" ||
-    state.value==""
+    product.value=="" ||
+    qty.value==""
   ){
-    alert("Please fill all details correctly");
+    alert("Please fill all required details");
     return;
   }
 
@@ -153,14 +176,16 @@ Name: ${name.value}
 Mobile: ${mobile.value}
 City: ${city.value}
 District: ${dist.value}
-State: ${state.value}`;
+State: ${state.value}
+Product: ${product.value}
+Quantity: ${qty.value} ${unit.value}`;
 
   window.open(
     "https://wa.me/919745838382?text="+encodeURIComponent(msg)
   );
 
-  alert("Thank you! Our team will contact you.");
-  openSec('main');
+  alert("Thank you! Our team will contact you shortly.");
+  openSec('home');
 }
 </script>
 
