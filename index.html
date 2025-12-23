@@ -6,24 +6,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Arial, Helvetica, sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial;}
 
-/* ===== BACKGROUND (IMAGE STYLE) ===== */
 body{
   min-height:100vh;
   color:#fff;
   background:
-    radial-gradient(circle at 70% 30%, rgba(0,255,255,0.18), transparent 45%),
-    radial-gradient(circle at 30% 70%, rgba(0,180,180,0.22), transparent 45%),
-    linear-gradient(135deg, #020b0e, #03161a, #020b0e);
+    radial-gradient(circle at 70% 30%, rgba(0,255,255,.18), transparent 45%),
+    radial-gradient(circle at 30% 70%, rgba(0,180,180,.25), transparent 45%),
+    linear-gradient(135deg,#020b0e,#03161a,#020b0e);
 }
 
-/* ===== MENU ===== */
+/* MENU */
 .menu{
   display:flex;
   justify-content:flex-end;
@@ -31,38 +25,36 @@ body{
   padding:18px;
   font-size:18px;
 }
-.menu span{cursor:pointer;opacity:.85;}
-.menu span:hover{opacity:1;}
+.menu span{cursor:pointer}
 
-/* ===== SECTIONS ===== */
-.section{display:none;padding:40px 15px;text-align:center;}
-.show{display:block;}
+/* SECTION */
+.section{display:none;text-align:center;padding:40px 15px}
+.show{display:block}
 
-h1{font-size:34px;margin-bottom:10px;}
-.tagline{color:#22e6d3;margin-bottom:30px;font-size:18px;}
+h1{font-size:32px;margin-bottom:8px}
+.tag{color:#22e6d3;margin-bottom:25px}
 
-/* ===== HOME BOXES ===== */
+/* HOME BOXES */
 .box-row{
   display:flex;
   justify-content:center;
-  gap:16px;
+  gap:18px;
 }
 .box{
-  width:95px;
-  height:95px;
+  width:100px;
+  height:100px;
   border:2px solid #22e6d3;
-  border-radius:12px;
+  border-radius:14px;
   display:flex;
   align-items:center;
   justify-content:center;
-  text-align:center;
-  font-size:14px;
+  cursor:pointer;
 }
 
-/* ===== FORM ===== */
-input, select{
+/* FORM */
+input,select{
   width:100%;
-  max-width:340px;
+  max-width:360px;
   padding:14px;
   margin:10px auto;
   border-radius:10px;
@@ -70,29 +62,36 @@ input, select{
   font-size:16px;
   display:block;
 }
-.error{
-  border:2px solid red !important;
-}
+.error{border:2px solid red}
 
 .btn{
-  width:150px;
+  width:160px;
   padding:14px;
-  margin:12px;
   border:none;
   border-radius:30px;
   font-size:16px;
   cursor:pointer;
+  margin:12px;
 }
-.confirm{background:#1ecf72;color:#000;}
-.cancel{background:#e00000;color:#fff;}
+.ok{background:#1ecf72;color:#000}
+.cancel{background:#e00000;color:#fff}
 
-a{
-  color:#22e6d3;
-  display:block;
-  margin:12px 0;
-  font-size:18px;
-  text-decoration:none;
+/* MODAL */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.8);
+  display:none;
+  align-items:center;
+  justify-content:center;
 }
+.modal-box{
+  background:#03161a;
+  padding:30px;
+  border-radius:14px;
+  text-align:center;
+}
+.modal.show{display:flex}
 </style>
 </head>
 
@@ -108,23 +107,35 @@ a{
 <!-- HOME -->
 <div id="home" class="section show">
   <h1>H4 Tile Adhesive & Waterproof</h1>
-  <div class="tagline">Molecular Bonding. Peaceful Dwelling...</div>
+  <div class="tag">Molecular Bonding. Peaceful Dwelling...</div>
+
+  <p style="line-height:1.8;margin-bottom:30px">
+    AV Chem Chemical & Manufacturing<br>
+    Mukkilapeedika, Kannam Kulam<br>
+    PO BP Angadi, Pin 676102<br>
+    Tirur, Malappuram<br>
+    Kerala, India
+  </p>
 
   <div class="box-row">
-    <div class="box">Tile<br>Adhesive</div>
-    <div class="box">Waterproof</div>
-    <div class="box">H4<br>ShieldX</div>
+    <div class="box" onclick="openModal('Tile Adhesive')">Tile Adhesive</div>
+    <div class="box" onclick="openModal('Waterproof')">Waterproof</div>
+    <div class="box" onclick="openModal('H4 ShieldX')">H4 ShieldX</div>
   </div>
 </div>
 
-<!-- DEALER ENQUIRY -->
+<!-- DEALER -->
 <div id="dealer" class="section">
   <h1>Dealer Enquiry</h1>
 
-  <input id="name" placeholder="Customer Name">
+  <input placeholder="Customer Name">
+  <input id="mobile" placeholder="Mobile Number" maxlength="10"
+         inputmode="numeric" oninput="checkMobile()">
 
-  <input id="mobile" placeholder="Mobile Number"
-         maxlength="10" oninput="validateMobile()">
+  <input placeholder="City">
+  <input placeholder="Pincode" inputmode="numeric">
+  <input placeholder="District">
+  <input placeholder="State">
 
   <select id="product">
     <option value="">Select Product</option>
@@ -133,24 +144,34 @@ a{
     <option>H4 ShieldX</option>
   </select>
 
-  <select id="qtyType">
+  <select id="qtyType" onchange="showQty()">
     <option value="">Select Quantity Type</option>
     <option>Kg</option>
-    <option>Bag</option>
     <option>20kg Bag</option>
     <option>40kg Bag</option>
   </select>
 
-  <button class="btn confirm" onclick="sendWA()">Confirm</button>
+  <input id="qty" placeholder="Quantity (1 – 10000000)"
+         inputmode="numeric" style="display:none">
+
+  <button class="btn ok" onclick="sendWA()">Confirm</button>
   <button class="btn cancel" onclick="show('home')">Cancel</button>
 </div>
 
 <!-- CONTACT -->
 <div id="contact" class="section">
   <h1>Contact</h1>
-  <a href="tel:+917907344030">📞 +91 79073 44030</a>
-  <a href="https://wa.me/919745838382">💬 WhatsApp 9745838382</a>
-  <a href="mailto:avchemtirur@gmail.com">✉️ avchemtirur@gmail.com</a>
+  <p>📞 +91 79073 44030</p>
+  <p>💬 WhatsApp 9745838382</p>
+  <p>✉️ avchemtirur@gmail.com</p>
+</div>
+
+<!-- PRODUCT MODAL -->
+<div id="modal" class="modal">
+  <div class="modal-box">
+    <h2 id="modalTitle"></h2><br>
+    <button class="btn ok" onclick="closeModal()">Close</button>
+  </div>
 </div>
 
 <script>
@@ -159,31 +180,35 @@ function show(id){
   document.getElementById(id).classList.add('show');
 }
 
-function validateMobile(){
+function openModal(text){
+  document.getElementById("modalTitle").innerText=text;
+  document.getElementById("modal").classList.add("show");
+}
+function closeModal(){
+  document.getElementById("modal").classList.remove("show");
+}
+
+function checkMobile(){
   const m=document.getElementById("mobile");
-  if(m.value.length!==10){
-    m.classList.add("error");
-  }else{
-    m.classList.remove("error");
-  }
+  if(m.value.length!==10) m.classList.add("error");
+  else m.classList.remove("error");
+}
+
+function showQty(){
+  document.getElementById("qty").style.display="block";
 }
 
 function sendWA(){
   const m=document.getElementById("mobile");
   if(m.value.length!==10){
-    m.classList.add("error");
     alert("Enter valid 10 digit mobile number");
     return;
   }
-
   const msg=encodeURIComponent(
-    "Dealer Enquiry\n"+
-    "Name: "+document.getElementById("name").value+"\n"+
-    "Mobile: "+m.value+"\n"+
-    "Product: "+document.getElementById("product").value+"\n"+
-    "Quantity: "+document.getElementById("qtyType").value
+    "Dealer Enquiry\nMobile: "+m.value+
+    "\nProduct: "+product.value+
+    "\nQuantity: "+qtyType.value+" "+qty.value
   );
-
   window.open("https://wa.me/919745838382?text="+msg,"_blank");
 }
 </script>
