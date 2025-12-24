@@ -5,22 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>H4 Waterproof</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+Malayalam:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
 body{
   margin:0;
-  font-family:'Noto Sans Malayalam',sans-serif;
+  font-family:'Inter','Noto Sans Malayalam',sans-serif;
   background:#f6f2fb;
   color:#222;
 }
-
 .container{max-width:1200px;margin:auto;padding:20px}
 
 /* LANGUAGE */
 .lang-switch{display:flex;gap:10px;margin-bottom:20px}
 .lang-switch button{
-  padding:8px 20px;border:none;border-radius:20px;
+  padding:8px 18px;border:none;border-radius:20px;
   background:#000;color:#fff;font-weight:800;cursor:pointer
 }
 .lang-switch button.active{background:#f5c400;color:#000}
@@ -29,27 +28,50 @@ body{
 .grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:20px;
+  gap:24px;
+  margin-top:30px;
 }
 .card{
   background:#fff;
-  padding:20px;
-  border-radius:14px;
+  padding:22px;
+  border-radius:12px;
   text-align:center;
-  box-shadow:0 6px 18px rgba(0,0,0,.1);
+  border-bottom:4px solid #f5c400;
+  box-shadow:0 6px 18px rgba(0,0,0,.08);
 }
 .card img{
-  width:90px;height:90px;object-fit:contain
+  width:80px;height:80px;object-fit:contain
 }
-.card b{display:block;font-size:18px;margin-top:10px}
-.card p{font-size:14px;color:#555}
+.card h4{
+  margin:12px 0 6px;
+  font-size:18px;font-weight:800
+}
+.card p{
+  font-size:14px;color:#555;line-height:1.6
+}
 
-/* ORDER */
+/* CONTENT */
+.section{
+  margin-top:50px;
+  background:#fff;
+  padding:30px;
+  border-radius:14px;
+  box-shadow:0 6px 18px rgba(0,0,0,.06);
+}
+.section h3{
+  font-size:22px;font-weight:800;margin-bottom:10px
+}
+.section p{line-height:1.9;font-size:16px}
+
+/* ORDER BUTTON */
 .order-btn{
-  margin:40px auto;display:block;
-  padding:14px 40px;font-size:18px;
+  margin:40px auto;
+  display:block;
+  padding:14px 40px;
+  font-size:18px;
   border:none;border-radius:30px;
-  background:#1e90ff;color:#fff;font-weight:800
+  background:#1e90ff;
+  color:#fff;font-weight:800
 }
 
 /* POPUP */
@@ -60,11 +82,13 @@ body{
 }
 .popup.active{display:flex}
 .popup-box{
-  background:#fff;width:95%;max-width:520px;
+  background:#fff;
+  width:95%;max-width:520px;
   padding:20px;border-radius:14px
 }
-.popup-box input,.popup-box select,.popup-box textarea{
-  width:100%;padding:10px;margin:6px 0;
+.popup-box input,.popup-box select{
+  width:100%;
+  padding:10px;margin:6px 0;
   border-radius:6px;border:1px solid #ccc;font-size:16px
 }
 .error{border:2px solid red!important}
@@ -79,6 +103,7 @@ button{padding:12px;border:none;border-radius:25px;font-weight:800}
 <body>
 <div class="container">
 
+<!-- LANGUAGE -->
 <div class="lang-switch">
 <button class="active" onclick="setLang('en',this)">English</button>
 <button onclick="setLang('ml',this)">Malayalam</button>
@@ -89,26 +114,77 @@ button{padding:12px;border:none;border-radius:25px;font-weight:800}
 H4 Waterproof – 10 Years of Trusted Protection
 </h2>
 
+<!-- ICON GRID -->
 <div class="grid">
-<script>
-const items=[
-"Next 10 years peace of mind",
-"Next 10 years peace of mind",
-"Next 10 years peace of mind",
-"Next 10 years peace of mind",
-"Next 10 years peace of mind",
-"Next 10 years peace of mind",
-"Next 10 years peace of mind",
-"Next 10 years peace of mind",
-"Next 10 years peace of mind"
-];
-document.write(items.map(()=>`
+
 <div class="card">
-<img src="images/water.png">
-<b>H4 Waterproof</b>
-<p>അടുത്ത 10 വർഷത്തെ നിങ്ങളുടെ സമാധാനം.</p>
-</div>`).join(""));
-</script>
+<img src="images/damp.png">
+<h4 data-en="Better Dampness Protection"
+    data-ml="മികച്ച ഈർപ്പ സംരക്ഷണം">
+Better Dampness Protection
+</h4>
+<p data-en="Prevents moisture damage permanently"
+   data-ml="ഈർപ്പത്തിൽ നിന്നുള്ള നാശം ശാശ്വതമായി തടയുന്നു">
+Prevents moisture damage permanently
+</p>
+</div>
+
+<div class="card">
+<img src="images/leak.png">
+<h4 data-en="Prevents Water Seepage"
+    data-ml="വെള്ളം ചോർച്ച തടയുന്നു">
+Prevents Water Seepage
+</h4>
+<p data-en="Stops leakage at molecular level"
+   data-ml="മോളിക്യുലാർ തലത്തിൽ ചോർച്ച തടയുന്നു">
+Stops leakage at molecular level
+</p>
+</div>
+
+<div class="card">
+<img src="images/durable.png">
+<h4 data-en="Higher Durability"
+    data-ml="ദീർഘകാല ശക്തി">
+Higher Durability
+</h4>
+<p data-en="Long lasting protection for structures"
+   data-ml="കെട്ടിടങ്ങൾക്ക് ദീർഘകാല സംരക്ഷണം">
+Long lasting protection for structures
+</p>
+</div>
+
+</div>
+
+<!-- CONTENT SECTION -->
+<div class="section">
+<h3 data-en="Our Advanced Promise: 10 Years 100% Guarantee"
+    data-ml="🛡️ ഞങ്ങളുടെ അഡ്വാൻസ് വാഗ്ദാനം: 10 വർഷത്തെ 100% ഗ്യാരണ്ടി">
+🛡️ ഞങ്ങളുടെ അഡ്വാൻസ് വാഗ്ദാനം: 10 വർഷത്തെ 100% ഗ്യാരണ്ടി
+</h3>
+
+<p data-en="Is all waterproofing the same? Never."
+   data-ml="എല്ലാ വാട്ടർപ്രൂഫിംഗും ഒരുപോലെയാണോ? ഒരിക്കലുമില്ല.">
+എല്ലാ വാട്ടർപ്രൂഫിംഗും ഒരുപോലെയാണോ? ഒരിക്കലുമില്ല.
+</p>
+
+<p data-ml="
+പരമ്പരാഗത ലായനികൾ കാലക്രമേണ വറ്റി പൊടിയും, ചുരുളും, പൊളിയും.
+2-3 വർഷത്തിനുള്ളിൽ നിങ്ങൾ ആ ചോർച്ചയുടെ ശബ്ദം വീണ്ടും കേൾക്കും.
+H4 വ്യത്യസ്തമാണ്. ഞങ്ങളുടെ ഗവേഷണത്തിന്റെ കേന്ദ്രബിന്ദു
+'പെർമനന്റ് കെമിക്കൽ ഇന്റഗ്രേഷൻ' ആണ്.
+ഇത് കോൺക്രീറ്റിന്റെ ആന്തരിക ഘടനയിൽ ദ്രവിച്ച് ചേർന്ന്,
+ഒന്നായി മാറുന്നു. കോൺക്രീറ്റിന് ജലവിരുദ്ധമായ ഒരു രണ്ടാം ചർമ്മം നൽകുന്നു.
+"
+data-en="
+Traditional solutions dry, crack and peel over time.
+Within 2–3 years, leakage returns.
+H4 is different. Our research focuses on
+Permanent Chemical Integration.
+It penetrates deep into concrete and becomes one with it,
+forming a permanent waterproof skin.
+">
+പരമ്പരാഗത ലായനികൾ കാലക്രമേണ വറ്റി പൊടിയും, ചുരുളും, പൊളിയും...
+</p>
 </div>
 
 <button class="order-btn" onclick="openOrder()">Order Sheet</button>
@@ -116,28 +192,10 @@ document.write(items.map(()=>`
 <!-- ORDER POPUP -->
 <div class="popup" id="orderPopup">
 <div class="popup-box">
-
 <input id="name" placeholder="Name">
-<input id="address" placeholder="Address">
-<input id="area" placeholder="Area">
-<input id="street" placeholder="Street">
-
 <input id="mobile" placeholder="Mobile Number" inputmode="numeric" maxlength="10" oninput="numOnly(this)">
-<label><input type="checkbox" onchange="copyWhatsapp(this)"> Same as WhatsApp</label>
-
 <input id="whatsapp" placeholder="WhatsApp Number" inputmode="numeric" maxlength="10" oninput="numOnly(this)">
 <input id="pincode" placeholder="Pincode" inputmode="numeric" maxlength="6" oninput="numOnly(this)">
-<input placeholder="District">
-<input placeholder="State">
-
-<select id="place" onchange="showOther(this)">
-<option value="">Waterproof Place</option>
-<option>Home</option><option>Office</option>
-<option>Shop</option><option>Building</option>
-<option>Other</option>
-</select>
-<input id="otherPlace" placeholder="Enter Place" style="display:none">
-
 <input id="qty" placeholder="Quantity (1–1000000)" inputmode="numeric" oninput="numOnly(this)">
 
 <div class="btn-row">
@@ -146,7 +204,6 @@ document.write(items.map(()=>`
 </div>
 
 <button class="share" onclick="shareData()">Share</button>
-
 </div>
 </div>
 
@@ -163,29 +220,13 @@ function setLang(l,b){
 function openOrder(){orderPopup.classList.add('active')}
 function closeOrder(){orderPopup.classList.remove('active')}
 function numOnly(el){el.value=el.value.replace(/\D/g,'')}
-function copyWhatsapp(c){if(c.checked) whatsapp.value=mobile.value}
-function showOther(s){otherPlace.style.display=s.value==='Other'?'block':'none'}
-
 function sendWA(){
- let m=mobile,w=whatsapp,p=pincode;
- [m,w,p].forEach(x=>x.classList.remove('error'));
- if(m.value.length!==10){m.classList.add('error');return}
- if(w.value.length!==10){w.classList.add('error');return}
- if(p.value.length!==6){p.classList.add('error');return}
-
- let msg=encodeURIComponent(
- "H4 Waterproof Order\n"+
- "Name:"+name.value+
- "\nMobile:"+m.value+
- "\nWhatsApp:"+w.value+
- "\nQty:"+qty.value
- );
+ if(mobile.value.length!==10||whatsapp.value.length!==10||pincode.value.length!==6)return;
+ let msg=encodeURIComponent("H4 Waterproof Order\nMobile:"+mobile.value+"\nQty:"+qty.value);
  window.open("https://wa.me/919745838382?text="+msg);
- window.open("https://wa.me/91"+w.value+"?text="+msg);
+ window.open("https://wa.me/91"+whatsapp.value+"?text="+msg);
 }
-function shareData(){
- navigator.share({text:"H4 Waterproof Order"});
-}
+function shareData(){navigator.share({text:"H4 Waterproof Order"})}
 </script>
 
 </body>
