@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ml">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,243 +15,176 @@ body{
   color:#222;
 }
 
-.container{
-  max-width:1100px;
-  margin:auto;
-  padding:20px;
-}
+.container{max-width:1200px;margin:auto;padding:20px}
 
 /* LANGUAGE */
-.lang-switch{
-  display:flex;
-  gap:10px;
-  margin-bottom:20px;
-}
+.lang-switch{display:flex;gap:10px;margin-bottom:20px}
 .lang-switch button{
-  border:none;
-  padding:8px 18px;
-  border-radius:20px;
-  background:#000;
-  color:#fff;
-  font-weight:800;
-  cursor:pointer;
+  padding:8px 20px;border:none;border-radius:20px;
+  background:#000;color:#fff;font-weight:800;cursor:pointer
 }
-.lang-switch button.active{
-  background:#f5c400;
-  color:#000;
-}
+.lang-switch button.active{background:#f5c400;color:#000}
 
-/* HEADINGS */
-h1{
-  font-size:34px;
-  font-weight:800;
-  margin-bottom:20px;
-}
-
-/* GRID 3x3 */
+/* GRID */
 .grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:20px;
-  margin-top:30px;
 }
-
 .card{
   background:#fff;
+  padding:20px;
   border-radius:14px;
-  padding:20px 10px;
   text-align:center;
-  box-shadow:0 8px 20px rgba(0,0,0,.08);
-  border-bottom:5px solid #f5c400;
-  transition:.3s;
+  box-shadow:0 6px 18px rgba(0,0,0,.1);
 }
-.card:hover{
-  transform:translateY(-5px);
+.card img{
+  width:90px;height:90px;object-fit:contain
 }
+.card b{display:block;font-size:18px;margin-top:10px}
+.card p{font-size:14px;color:#555}
 
-/* IMAGE SIZE SMALL */
-.icon-img{
-  width:90px;
-  height:90px;
-  object-fit:contain;
-  margin-bottom:10px;
-}
-
-/* TEXT STYLE */
-.card b{
-  display:block;
-  font-size:18px;
-  font-weight:800;
-  margin-bottom:5px;
-}
-.card span{
-  font-size:15px;
-  font-weight:500;
-  color:#555;
-}
-
-/* ORDER BUTTON */
+/* ORDER */
 .order-btn{
-  display:block;
-  margin:40px auto;
-  padding:14px 36px;
-  font-size:20px;
-  font-weight:800;
-  border:none;
-  border-radius:30px;
-  background:#f5c400;
-  cursor:pointer;
+  margin:40px auto;display:block;
+  padding:14px 40px;font-size:18px;
+  border:none;border-radius:30px;
+  background:#1e90ff;color:#fff;font-weight:800
 }
 
 /* POPUP */
 .popup{
-  position:fixed;
-  inset:0;
+  position:fixed;inset:0;
   background:rgba(0,0,0,.6);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  z-index:1000;
+  display:none;justify-content:center;align-items:center;
 }
 .popup.active{display:flex}
-
 .popup-box{
-  background:#fff;
-  width:90%;
-  max-width:420px;
-  padding:25px;
-  border-radius:14px;
+  background:#fff;width:95%;max-width:520px;
+  padding:20px;border-radius:14px
 }
-
-.popup-box input,
-.popup-box textarea{
-  width:100%;
-  margin:8px 0;
-  padding:10px;
-  border-radius:6px;
-  border:1px solid #ccc;
+.popup-box input,.popup-box select,.popup-box textarea{
+  width:100%;padding:10px;margin:6px 0;
+  border-radius:6px;border:1px solid #ccc;font-size:16px
 }
-.popup-box button{
-  width:100%;
-  margin-top:10px;
-  padding:12px;
-  border:none;
-  font-weight:800;
-  border-radius:20px;
-  background:#f5c400;
-}
-
-/* RESPONSIVE */
-@media(max-width:768px){
-  .grid{grid-template-columns:repeat(2,1fr)}
-}
+.error{border:2px solid red!important}
+.btn-row{display:flex;gap:10px;margin-top:10px}
+.confirm{flex:1;background:#1e90ff;color:#fff}
+.cancel{flex:1;background:#ccc}
+.share{margin-top:10px;background:#25d366;color:#fff;width:100%}
+button{padding:12px;border:none;border-radius:25px;font-weight:800}
 </style>
 </head>
 
 <body>
-
 <div class="container">
 
-<!-- LANGUAGE -->
 <div class="lang-switch">
-<button class="active" onclick="setLang('ml',this)">Malayalam</button>
-<button onclick="setLang('en',this)">English</button>
+<button class="active" onclick="setLang('en',this)">English</button>
+<button onclick="setLang('ml',this)">Malayalam</button>
 </div>
 
-<h1 data-ml="H4 Waterproof – 10 വർഷത്തെ വിശ്വാസനീയ സംരക്ഷണം"
-    data-en="H4 Waterproof – 10 Years of Trusted Protection">
-H4 Waterproof – 10 വർഷത്തെ വിശ്വാസനീയ സംരക്ഷണം
-</h1>
+<h2 data-en="H4 Waterproof – 10 Years of Trusted Protection"
+    data-ml="H4 Waterproof – 10 വർഷത്തെ വിശ്വാസനീയ സംരക്ഷണം">
+H4 Waterproof – 10 Years of Trusted Protection
+</h2>
 
-<!-- ICON GRID -->
 <div class="grid">
-
+<script>
+const items=[
+"Next 10 years peace of mind",
+"Next 10 years peace of mind",
+"Next 10 years peace of mind",
+"Next 10 years peace of mind",
+"Next 10 years peace of mind",
+"Next 10 years peace of mind",
+"Next 10 years peace of mind",
+"Next 10 years peace of mind",
+"Next 10 years peace of mind"
+];
+document.write(items.map(()=>`
 <div class="card">
-<img src="images/water.png" class="icon-img">
-<b data-ml="ജലസംരക്ഷണം" data-en="Water Protection">ജലസംരക്ഷണം</b>
-<span data-ml="പൂർണ്ണ സുരക്ഷ" data-en="Complete Safety">പൂർണ്ണ സുരക്ഷ</span>
+<img src="images/water.png">
+<b>H4 Waterproof</b>
+<p>അടുത്ത 10 വർഷത്തെ നിങ്ങളുടെ സമാധാനം.</p>
+</div>`).join(""));
+</script>
 </div>
 
-<div class="card">
-<img src="images/umbrella.png" class="icon-img">
-<b data-ml="ലീക്കേജ് ഇല്ല" data-en="No Leakage">ലീക്കേജ് ഇല്ല</b>
-<span data-ml="നിലവിലെ പരിഹാരം" data-en="Permanent Solution">നിലവിലെ പരിഹാരം</span>
-</div>
-
-<div class="card">
-<img src="images/security.png" class="icon-img">
-<b data-ml="മതിൽ സുരക്ഷ" data-en="Wall Safety">മതിൽ സുരക്ഷ</b>
-<span data-ml="ഉറപ്പുള്ള പിടി" data-en="Strong Protection">ഉറപ്പുള്ള പിടി</span>
-</div>
-
-<div class="card">
-<img src="images/brickwall.png" class="icon-img">
-<b data-ml="ദീർഘായുസ്" data-en="Long Life">ദീർഘായുസ്</b>
-<span data-ml="വർഷങ്ങളോളം" data-en="Years of Durability">വർഷങ്ങളോളം</span>
-</div>
-
-<div class="card">
-<img src="images/roof.png" class="icon-img">
-<b data-ml="മേൽക്കൂര" data-en="Roof">മേൽക്കൂര</b>
-<span data-ml="ടെറസ് സുരക്ഷ" data-en="Terrace Safety">ടെറസ് സുരക്ഷ</span>
-</div>
-
-<div class="card">
-<img src="images/foundation.png" class="icon-img">
-<b data-ml="അടിത്തറ" data-en="Foundation">അടിത്തറ</b>
-<span data-ml="ശക്തമായ അടിസ്ഥാനങ്ങൾ" data-en="Strong Base">ശക്തമായ അടിസ്ഥാനങ്ങൾ</span>
-</div>
-
-<div class="card">
-<img src="images/wall.png" class="icon-img">
-<b data-ml="മതിലുകൾ" data-en="Walls">മതിലുകൾ</b>
-<span data-ml="നീണ്ട സംരക്ഷണം" data-en="Extended Protection">നീണ്ട സംരക്ഷണം</span>
-</div>
-
-<div class="card">
-<img src="images/balcony.png" class="icon-img">
-<b data-ml="ബാൽക്കണി" data-en="Balcony">ബാൽക്കണി</b>
-<span data-ml="മഴ പ്രതിരോധം" data-en="Rain Resistant">മഴ പ്രതിരോധം</span>
-</div>
-
-<div class="card">
-<img src="images/tank.png" class="icon-img">
-<b data-ml="വാട്ടർ ടാങ്ക്" data-en="Water Tank">വാട്ടർ ടാങ്ക്</b>
-<span data-ml="സീപ്പ് ഇല്ല" data-en="No Seepage">സീപ്പ് ഇല്ല</span>
-</div>
-
-</div>
-
-<button class="order-btn" onclick="openOrder()"
-data-ml="ഓർഡർ ഷീറ്റ്"
-data-en="Order Sheet">ഓർഡർ ഷീറ്റ്</button>
+<button class="order-btn" onclick="openOrder()">Order Sheet</button>
 
 <!-- ORDER POPUP -->
 <div class="popup" id="orderPopup">
 <div class="popup-box">
-<h3>Order Sheet</h3>
-<input placeholder="Name">
-<input placeholder="Phone">
-<textarea placeholder="Address"></textarea>
-<button onclick="closeOrder()">Submit</button>
+
+<input id="name" placeholder="Name">
+<input id="address" placeholder="Address">
+<input id="area" placeholder="Area">
+<input id="street" placeholder="Street">
+
+<input id="mobile" placeholder="Mobile Number" inputmode="numeric" maxlength="10" oninput="numOnly(this)">
+<label><input type="checkbox" onchange="copyWhatsapp(this)"> Same as WhatsApp</label>
+
+<input id="whatsapp" placeholder="WhatsApp Number" inputmode="numeric" maxlength="10" oninput="numOnly(this)">
+<input id="pincode" placeholder="Pincode" inputmode="numeric" maxlength="6" oninput="numOnly(this)">
+<input placeholder="District">
+<input placeholder="State">
+
+<select id="place" onchange="showOther(this)">
+<option value="">Waterproof Place</option>
+<option>Home</option><option>Office</option>
+<option>Shop</option><option>Building</option>
+<option>Other</option>
+</select>
+<input id="otherPlace" placeholder="Enter Place" style="display:none">
+
+<input id="qty" placeholder="Quantity (1–1000000)" inputmode="numeric" oninput="numOnly(this)">
+
+<div class="btn-row">
+<button class="confirm" onclick="sendWA()">Confirm</button>
+<button class="cancel" onclick="closeOrder()">Cancel</button>
+</div>
+
+<button class="share" onclick="shareData()">Share</button>
+
 </div>
 </div>
 
 </div>
 
 <script>
-function setLang(lang,btn){
- document.querySelectorAll('.lang-switch button').forEach(b=>b.classList.remove('active'));
- btn.classList.add('active');
- document.querySelectorAll('[data-ml]').forEach(el=>{
-   el.innerHTML = lang==='ml'?el.dataset.ml:el.dataset.en;
+function setLang(l,b){
+ document.querySelectorAll('.lang-switch button').forEach(x=>x.classList.remove('active'));
+ b.classList.add('active');
+ document.querySelectorAll('[data-en]').forEach(el=>{
+  el.innerHTML=l==='ml'?el.dataset.ml:el.dataset.en;
  });
 }
-function openOrder(){
- document.getElementById('orderPopup').classList.add('active');
+function openOrder(){orderPopup.classList.add('active')}
+function closeOrder(){orderPopup.classList.remove('active')}
+function numOnly(el){el.value=el.value.replace(/\D/g,'')}
+function copyWhatsapp(c){if(c.checked) whatsapp.value=mobile.value}
+function showOther(s){otherPlace.style.display=s.value==='Other'?'block':'none'}
+
+function sendWA(){
+ let m=mobile,w=whatsapp,p=pincode;
+ [m,w,p].forEach(x=>x.classList.remove('error'));
+ if(m.value.length!==10){m.classList.add('error');return}
+ if(w.value.length!==10){w.classList.add('error');return}
+ if(p.value.length!==6){p.classList.add('error');return}
+
+ let msg=encodeURIComponent(
+ "H4 Waterproof Order\n"+
+ "Name:"+name.value+
+ "\nMobile:"+m.value+
+ "\nWhatsApp:"+w.value+
+ "\nQty:"+qty.value
+ );
+ window.open("https://wa.me/919745838382?text="+msg);
+ window.open("https://wa.me/91"+w.value+"?text="+msg);
 }
-function closeOrder(){
- document.getElementById('orderPopup').classList.remove('active');
+function shareData(){
+ navigator.share({text:"H4 Waterproof Order"});
 }
 </script>
 
