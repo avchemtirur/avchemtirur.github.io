@@ -3,178 +3,216 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>H4 ShieldX - The Future of Flooring</title>
+    <title>H4 ShieldX - AV Chem Official</title>
     <style>
         :root {
-            --h4-purple: #921b6a;
-            --h4-yellow: #ffc107;
-            --dark-bg: #1a1a1a;
+            --h4-purple: #9c2063;
+            --h4-yellow: #fdb913;
+            --text-dark: #2d2d2d;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0; padding: 0; background: #f0f0f0;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            margin: 0; padding: 0; background-color: #fff;
+            color: var(--text-dark); line-height: 1.6;
         }
 
-        /* A4 Page Styling */
-        .a4-page {
-            width: 210mm;
-            min-height: 297mm;
-            padding: 20mm;
-            margin: 10mm auto;
-            background: white;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            border: 15px solid var(--h4-yellow);
-            box-sizing: border-box;
-            position: relative;
-        }
-
+        /* Header & Logo */
         header {
-            text-align: center;
-            border-bottom: 3px solid var(--h4-purple);
-            padding-bottom: 20px;
-            margin-bottom: 30px;
-        }
-
-        .shield-badge {
-            background: var(--h4-purple);
-            color: white;
-            display: inline-block;
-            padding: 10px 30px;
-            border-radius: 50px;
-            font-size: 28px;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-
-        .hero-text {
-            color: var(--h4-purple);
-            font-size: 24px;
-            font-weight: bold;
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        /* Feature Grid */
-        .features {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin: 30px 0;
-        }
-
-        .feature-item {
-            background: #fff9e6;
+            background: #fff;
             padding: 15px;
-            border-radius: 10px;
-            border-left: 5px solid var(--h4-purple);
+            text-align: center;
+            border-bottom: 5px solid var(--h4-yellow);
+            position: sticky; top: 0; z-index: 1000;
         }
 
-        .feature-item h3 {
-            margin: 0 0 10px 0;
-            color: #333;
+        .logo { max-width: 180px; }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(156, 32, 99, 0.9), rgba(156, 32, 99, 0.8)), url('3d-floor-2.jpg');
+            background-size: cover; background-position: center;
+            color: white; padding: 60px 20px; text-align: center;
         }
 
-        /* 3D Gallery */
+        .hero h1 { font-size: 2.5rem; margin: 0; color: var(--h4-yellow); }
+        .hero p { font-size: 1.2rem; max-width: 800px; margin: 20px auto; }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+
+        /* Feature Icons (Style from your image) */
+        .feature-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px; margin: 40px 0;
+        }
+
+        .feature-box {
+            border: 2px solid #eee; border-radius: 15px; padding: 20px;
+            text-align: center; transition: 0.3s;
+        }
+
+        .feature-box:hover { border-color: var(--h4-purple); transform: translateY(-5px); }
+        .feature-box img { width: 60px; height: 60px; margin-bottom: 10px; }
+        .feature-box h4 { margin: 5px 0; color: var(--h4-purple); }
+
+        /* 3D Work Gallery */
+        .gallery-title {
+            text-align: center; border-bottom: 3px solid var(--h4-yellow);
+            display: table; margin: 40px auto; padding-bottom: 10px;
+        }
+
         .gallery {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 15px;
-            margin: 30px 0;
         }
 
         .gallery-item {
-            height: 150px;
-            background: #ddd;
-            border-radius: 8px;
-            overflow: hidden;
-            border: 2px solid var(--h4-yellow);
+            position: relative; overflow: hidden; border-radius: 12px; height: 250px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .gallery-item:hover img { transform: scale(1.1); }
+        .gallery-label {
+            position: absolute; bottom: 0; background: rgba(156, 32, 99, 0.8);
+            color: white; width: 100%; padding: 10px; text-align: center;
         }
 
-        .footer-info {
-            position: absolute;
-            bottom: 40px;
-            left: 40px;
-            right: 40px;
-            text-align: center;
-            border-top: 2px solid var(--h4-yellow);
-            padding-top: 20px;
+        /* Order Form Section */
+        .order-section {
+            background: #fdf7ec; border: 3px solid var(--h4-purple);
+            border-radius: 20px; padding: 30px; margin-top: 50px;
         }
 
-        @media print {
-            body { background: none; }
-            .a4-page { margin: 0; border-width: 10px; }
+        .form-group { margin-bottom: 15px; }
+        input, select, textarea {
+            width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;
+        }
+
+        .btn-submit {
+            background: var(--h4-purple); color: white; border: none;
+            padding: 15px 30px; border-radius: 10px; font-weight: bold;
+            width: 100%; cursor: pointer; font-size: 18px;
+        }
+
+        footer {
+            background: var(--h4-purple); color: white;
+            text-align: center; padding: 40px 20px; margin-top: 60px;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 1.8rem; }
+            .gallery { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <div class="a4-page">
-        <header>
-            <div style="font-size: 40px; font-weight: bold; color: var(--h4-purple);">H4 SHIELDX</div>
-            <div class="shield-badge">Advanced Chemical Bonding System</div>
-        </header>
+    <header>
+        <img src="h4logo.png" alt="H4 Logo" class="logo">
+    </header>
 
-        <div class="hero-text">
-            കേരളത്തിൽ ആദ്യമായി: ടൈലിനും വാട്ടർപ്രൂഫിംഗിനും അപ്പുറം ഒരു വിസ്മയം!
-        </div>
+    <div class="hero">
+        <h1>H4 SHIELDX</h1>
+        <p>കേരളത്തിൽ ആദ്യമായി: ടൈലിനും വാട്ടർപ്രൂഫിംഗിനും അപ്പുറം ഒരു ദൃശ്യവിസ്മയം! നിങ്ങളുടെ തറയിൽ കടലും തിരമാലകളും ജീവൻ വെക്കുന്നു.</p>
+    </div>
 
-        <p style="text-align: center; font-size: 18px; line-height: 1.6;">
-            മറ്റ് സംസ്ഥാനങ്ങളിൽ തരംഗമായ <b>3D Flooring & Jointless Works</b> ഇനി നമ്മുടെ കേരളത്തിലും. 
-            വെള്ളം കടക്കില്ല, ജോയിന്റുകൾ കാണില്ല, തറ ഒരു കണ്ണാടി പോലെ തിളങ്ങും.
-        </p>
-
-        <div class="features">
-            <div class="feature-item">
-                <h3>💧 100% വാട്ടർപ്രൂഫ്</h3>
-                <p>ബാത്ത്റൂമുകളിലും ടെറസ്സുകളിലും വെള്ളം ഇറങ്ങുന്നത് പൂർണ്ണമായും തടയുന്നു.</p>
+    <div class="container">
+        
+        <div class="feature-grid">
+            <div class="feature-box">
+                <img src="https://cdn-icons-png.flaticon.com/512/3105/3105807.png">
+                <h4>100% Waterproof</h4>
             </div>
-            <div class="feature-item">
-                <h3>✨ ജോയിന്റ്-ലെസ് ഫിനിഷ്</h3>
-                <p>ടൈലുകൾക്കിടയിലെ വൃത്തികെട്ട ജോയിന്റുകൾ ഒഴിവാക്കി തറയെ ഏകശിലാരൂപത്തിലാക്കുന്നു.</p>
+            <div class="feature-box">
+                <img src="https://cdn-icons-png.flaticon.com/512/1598/1598238.png">
+                <h4>Crack Resistant</h4>
             </div>
-            <div class="feature-item">
-                <h3>🎨 3D ഡിസൈനുകൾ</h3>
-                <p>നിങ്ങളുടെ ലിവിംഗ് റൂമിനെ ഒരു കടലോരമോ കാടോ ആക്കി മാറ്റാൻ കഴിയുന്ന ഡിസൈനുകൾ.</p>
+            <div class="feature-box">
+                <img src="https://cdn-icons-png.flaticon.com/512/2163/2163350.png">
+                <h4>Jointless Finish</h4>
             </div>
-            <div class="feature-item">
-                <h3>🛡️ ആയുഷ്കാല ഈട്</h3>
-                <p>സാധാരണ പശകളേക്കാൾ പത്തിരട്ടി കരുത്തുള്ള കെമിക്കൽ ഫ്യൂഷൻ ടെക്നോളജി.</p>
+            <div class="feature-box">
+                <img src="https://cdn-icons-png.flaticon.com/512/916/916771.png">
+                <h4>Life-time Bond</h4>
             </div>
         </div>
 
-        <h2 style="color: var(--h4-purple); border-bottom: 2px solid var(--h4-yellow); display: inline-block;">Latest Work Models</h2>
+        <h2 class="gallery-title">ഞങ്ങളുടെ ഏറ്റവും പുതിയ വർക്കുകൾ</h2>
         
         <div class="gallery">
             <div class="gallery-item">
-                <img src="https://i.imgur.com/S8WvVvR.jpg" alt="3D Floor">
+                <img src="3d-floor-1.jpg" alt="3D Floor">
+                <div class="gallery-label">3D Ocean Bathroom</div>
             </div>
             <div class="gallery-item">
-                <img src="https://i.imgur.com/3qG7tN6.jpg" alt="Seamless Floor">
+                <img src="3d-floor-2.jpg" alt="3D Floor">
+                <div class="gallery-label">Beach Effect Flooring</div>
             </div>
             <div class="gallery-item">
-                <img src="https://i.imgur.com/P5r0fA8.jpg" alt="Waterproof">
+                <img src="3d-floor-3.jpg" alt="3D Floor">
+                <div class="gallery-label">Dolphin 3D Art</div>
+            </div>
+            <div class="gallery-item">
+                <img src="jointless-1.jpg" alt="Jointless">
+                <div class="gallery-label">Premium Jointless Finish</div>
+            </div>
+            <div class="gallery-item">
+                <img src="waterproof-1.jpg" alt="Waterproof">
+                <div class="gallery-label">Roof Waterproofing</div>
+            </div>
+            <div class="gallery-item">
+                <img src="finish-1.jpg" alt="Finish">
+                <div class="gallery-label">H4 ShieldX Glossy Finish</div>
             </div>
         </div>
 
-        <div style="background: var(--h4-purple); color: white; padding: 20px; border-radius: 10px; margin-top: 30px;">
-            <p style="margin: 0; font-size: 18px; text-align: center;">
-                <b>ബാത്ത്റൂം, ടെറസ്സ്, ഷോറൂമുകൾ, പ്രീമിയം ഹോമുകൾ</b> എന്നിവയ്ക്ക് ഏറ്റവും അനുയോജ്യമായ വർക്കുകൾ.
-            </p>
-        </div>
-
-        <div class="footer-info">
-            <p><strong>AV Chem Chemical & Manufacturing</strong></p>
-            <p>Mukkilapeedika, Malappuram | Phone: +91 79073 44030 | WhatsApp: 97458 38382</p>
+        <div class="order-section">
+            <h2 style="text-align: center; color: var(--h4-purple);">Book Free Demo / Visit</h2>
+            <form id="orderForm">
+                <div class="form-group">
+                    <input type="text" id="name" placeholder="പേര് (Name)" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" id="mobile" placeholder="മൊബൈൽ നമ്പർ (10 Digit)" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="location" placeholder="സ്ഥലം (Location)" required>
+                </div>
+                <div class="form-group">
+                    <select id="workType">
+                        <option value="3D Flooring">3D Epoxy Flooring</option>
+                        <option value="Jointless">Jointless Tile Bond</option>
+                        <option value="Waterproof">100% Waterproofing</option>
+                    </select>
+                </div>
+                <button type="button" class="btn-submit" onclick="sendToWhatsApp()">Book My Demo on WhatsApp</button>
+            </form>
         </div>
     </div>
 
+    <footer>
+        <h3>AV Chem Chemical & Manufacturing</h3>
+        <p>Mukkilapeedika, Malappuram | +91 97458 38382</p>
+        <p>© 2025 H4 ShieldX. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function sendToWhatsApp() {
+            const name = document.getElementById('name').value;
+            const mobile = document.getElementById('mobile').value;
+            const location = document.getElementById('location').value;
+            const work = document.getElementById('workType').value;
+
+            if(!name || !mobile || !location) {
+                alert("ദയവായി എല്ലാ വിവരങ്ങളും നൽകുക.");
+                return;
+            }
+
+            const message = `*H4 SHIELDX NEW REQUEST*%0A%0A*Name:* ${name}%0A*Mobile:* ${mobile}%0A*Location:* ${location}%0A*Work:* ${work}`;
+            window.open(`https://wa.me/919745838382?text=${message}`);
+        }
+    </script>
 </body>
 </html>
 
