@@ -1,335 +1,318 @@
 <!DOCTYPE html>
 <html lang="ml">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>H4 Tile Adhesive - AV Chem Official</title>
-    <style>
-        :root {
-            --primary-yellow: #f1e311;
-            --dark-blue: #1a2a44;
-            --accent-red: #d32f2f;
-            --border-width: 15px;
-            --error-red: #ff3333;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>H4 Tile Adhesive - Order Sheet</title>
 
-        body {
-            font-family: 'Segoe UI', 'Meera', Tahoma, sans-serif;
-            margin: 0; padding: 0; line-height: 1.8;
-            background-color: #fff;
-            border-left: var(--border-width) solid var(--primary-yellow);
-            border-right: var(--border-width) solid var(--primary-yellow);
-            color: #333;
-        }
+<style>
+:root{
+  --yellow:#f1e311;
+  --dark:#1a2a44;
+  --error:#ff2e2e;
+}
 
-        header {
-            background: var(--primary-yellow);
-            padding: 25px 15px;
-            text-align: center;
-            position: sticky; top: 0; z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
+body{
+  font-family:'Segoe UI','Meera',sans-serif;
+  margin:0;
+  background:#f4f4f4;
+  border-left:15px solid var(--yellow);
+  border-right:15px solid var(--yellow);
+}
 
-        .lang-container {
-            display: flex; justify-content: center; gap: 15px; margin-bottom: 20px;
-        }
+header{
+  background:var(--yellow);
+  padding:20px;
+  text-align:center;
+  position:sticky;
+  top:0;
+}
 
-        .lang-btns button {
-            padding: 10px 25px; border: 2px solid #333; cursor: pointer;
-            font-weight: bold; border-radius: 5px; transition: 0.3s;
-        }
+.header-title{
+  background:#000;
+  color:var(--yellow);
+  padding:12px 35px;
+  font-size:22px;
+  font-weight:800;
+  display:inline-block;
+}
 
-        .header-title-box {
-            background: #000; color: var(--primary-yellow);
-            display: inline-block; padding: 12px 35px;
-            font-weight: bold; font-size: clamp(1.2rem, 5vw, 1.8rem);
-            border-radius: 4px;
-        }
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:20px;
+  background:#fff;
+}
 
-        .container { max-width: 900px; margin: 0 auto; padding: 30px 20px; }
+h2{
+  text-align:center;
+  color:var(--dark);
+}
 
-        .hero-banner {
-            border-left: 8px solid var(--accent-red);
-            padding: 15px 25px; margin-bottom: 40px; background: #fff5f5;
-        }
+.order-sheet{
+  border:4px solid var(--yellow);
+  padding:25px;
+  border-radius:15px;
+}
 
-        .hero-banner h1 {
-            color: var(--accent-red); font-size: clamp(1.4rem, 6vw, 2.2rem);
-            margin: 0; line-height: 1.3;
-        }
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
 
-        h2 {
-            color: var(--dark-blue); border-bottom: 3px solid var(--primary-yellow);
-            display: inline-block; margin-top: 45px; padding-bottom: 5px;
-        }
+.form-group{
+  display:flex;
+  flex-direction:column;
+}
 
-        .product-card {
-            background: #fff; border: 1px solid #eee; padding: 25px;
-            margin: 20px 0; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
+.full{
+  grid-column:span 2;
+}
 
-        /* Order Sheet New Styling */
-        .order-sheet {
-            background: #fff; border: 5px solid var(--primary-yellow);
-            padding: 30px; margin-top: 60px; border-radius: 20px;
-        }
+label{
+  font-weight:700;
+  margin-bottom:5px;
+  color:var(--dark);
+}
 
-        .form-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 15px;
-        }
+input,select{
+  padding:12px;
+  border:2px solid #ddd;
+  border-radius:8px;
+  font-size:16px;
+}
 
-        .form-group { display: flex; flex-direction: column; margin-bottom: 15px; }
-        .full-width { grid-column: span 2; }
+input:focus,select:focus{
+  outline:none;
+  border-color:var(--dark);
+}
 
-        label { font-weight: bold; margin-bottom: 5px; font-size: 0.9rem; }
+.invalid{
+  border-color:var(--error)!important;
+  background:#fff4f4;
+}
 
-        input, select {
-            padding: 12px; border: 2px solid #ccc; border-radius: 8px;
-            font-size: 1rem; transition: 0.3s;
-        }
+.error-text{
+  font-size:13px;
+  color:var(--error);
+  display:none;
+}
 
-        input:focus, select:focus { border-color: var(--dark-blue); outline: none; }
+.buttons{
+  display:flex;
+  gap:15px;
+  margin-top:25px;
+}
 
-        /* Error Styles */
-        input.invalid, select.invalid { border-color: var(--error-red) !important; background-color: #fff5f5; }
+.confirm{
+  flex:2;
+  background:var(--dark);
+  color:#fff;
+  padding:18px;
+  font-size:18px;
+  font-weight:800;
+  border:none;
+  border-radius:10px;
+}
 
-        .btn-row { display: flex; gap: 10px; margin-top: 20px; }
+.cancel{
+  flex:1;
+  background:#888;
+  color:#fff;
+  padding:18px;
+  font-weight:700;
+  border:none;
+  border-radius:10px;
+}
 
-        .btn-confirm {
-            flex: 2; background: #0044cc; color: white; border: none;
-            padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer;
-        }
+.share{
+  display:none;
+  margin-top:15px;
+  background:#25D366;
+  color:#fff;
+  padding:14px;
+  font-weight:800;
+  border:none;
+  border-radius:10px;
+  width:100%;
+}
 
-        .btn-cancel {
-            flex: 1; background: #888; color: white; border: none;
-            padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer;
-        }
-
-        .btn-share {
-            width: 100%; background: #25D366; color: white; border: none;
-            padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer;
-            margin-top: 10px; display: none;
-        }
-
-        #dynamic-work-type { display: none; }
-
-        .footer { background: var(--dark-blue); color: white; padding: 50px 20px; text-align: center; margin-top: 80px; }
-
-        @media (max-width: 600px) {
-            .form-grid { grid-template-columns: 1fr; }
-            .full-width { grid-column: span 1; }
-        }
-    </style>
+@media(max-width:600px){
+  .form-grid{grid-template-columns:1fr}
+  .full{grid-column:span 1}
+}
+</style>
 </head>
+
 <body>
 
-    <header>
-        <div class="lang-container">
-            <button class="btn-en" onclick="setLang('en')">English</button>
-            <button class="btn-ml" onclick="setLang('ml')">മലയാളം</button>
-        </div>
-        <div class="header-title-box">H4 TILE ADHESIVE</div>
-    </header>
+<header>
+  <div class="header-title">H4 TILE ADHESIVE</div>
+</header>
 
-    <div class="container">
-        
-        <div class="hero-banner">
-            <h1 class="lang" data-en="H4 Tile Adhesive: Next-Gen Installation Science" data-ml="H4 ടൈൽ അഡ്ഹസീവ്: പുതിയ തലമുറയുടെ ടൈൽ ഇൻസ്റ്റാളേഷൻ സയൻസ്">
-                H4 ടൈൽ അഡ്ഹസീവ്: പുതിയ തലമുറയുടെ ടൈൽ ഇൻസ്റ്റാളേഷൻ സയൻസ്
-            </h1>
-        </div>
+<div class="container">
+<h2>ORDER FORM / ഓർഡർ ഷീറ്റ്</h2>
 
-        <h2 class="lang" data-en="🔬 Product Portfolio" data-ml="🔬 എഞ്ചിനീയർ ചെയ്ത പ്രൊഡക്റ്റ് പോർട്ട്ഫോളിയോ">🔬 എഞ്ചിനീയർ ചെയ്ത പ്രൊഡക്റ്റ് പോർട്ട്ഫോളിയോ</h2>
-        
-        <div class="product-card">
-            <h3>🏠 H4 Normal (Ceramic Specialist)</h3>
-            <p class="lang" data-en="Revolution: Slip-resistance technology for ceramic tiles." data-ml="വിപ്ലവം: 'സ്ലിപ്പ് റെസിസ്റ്റൻസ്' ഗുണം. ടൈൽ സ്ഥാപിച്ചുകഴിഞ്ഞാൽ തെന്നി മാറാതെ നിൽക്കുന്നു.">വിപ്ലവം: 'സ്ലിപ്പ് റെസിസ്റ്റൻസ്' ഗുണം. ടൈൽ സ്ഥാപിച്ചുകഴിഞ്ഞാൽ തെന്നി മാറാതെ നിൽക്കുന്നു.</p>
-        </div>
+<form id="orderForm" class="order-sheet" novalidate>
 
-        <div class="order-sheet" id="order-section">
-            <h2 style="text-align:center; border:none; margin-top:0;">ORDER SHEET</h2>
-            
-            <form id="h4OrderForm" novalidate>
-                <div class="form-grid">
-                    <div class="form-group full-width">
-                        <label>പേര് (Name)*</label>
-                        <input type="text" id="name" required>
-                    </div>
+<div class="form-grid">
 
-                    <div class="form-group full-width">
-                        <label>വിലാസം (Address)*</label>
-                        <input type="text" id="address" required>
-                    </div>
+<div class="form-group full">
+<label>പേര് / Name *</label>
+<input id="name" required>
+<span class="error-text">Name required</span>
+</div>
 
-                    <div class="form-group">
-                        <label>City*</label>
-                        <input type="text" id="city" required>
-                    </div>
+<div class="form-group full">
+<label>വിലാസം / Address *</label>
+<input id="address" required>
+<span class="error-text">Address required</span>
+</div>
 
-                    <div class="form-group">
-                        <label>Land Mark*</label>
-                        <input type="text" id="landmark" required>
-                    </div>
+<div class="form-group">
+<label>City *</label>
+<input id="city" required>
+</div>
 
-                    <div class="form-group">
-                        <label>മൊബൈൽ (10 Digit Mobile)*</label>
-                        <input type="tel" id="mobile" pattern="[0-9]{10}" inputmode="numeric" oninput="autoWA(this.value)" required>
-                    </div>
+<div class="form-group">
+<label>Landmark *</label>
+<input id="landmark" required>
+</div>
 
-                    <div class="form-group">
-                        <label>WhatsApp (Option)</label>
-                        <input type="tel" id="whatsapp" pattern="[0-9]{10}" inputmode="numeric">
-                    </div>
+<div class="form-group">
+<label>Mobile (10 digit) *</label>
+<input id="mobile" maxlength="10" inputmode="numeric" oninput="numOnly(this);syncWA()" required>
+<span class="error-text">10 digit number required</span>
+</div>
 
-                    <div class="form-group">
-                        <label>പിൻ‌കോഡ് (6 Digit Pin)*</label>
-                        <input type="tel" id="pincode" pattern="[0-9]{6}" inputmode="numeric" required>
-                    </div>
+<div class="form-group">
+<label>WhatsApp (optional)</label>
+<input id="whatsapp" maxlength="10" inputmode="numeric" oninput="numOnly(this)">
+<span class="error-text">Invalid number</span>
+</div>
 
-                    <div class="form-group">
-                        <label>ജില്ല (District)*</label>
-                        <input type="text" id="district" required>
-                    </div>
+<div class="form-group">
+<label>Pincode (6 digit) *</label>
+<input id="pincode" maxlength="6" inputmode="numeric" oninput="numOnly(this)" required>
+<span class="error-text">6 digit pincode required</span>
+</div>
 
-                    <div class="form-group full-width">
-                        <label>സംസ്ഥാനം (State)*</label>
-                        <input type="text" id="state" value="Kerala" required>
-                    </div>
+<div class="form-group">
+<label>District *</label>
+<input id="district" required>
+</div>
 
-                    <div class="form-group full-width">
-                        <label>Tile Adhesive ചെയ്യേണ്ട സ്ഥലം*</label>
-                        <select id="location" onchange="toggleWorkType()" required>
-                            <option value="">തിരഞ്ഞെടുക്കുക</option>
-                            <option value="Home">Home</option>
-                            <option value="Office">Office</option>
-                            <option value="Shop">Shop</option>
-                            <option value="Building">Building</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
+<div class="form-group full">
+<label>State *</label>
+<input id="state" value="Kerala" required>
+</div>
 
-                    <div class="form-group full-width" id="dynamic-work-type">
-                        <label>തരം തിരഞ്ഞെടുക്കുക*</label>
-                        <select id="work_item" required>
-                            <option value="">തിരഞ്ഞെടുക്കുക</option>
-                            <option value="Marble">Marble</option>
-                            <option value="Granite">Granite</option>
-                            <option value="Marbonite">Marbonite</option>
-                            <option value="Floor">Floor</option>
-                            <option value="Wall">Wall</option>
-                            <option value="Bathroom">Bathroom</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
+<div class="form-group full">
+<label>Tile adhesive ചെയ്യേണ്ട സ്ഥലം *</label>
+<select id="place" onchange="toggleSub()" required>
+<option value="">Select</option>
+<option>Home</option>
+<option>Office</option>
+<option>Shop</option>
+<option>Building</option>
+<option>Other</option>
+</select>
+</div>
 
-                    <div class="form-group full-width">
-                        <label>Quantity (1 to 1000000)*</label>
-                        <input type="number" id="qty" min="1" max="1000000" inputmode="numeric" required>
-                    </div>
-                </div>
+<div class="form-group full" id="subBox" style="display:none">
+<label>Work Type *</label>
+<select id="workType" required>
+<option value="">Select</option>
+<option>Marble</option>
+<option>Granite</option>
+<option>Marbonite</option>
+<option>Floor</option>
+<option>Wall</option>
+<option>Bathroom</option>
+<option>Other</option>
+</select>
+</div>
 
-                <div class="btn-row">
-                    <button type="button" class="btn-confirm" onclick="validateAndSend()">CONFIRM</button>
-                    <button type="reset" class="btn-cancel" onclick="resetForm()">CANCEL</button>
-                </div>
+<div class="form-group full">
+<label>Quantity (1 – 1000000) *</label>
+<input id="qty" type="number" min="1" max="1000000" inputmode="numeric" required>
+</div>
 
-                <button type="button" id="shareBtn" class="btn-share" onclick="shareToWhatsApp()">SHARE DETAILS</button>
-            </form>
-        </div>
-    </div>
+</div>
 
-    <div class="footer">
-        <p><strong>AV Chem Chemical & Manufacturing</strong></p>
-        <p>📍 Mukkilapeedika, Kannamkulam, PO. BP Angadi, Malappuram.</p>
-        <p>📞 +91 79073 44030 | 💬 97458 38382</p>
-    </div>
+<div class="buttons">
+<button type="button" class="confirm" onclick="submitOrder()">CONFIRM</button>
+<button type="reset" class="cancel">CANCEL</button>
+</div>
 
-    <script>
-        function setLang(lang) {
-            document.querySelectorAll('.lang').forEach(el => el.innerText = el.getAttribute('data-' + lang));
-            document.querySelector('.btn-en').style.background = (lang === 'en') ? '#333' : '#fff';
-            document.querySelector('.btn-en').style.color = (lang === 'en') ? '#fff' : '#333';
-            document.querySelector('.btn-ml').style.background = (lang === 'ml') ? '#333' : '#fff';
-            document.querySelector('.btn-ml').style.color = (lang === 'ml') ? '#fff' : '#333';
-        }
+<button type="button" class="share" id="shareBtn" onclick="shareOrder()">SHARE ORDER</button>
 
-        // Auto copy mobile to WhatsApp field
-        function autoWA(val) {
-            if(val.length === 10) {
-                document.getElementById('whatsapp').value = val;
-            }
-        }
+</form>
+</div>
 
-        // Show/Hide sub menu
-        function toggleWorkType() {
-            const loc = document.getElementById('location').value;
-            const div = document.getElementById('dynamic-work-type');
-            div.style.display = loc ? "block" : "none";
-        }
+<script>
+function numOnly(el){
+ el.value=el.value.replace(/\D/g,'');
+}
 
-        function resetForm() {
-            document.getElementById('dynamic-work-type').style.display = "none";
-            document.getElementById('shareBtn').style.display = "none";
-            const fields = document.querySelectorAll('input, select');
-            fields.forEach(f => f.classList.remove('invalid'));
-        }
+function syncWA(){
+ if(mobile.value.length===10){
+  whatsapp.value=mobile.value;
+ }
+}
 
-        function validateAndSend() {
-            const form = document.getElementById('h4OrderForm');
-            const inputs = form.querySelectorAll('input[required], select[required]');
-            let isValid = true;
+function toggleSub(){
+ subBox.style.display=place.value?'block':'none';
+}
 
-            inputs.forEach(input => {
-                if (!input.value || !input.checkValidity()) {
-                    input.classList.add('invalid');
-                    isValid = false;
-                } else {
-                    input.classList.remove('invalid');
-                }
-            });
+function submitOrder(){
+ let valid=true;
+ document.querySelectorAll('[required]').forEach(f=>{
+  if(!f.value){
+   f.classList.add('invalid');
+   valid=false;
+  }else{
+   f.classList.remove('invalid');
+  }
+ });
 
-            if (!isValid) {
-                alert("ദയവായി എല്ലാ വിവരങ്ങളും കൃത്യമായി പൂരിപ്പിക്കുക.");
-                return;
-            }
+ if(mobile.value.length!==10){mobile.classList.add('invalid');valid=false}
+ if(whatsapp.value && whatsapp.value.length!==10){whatsapp.classList.add('invalid');valid=false}
+ if(pincode.value.length!==6){pincode.classList.add('invalid');valid=false}
 
-            const data = {
-                n: document.getElementById('name').value,
-                a: document.getElementById('address').value,
-                c: document.getElementById('city').value,
-                l: document.getElementById('landmark').value,
-                m: document.getElementById('mobile').value,
-                w: document.getElementById('whatsapp').value,
-                p: document.getElementById('pincode').value,
-                d: document.getElementById('district').value,
-                s: document.getElementById('state').value,
-                loc: document.getElementById('location').value,
-                item: document.getElementById('work_item').value,
-                q: document.getElementById('qty').value
-            };
+ if(!valid){
+  alert("Please fill all required fields correctly");
+  return;
+ }
 
-            const message = `*NEW H4 ORDER*%0A------------------%0A*Name:* ${data.n}%0A*Address:* ${data.a}%0A*City:* ${data.c}%0A*Landmark:* ${data.l}%0A*Mobile:* ${data.m}%0A*Pincode:* ${data.p}%0A*Location:* ${data.loc}%0A*Item:* ${data.item}%0A*Qty:* ${data.q} Bags`;
+ let msg=`*H4 TILE ADHESIVE ORDER*
+Name: ${name.value}
+Address: ${address.value}
+City: ${city.value}
+Mobile: ${mobile.value}
+Work: ${place.value} - ${workType.value}
+Qty: ${qty.value}`;
 
-            // 1. Send to Admin
-            window.open(`https://wa.me/919745838382?text=${message}`);
+ window.open(`https://wa.me/919745838382?text=${encodeURIComponent(msg)}`,'_blank');
 
-            // 2. Send to Customer if WhatsApp exists
-            if(data.w && data.w.length === 10) {
-                setTimeout(() => {
-                    window.open(`https://wa.me/91${data.w}?text=Confirmation: Your Order for H4 Tile Adhesive has been placed.%0A%0A${message}`);
-                }, 1000);
-            }
+ if(whatsapp.value){
+  setTimeout(()=>{
+   window.open(`https://wa.me/91${whatsapp.value}?text=${encodeURIComponent(msg)}`,'_blank');
+  },800);
+ }
 
-            document.getElementById('shareBtn').style.display = "block";
-        }
+ shareBtn.style.display='block';
+}
 
-        function shareToWhatsApp() {
-            const n = document.getElementById('name').value;
-            const q = document.getElementById('qty').value;
-            const text = `H4 Tile Adhesive Order for ${n}: ${q} Bags.`;
-            window.open(`whatsapp://send?text=${encodeURIComponent(text)}`);
-        }
-    </script>
+function shareOrder(){
+ navigator.share({
+  title:'H4 Order',
+  text:'H4 Tile Adhesive Order',
+  url:location.href
+ });
+}
+</script>
+
 </body>
 </html>
-
