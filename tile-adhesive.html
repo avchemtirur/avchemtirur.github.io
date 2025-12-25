@@ -1,318 +1,212 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="ml">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>H4 Tile Adhesive - Order Sheet</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H4 Tile Adhesive - Complete Technical Guide</title>
+    <style>
+        :root {
+            --primary-yellow: #f1e311;
+            --dark-blue: #1a2a44;
+            --accent-red: #d32f2f;
+            --border-width: 15px;
+        }
 
-<style>
-:root{
-  --yellow:#f1e311;
-  --dark:#1a2a44;
-  --error:#ff2e2e;
-}
+        body {
+            font-family: 'Segoe UI', 'Meera', sans-serif;
+            margin: 0; padding: 0; line-height: 1.8;
+            background-color: #fff;
+            border-left: var(--border-width) solid var(--primary-yellow);
+            border-right: var(--border-width) solid var(--primary-yellow);
+            color: #333;
+        }
 
-body{
-  font-family:'Segoe UI','Meera',sans-serif;
-  margin:0;
-  background:#f4f4f4;
-  border-left:15px solid var(--yellow);
-  border-right:15px solid var(--yellow);
-}
+        header {
+            background: var(--primary-yellow);
+            padding: 25px 10px;
+            text-align: center;
+            position: sticky; top: 0; z-index: 1000;
+        }
 
-header{
-  background:var(--yellow);
-  padding:20px;
-  text-align:center;
-  position:sticky;
-  top:0;
-}
+        .lang-container {
+            display: flex; justify-content: center; gap: 10px; margin-bottom: 20px;
+        }
 
-.header-title{
-  background:#000;
-  color:var(--yellow);
-  padding:12px 35px;
-  font-size:22px;
-  font-weight:800;
-  display:inline-block;
-}
+        .lang-btns button {
+            padding: 10px 25px; border: 2px solid #333; cursor: pointer;
+            font-weight: bold; border-radius: 5px; transition: 0.3s;
+        }
 
-.container{
-  max-width:900px;
-  margin:auto;
-  padding:20px;
-  background:#fff;
-}
+        .header-title-box {
+            background: #000; color: var(--primary-yellow);
+            display: inline-block; padding: 12px 35px;
+            font-weight: bold; font-size: 1.5rem; border-radius: 4px;
+        }
 
-h2{
-  text-align:center;
-  color:var(--dark);
-}
+        .container { max-width: 900px; margin: 0 auto; padding: 30px 20px; }
 
-.order-sheet{
-  border:4px solid var(--yellow);
-  padding:25px;
-  border-radius:15px;
-}
+        .hero-banner {
+            border-left: 8px solid var(--accent-red);
+            padding: 15px 25px; margin-bottom: 40px; background: #fff5f5;
+        }
 
-.form-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:15px;
-}
+        h2 {
+            color: var(--dark-blue); border-bottom: 3px solid var(--primary-yellow);
+            display: inline-block; margin-top: 45px;
+        }
 
-.form-group{
-  display:flex;
-  flex-direction:column;
-}
+        .product-card {
+            background: #fdfdfd; border: 1px solid #eee;
+            padding: 25px; margin: 20px 0; border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
 
-.full{
-  grid-column:span 2;
-}
+        .product-card h3 { color: var(--accent-red); margin-top: 0; }
+        .highlight { color: #007bff; font-weight: bold; }
 
-label{
-  font-weight:700;
-  margin-bottom:5px;
-  color:var(--dark);
-}
+        .table-wrapper { overflow-x: auto; margin: 35px 0; }
+        table { width: 100%; border-collapse: collapse; min-width: 600px; }
+        th, td { border: 1px solid #ddd; padding: 15px; text-align: left; }
+        th { background: var(--dark-blue); color: white; }
 
-input,select{
-  padding:12px;
-  border:2px solid #ddd;
-  border-radius:8px;
-  font-size:16px;
-}
+        .risk-section { background: #fffcf0; padding: 30px; border-radius: 15px; margin-top: 40px; }
+        .risk-item { margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
+        .risk-item h4 { color: #d32f2f; margin-bottom: 5px; }
 
-input:focus,select:focus{
-  outline:none;
-  border-color:var(--dark);
-}
+        .order-sheet {
+            background: #fff; border: 5px solid var(--primary-yellow);
+            padding: 35px; margin-top: 60px; border-radius: 20px;
+        }
 
-.invalid{
-  border-color:var(--error)!important;
-  background:#fff4f4;
-}
-
-.error-text{
-  font-size:13px;
-  color:var(--error);
-  display:none;
-}
-
-.buttons{
-  display:flex;
-  gap:15px;
-  margin-top:25px;
-}
-
-.confirm{
-  flex:2;
-  background:var(--dark);
-  color:#fff;
-  padding:18px;
-  font-size:18px;
-  font-weight:800;
-  border:none;
-  border-radius:10px;
-}
-
-.cancel{
-  flex:1;
-  background:#888;
-  color:#fff;
-  padding:18px;
-  font-weight:700;
-  border:none;
-  border-radius:10px;
-}
-
-.share{
-  display:none;
-  margin-top:15px;
-  background:#25D366;
-  color:#fff;
-  padding:14px;
-  font-weight:800;
-  border:none;
-  border-radius:10px;
-  width:100%;
-}
-
-@media(max-width:600px){
-  .form-grid{grid-template-columns:1fr}
-  .full{grid-column:span 1}
-}
-</style>
+        .footer {
+            background: var(--dark-blue); color: white;
+            padding: 50px 20px; text-align: center; margin-top: 80px;
+        }
+    </style>
 </head>
-
 <body>
 
-<header>
-  <div class="header-title">H4 TILE ADHESIVE</div>
-</header>
+    <header>
+        <div class="lang-container">
+            <button class="btn-en" onclick="setLang('en')">English</button>
+            <button class="btn-ml" onclick="setLang('ml')">മലയാളം</button>
+        </div>
+        <div class="header-title-box lang" data-en="H4 TILE ADHESIVE" data-ml="H4 ടൈൽ അഡ്ഹസീവ്">H4 ടൈൽ അഡ്ഹസീവ്</div>
+    </header>
 
-<div class="container">
-<h2>ORDER FORM / ഓർഡർ ഷീറ്റ്</h2>
+    <div class="container">
+        <div class="hero-banner">
+            <h1 class="lang" data-en="H4 Tile Adhesive: Next-Gen Installation Science" data-ml="H4 ടൈൽ അഡ്ഹസീവ്: പുതിയ തലമുറയുടെ ടൈൽ ഇൻസ്റ്റാളേഷൻ സയൻസ്">
+                H4 ടൈൽ അഡ്ഹസീവ്: പുതിയ തലമുറയുടെ ടൈൽ ഇൻസ്റ്റാളേഷൻ സയൻസ്
+            </h1>
+        </div>
 
-<form id="orderForm" class="order-sheet" novalidate>
+        <p class="lang" data-en="AV Chem presents H4 Tile Adhesive, a result of decades of chemical engineering research for heritage-grade construction." 
+           data-ml="നിലവിലെ ടൈൽ ഫിക്സിംഗ് സാങ്കേതികവിദ്യയുടെ പരിധികൾ തകർക്കുന്ന ഒരു പുതിയ കാലഘട്ടത്തിന്റെ ആരംഭം. AV Chem Chemical & Manufacturing, നിരവധി പതിറ്റാണ്ടുകളുടെ ഗവേഷണത്തിന്റെയും കെമിക്കൽ എഞ്ചിനീയറിംഗിന്റെയും ഫലമായി ഈ പ്രീമിയം പരമ്പര ആദരപൂർവ്വം ലോകത്തിന് മുന്നിൽവയ്ക്കുന്നു.">
+           നിലവിലെ ടൈൽ ഫിക്സിംഗ് സാങ്കേതികവിദ്യയുടെ പരിധികൾ തകർക്കുന്ന ഒരു പുതിയ കാലഘട്ടത്തിന്റെ ആരംഭം...
+        </p>
 
-<div class="form-grid">
+        <h2 class="lang" data-en="🚀 Advanced Polymer Fusion" data-ml="🚀 വിപ്ലവകരമായ 'അഡ്വാന്‍സ്ഡ് പോളിമർ ഫ്യൂഷൻ'">🚀 വിപ്ലവകരമായ 'അഡ്വാന്‍സ്ഡ് പോളിമർ ഫ്യൂഷൻ'</h2>
+        <p class="lang" data-en="H4 uses chemical fusion to bond concrete and tiles into a single stone-like structure." 
+           data-ml="പരമ്പരാഗത സിമന്റ്-മണൽ മിശ്രിതങ്ങൾക്ക് ഒരു ഭൗതിക പിടുത്തം മാത്രമാണുള്ളത്. എന്നാൽ H4 അഡ്ഹസീവിലെ പോളിമർ സൂത്രവിദ്യ കോൺക്രീറ്റിനെയും ടൈലിനെയും ഒരു കെമിക്കൽ ഫ്യൂഷനിലൂടെ ബന്ധിപ്പിക്കുന്നു.">
+           പരമ്പരാഗത സിമന്റ്-മണൽ മിശ്രിതങ്ങൾക്ക് ഒരു ഭൗതിക പിടുത്തം മാത്രമാണുള്ളത്...
+        </p>
 
-<div class="form-group full">
-<label>പേര് / Name *</label>
-<input id="name" required>
-<span class="error-text">Name required</span>
-</div>
+        <h2 class="lang" data-en="🔬 Product Portfolio" data-ml="🔬 എഞ്ചിനീയർ ചെയ്ത പ്രൊഡക്റ്റ് പോർട്ട്ഫോളിയോ">🔬 എഞ്ചിനീയർ ചെയ്ത പ്രൊഡക്റ്റ് പോർട്ട്ഫോളിയോ</h2>
+        
+        <div class="product-card">
+            <h3 class="lang" data-en="1. H4 Normal (Ceramic Specialist)" data-ml="1. 🏠 H4 നോർമൽ (സെറാമിക് സ്പെഷ്യലിസ്റ്റ്)">1. 🏠 H4 നോർമൽ (സെറാമിക് സ്പെഷ്യലിസ്റ്റ്)</h3>
+            <p class="lang" data-en="Superior strength for all interior ceramic tiles." data-ml="എല്ലാ ഇന്റീരിയർ ഭിത്തി, ഫ്ലോർ സെറാമിക് ടൈലുകൾക്കും. 'സ്ലിപ്പ് റെസിസ്റ്റൻസ്' ഗുണം നൽകുന്നു.">എല്ലാ ഇന്റീരിയർ ഭിത്തി, ഫ്ലോർ സെറാമിക് ടൈലുകൾക്കും...</p>
+        </div>
 
-<div class="form-group full">
-<label>വിലാസം / Address *</label>
-<input id="address" required>
-<span class="error-text">Address required</span>
-</div>
+        <div class="product-card">
+            <h3 class="lang" data-en="2. H4 Marbonite (Vitrifed Expert)" data-ml="2. ✨ H4 മാർബോണൈറ്റ് (വിട്രിഫൈഡ് സ്പെഷ്യലിസ്റ്റ്)">2. ✨ H4 മാർബോണൈറ്റ് (വിട്രിഫൈഡ് സ്പെഷ്യലിസ്റ്റ്)</h3>
+            <p class="lang" data-en="Perfect for large format tiles with no-sag formulation." data-ml="വലുപ്പമുള്ള ടൈലുകൾക്ക് (60x60 cm മുതൽ). 'നോ-സാഗ് ഫോർമുലേഷൻ' വഴി ടൈൽ താഴേക്ക് തെന്നി മാറില്ല.">വലുപ്പമുള്ള ടൈലുകൾക്ക്...</p>
+        </div>
 
-<div class="form-group">
-<label>City *</label>
-<input id="city" required>
-</div>
+        <div class="product-card">
+            <h3 class="lang" data-en="3. H4 Marble & Granite" data-ml="3. 🏛️ H4 മാർബിൾ & ഗ്രാനൈറ്റ്">3. 🏛️ H4 മാർബിൾ & ഗ്രാനൈറ്റ്</h3>
+            <p class="lang" data-en="Heavy duty bond for natural stones without color fading." data-ml="മാർബിൾ, ഗ്രാനൈറ്റ് എന്നിവയ്ക്ക്. കല്ലിന്റെ സ്വാഭാവിക നിറം മാറ്റമില്ലാതെ സംരക്ഷിക്കുന്ന 'നോ-ബ്ലീഡ്' ഫോർമുലേഷൻ.">മാർബിൾ, ഗ്രാനൈറ്റ് എന്നിവയ്ക്ക്...</p>
+        </div>
 
-<div class="form-group">
-<label>Landmark *</label>
-<input id="landmark" required>
-</div>
+        <div class="product-card">
+            <h3 class="lang" data-en="4. H4 Aqua-Shield" data-ml="4. 🚿 H4 ആക്വാ-ഷീൽഡ് (ബാത്ത്രൂം & പൂൾ)">4. 🚿 H4 ആക്വാ-ഷീൽഡ് (ബാത്ത്രൂം & പൂൾ)</h3>
+            <p class="lang" data-en="Inbuilt waterproofing for wet areas." data-ml="ബാത്റൂം, സ്വിമ്മിംഗ് പൂൾ എന്നിവയ്ക്ക്. 100% വാട്ടർപ്രൂഫിംഗ് ഉറപ്പാക്കുന്നു.">ബാത്റൂം, സ്വിമ്മിംഗ് പൂൾ എന്നിവയ്ക്ക്...</p>
+        </div>
 
-<div class="form-group">
-<label>Mobile (10 digit) *</label>
-<input id="mobile" maxlength="10" inputmode="numeric" oninput="numOnly(this);syncWA()" required>
-<span class="error-text">10 digit number required</span>
-</div>
+        <h2 class="lang" data-en="⚠️ 7 Critical Risks of Ordinary Cement" data-ml="⚠️ പരമ്പരാഗത രീതിയുടെ 7 വിനാശകരമായ പ്രശ്നങ്ങൾ">⚠️ പരമ്പരാഗത രീതിയുടെ 7 വിനാശകരമായ പ്രശ്നങ്ങൾ</h2>
+        <div class="risk-section">
+            <div class="risk-item">
+                <h4 class="lang" data-en="1. Hollow Spaces & Cracks" data-ml="1. 🕳️ ഹോളോ സ്പേസ് & ടൈൽ പൊട്ടൽ">1. 🕳️ ഹോളോ സ്പേസ് & ടൈൽ പൊട്ടൽ</h4>
+                <p class="lang" data-en="Air pockets cause tiles to crack under furniture weight." data-ml="ടൈലിനടിയിൽ വായുപിടിച്ച ഇടങ്ങൾ സൃഷ്ടിക്കപ്പെടുന്നത് ടൈൽ പൊട്ടാൻ കാരണമാകുന്നു.">ടൈലിനടിയിൽ വായുപിടിച്ച ഇടങ്ങൾ സൃഷ്ടിക്കപ്പെടുന്നത്...</p>
+            </div>
+            <div class="risk-item">
+                <h4 class="lang" data-en="2. Moisture & Mold" data-ml="2. 💧 ഈർപ്പം കയറ്റം & പൂപ്പൽ">2. 💧 ഈർപ്പം കയറ്റം & പൂപ്പൽ</h4>
+                <p class="lang" data-en="Leads to asthma and allergies through fungal growth." data-ml="ചുവരുകളിൽ നനവ് പടരാനും ഫംഗസ് വളരാനും കാരണമാകുന്നു. ഇത് ആസ്ത്മ, അലർജി എന്നിവയ്ക്ക് വഴിവെക്കാം.">ചുവരുകളിൽ നനവ് പടരാനും ഫംഗസ് വളരാനും...</p>
+            </div>
+            <p class="lang" data-en="...and 5 other critical issues including tile falling, heavy structural load, and long curing time." data-ml="...കൂടാതെ ടൈലുകൾ വീഴൽ, അധിക ഭാരം, പണി താമസം, ആരോഗ്യപ്രശ്നങ്ങൾ തുടങ്ങി മറ്റ് ഗുരുതരമായ 5 പ്രശ്നങ്ങൾ കൂടി സാധാരണ സിമന്റ് പണിയിലുണ്ട്.">...കൂടാതെ ടൈലുകൾ വീഴൽ, അധിക ഭാരം...</p>
+        </div>
 
-<div class="form-group">
-<label>WhatsApp (optional)</label>
-<input id="whatsapp" maxlength="10" inputmode="numeric" oninput="numOnly(this)">
-<span class="error-text">Invalid number</span>
-</div>
+        <h2 class="lang" data-en="⚖️ Technical Comparison" data-ml="⚖️ സാങ്കേതിക താരതമ്യം: സിമന്റ് vs H4">⚖️ സാങ്കേതിക താരതമ്യം</h2>
+        <div class="table-wrapper">
+            <table>
+                <tr>
+                    <th class="lang" data-en="Feature" data-ml="സവിശേഷതകൾ">സവിശേഷതകൾ</th>
+                    <th class="lang" data-en="Ordinary Cement" data-ml="സിമന്റ് പണി">സിമന്റ് പണി</th>
+                    <th>H4 Adhesive</th>
+                </tr>
+                <tr>
+                    <td class="lang" data-en="Bond Strength" data-ml="ബോണ്ട് ശക്തി">ബോണ്ട് ശക്തി</td>
+                    <td>0.5 - 1 MPa</td>
+                    <td>> 1.5 MPa</td>
+                </tr>
+                <tr>
+                    <td class="lang" data-en="Installation Speed" data-ml="വേഗത">വേഗത</td>
+                    <td>8-10 sq.m/day</td>
+                    <td>25-30 sq.m/day</td>
+                </tr>
+                <tr>
+                    <td class="lang" data-en="Waterproof" data-ml="വാട്ടർപ്രൂഫ്">വാട്ടർപ്രൂഫ്</td>
+                    <td>No</td>
+                    <td>Yes (Aqua-Shield)</td>
+                </tr>
+            </table>
+        </div>
 
-<div class="form-group">
-<label>Pincode (6 digit) *</label>
-<input id="pincode" maxlength="6" inputmode="numeric" oninput="numOnly(this)" required>
-<span class="error-text">6 digit pincode required</span>
-</div>
+        <div class="order-sheet">
+            <h2 style="text-align:center;">OFFICIAL ORDER SHEET</h2>
+            <div style="margin-bottom:15px;">
+                <label>Name</label><input type="text" id="name" style="width:100%; padding:10px;">
+            </div>
+            <div style="margin-bottom:15px;">
+                <label>WhatsApp</label><input type="tel" id="wa" style="width:100%; padding:10px;">
+            </div>
+            <div style="margin-bottom:15px;">
+                <label>Quantity (Bags)</label><input type="number" id="qty" style="width:100%; padding:10px;">
+            </div>
+            <button onclick="order()" style="width:100%; padding:15px; background:var(--dark-blue); color:white; font-weight:bold; border:none; border-radius:10px; cursor:pointer;">CONFIRM ORDER</button>
+        </div>
+    </div>
 
-<div class="form-group">
-<label>District *</label>
-<input id="district" required>
-</div>
+    <div class="footer">
+        <p><strong>AV Chem Chemical & Manufacturing</strong></p>
+        <p>Mukkilapeedika, Kannamkulam, PO. BP Angadi, Tirur, Malappuram.</p>
+        <p>📞 +91 79073 44030 | 💬 97458 38382</p>
+        <p>📧 avchemtirur@gmail.com | 🌐 www.avchem.in</p>
+        <p style="margin-top:20px; opacity:0.6;">© Bond. Believe. Build.</p>
+    </div>
 
-<div class="form-group full">
-<label>State *</label>
-<input id="state" value="Kerala" required>
-</div>
-
-<div class="form-group full">
-<label>Tile adhesive ചെയ്യേണ്ട സ്ഥലം *</label>
-<select id="place" onchange="toggleSub()" required>
-<option value="">Select</option>
-<option>Home</option>
-<option>Office</option>
-<option>Shop</option>
-<option>Building</option>
-<option>Other</option>
-</select>
-</div>
-
-<div class="form-group full" id="subBox" style="display:none">
-<label>Work Type *</label>
-<select id="workType" required>
-<option value="">Select</option>
-<option>Marble</option>
-<option>Granite</option>
-<option>Marbonite</option>
-<option>Floor</option>
-<option>Wall</option>
-<option>Bathroom</option>
-<option>Other</option>
-</select>
-</div>
-
-<div class="form-group full">
-<label>Quantity (1 – 1000000) *</label>
-<input id="qty" type="number" min="1" max="1000000" inputmode="numeric" required>
-</div>
-
-</div>
-
-<div class="buttons">
-<button type="button" class="confirm" onclick="submitOrder()">CONFIRM</button>
-<button type="reset" class="cancel">CANCEL</button>
-</div>
-
-<button type="button" class="share" id="shareBtn" onclick="shareOrder()">SHARE ORDER</button>
-
-</form>
-</div>
-
-<script>
-function numOnly(el){
- el.value=el.value.replace(/\D/g,'');
-}
-
-function syncWA(){
- if(mobile.value.length===10){
-  whatsapp.value=mobile.value;
- }
-}
-
-function toggleSub(){
- subBox.style.display=place.value?'block':'none';
-}
-
-function submitOrder(){
- let valid=true;
- document.querySelectorAll('[required]').forEach(f=>{
-  if(!f.value){
-   f.classList.add('invalid');
-   valid=false;
-  }else{
-   f.classList.remove('invalid');
-  }
- });
-
- if(mobile.value.length!==10){mobile.classList.add('invalid');valid=false}
- if(whatsapp.value && whatsapp.value.length!==10){whatsapp.classList.add('invalid');valid=false}
- if(pincode.value.length!==6){pincode.classList.add('invalid');valid=false}
-
- if(!valid){
-  alert("Please fill all required fields correctly");
-  return;
- }
-
- let msg=`*H4 TILE ADHESIVE ORDER*
-Name: ${name.value}
-Address: ${address.value}
-City: ${city.value}
-Mobile: ${mobile.value}
-Work: ${place.value} - ${workType.value}
-Qty: ${qty.value}`;
-
- window.open(`https://wa.me/919745838382?text=${encodeURIComponent(msg)}`,'_blank');
-
- if(whatsapp.value){
-  setTimeout(()=>{
-   window.open(`https://wa.me/91${whatsapp.value}?text=${encodeURIComponent(msg)}`,'_blank');
-  },800);
- }
-
- shareBtn.style.display='block';
-}
-
-function shareOrder(){
- navigator.share({
-  title:'H4 Order',
-  text:'H4 Tile Adhesive Order',
-  url:location.href
- });
-}
-</script>
-
+    <script>
+        function setLang(l){
+            document.querySelectorAll('.lang').forEach(e => e.innerText = e.getAttribute('data-'+l));
+        }
+        function order(){
+            const n = document.getElementById('name').value;
+            const w = document.getElementById('wa').value;
+            const q = document.getElementById('qty').value;
+            window.open(`https://wa.me/919745838382?text=New Order:%0AName: ${n}%0AWA: ${w}%0AQty: ${q}`);
+        }
+    </script>
 </body>
 </html>
+
