@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>H4 Tile Adhesive - AV Chem</title>
+    <title>H4 Tile Adhesive - AV Chem Official</title>
     <style>
         :root {
             --primary-yellow: #f1e311;
@@ -18,9 +18,10 @@
             padding: 0;
             line-height: 1.6;
             background-color: #fff;
+            color: #333;
         }
 
-        /* Header & Language Bar */
+        /* Top Navigation */
         .top-bar {
             background: var(--primary-yellow);
             padding: 10px 20px;
@@ -30,14 +31,19 @@
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
+        .logo-area { font-weight: 900; font-size: 1.2rem; color: var(--dark-blue); }
+
         .lang-btns button {
-            padding: 5px 15px;
-            border: 1px solid #333;
+            padding: 6px 12px;
+            border: 2px solid var(--dark-blue);
             cursor: pointer;
             background: white;
             font-weight: bold;
+            border-radius: 4px;
+            transition: 0.3s;
         }
 
         .lang-btns button.active {
@@ -45,27 +51,27 @@
             color: white;
         }
 
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 40px 20px;
-            background: #fff;
+        /* Content Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
         }
 
-        .logo-area img {
-            max-width: 150px;
-        }
+        .hero { text-align: center; padding: 30px 0; }
+        h1 { color: var(--dark-blue); font-size: 2rem; margin-bottom: 10px; }
+        .sub-headline { font-style: italic; color: #555; }
 
-        h1 { color: var(--dark-blue); font-size: 24px; font-weight: bold; }
+        /* Description Sections */
+        .desc-section { margin-bottom: 30px; }
+        h2 { border-left: 5px solid var(--primary-yellow); padding-left: 10px; color: var(--dark-blue); }
 
-        /* Image Grid (3x3 Layout) */
+        /* Grid System (3x3) */
         .grid-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 15px;
-            padding: 20px;
-            max-width: 1000px;
-            margin: 0 auto;
+            margin: 20px 0;
         }
 
         .grid-item {
@@ -73,248 +79,313 @@
             padding: 15px;
             text-align: center;
             background: #fafafa;
+            border-radius: 8px;
+            transition: transform 0.2s;
         }
 
-        .grid-item img {
-            width: 60px;
-            height: 60px;
-            margin-bottom: 10px;
-        }
+        .grid-item:hover { transform: translateY(-5px); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .grid-item img { width: 50px; height: 50px; margin-bottom: 10px; }
 
-        .grid-item h3 { font-size: 16px; margin: 5px 0; color: #333; }
-        .grid-item p { font-size: 12px; color: #666; }
+        /* Comparison Table */
+        .table-wrapper { overflow-x: auto; margin: 20px 0; }
+        table { width: 100%; border-collapse: collapse; background: #fff; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background: var(--dark-blue); color: white; }
+        tr:nth-child(even) { background: #f9f9f9; }
 
-        /* Form Styling */
-        .order-sheet {
-            max-width: 600px;
-            margin: 30px auto;
-            padding: 20px;
-            border: 2px solid var(--primary-yellow);
+        /* Product Cards */
+        .product-card {
+            background: #fdfdfd;
+            border: 1px solid #eee;
+            padding: 15px;
+            margin-bottom: 15px;
             border-radius: 8px;
         }
+        .product-card strong { color: #d4af37; font-size: 1.1rem; }
 
-        .form-group { margin-bottom: 15px; }
-
-        label { display: block; font-weight: bold; margin-bottom: 5px; }
-
-        input, select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        input:invalid { border: 1px solid #ccc; }
-        .error-border { border: 2px solid var(--error-red) !important; }
-
-        .btn-container {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .btn-confirm {
-            background: #0056b3;
-            color: white;
-            flex: 2;
-            padding: 12px;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .btn-cancel {
-            background: #888;
-            color: white;
-            flex: 1;
-            padding: 12px;
-            border: none;
-            cursor: pointer;
-        }
-
-        .footer {
-            background: var(--dark-blue);
-            color: white;
-            text-align: center;
-            padding: 20px;
+        /* Order Sheet */
+        .order-sheet {
+            background: #fff;
+            border: 3px solid var(--primary-yellow);
+            padding: 25px;
+            border-radius: 12px;
             margin-top: 40px;
         }
 
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; }
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 1rem;
+        }
+
+        .error-border { border: 2px solid var(--error-red) !important; background-color: #fff8f8; }
+
+        .btn-container { display: flex; gap: 10px; margin-top: 20px; }
+        .btn-confirm { background: #0056b3; color: white; flex: 2; padding: 15px; border: none; cursor: pointer; font-weight: bold; font-size: 1.1rem; border-radius: 5px; }
+        .btn-cancel { background: #888; color: white; flex: 1; padding: 15px; border: none; cursor: pointer; border-radius: 5px; }
+        .btn-share { background: #25D366; color: white; width: 100%; padding: 12px; border: none; cursor: pointer; margin-top: 10px; font-weight: bold; border-radius: 5px; display: none; }
+
+        .footer { background: var(--dark-blue); color: white; text-align: center; padding: 30px; margin-top: 50px; }
+
         @media (max-width: 600px) {
             .grid-container { grid-template-columns: repeat(1, 1fr); }
+            h1 { font-size: 1.5rem; }
         }
     </style>
 </head>
 <body>
 
     <div class="top-bar">
-        <div class="logo-area"><strong>H4 TILE ADHESIVE</strong></div>
+        <div class="logo-area">H4 TILE ADHESIVE</div>
         <div class="lang-btns">
             <button id="btn-en" class="active" onclick="setLang('en')">English</button>
             <button id="btn-ml" onclick="setLang('ml')">മലയാളം</button>
         </div>
     </div>
 
-    <div class="hero">
-        <h1 class="lang" data-en="H4 Tile Adhesive: Strength of Chemistry!" data-ml="H4 Tile Adhesive: വിള്ളലുകളില്ലാത്ത ഉറപ്പ്!">H4 Tile Adhesive: Strength of Chemistry!</h1>
-        <p class="lang" data-en="AV Chem Chemical & Manufacturing proudly presents..." data-ml="AV Chem Chemical & Manufacturing അഭിമാനപൂർവ്വം അവതരിപ്പിക്കുന്നു...">AV Chem Chemical & Manufacturing proudly presents...</p>
-    </div>
-
-    <div class="grid-container">
-        <div class="grid-item">
-            <img src="https://cdn-icons-png.flaticon.com/512/1048/1048953.png" alt="Bond">
-            <h3 class="lang" data-en="Superior Bonding" data-ml="അസാമാന്യ കരുത്ത്">Superior Bonding</h3>
-            <p class="lang" data-en="Chemical Fusion for hold" data-ml="കെമിക്കൽ ബോണ്ടിംഗ് ഉറപ്പ്">Chemical Fusion for hold</p>
-        </div>
-        <div class="grid-item">
-            <img src="https://cdn-icons-png.flaticon.com/512/3105/3105807.png" alt="Waterproof">
-            <h3 class="lang" data-en="100% Waterproof" data-ml="100% വാട്ടർപ്രൂഫ്">100% Waterproof</h3>
-            <p class="lang" data-en="Defends against moisture" data-ml="ഈർപ്പത്തിൽ നിന്ന് സംരക്ഷണം">Defends against moisture</p>
-        </div>
-        <div class="grid-item">
-            <img src="https://cdn-icons-png.flaticon.com/512/1598/1598238.png" alt="Crack">
-            <h3 class="lang" data-en="Crack Resistant" data-ml="വിള്ളലുകളെ പ്രതിരോധിക്കും">Crack Resistant</h3>
-            <p class="lang" data-en="High flexural strength" data-ml="കൂടിയ ഇലാസ്തികത">High flexural strength</p>
-        </div>
-        <div class="grid-item">
-            <img src="https://cdn-icons-png.flaticon.com/512/609/609803.png" alt="Normal">
-            <h3 class="lang" data-en="Normal Tiles" data-ml="നോർമൽ ടൈലുകൾ">Normal Tiles</h3>
-            <p class="lang" data-en="Ceramic specialist" data-ml="സെറാമിക് സ്പെഷ്യലിസ്റ്റ്">Ceramic specialist</p>
-        </div>
-        <div class="grid-item">
-            <img src="https://cdn-icons-png.flaticon.com/512/2163/2163350.png" alt="Vitrified">
-            <h3 class="lang" data-en="Marbonite" data-ml="മാർബോണൈറ്റ്">Marbonite</h3>
-            <p class="lang" data-en="For large formats" data-ml="വലിയ ടൈലുകൾക്ക്">For large formats</p>
-        </div>
-        <div class="grid-item">
-            <img src="https://cdn-icons-png.flaticon.com/512/4300/4300431.png" alt="Marble">
-            <h3 class="lang" data-en="Marble & Granite" data-ml="മാർബിൾ & ഗ്രാനൈറ്റ്">Marble & Granite</h3>
-            <p class="lang" data-en="Heavy duty hold" data-ml="കൂടുതൽ ഭാരം താങ്ങാൻ">Heavy duty hold</p>
-        </div>
-        <div class="grid-item">
-            <img src="https://cdn-icons-png.flaticon.com/512/2950/2950558.png" alt="Bathroom">
-            <h3 class="lang" data-en="Bathrooms" data-ml="ബാത്ത്റൂമുകൾ">Bathrooms</h3>
-            <p class="lang" data-en="Zero-slip formula" data-ml="തെന്നി മാറില്ല">Zero-slip formula</p>
-        </div>
-        <div class="grid-item">
-            <img src="https://cdn-icons-png.flaticon.com/512/3039/3039043.png" alt="Curing">
-            <h3 class="lang" data-en="No Curing" data-ml="നനയ്ക്കേണ്ടതില്ല">No Curing</h3>
-            <p class="lang" data-en="Saves time & water" data-ml="സമയവും ലാഭിക്കാം">Saves time & water</p>
-        </div>
-        <div class="grid-item">
-            <img src="https://cdn-icons-png.flaticon.com/512/916/916771.png" alt="Durability">
-            <h3 class="lang" data-en="10+ Year Life" data-ml="10 വർഷത്തെ ഈട്">10+ Year Life</h3>
-            <p class="lang" data-en="Decade long protection" data-ml="പതിറ്റാണ്ടുകളുടെ സംരക്ഷണം">Decade long protection</p>
-        </div>
-    </div>
-
-    <div class="order-sheet" id="order-form">
-        <h2 style="text-align:center;" class="lang" data-en="Order Sheet" data-ml="ഓർഡർ ഷീറ്റ്">Order Sheet</h2>
-        
-        <div class="form-group">
-            <label class="lang" data-en="Name" data-ml="പേര്">Name</label>
-            <input type="text" id="cust-name" required>
+    <div class="container">
+        <div class="hero">
+            <h1 class="lang" data-en="H4 Tile Adhesive: Unbeatable Strength, Protection for Generations!" data-ml="H4 Tile Adhesive: വിള്ളലുകളില്ലാത്ത ഉറപ്പ്, തലമുറകൾ കൈമാറുന്ന കരുത്ത്!">H4 Tile Adhesive: Unbeatable Strength, Protection for Generations!</h1>
+            <p class="sub-headline lang" data-en="(AV Chem Chemical & Manufacturing Proudly Presents)" data-ml="(AV Chem Chemical & Manufacturing അഭിമാനപൂർവ്വം അവതരിപ്പിക്കുന്നു)">(AV Chem Chemical & Manufacturing Proudly Presents)</p>
+            <p class="lang" data-en="You are not just building a house, you are building a legacy. Your dream tiles need more than just a cement mix; they need the scientific power of H4 Tile Adhesive." data-ml="വീട് പണിയുകയല്ല, ഒരു പൈതൃകം കെട്ടിപ്പടുക്കുകയാണ് നിങ്ങൾ. ആ സ്വപ്നത്തിന് മാറ്റുകൂട്ടുന്ന ടൈലുകൾക്ക് വേണ്ടത് വെറുമൊരു സിമന്റ് കൂട്ടല്ല, ആധുനിക രസതന്ത്രത്തിന്റെ കരുത്തുള്ള H4 Tile Adhesive ആണ്.">You are not just building a house, you are building a legacy...</p>
         </div>
 
-        <div class="form-group">
-            <label class="lang" data-en="Address" data-ml="വിലാസം">Address</label>
-            <input type="text" id="cust-address" required>
+        <div class="desc-section">
+            <h2 class="lang" data-en="🛠️ Why H4 Tile Adhesive? (The Science of Strong Bonding)" data-ml="🛠️ എന്തുകൊണ്ട് H4 Tile Adhesive? (The Science of Strong Bonding)">🛠️ Why H4 Tile Adhesive?</h2>
+            <p class="lang" data-en="Ordinary cement layers dry up over time, creating hollow spaces beneath tiles. This leads to cracking and loosening. H4's 'Advanced Polymer Fusion' integrates concrete and tiles into a single stone-like structure." data-ml="സാധാരണ സിമന്റ് പാളികൾ കാലക്രമേണ വരണ്ടുണങ്ങുകയും ടൈലുകൾക്കിടയിൽ വായു അറകൾ (Hollow space) രൂപപ്പെടുകയും ചെയ്യുന്നു. ഇത് ടൈലുകൾ പൊട്ടാനും ഇളകാനും കാരണമാകുന്നു. എന്നാൽ H4-ന്റെ 'Advanced Polymer Fusion' കോൺക്രീറ്റിനെയും ടൈലിനെയും ഒരൊറ്റ ശിലപോലെ ഉറപ്പിച്ചു നിർത്തുന്നു.">Ordinary cement layers...</p>
         </div>
 
-        <div class="form-group">
-            <label class="lang" data-en="City" data-ml="സിറ്റി">City</label>
-            <input type="text" id="cust-city" required>
+        <div class="grid-container">
+            <div class="grid-item">
+                <img src="https://cdn-icons-png.flaticon.com/512/1048/1048953.png">
+                <h3 class="lang" data-en="Superior Bonding" data-ml="അസാമാന്യ കരുത്ത്">Superior Bonding</h3>
+                <p class="lang" data-en="Chemical Fusion" data-ml="കെമിക്കൽ ബോണ്ടിംഗ്">Chemical Fusion</p>
+            </div>
+            <div class="grid-item">
+                <img src="https://cdn-icons-png.flaticon.com/512/3105/3105807.png">
+                <h3 class="lang" data-en="100% Waterproof" data-ml="100% വാട്ടർപ്രൂഫ്">100% Waterproof</h3>
+                <p class="lang" data-en="Moisture Defense" data-ml="ഈർപ്പ പ്രതിരോധം">Moisture Defense</p>
+            </div>
+            <div class="grid-item">
+                <img src="https://cdn-icons-png.flaticon.com/512/1598/1598238.png">
+                <h3 class="lang" data-en="Crack Resistant" data-ml="വിള്ളൽ പ്രതിരോധം">Crack Resistant</h3>
+                <p class="lang" data-en="High Elasticity" data-ml="കൂടിയ ഇലാസ്തികത">High Elasticity</p>
+            </div>
+            <div class="grid-item">
+                <img src="https://cdn-icons-png.flaticon.com/512/609/609803.png">
+                <h3 class="lang" data-en="Normal Tiles" data-ml="നോർമൽ ടൈലുകൾ">Normal Tiles</h3>
+                <p class="lang" data-en="Ceramic Expert" data-ml="സെറാമിക് സ്പെഷ്യലിസ്റ്റ്">Ceramic Expert</p>
+            </div>
+            <div class="grid-item">
+                <img src="https://cdn-icons-png.flaticon.com/512/2163/2163350.png">
+                <h3 class="lang" data-en="Marbonite" data-ml="മാർബോണൈറ്റ്">Marbonite</h3>
+                <p class="lang" data-en="Large Format Tiles" data-ml="വലിയ ടൈലുകൾക്ക്">Large Format Tiles</p>
+            </div>
+            <div class="grid-item">
+                <img src="https://cdn-icons-png.flaticon.com/512/4300/4300431.png">
+                <h3 class="lang" data-en="Marble/Granite" data-ml="മാർബിൾ/ഗ്രാനൈറ്റ്">Marble/Granite</h3>
+                <p class="lang" data-en="Heavy Duty Hold" data-ml="ഭാരമേറിയ കല്ലുകൾക്ക്">Heavy Duty Hold</p>
+            </div>
+            <div class="grid-item">
+                <img src="https://cdn-icons-png.flaticon.com/512/2950/2950558.png">
+                <h3 class="lang" data-en="Bathrooms" data-ml="ബാത്ത്റൂമുകൾ">Bathrooms</h3>
+                <p class="lang" data-en="Anti-Slip" data-ml="തെന്നി മാറില്ല">Anti-Slip</p>
+            </div>
+            <div class="grid-item">
+                <img src="https://cdn-icons-png.flaticon.com/512/3039/3039043.png">
+                <h3 class="lang" data-en="No Curing" data-ml="നനയ്ക്കേണ്ടതില്ല">No Curing</h3>
+                <p class="lang" data-en="Saves Water" data-ml="വെള്ളം ലാഭിക്കാം">Saves Water</p>
+            </div>
+            <div class="grid-item">
+                <img src="https://cdn-icons-png.flaticon.com/512/916/916771.png">
+                <h3 class="lang" data-en="Long Life" data-ml="ദീർഘകാല ഈട്">Long Life</h3>
+                <p class="lang" data-en="10+ Year Guarantee" data-ml="10 വർഷം ഗ്യാരണ്ടി">10+ Year Guarantee</p>
+            </div>
         </div>
 
-        <div class="form-group">
-            <label class="lang" data-en="Landmark" data-ml="ലാാൻഡ് മാർക്ക്">Landmark</label>
-            <input type="text" id="cust-landmark" required>
+        <div class="desc-section">
+            <h2 class="lang" data-en="💎 Special Formulas (Product Range)" data-ml="💎 ഓരോ പ്രതലത്തിനും കൃത്യമായ ഫോർമുല (Product Range)">💎 Product Range</h2>
+            
+            <div class="product-card">
+                <strong>1. 🏠 H4 Normal:</strong>
+                <p class="lang" data-en="Best for interior walls and floors. Provides extraordinary strength at low cost." data-ml="ഇന്റീരിയർ ഭിത്തികൾക്കും തറകൾക്കും അനുയോജ്യം. കുറഞ്ഞ ചിലവിൽ മികച്ച കരുത്ത്.">Best for interior...</p>
+            </div>
+            <div class="product-card">
+                <strong>2. ✨ H4 Marbonite:</strong>
+                <p class="lang" data-en="Specially made for vitrified tiles. High Sag Resistance ensures perfect alignment." data-ml="വിട്രിഫൈഡ്, മാർബോണൈറ്റ് ടൈലുകൾക്കായി പ്രത്യേകം നിർമ്മിച്ചത്. ടൈലുകൾ തെന്നി മാറില്ല.">Specially made for vitrified...</p>
+            </div>
+            <div class="product-card">
+                <strong>3. 🏛️ H4 Marble & Granite:</strong>
+                <p class="lang" data-en="Exceptional load-bearing capacity for heavy natural stones." data-ml="ഭാരമേറിയ കല്ലുകൾക്ക് ഭയമില്ലാത്ത പിടുത്തം. കല്ലുകളുടെ നിറം മാറാതെ സംരക്ഷിക്കുന്നു.">Exceptional load-bearing...</p>
+            </div>
+            <div class="product-card">
+                <strong>4. 🚿 H4 Aqua-Shield:</strong>
+                <p class="lang" data-en="Waterproof formula for bathrooms and pools. Prevents leaks permanently." data-ml="ബാത്ത്റൂമുകൾ, നീന്തൽക്കുളങ്ങൾ എന്നിവയ്ക്കായി. 100% വാട്ടർപ്രൂഫിംഗ്.">Waterproof formula...</p>
+            </div>
         </div>
 
-        <div class="form-group">
-            <label class="lang" data-en="Mobile Number" data-ml="മൊബൈൽ നമ്പർ">Mobile Number</label>
-            <input type="tel" id="cust-mobile" pattern="[0-9]{10}" placeholder="10 Digits" required oninput="syncWhatsapp(this.value)">
+        <div class="desc-section">
+            <h2 class="lang" data-en="📊 H4 Comparison: Number One!" data-ml="📊 H4-ന്റെ മേന്മകൾ: താരതമ്യം ചെയ്യുമ്പോൾ ഒന്നാമൻ!">📊 H4 Comparison</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="lang" data-en="Features" data-ml="സവിശേഷതകൾ">Features</th>
+                            <th class="lang" data-en="Ordinary Cement" data-ml="സാധാരണ സിമന്റ്">Ordinary Cement</th>
+                            <th class="lang" data-en="H4 Adhesive" data-ml="H4 Adhesive">H4 Adhesive</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="lang" data-en="Bonding Strength" data-ml="പിടുത്തം">Bonding Strength</td>
+                            <td class="lang" data-en="Low" data-ml="കുറവ്">Low</td>
+                            <td class="lang" data-en="Superior Chemical Bond" data-ml="അതിശക്തമായ കെമിക്കൽ ബോണ്ട്">Superior</td>
+                        </tr>
+                        <tr>
+                            <td class="lang" data-en="Hollow Sound" data-ml="പൊള്ളയായ ശബ്ദം">Hollow Sound</td>
+                            <td class="lang" data-en="Possible" data-ml="സാധ്യത കൂടുതൽ">Possible</td>
+                            <td class="lang" data-en="Zero Hollow Space" data-ml="ശബ്ദം ഉണ്ടാവില്ല">Zero</td>
+                        </tr>
+                        <tr>
+                            <td class="lang" data-en="Speed of Work" data-ml="നിർമ്മാണ വേഗത">Speed of Work</td>
+                            <td class="lang" data-en="Slow" data-ml="സാവധാനം">Slow</td>
+                            <td class="lang" data-en="3x Faster" data-ml="3 മടങ്ങ് വേഗത്തിൽ">3x Faster</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
-        <div class="form-group">
-            <label class="lang" data-en="WhatsApp Number" data-ml="വാട്സാപ്പ് നമ്പർ">WhatsApp Number</label>
-            <input type="tel" id="cust-whatsapp" pattern="[0-9]{10}" placeholder="10 Digits" required>
+        <div class="desc-section">
+            <h2 class="lang" data-en="🌟 H4 Benefits" data-ml="🌟 H4 നൽകുന്ന 4 മാസ്സ് ബെനിഫിറ്റ്സ്">🌟 Benefits</h2>
+            <ul>
+                <li class="lang" data-en="Micro Waterproofing: Prevents moisture spread." data-ml="മൈക്രോ വാട്ടർപ്രൂഫിംഗ്: ഈർപ്പം പടരുന്നത് തടയുന്നു.">Micro Waterproofing</li>
+                <li class="lang" data-en="Crack Bridging: Acts as a shock absorber for concrete movements." data-ml="ഫ്ലെക്സിബിലിറ്റി: വിള്ളലുകൾക്ക് മൂടാൻ സഹായിക്കുന്നു.">Crack Bridging</li>
+                <li class="lang" data-en="No Curing: No need to spray water after fixing." data-ml="ക്യൂറിംഗ് ആവശ്യമില്ല: പണി കഴിഞ്ഞ് നനയ്ക്കേണ്ടതില്ല.">No Curing</li>
+                <li class="lang" data-en="Anti-Fungal: Keeps bathroom joints clean from mold." data-ml="പൂപ്പൽ വിരുദ്ധം: പൂപ്പൽ വരാതെ സംരക്ഷിക്കുന്നു.">Anti-Fungal</li>
+            </ul>
         </div>
 
-        <div class="form-group">
-            <label class="lang" data-en="Pin Code" data-ml="പിൻ കോഡ്">Pin Code</label>
-            <input type="tel" id="cust-pin" pattern="[0-9]{6}" placeholder="6 Digits" required>
-        </div>
+        <div class="order-sheet" id="order-form">
+            <h2 style="text-align:center;" class="lang" data-en="Quick Order Form" data-ml="ദ്രുത ഓർഡർ ഷീറ്റ്">Quick Order Form</h2>
+            <p style="text-align:center; color:#666;" class="lang" data-en="Fill all fields to confirm" data-ml="സ്ഥിരീകരിക്കാൻ എല്ലാ ഭാഗവും പൂരിപ്പിക്കുക">Fill all fields</p>
+            
+            <div class="form-group">
+                <label class="lang" data-en="Name" data-ml="പേര്">Name</label>
+                <input type="text" id="cust-name" required>
+            </div>
 
-        <div class="form-group">
-            <label class="lang" data-en="District" data-ml="ജില്ല">District</label>
-            <input type="text" id="cust-district" required>
-        </div>
+            <div class="form-group">
+                <label class="lang" data-en="Full Address" data-ml="വിലാസം">Address</label>
+                <input type="text" id="cust-address" required>
+            </div>
 
-        <div class="form-group">
-            <label class="lang" data-en="Place of Work" data-ml="അഡീസീവ് ചെയ്യേണ്ട സ്ഥലം">Place of Work</label>
-            <select id="work-place" onchange="showSubOptions()" required>
-                <option value="">Select</option>
-                <option value="Home">Home</option>
-                <option value="Office">Office</option>
-                <option value="Shop">Shop</option>
-                <option value="Building">Building</option>
-                <option value="Other">Other</option>
-            </select>
-        </div>
+            <div class="form-group">
+                <label class="lang" data-en="City" data-ml="സിറ്റി">City</label>
+                <input type="text" id="cust-city" required>
+            </div>
 
-        <div id="sub-options-div" class="form-group" style="display:none;">
-            <label class="lang" data-en="Tile Type" data-ml="ടൈൽ ഇനം">Tile Type</label>
-            <select id="tile-type" required>
-                <option value="">Select Type</option>
-                <option value="Marble">Marble</option>
-                <option value="Granite">Granite</option>
-                <option value="Marbonite">Marbonite</option>
-                <option value="Floor">Floor</option>
-                <option value="Wall">Wall</option>
-                <option value="Bathroom">Bathroom</option>
-                <option value="Other">Other</option>
-            </select>
-        </div>
+            <div class="form-group">
+                <label class="lang" data-en="Landmark" data-ml="ലാാൻഡ് മാർക്ക്">Landmark</label>
+                <input type="text" id="cust-landmark" required>
+            </div>
 
-        <div class="form-group">
-            <label class="lang" data-en="Quantity" data-ml="അളവ് (Quantity)">Quantity</label>
-            <input type="number" id="cust-qty" min="1" max="1000000" required>
-        </div>
+            <div class="form-group">
+                <label class="lang" data-en="Mobile Number" data-ml="മൊബൈൽ നമ്പർ">Mobile</label>
+                <input type="tel" id="cust-mobile" pattern="[0-9]{10}" placeholder="10 Digits" required oninput="syncWhatsapp(this.value)">
+            </div>
 
-        <div class="btn-container">
-            <button class="btn-confirm lang" data-en="Confirm" data-ml="സ്ഥിരീകരിക്കുക" onclick="validateAndSend()">Confirm</button>
-            <button class="btn-cancel lang" data-en="Cancel" data-ml="റദ്ദാക്കുക" onclick="window.location.reload()">Cancel</button>
-        </div>
-        <div id="share-btn-div" style="display:none; margin-top:10px;">
-            <button class="btn-confirm" style="background:#25D366;" onclick="shareOrder()">Share Order</button>
+            <div class="form-group">
+                <label class="lang" data-en="WhatsApp (Optional)" data-ml="വാട്സാപ്പ് (നിർബന്ധമില്ല)">WhatsApp</label>
+                <input type="tel" id="cust-whatsapp" pattern="[0-9]{10}" placeholder="10 Digits" required>
+            </div>
+
+            <div class="form-group">
+                <label class="lang" data-en="Pin Code" data-ml="പിൻ കോഡ്">Pin Code</label>
+                <input type="tel" id="cust-pin" pattern="[0-9]{6}" placeholder="6 Digits" required>
+            </div>
+
+            <div class="form-group">
+                <label class="lang" data-en="District" data-ml="ജില്ല">District</label>
+                <input type="text" id="cust-district" required>
+            </div>
+
+            <div class="form-group">
+                <label class="lang" data-en="Selection (Home/Office...)" data-ml="ചെയ്യേണ്ട സ്ഥലം (വീട്/ഓഫീസ്...)">Selection</label>
+                <select id="work-place" onchange="showSubOptions()" required>
+                    <option value="">Select</option>
+                    <option value="Home">Home</option>
+                    <option value="Office">Office</option>
+                    <option value="Shop">Shop</option>
+                    <option value="Building">Building</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div id="sub-options-div" class="form-group" style="display:none;">
+                <label class="lang" data-en="Surface/Tile Type" data-ml="ഏത് തരം ഉപരിതലം?">Tile Type</label>
+                <select id="tile-type" required>
+                    <option value="">Select</option>
+                    <option value="Marble">Marble</option>
+                    <option value="Granite">Granite</option>
+                    <option value="Marbonite">Marbonite</option>
+                    <option value="Floor">Floor</option>
+                    <option value="Wall">Wall</option>
+                    <option value="Bathroom">Bathroom</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="lang" data-en="Quantity (Bags/Units)" data-ml="ആവശ്യമുള്ള അളവ് (Quantity)">Quantity</label>
+                <input type="number" id="cust-qty" min="1" max="1000000" required>
+            </div>
+
+            <div class="btn-container">
+                <button class="btn-confirm lang" data-en="Confirm Order" data-ml="ഓർഡർ സ്ഥിരീകരിക്കുക" onclick="validateAndSend()">Confirm Order</button>
+                <button class="btn-cancel lang" data-en="Cancel" data-ml="റദ്ദാക്കുക" onclick="window.location.reload()">Cancel</button>
+            </div>
+            
+            <button id="btn-share" class="btn-share" onclick="shareOrder()">Share Order Info</button>
         </div>
     </div>
 
     <div class="footer">
-        <p>© AV Chem Chemical & Manufacturing. All Rights Reserved.</p>
-        <p>Tirur, Malappuram | +91 9745838382</p>
+        <p><strong>AV Chem Chemical & Manufacturing</strong></p>
+        <p>Mukkilapeedika, Kannamkulam, PO. BP Angadi, Tirur, Malappuram, Kerala - 676102</p>
+        <p>📞 +91 7907344030, 9745838382 | 📧 avchemtirur@gmail.com</p>
+        <hr style="opacity: 0.2;">
+        <p>© 2024 AV Chem. All Rights Reserved.</p>
     </div>
 
     <script>
+        // Language Switcher Logic
         function setLang(lang) {
             document.querySelectorAll('.lang').forEach(el => {
-                el.innerText = el.getAttribute('data-' + lang);
+                const text = el.getAttribute('data-' + lang);
+                if(text) el.innerText = text;
             });
             document.getElementById('btn-en').className = (lang === 'en' ? 'active' : '');
             document.getElementById('btn-ml').className = (lang === 'ml' ? 'active' : '');
         }
 
+        // Dropdown Logic
         function showSubOptions() {
-            const wp = document.getElementById('work-place').value;
-            document.getElementById('sub-options-div').style.display = wp ? 'block' : 'none';
+            const val = document.getElementById('work-place').value;
+            document.getElementById('sub-options-div').style.display = (val !== "") ? 'block' : 'none';
         }
 
+        // WhatsApp Sync
         function syncWhatsapp(val) {
             document.getElementById('cust-whatsapp').value = val;
         }
 
+        // Validation and Sending
         function validateAndSend() {
             const fields = [
                 'cust-name', 'cust-address', 'cust-city', 'cust-landmark', 
@@ -325,6 +396,9 @@
 
             fields.forEach(id => {
                 const el = document.getElementById(id);
+                // Check if hidden field is required
+                if(id === 'tile-type' && document.getElementById('work-place').value === "") return;
+
                 if (!el.value || !el.checkValidity()) {
                     el.classList.add('error-border');
                     isValid = false;
@@ -334,38 +408,44 @@
             });
 
             if (!isValid) {
-                alert("Please fill all fields correctly (Red highlighted)");
+                alert("ദയവായി എല്ലാ കോളങ്ങളും കൃത്യമായി പൂരിപ്പിക്കുക (ചുവന്ന ബോർഡർ ശ്രദ്ധിക്കുക)");
                 return;
             }
 
-            sendMessages();
-        }
-
-        function sendMessages() {
+            // WhatsApp Logic
             const name = document.getElementById('cust-name').value;
             const mobile = document.getElementById('cust-mobile').value;
             const place = document.getElementById('work-place').value;
-            const type = document.getElementById('tile-type').value;
+            const tile = document.getElementById('tile-type').value;
             const qty = document.getElementById('cust-qty').value;
-            const address = document.getElementById('cust-address').value;
+            const location = document.getElementById('cust-city').value;
 
-            const msg = `*NEW H4 ORDER*\nName: ${name}\nMobile: ${mobile}\nPlace: ${place}\nType: ${type}\nQty: ${qty}\nAddress: ${address}`;
+            const message = `*H4 TILE ADHESIVE - NEW ORDER*%0A--------------------------%0A*Name:* ${name}%0A*Mobile:* ${mobile}%0A*Place:* ${place}%0A*Type:* ${tile}%0A*Quantity:* ${qty}%0A*City:* ${location}%0A--------------------------%0A_Sent via Website Form_`;
 
-            // Send to Admin
-            window.open(`https://wa.me/919745838382?text=${encodeURIComponent(msg)}`, '_blank');
-            
-            // Show share button for customer
-            document.getElementById('share-btn-div').style.display = 'block';
-            alert("Order Confirmed! You can now share this order.");
+            // Open Admin WhatsApp
+            const adminUrl = `https://wa.me/919745838382?text=${message}`;
+            window.open(adminUrl, '_blank');
+
+            // Open Customer WhatsApp (Optional second send)
+            const custMobile = document.getElementById('cust-whatsapp').value;
+            setTimeout(() => {
+                const custUrl = `https://wa.me/91${custMobile}?text=Your H4 Order has been recorded! Thank you.`;
+                window.open(custUrl, '_blank');
+            }, 1000);
+
+            document.getElementById('btn-share').style.display = 'block';
+            alert("ഓർഡർ സ്ഥിരീകരിച്ചു! മെസ്സേജ് അയക്കാൻ നിങ്ങളുടെ വാട്സാപ്പ് തുറക്കുക.");
         }
 
         function shareOrder() {
-            const name = document.getElementById('cust-name').value;
-            const msg = `My H4 Order Confirmed! Name: ${name}`;
             if (navigator.share) {
-                navigator.share({ title: 'H4 Order', text: msg, url: window.location.href });
+                navigator.share({
+                    title: 'H4 Order Details',
+                    text: 'H4 Tile Adhesive Order Confirmed!',
+                    url: window.location.href
+                });
             } else {
-                alert("Sharing not supported on this browser.");
+                alert("Sharing not supported in this browser.");
             }
         }
     </script>
