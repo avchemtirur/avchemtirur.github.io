@@ -1,296 +1,374 @@
 <!DOCTYPE html>
-<html lang="ml">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H4 Tile Adhesive - AV Chem</title>
+    <style>
+        :root {
+            --primary-yellow: #f1e311;
+            --dark-blue: #1a2a44;
+            --light-grey: #f4f4f4;
+            --error-red: #ff0000;
+        }
 
-<title>H4 Tile Adhesive</title>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            background-color: #fff;
+        }
 
-<!-- Malayalam Font -->
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@600;700;800&display=swap" rel="stylesheet">
+        /* Header & Language Bar */
+        .top-bar {
+            background: var(--primary-yellow);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
 
-<style>
-body{
-  margin:0;
-  font-family:'Noto Sans Malayalam', sans-serif;
-  background:#f5f6ff;
-  color:#222;
-}
+        .lang-btns button {
+            padding: 5px 15px;
+            border: 1px solid #333;
+            cursor: pointer;
+            background: white;
+            font-weight: bold;
+        }
 
-/* ====== GOLD COLOR ====== */
-:root{
-  --gold:#f5c400;
-}
+        .lang-btns button.active {
+            background: var(--dark-blue);
+            color: white;
+        }
 
-/* ====== HEADER ====== */
-.header{
-  padding:25px 15px 10px;
-}
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 40px 20px;
+            background: #fff;
+        }
 
-.lang-switch{
-  display:flex;
-  gap:10px;
-}
+        .logo-area img {
+            max-width: 150px;
+        }
 
-.lang-switch button{
-  border:none;
-  padding:6px 14px;
-  border-radius:20px;
-  font-weight:700;
-  cursor:pointer;
-  background:#000;
-  color:#fff;
-}
+        h1 { color: var(--dark-blue); font-size: 24px; font-weight: bold; }
 
-.lang-switch button.active{
-  background:var(--gold);
-  color:#000;
-}
+        /* Image Grid (3x3 Layout) */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
 
-/* ====== HEADLINE ====== */
-h1{
-  margin-top:20px;
-  font-size:30px;
-  font-weight:800;
-  color:var(--gold);   /* GOLD HEADLINE */
-}
+        .grid-item {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: center;
+            background: #fafafa;
+        }
 
-/* ====== GRID ====== */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:20px;
-  padding:20px;
-}
+        .grid-item img {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 10px;
+        }
 
-.card{
-  background:#fff;
-  border-radius:15px;
-  padding:25px 15px;
-  text-align:center;
-  box-shadow:0 8px 20px rgba(0,0,0,.08);
-  border-bottom:5px solid var(--gold);
-  transition:.3s;
-}
+        .grid-item h3 { font-size: 16px; margin: 5px 0; color: #333; }
+        .grid-item p { font-size: 12px; color: #666; }
 
-.card:hover{
-  transform:translateY(-6px);
-}
+        /* Form Styling */
+        .order-sheet {
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 20px;
+            border: 2px solid var(--primary-yellow);
+            border-radius: 8px;
+        }
 
-/* ====== IMAGE ====== */
-.card img{
-  width:110px;
-  height:110px;
-  object-fit:contain;
-  margin-bottom:15px;
-}
+        .form-group { margin-bottom: 15px; }
 
-/* ====== IMAGE BELOW TEXT 20% BIG ====== */
-.card b{
-  display:block;
-  font-size:22px;   /* 20% increased */
-  font-weight:800;
-}
+        label { display: block; font-weight: bold; margin-bottom: 5px; }
 
-/* ====== ORDER BUTTON ====== */
-.order-btn{
-  display:block;
-  margin:30px auto;
-  padding:14px 40px;
-  border:none;
-  border-radius:30px;
-  background:var(--gold);
-  font-size:18px;
-  font-weight:800;
-  cursor:pointer;
-}
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
 
-/* ====== ABOUT ====== */
-.about{
-  background:#fff;
-  margin:20px;
-  padding:25px;
-  border-radius:15px;
-}
+        input:invalid { border: 1px solid #ccc; }
+        .error-border { border: 2px solid var(--error-red) !important; }
 
-.about h2{
-  color:var(--gold);
-  font-size:26px;
-  font-weight:800;
-}
+        .btn-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
 
-.about p, .about li{
-  font-size:18px;   /* 20% increased */
-  line-height:1.8;
-}
+        .btn-confirm {
+            background: #0056b3;
+            color: white;
+            flex: 2;
+            padding: 12px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
 
-.about ul{
-  padding-left:20px;
-}
+        .btn-cancel {
+            background: #888;
+            color: white;
+            flex: 1;
+            padding: 12px;
+            border: none;
+            cursor: pointer;
+        }
 
-/* ====== POPUP ====== */
-.popup{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.6);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:999;
-}
+        .footer {
+            background: var(--dark-blue);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
 
-.popup.active{
-  display:flex;
-}
-
-.popup-box{
-  background:#fff;
-  width:90%;
-  max-width:400px;
-  padding:25px;
-  border-radius:15px;
-  animation:zoom .3s ease;
-}
-
-@keyframes zoom{
-  from{transform:scale(.7);opacity:0}
-  to{transform:scale(1);opacity:1}
-}
-
-.popup-box h3{
-  color:var(--gold);
-  margin-bottom:15px;
-}
-
-.popup-box input, .popup-box textarea{
-  width:100%;
-  padding:10px;
-  margin-bottom:10px;
-  border-radius:8px;
-  border:1px solid #ccc;
-}
-
-.popup-box button{
-  width:100%;
-  padding:12px;
-  border:none;
-  background:var(--gold);
-  font-weight:800;
-  border-radius:25px;
-}
-
-/* ====== FOOTER ====== */
-.footer{
-  text-align:center;
-  padding:20px;
-  font-size:14px;
-  color:#666;
-}
-</style>
+        @media (max-width: 600px) {
+            .grid-container { grid-template-columns: repeat(1, 1fr); }
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="header">
-  <div class="lang-switch">
-    <button class="active">Malayalam</button>
-    <button>English</button>
-  </div>
+    <div class="top-bar">
+        <div class="logo-area"><strong>H4 TILE ADHESIVE</strong></div>
+        <div class="lang-btns">
+            <button id="btn-en" class="active" onclick="setLang('en')">English</button>
+            <button id="btn-ml" onclick="setLang('ml')">മലയാളം</button>
+        </div>
+    </div>
 
-  <h1>H4 Tile Adhesive – ശക്തമായ പിടി, ദീർഘകാല വിശ്വാസം</h1>
-</div>
+    <div class="hero">
+        <h1 class="lang" data-en="H4 Tile Adhesive: Strength of Chemistry!" data-ml="H4 Tile Adhesive: വിള്ളലുകളില്ലാത്ത ഉറപ്പ്!">H4 Tile Adhesive: Strength of Chemistry!</h1>
+        <p class="lang" data-en="AV Chem Chemical & Manufacturing proudly presents..." data-ml="AV Chem Chemical & Manufacturing അഭിമാനപൂർവ്വം അവതരിപ്പിക്കുന്നു...">AV Chem Chemical & Manufacturing proudly presents...</p>
+    </div>
 
-<!-- ====== GRID ====== -->
-<div class="grid">
+    <div class="grid-container">
+        <div class="grid-item">
+            <img src="https://cdn-icons-png.flaticon.com/512/1048/1048953.png" alt="Bond">
+            <h3 class="lang" data-en="Superior Bonding" data-ml="അസാമാന്യ കരുത്ത്">Superior Bonding</h3>
+            <p class="lang" data-en="Chemical Fusion for hold" data-ml="കെമിക്കൽ ബോണ്ടിംഗ് ഉറപ്പ്">Chemical Fusion for hold</p>
+        </div>
+        <div class="grid-item">
+            <img src="https://cdn-icons-png.flaticon.com/512/3105/3105807.png" alt="Waterproof">
+            <h3 class="lang" data-en="100% Waterproof" data-ml="100% വാട്ടർപ്രൂഫ്">100% Waterproof</h3>
+            <p class="lang" data-en="Defends against moisture" data-ml="ഈർപ്പത്തിൽ നിന്ന് സംരക്ഷണം">Defends against moisture</p>
+        </div>
+        <div class="grid-item">
+            <img src="https://cdn-icons-png.flaticon.com/512/1598/1598238.png" alt="Crack">
+            <h3 class="lang" data-en="Crack Resistant" data-ml="വിള്ളലുകളെ പ്രതിരോധിക്കും">Crack Resistant</h3>
+            <p class="lang" data-en="High flexural strength" data-ml="കൂടിയ ഇലാസ്തികത">High flexural strength</p>
+        </div>
+        <div class="grid-item">
+            <img src="https://cdn-icons-png.flaticon.com/512/609/609803.png" alt="Normal">
+            <h3 class="lang" data-en="Normal Tiles" data-ml="നോർമൽ ടൈലുകൾ">Normal Tiles</h3>
+            <p class="lang" data-en="Ceramic specialist" data-ml="സെറാമിക് സ്പെഷ്യലിസ്റ്റ്">Ceramic specialist</p>
+        </div>
+        <div class="grid-item">
+            <img src="https://cdn-icons-png.flaticon.com/512/2163/2163350.png" alt="Vitrified">
+            <h3 class="lang" data-en="Marbonite" data-ml="മാർബോണൈറ്റ്">Marbonite</h3>
+            <p class="lang" data-en="For large formats" data-ml="വലിയ ടൈലുകൾക്ക്">For large formats</p>
+        </div>
+        <div class="grid-item">
+            <img src="https://cdn-icons-png.flaticon.com/512/4300/4300431.png" alt="Marble">
+            <h3 class="lang" data-en="Marble & Granite" data-ml="മാർബിൾ & ഗ്രാനൈറ്റ്">Marble & Granite</h3>
+            <p class="lang" data-en="Heavy duty hold" data-ml="കൂടുതൽ ഭാരം താങ്ങാൻ">Heavy duty hold</p>
+        </div>
+        <div class="grid-item">
+            <img src="https://cdn-icons-png.flaticon.com/512/2950/2950558.png" alt="Bathroom">
+            <h3 class="lang" data-en="Bathrooms" data-ml="ബാത്ത്റൂമുകൾ">Bathrooms</h3>
+            <p class="lang" data-en="Zero-slip formula" data-ml="തെന്നി മാറില്ല">Zero-slip formula</p>
+        </div>
+        <div class="grid-item">
+            <img src="https://cdn-icons-png.flaticon.com/512/3039/3039043.png" alt="Curing">
+            <h3 class="lang" data-en="No Curing" data-ml="നനയ്ക്കേണ്ടതില്ല">No Curing</h3>
+            <p class="lang" data-en="Saves time & water" data-ml="സമയവും ലാഭിക്കാം">Saves time & water</p>
+        </div>
+        <div class="grid-item">
+            <img src="https://cdn-icons-png.flaticon.com/512/916/916771.png" alt="Durability">
+            <h3 class="lang" data-en="10+ Year Life" data-ml="10 വർഷത്തെ ഈട്">10+ Year Life</h3>
+            <p class="lang" data-en="Decade long protection" data-ml="പതിറ്റാണ്ടുകളുടെ സംരക്ഷണം">Decade long protection</p>
+        </div>
+    </div>
 
-  <div class="card">
-    <img src="images/tile.png" alt="">
-    <b>ടൈൽ ഒട്ടിക്കാൻ</b>
-  </div>
+    <div class="order-sheet" id="order-form">
+        <h2 style="text-align:center;" class="lang" data-en="Order Sheet" data-ml="ഓർഡർ ഷീറ്റ്">Order Sheet</h2>
+        
+        <div class="form-group">
+            <label class="lang" data-en="Name" data-ml="പേര്">Name</label>
+            <input type="text" id="cust-name" required>
+        </div>
 
-  <div class="card">
-    <img src="images/marble.png" alt="">
-    <b>മാർബിൾ</b>
-  </div>
+        <div class="form-group">
+            <label class="lang" data-en="Address" data-ml="വിലാസം">Address</label>
+            <input type="text" id="cust-address" required>
+        </div>
 
-  <div class="card">
-    <img src="images/granite.png" alt="">
-    <b>ഗ്രാനൈറ്റ്</b>
-  </div>
+        <div class="form-group">
+            <label class="lang" data-en="City" data-ml="സിറ്റി">City</label>
+            <input type="text" id="cust-city" required>
+        </div>
 
-  <div class="card">
-    <img src="images/large-tile.png" alt="">
-    <b>മാർബോനൈറ്റ് / വലിയ ടൈൽ</b>
-  </div>
+        <div class="form-group">
+            <label class="lang" data-en="Landmark" data-ml="ലാാൻഡ് മാർക്ക്">Landmark</label>
+            <input type="text" id="cust-landmark" required>
+        </div>
 
-  <div class="card">
-    <img src="images/bathroom.png" alt="">
-    <b>ബാത്ത്റൂം ടൈൽ</b>
-  </div>
+        <div class="form-group">
+            <label class="lang" data-en="Mobile Number" data-ml="മൊബൈൽ നമ്പർ">Mobile Number</label>
+            <input type="tel" id="cust-mobile" pattern="[0-9]{10}" placeholder="10 Digits" required oninput="syncWhatsapp(this.value)">
+        </div>
 
-  <div class="card">
-    <img src="images/floor.png" alt="">
-    <b>ഫ്ലോർ ടൈൽ</b>
-  </div>
+        <div class="form-group">
+            <label class="lang" data-en="WhatsApp Number" data-ml="വാട്സാപ്പ് നമ്പർ">WhatsApp Number</label>
+            <input type="tel" id="cust-whatsapp" pattern="[0-9]{10}" placeholder="10 Digits" required>
+        </div>
 
-  <div class="card">
-    <img src="images/wall.png" alt="">
-    <b>വാൾ ടൈൽ</b>
-  </div>
+        <div class="form-group">
+            <label class="lang" data-en="Pin Code" data-ml="പിൻ കോഡ്">Pin Code</label>
+            <input type="tel" id="cust-pin" pattern="[0-9]{6}" placeholder="6 Digits" required>
+        </div>
 
-  <div class="card">
-    <img src="images/adhesive.png" alt="">
-    <b>ശക്തമായ ബോണ്ടിംഗ്</b>
-  </div>
+        <div class="form-group">
+            <label class="lang" data-en="District" data-ml="ജില്ല">District</label>
+            <input type="text" id="cust-district" required>
+        </div>
 
-  <div class="card">
-    <img src="images/waterproof.png" alt="">
-    <b>ജല പ്രതിരോധം</b>
-  </div>
+        <div class="form-group">
+            <label class="lang" data-en="Place of Work" data-ml="അഡീസീവ് ചെയ്യേണ്ട സ്ഥലം">Place of Work</label>
+            <select id="work-place" onchange="showSubOptions()" required>
+                <option value="">Select</option>
+                <option value="Home">Home</option>
+                <option value="Office">Office</option>
+                <option value="Shop">Shop</option>
+                <option value="Building">Building</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
 
-</div>
+        <div id="sub-options-div" class="form-group" style="display:none;">
+            <label class="lang" data-en="Tile Type" data-ml="ടൈൽ ഇനം">Tile Type</label>
+            <select id="tile-type" required>
+                <option value="">Select Type</option>
+                <option value="Marble">Marble</option>
+                <option value="Granite">Granite</option>
+                <option value="Marbonite">Marbonite</option>
+                <option value="Floor">Floor</option>
+                <option value="Wall">Wall</option>
+                <option value="Bathroom">Bathroom</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
 
-<button class="order-btn" onclick="openPopup()">ഓർഡർ ഷീറ്റ്</button>
+        <div class="form-group">
+            <label class="lang" data-en="Quantity" data-ml="അളവ് (Quantity)">Quantity</label>
+            <input type="number" id="cust-qty" min="1" max="1000000" required>
+        </div>
 
-<!-- ====== ABOUT ====== -->
-<div class="about">
-  <h2>എന്തുകൊണ്ട് H4 Tile Adhesive?</h2>
-  <p>
-    H4 Tile Adhesive ഒരു premium Polymer Modified Cementitious Adhesive ആണ്.
-    വലിയ ടൈൽസ്, മാർബിൾ, ഗ്രാനൈറ്റ്, ബാത്ത്റൂം ടൈൽ എന്നിവക്ക് ഏറ്റവും അനുയോജ്യം.
-  </p>
-  <ul>
-    <li>✔ Vertical slip ഇല്ല</li>
-    <li>✔ Crack resistance</li>
-    <li>✔ Strong chemical bonding</li>
-    <li>✔ Bathroom & wet area suitable</li>
-    <li>✔ Long life performance</li>
-  </ul>
-</div>
+        <div class="btn-container">
+            <button class="btn-confirm lang" data-en="Confirm" data-ml="സ്ഥിരീകരിക്കുക" onclick="validateAndSend()">Confirm</button>
+            <button class="btn-cancel lang" data-en="Cancel" data-ml="റദ്ദാക്കുക" onclick="window.location.reload()">Cancel</button>
+        </div>
+        <div id="share-btn-div" style="display:none; margin-top:10px;">
+            <button class="btn-confirm" style="background:#25D366;" onclick="shareOrder()">Share Order</button>
+        </div>
+    </div>
 
-<!-- ====== POPUP ====== -->
-<div class="popup" id="popup">
-  <div class="popup-box">
-    <h3>Order Sheet</h3>
-    <input type="text" placeholder="Name">
-    <input type="tel" placeholder="Mobile Number">
-    <textarea placeholder="Address"></textarea>
-    <button onclick="closePopup()">Submit</button>
-  </div>
-</div>
+    <div class="footer">
+        <p>© AV Chem Chemical & Manufacturing. All Rights Reserved.</p>
+        <p>Tirur, Malappuram | +91 9745838382</p>
+    </div>
 
-<div class="footer">
-© AV Chem Chemical & Manufacturing
-</div>
+    <script>
+        function setLang(lang) {
+            document.querySelectorAll('.lang').forEach(el => {
+                el.innerText = el.getAttribute('data-' + lang);
+            });
+            document.getElementById('btn-en').className = (lang === 'en' ? 'active' : '');
+            document.getElementById('btn-ml').className = (lang === 'ml' ? 'active' : '');
+        }
 
-<script>
-function openPopup(){
-  document.getElementById("popup").classList.add("active");
-}
-function closePopup(){
-  document.getElementById("popup").classList.remove("active");
-}
-</script>
+        function showSubOptions() {
+            const wp = document.getElementById('work-place').value;
+            document.getElementById('sub-options-div').style.display = wp ? 'block' : 'none';
+        }
 
+        function syncWhatsapp(val) {
+            document.getElementById('cust-whatsapp').value = val;
+        }
+
+        function validateAndSend() {
+            const fields = [
+                'cust-name', 'cust-address', 'cust-city', 'cust-landmark', 
+                'cust-mobile', 'cust-whatsapp', 'cust-pin', 'cust-district', 
+                'work-place', 'tile-type', 'cust-qty'
+            ];
+            let isValid = true;
+
+            fields.forEach(id => {
+                const el = document.getElementById(id);
+                if (!el.value || !el.checkValidity()) {
+                    el.classList.add('error-border');
+                    isValid = false;
+                } else {
+                    el.classList.remove('error-border');
+                }
+            });
+
+            if (!isValid) {
+                alert("Please fill all fields correctly (Red highlighted)");
+                return;
+            }
+
+            sendMessages();
+        }
+
+        function sendMessages() {
+            const name = document.getElementById('cust-name').value;
+            const mobile = document.getElementById('cust-mobile').value;
+            const place = document.getElementById('work-place').value;
+            const type = document.getElementById('tile-type').value;
+            const qty = document.getElementById('cust-qty').value;
+            const address = document.getElementById('cust-address').value;
+
+            const msg = `*NEW H4 ORDER*\nName: ${name}\nMobile: ${mobile}\nPlace: ${place}\nType: ${type}\nQty: ${qty}\nAddress: ${address}`;
+
+            // Send to Admin
+            window.open(`https://wa.me/919745838382?text=${encodeURIComponent(msg)}`, '_blank');
+            
+            // Show share button for customer
+            document.getElementById('share-btn-div').style.display = 'block';
+            alert("Order Confirmed! You can now share this order.");
+        }
+
+        function shareOrder() {
+            const name = document.getElementById('cust-name').value;
+            const msg = `My H4 Order Confirmed! Name: ${name}`;
+            if (navigator.share) {
+                navigator.share({ title: 'H4 Order', text: msg, url: window.location.href });
+            } else {
+                alert("Sharing not supported on this browser.");
+            }
+        }
+    </script>
 </body>
 </html>
+
