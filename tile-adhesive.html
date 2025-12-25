@@ -10,6 +10,7 @@
             --dark-blue: #1a2a44;
             --accent-red: #d32f2f;
             --border-width: 15px;
+            --error-red: #ff3333;
         }
 
         body {
@@ -62,49 +63,61 @@
             display: inline-block; margin-top: 45px; padding-bottom: 5px;
         }
 
-        .grid-container {
-            display: grid; grid-template-columns: repeat(3, 1fr);
-            gap: 15px; margin: 35px 0;
-        }
-
-        .grid-item {
-            border: 1px solid #ddd; padding: 15px; text-align: center;
-            border-radius: 10px; background: #fff; transition: 0.3s;
-        }
-
-        .grid-item:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .grid-item i { font-size: 2rem; display: block; margin-bottom: 10px; }
-
         .product-card {
             background: #fff; border: 1px solid #eee; padding: 25px;
             margin: 20px 0; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
 
-        .product-card h3 { color: var(--accent-red); margin-top: 0; border-bottom: 1px dashed #ccc; padding-bottom: 10px; }
-
-        .table-wrapper { overflow-x: auto; margin: 35px 0; border-radius: 8px; }
-        table { width: 100%; border-collapse: collapse; min-width: 600px; }
-        th, td { border: 1px solid #ddd; padding: 15px; text-align: left; }
-        th { background: var(--dark-blue); color: white; }
-        tr:nth-child(even) { background: #fcfcfc; }
-
-        .risk-item {
-            margin-bottom: 30px; padding: 20px; border: 1px solid #ffebeb;
-            border-radius: 10px; background: #fffafa;
-        }
-
-        .risk-item h4 { color: #b71c1c; margin-top: 0; }
-
+        /* Order Sheet New Styling */
         .order-sheet {
             background: #fff; border: 5px solid var(--primary-yellow);
-            padding: 35px; margin-top: 60px; border-radius: 20px;
+            padding: 30px; margin-top: 60px; border-radius: 20px;
         }
+
+        .form-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 15px;
+        }
+
+        .form-group { display: flex; flex-direction: column; margin-bottom: 15px; }
+        .full-width { grid-column: span 2; }
+
+        label { font-weight: bold; margin-bottom: 5px; font-size: 0.9rem; }
+
+        input, select {
+            padding: 12px; border: 2px solid #ccc; border-radius: 8px;
+            font-size: 1rem; transition: 0.3s;
+        }
+
+        input:focus, select:focus { border-color: var(--dark-blue); outline: none; }
+
+        /* Error Styles */
+        input.invalid, select.invalid { border-color: var(--error-red) !important; background-color: #fff5f5; }
+
+        .btn-row { display: flex; gap: 10px; margin-top: 20px; }
+
+        .btn-confirm {
+            flex: 2; background: #0044cc; color: white; border: none;
+            padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer;
+        }
+
+        .btn-cancel {
+            flex: 1; background: #888; color: white; border: none;
+            padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer;
+        }
+
+        .btn-share {
+            width: 100%; background: #25D366; color: white; border: none;
+            padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer;
+            margin-top: 10px; display: none;
+        }
+
+        #dynamic-work-type { display: none; }
 
         .footer { background: var(--dark-blue); color: white; padding: 50px 20px; text-align: center; margin-top: 80px; }
 
-        @media (max-width: 650px) {
-            .grid-container { grid-template-columns: repeat(2, 1fr); }
-            :root { --border-width: 10px; }
+        @media (max-width: 600px) {
+            .form-grid { grid-template-columns: 1fr; }
+            .full-width { grid-column: span 1; }
         }
     </style>
 </head>
@@ -126,91 +139,102 @@
             </h1>
         </div>
 
-        <p class="lang" data-en="Breaking the limits of current technology through decades of chemical engineering." data-ml="നിലവിലെ ടൈൽ ഫിക്സിംഗ് സാങ്കേതികവിദ്യയുടെ പരിധികൾ തകർക്കുന്ന ഒരു പുതിയ കാലഘട്ടത്തിന്റെ ആരംഭം. AV Chem Chemical & Manufacturing, നിരവധി പതിറ്റാണ്ടുകളുടെ ഗവേഷണത്തിന്റെയും കെമിക്കൽ എഞ്ചിനീയറിംഗിന്റെയും ഫലമായി ഈ പ്രീമിയം പരമ്പര ആദരപൂർവ്വം ലോകത്തിന് മുന്നിൽവയ്ക്കുന്നു.">
-            നിലവിലെ ടൈൽ ഫിക്സിംഗ് സാങ്കേതികവിദ്യയുടെ പരിധികൾ തകർക്കുന്ന ഒരു പുതിയ കാലഘട്ടത്തിന്റെ ആരംഭം...
-        </p>
-
-        <h2 class="lang" data-en="🚀 Advanced Polymer Fusion" data-ml="🚀 വിപ്ലവകരമായ 'അഡ്വാൻസ്ഡ് പോളിമർ ഫ്യൂഷൻ' ടെക്നോളജി">🚀 വിപ്ലവകരമായ 'അഡ്വാൻസ്ഡ് പോളിമർ ഫ്യൂഷൻ' ടെക്നോളജി</h2>
-        <p class="lang" data-en="H4 creates a chemical fusion between concrete and tile for a permanent bond." data-ml="പരമ്പരാഗത മിശ്രിതങ്ങൾക്ക് ഒരു ഭൗതിക പിടുത്തം മാത്രമാണുള്ളത്. എന്നാൽ H4 അഡ്ഹസീവിലെ അത്യാധുനിക പോളിമർ സൂത്രവിദ്യ കോൺക്രീറ്റിനെയും ടൈലിനെയും ഒരു കെമിക്കൽ ഫ്യൂഷനിലൂടെ ബന്ധിപ്പിക്കുന്നു. ഇത് വിള്ളലുകളിൽ നിന്ന് സ്വതന്ത്രമായ ഒരു ശാശ്വത ബന്ധനം നൽകുന്നു.">
-            പരമ്പരാഗത മിശ്രിതങ്ങൾക്ക് ഒരു ഭൗതിക പിടുത്തം മാത്രമാണുള്ളത്...
-        </p>
-
-        <div class="grid-container">
-            <div class="grid-item"><i>🧪</i><h4 class="lang" data-en="Chemical Fusion" data-ml="കെമിക്കൽ ഫ്യൂഷൻ">കെമിക്കൽ ഫ്യൂഷൻ</h4></div>
-            <div class="grid-item"><i>🚿</i><h4 class="lang" data-en="Aqua Shield" data-ml="ആക്വാ ഷീൽഡ്">ആക്വാ ഷീൽഡ്</h4></div>
-            <div class="grid-item"><i>🏗️</i><h4 class="lang" data-en="No Cracks" data-ml="വിള്ളലുകളില്ല">വിള്ളലുകളില്ല</h4></div>
-            <div class="grid-item"><i>🚫</i><h4 class="lang" data-en="Zero Slip" data-ml="തെന്നി മാറില്ല">തെന്നി മാറില്ല</h4></div>
-            <div class="grid-item"><i>📐</i><h4 class="lang" data-en="Perfect Level" data-ml="കൃത്യമായ ലെവൽ">കൃത്യമായ ലെവൽ</h4></div>
-            <div class="grid-item"><i>✨</i><h4 class="lang" data-en="No Stains" data-ml="നിറം മാറില്ല">നിറം മാറില്ല</h4></div>
-            <div class="grid-item"><i>🏊</i><h4 class="lang" data-en="Pool Expert" data-ml="പൂൾ എക്സ്പെർട്ട്">പൂൾ എക്സ്പെർട്ട്</h4></div>
-            <div class="grid-item"><i>🍃</i><h4 class="lang" data-en="Eco Friendly" data-ml="ഇക്കോ ഫ്രണ്ട്ലി">ഇക്കോ ഫ്രണ്ട്ലി</h4></div>
-            <div class="grid-item"><i>⏳</i><h4 class="lang" data-en="25+ Years" data-ml="25+ വർഷത്തെ ആയുസ്സ്">25+ വർഷത്തെ ആയുസ്സ്</h4></div>
-        </div>
-
         <h2 class="lang" data-en="🔬 Product Portfolio" data-ml="🔬 എഞ്ചിനീയർ ചെയ്ത പ്രൊഡക്റ്റ് പോർട്ട്ഫോളിയോ">🔬 എഞ്ചിനീയർ ചെയ്ത പ്രൊഡക്റ്റ് പോർട്ട്ഫോളിയോ</h2>
         
         <div class="product-card">
             <h3>🏠 H4 Normal (Ceramic Specialist)</h3>
-            <p class="lang" data-en="Core: Engineered Cement & Premium Polymer." data-ml="കോർ ടെക്നോളജി: എഞ്ചിനീയർ ചെയ്ത സിമന്റ്, പ്രീമിയം പോളിമർ.">കോർ ടെക്നോളജി: എഞ്ചിനീയർ ചെയ്ത സിമന്റ്, പ്രീമിയം പോളിമർ.</p>
             <p class="lang" data-en="Revolution: Slip-resistance technology for ceramic tiles." data-ml="വിപ്ലവം: 'സ്ലിപ്പ് റെസിസ്റ്റൻസ്' ഗുണം. ടൈൽ സ്ഥാപിച്ചുകഴിഞ്ഞാൽ തെന്നി മാറാതെ നിൽക്കുന്നു.">വിപ്ലവം: 'സ്ലിപ്പ് റെസിസ്റ്റൻസ്' ഗുണം. ടൈൽ സ്ഥാപിച്ചുകഴിഞ്ഞാൽ തെന്നി മാറാതെ നിൽക്കുന്നു.</p>
         </div>
 
-        <div class="product-card">
-            <h3>✨ H4 Marbonite (Vitrified Specialist)</h3>
-            <p class="lang" data-en="Core: High-grade Re-dispersible Polymer." data-ml="കോർ ടെക്നോളജി: ഉയർന്ന നിലവാരത്തിലുള്ള റീ-ഡിസ്പേഴ്സിബിൾ പോളിമർ.">കോർ ടെക്നോളജി: ഉയർന്ന നിലവാരത്തിലുള്ള റീ-ഡിസ്പേഴ്സിബിൾ പോളിമർ.</p>
-            <p class="lang" data-en="Revolution: No-sag formulation for large format tiles." data-ml="വിപ്ലവം: 'നോ-സാഗ് ഫോർമുലേഷൻ'. ടൈലിന്റെ ഭാരം കാരണം താഴേക്ക് വലിച്ചിഴക്കപ്പെടില്ല.">വിപ്ലവം: 'നോ-സാഗ് ഫോർമുലേഷൻ'. ടൈലിന്റെ ഭാരം കാരണം താഴേക്ക് വലിച്ചിഴക്കപ്പെടില്ല.</p>
-        </div>
+        <div class="order-sheet" id="order-section">
+            <h2 style="text-align:center; border:none; margin-top:0;">ORDER SHEET</h2>
+            
+            <form id="h4OrderForm" novalidate>
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label>പേര് (Name)*</label>
+                        <input type="text" id="name" required>
+                    </div>
 
-        <div class="product-card">
-            <h3>🏛️ H4 Marble & Granite (Heavy Duty)</h3>
-            <p class="lang" data-en="Core: White Cement & Flexible Polymer." data-ml="കോർ ടെക്നോളജി: വൈറ്റ് സിമന്റ്, ഫ്ലെക്സിബിൾ പോളിമർ.">കോർ ടെക്നോളജി: വൈറ്റ് സിമന്റ്, ഫ്ലെക്സിബിൾ പോളിമർ.</p>
-            <p class="lang" data-en="Revolution: No-bleed formulation protects natural stone colors." data-ml="വിപ്ലവം: 'നോ-ബ്ലീഡ്' ഫോർമുലേഷൻ. കല്ലിന്റെ സ്വാഭാവിക നിറം മങ്ങാതെ സംരക്ഷിക്കുന്നു.">വിപ്ലവം: 'നോ-ബ്ലീഡ്' ഫോർമുലേഷൻ. കല്ലിന്റെ സ്വാഭാവിക നിറം മങ്ങാതെ സംരക്ഷിക്കുന്നു.</p>
-        </div>
+                    <div class="form-group full-width">
+                        <label>വിലാസം (Address)*</label>
+                        <input type="text" id="address" required>
+                    </div>
 
-        <div class="product-card">
-            <h3>🚿 H4 Aqua-Shield (Pool & Bathroom)</h3>
-            <p class="lang" data-en="Core: Elastomeric Polymer & Crystal Tech." data-ml="കോർ ടെക്നോളജി: ഇലാസ്റ്റോമെറിക് പോളിമർ, ക്രിസ്റ്റൽ ടെക്നോളജി.">കോർ ടെക്നോളജി: ഇലാസ്റ്റോമെറിക് പോളിമർ, ക്രിസ്റ്റൽ ടെക്നോളജി.</p>
-            <p class="lang" data-en="Revolution: Inbuilt waterproofing sealer." data-ml="വിപ്ലവം: 'ഇൻബിൽറ്റ് വാട്ടർപ്രൂഫിംഗ്'. ജോയിന്റുകളിലൂടെയുള്ള ജലസഞ്ചാരം പൂർണ്ണമായും തടയുന്നു.">വിപ്ലവം: 'ഇൻബിൽറ്റ് വാട്ടർപ്രൂഫിംഗ്'. ജോയിന്റുകളിലൂടെയുള്ള ജലസഞ്ചാരം പൂർണ്ണമായും തടയുന്നു.</p>
-        </div>
+                    <div class="form-group">
+                        <label>City*</label>
+                        <input type="text" id="city" required>
+                    </div>
 
-        <h2 class="lang" data-en="⚠️ 7 Critical Risks of Ordinary Cement" data-ml="⚠️ പരമ്പരാഗത രീതിയുടെ 7 വിനാശകരമായ പ്രശ്നങ്ങൾ">⚠️ പരമ്പരാഗത രീതിയുടെ 7 വിനാശകരമായ പ്രശ്നങ്ങൾ</h2>
-        
-        <div class="risk-item">
-            <h4 class="lang" data-en="1. Hollow Spaces & Cracking" data-ml="1. 🕳️ ഹോളോ സ്പേസ് & ടൈൽ പൊട്ടൽ">1. 🕳️ ഹോളോ സ്പേസ് & ടൈൽ പൊട്ടൽ</h4>
-            <p class="lang" data-en="Air pockets cause tiles to crack under pressure." data-ml="സാധാരണ സിമന്റ് കൂട്ട് ചുരുങ്ങുമ്പോൾ വായുപിടിച്ച ഇടങ്ങൾ സൃഷ്ടിക്കപ്പെടുകയും ടൈലുകൾ പൊട്ടാൻ കാരണമാകുകയും ചെയ്യുന്നു.">സാധാരണ സിമന്റ് കൂട്ട് ചുരുങ്ങുമ്പോൾ വായുപിടിച്ച ഇടങ്ങൾ സൃഷ്ടിക്കപ്പെടുകയും...</p>
-        </div>
+                    <div class="form-group">
+                        <label>Land Mark*</label>
+                        <input type="text" id="landmark" required>
+                    </div>
 
-        <div class="risk-item">
-            <h4 class="lang" data-en="2. Moisture & Fungus" data-ml="2. 💧 ഈർപ്പം കയറ്റം & പൂപ്പൽ">2. 💧 ഈർപ്പം കയറ്റം & പൂപ്പൽ</h4>
-            <p class="lang" data-en="Leads to asthma and allergies through fungal growth." data-ml="ജലസഞ്ചാരം തടയാൻ കഴിയാത്തതിനാൽ ചുവരുകളിൽ നനവ് പടരാനും ഫംഗസ് വളരാനും കാരണമാകുന്നു.">ജലസഞ്ചാരം തടയാൻ കഴിയാത്തതിനാൽ ചുവരുകളിൽ നനവ് പടരാനും...</p>
-        </div>
-        
-        <p class="lang" data-en="...and 5 more risks like Tile Falling, Heavy Structural Load, Curing Time, Efflorescence, and Health issues." 
-           data-ml="...കൂടാതെ ടൈലുകൾ ഇളകി വീഴൽ, ഘടനാപരമായ അധിക ഭാരം, ദീർഘനേരത്തെ ക്യൂറിംഗ്, വെളുത്ത പാടുകൾ (Efflorescence), ആരോഗ്യപ്രശ്നങ്ങൾ തുടങ്ങി മറ്റ് 5 ഗുരുതരമായ പ്രശ്നങ്ങൾ കൂടി സിമന്റ് പണിയിലുണ്ട്.">
-           ...കൂടാതെ ടൈലുകൾ ഇളകി വീഴൽ, അധിക ഭാരം...
-        </p>
+                    <div class="form-group">
+                        <label>മൊബൈൽ (10 Digit Mobile)*</label>
+                        <input type="tel" id="mobile" pattern="[0-9]{10}" inputmode="numeric" oninput="autoWA(this.value)" required>
+                    </div>
 
-        <h2 class="lang" data-en="⚖️ Technical Comparison" data-ml="⚖️ സിമന്റ് vs H4: സാങ്കേതിക വിശകലനം">⚖️ സാങ്കേതിക വിശകലനം</h2>
-        <div class="table-wrapper">
-            <table>
-                <tr>
-                    <th class="lang" data-en="Parameter" data-ml="പാരാമീറ്റർ">പാരാമീറ്റർ</th>
-                    <th class="lang" data-en="Ordinary Cement" data-ml="സിമന്റ് പണി">സിമന്റ് പണി</th>
-                    <th>H4 Adhesive</th>
-                </tr>
-                <tr><td class="lang" data-en="Bond Strength" data-ml="ബോണ്ട് ശക്തി">ബോണ്ട് ശക്തി</td><td>0.5 - 1 MPa</td><td>> 1.5 MPa</td></tr>
-                <tr><td class="lang" data-en="Installation Speed" data-ml="വേഗത">വേഗത</td><td>8-10 sq.m/day</td><td>25-30 sq.m/day</td></tr>
-                <tr><td class="lang" data-en="Waterproof" data-ml="വാട്ടർപ്രൂഫ്">വാട്ടർപ്രൂഫ്</td><td>No</td><td>Yes (Aqua-Shield)</td></tr>
-                <tr><td class="lang" data-en="Life" data-ml="ദീർഘായുസ്സ്">ദീർഘായുസ്സ്</td><td>5-8 Years</td><td>25+ Years</td></tr>
-            </table>
-        </div>
+                    <div class="form-group">
+                        <label>WhatsApp (Option)</label>
+                        <input type="tel" id="whatsapp" pattern="[0-9]{10}" inputmode="numeric">
+                    </div>
 
-        <div class="order-sheet">
-            <h2 style="text-align:center;">ORDER SHEET</h2>
-            <div style="margin-bottom:15px;"><label>Name</label><input type="text" id="c-name" style="width:100%; padding:10px; border-radius:5px; border:1px solid #ccc;"></div>
-            <div style="margin-bottom:15px;"><label>WhatsApp</label><input type="tel" id="c-wa" style="width:100%; padding:10px; border-radius:5px; border:1px solid #ccc;"></div>
-            <div style="margin-bottom:15px;"><label>Qty (Bags)</label><input type="number" id="c-qty" style="width:100%; padding:10px; border-radius:5px; border:1px solid #ccc;"></div>
-            <button onclick="send()" style="width:100%; padding:15px; background:var(--dark-blue); color:white; font-weight:bold; border:none; border-radius:10px; cursor:pointer;">CONFIRM ORDER</button>
+                    <div class="form-group">
+                        <label>പിൻ‌കോഡ് (6 Digit Pin)*</label>
+                        <input type="tel" id="pincode" pattern="[0-9]{6}" inputmode="numeric" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>ജില്ല (District)*</label>
+                        <input type="text" id="district" required>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label>സംസ്ഥാനം (State)*</label>
+                        <input type="text" id="state" value="Kerala" required>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label>Tile Adhesive ചെയ്യേണ്ട സ്ഥലം*</label>
+                        <select id="location" onchange="toggleWorkType()" required>
+                            <option value="">തിരഞ്ഞെടുക്കുക</option>
+                            <option value="Home">Home</option>
+                            <option value="Office">Office</option>
+                            <option value="Shop">Shop</option>
+                            <option value="Building">Building</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group full-width" id="dynamic-work-type">
+                        <label>തരം തിരഞ്ഞെടുക്കുക*</label>
+                        <select id="work_item" required>
+                            <option value="">തിരഞ്ഞെടുക്കുക</option>
+                            <option value="Marble">Marble</option>
+                            <option value="Granite">Granite</option>
+                            <option value="Marbonite">Marbonite</option>
+                            <option value="Floor">Floor</option>
+                            <option value="Wall">Wall</option>
+                            <option value="Bathroom">Bathroom</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label>Quantity (1 to 1000000)*</label>
+                        <input type="number" id="qty" min="1" max="1000000" inputmode="numeric" required>
+                    </div>
+                </div>
+
+                <div class="btn-row">
+                    <button type="button" class="btn-confirm" onclick="validateAndSend()">CONFIRM</button>
+                    <button type="reset" class="btn-cancel" onclick="resetForm()">CANCEL</button>
+                </div>
+
+                <button type="button" id="shareBtn" class="btn-share" onclick="shareToWhatsApp()">SHARE DETAILS</button>
+            </form>
         </div>
     </div>
 
@@ -218,7 +242,6 @@
         <p><strong>AV Chem Chemical & Manufacturing</strong></p>
         <p>📍 Mukkilapeedika, Kannamkulam, PO. BP Angadi, Malappuram.</p>
         <p>📞 +91 79073 44030 | 💬 97458 38382</p>
-        <p>© 2025 Bond. Believe. Build.</p>
     </div>
 
     <script>
@@ -229,12 +252,82 @@
             document.querySelector('.btn-ml').style.background = (lang === 'ml') ? '#333' : '#fff';
             document.querySelector('.btn-ml').style.color = (lang === 'ml') ? '#fff' : '#333';
         }
-        function send() {
-            const n = document.getElementById('c-name').value;
-            const w = document.getElementById('c-wa').value;
-            const q = document.getElementById('c-qty').value;
-            if(!n || !w) { alert("Fill all details"); return; }
-            window.open(`https://wa.me/919745838382?text=New Order: ${n}, WA: ${w}, Qty: ${q}`);
+
+        // Auto copy mobile to WhatsApp field
+        function autoWA(val) {
+            if(val.length === 10) {
+                document.getElementById('whatsapp').value = val;
+            }
+        }
+
+        // Show/Hide sub menu
+        function toggleWorkType() {
+            const loc = document.getElementById('location').value;
+            const div = document.getElementById('dynamic-work-type');
+            div.style.display = loc ? "block" : "none";
+        }
+
+        function resetForm() {
+            document.getElementById('dynamic-work-type').style.display = "none";
+            document.getElementById('shareBtn').style.display = "none";
+            const fields = document.querySelectorAll('input, select');
+            fields.forEach(f => f.classList.remove('invalid'));
+        }
+
+        function validateAndSend() {
+            const form = document.getElementById('h4OrderForm');
+            const inputs = form.querySelectorAll('input[required], select[required]');
+            let isValid = true;
+
+            inputs.forEach(input => {
+                if (!input.value || !input.checkValidity()) {
+                    input.classList.add('invalid');
+                    isValid = false;
+                } else {
+                    input.classList.remove('invalid');
+                }
+            });
+
+            if (!isValid) {
+                alert("ദയവായി എല്ലാ വിവരങ്ങളും കൃത്യമായി പൂരിപ്പിക്കുക.");
+                return;
+            }
+
+            const data = {
+                n: document.getElementById('name').value,
+                a: document.getElementById('address').value,
+                c: document.getElementById('city').value,
+                l: document.getElementById('landmark').value,
+                m: document.getElementById('mobile').value,
+                w: document.getElementById('whatsapp').value,
+                p: document.getElementById('pincode').value,
+                d: document.getElementById('district').value,
+                s: document.getElementById('state').value,
+                loc: document.getElementById('location').value,
+                item: document.getElementById('work_item').value,
+                q: document.getElementById('qty').value
+            };
+
+            const message = `*NEW H4 ORDER*%0A------------------%0A*Name:* ${data.n}%0A*Address:* ${data.a}%0A*City:* ${data.c}%0A*Landmark:* ${data.l}%0A*Mobile:* ${data.m}%0A*Pincode:* ${data.p}%0A*Location:* ${data.loc}%0A*Item:* ${data.item}%0A*Qty:* ${data.q} Bags`;
+
+            // 1. Send to Admin
+            window.open(`https://wa.me/919745838382?text=${message}`);
+
+            // 2. Send to Customer if WhatsApp exists
+            if(data.w && data.w.length === 10) {
+                setTimeout(() => {
+                    window.open(`https://wa.me/91${data.w}?text=Confirmation: Your Order for H4 Tile Adhesive has been placed.%0A%0A${message}`);
+                }, 1000);
+            }
+
+            document.getElementById('shareBtn').style.display = "block";
+        }
+
+        function shareToWhatsApp() {
+            const n = document.getElementById('name').value;
+            const q = document.getElementById('qty').value;
+            const text = `H4 Tile Adhesive Order for ${n}: ${q} Bags.`;
+            window.open(`whatsapp://send?text=${encodeURIComponent(text)}`);
         }
     </script>
 </body>
