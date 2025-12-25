@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>H4 Tile Adhesive - Technical Page</title>
+    <title>H4 Tile Adhesive - Complete Technical Guide</title>
     <style>
         :root {
             --primary-yellow: #f1e311;
@@ -14,10 +14,8 @@
         }
 
         body {
-            font-family: 'Segoe UI', 'Meera', 'Arya', sans-serif;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
+            font-family: 'Segoe UI', 'Meera', sans-serif;
+            margin: 0; padding: 0; line-height: 1.8;
             background-color: #fff;
             border-left: var(--border-width) solid var(--primary-yellow);
             border-right: var(--border-width) solid var(--primary-yellow);
@@ -28,141 +26,62 @@
             background: var(--primary-yellow);
             padding: 25px 10px;
             text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            position: sticky; top: 0; z-index: 1000;
         }
 
         .lang-container {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 20px;
+            display: flex; justify-content: center; gap: 10px; margin-bottom: 20px;
         }
 
         .lang-btns button {
-            padding: 10px 20px;
-            border: 2px solid #333;
-            cursor: pointer;
-            font-weight: bold;
-            border-radius: 5px;
-            font-size: 14px;
-            transition: 0.3s;
+            padding: 10px 25px; border: 2px solid #333; cursor: pointer;
+            font-weight: bold; border-radius: 5px; transition: 0.3s;
         }
-
-        .btn-en { background: #333; color: white; }
-        .btn-ml { background: #fff; color: #333; }
 
         .header-title-box {
-            background: #000;
-            color: var(--primary-yellow);
-            display: inline-block;
-            padding: 12px 30px;
-            font-weight: bold;
-            font-size: clamp(1.2rem, 5vw, 1.8rem);
-            border-radius: 4px;
-            width: fit-content;
-            max-width: 90% ;
+            background: #000; color: var(--primary-yellow);
+            display: inline-block; padding: 12px 35px;
+            font-weight: bold; font-size: 1.5rem; border-radius: 4px;
         }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 30px 15px;
-        }
+        .container { max-width: 900px; margin: 0 auto; padding: 30px 20px; }
 
-        /* Fixed Red Text Alignment */
-        .hero-title-section {
-            border-left: 6px solid var(--accent-red);
-            padding: 10px 20px;
-            margin-bottom: 40px;
-            background: #fff5f5;
-        }
-
-        .hero-title-section h1 {
-            color: var(--accent-red);
-            font-size: clamp(1.5rem, 6vw, 2.2rem);
-            margin: 0;
-            word-wrap: break-word;
-            line-height: 1.3;
+        .hero-banner {
+            border-left: 8px solid var(--accent-red);
+            padding: 15px 25px; margin-bottom: 40px; background: #fff5f5;
         }
 
         h2 {
-            color: var(--dark-blue);
-            border-bottom: 3px solid var(--primary-yellow);
-            padding-bottom: 5px;
-            margin-top: 40px;
+            color: var(--dark-blue); border-bottom: 3px solid var(--primary-yellow);
+            display: inline-block; margin-top: 45px;
         }
 
-        .tech-card {
-            background: #fdfdfd;
-            border: 1px solid #eee;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        .product-card {
+            background: #fdfdfd; border: 1px solid #eee;
+            padding: 25px; margin: 20px 0; border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
 
-        /* 3x3 Grid Optimization */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin: 35px 0;
-        }
+        .product-card h3 { color: var(--accent-red); margin-top: 0; }
+        .highlight { color: #007bff; font-weight: bold; }
 
-        .grid-item {
-            border: 1px solid #ddd;
-            padding: 15px 10px;
-            text-align: center;
-            border-radius: 10px;
-            background: #fff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .grid-item img { width: 45px; height: 45px; margin-bottom: 10px; }
-        .grid-item h4 { margin: 5px 0; font-size: 0.85rem; color: #444; }
-
-        /* Comparison Table */
-        .table-wrapper { overflow-x: auto; margin: 30px 0; }
-        table { width: 100%; border-collapse: collapse; min-width: 500px; }
-        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        .table-wrapper { overflow-x: auto; margin: 35px 0; }
+        table { width: 100%; border-collapse: collapse; min-width: 600px; }
+        th, td { border: 1px solid #ddd; padding: 15px; text-align: left; }
         th { background: var(--dark-blue); color: white; }
-        tr:nth-child(even) { background: #f9f9f9; }
 
-        /* Form */
+        .risk-section { background: #fffcf0; padding: 30px; border-radius: 15px; margin-top: 40px; }
+        .risk-item { margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
+        .risk-item h4 { color: #d32f2f; margin-bottom: 5px; }
+
         .order-sheet {
-            background: #fff;
-            border: 4px solid var(--primary-yellow);
-            padding: 25px;
-            margin-top: 50px;
-            border-radius: 15px;
-        }
-
-        .form-group { margin-bottom: 15px; }
-        label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 14px; }
-        input, select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            box-sizing: border-box;
+            background: #fff; border: 5px solid var(--primary-yellow);
+            padding: 35px; margin-top: 60px; border-radius: 20px;
         }
 
         .footer {
-            background: var(--dark-blue);
-            color: white;
-            text-align: center;
-            padding: 40px 20px;
-            margin-top: 60px;
-        }
-
-        @media (max-width: 600px) {
-            .grid-container { grid-template-columns: repeat(2, 1fr); }
-            :root { --border-width: 8px; }
+            background: var(--dark-blue); color: white;
+            padding: 50px 20px; text-align: center; margin-top: 80px;
         }
     </style>
 </head>
@@ -177,137 +96,116 @@
     </header>
 
     <div class="container">
-        
-        <div class="hero-title-section">
+        <div class="hero-banner">
             <h1 class="lang" data-en="H4 Tile Adhesive: Next-Gen Installation Science" data-ml="H4 ടൈൽ അഡ്ഹസീവ്: പുതിയ തലമുറയുടെ ടൈൽ ഇൻസ്റ്റാളേഷൻ സയൻസ്">
                 H4 ടൈൽ അഡ്ഹസീവ്: പുതിയ തലമുറയുടെ ടൈൽ ഇൻസ്റ്റാളേഷൻ സയൻസ്
             </h1>
         </div>
 
-        <p class="lang" data-en="AV Chem presents H4 Tile Adhesive, the result of decades of chemical engineering for heritage-grade construction." data-ml="പതിറ്റാണ്ടുകളുടെ ഗവേഷണഫലമായി AV Chem അവതരിപ്പിക്കുന്നു, പൈതൃക നിലവാരമുള്ള നിർമ്മാണം സാധ്യമാക്കുന്ന H4 ടൈൽ അഡ്ഹസീവ്.">
-            പതിറ്റാണ്ടുകളുടെ ഗവേഷണഫലമായി AV Chem അവതരിപ്പിക്കുന്നു, പൈതൃക നിലവാരമുള്ള നിർമ്മാണം സാധ്യമാക്കുന്ന H4 ടൈൽ അഡ്ഹസീവ്.
+        <p class="lang" data-en="AV Chem presents H4 Tile Adhesive, a result of decades of chemical engineering research for heritage-grade construction." 
+           data-ml="നിലവിലെ ടൈൽ ഫിക്സിംഗ് സാങ്കേതികവിദ്യയുടെ പരിധികൾ തകർക്കുന്ന ഒരു പുതിയ കാലഘട്ടത്തിന്റെ ആരംഭം. AV Chem Chemical & Manufacturing, നിരവധി പതിറ്റാണ്ടുകളുടെ ഗവേഷണത്തിന്റെയും കെമിക്കൽ എഞ്ചിനീയറിംഗിന്റെയും ഫലമായി ഈ പ്രീമിയം പരമ്പര ആദരപൂർവ്വം ലോകത്തിന് മുന്നിൽവയ്ക്കുന്നു.">
+           നിലവിലെ ടൈൽ ഫിക്സിംഗ് സാങ്കേതികവിദ്യയുടെ പരിധികൾ തകർക്കുന്ന ഒരു പുതിയ കാലഘട്ടത്തിന്റെ ആരംഭം...
         </p>
 
-        <h2 class="lang" data-en="🚀 Advanced Polymer Fusion" data-ml="🚀 അഡ്വാൻസ്ഡ് പോളിമർ ഫ്യൂഷൻ">🚀 അഡ്വാൻസ്ഡ് പോളിമർ ഫ്യൂഷൻ</h2>
-        <div class="tech-card lang" data-en="H4 creates a chemical fusion between concrete and tile, transforming two surfaces into a single unified structure." data-ml="H4 അഡ്ഹസീവിലെ പോളിമർ സൂത്രവിദ്യ കോൺക്രീറ്റിനെയും ടൈലിനെയും ഒരു കെമിക്കൽ ഫ്യൂഷനിലൂടെ ബന്ധിപ്പിക്കുന്നു. ഇത് രണ്ട് പ്രതലങ്ങളെയും ഒരൊറ്റ ശിലപോലെ ഉറപ്പിച്ചു നിർത്തുന്നു.">
-            H4 അഡ്ഹസീവിലെ പോളിമർ സൂത്രവിദ്യ കോൺക്രീറ്റിനെയും ടൈലിനെയും ഒരു കെമിക്കൽ ഫ്യൂഷനിലൂടെ ബന്ധിപ്പിക്കുന്നു. ഇത് രണ്ട് പ്രതലങ്ങളെയും ഒരൊറ്റ ശിലപോലെ ഉറപ്പിച്ചു നിർത്തുന്നു.
+        <h2 class="lang" data-en="🚀 Advanced Polymer Fusion" data-ml="🚀 വിപ്ലവകരമായ 'അഡ്വാന്‍സ്ഡ് പോളിമർ ഫ്യൂഷൻ'">🚀 വിപ്ലവകരമായ 'അഡ്വാന്‍സ്ഡ് പോളിമർ ഫ്യൂഷൻ'</h2>
+        <p class="lang" data-en="H4 uses chemical fusion to bond concrete and tiles into a single stone-like structure." 
+           data-ml="പരമ്പരാഗത സിമന്റ്-മണൽ മിശ്രിതങ്ങൾക്ക് ഒരു ഭൗതിക പിടുത്തം മാത്രമാണുള്ളത്. എന്നാൽ H4 അഡ്ഹസീവിലെ പോളിമർ സൂത്രവിദ്യ കോൺക്രീറ്റിനെയും ടൈലിനെയും ഒരു കെമിക്കൽ ഫ്യൂഷനിലൂടെ ബന്ധിപ്പിക്കുന്നു.">
+           പരമ്പരാഗത സിമന്റ്-മണൽ മിശ്രിതങ്ങൾക്ക് ഒരു ഭൗതിക പിടുത്തം മാത്രമാണുള്ളത്...
+        </p>
+
+        <h2 class="lang" data-en="🔬 Product Portfolio" data-ml="🔬 എഞ്ചിനീയർ ചെയ്ത പ്രൊഡക്റ്റ് പോർട്ട്ഫോളിയോ">🔬 എഞ്ചിനീയർ ചെയ്ത പ്രൊഡക്റ്റ് പോർട്ട്ഫോളിയോ</h2>
+        
+        <div class="product-card">
+            <h3 class="lang" data-en="1. H4 Normal (Ceramic Specialist)" data-ml="1. 🏠 H4 നോർമൽ (സെറാമിക് സ്പെഷ്യലിസ്റ്റ്)">1. 🏠 H4 നോർമൽ (സെറാമിക് സ്പെഷ്യലിസ്റ്റ്)</h3>
+            <p class="lang" data-en="Superior strength for all interior ceramic tiles." data-ml="എല്ലാ ഇന്റീരിയർ ഭിത്തി, ഫ്ലോർ സെറാമിക് ടൈലുകൾക്കും. 'സ്ലിപ്പ് റെസിസ്റ്റൻസ്' ഗുണം നൽകുന്നു.">എല്ലാ ഇന്റീരിയർ ഭിത്തി, ഫ്ലോർ സെറാമിക് ടൈലുകൾക്കും...</p>
         </div>
 
-        <div class="grid-container">
-            <div class="grid-item">
-                <img src="https://cdn-icons-png.flaticon.com/512/1048/1048953.png" alt="Fusion">
-                <h4 class="lang" data-en="Chemical Fusion" data-ml="കെമിക്കൽ ഫ്യൂഷൻ">കെമിക്കൽ ഫ്യൂഷൻ</h4>
-            </div>
-            <div class="grid-item">
-                <img src="https://cdn-icons-png.flaticon.com/512/3105/3105807.png" alt="Waterproof">
-                <h4 class="lang" data-en="100% Waterproof" data-ml="100% വാട്ടർപ്രൂഫ്">100% വാട്ടർപ്രൂഫ്</h4>
-            </div>
-            <div class="grid-item">
-                <img src="https://cdn-icons-png.flaticon.com/512/1598/1598238.png" alt="Crack">
-                <h4 class="lang" data-en="Crack Resistant" data-ml="വിള്ളൽ പ്രതിരോധം">വിള്ളൽ പ്രതിരോധം</h4>
-            </div>
-            <div class="grid-item">
-                <img src="https://cdn-icons-png.flaticon.com/512/609/609803.png" alt="Slip">
-                <h4 class="lang" data-en="Zero Slip" data-ml="തെന്നി മാറില്ല">തെന്നി മാറില്ല</h4>
-            </div>
-            <div class="grid-item">
-                <img src="https://cdn-icons-png.flaticon.com/512/2163/2163350.png" alt="Level">
-                <h4 class="lang" data-en="Perfect Level" data-ml="കൃത്യമായ ലെവൽ">കൃത്യമായ ലെവൽ</h4>
-            </div>
-            <div class="grid-item">
-                <img src="https://cdn-icons-png.flaticon.com/512/4300/4300431.png" alt="Stain">
-                <h4 class="lang" data-en="Stain Free" data-ml="നിറം മാറില്ല">നിറം മാറില്ല</h4>
-            </div>
-            <div class="grid-item">
-                <img src="https://cdn-icons-png.flaticon.com/512/2950/2950558.png" alt="Aqua">
-                <h4 class="lang" data-en="Aqua Shield" data-ml="ആക്വാ ഷീൽഡ്">ആക്വാ ഷീൽഡ്</h4>
-            </div>
-            <div class="grid-item">
-                <img src="https://cdn-icons-png.flaticon.com/512/3039/3039043.png" alt="Curing">
-                <h4 class="lang" data-en="No Curing" data-ml="നനയ്ക്കേണ്ടതില്ല">നനയ്ക്കേണ്ടതില്ല</h4>
-            </div>
-            <div class="grid-item">
-                <img src="https://cdn-icons-png.flaticon.com/512/916/916771.png" alt="Life">
-                <h4 class="lang" data-en="25+ Years Life" data-ml="25+ വർഷത്തെ ഈട്">25+ വർഷത്തെ ഈട്</h4>
-            </div>
+        <div class="product-card">
+            <h3 class="lang" data-en="2. H4 Marbonite (Vitrifed Expert)" data-ml="2. ✨ H4 മാർബോണൈറ്റ് (വിട്രിഫൈഡ് സ്പെഷ്യലിസ്റ്റ്)">2. ✨ H4 മാർബോണൈറ്റ് (വിട്രിഫൈഡ് സ്പെഷ്യലിസ്റ്റ്)</h3>
+            <p class="lang" data-en="Perfect for large format tiles with no-sag formulation." data-ml="വലുപ്പമുള്ള ടൈലുകൾക്ക് (60x60 cm മുതൽ). 'നോ-സാഗ് ഫോർമുലേഷൻ' വഴി ടൈൽ താഴേക്ക് തെന്നി മാറില്ല.">വലുപ്പമുള്ള ടൈലുകൾക്ക്...</p>
         </div>
 
-        <h2 class="lang" data-en="📊 Technical Comparison" data-ml="📊 സാങ്കേതിക വിശകലനം">📊 സാങ്കേതിക വിശകലനം</h2>
+        <div class="product-card">
+            <h3 class="lang" data-en="3. H4 Marble & Granite" data-ml="3. 🏛️ H4 മാർബിൾ & ഗ്രാനൈറ്റ്">3. 🏛️ H4 മാർബിൾ & ഗ്രാനൈറ്റ്</h3>
+            <p class="lang" data-en="Heavy duty bond for natural stones without color fading." data-ml="മാർബിൾ, ഗ്രാനൈറ്റ് എന്നിവയ്ക്ക്. കല്ലിന്റെ സ്വാഭാവിക നിറം മാറ്റമില്ലാതെ സംരക്ഷിക്കുന്ന 'നോ-ബ്ലീഡ്' ഫോർമുലേഷൻ.">മാർബിൾ, ഗ്രാനൈറ്റ് എന്നിവയ്ക്ക്...</p>
+        </div>
+
+        <div class="product-card">
+            <h3 class="lang" data-en="4. H4 Aqua-Shield" data-ml="4. 🚿 H4 ആക്വാ-ഷീൽഡ് (ബാത്ത്രൂം & പൂൾ)">4. 🚿 H4 ആക്വാ-ഷീൽഡ് (ബാത്ത്രൂം & പൂൾ)</h3>
+            <p class="lang" data-en="Inbuilt waterproofing for wet areas." data-ml="ബാത്റൂം, സ്വിമ്മിംഗ് പൂൾ എന്നിവയ്ക്ക്. 100% വാട്ടർപ്രൂഫിംഗ് ഉറപ്പാക്കുന്നു.">ബാത്റൂം, സ്വിമ്മിംഗ് പൂൾ എന്നിവയ്ക്ക്...</p>
+        </div>
+
+        <h2 class="lang" data-en="⚠️ 7 Critical Risks of Ordinary Cement" data-ml="⚠️ പരമ്പരാഗത രീതിയുടെ 7 വിനാശകരമായ പ്രശ്നങ്ങൾ">⚠️ പരമ്പരാഗത രീതിയുടെ 7 വിനാശകരമായ പ്രശ്നങ്ങൾ</h2>
+        <div class="risk-section">
+            <div class="risk-item">
+                <h4 class="lang" data-en="1. Hollow Spaces & Cracks" data-ml="1. 🕳️ ഹോളോ സ്പേസ് & ടൈൽ പൊട്ടൽ">1. 🕳️ ഹോളോ സ്പേസ് & ടൈൽ പൊട്ടൽ</h4>
+                <p class="lang" data-en="Air pockets cause tiles to crack under furniture weight." data-ml="ടൈലിനടിയിൽ വായുപിടിച്ച ഇടങ്ങൾ സൃഷ്ടിക്കപ്പെടുന്നത് ടൈൽ പൊട്ടാൻ കാരണമാകുന്നു.">ടൈലിനടിയിൽ വായുപിടിച്ച ഇടങ്ങൾ സൃഷ്ടിക്കപ്പെടുന്നത്...</p>
+            </div>
+            <div class="risk-item">
+                <h4 class="lang" data-en="2. Moisture & Mold" data-ml="2. 💧 ഈർപ്പം കയറ്റം & പൂപ്പൽ">2. 💧 ഈർപ്പം കയറ്റം & പൂപ്പൽ</h4>
+                <p class="lang" data-en="Leads to asthma and allergies through fungal growth." data-ml="ചുവരുകളിൽ നനവ് പടരാനും ഫംഗസ് വളരാനും കാരണമാകുന്നു. ഇത് ആസ്ത്മ, അലർജി എന്നിവയ്ക്ക് വഴിവെക്കാം.">ചുവരുകളിൽ നനവ് പടരാനും ഫംഗസ് വളരാനും...</p>
+            </div>
+            <p class="lang" data-en="...and 5 other critical issues including tile falling, heavy structural load, and long curing time." data-ml="...കൂടാതെ ടൈലുകൾ വീഴൽ, അധിക ഭാരം, പണി താമസം, ആരോഗ്യപ്രശ്നങ്ങൾ തുടങ്ങി മറ്റ് ഗുരുതരമായ 5 പ്രശ്നങ്ങൾ കൂടി സാധാരണ സിമന്റ് പണിയിലുണ്ട്.">...കൂടാതെ ടൈലുകൾ വീഴൽ, അധിക ഭാരം...</p>
+        </div>
+
+        <h2 class="lang" data-en="⚖️ Technical Comparison" data-ml="⚖️ സാങ്കേതിക താരതമ്യം: സിമന്റ് vs H4">⚖️ സാങ്കേതിക താരതമ്യം</h2>
         <div class="table-wrapper">
             <table>
                 <tr>
-                    <th class="lang" data-en="Parameter" data-ml="ഘടകങ്ങൾ">ഘടകങ്ങൾ</th>
-                    <th class="lang" data-en="Ordinary Cement" data-ml="സാധാരണ സിമന്റ്">സാധാരണ സിമന്റ്</th>
+                    <th class="lang" data-en="Feature" data-ml="സവിശേഷതകൾ">സവിശേഷതകൾ</th>
+                    <th class="lang" data-en="Ordinary Cement" data-ml="സിമന്റ് പണി">സിമന്റ് പണി</th>
                     <th>H4 Adhesive</th>
                 </tr>
                 <tr>
                     <td class="lang" data-en="Bond Strength" data-ml="ബോണ്ട് ശക്തി">ബോണ്ട് ശക്തി</td>
-                    <td>Low</td>
-                    <td>Very High</td>
+                    <td>0.5 - 1 MPa</td>
+                    <td>> 1.5 MPa</td>
                 </tr>
                 <tr>
-                    <td>Hollow Space</td>
-                    <td>High Chance</td>
-                    <td>Zero</td>
+                    <td class="lang" data-en="Installation Speed" data-ml="വേഗത">വേഗത</td>
+                    <td>8-10 sq.m/day</td>
+                    <td>25-30 sq.m/day</td>
                 </tr>
                 <tr>
-                    <td class="lang" data-en="Durability" data-ml="ഈട്">ഈട്</td>
-                    <td>5-8 Years</td>
-                    <td>25+ Years</td>
+                    <td class="lang" data-en="Waterproof" data-ml="വാട്ടർപ്രൂഫ്">വാട്ടർപ്രൂഫ്</td>
+                    <td>No</td>
+                    <td>Yes (Aqua-Shield)</td>
                 </tr>
             </table>
         </div>
 
         <div class="order-sheet">
-            <h3 style="text-align:center; margin-bottom:20px;">ORDER SHEET</h3>
-            <div class="form-group">
-                <label>Name</label>
-                <input type="text" id="cust-name">
+            <h2 style="text-align:center;">OFFICIAL ORDER SHEET</h2>
+            <div style="margin-bottom:15px;">
+                <label>Name</label><input type="text" id="name" style="width:100%; padding:10px;">
             </div>
-            <div class="form-group">
-                <label>WhatsApp Number</label>
-                <input type="tel" id="cust-whatsapp" placeholder="10 Digits">
+            <div style="margin-bottom:15px;">
+                <label>WhatsApp</label><input type="tel" id="wa" style="width:100%; padding:10px;">
             </div>
-            <div class="form-group">
-                <label>Quantity (Bags)</label>
-                <input type="number" id="cust-qty">
+            <div style="margin-bottom:15px;">
+                <label>Quantity (Bags)</label><input type="number" id="qty" style="width:100%; padding:10px;">
             </div>
-            <button onclick="sendOrder()" style="width:100%; padding:15px; background:var(--dark-blue); color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">CONFIRM ORDER</button>
+            <button onclick="order()" style="width:100%; padding:15px; background:var(--dark-blue); color:white; font-weight:bold; border:none; border-radius:10px; cursor:pointer;">CONFIRM ORDER</button>
         </div>
-
     </div>
 
     <div class="footer">
         <p><strong>AV Chem Chemical & Manufacturing</strong></p>
-        <p>Mukkilapeedika, Kannamkulam, PO. BP Angadi, Malappuram - 676102</p>
+        <p>Mukkilapeedika, Kannamkulam, PO. BP Angadi, Tirur, Malappuram.</p>
         <p>📞 +91 79073 44030 | 💬 97458 38382</p>
-        <p>© All Rights Reserved. Bond. Believe. Build.</p>
+        <p>📧 avchemtirur@gmail.com | 🌐 www.avchem.in</p>
+        <p style="margin-top:20px; opacity:0.6;">© Bond. Believe. Build.</p>
     </div>
 
     <script>
-        function setLang(lang) {
-            document.querySelectorAll('.lang').forEach(el => {
-                el.innerText = el.getAttribute('data-' + lang);
-            });
-            // Language Button Toggle Effect
-            if(lang === 'en') {
-                document.querySelector('.btn-en').style.background = '#333';
-                document.querySelector('.btn-en').style.color = '#fff';
-                document.querySelector('.btn-ml').style.background = '#fff';
-            } else {
-                document.querySelector('.btn-ml').style.background = '#333';
-                document.querySelector('.btn-ml').style.color = '#fff';
-                document.querySelector('.btn-en').style.background = '#fff';
-            }
+        function setLang(l){
+            document.querySelectorAll('.lang').forEach(e => e.innerText = e.getAttribute('data-'+l));
         }
-
-        function sendOrder() {
-            const name = document.getElementById('cust-name').value;
-            const mobile = document.getElementById('cust-whatsapp').value;
-            const qty = document.getElementById('cust-qty').value;
-            if(!name || !mobile) { alert("Please fill details"); return; }
-            const msg = `*NEW H4 ORDER*%0AName: ${name}%0AMobile: ${mobile}%0AQty: ${qty}`;
-            window.open(`https://wa.me/919745838382?text=${msg}`);
+        function order(){
+            const n = document.getElementById('name').value;
+            const w = document.getElementById('wa').value;
+            const q = document.getElementById('qty').value;
+            window.open(`https://wa.me/919745838382?text=New Order:%0AName: ${n}%0AWA: ${w}%0AQty: ${q}`);
         }
     </script>
 </body>
