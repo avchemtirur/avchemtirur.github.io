@@ -23,47 +23,51 @@
             line-height: 1.6;
         }
 
-        /* --- Language Toggle & Header --- */
-        .lang-switch {
-            background: #333;
-            padding: 10px;
-            text-align: right;
+        /* --- Header & Language Toggle --- */
+        header {
+            background-color: var(--primary-yellow);
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
         .lang-btn {
-            background: transparent;
+            background: #333;
             color: white;
-            border: 1px solid white;
-            padding: 5px 15px;
+            border: 1px solid #333;
+            padding: 6px 12px;
             cursor: pointer;
-            font-size: 14px;
-            margin-left: 5px;
+            font-size: 13px;
+            border-radius: 4px;
+            transition: 0.3s;
         }
 
         .lang-btn.active {
-            background: var(--primary-yellow);
+            background: white;
             color: black;
-            border-color: var(--primary-yellow);
             font-weight: bold;
-        }
-
-        header {
-            background-color: var(--primary-yellow);
-            padding: 15px 20px;
-            display: flex;
-            align-items: center;
+            border-color: white;
         }
 
         .logo {
             font-weight: 900;
-            font-size: 22px;
+            font-size: 20px;
             background: black;
             color: var(--primary-yellow);
-            padding: 8px 12px;
+            padding: 8px 15px;
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .container {
@@ -75,253 +79,178 @@
         /* --- Text Content Section --- */
         .content-section {
             background: white;
-            padding: 25px;
+            padding: 30px;
             margin-bottom: 30px;
-            border-bottom: 4px solid var(--primary-yellow);
+            border-bottom: 5px solid var(--primary-yellow);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
 
         .main-headline {
-            font-size: 24px;
+            font-size: 26px;
             font-weight: bold;
-            color: #d32f2f; /* Red tone for attention */
-            margin-bottom: 20px;
+            color: #d32f2f;
+            margin-bottom: 25px;
             line-height: 1.4;
+            border-left: 5px solid #d32f2f;
+            padding-left: 15px;
         }
 
         .sub-headline {
             font-weight: bold;
-            font-size: 18px;
-            margin-top: 20px;
-            margin-bottom: 10px;
+            font-size: 20px;
+            margin-top: 25px;
+            margin-bottom: 15px;
             color: #000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .text-block {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             text-align: justify;
+            font-size: 16px;
         }
 
         .highlight-box {
             background: #fffbe6;
-            border-left: 5px solid var(--primary-yellow);
-            padding: 15px;
-            margin: 20px 0;
+            border: 1px dashed var(--primary-yellow);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
         }
 
-        /* --- 3x3 Image Grid Section --- */
-        .grid-section h2 {
-            text-align: center;
-            margin-bottom: 30px;
+        .footer-info {
+            background: #f1f1f1;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 8px;
+            font-size: 14px;
         }
 
+        /* --- Grid Section --- */
         .image-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 3 Columns fixed */
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
-            margin-bottom: 40px;
+            margin: 40px 0;
         }
 
         .card {
             background: white;
             border: 1px solid #ddd;
-            padding: 20px;
+            padding: 25px;
             text-align: center;
-            height: 220px; /* Fixed Height */
+            height: 220px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: transform 0.2s;
-            cursor: pointer;
+            transition: 0.3s;
         }
 
         .card:hover {
-            transform: translateY(-5px);
             border-color: var(--primary-yellow);
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
         }
 
         .card i {
-            font-size: 50px;
-            color: #555;
-            margin-bottom: 20px;
-        }
-
-        .card p {
-            font-weight: bold;
-            font-size: 15px;
-            margin: 0;
-        }
-
-        /* --- Order Sheet (Form) --- */
-        .order-sheet {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            border-top: 5px solid var(--primary-yellow);
-        }
-
-        .form-group {
+            font-size: 45px;
+            color: #444;
             margin-bottom: 15px;
         }
 
-        .form-label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
+        .card p { font-weight: bold; margin: 0; }
+
+        /* --- Form Styling --- */
+        .order-sheet {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            border-top: 6px solid var(--primary-yellow);
         }
 
+        .form-group { margin-bottom: 18px; }
+        .form-label { display: block; margin-bottom: 6px; font-weight: bold; }
         .form-input, .form-select {
             width: 100%;
             padding: 12px;
             border: 1px solid #ccc;
-            border-radius: 5px;
+            border-radius: 6px;
             font-size: 16px;
-            box-sizing: border-box; /* Ensures padding doesn't affect width */
+            box-sizing: border-box;
         }
 
-        /* Error Style */
-        .form-input.error, .form-select.error {
-            border: 2px solid var(--error-red);
-            background-color: #ffe6e6;
-        }
+        .form-input.error { border: 2px solid var(--error-red); background: #fff1f1; }
 
-        .error-msg {
-            color: var(--error-red);
-            font-size: 12px;
-            display: none;
-        }
-
-        .copy-btn {
-            background: #eee;
-            border: none;
-            padding: 5px 10px;
-            font-size: 12px;
-            cursor: pointer;
-            margin-top: 5px;
-            border-radius: 4px;
-        }
-
-        /* --- Bottom Buttons --- */
-        .action-buttons {
-            display: flex;
-            gap: 15px;
-            margin-top: 30px;
-        }
-
+        .action-buttons { display: flex; gap: 15px; margin-top: 25px; }
         .btn {
             flex: 1;
             padding: 15px;
             border: none;
-            border-radius: 5px;
-            font-size: 18px;
+            border-radius: 6px;
+            font-size: 17px;
             font-weight: bold;
             cursor: pointer;
-            color: white;
+            transition: 0.2s;
         }
+        .btn-confirm { background: var(--confirm-blue); color: white; }
+        .btn-cancel { background: var(--cancel-grey); color: white; }
+        .btn-share { background: #25D366; color: white; width: 100%; margin-top: 15px; display: none; }
 
-        .btn-confirm { background-color: var(--confirm-blue); }
-        .btn-cancel { background-color: var(--cancel-grey); }
-        .btn-share { background-color: #25D366; display: none; margin-top: 15px; width: 100%; } /* WhatsApp Green */
-
-        /* Responsive for Mobile */
         @media (max-width: 768px) {
-            .image-grid {
-                grid-template-columns: 1fr; /* Stack on mobile */
-            }
-            .main-headline {
-                font-size: 20px;
-            }
+            .image-grid { grid-template-columns: 1fr; }
+            header { flex-direction: column; gap: 10px; padding: 15px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="lang-switch">
-        <button class="lang-btn active" onclick="setLanguage('en')">English</button>
-        <button class="lang-btn" onclick="setLanguage('ml')">മലയാളം</button>
-    </div>
-
     <header>
-        <div class="logo">AV Chem</div>
+        <div class="header-left">
+            <button class="lang-btn active" id="btnEn" onclick="setLanguage('en')">English</button>
+            <button class="lang-btn" id="btnMl" onclick="setLanguage('ml')">മലയാളം</button>
+        </div>
+        <div class="logo">H4 Waterproof</div>
     </header>
 
     <div class="container">
-
-        <div class="content-section" id="textContent">
-            </div>
+        <div class="content-section" id="mainContent"></div>
 
         <div class="grid-section">
-            <h2 id="gridTitle">Features & Applications</h2>
-            <div class="image-grid">
-                <div class="card"><i class="fas fa-umbrella"></i><p id="c1">Water Repellent</p></div>
-                <div class="card"><i class="fas fa-temperature-low"></i><p id="c2">Heat Control</p></div>
-                <div class="card"><i class="fas fa-link"></i><p id="c3">Chemical Bonding</p></div>
-                <div class="card"><i class="fas fa-magic"></i><p id="c4">Crack Bridging</p></div>
-                <div class="card"><i class="fas fa-shield-virus"></i><p id="c5">Anti-Fungal</p></div>
-                <div class="card"><i class="fas fa-industry"></i><p id="c6">Anti-Corrosion</p></div>
-                <div class="card"><i class="fas fa-home"></i><p id="c7">Roofs & Terraces</p></div>
-                <div class="card"><i class="fas fa-layer-group"></i><p id="c8">Wall Protection</p></div>
-                <div class="card"><i class="fas fa-water"></i><p id="c9">Water Tanks</p></div>
+            <div class="image-grid" id="featureGrid">
+                <div class="card"><i class="fas fa-umbrella"></i><p id="c1"></p></div>
+                <div class="card"><i class="fas fa-temperature-low"></i><p id="c2"></p></div>
+                <div class="card"><i class="fas fa-link"></i><p id="c3"></p></div>
+                <div class="card"><i class="fas fa-magic"></i><p id="c4"></p></div>
+                <div class="card"><i class="fas fa-shield-virus"></i><p id="c5"></p></div>
+                <div class="card"><i class="fas fa-industry"></i><p id="c6"></p></div>
+                <div class="card"><i class="fas fa-home"></i><p id="c7"></p></div>
+                <div class="card"><i class="fas fa-layer-group"></i><p id="c8"></p></div>
+                <div class="card"><i class="fas fa-water"></i><p id="c9"></p></div>
             </div>
         </div>
 
         <div class="order-sheet">
-            <h2 id="formTitle" style="text-align:center; margin-bottom:20px;">Order Sheet</h2>
-
+            <h2 id="formTitle" style="text-align:center;">Order Sheet</h2>
+            <div class="form-group"><label class="form-label" id="lblName"></label><input type="text" id="name" class="form-input"></div>
+            <div class="form-group"><label class="form-label" id="lblAddress"></label><textarea id="address" class="form-input" rows="3"></textarea></div>
+            <div class="form-group"><label class="form-label" id="lblArea"></label><input type="text" id="area" class="form-input"></div>
+            <div class="form-group"><label class="form-label" id="lblStreet"></label><input type="text" id="street" class="form-input"></div>
+            <div class="form-group"><label class="form-label" id="lblMobile"></label><input type="number" id="mobile" class="form-input" placeholder="10 Digits"></div>
             <div class="form-group">
-                <label class="form-label" id="lblName">Name</label>
-                <input type="text" id="name" class="form-input">
+                <label class="form-label" id="lblWhatsapp"></label>
+                <input type="number" id="whatsapp" class="form-input" placeholder="10 Digits">
+                <button class="lang-btn" style="margin-top:5px; background:#666;" onclick="copyNum()" id="btnCopy">Copy Mobile</button>
             </div>
-
+            <div class="form-group"><label class="form-label" id="lblPin"></label><input type="number" id="pincode" class="form-input" placeholder="6 Digits"></div>
+            <div class="form-group"><label class="form-label" id="lblDist"></label><input type="text" id="district" class="form-input"></div>
+            <div class="form-group"><label class="form-label" id="lblState"></label><input type="text" id="state" class="form-input" value="Kerala"></div>
             <div class="form-group">
-                <label class="form-label" id="lblAddress">Address</label>
-                <textarea id="address" class="form-input" rows="3"></textarea>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label" id="lblArea">Area</label>
-                <input type="text" id="area" class="form-input">
-            </div>
-
-            <div class="form-group">
-                <label class="form-label" id="lblStreet">Street</label>
-                <input type="text" id="street" class="form-input">
-            </div>
-
-            <div class="form-group">
-                <label class="form-label" id="lblMobile">Mobile (10 Digit)</label>
-                <input type="number" id="mobile" class="form-input" placeholder="99xxxxxxxx" oninput="checkMobile()">
-                <small class="error-msg">Must be 10 digits</small>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label" id="lblWhatsapp">WhatsApp (Optional)</label>
-                <input type="number" id="whatsapp" class="form-input" placeholder="99xxxxxxxx">
-                <button type="button" class="copy-btn" onclick="copyMobileToWa()" id="btnCopyWa">Use Mobile Number</button>
-                <small class="error-msg">Must be 10 digits</small>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label" id="lblPincode">Pin Code (6 Digit)</label>
-                <input type="number" id="pincode" class="form-input" placeholder="67xxxx">
-                <small class="error-msg">Must be 6 digits</small>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label" id="lblDistrict">District</label>
-                <input type="text" id="district" class="form-input">
-            </div>
-
-            <div class="form-group">
-                <label class="form-label" id="lblState">State</label>
-                <input type="text" id="state" class="form-input" value="Kerala">
-            </div>
-
-            <div class="form-group">
-                <label class="form-label" id="lblSelectArea">Area for Waterproofing</label>
-                <select id="waterproofArea" class="form-select">
+                <label class="form-label" id="lblType"></label>
+                <select id="wpType" class="form-select">
                     <option value="">-- Select --</option>
                     <option value="Home">Home</option>
                     <option value="Office">Office</option>
@@ -330,272 +259,133 @@
                     <option value="Other">Other</option>
                 </select>
             </div>
-
-            <div class="form-group">
-                <label class="form-label" id="lblQuantity">Quantity</label>
-                <input type="number" id="quantity" class="form-input" min="1" max="1000000">
-            </div>
+            <div class="form-group"><label class="form-label" id="lblQty"></label><input type="number" id="qty" class="form-input" placeholder="1 to 1000000"></div>
 
             <div class="action-buttons">
-                <button class="btn btn-cancel" onclick="resetForm()" id="btnCancel">Cancel</button>
-                <button class="btn btn-confirm" onclick="validateAndSend()" id="btnConfirm">Confirm</button>
+                <button class="btn btn-cancel" id="btnCancel" onclick="location.reload()">Cancel</button>
+                <button class="btn btn-confirm" id="btnConfirm" onclick="validate()">Confirm</button>
             </div>
-            
-            <button class="btn btn-share" id="btnShare" onclick="shareDetails()">Share Details <i class="fas fa-share-alt"></i></button>
+            <button class="btn btn-share" id="btnShare" onclick="share()">Share <i class="fab fa-whatsapp"></i></button>
         </div>
-
     </div>
 
     <script>
-        // --- DATA OBJECTS FOR TRANSLATION ---
-        const contentData = {
-            en: {
-                headline: "Don't let the red of rain and the heat of sun mix into your dream home anymore.",
-                intro: "<b>AV Chem Chemical & Manufacturing</b> presents, a protective shield that stands beyond the limits of science: <b>H4 Waterproof</b>.<br><br>This is not a paint. This is a Chemical Bonding System.",
-                guaranteeTitle: "🛡️ Our Advance Promise: 10 Year 100% Guarantee",
-                guaranteeText: "Is all waterproofing the same? Never.<br>Traditional solutions dry up, peel, and crack over time. Within 2-3 years, you will hear the sound of leakage again. H4 is different. The focus of our research is 'Permanent Chemical Integration'. It dissolves into the internal structure of the concrete and becomes one. It gives concrete a second skin that is water-resistant.<br>That's why we boldly say: For the next ten years, the rainy season will not disturb your sleep.",
-                chemistryTitle: "🔬 The Chemistry of H4: Not just a dye, a System",
-                chemistryText: "The power of H4 lies in its molecular structure. It pushes water back at the surface (Water Repellency). But beyond that, due to Chemical Bonding, it provides permanent protection.<br><b>Advance Tip:</b> New chemical technology often requires special training to apply. But H4 is a User-Friendly Technology that can be applied using the traditional brush/roller method. Your local painter can apply this easily.",
-                benefitsTitle: "💎 Not just 'Water Blocking', 4 Additional Mass Benefits of H4:",
-                b1: "<b>1. 🌡️ Controls Temperature (Modern Thermal Insulation):</b><br>Cutting-edge reflective pigments in H4 reflect up to 90% of the sun's heat. This helps reduce indoor temperature by 3°C to 8°C in summer and retain heat inside in winter. Result: Lower AC bills, energy saving, healthy atmosphere.",
-                b2: "<b>2. 🧱 Self-Seals Cracks (High Elasticity):</b><br>Small cracks are natural in concrete. Ordinary paints widen here. But H4 has elastomeric properties. It stretches across cracks like an elastic shield and covers them. Even if a crack forms, H4's protective layer won't allow water to pass through. (Crack Bridging Ability)",
-                b3: "<b>3. 🏭 Shield against Carbonation & Rust (Anti-Carbonation):</b><br>Polluted air and Carbon Dioxide in cities rust steel reinforcements in concrete. H4 acts as an integral barrier layer, preventing these dangerous gases and moisture from reaching the concrete.",
-                b4: "<b>4. 🚫 Prevents Algae, Fungus, Bacteria Growth:</b><br>Constant moisture is ideal for algae and fungus. Since H4 does not allow water to stay on the surface, it creates an unfavorable environment for these organisms.",
-                usageTitle: "📋 Where? How to use?",
-                usageText: "<b>Suitable Surfaces:</b> Terrace, Roof Top, Sunshade, Balcony, Exterior Walls, Water Tanks, Concrete Terrace Garden.<br><b>Special Note:</b> Allow new concrete to age for at least 21 days. Surface must be clean and dry before application.",
-                
-                // Form Labels
-                formTitle: "Order Sheet",
-                lblName: "Name",
-                lblAddress: "Address",
-                lblArea: "Area",
-                lblStreet: "Street",
-                lblMobile: "Mobile (10 Digit)",
-                lblWhatsapp: "WhatsApp (Optional)",
-                lblPincode: "Pin Code (6 Digit)",
-                lblDistrict: "District",
-                lblState: "State",
-                lblSelectArea: "Waterproofing Area",
-                lblQuantity: "Quantity",
-                btnCopyWa: "Use Mobile Number",
-                btnCancel: "Cancel",
-                btnConfirm: "Confirm",
-                
-                // Grid
-                gridTitle: "Features & Applications",
-                c1: "Water Repellent", c2: "Heat Control", c3: "Chemical Bonding",
-                c4: "Crack Bridging", c5: "Anti-Fungal", c6: "Anti-Corrosion",
-                c7: "Roofs", c8: "Walls", c9: "Water Tanks"
-            },
+        const data = {
             ml: {
-                headline: "മഴയുടെ ചുവപ്പും വെയിലിന്റെ ചുട്ടുപഴുപ്പും നിങ്ങളുടെ സ്വപ്നഭവനത്തിൽ ഇനി കലർത്തരുത്.",
-                intro: "<b>AV Chem Chemical & Manufacturing</b> അവതരിപ്പിക്കുന്നു, ശാസ്ത്രത്തിന്റെ അതിരുകൾ വിട്ട് നിൽക്കുന്ന ഒരു സംരക്ഷണ കവചം: <b>H4 Waterproof</b>.<br><br>ഇത് ഒരു പെയിന്റ് അല്ല. ഇതൊരു കെമിക്കൽ ബോണ്ടിംഗ് സംവിധാനം ആണ്.",
-                guaranteeTitle: "🛡️ ഞങ്ങളുടെ അഡ്വാൻസ് വാഗ്ദാനം: 10 വർഷത്തെ 100% ഗ്യാരണ്ടി",
-                guaranteeText: "എല്ലാ വാട്ടർപ്രൂഫിംഗും ഒരുപോലെയാണോ? ഒരിക്കലുമില്ല.<br>പരമ്പരാഗത ലായനികൾ കാലക്രമേണ വറ്റി പൊടിയും, ചുരുളും, പൊളിയും. 2-3 വർഷത്തിനുള്ളിൽ നിങ്ങൾ ആ ചോർച്ചയുടെ ശബ്ദം വീണ്ടും കേൾക്കും. H4 വ്യത്യസ്തമാണ്. ഞങ്ങളുടെ ഗവേഷണത്തിന്റെ കേന്ദ്രബിന്ദു, 'പെർമനന്റ് കെമിക്കൽ ഇന്റഗ്രേഷൻ' ആണ്. ഇത് കോൺക്രീറ്റിന്റെ ആന്തരിക ഘടനയിൽ ദ്രവിച്ച് ചേർന്ന്, ഒന്നായി മാറുന്നു.<br>അതുകൊണ്ടാണ് ഞങ്ങൾക്ക് ധൈര്യമായി ഇത് പറയാൻ: അടുത്ത പത്തുവർഷം, മഴക്കാലം നിങ്ങളുടെ ഉറക്കം കെടുത്തില്ല.",
-                chemistryTitle: "🔬 H4-ന്റെ രസതന്ത്രം: സാധാരണ ചായം അല്ല, ഒരു സംവിധാനം",
-                chemistryText: "H4-ന്റെ ശക്തി അതിന്റെ തന്മാത്രാ ഘടനയിൽ ഒളിഞ്ഞിരിക്കുന്നു. ഇത് ജലത്തെ ഉപരിതലത്തിൽ തന്നെ തിരികെ തള്ളുകയാണ്. എന്നാൽ അതിനപ്പുറം, കെമിക്കൽ ബോണ്ടിംഗ് മൂലം ഇത് ശാശ്വതമായ സംരക്ഷണം നൽകുന്നു.<br><b>അഡ്വാൻസ് ടിപ്പ്:</b> H4, പാരമ്പര്യമായ ബ്രഷ്/റോളർ രീതിയിൽ തന്നെ പ്രയോഗിക്കാവുന്ന യൂസർ-ഫ്രണ്ട്ലി ടെക്നോളജി ആണ്. നിങ്ങളുടെ പ്രാദേശിക പെയിന്റർ തന്നെ ഇത് എളുപ്പത്തിൽ പ്രയോഗിക്കും.",
-                benefitsTitle: "💎 'ജലം തടയൽ' മാത്രമല്ല, H4 നൽകുന്ന 4 അധിക മാസ് ബെനിഫിറ്റ്സ്:",
-                b1: "<b>1. 🌡️ താപനിലയെ നിയന്ത്രിക്കുന്നു (ആധുനിക താപ ഇൻസുലേഷൻ):</b><br>H4-യിലെ അത്യാധുനിക റിഫ്ലെക്ടീവ് പിഗ്മെന്റുകൾ സൂര്യരശ്മികളുടെ താപത്തിന്റെ 90% വരെ പ്രതിഫലിപ്പിക്കുന്നു. ഇത് വേനൽക്കാലത്ത് വീടിനുള്ളിലെ താപനില 3°C മുതൽ 8°C വരെ കുറയ്ക്കാനും സഹായിക്കുന്നു.",
-                b2: "<b>2. 🧱 വിള്ളലുകൾ സ്വയം അടയ്ക്കുന്നു (ഉയർന്ന ഇലാസ്തികത):</b><br>ചെറിയ വിള്ളലുകൾ കോൺക്രീറ്റിന്റെ സ്വാഭാവികതയാണ്. H4-യ്ക്ക് എലാസ്റ്റോമെറിക് ഗുണം ഉണ്ട്. ഇത് ഒരു ഇലാസ്തിക കവചം പോലെ വിള്ളലുകൾക്ക് കുറുകെ വലിച്ചുനീട്ടി അവയെ മൂടുന്നു.",
-                b3: "<b>3. 🏭 കാർബണേഷൻ & തുരുമ്പ് എതിരെ കവചം:</b><br>നഗരങ്ങളിലെ മലിനവായു, കാർബൺ ഡൈ ഓക്സൈഡ് എന്നിവ കോൺക്രീറ്റിലെ ഉരുക്ക് ഉറകളെ തുരുമ്പിപ്പിക്കുന്നു. H4 ഒരു അവിഭാജ്യ അവരോധക പാളിയായി പ്രവർത്തിച്ച് ഇതിനെ തടയുന്നു.",
-                b4: "<b>4. 🚫 പായൽ, പൂപ്പൽ, ബാക്ടീരിയ എന്നിവയുടെ വർദ്ധനവ് തടയുന്നു:</b><br>H4, ഉപരിതലത്തിൽ ജലം തങ്ങാൻ അനുവദിക്കാത്തതിനാൽ, പായലിനും പൂപ്പലിനും വളരാൻ അനുകൂലമല്ലാത്ത ഒരു പരിതസ്ഥിതി സൃഷ്ടിക്കുന്നു.",
-                usageTitle: "📋 എവിടെയെല്ലാം? എങ്ങനെ ഉപയോഗിക്കാം?",
-                usageText: "<b>അനുയോജ്യമായ ഉപരിതലങ്ങൾ:</b> ടെറസ്, റൂഫ് ടോപ്പ്, സൺഷെയ്ഡ്, ബാലക്കണി, എക്സ്റ്റീരിയർ വാൾസ്, വാട്ടർ ടാങ്കുകൾ.<br><b>പ്രത്യേക ശ്രദ്ധ:</b> പുതിയ കോൺക്രീറ്റിന് കുറഞ്ഞത് 21 ദിവസം പ്രായമാകാൻ അനുവദിക്കുക. ഉപരിതലം വൃത്തിയും ഉണങ്ങിയതുമായിരിക്കണം.",
-                
-                // Form Labels
-                formTitle: "ഓർഡർ ഷീറ്റ്",
-                lblName: "പേര്",
-                lblAddress: "വിലാസം",
-                lblArea: "ഏരിയ",
-                lblStreet: "സ്ട്രീറ്റ്",
-                lblMobile: "മൊബൈൽ (10 അക്കം)",
-                lblWhatsapp: "WhatsApp (ഓപ്ഷണൽ)",
-                lblPincode: "പിൻ‌കോഡ് (6 അക്കം)",
-                lblDistrict: "ജില്ല",
-                lblState: "സംസ്ഥാനം",
-                lblSelectArea: "Waterproof ചെയ്യേണ്ട സ്ഥലം",
-                lblQuantity: "Quantity",
-                btnCopyWa: "മൊബൈൽ നമ്പർ തന്നെ നൽകുക",
-                btnCancel: "Cancel",
-                btnConfirm: "Confirm",
-
-                // Grid
-                gridTitle: "പ്രത്യേകതകൾ & ഉപയോഗങ്ങൾ",
-                c1: "നനവ് തടയുന്നു", c2: "ചൂട് കുറയ്ക്കുന്നു", c3: "കെമിക്കൽ ബോണ്ടിംഗ്",
-                c4: "വിള്ളൽ അടയ്ക്കുന്നു", c5: "പൂപ്പൽ സംരക്ഷണം", c6: "തുരുമ്പ് തടയുന്നു",
-                c7: "റൂഫ് & ടെറസ്", c8: "ഭിത്തികൾ", c9: "വാട്ടർ ടാങ്ക്"
+                h1: "H4 Waterproof: കെമിസ്ട്രിയുടെ കരുത്തിൽ നിർമ്മിച്ച, പതിറ്റാണ്ടുകളുടെ സംരക്ഷണം!",
+                intro: "വീട്, മാത്രമല്ല; അടുത്ത 10 വർഷത്തെ നിങ്ങളുടെ സമാധാനം. മഴയുടെ ചുവപ്പും വെയിലിന്റെ ചുട്ടുപഴുപ്പും നിങ്ങളുടെ സ്വപ്നഭവനത്തിൽ ഇനി കലർത്തരുത്. AV Chem Chemical & Manufacturing അവതരിപ്പിക്കുന്നു, ശാസ്ത്രത്തിന്റെ അതിരുകൾ വിട്ട് നിൽക്കുന്ന ഒരു സംരക്ഷണ കവചം: H4 Waterproof.<br><br>ഇത് ഒരു പെയിന്റ് അല്ല. ഇതൊരു കെമിക്കൽ ബോണ്ടിംഗ് സംവിധാനം ആണ്.",
+                g_title: "🛡️ ഞങ്ങളുടെ അഡ്വാൻസ് വാഗ്ദാനം: 10 വർഷത്തെ 100% ഗ്യാരണ്ടി",
+                g_text: "എല്ലാ വാട്ടർപ്രൂഫിംഗും ഒരുപോലെയാണോ? ഒരിക്കലുമില്ല. പരമ്പരാഗത ലായനികൾ കാലക്രമേണ വറ്റി പൊടിയും, ചുരുളും, പൊളിയും. 2-3 വർഷത്തിനുള്ളിൽ നിങ്ങൾ ആ ചോർച്ചയുടെ ശബ്ദം വീണ്ടും കേൾക്കും. H4 വ്യത്യസ്തമാണ്. ഞങ്ങളുടെ ഗവേഷണത്തിന്റെ കേന്ദ്രബിന്ദു, 'പെർമനന്റ് കെമിക്കൽ ഇന്റഗ്രേഷൻ' ആണ്. ഇത് കോൺക്രീറ്റിന്റെ ആന്തരിക ഘടനയിൽ ദ്രവിച്ച് ചേർന്ന്, ഒന്നായി മാറുന്നു. കോൺക്രീറ്റിന് ജലവിരുദ്ധമായ ഒരു രണ്ടാം ചർമ്മം നൽകുന്നു.<br><br>അതുകൊണ്ടാണ് ഞങ്ങൾക്ക് ധൈര്യമായി ഇത് പറയാൻ: അടുത്ത പത്തുവർഷം, മഴക്കാലം നിങ്ങളുടെ ഉറക്കം കെടുത്തില്ല.",
+                c_title: "🔬 H4-ന്റെ രസതന്ത്രം: സാധാരണ ചായം അല്ല, ഒരു സംവിധാനം",
+                c_text: "H4-ന്റെ ശക്തി അതിന്റെ തന്മാത്രാ ഘടനയിൽ ഒളിഞ്ഞിരിക്കുന്നു. ഇത് ജലത്തെ ഉപരിതലത്തിൽ തന്നെ തിരികെ തള്ളുകയാണ്. എന്നാൽ അതിനപ്പുറം, കെമിക്കൽ ബോണ്ടിംഗ് മൂലം ഇത് ശാശ്വതമായ സംരക്ഷണം നൽകുന്നു.<br><br><b>അഡ്വാൻസ് ടിപ്പ്:</b> H4, പാരമ്പര്യമായ ബ്രഷ്/റോളർ രീതിയിൽ തന്നെ പ്രയോഗിക്കാവുന്ന യൂസർ-ഫ്രണ്ട്ലി ടെക്നോളജി ആണ്.",
+                b_title: "💎 'ജലം തടയൽ' മാത്രമല്ല, H4 നൽകുന്ന 4 അധിക മാസ് ബെനിഫിറ്റ്സ്:",
+                b1: "<b>1. 🌡️ താപനിലയെ നിയന്ത്രിക്കുന്നു:</b> സൂര്യരശ്മികളുടെ താപത്തിന്റെ 90% വരെ പ്രതിഫലിപ്പിക്കുന്നു. വീടിനുള്ളിലെ താപനില 3°C മുതൽ 8°C വരെ കുറയ്ക്കാൻ സഹായിക്കുന്നു.",
+                b2: "<b>2. 🧱 വിള്ളലുകൾ സ്വയം അടയ്ക്കുന്നു:</b> H4-യ്ക്ക് എലാസ്റ്റോമെറിക് ഗുണം ഉണ്ട്. ഇത് ഒരു ഇലാസ്തിക കവചം പോലെ വിള്ളലുകൾ മൂടുന്നു.",
+                b3: "<b>3. 🏭 കാർബണേഷൻ & തുരുമ്പ് എതിരെ കവചം:</b> ഈർപ്പവും അപകടകരമായ വാതകങ്ങളും കോൺക്രീറ്റിൽ എത്താതെ തടയുന്നു.",
+                b4: "<b>4. 🚫 പായൽ, പൂപ്പൽ തടയുന്നു:</b> ഉപരിതലത്തിൽ ജലം തങ്ങാൻ അനുവദിക്കാത്തതിനാൽ പൂപ്പൽ വളർച്ച തടയുന്നു.",
+                u_title: "📋 എവിടെയെല്ലാം? എങ്ങനെ ഉപയോഗിക്കാം?",
+                u_text: "ടെറസ്, റൂഫ് ടോപ്പ്, ബാലക്കണി, എക്സ്റ്റീരിയർ വാൾസ്, വാട്ടർ ടാങ്കുകൾ. പ്രയോഗത്തിന് മുമ്പ് ഉപരിതലം വൃത്തിയും ഉണങ്ങിയതുമായിരിക്കണം.",
+                footer: "🏢 <b>AV Chem Chemical & Manufacturing</b><br>Mukkilapeedika, Tirur, Malappuram<br>📞 9745838382, 7907344030",
+                fields: ["പേര്", "വിലാസം", "ഏരിയ", "സ്ട്രീറ്റ്", "മൊബൈൽ", "WhatsApp", "പിൻ‌കോഡ്", "ജില്ല", "സംസ്ഥാനം", "Waterproof ചെയ്യേണ്ട സ്ഥലം", "Quantity", "Confirm", "Cancel", "മൊബൈൽ പകർപ്പുക"],
+                grid: ["ജല പ്രതിരോധം", "താപ നിയന്ത്രണം", "കെമിക്കൽ ബോണ്ടിംഗ്", "വിള്ളൽ അടയ്ക്കുന്നു", "പൂപ്പൽ വിരുദ്ധം", "തുരുമ്പ് വിരുദ്ധം", "റൂഫുകൾ", "ഭിത്തികൾ", "വാട്ടർ ടാങ്ക്"]
+            },
+            en: {
+                h1: "H4 Waterproof: Built with the Power of Chemistry, Decades of Protection!",
+                intro: "Not just a home; your peace of mind for the next 10 years. Stop the leakage and heat from affecting your dream home. AV Chem presents H4 Waterproof - a shield beyond science.<br><br>This is not a paint; it is a Chemical Bonding System.",
+                g_title: "🛡️ Our Advance Promise: 10 Year 100% Guarantee",
+                g_text: "Traditional solutions dry up and peel within 2-3 years. H4 is different. It integrates into the concrete's internal structure, giving it a permanent water-resistant second skin. Next 10 years, rain won't disturb your sleep.",
+                c_title: "🔬 The Chemistry of H4: A System, Not Just Paint",
+                c_text: "H4 uses molecular structure to repel water at the surface. It provides permanent protection through chemical bonding. It's user-friendly and can be applied by local painters using brushes or rollers.",
+                b_title: "💎 4 Additional Mass Benefits of H4:",
+                b1: "<b>1. 🌡️ Temperature Control:</b> Reflects 90% of solar heat, reducing indoor temp by 3°C to 8°C.",
+                b2: "<b>2. 🧱 Crack Bridging:</b> High elasticity allows it to cover and seal hairline cracks automatically.",
+                b3: "<b>3. 🏭 Anti-Corrosion:</b> Prevents carbonation and rust in steel reinforcements.",
+                b4: "<b>4. 🚫 Anti-Fungal:</b> Keeps walls clean by preventing the growth of algae and bacteria.",
+                u_title: "📋 Where & How to Use?",
+                u_text: "Suitable for terraces, balconies, exterior walls, and water tanks. Ensure the surface is clean and dry before application.",
+                footer: "🏢 <b>AV Chem Chemical & Manufacturing</b><br>Mukkilapeedika, Tirur, Malappuram<br>📞 9745838382, 7907344030",
+                fields: ["Name", "Address", "Area", "Street", "Mobile", "WhatsApp", "Pin Code", "District", "State", "Waterproofing Area", "Quantity", "Confirm", "Cancel", "Copy Mobile"],
+                grid: ["Water Repellent", "Heat Control", "Chemical Bonding", "Crack Bridging", "Anti-Fungal", "Anti-Corrosion", "Roofs", "Walls", "Water Tanks"]
             }
         };
 
-        let currentLang = 'en';
-
-        // Function to render content
         function setLanguage(lang) {
-            currentLang = lang;
-            const data = contentData[lang];
-
-            // Update Text Content
-            const contentDiv = document.getElementById('textContent');
-            contentDiv.innerHTML = `
-                <div class="main-headline">${data.headline}</div>
-                <div class="text-block">${data.intro}</div>
-                <hr>
-                <div class="sub-headline">${data.guaranteeTitle}</div>
-                <div class="text-block">${data.guaranteeText}</div>
-                <hr>
-                <div class="sub-headline">${data.chemistryTitle}</div>
-                <div class="text-block">${data.chemistryText}</div>
-                <hr>
-                <div class="sub-headline">${data.benefitsTitle}</div>
-                <div class="text-block">${data.b1}</div>
-                <div class="text-block">${data.b2}</div>
-                <div class="text-block">${data.b3}</div>
-                <div class="text-block">${data.b4}</div>
-                <hr>
+            const l = data[lang];
+            document.getElementById('mainContent').innerHTML = `
+                <div class="main-headline">${l.h1}</div>
+                <p class="text-block">${l.intro}</p><hr>
+                <div class="sub-headline">${l.g_title}</div><p class="text-block">${l.g_text}</p><hr>
+                <div class="sub-headline">${l.c_title}</div><p class="text-block">${l.c_text}</p>
                 <div class="highlight-box">
-                    <div class="sub-headline">${data.usageTitle}</div>
-                    <div class="text-block">${data.usageText}</div>
-                </div>
+                    <div class="sub-headline">${l.b_title}</div>
+                    <p class="text-block">${l.b1}</p><p class="text-block">${l.b2}</p>
+                    <p class="text-block">${l.b3}</p><p class="text-block">${l.b4}</p>
+                </div><hr>
+                <div class="sub-headline">${l.u_title}</div><p class="text-block">${l.u_text}</p>
+                <div class="footer-info">${l.footer}</div>
             `;
+            // Labels
+            const f = l.fields;
+            document.getElementById('lblName').innerText = f[0];
+            document.getElementById('lblAddress').innerText = f[1];
+            document.getElementById('lblArea').innerText = f[2];
+            document.getElementById('lblStreet').innerText = f[3];
+            document.getElementById('lblMobile').innerText = f[4];
+            document.getElementById('lblWhatsapp').innerText = f[5];
+            document.getElementById('lblPin').innerText = f[6];
+            document.getElementById('lblDist').innerText = f[7];
+            document.getElementById('lblState').innerText = f[8];
+            document.getElementById('lblType').innerText = f[9];
+            document.getElementById('lblQty').innerText = f[10];
+            document.getElementById('btnConfirm').innerText = f[11];
+            document.getElementById('btnCancel').innerText = f[12];
+            document.getElementById('btnCopy').innerText = f[13];
+            document.getElementById('formTitle').innerText = lang === 'ml' ? "ഓർഡർ ഷീറ്റ്" : "Order Sheet";
 
-            // Update Form Labels
-            document.getElementById('formTitle').innerText = data.formTitle;
-            document.getElementById('lblName').innerText = data.lblName;
-            document.getElementById('lblAddress').innerText = data.lblAddress;
-            document.getElementById('lblArea').innerText = data.lblArea;
-            document.getElementById('lblStreet').innerText = data.lblStreet;
-            document.getElementById('lblMobile').innerText = data.lblMobile;
-            document.getElementById('lblWhatsapp').innerText = data.lblWhatsapp;
-            document.getElementById('lblPincode').innerText = data.lblPincode;
-            document.getElementById('lblDistrict').innerText = data.lblDistrict;
-            document.getElementById('lblState').innerText = data.lblState;
-            document.getElementById('lblSelectArea').innerText = data.lblSelectArea;
-            document.getElementById('lblQuantity').innerText = data.lblQuantity;
-            document.getElementById('btnCopyWa').innerText = data.btnCopyWa;
-            document.getElementById('btnCancel').innerText = data.btnCancel;
-            document.getElementById('btnConfirm').innerText = data.btnConfirm;
+            // Grid
+            for(let i=1; i<=9; i++) document.getElementById('c'+i).innerText = l.grid[i-1];
 
-            // Update Grid
-            document.getElementById('gridTitle').innerText = data.gridTitle;
-            for(let i=1; i<=9; i++) {
-                document.getElementById(`c${i}`).innerText = data[`c${i}`];
-            }
-
-            // Update Active Button State
-            const btns = document.querySelectorAll('.lang-btn');
-            btns.forEach(btn => btn.classList.remove('active'));
-            // Assuming first is En, second is Ml
-            if(lang === 'en') btns[0].classList.add('active');
-            else btns[1].classList.add('active');
+            // Buttons
+            document.getElementById('btnEn').classList.toggle('active', lang === 'en');
+            document.getElementById('btnMl').classList.toggle('active', lang === 'ml');
         }
 
-        // --- FORM FUNCTIONS ---
+        function copyNum() { document.getElementById('whatsapp').value = document.getElementById('mobile').value; }
 
-        function copyMobileToWa() {
-            const mobile = document.getElementById('mobile').value;
-            if(mobile) {
-                document.getElementById('whatsapp').value = mobile;
-            } else {
-                alert("Please enter mobile number first / ദയവായി മൊബൈൽ നമ്പർ നൽകുക");
-            }
-        }
+        function validate() {
+            let valid = true;
+            const fields = ['name', 'address', 'area', 'street', 'mobile', 'pincode', 'district', 'wpType', 'qty'];
+            fields.forEach(id => {
+                const el = document.getElementById(id);
+                if(!el.value) { el.classList.add('error'); valid = false; }
+                else el.classList.remove('error');
+            });
 
-        function validateAndSend() {
-            // Get Values
-            const name = document.getElementById('name');
-            const address = document.getElementById('address');
-            const area = document.getElementById('area');
-            const street = document.getElementById('street');
-            const mobile = document.getElementById('mobile');
-            const whatsapp = document.getElementById('whatsapp');
-            const pincode = document.getElementById('pincode');
-            const district = document.getElementById('district');
-            const state = document.getElementById('state');
-            const wpArea = document.getElementById('waterproofArea');
-            const qty = document.getElementById('quantity');
+            const m = document.getElementById('mobile');
+            if(m.value.length !== 10) { m.classList.add('error'); valid = false; }
 
-            let isValid = true;
-            
-            // Clear previous errors
-            document.querySelectorAll('.form-input, .form-select').forEach(el => el.classList.remove('error'));
+            const p = document.getElementById('pincode');
+            if(p.value.length !== 6) { p.classList.add('error'); valid = false; }
 
-            // Validation Logic
-            if(!name.value) { name.classList.add('error'); isValid = false; }
-            if(!address.value) { address.classList.add('error'); isValid = false; }
-            if(!area.value) { area.classList.add('error'); isValid = false; }
-            if(!street.value) { street.classList.add('error'); isValid = false; }
-            if(!district.value) { district.classList.add('error'); isValid = false; }
-            if(!wpArea.value) { wpArea.classList.add('error'); isValid = false; }
-            if(!qty.value) { qty.classList.add('error'); isValid = false; }
+            if(!valid) { alert("Please fill all red fields correctly!"); return; }
 
-            // Mobile Validation (10 digits)
-            if(mobile.value.length !== 10) { mobile.classList.add('error'); isValid = false; }
-            // Pincode Validation (6 digits)
-            if(pincode.value.length !== 6) { pincode.classList.add('error'); isValid = false; }
-            // WhatsApp (if filled, must be 10 digits)
-            if(whatsapp.value && whatsapp.value.length !== 10) { whatsapp.classList.add('error'); isValid = false; }
-
-            if (!isValid) {
-                alert("Please fill all required fields correctly / ചുവപ്പ് നിറത്തിൽ കാണുന്നവ കൃത്യമായി പൂരിപ്പിക്കുക");
-                return;
-            }
-
-            // Construct Message
-            const message = `*New H4 Waterproof Order*%0a%0a` + 
-                            `Name: ${name.value}%0a` +
-                            `Address: ${address.value}%0a` +
-                            `Area: ${area.value}, Street: ${street.value}%0a` +
-                            `Mobile: ${mobile.value}%0a` +
-                            `WhatsApp: ${whatsapp.value || 'N/A'}%0a` +
-                            `Pin: ${pincode.value}%0a` +
-                            `District: ${district.value}%0a` +
-                            `Target Area: ${wpArea.value}%0a` +
-                            `Quantity: ${qty.value}`;
-
-            // 1. Send to Shop Number
-            const shopNumber = "9745838382";
-            const shopUrl = `https://wa.me/91${shopNumber}?text=${message}`;
-            window.open(shopUrl, '_blank');
-
-            // 2. Send to Customer Number (if WhatsApp provided)
-            if(whatsapp.value) {
-                // Small delay to allow browser to handle first popup
+            const msg = `*New Order - H4 Waterproof*%0AName: ${document.getElementById('name').value}%0AMobile: ${m.value}%0AQty: ${document.getElementById('qty').value}`;
+            window.open(`https://wa.me/919745838382?text=${msg}`, '_blank');
+            if(document.getElementById('whatsapp').value) {
                 setTimeout(() => {
-                    const custUrl = `https://wa.me/91${whatsapp.value}?text=Order Confirmed:%0a${message}`;
-                    window.open(custUrl, '_blank');
+                    window.open(`https://wa.me/91${document.getElementById('whatsapp').value}?text=Thank you for your H4 order!`, '_blank');
                 }, 1000);
             }
-
-            // Show Share Button
-            document.getElementById('btnShare').style.display = "block";
+            document.getElementById('btnShare').style.display = 'block';
         }
 
-        function resetForm() {
-            document.querySelectorAll('input, textarea, select').forEach(el => el.value = '');
-            document.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
-            document.getElementById('btnShare').style.display = "none";
-        }
-
-        async function shareDetails() {
-            const message = "Check out H4 Waterproofing System! Best protection for your home.";
+        function share() {
             if (navigator.share) {
-                try {
-                    await navigator.share({
-                        title: 'H4 Waterproofing',
-                        text: message,
-                        url: window.location.href
-                    });
-                } catch (err) {
-                    console.log('Error sharing', err);
-                }
-            } else {
-                alert("Sharing is not supported on this browser.");
+                navigator.share({ title: 'H4 Waterproof', text: 'Order for H4 Waterproofing', url: window.location.href });
             }
         }
 
-        // Initial Load (Left side English as requested default)
         setLanguage('en');
-
     </script>
 </body>
 </html>
