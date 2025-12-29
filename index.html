@@ -1,217 +1,343 @@
+
 <!DOCTYPE html>
 <html lang="ml">
-
 <head>
     <meta charset="utf-8">
-    <title>AV Chem Chemical & Manufacturing | H4 Waterproof</title>
+    <title>AV Chem | Chemical & Manufacturing</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">
-
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         :root {
-            --primary-pink: #e91e63; /* ചിത്രത്തിലെ അതേ പിങ്ക് കളർ */
-            --dark-bg: #0b0b0b;
-            --card-bg: #161616;
+            --primary-pink: #e91e63;
+            --dark-bg: #000000;
+            --card-bg: #111111;
+            --error-red: #ff4d4d;
         }
 
         body {
-            font-family: 'Work Sans', sans-serif;
             background-color: var(--dark-bg);
             color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
         }
 
-        /* Top Bar / Navbar */
-        .navbar {
-            background-color: rgba(0, 0, 0, 0.9);
-            padding: 15px 0;
+        /* Top Bar */
+        .top-nav {
+            background: #000;
             border-bottom: 1px solid #333;
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
         }
 
-        .nav-link {
-            color: white !important;
-            font-weight: 600;
-            margin: 0 15px;
-            text-transform: uppercase;
-        }
-
-        .nav-link:hover {
-            color: var(--primary-pink) !important;
-        }
-
-        /* Hero Section */
-        .hero-section {
-            padding: 100px 0;
-            text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8));
-            animation: fadeIn 1.5s ease-in;
-        }
-
-        .h4-logo {
-            max-width: 150px;
-            margin-bottom: 20px;
-        }
-
-        .main-text {
-            font-size: 3.5rem;
-            font-weight: 700;
+        .nav-btn {
+            background: transparent;
+            border: 1px solid var(--primary-pink);
             color: white;
-            text-transform: uppercase;
+            padding: 8px 20px;
+            border-radius: 20px;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: 0.3s;
         }
 
-        .pink-text {
-            color: var(--primary-pink);
+        .nav-btn:hover { background: var(--primary-pink); }
+
+        /* Main Sections */
+        .content-section {
+            display: none;
+            padding-top: 100px;
+            min-height: 100vh;
+            text-align: center;
         }
 
-        /* Bags Display */
-        .bag-container {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 40px;
-        }
+        .active-section { display: block; }
 
-        .bag-item {
-            width: 200px;
-            transition: transform 0.3s;
-            animation: bounce 3s infinite;
-        }
-
-        .bag-item:hover { transform: scale(1.1); }
-
-        /* Folders Row (Left to Right) */
-        .folder-container {
-            padding: 60px 0;
+        /* Folder Grid */
+        .folder-grid {
             display: flex;
             justify-content: center;
             gap: 20px;
+            padding: 40px;
             flex-wrap: wrap;
         }
 
         .folder-card {
             background: var(--card-bg);
-            border: 1px solid #333;
-            width: 300px;
-            padding: 40px 20px;
+            border: 2px solid #222;
+            width: 250px;
+            padding: 30px;
             border-radius: 15px;
-            text-align: center;
             cursor: pointer;
             transition: 0.4s;
         }
 
-        .folder-card:hover {
-            border-color: var(--primary-pink);
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(233, 30, 99, 0.2);
+        .folder-card:hover { border-color: var(--primary-pink); transform: translateY(-5px); }
+        .folder-card i { font-size: 40px; color: var(--primary-pink); margin-bottom: 15px; }
+
+        /* Order Form Styles */
+        .order-form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #111;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: left;
         }
 
-        .folder-card i {
-            font-size: 40px;
-            color: var(--primary-pink);
-            margin-bottom: 15px;
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; color: #bbb; }
+        .form-control {
+            background: #222;
+            border: 1px solid #444;
+            color: white;
+            border-radius: 8px;
         }
 
-        /* Footer Address */
-        .footer-address {
-            background: #000;
-            padding: 50px 0;
-            border-top: 2px solid var(--primary-pink);
-        }
+        .form-control:focus { background: #222; border-color: var(--primary-pink); color: white; box-shadow: none; }
+        
+        .is-invalid { border-color: var(--error-red) !important; }
+        .error-text { color: var(--error-red); font-size: 12px; display: none; }
 
-        .address-box {
-            border-left: 3px solid var(--primary-pink);
-            padding-left: 20px;
-        }
+        .btn-confirm { background-color: #007bff; color: white; width: 48%; }
+        .btn-cancel { background-color: #6c757d; color: white; width: 48%; }
 
-        /* Animations */
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        /* Bag Image Animation */
+        .hero-img { width: 200px; animation: float 3s infinite ease-in-out; margin: 10px; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
 
-        @media (max-width: 768px) {
-            .main-text { font-size: 2rem; }
-            .folder-card { width: 90%; }
-        }
     </style>
 </head>
-
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-        <div class="container">
-            <a href="#" class="navbar-brand d-flex align-items-center">
-                <img src="av.png.ogo" alt="AV Logo" style="height: 40px; margin-right: 10px;">
-                <span style="font-weight: 700; color: var(--primary-pink);">AV CHEM</span>
-            </a>
-            <div class="ms-auto d-flex">
-                <a class="nav-link" href="#home">Home</a>
-                <a class="nav-link" href="#contact">Contact</a>
-            </div>
-        </div>
-    </nav>
+    <div class="top-nav text-center">
+        <button class="nav-btn" onclick="showSection('home')">Home</button>
+        <button class="nav-btn" onclick="showSection('contact')">Contact</button>
+        <button class="nav-btn" onclick="showSection('dealer')">Dealer Enquiry</button>
+    </div>
 
-    <section class="hero-section" id="home">
-        <div class="container">
-            <p style="letter-spacing: 5px;">WELCOME TO</p>
-            <img src="h4logo.png" alt="H4 Logo" class="h4-logo">
-            <h1 class="main-text">H4 <span class="pink-text">Tile Adhesive</span> & <br>Water Proof</h1>
-            
-            <div class="bag-container">
-                <img src="bag.blueandred.png" alt="Blue and Red Bag" class="bag-item">
-                <img src="bag.purpleandyellow.png" alt="Purple and Yellow Bag" class="bag-item">
-            </div>
-        </div>
-    </section>
-
-    <div class="container">
-        <div class="folder-container">
-            <div class="folder-card" onclick="window.open('tile-adhesive-details.html', '_blank')">
+    <div id="home" class="content-section active-section">
+        <img src="av.png.ogo" alt="AV Logo" style="height: 60px; margin-bottom: 20px;">
+        <h2>WELCOME TO</h2>
+        <img src="h4logo.png" alt="H4 Logo" style="width: 150px;">
+        <h1 style="color: var(--primary-pink);">H4 Tile Adhesive & Water Proof</h1>
+        
+        <div class="folder-grid">
+            <div class="folder-card" onclick="window.open('tile-adhesive.html', '_blank')">
                 <i class="fas fa-layer-group"></i>
-                <h3>Tile Adhesive</h3>
-                <p>Premium quality bonding for all types of tiles.</p>
+                <h5>Tile Adhesive</h5>
             </div>
-            <div class="folder-card" onclick="window.open('water-proof-details.html', '_blank')">
-                <i class="fas fa-faucet-drip"></i>
-                <h3>Water Proof</h3>
-                <p>Superior protection against water leakage.</p>
+            <div class="folder-card" onclick="window.open('water-proof.html', '_blank')">
+                <i class="fas fa-droplet"></i>
+                <h5>Water Proof</h5>
             </div>
-            <div class="folder-card" onclick="window.open('shieldx-details.html', '_blank')">
+            <div class="folder-card" onclick="window.open('shield-x.html', '_blank')">
                 <i class="fas fa-shield-halved"></i>
-                <h3>H4 ShieldX</h3>
-                <p>The ultimate protective shield technology.</p>
+                <h5>H4 ShieldX</h5>
             </div>
+        </div>
+
+        <div>
+            <img src="bag.blueandred.png" class="hero-img">
+            <img src="bag.purpleandyellow.png" class="hero-img">
         </div>
     </div>
 
-    <footer class="footer-address" id="contact">
-        <div class="container">
-            <div class="row g-4">
-                <div class="col-md-6">
-                    <h3 class="pink-text mb-4">Contact Details</h3>
-                    <p><i class="fa fa-phone me-2"></i> Call: +917907344030</p>
-                    <p><i class="fab fa-whatsapp me-2"></i> Whatsapp: 9745838382</p>
-                    <p><i class="fa fa-envelope me-2"></i> Email: avchemtirur@gmail.com</p>
+    <div id="contact" class="content-section">
+        <h2>Contact Us</h2>
+        <div class="order-form-container mt-4 text-center">
+            <p><i class="fa fa-phone me-2"></i> Call: +917907344030</p>
+            <p><i class="fab fa-whatsapp me-2"></i> Whatsapp: 9745838382</p>
+            <p><i class="fa fa-envelope me-2"></i> Email: avchemtirur@gmail.com</p>
+            <hr>
+            <h5>Address</h5>
+            <p>AV Chem Chemical & Manufacturing<br>Mukkilapeedika, Kannamkulam PO,<br>BP Angadi, Tirur, Malappuram - 676102</p>
+        </div>
+    </div>
+
+    <div id="dealer" class="content-section">
+        <h2>Order Sheet</h2>
+        <div class="order-form-container">
+            <form id="orderForm">
+                <div class="form-group">
+                    <label>പേര്</label>
+                    <input type="text" id="name" class="form-control required-field">
                 </div>
-                <div class="col-md-6">
-                    <h3 class="pink-text mb-4">Our Address</h3>
-                    <div class="address-box">
-                        <h5>AV Chem Chemical & Manufacturing</h5>
-                        <p>
-                            Mukkilapeedika, Kannamkulam PO,<br>
-                            BP Angadi, Pincode 676102,<br>
-                            Tirur, Malappuram, Kerala
-                        </p>
+                <div class="form-group">
+                    <label>വിലാസം</label>
+                    <textarea id="address" class="form-control required-field"></textarea>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <label>City</label>
+                        <input type="text" id="city" class="form-control required-field">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>Land Mark</label>
+                        <input type="text" id="landmark" class="form-control required-field">
                     </div>
                 </div>
-            </div>
-        </div>
-    </footer>
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <label>District</label>
+                        <input type="text" id="dist" class="form-control required-field">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>State</label>
+                        <input type="text" id="state" class="form-control required-field">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>മൊബൈൽ (10 Digits)</label>
+                    <input type="tel" id="mobile" maxlength="10" inputmode="numeric" class="form-control required-field" oninput="validatePhone(this)">
+                </div>
+                <div id="whatsapp_option" class="form-group" style="display:none;">
+                    <label>Next WhatsApp Number (Optional)</label>
+                    <input type="tel" id="whatsapp" maxlength="10" inputmode="numeric" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>പിൻ‌കോഡ് (6 Digits)</label>
+                    <input type="tel" id="pincode" maxlength="6" inputmode="numeric" class="form-control required-field" oninput="validatePin(this)">
+                </div>
 
+                <div class="form-group">
+                    <label>Product Select</label>
+                    <select id="product_type" class="form-control" onchange="toggleProductFields()">
+                        <option value="">--തിരഞ്ഞെടുക്കുക--</option>
+                        <option value="tile">Tile Adhesive</option>
+                        <option value="waterproof">Water Proof</option>
+                        <option value="shieldx">H4 ShieldX</option>
+                    </select>
+                </div>
+
+                <div id="dynamic_fields"></div>
+
+                <div class="form-group mt-3">
+                    <label>Quantity</label>
+                    <input type="tel" id="qty" inputmode="numeric" class="form-control required-field">
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <button type="button" class="btn btn-confirm" onclick="confirmOrder()">Confirm</button>
+                    <button type="reset" class="btn btn-cancel" onclick="showSection('home')">Cancel</button>
+                </div>
+                <button type="button" class="btn btn-success w-100 mt-2" onclick="sharePage()"><i class="fa fa-share-alt"></i> Share</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function showSection(id) {
+            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active-section'));
+            document.getElementById(id).classList.add('active-section');
+        }
+
+        function validatePhone(input) {
+            input.value = input.value.replace(/\D/g, '');
+            if(input.value.length === 10) {
+                input.classList.remove('is-invalid');
+                document.getElementById('whatsapp_option').style.display = 'block';
+            } else {
+                input.classList.add('is-invalid');
+            }
+        }
+
+        function validatePin(input) {
+            input.value = input.value.replace(/\D/g, '');
+            input.classList.toggle('is-invalid', input.value.length !== 6);
+        }
+
+        function toggleProductFields() {
+            const type = document.getElementById('product_type').value;
+            const container = document.getElementById('dynamic_fields');
+            container.innerHTML = '';
+
+            if(type === 'tile') {
+                container.innerHTML = `
+                    <label>ചെയ്യേണ്ട സ്ഥലം</label>
+                    <select id="sub_place" class="form-control mb-2" onchange="showSubOptions('tile')">
+                        <option value="">--Select--</option>
+                        <option value="Home">Home</option>
+                        <option value="Office">Office</option>
+                        <option value="Shop">Shop</option>
+                        <option value="Building">Building</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <div id="sub_options"></div>
+                `;
+            } else if(type === 'waterproof') {
+                container.innerHTML = `
+                    <label>ചെയ്യേണ്ട സ്ഥലം</label>
+                    <select id="sub_place" class="form-control" onchange="showSubOptions('water')">
+                        <option value="">--Select--</option>
+                        <option value="Home">Home</option>
+                        <option value="Building">Building</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <div id="sub_options"></div>
+                `;
+            }
+        }
+
+        function showSubOptions(cat) {
+            const sub = document.getElementById('sub_options');
+            if(cat === 'tile') {
+                sub.innerHTML = `
+                    <label>മെറ്റീരിയൽ</label>
+                    <select id="final_choice" class="form-control">
+                        <option value="Marble">Marble</option>
+                        <option value="Granite">Granite</option>
+                        <option value="Marbonit">Marbonit</option>
+                        <option value="Ceramic Tile">Ceramic Tile</option>
+                        <option value="Other">Other</option>
+                    </select>
+                `;
+            } else {
+                sub.innerHTML = `<input type="text" id="final_choice" placeholder="Specify more details" class="form-control mt-2">`;
+            }
+        }
+
+        function confirmOrder() {
+            let isValid = true;
+            document.querySelectorAll('.required-field').forEach(field => {
+                if(!field.value || field.classList.contains('is-invalid')) {
+                    field.classList.add('is-invalid');
+                    isValid = false;
+                } else {
+                    field.classList.remove('is-invalid');
+                }
+            });
+
+            if(!isValid) { alert("ദയവായി എല്ലാ കളങ്ങളും ചുവന്ന അടയാളം ഇല്ലാതെ പൂരിപ്പിക്കുക."); return; }
+
+            const msg = `*New Dealer Enquiry - AV Chem*%0A
+Name: ${document.getElementById('name').value}%0A
+Address: ${document.getElementById('address').value}%0A
+Mobile: ${document.getElementById('mobile').value}%0A
+Pincode: ${document.getElementById('pincode').value}%0A
+Product: ${document.getElementById('product_type').value}%0A
+Qty: ${document.getElementById('qty').value}`;
+
+            // Send to Admin
+            window.open(`https://wa.me/919745838382?text=${msg}`);
+            
+            // Send to Customer (if whatsapp added)
+            const custWA = document.getElementById('whatsapp').value || document.getElementById('mobile').value;
+            setTimeout(() => {
+                window.open(`https://wa.me/91${custWA}?text=Thank you for your inquiry with AV Chem. We will contact you soon.`);
+            }, 2000);
+        }
+
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({ title: 'AV Chem', text: 'Quality Chemical Solutions', url: window.location.href });
+            } else { alert("Sharing not supported in this browser"); }
+        }
+    </script>
 </body>
 </html>
-
