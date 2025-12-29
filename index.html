@@ -7,219 +7,162 @@
 
 <style>
 :root{
-  --bg:#070716;
-  --card:#12122b;
-  --purple:#8b5cff;
-  --blue:#2979ff;
-  --error:#ff3b3b;
-  --grey:#d5d5d5;
+ --bg-main:#05040a;
+ --bg-deep:#0b0716;
+ --violet-dark:#1a0f2e;
+ --violet-glow:#7c4dff;
+ --violet-soft:#b388ff;
+ --card-bg:rgba(30,20,55,0.65);
+ --card-border:rgba(180,140,255,0.15);
+ --text-main:#ffffff;
+ --text-soft:#cfc7ff;
+ --blue:#2979ff;
 }
+
+*{box-sizing:border-box}
 body{
-  margin:0;
-  background:radial-gradient(circle at top,#2b0f4a,#050510);
-  color:#fff;
-  font-family:Segoe UI,sans-serif;
+ margin:0;
+ font-family:Segoe UI,sans-serif;
+ color:var(--text-main);
+ background:
+ radial-gradient(circle at 50% 25%, rgba(124,77,255,0.35), transparent 55%),
+ linear-gradient(180deg,var(--bg-main),var(--bg-deep));
 }
+
+/* TOP BAR */
 header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:15px 25px;
-  background:rgba(0,0,0,0.4);
-  backdrop-filter:blur(12px);
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ padding:14px 22px;
+ background:rgba(10,5,25,0.6);
+ backdrop-filter:blur(14px);
 }
 nav button{
-  background:none;border:none;color:#fff;
-  margin-left:15px;font-size:15px;
+ background:none;border:none;
+ color:var(--text-soft);
+ margin-left:16px;
+ font-size:15px;
 }
-nav button:hover{color:var(--purple)}
-.hero{text-align:center;padding:70px 20px}
+nav button:hover{color:var(--violet-soft)}
+.lang{
+ border:1px solid var(--card-border);
+ border-radius:20px;
+ padding:4px 10px;
+ font-size:12px;
+}
+
+/* HERO */
+.hero{
+ text-align:center;
+ padding:90px 20px 60px;
+}
 .hero h1{
-  font-size:36px;
-  background:linear-gradient(90deg,#b88cff,#fff);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+ font-size:38px;
+ line-height:1.2;
+ background:linear-gradient(90deg,var(--violet-soft),#ffffff);
+ -webkit-background-clip:text;
+ -webkit-text-fill-color:transparent;
 }
+
+/* CARDS */
 .folders{
-  display:flex;gap:20px;
-  justify-content:center;
-  padding:30px;
+ display:flex;
+ gap:18px;
+ justify-content:center;
+ padding:40px 20px 70px;
 }
 .folder{
-  width:260px;padding:30px;
-  background:linear-gradient(180deg,#1a1a3a,#0d0d22);
-  border-radius:20px;text-align:center;
-  cursor:pointer;
+ width:240px;
+ padding:32px 18px;
+ text-align:center;
+ background:var(--card-bg);
+ border-radius:22px;
+ border:1px solid var(--card-border);
+ backdrop-filter:blur(10px);
+ box-shadow:0 20px 50px rgba(0,0,0,0.6);
+ cursor:pointer;
 }
-.folder:hover{outline:2px solid var(--purple)}
+.folder:hover{
+ transform:translateY(-4px);
+ box-shadow:0 0 40px rgba(124,77,255,0.45);
+}
+
+/* MODAL */
 .modal{
-  display:none;position:fixed;inset:0;
-  background:rgba(0,0,0,0.85);overflow:auto;
+ display:none;
+ position:fixed;
+ inset:0;
+ background:rgba(0,0,0,0.85);
+ overflow:auto;
 }
 .modal-content{
-  background:#0f0f26;
-  max-width:600px;margin:30px auto;
-  padding:25px;border-radius:18px;
+ background:linear-gradient(180deg,#120a25,#090513);
+ max-width:600px;
+ margin:30px auto;
+ padding:26px;
+ border-radius:22px;
+ border:1px solid var(--card-border);
 }
 label{display:block;margin-top:14px}
 input,select{
-  width:100%;padding:10px;
-  border-radius:8px;border:none;margin-top:5px;
+ width:100%;
+ padding:11px;
+ border-radius:10px;
+ border:none;
+ margin-top:6px;
 }
-.error{border:2px solid var(--error)}
-.buttons{display:flex;gap:15px;margin-top:25px}
-.confirm{flex:1;background:var(--blue);color:#fff;border:none;padding:12px;border-radius:10px}
-.cancel{flex:1;background:var(--grey);border:none;padding:12px;border-radius:10px}
-.lang{font-size:13px;border:1px solid #555;border-radius:20px;padding:4px 10px}
+.buttons{
+ display:flex;
+ gap:16px;
+ margin-top:26px;
+}
+.confirm{
+ flex:1;
+ background:var(--blue);
+ color:white;
+ border:none;
+ padding:13px;
+ border-radius:12px;
+}
+.cancel{
+ flex:1;
+ background:#cfcfcf;
+ border:none;
+ padding:13px;
+ border-radius:12px;
+}
+
+/* MOBILE */
+@media(max-width:720px){
+ .folders{flex-direction:column;align-items:center}
+ .folder{width:90%}
+ .hero h1{font-size:32px}
+}
 </style>
 </head>
 
 <body>
 
 <header>
-  <img src="av.logo.png" height="40">
-  <nav>
-    <button onclick="home()">Home</button>
-    <button onclick="openDealer()">Dealer Enquiry</button>
-    <button onclick="openContact()">Contact</button>
-    <button class="lang" onclick="toggleLang()">EN / ML</button>
-  </nav>
+ <img src="av.logo.png" height="38">
+ <nav>
+  <button onclick="home()">Home</button>
+  <button onclick="openDealer()">Dealer Enquiry</button>
+  <button onclick="openContact()">Contact</button>
+  <button class="lang">EN / ML</button>
+ </nav>
 </header>
 
 <div class="hero">
-  <h1 id="heroText">H4 Tile Adhesive & Waterproof Solutions</h1>
+ <h1>H4 Tile Adhesive & Waterproof Solutions</h1>
 </div>
 
 <div class="folders">
-  <div class="folder" onclick="openProduct('Tile Adhesive')">Tile Adhesive</div>
-  <div class="folder" onclick="openProduct('Waterproof')">Waterproof</div>
-  <div class="folder" onclick="openProduct('H4 ShieldX')">H4 ShieldX</div>
+ <div class="folder">Tile Adhesive</div>
+ <div class="folder">Waterproof</div>
+ <div class="folder">H4 ShieldX</div>
 </div>
-
-<!-- DEALER -->
-<div class="modal" id="dealer">
-<div class="modal-content">
-
-<h2 id="formTitle">Dealer Enquiry</h2>
-
-<label>Name<input id="name"></label>
-<label>Address<input id="address"></label>
-<label>City<input id="city"></label>
-<label>District<input id="dist"></label>
-<label>State<input id="state"></label>
-
-<label>Mobile
-<input id="mobile" inputmode="numeric" maxlength="10">
-</label>
-
-<label>WhatsApp Number
-<input id="whatsapp" inputmode="numeric" maxlength="10">
-</label>
-
-<label>Pincode
-<input id="pincode" inputmode="numeric" maxlength="6">
-</label>
-
-<label>Product
-<select id="product" onchange="productChange()">
-<option value="">Select</option>
-<option>Tile Adhesive</option>
-<option>Waterproof</option>
-<option>H4 ShieldX</option>
-</select>
-</label>
-
-<div id="tileBlock" style="display:none">
-<label>Tile Adhesive Location
-<select id="tilePlace">
-<option value="">Select</option>
-<option>Home</option>
-<option>Office</option>
-<option>Shop</option>
-<option>Building</option>
-</select>
-</label>
-
-<label>Tile Type
-<select id="tileType">
-<option value="">Select</option>
-<option>Marble</option>
-<option>Granite / Marbonit</option>
-<option>Ceramic Tile</option>
-</select>
-</label>
-</div>
-
-<div id="waterBlock" style="display:none">
-<label>Waterproof Location
-<select id="waterPlace">
-<option value="">Select</option>
-<option>Home</option>
-<option>Building</option>
-<option>Other</option>
-</select>
-</label>
-</div>
-
-<label>Quantity
-<input id="qty" inputmode="numeric">
-</label>
-
-<div class="buttons">
-<button class="confirm" onclick="submit()">Confirm</button>
-<button class="cancel" onclick="closeDealer()">Cancel</button>
-</div>
-
-</div>
-</div>
-
-<!-- CONTACT -->
-<div class="modal" id="contact">
-  <div class="modal-content" style="text-align:center">
-    <h2>Contact</h2>
-    <p>For business enquiry<br>please use Dealer Enquiry</p>
-    <button class="confirm" onclick="closeContact()">Close</button>
-  </div>
-</div>
-
-<script>
-let ml=false;
-
-function toggleLang(){
- ml=!ml;
- document.getElementById('heroText').innerText=
- ml?"H4 ടൈൽ അഡ്ഹീസീവ് & വാട്ടർപ്രൂഫ്":"H4 Tile Adhesive & Waterproof Solutions";
-}
-
-function productChange(){
- let p=product.value;
- tileBlock.style.display=(p==="Tile Adhesive")?"block":"none";
- waterBlock.style.display=(p==="Waterproof")?"block":"none";
-}
-
-function openDealer(){dealer.style.display='block'}
-function closeDealer(){dealer.style.display='none'}
-function openContact(){contact.style.display='block'}
-function closeContact(){contact.style.display='none'}
-function home(){location.reload()}
-function openProduct(p){window.open('', '_blank').document.write(`<h1>${p}</h1>`)}
-
-function submit(){
- let req=['name','address','city','dist','state','mobile','pincode','product','qty'];
- let ok=true;
- req.forEach(id=>{
-  let e=document.getElementById(id);
-  e.classList.remove('error');
-  if(!e.value){e.classList.add('error');ok=false;}
- });
- if(!ok){alert("Fill all required fields");return;}
-
- let msg=`H4 Order\nName:${name.value}\nMobile:${mobile.value}\nProduct:${product.value}\nQty:${qty.value}`;
- window.open(`https://wa.me/9745838382?text=${encodeURIComponent(msg)}`);
- if(whatsapp.value)
- window.open(`https://wa.me/${whatsapp.value}?text=${encodeURIComponent(msg)}`);
-}
-</script>
 
 </body>
 </html>
