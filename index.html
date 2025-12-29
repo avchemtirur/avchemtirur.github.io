@@ -1,168 +1,1053 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>AV Chem Chemical | H4</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eterna Cloud - Clarity, Consistency & Unity</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-<style>
-:root{
- --bg-main:#05040a;
- --bg-deep:#0b0716;
- --violet-dark:#1a0f2e;
- --violet-glow:#7c4dff;
- --violet-soft:#b388ff;
- --card-bg:rgba(30,20,55,0.65);
- --card-border:rgba(180,140,255,0.15);
- --text-main:#ffffff;
- --text-soft:#cfc7ff;
- --blue:#2979ff;
-}
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
 
-*{box-sizing:border-box}
-body{
- margin:0;
- font-family:Segoe UI,sans-serif;
- color:var(--text-main);
- background:
- radial-gradient(circle at 50% 25%, rgba(124,77,255,0.35), transparent 55%),
- linear-gradient(180deg,var(--bg-main),var(--bg-deep));
-}
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, #1a365d 0%, #2d4a7c 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
 
-/* TOP BAR */
-header{
- display:flex;
- justify-content:space-between;
- align-items:center;
- padding:14px 22px;
- background:rgba(10,5,25,0.6);
- backdrop-filter:blur(14px);
-}
-nav button{
- background:none;border:none;
- color:var(--text-soft);
- margin-left:16px;
- font-size:15px;
-}
-nav button:hover{color:var(--violet-soft)}
-.lang{
- border:1px solid var(--card-border);
- border-radius:20px;
- padding:4px 10px;
- font-size:12px;
-}
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
 
-/* HERO */
-.hero{
- text-align:center;
- padding:90px 20px 60px;
-}
-.hero h1{
- font-size:38px;
- line-height:1.2;
- background:linear-gradient(90deg,var(--violet-soft),#ffffff);
- -webkit-background-clip:text;
- -webkit-text-fill-color:transparent;
-}
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-/* CARDS */
-.folders{
- display:flex;
- gap:18px;
- justify-content:center;
- padding:40px 20px 70px;
-}
-.folder{
- width:240px;
- padding:32px 18px;
- text-align:center;
- background:var(--card-bg);
- border-radius:22px;
- border:1px solid var(--card-border);
- backdrop-filter:blur(10px);
- box-shadow:0 20px 50px rgba(0,0,0,0.6);
- cursor:pointer;
-}
-.folder:hover{
- transform:translateY(-4px);
- box-shadow:0 0 40px rgba(124,77,255,0.45);
-}
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
 
-/* MODAL */
-.modal{
- display:none;
- position:fixed;
- inset:0;
- background:rgba(0,0,0,0.85);
- overflow:auto;
-}
-.modal-content{
- background:linear-gradient(180deg,#120a25,#090513);
- max-width:600px;
- margin:30px auto;
- padding:26px;
- border-radius:22px;
- border:1px solid var(--card-border);
-}
-label{display:block;margin-top:14px}
-input,select{
- width:100%;
- padding:11px;
- border-radius:10px;
- border:none;
- margin-top:6px;
-}
-.buttons{
- display:flex;
- gap:16px;
- margin-top:26px;
-}
-.confirm{
- flex:1;
- background:var(--blue);
- color:white;
- border:none;
- padding:13px;
- border-radius:12px;
-}
-.cancel{
- flex:1;
- background:#cfcfcf;
- border:none;
- padding:13px;
- border-radius:12px;
-}
+        .logo i {
+            margin-right: 10px;
+            color: #4dabf7;
+        }
 
-/* MOBILE */
-@media(max-width:720px){
- .folders{flex-direction:column;align-items:center}
- .folder{width:90%}
- .hero h1{font-size:32px}
-}
-</style>
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0.8rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .hero {
+            background: linear-gradient(rgba(26, 54, 93, 0.9), rgba(26, 54, 93, 0.8)), url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        /* Products Section */
+        .products-section {
+            padding: 4rem 0;
+            background-color: #f1f5f9;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #1a365d;
+            font-size: 2.5rem;
+        }
+
+        .products-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .product-folder {
+            background: white;
+            border-radius: 10px;
+            width: 300px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .product-folder:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-icon {
+            font-size: 3rem;
+            color: #1a365d;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1a365d;
+        }
+
+        .product-desc {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-btn {
+            background-color: #1a365d;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .product-btn:hover {
+            background-color: #2d4a7c;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 4rem 0;
+            background-color: white;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background-color: #f8f9fa;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .service-card h3 {
+            color: #1a365d;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        /* About Section */
+        .about {
+            padding: 4rem 0;
+            background-color: #f1f5f9;
+        }
+
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-text h2 {
+            color: #1a365d;
+            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 4rem 0;
+            background-color: white;
+        }
+
+        .contact-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-content h2 {
+            color: #1a365d;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+
+        .contact-details {
+            margin-top: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-details p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a365d;
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .footer-logo {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links ul li a {
+            color: #cbd5e0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links ul li a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid #2d4a7c;
+            color: #cbd5e0;
+            font-size: 0.9rem;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 10px;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+            animation: modalFade 0.3s;
+        }
+
+        @keyframes modalFade {
+            from {opacity: 0; transform: translateY(-50px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            background-color: #1a365d;
+            color: white;
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            font-size: 1.5rem;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        /* Form Styles */
+        .form-step {
+            display: none;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: #1a365d;
+            outline: none;
+        }
+
+        .form-control.error {
+            border-color: #e53e3e;
+            background-color: #fff5f5;
+        }
+
+        .error-message {
+            color: #e53e3e;
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+            display: none;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .form-col {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .product-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .product-option {
+            flex: 1;
+            min-width: 150px;
+            text-align: center;
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .product-option:hover {
+            border-color: #1a365d;
+        }
+
+        .product-option.selected {
+            border-color: #1a365d;
+            background-color: #f0f7ff;
+        }
+
+        .dropdown-group {
+            margin-top: 1rem;
+            padding-left: 1rem;
+            border-left: 3px solid #e2e8f0;
+        }
+
+        .dropdown-group label {
+            font-weight: normal;
+            font-size: 0.95rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .checkbox-item input {
+            margin-right: 0.5rem;
+        }
+
+        .form-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .btn {
+            padding: 0.8rem 1.8rem;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background-color: #3182ce;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #2c6cb0;
+        }
+
+        .btn-secondary {
+            background-color: #e2e8f0;
+            color: #4a5568;
+        }
+
+        .btn-secondary:hover {
+            background-color: #cbd5e0;
+        }
+
+        .btn-success {
+            background-color: #38a169;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background-color: #2f855a;
+        }
+
+        .btn-cancel {
+            background-color: #a0aec0;
+            color: white;
+        }
+
+        .btn-cancel:hover {
+            background-color: #718096;
+        }
+
+        .whatsapp-option {
+            display: flex;
+            align-items: center;
+            margin-top: 0.5rem;
+        }
+
+        .whatsapp-option input {
+            margin-right: 0.5rem;
+        }
+
+        .final-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        /* Animation for product folders */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .product-folder.active {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            nav ul li {
+                margin: 0.3rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+            }
+        }
+    </style>
 </head>
-
 <body>
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <i class="fas fa-cloud"></i>
+                Eterna Cloud
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" id="homeBtn">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#" id="contactDealerBtn">Contact Dealer</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-<header>
- <img src="av.logo.png" height="38">
- <nav>
-  <button onclick="home()">Home</button>
-  <button onclick="openDealer()">Dealer Enquiry</button>
-  <button onclick="openContact()">Contact</button>
-  <button class="lang">EN / ML</button>
- </nav>
-</header>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Our business is clarity, consistency & unity</h1>
+            <p>We are value creators with hyperfocus</p>
+            <div class="products-container">
+                <div class="product-folder active" id="tileAdhesiveFolder">
+                    <div class="product-icon">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h3 class="product-title">Tile Adhesive</h3>
+                    <p class="product-desc">High-quality adhesive for all tile installation needs</p>
+                    <button class="product-btn" data-product="tile-adhesive">Learn More</button>
+                </div>
+                <div class="product-folder" id="waterProofFolder">
+                    <div class="product-icon">
+                        <i class="fas fa-tint-slash"></i>
+                    </div>
+                    <h3 class="product-title">Water Proof</h3>
+                    <p class="product-desc">Advanced waterproofing solutions for all surfaces</p>
+                    <button class="product-btn" data-product="water-proof">Learn More</button>
+                </div>
+                <div class="product-folder" id="h4ShieldFolder">
+                    <div class="product-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="product-title">H4 ShieldX</h3>
+                    <p class="product-desc">Premium protective coating for extreme conditions</p>
+                    <button class="product-btn" data-product="h4-shield">Learn More</button>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<div class="hero">
- <h1>H4 Tile Adhesive & Waterproof Solutions</h1>
-</div>
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2 class="section-title">What we offer</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>One service</h3>
+                    <p>Delivering seamless experiences</p>
+                </div>
+                <div class="service-card">
+                    <h3>Orchestrating unified frameworks</h3>
+                    <p>Compounding partnership gains</p>
+                </div>
+                <div class="service-card">
+                    <h3>Make it easy</h3>
+                    <p>We transform complex workloads into effortless progress.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Keep it simple</h3>
+                    <p>We own the process that transcends typical limitations.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Do good for people</h3>
+                    <p>We serve with Heart to impact what matters most.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<div class="folders">
- <div class="folder">Tile Adhesive</div>
- <div class="folder">Waterproof</div>
- <div class="folder">H4 ShieldX</div>
-</div>
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Our Solution You experience</h2>
+                    <p>We set out to create the ideal business scenario. The one that turns isolated moments of excellence into a consistent pattern of success. At Eterna Cloud, we believe in clarity of purpose, consistency in delivery, and unity in collaboration.</p>
+                    <p>Our approach combines innovative thinking with practical execution, ensuring that every project we undertake delivers measurable results and creates lasting value for our clients and partners.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Eterna Cloud Team">
+                </div>
+            </div>
+        </div>
+    </section>
 
-</body>
-</html>
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-content">
+                <h2>Contact Us</h2>
+                <p>Get in touch with our team for more information about our products and services.</p>
+                <div class="contact-details">
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Business District, Innovation City, IC 12345</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-envelope"></i> info@eternacloud.com</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="logo">
+                        <i class="fas fa-cloud"></i>
+                        Eterna Cloud
+                    </div>
+                    <p>Our business is clarity, consistency & unity</p>
+                    <p>We are value creators with hyperfocus</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Our Products</h3>
+                    <ul>
+                        <li><a href="#" data-product="tile-adhesive">Tile Adhesive</a></li>
+                        <li><a href="#" data-product="water-proof">Water Proof</a></li>
+                        <li><a href="#" data-product="h4-shield">H4 ShieldX</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Eterna Cloud. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Dealer Inquiry Modal -->
+    <div id="dealerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Dealer Inquiry / Order Sheet</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="dealerForm">
+                    <!-- Step 1: Personal Details -->
+                    <div class="form-step active" id="step1">
+                        <h3 style="margin-bottom: 1.5rem; color: #1a365d;">Personal Details</h3>
+                        
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" class="form-control" required>
+                            <div class="error-message" id="nameError">Please enter your full name</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="address">Address *</label>
+                            <textarea id="address" class="form-control" rows="3" required></textarea>
+                            <div class="error-message" id="addressError">Please enter your address</div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="city">City *</label>
+                                    <input type="text" id="city" class="form-control" required>
+                                    <div class="error-message" id="cityError">Please enter your city</div>
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="landmark">Landmark</label>
+                                    <input type="text" id="landmark" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="district">District *</label>
+                                    <input type="text" id="district" class="form-control" required>
+                                    <div class="error-message" id="districtError">Please enter your district</div>
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="state">State *</label>
+                                    <input type="text" id="state" class="form-control" required>
+                                    <div class="error-message" id="stateError">Please enter your state</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="mobile">Mobile Number *</label>
+                            <input type="tel" id="mobile" class="form-control" pattern="[0-9]{10}" maxlength="10" required>
+                            <div class="error-message" id="mobileError">Please enter a valid 10-digit mobile number</div>
+                            <div class="whatsapp-option">
+                                <input type="checkbox" id="whatsappSame">
+                                <label for="whatsappSame">Use same number for WhatsApp</label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group" id="whatsappGroup" style="display: none;">
+                            <label for="whatsapp">WhatsApp Number *</label>
+                            <input type="tel" id="whatsapp" class="form-control" pattern="[0-9]{10}" maxlength="10">
+                            <div class="error-message" id="whatsappError">Please enter a valid 10-digit WhatsApp number</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="pincode">Pin Code *</label>
+                            <input type="text" id="pincode" class="form-control" pattern="[0-9]{6}" maxlength="6" required>
+                            <div class="error-message" id="pincodeError">Please enter a valid 6-digit pin code</div>
+                        </div>
+                        
+                        <div class="form-buttons">
+                            <button type="button" class="btn btn-secondary" id="cancelForm">Cancel</button>
+                            <button type="button" class="btn btn-primary" id="nextStep1">Next</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2: Product Selection -->
+                    <div class="form-step" id="step2">
+                        <h3 style="margin-bottom: 1.5rem; color: #1a365d;">Product Selection</h3>
+                        
+                        <div class="form-group">
+                            <label>Select Product *</label>
+                            <div class="product-options">
+                                <div class="product-option" data-product="tile-adhesive">
+                                    <h4>Tile Adhesive</h4>
+                                </div>
+                                <div class="product-option" data-product="water-proof">
+                                    <h4>Water Proof</h4>
+                                </div>
+                                <div class="product-option" data-product="h4-shield">
+                                    <h4>H4 ShieldX</h4>
+                                </div>
+                            </div>
+                            <div class="error-message" id="productError">Please select a product</div>
+                        </div>
+                        
+                        <!-- Tile Adhesive Details -->
+                        <div id="tileDetails" class="dropdown-group" style="display: none;">
+                            <div class="form-group">
+                                <label for="tileLocation">Tile Adhesive Location *</label>
+                                <select id="tileLocation" class="form-control">
+                                    <option value="">Select Location</option>
+                                    <option value="home">Home</option>
+                                    <option value="office">Office</option>
+                                    <option value="shop">Shop</option>
+                                    <option value="building">Building</option>
+                                    <option value="other">Other</option>
+                                </select>
+                                <div class="error-message" id="tileLocationError">Please select a location</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Tile Type *</label>
+                                <div class="checkbox-group">
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="tileMarble" value="marble">
+                                        <label for="tileMarble">Marble</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="tileGranite" value="granite">
+                                        <label for="tileGranite">Granite/Marbonit</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="tileCeramic" value="ceramic">
+                                        <label for="tileCeramic">Ceramic Tile</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="tileOther" value="other">
+                                        <label for="tileOther">Other</label>
+                                    </div>
+                                </div>
+                                <div class="error-message" id="tileTypeError">Please select at least one tile type</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="tileQuantity">Quantity (in sq ft) *</label>
+                                <input type="number" id="tileQuantity" class="form-control" min="1">
+                                <div class="error-message" id="tileQuantityError">Please enter a valid quantity</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Water Proof Details -->
+                        <div id="waterDetails" class="dropdown-group" style="display: none;">
+                            <div class="form-group">
+                                <label for="waterLocation">Water Proof Location *</label>
+                                <select id="waterLocation" class="form-control">
+                                    <option value="">Select Location</option>
+                                    <option value="home">Home</option>
+                                    <option value="building">Building</option>
+                                    <option value="other">Other</option>
+                                </select>
+                                <div class="error-message" id="waterLocationError">Please select a location</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="waterQuantity">Quantity (in liters) *</label>
+                                <input type="number" id="waterQuantity" class="form-control" min="1">
+                                <div class="error-message" id="waterQuantityError">Please enter a valid quantity</div>
+                            </div>
+                        </div>
+                        
+                        <!-- H4 ShieldX Details -->
+                        <div id="shieldDetails" class="dropdown-group" style="display: none;">
+                            <div class="form-group">
+                                <label for="shieldQuantity">Quantity (in liters) *</label>
+                                <input type="number" id="shieldQuantity" class="form-control" min="1">
+                                <div class="error-message" id="shieldQuantityError">Please enter a valid quantity</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-buttons">
+                            <button type="button" class="btn btn-secondary" id="prevStep2">Previous</button>
+                            <button type="button" class="btn btn-primary" id="nextStep2">Next</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 3: Confirmation -->
+                    <div class="form-step" id="step3">
+                        <h3 style="margin-bottom: 1.5rem; color: #1a365d;">Confirmation</h3>
+                        
+                        <div class="form-group">
+                            <h4>Please review your details:</h4>
+                            <div id="summaryDetails" style="background-color: #f8f9fa; padding: 1.5rem; border-radius: 5px; margin-top: 1rem;"></div>
+                        </div>
+                        
+                        <div class="final-buttons">
+                            <button type="button" class="btn btn-cancel" id="cancelOrder">Cancel</button>
+                            <button type="button" class="btn btn-success" id="confirmOrder">Confirm Order</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 4: Success -->
+                    <div class="form-step" id="step4">
+                        <div style="text-align: center; padding: 2rem 0;">
+                            <i class="fas fa-check-circle" style="font-size: 4rem; color: #38a169; margin-bottom: 1.5rem;"></i>
+                            <h3 style="margin-bottom: 1rem; color: #1a365d;">Order Submitted Successfully!</h3>
+                            <p>Your order details have been sent to our team via WhatsApp.</p>
+                            <p>We will contact you shortly to confirm your order.</p>
+                            <button type="button" class="btn btn-primary" id="closeModal" style="margin-top: 1.5rem;">Close</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const dealerModal = document.getElementById('dealerModal');
+        const contactDealerBtn = document.getElementById('contactDealerBtn');
+        const homeBtn = document.getElementById('homeBtn');
+        const closeModalBtn = document.querySelector('.close-modal');
+        const cancelFormBtn = document.getElementById('cancelForm');
+        const cancelOrderBtn = document.getElementById('cancelOrder');
+        const closeModalSuccessBtn = document.getElementById('closeModal');
+        
+        // Product folder buttons
+        const tileAdhesiveFolder = document.getElementById('tileAdhesiveFolder');
+        const waterProofFolder = document.getElementById('waterProofFolder');
+        const h4ShieldFolder = document.getElementById('h4ShieldFolder');
+        const productFolders = [tileAdhesiveFolder, waterProofFolder, h4ShieldFolder];
+        
+        // Form navigation
+        const nextStep1Btn = document.getElementById('nextStep1');
+        const prevStep2Btn = document.getElementById('prevStep2');
+        const nextStep2Btn = document.getElementById('nextStep2');
+        const confirmOrderBtn = document.getElementById('confirmOrder');
+        
+        // Form steps
+        const formSteps = document.querySelectorAll('.form-step');
+        let currentStep = 1;
+        
+        // Form data storage
+        let formData = {
+            name: '',
+            address: '',
+            city: '',
+            landmark: '',
+            district: '',
+            state: '',
+            mobile: '',
+            whatsapp: '',
+            pincode: '',
+            product: '',
+            productDetails: {}
+        };
+        
+        // Event Listeners
+        contactDealerBtn.addEventListener('click', () => {
+            dealerModal.style.display = 'block';
+            resetForm();
+        });
+        
+        homeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            // Show home page content
+            document.querySelector('.hero').scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        closeModalBtn.addEventListener('click', () => {
+            dealerModal.style.display = 'none';
+        });
+        
+        cancelFormBtn.addEventListener('click', () => {
+            dealerModal.style.display = 'none';
+        });
+        
+        cancelOrderBtn.addEventListener('click', () => {
+            dealerModal.style.display = 'none';
+        });
+        
+        closeModalSuccessBtn.addEventListener('click', () => {
+            dealerModal.style.display = 'none';
+        });
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === dealerModal) {
+                dealerModal.style.display = 'none';
+            }
+        });
+        
+        // Product folder click events
+        productFolders.forEach(folder => {
+            folder.addEventListener('click', (e) => {
+                // Remove active class from all folders
+                productFolders.forEach(f => f.classList.remove('active'));
+                // Add active class to clicked folder
+                folder.classList.add('active');
+                
+                // Open dealer modal with product pre-selected
+                dealerModal.style.display = 'block';
+                resetForm();
+                
+                // Get product from data attribute
+                const productBtn = folder.querySelector('.product-btn');
+                const product = productBtn.getAttribute('data-product');
+                
+                // Pre-select the product in form
+                setTimeout(() => {
