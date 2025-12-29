@@ -11,135 +11,131 @@
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         :root {
-            --primary-pink: #e91e63;
+            --primary-pink: #e91e63; /* ചിത്രത്തിലെ അതേ പിങ്ക് കളർ */
             --dark-bg: #0b0b0b;
             --card-bg: #161616;
-            --text-gold: #ffde00;
         }
 
         body {
             font-family: 'Work Sans', sans-serif;
             background-color: var(--dark-bg);
             color: white;
-            overflow-x: hidden;
+            margin: 0;
         }
 
-        /* --- Header & Navigation --- */
+        /* Top Bar / Navbar */
         .navbar {
-            background-color: rgba(0, 0, 0, 0.95);
+            background-color: rgba(0, 0, 0, 0.9);
             padding: 15px 0;
             border-bottom: 1px solid #333;
         }
 
-        .navbar-brand h2 {
-            font-family: 'Josefin Sans', sans-serif;
-            font-weight: 700;
-            color: var(--primary-pink);
-            letter-spacing: 1px;
-        }
-
-        .lang-switch-btn {
-            border: 1px solid var(--primary-pink);
-            color: white;
-            background: transparent;
-            padding: 5px 15px;
-            border-radius: 20px;
-            margin-right: 10px;
-            transition: 0.3s;
-        }
-
-        .lang-switch-btn.active {
-            background: var(--primary-pink);
-        }
-
-        /* --- Hero Section --- */
-        .hero-header {
-            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070');
-            background-size: cover;
-            background-position: center;
-            height: 90vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-        }
-
-        .hero-title {
-            font-family: 'Josefin Sans', sans-serif;
-            font-size: 4rem;
-            font-weight: 700;
+        .nav-link {
+            color: white !important;
+            font-weight: 600;
+            margin: 0 15px;
             text-transform: uppercase;
-            animation: fadeInDown 1s ease-out;
         }
 
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
+        .nav-link:hover {
+            color: var(--primary-pink) !important;
         }
 
-        /* --- Product Folders Section --- */
-        .product-folder {
-            background: var(--card-bg);
-            border: 1px solid #333;
-            padding: 40px 20px;
-            border-radius: 15px;
+        /* Hero Section */
+        .hero-section {
+            padding: 100px 0;
             text-align: center;
-            transition: 0.4s;
-            cursor: pointer;
-            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8));
+            animation: fadeIn 1.5s ease-in;
         }
 
-        .product-folder:hover {
-            border-color: var(--primary-pink);
-            transform: translateY(-10px);
-            background: #1f1f1f;
-        }
-
-        .product-folder i {
-            font-size: 50px;
-            color: var(--primary-pink);
+        .h4-logo {
+            max-width: 150px;
             margin-bottom: 20px;
         }
 
-        /* --- Bag Animation Section --- */
-        .bag-img {
-            max-width: 300px;
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
-            animation: float 3s ease-in-out infinite;
+        .main-text {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: white;
+            text-transform: uppercase;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        /* --- Footer & Address --- */
-        .footer {
-            background-color: #000;
-            padding: 60px 0;
-            border-top: 1px solid var(--primary-pink);
-        }
-
-        .contact-info p {
-            margin-bottom: 10px;
-            font-size: 1.1rem;
-        }
-
-        .contact-info i {
+        .pink-text {
             color: var(--primary-pink);
-            margin-right: 10px;
+        }
+
+        /* Bags Display */
+        .bag-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .bag-item {
+            width: 200px;
+            transition: transform 0.3s;
+            animation: bounce 3s infinite;
+        }
+
+        .bag-item:hover { transform: scale(1.1); }
+
+        /* Folders Row (Left to Right) */
+        .folder-container {
+            padding: 60px 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .folder-card {
+            background: var(--card-bg);
+            border: 1px solid #333;
+            width: 300px;
+            padding: 40px 20px;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.4s;
+        }
+
+        .folder-card:hover {
+            border-color: var(--primary-pink);
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(233, 30, 99, 0.2);
+        }
+
+        .folder-card i {
+            font-size: 40px;
+            color: var(--primary-pink);
+            margin-bottom: 15px;
+        }
+
+        /* Footer Address */
+        .footer-address {
+            background: #000;
+            padding: 50px 0;
+            border-top: 2px solid var(--primary-pink);
         }
 
         .address-box {
-            background: #111;
-            padding: 30px;
-            border-radius: 10px;
-            border-left: 4px solid var(--primary-pink);
+            border-left: 3px solid var(--primary-pink);
+            padding-left: 20px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+
+        @media (max-width: 768px) {
+            .main-text { font-size: 2rem; }
+            .folder-card { width: 90%; }
         }
     </style>
 </head>
@@ -148,79 +144,64 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
         <div class="container">
-            <a href="index.html" class="navbar-brand d-flex align-items-center">
-                <div style="width: 40px; height: 40px; background: var(--primary-pink); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 10px;">AV</div>
-                <h2 class="m-0">AV CHEM</h2>
+            <a href="#" class="navbar-brand d-flex align-items-center">
+                <img src="av.png.ogo" alt="AV Logo" style="height: 40px; margin-right: 10px;">
+                <span style="font-weight: 700; color: var(--primary-pink);">AV CHEM</span>
             </a>
-            <div class="ms-auto d-flex align-items-center">
-                <button class="lang-switch-btn active" onclick="setLang('en')">English</button>
-                <button class="lang-switch-btn" onclick="setLang('ml')">മലയാളം</button>
+            <div class="ms-auto d-flex">
+                <a class="nav-link" href="#home">Home</a>
+                <a class="nav-link" href="#contact">Contact</a>
             </div>
         </div>
     </nav>
 
-    <div class="container-fluid hero-header mb-5">
+    <section class="hero-section" id="home">
         <div class="container">
-            <div class="row g-5 align-items-center">
-                <div class="col-lg-7 text-center text-lg-start">
-                    <h1 class="hero-title mb-3" id="main-title">CHEMICAL & MANUFACTURING</h1>
-                    <p class="fs-5 mb-4" id="main-sub">Innovating Solutions for a Sustainable Future. Quality chemicals for decades of protection.</p>
-                    <a href="#products" class="btn btn-outline-light border-2 py-3 px-5 animated slideInRight">Explore Products</a>
-                </div>
-                <div class="col-lg-5 text-center">
-                    <img src="https://via.placeholder.com/300x400/ffde00/000000?text=H4+WATERPROOF+BAG" class="bag-img img-fluid" alt="H4 Waterproof Bag">
-                </div>
+            <p style="letter-spacing: 5px;">WELCOME TO</p>
+            <img src="h4logo.png" alt="H4 Logo" class="h4-logo">
+            <h1 class="main-text">H4 <span class="pink-text">Tile Adhesive</span> & <br>Water Proof</h1>
+            
+            <div class="bag-container">
+                <img src="bag.blueandred.png" alt="Blue and Red Bag" class="bag-item">
+                <img src="bag.purpleandyellow.png" alt="Purple and Yellow Bag" class="bag-item">
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="folder-container">
+            <div class="folder-card" onclick="window.open('tile-adhesive-details.html', '_blank')">
+                <i class="fas fa-layer-group"></i>
+                <h3>Tile Adhesive</h3>
+                <p>Premium quality bonding for all types of tiles.</p>
+            </div>
+            <div class="folder-card" onclick="window.open('water-proof-details.html', '_blank')">
+                <i class="fas fa-faucet-drip"></i>
+                <h3>Water Proof</h3>
+                <p>Superior protection against water leakage.</p>
+            </div>
+            <div class="folder-card" onclick="window.open('shieldx-details.html', '_blank')">
+                <i class="fas fa-shield-halved"></i>
+                <h3>H4 ShieldX</h3>
+                <p>The ultimate protective shield technology.</p>
             </div>
         </div>
     </div>
 
-    <div class="container-xxl py-5" id="products">
+    <footer class="footer-address" id="contact">
         <div class="container">
-            <div class="text-center mx-auto mb-5" style="max-width: 600px;">
-                <h1 class="display-5 mb-4" id="prod-head">Our Categories</h1>
-            </div>
             <div class="row g-4">
-                <div class="col-lg-4 col-md-6" onclick="window.open('tile-adhesive.html', '_blank')">
-                    <div class="product-folder">
-                        <i class="fas fa-layer-group"></i>
-                        <h3>Tile Adhesive</h3>
-                        <p>High-strength bonding solutions for all types of tiles and stones.</p>
-                    </div>
+                <div class="col-md-6">
+                    <h3 class="pink-text mb-4">Contact Details</h3>
+                    <p><i class="fa fa-phone me-2"></i> Call: +917907344030</p>
+                    <p><i class="fab fa-whatsapp me-2"></i> Whatsapp: 9745838382</p>
+                    <p><i class="fa fa-envelope me-2"></i> Email: avchemtirur@gmail.com</p>
                 </div>
-                <div class="col-lg-4 col-md-6" onclick="window.open('waterproof-h4.html', '_blank')">
-                    <div class="product-folder">
-                        <i class="fas fa-droplet"></i>
-                        <h3>Water Proof H4</h3>
-                        <p>Advanced chemical bonding technology with 10 years guarantee.</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6" onclick="window.open('shield-x.html', '_blank')">
-                    <div class="product-folder">
-                        <i class="fas fa-shield-halved"></i>
-                        <h3>ShieldX</h3>
-                        <p>Premium protective coating for extreme weather conditions.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="footer mt-5">
-        <div class="container">
-            <div class="row g-5">
-                <div class="col-lg-6">
-                    <h2 class="text-white mb-4">Contact Us</h2>
-                    <div class="contact-info">
-                        <p><i class="fa fa-phone-alt"></i> <a href="tel:+917907344030" class="text-white text-decoration-none">+91 7907344030</a></p>
-                        <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/919745838382" class="text-white text-decoration-none">9745838382</a></p>
-                        <p><i class="fa fa-envelope"></i> <a href="mailto:avchemtirur@gmail.com" class="text-white text-decoration-none">avchemtirur@gmail.com</a></p>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <h2 class="text-white mb-4">Our Address</h2>
+                <div class="col-md-6">
+                    <h3 class="pink-text mb-4">Our Address</h3>
                     <div class="address-box">
-                        <h4 class="text-primary">AV Chem Chemical & Manufacturing</h4>
-                        <p class="mb-0">
+                        <h5>AV Chem Chemical & Manufacturing</h5>
+                        <p>
                             Mukkilapeedika, Kannamkulam PO,<br>
                             BP Angadi, Pincode 676102,<br>
                             Tirur, Malappuram, Kerala
@@ -228,36 +209,8 @@
                     </div>
                 </div>
             </div>
-            <hr class="my-5" style="background: #333;">
-            <div class="text-center">
-                <p class="mb-0">&copy; <a class="text-primary text-decoration-none" href="#">AV Chem Chemical & Manufacturing</a>. All Rights Reserved.</p>
-            </div>
         </div>
-    </div>
-
-    <script>
-        const translations = {
-            en: {
-                title: "CHEMICAL & MANUFACTURING",
-                sub: "Innovating Solutions for a Sustainable Future. Quality chemicals for decades of protection.",
-                prod: "Our Categories"
-            },
-            ml: {
-                title: "കെമിക്കൽ & മാനുഫാക്ചറിംഗ്",
-                sub: "സുസ്ഥിരമായ ഭാവിയിലേക്കുള്ള നൂതനമായ കെമിക്കൽ സൊല്യൂഷനുകൾ. ദശകങ്ങളുടെ സംരക്ഷണം ഉറപ്പാക്കുന്ന ഗുണമേന്മയുള്ള ഉൽപ്പന്നങ്ങൾ.",
-                prod: "വിഭാഗങ്ങൾ"
-            }
-        };
-
-        function setLang(lang) {
-            document.getElementById('main-title').innerText = translations[lang].title;
-            document.getElementById('main-sub').innerText = translations[lang].sub;
-            document.getElementById('prod-head').innerText = translations[lang].prod;
-            
-            document.querySelectorAll('.lang-switch-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-        }
-    </script>
+    </footer>
 
 </body>
 </html>
