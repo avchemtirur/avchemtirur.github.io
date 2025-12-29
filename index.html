@@ -1,210 +1,169 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>H4 Tile Adhesive & Waterproof</title>
+    <meta charset="utf-8">
+    <title>AV Chem Chemical & Manufacturing</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Chemical Manufacturing, AV Chem, Waterproofing" name="keywords">
+    <meta content="AV Chem Chemical & Manufacturing - Quality Chemical Solutions" name="description">
 
-<style>
-*{box-sizing:border-box}
-body{
-  margin:0;
-  background:#000;
-  color:#fff;
-  font-family:Arial,Helvetica,sans-serif;
-}
+    <link href="img/favicon.ico" rel="icon">
 
-/* TOP BAR */
-.topbar{
-  display:flex;
-  justify-content:flex-end;
-  padding:12px;
-}
-.menu div{
-  font-size:18px;
-  cursor:pointer;
-  margin:6px 0;
-}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;700&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">
 
-/* SECTIONS */
-.section{
-  display:none;
-  padding:20px;
-  text-align:center;
-}
-.section.active{display:block}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
-h1{font-size:32px;margin-top:30px}
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
-/* FOLDERS */
-.folders{
-  display:flex;
-  justify-content:center;
-  gap:14px;
-  margin-top:30px;
-}
-.folder{
-  width:120px;
-  padding:18px;
-  border:2px solid #00ffff;
-  border-radius:8px;
-  cursor:pointer;
-  transition:.3s;
-}
-.folder:hover{
-  background:rgba(0,255,255,.15);
-  transform:scale(1.05);
-}
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
-/* FORM */
-input,select{
-  width:90%;
-  padding:14px;
-  margin:8px 0;
-  font-size:18px;
-  border-radius:6px;
-}
-
-/* BUTTONS */
-button{
-  padding:14px 30px;
-  font-size:18px;
-  border:none;
-  border-radius:30px;
-  cursor:pointer;
-}
-.back{background:#e00000;color:#fff}
-.ok{background:#1ecf72;color:#000}
-
-.cyan{color:#00ffff}
-</style>
+    <link href="css/style.css" rel="stylesheet">
 </head>
 
 <body>
+    <div id="spinner" class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <div class="container-fluid p-0">
+        <nav class="navbar navbar-expand-lg navbar-dark px-lg-5">
+            <a href="index.html" class="navbar-brand ms-4 ms-lg-0">
+                <h2 class="mb-0 text-primary text-uppercase"><i class="fa fa-flask me-2"></i>AV Chem</h2>
+            </a>
+            <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav mx-auto p-4 p-lg-0">
+                    <a href="index.html" class="nav-item nav-link active">Home</a>
+                    <a href="about.html" class="nav-item nav-link">About</a>
+                    <a href="service.html" class="nav-item nav-link">Products</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Solutions</a>
+                        <div class="dropdown-menu m-0">
+                            <a href="waterproofing.html" class="dropdown-item">Waterproofing</a>
+                            <a href="industrial.html" class="dropdown-item">Industrial Chemicals</a>
+                        </div>
+                    </div>
+                    <a href="contact.html" class="nav-item nav-link">Contact</a>
+                </div>
+                <div class="d-none d-lg-flex">
+                    <a class="btn btn-outline-primary border-2" href="contact.html">Get Quote</a>
+                </div>
+            </div>
+        </nav>
 
-<!-- TOP BAR -->
-<div class="topbar">
-  <div class="menu">
-    <div onclick="show('home')">Home</div>
-    <div onclick="show('dealer')">Dealer Enquiry</div>
-    <div onclick="show('contact')">Contact</div>
-  </div>
-</div>
+        <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="w-100" src="img/carousel-1.jpg" alt="Image">
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <div class="title mx-5 px-5 animated slideInDown">
+                            <div class="title-center">
+                                <h5>Welcome to</h5>
+                                <h1 class="display-1">AV Chem Chemical</h1>
+                            </div>
+                        </div>
+                        <p class="fs-5 mb-5 animated slideInDown">Leading Manufacturers of High-Quality Construction Chemicals and Waterproofing Solutions.</p>
+                        <a href="service.html" class="btn btn-outline-primary border-2 py-3 px-5 animated slideInDown">Our Products</a>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="w-100" src="img/carousel-2.jpg" alt="Image">
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <div class="title mx-5 px-5 animated slideInDown">
+                            <div class="title-center">
+                                <h5>Innovation in</h5>
+                                <h1 class="display-1">Manufacturing</h1>
+                            </div>
+                        </div>
+                        <p class="fs-5 mb-5 animated slideInDown">Providing durable and sustainable chemical solutions for your infrastructure needs.</p>
+                        <a href="contact.html" class="btn btn-outline-primary border-2 py-3 px-5 animated slideInDown">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#header-carousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    <div class="container-fluid bg-secondary">
+        <div class="container">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-7 pb-0 pb-lg-5 py-5">
+                    <div class="pb-0 pb-lg-5 py-5">
+                        <div class="title wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="title-left">
+                                <h5>Our Legacy</h5>
+                                <h1>AV Chem Chemical & Manufacturing</h1>
+                            </div>
+                        </div>
+                        <p class="mb-4 wow fadeInUp" data-wow-delay="0.2s">AV Chem is a pioneer in the chemical manufacturing industry, specializing in advanced waterproofing and construction chemicals. We combine science and innovation to deliver products that ensure the longevity of your structures.</p>
+                        <ul class="list-group list-group-flush mb-5 wow fadeInUp" data-wow-delay="0.3s">
+                            <li class="list-group-item bg-dark text-body border-secondary ps-0">
+                                <i class="fa fa-check-circle text-primary me-1"></i> ISO Certified Manufacturing Standards.
+                            </li>
+                            <li class="list-group-item bg-dark text-body border-secondary ps-0">
+                                <i class="fa fa-check-circle text-primary me-1"></i> Eco-friendly and Sustainable Solutions.
+                            </li>
+                            <li class="list-group-item bg-dark text-body border-secondary ps-0">
+                                <i class="fa fa-check-circle text-primary me-1"></i> Expert Technical Support and Consultation.
+                            </li>
+                        </ul>
+                        <div class="row wow fadeInUp" data-wow-delay="0.4s">
+                            <div class="col-6">
+                                <a href="service.html" class="btn btn-outline-primary border-2 py-3 w-100">View Products</a>
+                            </div>
+                            <div class="col-6">
+                                <a href="contact.html" class="btn btn-primary py-3 w-100">Contact Expert</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 wow fadeInUp" data-wow-delay="0.5s">
+                    <img class="img-fluid" src="img/about.png" alt="Chemical Manufacturing">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid bg-dark text-light footer py-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container text-center py-5">
+            <a href="index.html">
+                <h1 class="display-4 mb-3 text-white text-uppercase"><i class="fa fa-flask me-2"></i>AV Chem</h1>
+            </a>
+            <p class="mb-4">AV Chem Chemical & Manufacturing - Your trusted partner in construction chemicals.</p>
+            <div class="d-flex justify-content-center mb-4">
+                <a class="btn btn-lg-square btn-outline-primary border-2 m-1" href="#"><i class="fab fa-facebook-f"></i></a>
+                <a class="btn btn-lg-square btn-outline-primary border-2 m-1" href="#"><i class="fab fa-instagram"></i></a>
+                <a class="btn btn-lg-square btn-outline-primary border-2 m-1" href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <p>&copy; <a class="border-bottom" href="#">AV Chem Chemical & Manufacturing</a>, All Rights Reserved.</p>
+        </div>
+    </div>
+    <a href="#" class="btn btn-outline-primary border-2 btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 
-<!-- MAIN SCREEN -->
-<div id="main" class="section active">
-  <h1>H4 Tile Adhesive & Waterproof</h1>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/lightbox/js/lightbox.min.js"></script>
 
-  <div class="folders">
-    <div class="folder" onclick="openProduct('tile')">Tile Adhesive</div>
-    <div class="folder" onclick="openProduct('water')">Waterproof</div>
-    <div class="folder" onclick="openProduct('shield')">H4 ShieldX</div>
-  </div>
-</div>
-
-<!-- HOME DETAILS -->
-<div id="home" class="section">
-  <img src="avlogo.png" width="120"><br><br>
-  <p class="cyan">
-    <b>AV Chem Chemical & Manufacturing</b><br><br>
-    Mukkilapeedika<br>
-    Kannam Kulam<br>
-    PO BP Angadi<br>
-    Pin Code 676102<br>
-    Tirur<br>
-    Malappuram<br>
-    Kerala<br>
-    India
-  </p>
-  <br>
-  <button class="back" onclick="show('main')">Back</button>
-</div>
-
-<!-- DEALER ENQUIRY -->
-<div id="dealer" class="section">
-  <h2>Dealer Enquiry</h2>
-
-  <input placeholder="Customer Name">
-
-  <input id="mobile"
-         placeholder="Mobile Number"
-         type="tel"
-         inputmode="numeric"
-         pattern="[0-9]*"
-         maxlength="10">
-
-  <input placeholder="City">
-  <input placeholder="District">
-  <input placeholder="State">
-
-  <select id="product">
-    <option value="">Select Product</option>
-    <option>Tile Adhesive</option>
-    <option>Waterproof</option>
-    <option>H4 ShieldX</option>
-  </select>
-
-  <input id="qty"
-         placeholder="Quantity (Kg / Bag)"
-         type="number"
-         inputmode="numeric">
-
-  <br>
-  <button class="ok" onclick="sendWA()">Confirm</button>
-  <br><br>
-  <button class="back" onclick="show('main')">Back</button>
-</div>
-
-<!-- CONTACT -->
-<div id="contact" class="section">
-  <h2>Contact</h2>
-
-  <p class="cyan">
-    📞 <a class="cyan" href="tel:+917907344030">+91 79073 44030</a>
-  </p>
-
-  <p class="cyan">
-    💬 <a class="cyan" href="https://wa.me/919745838382" target="_blank">
-    WhatsApp 9745838382</a>
-  </p>
-
-  <p class="cyan">
-    ✉ <a class="cyan" href="mailto:avchemtirur@gmail.com">
-    avchemtirur@gmail.com</a>
-  </p>
-
-  <button class="back" onclick="show('main')">Back</button>
-</div>
-
-<script>
-function show(id){
-  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
-
-function openProduct(type){
-  let url="#";
-  if(type==="tile") url="tile-adhesive.html";
-  if(type==="water") url="waterproof.html";
-  if(type==="shield") url="h4-shieldx.html";
-  window.open(url,"_blank");
-}
-
-function sendWA(){
-  const m=document.getElementById("mobile").value;
-  if(m.length!==10){
-    alert("Enter valid 10 digit mobile number");
-    return;
-  }
-  const msg=encodeURIComponent(
-    "Dealer Enquiry\nMobile: "+m+
-    "\nProduct: "+document.getElementById("product").value+
-    "\nQuantity: "+document.getElementById("qty").value
-  );
-  window.open("https://wa.me/919745838382?text="+msg,"_blank");
-}
-</script>
-
+    <script src="js/main.js"></script>
 </body>
+
 </html>
