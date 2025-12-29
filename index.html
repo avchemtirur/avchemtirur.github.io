@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ml">
 <head>
@@ -9,7 +10,7 @@
     <style>
         :root {
             --primary-pink: #e91e63;
-            --primary-yellow: #ffde00;
+            --primary-yellow: #ffcc00;
             --dark-bg: #111111;
             --card-bg: #1a1a1a;
             --text-light: #ffffff;
@@ -21,14 +22,13 @@
             padding: 0;
             background-color: var(--dark-bg);
             color: var(--text-light);
-            line-height: 1.6;
-            overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
-        /* --- Header & Lang Switch --- */
+        /* --- Header --- */
         header {
-            background-color: rgba(0, 0, 0, 0.9);
-            padding: 15px 5%;
+            background-color: rgba(0, 0, 0, 0.95);
+            padding: 10px 5%;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -37,336 +37,241 @@
             top: 0;
             z-index: 1000;
             box-sizing: border-box;
+            border-bottom: 2px solid var(--primary-pink);
         }
 
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 15px;
+        .logo-area { display: flex; align-items: center; gap: 10px; }
+        .av-logo {
+            background: var(--primary-pink);
+            color: black;
+            font-weight: 900;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-family: 'Josefin Sans', sans-serif;
         }
 
+        .lang-switch { display: flex; gap: 10px; }
         .lang-btn {
             background: transparent;
             color: white;
             border: 1px solid var(--primary-pink);
-            padding: 5px 15px;
+            padding: 5px 12px;
             cursor: pointer;
             border-radius: 20px;
-            font-size: 14px;
-            transition: 0.3s;
+            font-size: 13px;
         }
-
-        .lang-btn.active {
-            background: var(--primary-pink);
-            font-weight: bold;
-        }
-
-        .logo {
-            font-family: 'Josefin Sans', sans-serif;
-            font-weight: 700;
-            font-size: 24px;
-            color: var(--primary-pink);
-            text-transform: uppercase;
-        }
+        .lang-btn.active { background: var(--primary-pink); }
 
         /* --- Hero Section --- */
         .hero {
-            height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&q=80') center/cover;
+            height: 90vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding-top: 80px;
-            animation: fadeIn 1.5s ease-out;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&q=80') center/cover;
+            padding: 0 5%;
         }
 
-        .hero h5 {
-            color: var(--primary-pink);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 10px;
-        }
+        .hero h1 { font-size: 3rem; margin: 10px 0; font-family: 'Josefin Sans', sans-serif; color: var(--primary-pink); }
+        .hero p { max-width: 600px; color: #ccc; }
 
-        .hero h1 {
-            font-size: 3.5rem;
-            font-family: 'Josefin Sans', sans-serif;
-            margin: 0;
-            text-transform: uppercase;
-        }
-
-        .hero p {
-            max-width: 700px;
-            font-size: 1.1rem;
-            margin: 20px 0;
-            color: #ccc;
-        }
-
-        .hero-btns {
+        /* --- Category Folders (The requested feature) --- */
+        .folder-section {
+            padding: 50px 5%;
             display: flex;
-            gap: 15px;
-            margin-top: 20px;
+            justify-content: center;
+            gap: 20px;
         }
 
-        .btn-outline {
-            border: 2px solid var(--primary-pink);
-            color: white;
-            padding: 12px 30px;
-            text-decoration: none;
-            border-radius: 30px;
-            transition: 0.3s;
-        }
-
-        .btn-filled {
-            background: var(--primary-pink);
-            color: white;
-            padding: 12px 30px;
-            text-decoration: none;
-            border-radius: 30px;
-            transition: 0.3s;
-        }
-
-        /* --- About Section & Bags --- */
-        .about-section {
-            padding: 100px 10%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .about-text {
+        .folder {
+            background: var(--card-bg);
+            border: 1px solid #333;
+            padding: 30px;
+            width: 250px;
             text-align: center;
-            margin-bottom: 50px;
-            max-width: 800px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: 0.4s;
+            position: relative;
+            overflow: hidden;
         }
+        .folder:hover { border-color: var(--primary-pink); transform: translateY(-10px); }
+        .folder i { font-size: 40px; color: var(--primary-pink); margin-bottom: 15px; }
+        .folder h3 { margin: 0; }
 
-        .about-text h5 { color: #888; text-transform: uppercase; margin: 0; }
-        .about-text h2 { font-size: 2.5rem; border-bottom: 3px solid var(--primary-pink); display: inline-block; padding-bottom: 10px; }
+        /* --- Bag Animation Area --- */
+        .bag-display {
+            display: none; /* Initially hidden, shows when folder is clicked */
+            padding: 50px 5%;
+            text-align: center;
+            animation: fadeIn 1s;
+        }
 
         .bag-container {
             display: flex;
-            gap: 20px;
             justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 40px;
-            animation: slideUp 1s ease-out;
+            gap: 30px;
+            margin-top: 30px;
         }
 
-        /* പശ്ചാത്തലത്തിൽ കാണുന്ന ബാഗുകളുടെ ഡിസൈൻ */
-        .bag-mockup {
-            width: 280px;
-            background: #ffcc00; /* Yellow bag color */
-            padding: 30px 20px;
-            border-radius: 10px 10px 40px 40px;
+        .bag-png {
+            width: 220px;
+            background: var(--primary-yellow);
+            padding: 20px;
+            border-radius: 10px 10px 50px 50px;
             color: black;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(255, 204, 0, 0.3);
             position: relative;
-            transform: rotate(-2deg);
+        }
+        .bag-png::after {
+            content: "H4";
+            position: absolute;
+            top: 40%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem; opacity: 0.1;
         }
 
-        .bag-mockup:nth-child(2) { transform: rotate(3deg); margin-top: 20px; }
-
-        .bag-mockup h3 { margin: 0; font-size: 24px; font-weight: 900; }
-        .bag-mockup .brand { font-size: 14px; letter-spacing: 2px; border-bottom: 1px solid black; display: inline-block; margin-bottom: 20px; }
-        .bag-mockup .circle-label {
-            background: black;
-            color: #ffcc00;
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 20px auto;
-            font-weight: bold;
-            border: 2px solid white;
+        /* --- Footer & Contact --- */
+        footer {
+            background: #000;
+            padding: 60px 5%;
+            border-top: 1px solid #222;
         }
 
-        /* --- Form Section --- */
-        .order-container {
-            padding: 80px 10%;
-            background: var(--card-bg);
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
         }
 
-        .order-sheet {
-            max-width: 800px;
-            margin: 0 auto;
-            background: #222;
-            padding: 40px;
-            border-radius: 15px;
-            border-top: 5px solid var(--primary-pink);
-        }
+        .contact-box h4 { color: var(--primary-pink); margin-bottom: 20px; }
+        .contact-item { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; color: #bbb; text-decoration: none; }
+        .contact-item i { color: var(--primary-pink); font-size: 20px; }
 
-        .form-group { margin-bottom: 20px; }
-        .form-label { display: block; margin-bottom: 8px; font-weight: bold; color: var(--primary-pink); }
-        .form-input {
-            width: 100%;
-            padding: 12px;
-            background: #333;
-            border: 1px solid #444;
-            color: white;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
+        .address-box p { line-height: 1.8; color: #bbb; }
 
-        .btn-submit {
-            width: 100%;
-            padding: 15px;
-            background: var(--primary-pink);
-            border: none;
-            color: white;
-            font-size: 18px;
-            font-weight: bold;
-            border-radius: 30px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-
-        /* Animations */
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
         @media (max-width: 768px) {
             .hero h1 { font-size: 2rem; }
-            .bag-container { flex-direction: column; align-items: center; }
+            .folder-section { flex-direction: column; align-items: center; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="header-left">
+        <div class="logo-area">
+            <div class="av-logo">AV</div>
+            <div class="logo">CHEM</div>
+        </div>
+        <div class="lang-switch">
             <button class="lang-btn active" onclick="setLanguage('en')">English</button>
             <button class="lang-btn" onclick="setLanguage('ml')">മലയാളം</button>
         </div>
-        <div class="logo">AV Chem</div>
     </header>
 
     <section class="hero">
-        <h5 id="heroWelcome">Welcome</h5>
-        <h1 id="heroTitle">CHEMICAL & MANUFACTURING</h1>
-        <p id="heroDesc">Innovating Solutions for a Sustainable Future. High-performance chemical products for your dream home.</p>
-        <div class="hero-btns">
-            <a href="#about" class="btn-outline" id="btnExplore">Our Products</a>
-            <a href="#order" class="btn-filled" id="btnQuote">Get a Quote</a>
+        <h1 id="heroTitle">AV CHEM CHEMICALS</h1>
+        <p id="heroDesc">Leading manufacturers of high-quality construction chemicals and waterproofing solutions for a durable future.</p>
+    </section>
+
+    <section class="folder-section">
+        <div class="folder" onclick="showCategory('waterproof')">
+            <i class="fas fa-shield-virus"></i>
+            <h3 id="foldWP">Water Proofing</h3>
+            <p id="foldWPDesc">H4 Technology</p>
+        </div>
+        <div class="folder" onclick="showCategory('adhesive')">
+            <i class="fas fa-fill-drip"></i>
+            <h3 id="foldTile">Tile Adhesive</h3>
+            <p id="foldTileDesc">Premium Grip</p>
         </div>
     </section>
 
-    <section class="about-section" id="about">
-        <div class="about-text">
-            <h5 id="histLabel">HISTORY</h5>
-            <h2 id="aboutTitle">ABOUT OUR COMPANY</h2>
-            <p id="aboutLongDesc">AV Chem Chemical & Manufacturing presents H4 Waterproof, a protective shield beyond the limits of science. This is not just paint; it is a chemical bonding system.</p>
-        </div>
-
+    <div id="waterproof-area" class="bag-display">
+        <h2 id="wpDetailTitle">H4 Waterproof System</h2>
         <div class="bag-container">
-            <div class="bag-mockup">
-                <span class="brand">AV CHEM</span>
+            <div class="bag-png">
+                <small>AV CHEM</small>
                 <h3>H4</h3>
-                <div class="circle-label">H4</div>
-                <p><b>H4 Waterproof</b></p>
-                <small>Chemical Technology</small>
+                <p>WATER PROOF</p>
+                <div style="background:black; color:white; padding:5px; margin-top:10px;">20 KG</div>
             </div>
-            <div class="bag-mockup">
-                <span class="brand">AV CHEM</span>
+            <div class="bag-png">
+                <small>AV CHEM</small>
                 <h3>H4</h3>
-                <div class="circle-label">H4</div>
-                <p><b>H4 Waterproof</b></p>
-                <small>Chemical Technology</small>
+                <p>WATER PROOF</p>
+                <div style="background:black; color:white; padding:5px; margin-top:10px;">20 KG</div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <section class="order-container" id="order">
-        <div class="order-sheet">
-            <h2 id="formHeader" style="text-align: center; margin-bottom: 30px; color: white;">Order Sheet</h2>
-            <div class="form-group">
-                <label class="form-label" id="lblName">Name</label>
-                <input type="text" id="name" class="form-input">
+    <div id="adhesive-area" class="bag-display">
+        <h2 id="tileDetailTitle">Premium Tile Adhesive</h2>
+        <p>Advanced bonding solutions for tiles and granites.</p>
+    </div>
+
+    <footer id="contact">
+        <div class="footer-grid">
+            <div class="address-box">
+                <h4>AV CHEM CHEMICAL & MANUFACTURING</h4>
+                <p>
+                    Mukkilapeedika, Kannamkulam,<br>
+                    PO, BP Angadi, Tirur,<br>
+                    Malappuram, Kerala - 676102
+                </p>
             </div>
-            <div class="form-group">
-                <label class="form-label" id="lblAddress">Address</label>
-                <textarea id="address" class="form-input" rows="3"></textarea>
+            <div class="contact-box">
+                <h4 id="footerContact">Contact Us</h4>
+                <a href="tel:+917907344030" class="contact-item"><i class="fas fa-phone"></i> +91 7907344030</a>
+                <a href="https://wa.me/919745838382" class="contact-item"><i class="fab fa-whatsapp"></i> 9745838382</a>
+                <a href="mailto:avchemtirur@gmail.com" class="contact-item"><i class="fas fa-envelope"></i> avchemtirur@gmail.com</a>
             </div>
-            <div class="form-group">
-                <label class="form-label" id="lblMobile">Mobile Number</label>
-                <input type="number" id="mobile" class="form-input">
-            </div>
-            <div class="form-group">
-                <label class="form-label" id="lblQty">Quantity (Bags)</label>
-                <input type="number" id="qty" class="form-input">
-            </div>
-            <button class="btn-submit" onclick="sendOrder()" id="btnSubmit">Confirm Order</button>
         </div>
-    </section>
+        <center style="margin-top:50px; color:#555; font-size:12px;">
+            &copy; 2025 AV Chem Chemical & Manufacturing. All Rights Reserved.
+        </center>
+    </footer>
 
     <script>
-        const content = {
+        function showCategory(type) {
+            document.querySelectorAll('.bag-display').forEach(el => el.style.display = 'none');
+            document.getElementById(type + '-area').style.display = 'block';
+            window.location.href = "#" + type + "-area";
+        }
+
+        const langData = {
             en: {
-                welcome: "Welcome",
-                title: "CHEMICAL & MANUFACTURING",
-                desc: "Innovating Solutions for a Sustainable Future. High-performance chemical products for your dream home.",
-                explore: "Our Products",
-                quote: "Get a Quote",
-                hist: "HISTORY",
-                about: "ABOUT OUR COMPANY",
-                longDesc: "AV Chem Chemical & Manufacturing presents H4 Waterproof, a protective shield beyond the limits of science. This is not just paint; it is a chemical bonding system.",
-                form: "Order Sheet",
-                name: "Full Name",
-                address: "Delivery Address",
-                mobile: "Mobile Number",
-                qty: "Quantity",
-                submit: "Confirm Order via WhatsApp"
+                title: "AV CHEM CHEMICALS",
+                desc: "Leading manufacturers of high-quality construction chemicals and waterproofing solutions for a durable future.",
+                foldWP: "Water Proofing",
+                foldTile: "Tile Adhesive",
+                contact: "Contact Us"
             },
             ml: {
-                welcome: "സ്വാഗതം",
-                title: "കെമിക്കൽ & മാനുഫാക്ചറിംഗ്",
-                desc: "സുസ്ഥിരമായ ഭാവിയിലേക്കുള്ള നൂതനമായ കെമിക്കൽ സൊല്യൂഷനുകൾ. നിങ്ങളുടെ സ്വപ്നഭവനത്തിന് മികച്ച സംരക്ഷണം.",
-                explore: "ഞങ്ങളുടെ ഉൽപ്പന്നങ്ങൾ",
-                quote: "ക്വോട്ട് നേടുക",
-                hist: "ചരിത്രം",
-                about: "ഞങ്ങളുടെ കമ്പനിയെക്കുറിച്ച്",
-                longDesc: "വീട് മാത്രമല്ല; അടുത്ത 10 വർഷത്തെ നിങ്ങളുടെ സമാധാനം. AV Chem അവതരിപ്പിക്കുന്നു, ശാസ്ത്രത്തിന്റെ അതിരുകൾ വിട്ട് നിൽക്കുന്ന സംരക്ഷണ കവചം: H4 Waterproof.",
-                form: "ഓർഡർ ഷീറ്റ്",
-                name: "മുഴുവൻ പേര്",
-                address: "വിലാസം",
-                mobile: "മൊബൈൽ നമ്പർ",
-                qty: "ക്വാണ്ടിറ്റി (ബാഗുകൾ)",
-                submit: "ഓർഡർ സ്ഥിരീകരിക്കുക"
+                title: "AV CHEM കെമിക്കൽസ്",
+                desc: "ഉയർന്ന ഗുണനിലവാരമുള്ള കൺസ്ട്രക്ഷൻ കെമിക്കലുകളുടെയും വാട്ടർപ്രൂഫിംഗ് സൊല്യൂഷനുകളുടെയും മുൻനിര നിർമ്മാതാക്കൾ.",
+                foldWP: "വാട്ടർ പ്രൂഫിംഗ്",
+                foldTile: "ടൈൽ അഡസീവ്",
+                contact: "ബന്ധപ്പെടുക"
             }
         };
 
         function setLanguage(lang) {
-            const l = content[lang];
-            document.getElementById('heroWelcome').innerText = l.welcome;
+            const l = langData[lang];
             document.getElementById('heroTitle').innerText = l.title;
             document.getElementById('heroDesc').innerText = l.desc;
-            document.getElementById('btnExplore').innerText = l.explore;
-            document.getElementById('btnQuote').innerText = l.quote;
-            document.getElementById('histLabel').innerText = l.hist;
-            document.getElementById('aboutTitle').innerText = l.about;
-            document.getElementById('aboutLongDesc').innerText = l.longDesc;
-            document.getElementById('formHeader').innerText = l.form;
-            document.getElementById('lblName').innerText = l.name;
-            document.getElementById('lblAddress').innerText = l.address;
-            document.getElementById('lblMobile').innerText = l.mobile;
-            document.getElementById('lblQty').innerText = l.qty;
-            document.getElementById('btnSubmit').innerText = l.submit;
+            document.getElementById('foldWP').innerText = l.foldWP;
+            document.getElementById('foldTile').innerText = l.foldTile;
+            document.getElementById('footerContact').innerText = l.contact;
 
             document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
             event.target.classList.add('active');
         }
-
-        function sendOrder() {
-            const name = document.getElementById('name').value;
-            const mobile = document.getElementById('mobile').value;
-            const qty = document.getElementById('qty').value;
-            const msg = `New Order from AV Chem Web:%0AName: ${name}%0AMobile: ${mobile}%0AQty: ${qty} Bags`;
-            window.open(`https://wa.me/919745838382?text=${msg}`);
-        }
     </script>
 </body>
 </html>
-
