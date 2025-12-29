@@ -1,169 +1,372 @@
-
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ml">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AV Chem Chemical & Manufacturing</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Chemical Manufacturing, AV Chem, Waterproofing" name="keywords">
-    <meta content="AV Chem Chemical & Manufacturing - Quality Chemical Solutions" name="description">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-pink: #e91e63;
+            --primary-yellow: #ffde00;
+            --dark-bg: #111111;
+            --card-bg: #1a1a1a;
+            --text-light: #ffffff;
+        }
 
-    <link href="img/favicon.ico" rel="icon">
+        body {
+            font-family: 'Work Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;700&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">
+        /* --- Header & Lang Switch --- */
+        header {
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 15px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-sizing: border-box;
+        }
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
 
-    <link href="lib/animate/animate.min.css" rel="stylesheet">
-    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        .lang-btn {
+            background: transparent;
+            color: white;
+            border: 1px solid var(--primary-pink);
+            padding: 5px 15px;
+            cursor: pointer;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+        .lang-btn.active {
+            background: var(--primary-pink);
+            font-weight: bold;
+        }
 
-    <link href="css/style.css" rel="stylesheet">
+        .logo {
+            font-family: 'Josefin Sans', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            color: var(--primary-pink);
+            text-transform: uppercase;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&q=80') center/cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 80px;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .hero h5 {
+            color: var(--primary-pink);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-family: 'Josefin Sans', sans-serif;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .hero p {
+            max-width: 700px;
+            font-size: 1.1rem;
+            margin: 20px 0;
+            color: #ccc;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary-pink);
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: 0.3s;
+        }
+
+        .btn-filled {
+            background: var(--primary-pink);
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: 0.3s;
+        }
+
+        /* --- About Section & Bags --- */
+        .about-section {
+            padding: 100px 10%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .about-text {
+            text-align: center;
+            margin-bottom: 50px;
+            max-width: 800px;
+        }
+
+        .about-text h5 { color: #888; text-transform: uppercase; margin: 0; }
+        .about-text h2 { font-size: 2.5rem; border-bottom: 3px solid var(--primary-pink); display: inline-block; padding-bottom: 10px; }
+
+        .bag-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+            animation: slideUp 1s ease-out;
+        }
+
+        /* പശ്ചാത്തലത്തിൽ കാണുന്ന ബാഗുകളുടെ ഡിസൈൻ */
+        .bag-mockup {
+            width: 280px;
+            background: #ffcc00; /* Yellow bag color */
+            padding: 30px 20px;
+            border-radius: 10px 10px 40px 40px;
+            color: black;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            position: relative;
+            transform: rotate(-2deg);
+        }
+
+        .bag-mockup:nth-child(2) { transform: rotate(3deg); margin-top: 20px; }
+
+        .bag-mockup h3 { margin: 0; font-size: 24px; font-weight: 900; }
+        .bag-mockup .brand { font-size: 14px; letter-spacing: 2px; border-bottom: 1px solid black; display: inline-block; margin-bottom: 20px; }
+        .bag-mockup .circle-label {
+            background: black;
+            color: #ffcc00;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px auto;
+            font-weight: bold;
+            border: 2px solid white;
+        }
+
+        /* --- Form Section --- */
+        .order-container {
+            padding: 80px 10%;
+            background: var(--card-bg);
+        }
+
+        .order-sheet {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #222;
+            padding: 40px;
+            border-radius: 15px;
+            border-top: 5px solid var(--primary-pink);
+        }
+
+        .form-group { margin-bottom: 20px; }
+        .form-label { display: block; margin-bottom: 8px; font-weight: bold; color: var(--primary-pink); }
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            background: #333;
+            border: 1px solid #444;
+            color: white;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary-pink);
+            border: none;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .bag-container { flex-direction: column; align-items: center; }
+        }
+    </style>
 </head>
-
 <body>
-    <div id="spinner" class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-        <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-    </div>
-    <div class="container-fluid p-0">
-        <nav class="navbar navbar-expand-lg navbar-dark px-lg-5">
-            <a href="index.html" class="navbar-brand ms-4 ms-lg-0">
-                <h2 class="mb-0 text-primary text-uppercase"><i class="fa fa-flask me-2"></i>AV Chem</h2>
-            </a>
-            <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <div class="navbar-nav mx-auto p-4 p-lg-0">
-                    <a href="index.html" class="nav-item nav-link active">Home</a>
-                    <a href="about.html" class="nav-item nav-link">About</a>
-                    <a href="service.html" class="nav-item nav-link">Products</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Solutions</a>
-                        <div class="dropdown-menu m-0">
-                            <a href="waterproofing.html" class="dropdown-item">Waterproofing</a>
-                            <a href="industrial.html" class="dropdown-item">Industrial Chemicals</a>
-                        </div>
-                    </div>
-                    <a href="contact.html" class="nav-item nav-link">Contact</a>
-                </div>
-                <div class="d-none d-lg-flex">
-                    <a class="btn btn-outline-primary border-2" href="contact.html">Get Quote</a>
-                </div>
-            </div>
-        </nav>
 
-        <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img class="w-100" src="img/carousel-1.jpg" alt="Image">
-                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                        <div class="title mx-5 px-5 animated slideInDown">
-                            <div class="title-center">
-                                <h5>Welcome to</h5>
-                                <h1 class="display-1">AV Chem Chemical</h1>
-                            </div>
-                        </div>
-                        <p class="fs-5 mb-5 animated slideInDown">Leading Manufacturers of High-Quality Construction Chemicals and Waterproofing Solutions.</p>
-                        <a href="service.html" class="btn btn-outline-primary border-2 py-3 px-5 animated slideInDown">Our Products</a>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img class="w-100" src="img/carousel-2.jpg" alt="Image">
-                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                        <div class="title mx-5 px-5 animated slideInDown">
-                            <div class="title-center">
-                                <h5>Innovation in</h5>
-                                <h1 class="display-1">Manufacturing</h1>
-                            </div>
-                        </div>
-                        <p class="fs-5 mb-5 animated slideInDown">Providing durable and sustainable chemical solutions for your infrastructure needs.</p>
-                        <a href="contact.html" class="btn btn-outline-primary border-2 py-3 px-5 animated slideInDown">Contact Us</a>
-                    </div>
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#header-carousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+    <header>
+        <div class="header-left">
+            <button class="lang-btn active" onclick="setLanguage('en')">English</button>
+            <button class="lang-btn" onclick="setLanguage('ml')">മലയാളം</button>
         </div>
-    </div>
-    <div class="container-fluid bg-secondary">
-        <div class="container">
-            <div class="row g-5 align-items-center">
-                <div class="col-lg-7 pb-0 pb-lg-5 py-5">
-                    <div class="pb-0 pb-lg-5 py-5">
-                        <div class="title wow fadeInUp" data-wow-delay="0.1s">
-                            <div class="title-left">
-                                <h5>Our Legacy</h5>
-                                <h1>AV Chem Chemical & Manufacturing</h1>
-                            </div>
-                        </div>
-                        <p class="mb-4 wow fadeInUp" data-wow-delay="0.2s">AV Chem is a pioneer in the chemical manufacturing industry, specializing in advanced waterproofing and construction chemicals. We combine science and innovation to deliver products that ensure the longevity of your structures.</p>
-                        <ul class="list-group list-group-flush mb-5 wow fadeInUp" data-wow-delay="0.3s">
-                            <li class="list-group-item bg-dark text-body border-secondary ps-0">
-                                <i class="fa fa-check-circle text-primary me-1"></i> ISO Certified Manufacturing Standards.
-                            </li>
-                            <li class="list-group-item bg-dark text-body border-secondary ps-0">
-                                <i class="fa fa-check-circle text-primary me-1"></i> Eco-friendly and Sustainable Solutions.
-                            </li>
-                            <li class="list-group-item bg-dark text-body border-secondary ps-0">
-                                <i class="fa fa-check-circle text-primary me-1"></i> Expert Technical Support and Consultation.
-                            </li>
-                        </ul>
-                        <div class="row wow fadeInUp" data-wow-delay="0.4s">
-                            <div class="col-6">
-                                <a href="service.html" class="btn btn-outline-primary border-2 py-3 w-100">View Products</a>
-                            </div>
-                            <div class="col-6">
-                                <a href="contact.html" class="btn btn-primary py-3 w-100">Contact Expert</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-5 wow fadeInUp" data-wow-delay="0.5s">
-                    <img class="img-fluid" src="img/about.png" alt="Chemical Manufacturing">
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container-fluid bg-dark text-light footer py-5 wow fadeIn" data-wow-delay="0.1s">
-        <div class="container text-center py-5">
-            <a href="index.html">
-                <h1 class="display-4 mb-3 text-white text-uppercase"><i class="fa fa-flask me-2"></i>AV Chem</h1>
-            </a>
-            <p class="mb-4">AV Chem Chemical & Manufacturing - Your trusted partner in construction chemicals.</p>
-            <div class="d-flex justify-content-center mb-4">
-                <a class="btn btn-lg-square btn-outline-primary border-2 m-1" href="#"><i class="fab fa-facebook-f"></i></a>
-                <a class="btn btn-lg-square btn-outline-primary border-2 m-1" href="#"><i class="fab fa-instagram"></i></a>
-                <a class="btn btn-lg-square btn-outline-primary border-2 m-1" href="#"><i class="fab fa-linkedin-in"></i></a>
-            </div>
-            <p>&copy; <a class="border-bottom" href="#">AV Chem Chemical & Manufacturing</a>, All Rights Reserved.</p>
-        </div>
-    </div>
-    <a href="#" class="btn btn-outline-primary border-2 btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+        <div class="logo">AV Chem</div>
+    </header>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/wow/wow.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/lightbox/js/lightbox.min.js"></script>
+    <section class="hero">
+        <h5 id="heroWelcome">Welcome</h5>
+        <h1 id="heroTitle">CHEMICAL & MANUFACTURING</h1>
+        <p id="heroDesc">Innovating Solutions for a Sustainable Future. High-performance chemical products for your dream home.</p>
+        <div class="hero-btns">
+            <a href="#about" class="btn-outline" id="btnExplore">Our Products</a>
+            <a href="#order" class="btn-filled" id="btnQuote">Get a Quote</a>
+        </div>
+    </section>
 
-    <script src="js/main.js"></script>
+    <section class="about-section" id="about">
+        <div class="about-text">
+            <h5 id="histLabel">HISTORY</h5>
+            <h2 id="aboutTitle">ABOUT OUR COMPANY</h2>
+            <p id="aboutLongDesc">AV Chem Chemical & Manufacturing presents H4 Waterproof, a protective shield beyond the limits of science. This is not just paint; it is a chemical bonding system.</p>
+        </div>
+
+        <div class="bag-container">
+            <div class="bag-mockup">
+                <span class="brand">AV CHEM</span>
+                <h3>H4</h3>
+                <div class="circle-label">H4</div>
+                <p><b>H4 Waterproof</b></p>
+                <small>Chemical Technology</small>
+            </div>
+            <div class="bag-mockup">
+                <span class="brand">AV CHEM</span>
+                <h3>H4</h3>
+                <div class="circle-label">H4</div>
+                <p><b>H4 Waterproof</b></p>
+                <small>Chemical Technology</small>
+            </div>
+        </div>
+    </section>
+
+    <section class="order-container" id="order">
+        <div class="order-sheet">
+            <h2 id="formHeader" style="text-align: center; margin-bottom: 30px; color: white;">Order Sheet</h2>
+            <div class="form-group">
+                <label class="form-label" id="lblName">Name</label>
+                <input type="text" id="name" class="form-input">
+            </div>
+            <div class="form-group">
+                <label class="form-label" id="lblAddress">Address</label>
+                <textarea id="address" class="form-input" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label class="form-label" id="lblMobile">Mobile Number</label>
+                <input type="number" id="mobile" class="form-input">
+            </div>
+            <div class="form-group">
+                <label class="form-label" id="lblQty">Quantity (Bags)</label>
+                <input type="number" id="qty" class="form-input">
+            </div>
+            <button class="btn-submit" onclick="sendOrder()" id="btnSubmit">Confirm Order</button>
+        </div>
+    </section>
+
+    <script>
+        const content = {
+            en: {
+                welcome: "Welcome",
+                title: "CHEMICAL & MANUFACTURING",
+                desc: "Innovating Solutions for a Sustainable Future. High-performance chemical products for your dream home.",
+                explore: "Our Products",
+                quote: "Get a Quote",
+                hist: "HISTORY",
+                about: "ABOUT OUR COMPANY",
+                longDesc: "AV Chem Chemical & Manufacturing presents H4 Waterproof, a protective shield beyond the limits of science. This is not just paint; it is a chemical bonding system.",
+                form: "Order Sheet",
+                name: "Full Name",
+                address: "Delivery Address",
+                mobile: "Mobile Number",
+                qty: "Quantity",
+                submit: "Confirm Order via WhatsApp"
+            },
+            ml: {
+                welcome: "സ്വാഗതം",
+                title: "കെമിക്കൽ & മാനുഫാക്ചറിംഗ്",
+                desc: "സുസ്ഥിരമായ ഭാവിയിലേക്കുള്ള നൂതനമായ കെമിക്കൽ സൊല്യൂഷനുകൾ. നിങ്ങളുടെ സ്വപ്നഭവനത്തിന് മികച്ച സംരക്ഷണം.",
+                explore: "ഞങ്ങളുടെ ഉൽപ്പന്നങ്ങൾ",
+                quote: "ക്വോട്ട് നേടുക",
+                hist: "ചരിത്രം",
+                about: "ഞങ്ങളുടെ കമ്പനിയെക്കുറിച്ച്",
+                longDesc: "വീട് മാത്രമല്ല; അടുത്ത 10 വർഷത്തെ നിങ്ങളുടെ സമാധാനം. AV Chem അവതരിപ്പിക്കുന്നു, ശാസ്ത്രത്തിന്റെ അതിരുകൾ വിട്ട് നിൽക്കുന്ന സംരക്ഷണ കവചം: H4 Waterproof.",
+                form: "ഓർഡർ ഷീറ്റ്",
+                name: "മുഴുവൻ പേര്",
+                address: "വിലാസം",
+                mobile: "മൊബൈൽ നമ്പർ",
+                qty: "ക്വാണ്ടിറ്റി (ബാഗുകൾ)",
+                submit: "ഓർഡർ സ്ഥിരീകരിക്കുക"
+            }
+        };
+
+        function setLanguage(lang) {
+            const l = content[lang];
+            document.getElementById('heroWelcome').innerText = l.welcome;
+            document.getElementById('heroTitle').innerText = l.title;
+            document.getElementById('heroDesc').innerText = l.desc;
+            document.getElementById('btnExplore').innerText = l.explore;
+            document.getElementById('btnQuote').innerText = l.quote;
+            document.getElementById('histLabel').innerText = l.hist;
+            document.getElementById('aboutTitle').innerText = l.about;
+            document.getElementById('aboutLongDesc').innerText = l.longDesc;
+            document.getElementById('formHeader').innerText = l.form;
+            document.getElementById('lblName').innerText = l.name;
+            document.getElementById('lblAddress').innerText = l.address;
+            document.getElementById('lblMobile').innerText = l.mobile;
+            document.getElementById('lblQty').innerText = l.qty;
+            document.getElementById('btnSubmit').innerText = l.submit;
+
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function sendOrder() {
+            const name = document.getElementById('name').value;
+            const mobile = document.getElementById('mobile').value;
+            const qty = document.getElementById('qty').value;
+            const msg = `New Order from AV Chem Web:%0AName: ${name}%0AMobile: ${mobile}%0AQty: ${qty} Bags`;
+            window.open(`https://wa.me/919745838382?text=${msg}`);
+        }
+    </script>
 </body>
-
 </html>
+
