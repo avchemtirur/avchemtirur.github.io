@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1051,3 +1050,493 @@
                 
                 // Pre-select the product in form
                 setTimeout(() => {
+                    const productOption = document.querySelector(`.product-option[data-product="${product}"]`);
+                    if (productOption) {
+                        productOption.click();
+                        showStep(2);
+                    }
+                }, 100);
+            });
+        });
+        
+        // WhatsApp same as mobile checkbox
+        const whatsappSameCheckbox = document.getElementById('whatsappSame');
+        const whatsappGroup = document.getElementById('whatsappGroup');
+        const whatsappInput = document.getElementById('whatsapp');
+        const mobileInput = document.getElementById('mobile');
+        
+        whatsappSameCheckbox.addEventListener('change', () => {
+            if (whatsappSameCheckbox.checked) {
+                whatsappGroup.style.display = 'none';
+                whatsappInput.value = mobileInput.value;
+            } else {
+                whatsappGroup.style.display = 'block';
+                whatsappInput.value = '';
+            }
+        });
+        
+        // Mobile input validation
+        mobileInput.addEventListener('input', (e) => {
+            // Only allow numbers
+            e.target.value = e.target.value.replace(/\D/g, '');
+            
+            // If whatsapp same is checked, update whatsapp field too
+            if (whatsappSameCheckbox.checked) {
+                whatsappInput.value = e.target.value;
+            }
+        });
+        
+        // WhatsApp input validation
+        whatsappInput.addEventListener('input', (e) => {
+            // Only allow numbers
+            e.target.value = e.target.value.replace(/\D/g, '');
+        });
+        
+        // Pincode input validation
+        const pincodeInput = document.getElementById('pincode');
+        pincodeInput.addEventListener('input', (e) => {
+            // Only allow numbers
+            e.target.value = e.target.value.replace(/\D/g, '');
+        });
+        
+        // Product selection
+        const productOptions = document.querySelectorAll('.product-option');
+        productOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                // Remove selected class from all options
+                productOptions.forEach(opt => opt.classList.remove('selected'));
+                // Add selected class to clicked option
+                option.classList.add('selected');
+                
+                // Get selected product
+                const product = option.getAttribute('data-product');
+                formData.product = product;
+                
+                // Show appropriate product details
+                document.getElementById('tileDetails').style.display = 'none';
+                document.getElementById('waterDetails').style.display = 'none';
+                document.getElementById('shieldDetails').style.display = 'none';
+                
+                if (product === 'tile-adhesive') {
+                    document.getElementById('tileDetails').style.display = 'block';
+                } else if (product === 'water-proof') {
+                    document.getElementById('waterDetails').style.display = 'block';
+                } else if (product === 'h4-shield') {
+                    document.getElementById('shieldDetails').style.display = 'block';
+                }
+            });
+        });
+        
+        // Form navigation
+        nextStep1Btn.addEventListener('click', () => {
+            if (validateStep1()) {
+                saveStep1Data();
+                showStep(2);
+            }
+        });
+        
+        prevStep2Btn.addEventListener('click', () => {
+            showStep(1);
+        });
+        
+        nextStep2Btn.addEventListener('click', () => {
+            if (validateStep2()) {
+                saveStep2Data();
+                showStep(3);
+                updateSummary();
+            }
+        });
+        
+        confirmOrderBtn.addEventListener('click', () => {
+            if (sendWhatsAppMessage()) {
+                showStep(4);
+            }
+        });
+        
+        // Function to show specific step
+        function showStep(step) {
+            // Hide all steps
+            formSteps.forEach(formStep => {
+                formStep.classList.remove('active');
+            });
+            
+            // Show requested step
+            document.getElementById(`step${step}`).classList.add('active');
+            currentStep = step;
+            
+            // Scroll to top of modal
+            document.querySelector('.modal-body').scrollTop = 0;
+        }
+        
+        // Function to validate step 1
+        function validateStep1() {
+            let isValid = true;
+            
+            // Name validation
+            const name = document.getElementById('name').value.trim();
+            if (!name) {
+                document.getElementById('nameError').style.display = 'block';
+                document.getElementById('name').classList.add('error');
+                isValid = false;
+            } else {
+                document.getElementById('nameError').style.display = 'none';
+                document.getElementById('name').classList.remove('error');
+            }
+            
+            // Address validation
+            const address = document.getElementById('address').value.trim();
+            if (!address) {
+                document.getElementById('addressError').style.display = 'block';
+                document.getElementById('address').classList.add('error');
+                isValid = false;
+            } else {
+                document.getElementById('addressError').style.display = 'none';
+                document.getElementById('address').classList.remove('error');
+            }
+            
+            // City validation
+            const city = document.getElementById('city').value.trim();
+            if (!city) {
+                document.getElementById('cityError').style.display = 'block';
+                document.getElementById('city').classList.add('error');
+                isValid = false;
+            } else {
+                document.getElementById('cityError').style.display = 'none';
+                document.getElementById('city').classList.remove('error');
+            }
+            
+            // District validation
+            const district = document.getElementById('district').value.trim();
+            if (!district) {
+                document.getElementById('districtError').style.display = 'block';
+                document.getElementById('district').classList.add('error');
+                isValid = false;
+            } else {
+                document.getElementById('districtError').style.display = 'none';
+                document.getElementById('district').classList.remove('error');
+            }
+            
+            // State validation
+            const state = document.getElementById('state').value.trim();
+            if (!state) {
+                document.getElementById('stateError').style.display = 'block';
+                document.getElementById('state').classList.add('error');
+                isValid = false;
+            } else {
+                document.getElementById('stateError').style.display = 'none';
+                document.getElementById('state').classList.remove('error');
+            }
+            
+            // Mobile validation (10 digits)
+            const mobile = document.getElementById('mobile').value.trim();
+            const mobilePattern = /^\d{10}$/;
+            if (!mobilePattern.test(mobile)) {
+                document.getElementById('mobileError').style.display = 'block';
+                document.getElementById('mobile').classList.add('error');
+                isValid = false;
+            } else {
+                document.getElementById('mobileError').style.display = 'none';
+                document.getElementById('mobile').classList.remove('error');
+            }
+            
+            // WhatsApp validation (if different from mobile)
+            if (!whatsappSameCheckbox.checked) {
+                const whatsapp = document.getElementById('whatsapp').value.trim();
+                if (!mobilePattern.test(whatsapp)) {
+                    document.getElementById('whatsappError').style.display = 'block';
+                    document.getElementById('whatsapp').classList.add('error');
+                    isValid = false;
+                } else {
+                    document.getElementById('whatsappError').style.display = 'none';
+                    document.getElementById('whatsapp').classList.remove('error');
+                }
+            }
+            
+            // Pincode validation (6 digits)
+            const pincode = document.getElementById('pincode').value.trim();
+            const pincodePattern = /^\d{6}$/;
+            if (!pincodePattern.test(pincode)) {
+                document.getElementById('pincodeError').style.display = 'block';
+                document.getElementById('pincode').classList.add('error');
+                isValid = false;
+            } else {
+                document.getElementById('pincodeError').style.display = 'none';
+                document.getElementById('pincode').classList.remove('error');
+            }
+            
+            return isValid;
+        }
+        
+        // Function to save step 1 data
+        function saveStep1Data() {
+            formData.name = document.getElementById('name').value.trim();
+            formData.address = document.getElementById('address').value.trim();
+            formData.city = document.getElementById('city').value.trim();
+            formData.landmark = document.getElementById('landmark').value.trim();
+            formData.district = document.getElementById('district').value.trim();
+            formData.state = document.getElementById('state').value.trim();
+            formData.mobile = document.getElementById('mobile').value.trim();
+            formData.pincode = document.getElementById('pincode').value.trim();
+            
+            if (whatsappSameCheckbox.checked) {
+                formData.whatsapp = formData.mobile;
+            } else {
+                formData.whatsapp = document.getElementById('whatsapp').value.trim();
+            }
+        }
+        
+        // Function to validate step 2
+        function validateStep2() {
+            let isValid = true;
+            
+            // Product selection validation
+            if (!formData.product) {
+                document.getElementById('productError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('productError').style.display = 'none';
+            }
+            
+            // Product-specific validation
+            if (formData.product === 'tile-adhesive') {
+                const tileLocation = document.getElementById('tileLocation').value;
+                if (!tileLocation) {
+                    document.getElementById('tileLocationError').style.display = 'block';
+                    document.getElementById('tileLocation').classList.add('error');
+                    isValid = false;
+                } else {
+                    document.getElementById('tileLocationError').style.display = 'none';
+                    document.getElementById('tileLocation').classList.remove('error');
+                }
+                
+                const tileTypes = [
+                    document.getElementById('tileMarble').checked,
+                    document.getElementById('tileGranite').checked,
+                    document.getElementById('tileCeramic').checked,
+                    document.getElementById('tileOther').checked
+                ];
+                
+                if (!tileTypes.some(type => type)) {
+                    document.getElementById('tileTypeError').style.display = 'block';
+                    isValid = false;
+                } else {
+                    document.getElementById('tileTypeError').style.display = 'none';
+                }
+                
+                const tileQuantity = document.getElementById('tileQuantity').value;
+                if (!tileQuantity || tileQuantity <= 0) {
+                    document.getElementById('tileQuantityError').style.display = 'block';
+                    document.getElementById('tileQuantity').classList.add('error');
+                    isValid = false;
+                } else {
+                    document.getElementById('tileQuantityError').style.display = 'none';
+                    document.getElementById('tileQuantity').classList.remove('error');
+                }
+            } else if (formData.product === 'water-proof') {
+                const waterLocation = document.getElementById('waterLocation').value;
+                if (!waterLocation) {
+                    document.getElementById('waterLocationError').style.display = 'block';
+                    document.getElementById('waterLocation').classList.add('error');
+                    isValid = false;
+                } else {
+                    document.getElementById('waterLocationError').style.display = 'none';
+                    document.getElementById('waterLocation').classList.remove('error');
+                }
+                
+                const waterQuantity = document.getElementById('waterQuantity').value;
+                if (!waterQuantity || waterQuantity <= 0) {
+                    document.getElementById('waterQuantityError').style.display = 'block';
+                    document.getElementById('waterQuantity').classList.add('error');
+                    isValid = false;
+                } else {
+                    document.getElementById('waterQuantityError').style.display = 'none';
+                    document.getElementById('waterQuantity').classList.remove('error');
+                }
+            } else if (formData.product === 'h4-shield') {
+                const shieldQuantity = document.getElementById('shieldQuantity').value;
+                if (!shieldQuantity || shieldQuantity <= 0) {
+                    document.getElementById('shieldQuantityError').style.display = 'block';
+                    document.getElementById('shieldQuantity').classList.add('error');
+                    isValid = false;
+                } else {
+                    document.getElementById('shieldQuantityError').style.display = 'none';
+                    document.getElementById('shieldQuantity').classList.remove('error');
+                }
+            }
+            
+            return isValid;
+        }
+        
+        // Function to save step 2 data
+        function saveStep2Data() {
+            formData.productDetails = {};
+            
+            if (formData.product === 'tile-adhesive') {
+                formData.productDetails.location = document.getElementById('tileLocation').value;
+                formData.productDetails.types = [];
+                if (document.getElementById('tileMarble').checked) formData.productDetails.types.push('Marble');
+                if (document.getElementById('tileGranite').checked) formData.productDetails.types.push('Granite/Marbonit');
+                if (document.getElementById('tileCeramic').checked) formData.productDetails.types.push('Ceramic Tile');
+                if (document.getElementById('tileOther').checked) formData.productDetails.types.push('Other');
+                formData.productDetails.quantity = document.getElementById('tileQuantity').value + ' sq ft';
+            } else if (formData.product === 'water-proof') {
+                formData.productDetails.location = document.getElementById('waterLocation').value;
+                formData.productDetails.quantity = document.getElementById('waterQuantity').value + ' liters';
+            } else if (formData.product === 'h4-shield') {
+                formData.productDetails.quantity = document.getElementById('shieldQuantity').value + ' liters';
+            }
+        }
+        
+        // Function to update summary
+        function updateSummary() {
+            const summaryDiv = document.getElementById('summaryDetails');
+            
+            let summaryHTML = `
+                <p><strong>Name:</strong> ${formData.name}</p>
+                <p><strong>Address:</strong> ${formData.address}</p>
+                <p><strong>City:</strong> ${formData.city}</p>
+                <p><strong>Landmark:</strong> ${formData.landmark || 'N/A'}</p>
+                <p><strong>District:</strong> ${formData.district}</p>
+                <p><strong>State:</strong> ${formData.state}</p>
+                <p><strong>Mobile:</strong> ${formData.mobile}</p>
+                <p><strong>WhatsApp:</strong> ${formData.whatsapp}</p>
+                <p><strong>Pin Code:</strong> ${formData.pincode}</p>
+                <p><strong>Product:</strong> ${getProductName(formData.product)}</p>
+            `;
+            
+            if (formData.product === 'tile-adhesive') {
+                summaryHTML += `
+                    <p><strong>Location:</strong> ${formData.productDetails.location}</p>
+                    <p><strong>Tile Types:</strong> ${formData.productDetails.types.join(', ')}</p>
+                    <p><strong>Quantity:</strong> ${formData.productDetails.quantity}</p>
+                `;
+            } else if (formData.product === 'water-proof') {
+                summaryHTML += `
+                    <p><strong>Location:</strong> ${formData.productDetails.location}</p>
+                    <p><strong>Quantity:</strong> ${formData.productDetails.quantity}</p>
+                `;
+            } else if (formData.product === 'h4-shield') {
+                summaryHTML += `
+                    <p><strong>Quantity:</strong> ${formData.productDetails.quantity}</p>
+                `;
+            }
+            
+            summaryDiv.innerHTML = summaryHTML;
+        }
+        
+        // Function to get product name
+        function getProductName(productKey) {
+            const productNames = {
+                'tile-adhesive': 'Tile Adhesive',
+                'water-proof': 'Water Proof',
+                'h4-shield': 'H4 ShieldX'
+            };
+            return productNames[productKey] || productKey;
+        }
+        
+        // Function to send WhatsApp message
+        function sendWhatsAppMessage() {
+            // Create message content
+            let message = `*New Order Inquiry - Eterna Cloud*\n\n`;
+            message += `*Customer Details:*\n`;
+            message += `Name: ${formData.name}\n`;
+            message += `Address: ${formData.address}\n`;
+            message += `City: ${formData.city}, District: ${formData.district}\n`;
+            message += `State: ${formData.state}, Pincode: ${formData.pincode}\n`;
+            message += `Mobile: ${formData.mobile}, WhatsApp: ${formData.whatsapp}\n\n`;
+            message += `*Product Details:*\n`;
+            message += `Product: ${getProductName(formData.product)}\n`;
+            
+            if (formData.product === 'tile-adhesive') {
+                message += `Location: ${formData.productDetails.location}\n`;
+                message += `Tile Types: ${formData.productDetails.types.join(', ')}\n`;
+                message += `Quantity: ${formData.productDetails.quantity}\n`;
+            } else if (formData.product === 'water-proof') {
+                message += `Location: ${formData.productDetails.location}\n`;
+                message += `Quantity: ${formData.productDetails.quantity}\n`;
+            } else if (formData.product === 'h4-shield') {
+                message += `Quantity: ${formData.productDetails.quantity}\n`;
+            }
+            
+            message += `\n*Submitted on:* ${new Date().toLocaleString()}`;
+            
+            // Encode message for URL
+            const encodedMessage = encodeURIComponent(message);
+            
+            // Send to company WhatsApp (9745838382)
+            const companyWhatsAppURL = `https://wa.me/9745838382?text=${encodedMessage}`;
+            
+            // Send to customer WhatsApp
+            const customerWhatsAppURL = `https://wa.me/91${formData.whatsapp}?text=${encodedMessage}`;
+            
+            // Open both WhatsApp messages in new tabs
+            window.open(companyWhatsAppURL, '_blank');
+            window.open(customerWhatsAppURL, '_blank');
+            
+            return true;
+        }
+        
+        // Function to reset form
+        function resetForm() {
+            // Reset form data
+            formData = {
+                name: '',
+                address: '',
+                city: '',
+                landmark: '',
+                district: '',
+                state: '',
+                mobile: '',
+                whatsapp: '',
+                pincode: '',
+                product: '',
+                productDetails: {}
+            };
+            
+            // Reset form fields
+            document.getElementById('dealerForm').reset();
+            
+            // Hide all error messages
+            document.querySelectorAll('.error-message').forEach(error => {
+                error.style.display = 'none';
+            });
+            
+            // Remove error classes
+            document.querySelectorAll('.form-control').forEach(input => {
+                input.classList.remove('error');
+            });
+            
+            // Hide product details
+            document.getElementById('tileDetails').style.display = 'none';
+            document.getElementById('waterDetails').style.display = 'none';
+            document.getElementById('shieldDetails').style.display = 'none';
+            
+            // Hide whatsapp group
+            whatsappGroup.style.display = 'none';
+            whatsappSameCheckbox.checked = false;
+            
+            // Remove selected product
+            productOptions.forEach(opt => opt.classList.remove('selected'));
+            
+            // Reset to step 1
+            showStep(1);
+        }
+        
+        // Initialize animation for product folders
+        let activeFolderIndex = 0;
+        function animateProductFolders() {
+            // Remove active class from all folders
+            productFolders.forEach(folder => folder.classList.remove('active'));
+            
+            // Add active class to current folder
+            productFolders[activeFolderIndex].classList.add('active');
+            
+            // Update index for next iteration
+            activeFolderIndex = (activeFolderIndex + 1) % productFolders.length;
+        }
+        
+        // Start animation
+        setInterval(animateProductFolders, 3000);
+    </script>
+</body>
+                                </html>
