@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eterna Cloud - Clarity, Consistency & Unity</title>
+    <title>AV Chem Chemical & Manufacturing</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -43,21 +44,32 @@
             align-items: center;
         }
 
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
+        .logo-container {
             display: flex;
             align-items: center;
         }
 
-        .logo i {
-            margin-right: 10px;
-            color: #4dabf7;
+        .logo-img {
+            height: 50px;
+            margin-right: 15px;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .logo-text small {
+            font-size: 0.8rem;
+            display: block;
+            font-weight: normal;
+            opacity: 0.9;
         }
 
         nav ul {
             display: flex;
             list-style: none;
+            align-items: center;
         }
 
         nav ul li {
@@ -77,8 +89,40 @@
             background-color: rgba(255, 255, 255, 0.1);
         }
 
+        .language-switcher {
+            display: flex;
+            align-items: center;
+            margin-left: 1.5rem;
+        }
+
+        .language-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .language-btn.active {
+            background: white;
+            color: #1a365d;
+        }
+
+        .language-btn:first-child {
+            border-radius: 4px 0 0 4px;
+            border-right: none;
+        }
+
+        .language-btn:last-child {
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(26, 54, 93, 0.9), rgba(26, 54, 93, 0.8)), url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background: linear-gradient(rgba(26, 54, 93, 0.85), rgba(26, 54, 93, 0.8)), url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
             background-size: cover;
             background-position: center;
             color: white;
@@ -87,7 +131,7 @@
         }
 
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: 3rem;
             margin-bottom: 1.5rem;
             font-weight: 800;
         }
@@ -136,9 +180,11 @@
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
         }
 
-        .product-icon {
-            font-size: 3rem;
-            color: #1a365d;
+        .product-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
             margin-bottom: 1.5rem;
         }
 
@@ -257,6 +303,15 @@
 
         .contact-details p {
             margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .contact-details i {
+            color: #1a365d;
+            width: 20px;
         }
 
         /* Footer */
@@ -331,12 +386,14 @@
 
         .modal-content {
             background-color: white;
-            margin: 5% auto;
+            margin: 3% auto;
             width: 90%;
             max-width: 800px;
             border-radius: 10px;
             box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
             animation: modalFade 0.3s;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         @keyframes modalFade {
@@ -352,6 +409,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
         }
 
         .modal-header h2 {
@@ -456,7 +516,7 @@
         }
 
         .dropdown-group {
-            margin-top: 1rem;
+            margin-top: 1.5rem;
             padding-left: 1rem;
             border-left: 3px solid #e2e8f0;
         }
@@ -536,6 +596,15 @@
             background-color: #718096;
         }
 
+        .btn-share {
+            background-color: #805ad5;
+            color: white;
+        }
+
+        .btn-share:hover {
+            background-color: #6b46c1;
+        }
+
         .whatsapp-option {
             display: flex;
             align-items: center;
@@ -551,6 +620,16 @@
             justify-content: center;
             gap: 1rem;
             margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        /* Product Details in Modal */
+        .product-details-section {
+            display: none;
+        }
+
+        .product-details-section.active {
+            display: block;
         }
 
         /* Animation for product folders */
@@ -581,12 +660,21 @@
             }
             
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
             }
             
             .modal-content {
                 width: 95%;
-                margin: 10% auto;
+                margin: 5% auto;
+            }
+            
+            .final-buttons {
+                flex-direction: column;
+            }
+            
+            .final-buttons .btn {
+                width: 100%;
+                margin-bottom: 0.5rem;
             }
         }
     </style>
@@ -595,16 +683,23 @@
     <!-- Header -->
     <header>
         <div class="container nav-container">
-            <div class="logo">
-                <i class="fas fa-cloud"></i>
-                Eterna Cloud
+            <div class="logo-container">
+                <img src="https://via.placeholder.com/50x50/1a365d/ffffff?text=AV" alt="AV Logo" class="logo-img" id="mainLogo">
+                <div class="logo-text">
+                    AV Chem Chemical & Manufacturing
+                    <small>Quality Chemical Products</small>
+                </div>
             </div>
             <nav>
                 <ul>
                     <li><a href="#" id="homeBtn">Home</a></li>
                     <li><a href="#about">About Us</a></li>
                     <li><a href="#contact">Contact</a></li>
-                    <li><a href="#" id="contactDealerBtn">Contact Dealer</a></li>
+                    <li><a href="#" id="contactDealerBtn">Dealer Enquiry</a></li>
+                    <li class="language-switcher">
+                        <button class="language-btn active" id="englishBtn">English</button>
+                        <button class="language-btn" id="malayalamBtn">മലയാളം</button>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -613,61 +708,26 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1>Our business is clarity, consistency & unity</h1>
-            <p>We are value creators with hyperfocus</p>
+            <h1 id="heroTitle">Quality Chemical Solutions for Modern Construction</h1>
+            <p id="heroText">Manufacturers of premium tile adhesives, waterproofing solutions, and protective coatings for all your construction needs.</p>
             <div class="products-container">
                 <div class="product-folder active" id="tileAdhesiveFolder">
-                    <div class="product-icon">
-                        <i class="fas fa-layer-group"></i>
-                    </div>
-                    <h3 class="product-title">Tile Adhesive</h3>
-                    <p class="product-desc">High-quality adhesive for all tile installation needs</p>
-                    <button class="product-btn" data-product="tile-adhesive">Learn More</button>
+                    <img src="https://via.placeholder.com/300x180/805ad5/ffffff?text=Purple+Yellow+Bag" alt="Tile Adhesive" class="product-img">
+                    <h3 class="product-title" id="tileTitle">Tile Adhesive</h3>
+                    <p class="product-desc" id="tileDesc">Premium adhesive for all types of tiles including marble, granite and ceramic</p>
+                    <button class="product-btn" data-product="tile-adhesive" id="tileBtn">View Details</button>
                 </div>
                 <div class="product-folder" id="waterProofFolder">
-                    <div class="product-icon">
-                        <i class="fas fa-tint-slash"></i>
-                    </div>
-                    <h3 class="product-title">Water Proof</h3>
-                    <p class="product-desc">Advanced waterproofing solutions for all surfaces</p>
-                    <button class="product-btn" data-product="water-proof">Learn More</button>
+                    <img src="https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Water Proof" class="product-img">
+                    <h3 class="product-title" id="waterTitle">Water Proof</h3>
+                    <p class="product-desc" id="waterDesc">Advanced waterproofing solutions for roofs, walls, and water tanks</p>
+                    <button class="product-btn" data-product="water-proof" id="waterBtn">View Details</button>
                 </div>
                 <div class="product-folder" id="h4ShieldFolder">
-                    <div class="product-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3 class="product-title">H4 ShieldX</h3>
-                    <p class="product-desc">Premium protective coating for extreme conditions</p>
-                    <button class="product-btn" data-product="h4-shield">Learn More</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section class="services" id="services">
-        <div class="container">
-            <h2 class="section-title">What we offer</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <h3>One service</h3>
-                    <p>Delivering seamless experiences</p>
-                </div>
-                <div class="service-card">
-                    <h3>Orchestrating unified frameworks</h3>
-                    <p>Compounding partnership gains</p>
-                </div>
-                <div class="service-card">
-                    <h3>Make it easy</h3>
-                    <p>We transform complex workloads into effortless progress.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Keep it simple</h3>
-                    <p>We own the process that transcends typical limitations.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Do good for people</h3>
-                    <p>We serve with Heart to impact what matters most.</p>
+                    <img src="https://via.placeholder.com/300x180/3182ce/ffffff?text=Blue+Red+Bag" alt="H4 ShieldX" class="product-img">
+                    <h3 class="product-title" id="shieldTitle">H4 ShieldX</h3>
+                    <p class="product-desc" id="shieldDesc">High-performance protective coating for extreme weather conditions</p>
+                    <button class="product-btn" data-product="h4-shield" id="shieldBtn">View Details</button>
                 </div>
             </div>
         </div>
@@ -678,12 +738,12 @@
         <div class="container">
             <div class="about-content">
                 <div class="about-text">
-                    <h2>Our Solution You experience</h2>
-                    <p>We set out to create the ideal business scenario. The one that turns isolated moments of excellence into a consistent pattern of success. At Eterna Cloud, we believe in clarity of purpose, consistency in delivery, and unity in collaboration.</p>
-                    <p>Our approach combines innovative thinking with practical execution, ensuring that every project we undertake delivers measurable results and creates lasting value for our clients and partners.</p>
+                    <h2 id="aboutTitle">About AV Chem Chemical & Manufacturing</h2>
+                    <p id="aboutText1">We are a leading manufacturer of high-quality chemical products for the construction industry. With years of experience and expertise, we provide reliable solutions for all your construction needs.</p>
+                    <p id="aboutText2">Our products are manufactured using the finest raw materials and advanced technology to ensure superior quality and performance. We are committed to delivering excellence in every product we make.</p>
                 </div>
                 <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Eterna Cloud Team">
+                    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Chemical Manufacturing">
                 </div>
             </div>
         </div>
@@ -693,12 +753,13 @@
     <section class="contact" id="contact">
         <div class="container">
             <div class="contact-content">
-                <h2>Contact Us</h2>
-                <p>Get in touch with our team for more information about our products and services.</p>
+                <h2 id="contactTitle">Contact Us</h2>
+                <p id="contactText">Get in touch with us for product enquiries, dealer opportunities, or technical support.</p>
                 <div class="contact-details">
-                    <p><i class="fas fa-map-marker-alt"></i> 123 Business District, Innovation City, IC 12345</p>
-                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
-                    <p><i class="fas fa-envelope"></i> info@eternacloud.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> <span id="addressText">Mukkilapeedika, Kannam Kulam PO, BP Angadi, Tirur, Dist: Malappuram, State: Kerala</span></p>
+                    <p><i class="fas fa-phone"></i> <span id="phoneText">Call: +91 79073 44030</span></p>
+                    <p><i class="fab fa-whatsapp"></i> <span id="whatsappText">WhatsApp: +91 97458 38382</span></p>
+                    <p><i class="fas fa-envelope"></i> <span id="emailText">Email: avchemtirur@gmail.com</span></p>
                 </div>
             </div>
         </div>
@@ -709,24 +770,25 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <div class="logo">
-                        <i class="fas fa-cloud"></i>
-                        Eterna Cloud
+                    <div class="logo-container">
+                        <img src="https://via.placeholder.com/40x40/ffffff/1a365d?text=AV" alt="AV Logo" class="logo-img">
+                        <div class="logo-text">
+                            AV Chem Chemical & Manufacturing
+                        </div>
                     </div>
-                    <p>Our business is clarity, consistency & unity</p>
-                    <p>We are value creators with hyperfocus</p>
+                    <p id="footerTagline">Quality Chemicals for Construction Excellence</p>
                 </div>
                 <div class="footer-links">
-                    <h3>Quick Links</h3>
+                    <h3 id="quickLinksTitle">Quick Links</h3>
                     <ul>
                         <li><a href="#home">Home</a></li>
-                        <li><a href="#services">Services</a></li>
                         <li><a href="#about">About Us</a></li>
                         <li><a href="#contact">Contact</a></li>
+                        <li><a href="#" id="footerDealerBtn">Dealer Enquiry</a></li>
                     </ul>
                 </div>
                 <div class="footer-links">
-                    <h3>Our Products</h3>
+                    <h3 id="productsTitle">Our Products</h3>
                     <ul>
                         <li><a href="#" data-product="tile-adhesive">Tile Adhesive</a></li>
                         <li><a href="#" data-product="water-proof">Water Proof</a></li>
@@ -735,7 +797,7 @@
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2023 Eterna Cloud. All rights reserved.</p>
+                <p>&copy; 2023 AV Chem Chemical & Manufacturing. <span id="rightsText">All rights reserved.</span></p>
             </div>
         </div>
     </footer>
@@ -744,23 +806,23 @@
     <div id="dealerModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Dealer Inquiry / Order Sheet</h2>
+                <h2 id="modalTitle">Dealer Enquiry / Order Sheet</h2>
                 <button class="close-modal">&times;</button>
             </div>
             <div class="modal-body">
                 <form id="dealerForm">
                     <!-- Step 1: Personal Details -->
                     <div class="form-step active" id="step1">
-                        <h3 style="margin-bottom: 1.5rem; color: #1a365d;">Personal Details</h3>
+                        <h3 style="margin-bottom: 1.5rem; color: #1a365d;" id="personalDetailsTitle">Personal Details</h3>
                         
                         <div class="form-group">
-                            <label for="name">Full Name *</label>
+                            <label for="name" id="nameLabel">Name *</label>
                             <input type="text" id="name" class="form-control" required>
-                            <div class="error-message" id="nameError">Please enter your full name</div>
+                            <div class="error-message" id="nameError">Please enter your name</div>
                         </div>
                         
                         <div class="form-group">
-                            <label for="address">Address *</label>
+                            <label for="address" id="addressLabel">Address *</label>
                             <textarea id="address" class="form-control" rows="3" required></textarea>
                             <div class="error-message" id="addressError">Please enter your address</div>
                         </div>
@@ -768,15 +830,16 @@
                         <div class="form-row">
                             <div class="form-col">
                                 <div class="form-group">
-                                    <label for="city">City *</label>
+                                    <label for="city" id="cityLabel">City *</label>
                                     <input type="text" id="city" class="form-control" required>
                                     <div class="error-message" id="cityError">Please enter your city</div>
                                 </div>
                             </div>
                             <div class="form-col">
                                 <div class="form-group">
-                                    <label for="landmark">Landmark</label>
-                                    <input type="text" id="landmark" class="form-control">
+                                    <label for="pincode" id="pincodeLabel">Pin Code *</label>
+                                    <input type="tel" id="pincode" class="form-control" pattern="[0-9]{6}" maxlength="6" required inputmode="numeric">
+                                    <div class="error-message" id="pincodeError">Please enter a valid 6-digit pin code</div>
                                 </div>
                             </div>
                         </div>
@@ -784,14 +847,14 @@
                         <div class="form-row">
                             <div class="form-col">
                                 <div class="form-group">
-                                    <label for="district">District *</label>
+                                    <label for="district" id="districtLabel">District *</label>
                                     <input type="text" id="district" class="form-control" required>
                                     <div class="error-message" id="districtError">Please enter your district</div>
                                 </div>
                             </div>
                             <div class="form-col">
                                 <div class="form-group">
-                                    <label for="state">State *</label>
+                                    <label for="state" id="stateLabel">State *</label>
                                     <input type="text" id="state" class="form-control" required>
                                     <div class="error-message" id="stateError">Please enter your state</div>
                                 </div>
@@ -799,25 +862,15 @@
                         </div>
                         
                         <div class="form-group">
-                            <label for="mobile">Mobile Number *</label>
-                            <input type="tel" id="mobile" class="form-control" pattern="[0-9]{10}" maxlength="10" required>
+                            <label for="mobile" id="mobileLabel">Mobile Number *</label>
+                            <input type="tel" id="mobile" class="form-control" pattern="[0-9]{10}" maxlength="10" required inputmode="numeric">
                             <div class="error-message" id="mobileError">Please enter a valid 10-digit mobile number</div>
-                            <div class="whatsapp-option">
-                                <input type="checkbox" id="whatsappSame">
-                                <label for="whatsappSame">Use same number for WhatsApp</label>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group" id="whatsappGroup" style="display: none;">
-                            <label for="whatsapp">WhatsApp Number *</label>
-                            <input type="tel" id="whatsapp" class="form-control" pattern="[0-9]{10}" maxlength="10">
-                            <div class="error-message" id="whatsappError">Please enter a valid 10-digit WhatsApp number</div>
                         </div>
                         
                         <div class="form-group">
-                            <label for="pincode">Pin Code *</label>
-                            <input type="text" id="pincode" class="form-control" pattern="[0-9]{6}" maxlength="6" required>
-                            <div class="error-message" id="pincodeError">Please enter a valid 6-digit pin code</div>
+                            <label for="whatsapp" id="whatsappLabel">WhatsApp Number (Optional)</label>
+                            <input type="tel" id="whatsapp" class="form-control" pattern="[0-9]{10}" maxlength="10" inputmode="numeric">
+                            <div class="error-message" id="whatsappError">Please enter a valid 10-digit WhatsApp number</div>
                         </div>
                         
                         <div class="form-buttons">
@@ -828,19 +881,19 @@
                     
                     <!-- Step 2: Product Selection -->
                     <div class="form-step" id="step2">
-                        <h3 style="margin-bottom: 1.5rem; color: #1a365d;">Product Selection</h3>
+                        <h3 style="margin-bottom: 1.5rem; color: #1a365d;" id="productSelectTitle">Product Selection</h3>
                         
                         <div class="form-group">
-                            <label>Select Product *</label>
+                            <label id="selectProductLabel">Select Product *</label>
                             <div class="product-options">
                                 <div class="product-option" data-product="tile-adhesive">
-                                    <h4>Tile Adhesive</h4>
+                                    <h4 id="optionTile">Tile Adhesive</h4>
                                 </div>
                                 <div class="product-option" data-product="water-proof">
-                                    <h4>Water Proof</h4>
+                                    <h4 id="optionWater">Water Proof</h4>
                                 </div>
                                 <div class="product-option" data-product="h4-shield">
-                                    <h4>H4 ShieldX</h4>
+                                    <h4 id="optionShield">H4 ShieldX</h4>
                                 </div>
                             </div>
                             <div class="error-message" id="productError">Please select a product</div>
@@ -849,44 +902,27 @@
                         <!-- Tile Adhesive Details -->
                         <div id="tileDetails" class="dropdown-group" style="display: none;">
                             <div class="form-group">
-                                <label for="tileLocation">Tile Adhesive Location *</label>
-                                <select id="tileLocation" class="form-control">
-                                    <option value="">Select Location</option>
-                                    <option value="home">Home</option>
-                                    <option value="office">Office</option>
-                                    <option value="shop">Shop</option>
-                                    <option value="building">Building</option>
-                                    <option value="other">Other</option>
-                                </select>
-                                <div class="error-message" id="tileLocationError">Please select a location</div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label>Tile Type *</label>
+                                <label for="tileType" id="tileTypeLabel">Select Tile Type *</label>
                                 <div class="checkbox-group">
                                     <div class="checkbox-item">
-                                        <input type="checkbox" id="tileMarble" value="marble">
-                                        <label for="tileMarble">Marble</label>
+                                        <input type="radio" id="tileMarble" name="tileType" value="marble">
+                                        <label for="tileMarble" id="marbleLabel">Marble</label>
                                     </div>
                                     <div class="checkbox-item">
-                                        <input type="checkbox" id="tileGranite" value="granite">
-                                        <label for="tileGranite">Granite/Marbonit</label>
+                                        <input type="radio" id="tileGranite" name="tileType" value="granite">
+                                        <label for="tileGranite" id="graniteLabel">Granite / Marbonit</label>
                                     </div>
                                     <div class="checkbox-item">
-                                        <input type="checkbox" id="tileCeramic" value="ceramic">
-                                        <label for="tileCeramic">Ceramic Tile</label>
-                                    </div>
-                                    <div class="checkbox-item">
-                                        <input type="checkbox" id="tileOther" value="other">
-                                        <label for="tileOther">Other</label>
+                                        <input type="radio" id="tileCeramic" name="tileType" value="ceramic">
+                                        <label for="tileCeramic" id="ceramicLabel">Ceramic Tile</label>
                                     </div>
                                 </div>
-                                <div class="error-message" id="tileTypeError">Please select at least one tile type</div>
+                                <div class="error-message" id="tileTypeError">Please select a tile type</div>
                             </div>
                             
                             <div class="form-group">
-                                <label for="tileQuantity">Quantity (in sq ft) *</label>
-                                <input type="number" id="tileQuantity" class="form-control" min="1">
+                                <label for="tileQuantity" id="tileQuantityLabel">Quantity (in kg) *</label>
+                                <input type="number" id="tileQuantity" class="form-control" min="1" inputmode="numeric">
                                 <div class="error-message" id="tileQuantityError">Please enter a valid quantity</div>
                             </div>
                         </div>
@@ -894,19 +930,20 @@
                         <!-- Water Proof Details -->
                         <div id="waterDetails" class="dropdown-group" style="display: none;">
                             <div class="form-group">
-                                <label for="waterLocation">Water Proof Location *</label>
+                                <label for="waterLocation" id="waterLocationLabel">Water Proof Location *</label>
                                 <select id="waterLocation" class="form-control">
                                     <option value="">Select Location</option>
                                     <option value="home">Home</option>
                                     <option value="building">Building</option>
+                                    <option value="water-tank">Water Tank</option>
                                     <option value="other">Other</option>
                                 </select>
                                 <div class="error-message" id="waterLocationError">Please select a location</div>
                             </div>
                             
                             <div class="form-group">
-                                <label for="waterQuantity">Quantity (in liters) *</label>
-                                <input type="number" id="waterQuantity" class="form-control" min="1">
+                                <label for="waterQuantity" id="waterQuantityLabel">Quantity (in liters) *</label>
+                                <input type="number" id="waterQuantity" class="form-control" min="1" inputmode="numeric">
                                 <div class="error-message" id="waterQuantityError">Please enter a valid quantity</div>
                             </div>
                         </div>
@@ -914,8 +951,8 @@
                         <!-- H4 ShieldX Details -->
                         <div id="shieldDetails" class="dropdown-group" style="display: none;">
                             <div class="form-group">
-                                <label for="shieldQuantity">Quantity (in liters) *</label>
-                                <input type="number" id="shieldQuantity" class="form-control" min="1">
+                                <label for="shieldQuantity" id="shieldQuantityLabel">Quantity (in liters) *</label>
+                                <input type="number" id="shieldQuantity" class="form-control" min="1" inputmode="numeric">
                                 <div class="error-message" id="shieldQuantityError">Please enter a valid quantity</div>
                             </div>
                         </div>
@@ -928,16 +965,17 @@
                     
                     <!-- Step 3: Confirmation -->
                     <div class="form-step" id="step3">
-                        <h3 style="margin-bottom: 1.5rem; color: #1a365d;">Confirmation</h3>
+                        <h3 style="margin-bottom: 1.5rem; color: #1a365d;" id="confirmTitle">Confirmation</h3>
                         
                         <div class="form-group">
-                            <h4>Please review your details:</h4>
+                            <h4 id="reviewTitle">Please review your details:</h4>
                             <div id="summaryDetails" style="background-color: #f8f9fa; padding: 1.5rem; border-radius: 5px; margin-top: 1rem;"></div>
                         </div>
                         
                         <div class="final-buttons">
                             <button type="button" class="btn btn-cancel" id="cancelOrder">Cancel</button>
-                            <button type="button" class="btn btn-success" id="confirmOrder">Confirm Order</button>
+                            <button type="button" class="btn btn-success" id="confirmOrder">Confirm</button>
+                            <button type="button" class="btn btn-share" id="shareOrder">Share</button>
                         </div>
                     </div>
                     
@@ -945,9 +983,9 @@
                     <div class="form-step" id="step4">
                         <div style="text-align: center; padding: 2rem 0;">
                             <i class="fas fa-check-circle" style="font-size: 4rem; color: #38a169; margin-bottom: 1.5rem;"></i>
-                            <h3 style="margin-bottom: 1rem; color: #1a365d;">Order Submitted Successfully!</h3>
-                            <p>Your order details have been sent to our team via WhatsApp.</p>
-                            <p>We will contact you shortly to confirm your order.</p>
+                            <h3 style="margin-bottom: 1rem; color: #1a365d;" id="successTitle">Order Submitted Successfully!</h3>
+                            <p id="successText1">Your order details have been sent to our team via WhatsApp.</p>
+                            <p id="successText2">We will contact you shortly to confirm your order.</p>
                             <button type="button" class="btn btn-primary" id="closeModal" style="margin-top: 1.5rem;">Close</button>
                         </div>
                     </div>
@@ -957,6 +995,155 @@
     </div>
 
     <script>
+        // Language Content
+        const englishContent = {
+            // Header
+            heroTitle: "Quality Chemical Solutions for Modern Construction",
+            heroText: "Manufacturers of premium tile adhesives, waterproofing solutions, and protective coatings for all your construction needs.",
+            
+            // Product Titles
+            tileTitle: "Tile Adhesive",
+            tileDesc: "Premium adhesive for all types of tiles including marble, granite and ceramic",
+            tileBtn: "View Details",
+            
+            waterTitle: "Water Proof",
+            waterDesc: "Advanced waterproofing solutions for roofs, walls, and water tanks",
+            waterBtn: "View Details",
+            
+            shieldTitle: "H4 ShieldX",
+            shieldDesc: "High-performance protective coating for extreme weather conditions",
+            shieldBtn: "View Details",
+            
+            // About
+            aboutTitle: "About AV Chem Chemical & Manufacturing",
+            aboutText1: "We are a leading manufacturer of high-quality chemical products for the construction industry. With years of experience and expertise, we provide reliable solutions for all your construction needs.",
+            aboutText2: "Our products are manufactured using the finest raw materials and advanced technology to ensure superior quality and performance. We are committed to delivering excellence in every product we make.",
+            
+            // Contact
+            contactTitle: "Contact Us",
+            contactText: "Get in touch with us for product enquiries, dealer opportunities, or technical support.",
+            addressText: "Mukkilapeedika, Kannam Kulam PO, BP Angadi, Tirur, Dist: Malappuram, State: Kerala",
+            phoneText: "Call: +91 79073 44030",
+            whatsappText: "WhatsApp: +91 97458 38382",
+            emailText: "Email: avchemtirur@gmail.com",
+            
+            // Footer
+            footerTagline: "Quality Chemicals for Construction Excellence",
+            quickLinksTitle: "Quick Links",
+            productsTitle: "Our Products",
+            rightsText: "All rights reserved.",
+            
+            // Modal
+            modalTitle: "Dealer Enquiry / Order Sheet",
+            personalDetailsTitle: "Personal Details",
+            nameLabel: "Name *",
+            addressLabel: "Address *",
+            cityLabel: "City *",
+            pincodeLabel: "Pin Code *",
+            districtLabel: "District *",
+            stateLabel: "State *",
+            mobileLabel: "Mobile Number *",
+            whatsappLabel: "WhatsApp Number (Optional)",
+            
+            productSelectTitle: "Product Selection",
+            selectProductLabel: "Select Product *",
+            optionTile: "Tile Adhesive",
+            optionWater: "Water Proof",
+            optionShield: "H4 ShieldX",
+            
+            tileTypeLabel: "Select Tile Type *",
+            marbleLabel: "Marble",
+            graniteLabel: "Granite / Marbonit",
+            ceramicLabel: "Ceramic Tile",
+            tileQuantityLabel: "Quantity (in kg) *",
+            
+            waterLocationLabel: "Water Proof Location *",
+            waterQuantityLabel: "Quantity (in liters) *",
+            
+            shieldQuantityLabel: "Quantity (in liters) *",
+            
+            confirmTitle: "Confirmation",
+            reviewTitle: "Please review your details:",
+            
+            successTitle: "Order Submitted Successfully!",
+            successText1: "Your order details have been sent to our team via WhatsApp.",
+            successText2: "We will contact you shortly to confirm your order."
+        };
+
+        const malayalamContent = {
+            // Header
+            heroTitle: "ആധുനിക കോൺസ്ട്രക്ഷനുകൾക്ക് ഉയർന്ന നിലവാരമുള്ള കെമിക്കൽ പരിഹാരങ്ങൾ",
+            heroText: "പ്രീമിയം ടൈൽ അഡ്ഹീസീവുകൾ, വാട്ടർപ്രൂഫിംഗ് പരിഹാരങ്ങൾ, പ്രോട്ടക്റ്റീവ് കോട്ടിംഗുകൾ എന്നിവയുടെ നിർമ്മാതാക്കൾ",
+            
+            // Product Titles
+            tileTitle: "ടൈൽ അഡ്ഹീസീവ്",
+            tileDesc: "മാർബിൾ, ഗ്രാനൈറ്റ്, സെറാമിക് ടൈൽ എന്നിവയ്ക്ക് അനുയോജ്യമായ പ്രീമിയം അഡ്ഹീസീവ്",
+            tileBtn: "വിശദാംശങ്ങൾ കാണുക",
+            
+            waterTitle: "വാട്ടർ പ്രൂഫ്",
+            waterDesc: "മേൽക്കൂര, മതിൽ, വാട്ടർ ടാങ്ക് എന്നിവയ്ക്ക് ഉയർന്ന നിലവാരമുള്ള വാട്ടർപ്രൂഫിംഗ് പരിഹാരങ്ങൾ",
+            waterBtn: "വിശദാംശങ്ങൾ കാണുക",
+            
+            shieldTitle: "എച്ച് 4 ഷീൽഡ് എക്സ്",
+            shieldDesc: "കഠിന കാലാവസ്ഥാ സാഹചര്യങ്ങൾക്ക് അനുയോജ്യമായ ഉയർന്ന പ്രകടനം നൽകുന്ന പ്രോട്ടക്റ്റീവ് കോട്ടിംഗ്",
+            shieldBtn: "വിശദാംശങ്ങൾ കാണുക",
+            
+            // About
+            aboutTitle: "എവി കെം കെമിക്കൽ ആൻഡ് മാനുഫാക്ചറിംഗിനെക്കുറിച്ച്",
+            aboutText1: "കോൺസ്ട്രക്ഷൻ വ്യവസായത്തിന് ഉയർന്ന നിലവാരമുള്ള കെമിക്കൽ ഉൽപ്പന്നങ്ങളുടെ പ്രമുഖ നിർമ്മാതാവാണ് ഞങ്ങൾ. വർഷങ്ങളുടെ അനുഭവവും വൈദഗ്ധ്യവും ഉപയോഗിച്ച്, നിങ്ങളുടെ എല്ലാ കോൺസ്ട്രക്ഷൻ ആവശ്യങ്ങൾക്കും വിശ്വസനീയമായ പരിഹാരങ്ങൾ ഞങ്ങൾ നൽകുന്നു.",
+            aboutText2: "മികച്ച നിലവാരവും പ്രകടനവും ഉറപ്പാക്കാൻ ഫൈൻ റോ മെറ്റീരിയലുകളും അഡ്വാൻസ്ഡ് സാങ്കേതികവിദ്യയും ഉപയോഗിച്ചാണ് ഞങ്ങളുടെ ഉൽപ്പന്നങ്ങൾ നിർമ്മിക്കുന്നത്. ഞങ്ങൾ നിർമ്മിക്കുന്ന ഓരോ ഉൽപ്പന്നത്തിലും മികച്ചത് നൽകുന്നതിന് ഞങ്ങൾ പ്രതിജ്ഞാബദ്ധരാണ്.",
+            
+            // Contact
+            contactTitle: "ഞങ്ങളെ സമീപിക്കുക",
+            contactText: "ഉൽപ്പന്ന അന്വേഷണങ്ങൾ, ഡീലർ അവസരങ്ങൾ അല്ലെങ്കിൽ സാങ്കേതിക പിന്തുണയ്ക്കായി ഞങ്ങളെ സമീപിക്കുക.",
+            addressText: "മുക്കിലപ്പീഡിക, കണ്ണം കുളം പി.ഒ., ബി.പി. അങ്ങാടി, തിരൂർ, ജില്ല: മലപ്പുറം, സംസ്ഥാനം: കേരളം",
+            phoneText: "കോൾ: +91 79073 44030",
+            whatsappText: "വാട്ട്സ്ആപ്പ്: +91 97458 38382",
+            emailText: "ഇമെയിൽ: avchemtirur@gmail.com",
+            
+            // Footer
+            footerTagline: "കോൺസ്ട്രക്ഷൻ മികവിന് ഉയർന്ന നിലവാരമുള്ള കെമിക്കൽ ഉൽപ്പന്നങ്ങൾ",
+            quickLinksTitle: "ദ്രുത ലിങ്കുകൾ",
+            productsTitle: "ഞങ്ങളുടെ ഉൽപ്പന്നങ്ങൾ",
+            rightsText: "എല്ലാ അവകാശങ്ങളും നിക്ഷിപ്തം.",
+            
+            // Modal
+            modalTitle: "ഡീലർ അന്വേഷണം / ഓർഡർ ഷീറ്റ്",
+            personalDetailsTitle: "വ്യക്തിഗത വിവരങ്ങൾ",
+            nameLabel: "പേര് *",
+            addressLabel: "വിലാസം *",
+            cityLabel: "നഗരം *",
+            pincodeLabel: "പിൻ കോഡ് *",
+            districtLabel: "ജില്ല *",
+            stateLabel: "സംസ്ഥാനം *",
+            mobileLabel: "മൊബൈൽ നമ്പർ *",
+            whatsappLabel: "വാട്ട്സ്ആപ്പ് നമ്പർ (ഓപ്ഷണൽ)",
+            
+            productSelectTitle: "ഉൽപ്പന്ന തിരഞ്ഞെടുപ്പ്",
+            selectProductLabel: "ഉൽപ്പന്നം തിരഞ്ഞെടുക്കുക *",
+            optionTile: "ടൈൽ അഡ്ഹീസീവ്",
+            optionWater: "വാട്ടർ പ്രൂഫ്",
+            optionShield: "എച്ച് 4 ഷീൽഡ് എക്സ്",
+            
+            tileTypeLabel: "ടൈൽ തരം തിരഞ്ഞെടുക്കുക *",
+            marbleLabel: "മാർബിൾ",
+            graniteLabel: "ഗ്രാനൈറ്റ് / മാർബോണിറ്റ്",
+            ceramicLabel: "സെറാമിക് ടൈൽ",
+            tileQuantityLabel: "അളവ് (കിലോയിൽ) *",
+            
+            waterLocationLabel: "വാട്ടർ പ്രൂഫ് സ്ഥലം *",
+            waterQuantityLabel: "അളവ് (ലിറ്ററിൽ) *",
+            
+            shieldQuantityLabel: "അളവ് (ലിറ്ററിൽ) *",
+            
+            confirmTitle: "സ്ഥിരീകരണം",
+            reviewTitle: "ദയവായി നിങ്ങളുടെ വിവരങ്ങൾ പരിശോധിക്കുക:",
+            
+            successTitle: "ഓർഡർ വിജയകരമായി സമർപ്പിച്ചു!",
+            successText1: "നിങ്ങളുടെ ഓർഡർ വിവരങ്ങൾ ഞങ്ങളുടെ ടീമിലേക്ക് വാട്ട്സ്ആപ്പ് വഴി അയച്ചിട്ടുണ്ട്.",
+            successText2: "നിങ്ങളുടെ ഓർഡർ സ്ഥിരീകരിക്കാൻ ഞങ്ങൾ ഉടൻ തന്നെ ബന്ധപ്പെടുന്നതായിരിക്കും."
+        };
+
         // DOM Elements
         const dealerModal = document.getElementById('dealerModal');
         const contactDealerBtn = document.getElementById('contactDealerBtn');
@@ -965,6 +1152,11 @@
         const cancelFormBtn = document.getElementById('cancelForm');
         const cancelOrderBtn = document.getElementById('cancelOrder');
         const closeModalSuccessBtn = document.getElementById('closeModal');
+        const footerDealerBtn = document.getElementById('footerDealerBtn');
+        
+        // Language buttons
+        const englishBtn = document.getElementById('englishBtn');
+        const malayalamBtn = document.getElementById('malayalamBtn');
         
         // Product folder buttons
         const tileAdhesiveFolder = document.getElementById('tileAdhesiveFolder');
@@ -977,28 +1169,60 @@
         const prevStep2Btn = document.getElementById('prevStep2');
         const nextStep2Btn = document.getElementById('nextStep2');
         const confirmOrderBtn = document.getElementById('confirmOrder');
+        const shareOrderBtn = document.getElementById('shareOrder');
         
         // Form steps
         const formSteps = document.querySelectorAll('.form-step');
         let currentStep = 1;
+        let currentLanguage = 'english';
         
         // Form data storage
         let formData = {
             name: '',
             address: '',
             city: '',
-            landmark: '',
+            pincode: '',
             district: '',
             state: '',
             mobile: '',
             whatsapp: '',
-            pincode: '',
             product: '',
             productDetails: {}
         };
         
+        // Function to update content based on language
+        function updateContent(language) {
+            const content = language === 'english' ? englishContent : malayalamContent;
+            
+            // Update all elements with data
+            for (const key in content) {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.textContent = content[key];
+                }
+            }
+            
+            // Update language buttons
+            if (language === 'english') {
+                englishBtn.classList.add('active');
+                malayalamBtn.classList.remove('active');
+            } else {
+                englishBtn.classList.remove('active');
+                malayalamBtn.classList.add('active');
+            }
+            
+            currentLanguage = language;
+        }
+        
         // Event Listeners
-        contactDealerBtn.addEventListener('click', () => {
+        contactDealerBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            dealerModal.style.display = 'block';
+            resetForm();
+        });
+        
+        footerDealerBtn.addEventListener('click', (e) => {
+            e.preventDefault();
             dealerModal.style.display = 'block';
             resetForm();
         });
@@ -1007,6 +1231,9 @@
             e.preventDefault();
             // Show home page content
             document.querySelector('.hero').scrollIntoView({ behavior: 'smooth' });
+            
+            // Update logo for home
+            document.getElementById('mainLogo').src = "https://via.placeholder.com/50x50/1a365d/ffffff?text=AV";
         });
         
         closeModalBtn.addEventListener('click', () => {
@@ -1023,6 +1250,15 @@
         
         closeModalSuccessBtn.addEventListener('click', () => {
             dealerModal.style.display = 'none';
+        });
+        
+        // Language switcher
+        englishBtn.addEventListener('click', () => {
+            updateContent('english');
+        });
+        
+        malayalamBtn.addEventListener('click', () => {
+            updateContent('malayalam');
         });
         
         // Close modal when clicking outside
@@ -1059,34 +1295,15 @@
             });
         });
         
-        // WhatsApp same as mobile checkbox
-        const whatsappSameCheckbox = document.getElementById('whatsappSame');
-        const whatsappGroup = document.getElementById('whatsappGroup');
-        const whatsappInput = document.getElementById('whatsapp');
-        const mobileInput = document.getElementById('mobile');
-        
-        whatsappSameCheckbox.addEventListener('change', () => {
-            if (whatsappSameCheckbox.checked) {
-                whatsappGroup.style.display = 'none';
-                whatsappInput.value = mobileInput.value;
-            } else {
-                whatsappGroup.style.display = 'block';
-                whatsappInput.value = '';
-            }
-        });
-        
         // Mobile input validation
+        const mobileInput = document.getElementById('mobile');
         mobileInput.addEventListener('input', (e) => {
             // Only allow numbers
             e.target.value = e.target.value.replace(/\D/g, '');
-            
-            // If whatsapp same is checked, update whatsapp field too
-            if (whatsappSameCheckbox.checked) {
-                whatsappInput.value = e.target.value;
-            }
         });
         
         // WhatsApp input validation
+        const whatsappInput = document.getElementById('whatsapp');
         whatsappInput.addEventListener('input', (e) => {
             // Only allow numbers
             e.target.value = e.target.value.replace(/\D/g, '');
@@ -1097,6 +1314,18 @@
         pincodeInput.addEventListener('input', (e) => {
             // Only allow numbers
             e.target.value = e.target.value.replace(/\D/g, '');
+        });
+        
+        // Quantity inputs validation
+        const quantityInputs = ['tileQuantity', 'waterQuantity', 'shieldQuantity'];
+        quantityInputs.forEach(id => {
+            const input = document.getElementById(id);
+            if (input) {
+                input.addEventListener('input', (e) => {
+                    // Only allow numbers
+                    e.target.value = e.target.value.replace(/\D/g, '');
+                });
+            }
         });
         
         // Product selection
@@ -1151,6 +1380,10 @@
             if (sendWhatsAppMessage()) {
                 showStep(4);
             }
+        });
+        
+        shareOrderBtn.addEventListener('click', () => {
+            shareOrderDetails();
         });
         
         // Function to show specific step
@@ -1239,17 +1472,15 @@
                 document.getElementById('mobile').classList.remove('error');
             }
             
-            // WhatsApp validation (if different from mobile)
-            if (!whatsappSameCheckbox.checked) {
-                const whatsapp = document.getElementById('whatsapp').value.trim();
-                if (!mobilePattern.test(whatsapp)) {
-                    document.getElementById('whatsappError').style.display = 'block';
-                    document.getElementById('whatsapp').classList.add('error');
-                    isValid = false;
-                } else {
-                    document.getElementById('whatsappError').style.display = 'none';
-                    document.getElementById('whatsapp').classList.remove('error');
-                }
+            // WhatsApp validation (if provided)
+            const whatsapp = document.getElementById('whatsapp').value.trim();
+            if (whatsapp && !mobilePattern.test(whatsapp)) {
+                document.getElementById('whatsappError').style.display = 'block';
+                document.getElementById('whatsapp').classList.add('error');
+                isValid = false;
+            } else {
+                document.getElementById('whatsappError').style.display = 'none';
+                document.getElementById('whatsapp').classList.remove('error');
             }
             
             // Pincode validation (6 digits)
@@ -1272,17 +1503,11 @@
             formData.name = document.getElementById('name').value.trim();
             formData.address = document.getElementById('address').value.trim();
             formData.city = document.getElementById('city').value.trim();
-            formData.landmark = document.getElementById('landmark').value.trim();
+            formData.pincode = document.getElementById('pincode').value.trim();
             formData.district = document.getElementById('district').value.trim();
             formData.state = document.getElementById('state').value.trim();
             formData.mobile = document.getElementById('mobile').value.trim();
-            formData.pincode = document.getElementById('pincode').value.trim();
-            
-            if (whatsappSameCheckbox.checked) {
-                formData.whatsapp = formData.mobile;
-            } else {
-                formData.whatsapp = document.getElementById('whatsapp').value.trim();
-            }
+            formData.whatsapp = document.getElementById('whatsapp').value.trim();
         }
         
         // Function to validate step 2
@@ -1299,24 +1524,8 @@
             
             // Product-specific validation
             if (formData.product === 'tile-adhesive') {
-                const tileLocation = document.getElementById('tileLocation').value;
-                if (!tileLocation) {
-                    document.getElementById('tileLocationError').style.display = 'block';
-                    document.getElementById('tileLocation').classList.add('error');
-                    isValid = false;
-                } else {
-                    document.getElementById('tileLocationError').style.display = 'none';
-                    document.getElementById('tileLocation').classList.remove('error');
-                }
-                
-                const tileTypes = [
-                    document.getElementById('tileMarble').checked,
-                    document.getElementById('tileGranite').checked,
-                    document.getElementById('tileCeramic').checked,
-                    document.getElementById('tileOther').checked
-                ];
-                
-                if (!tileTypes.some(type => type)) {
+                const tileTypes = document.querySelectorAll('input[name="tileType"]:checked');
+                if (tileTypes.length === 0) {
                     document.getElementById('tileTypeError').style.display = 'block';
                     isValid = false;
                 } else {
@@ -1372,13 +1581,9 @@
             formData.productDetails = {};
             
             if (formData.product === 'tile-adhesive') {
-                formData.productDetails.location = document.getElementById('tileLocation').value;
-                formData.productDetails.types = [];
-                if (document.getElementById('tileMarble').checked) formData.productDetails.types.push('Marble');
-                if (document.getElementById('tileGranite').checked) formData.productDetails.types.push('Granite/Marbonit');
-                if (document.getElementById('tileCeramic').checked) formData.productDetails.types.push('Ceramic Tile');
-                if (document.getElementById('tileOther').checked) formData.productDetails.types.push('Other');
-                formData.productDetails.quantity = document.getElementById('tileQuantity').value + ' sq ft';
+                const tileType = document.querySelector('input[name="tileType"]:checked');
+                formData.productDetails.type = tileType ? tileType.value : '';
+                formData.productDetails.quantity = document.getElementById('tileQuantity').value + ' kg';
             } else if (formData.product === 'water-proof') {
                 formData.productDetails.location = document.getElementById('waterLocation').value;
                 formData.productDetails.quantity = document.getElementById('waterQuantity').value + ' liters';
@@ -1392,32 +1597,41 @@
             const summaryDiv = document.getElementById('summaryDetails');
             
             let summaryHTML = `
-                <p><strong>Name:</strong> ${formData.name}</p>
-                <p><strong>Address:</strong> ${formData.address}</p>
-                <p><strong>City:</strong> ${formData.city}</p>
-                <p><strong>Landmark:</strong> ${formData.landmark || 'N/A'}</p>
-                <p><strong>District:</strong> ${formData.district}</p>
-                <p><strong>State:</strong> ${formData.state}</p>
-                <p><strong>Mobile:</strong> ${formData.mobile}</p>
-                <p><strong>WhatsApp:</strong> ${formData.whatsapp}</p>
-                <p><strong>Pin Code:</strong> ${formData.pincode}</p>
-                <p><strong>Product:</strong> ${getProductName(formData.product)}</p>
+                <p><strong>${currentLanguage === 'english' ? 'Name:' : 'പേര്:'}</strong> ${formData.name}</p>
+                <p><strong>${currentLanguage === 'english' ? 'Address:' : 'വിലാസം:'}</strong> ${formData.address}</p>
+                <p><strong>${currentLanguage === 'english' ? 'City:' : 'നഗരം:'}</strong> ${formData.city}</p>
+                <p><strong>${currentLanguage === 'english' ? 'Pin Code:' : 'പിൻ കോഡ്:'}</strong> ${formData.pincode}</p>
+                <p><strong>${currentLanguage === 'english' ? 'District:' : 'ജില്ല:'}</strong> ${formData.district}</p>
+                <p><strong>${currentLanguage === 'english' ? 'State:' : 'സംസ്ഥാനം:'}</strong> ${formData.state}</p>
+                <p><strong>${currentLanguage === 'english' ? 'Mobile:' : 'മൊബൈൽ:'}</strong> ${formData.mobile}</p>
+                <p><strong>${currentLanguage === 'english' ? 'WhatsApp:' : 'വാട്ട്സ്ആപ്പ്:'}</strong> ${formData.whatsapp || 'N/A'}</p>
+                <p><strong>${currentLanguage === 'english' ? 'Product:' : 'ഉൽപ്പന്നം:'}</strong> ${getProductName(formData.product)}</p>
             `;
             
             if (formData.product === 'tile-adhesive') {
+                const tileTypeMap = {
+                    'marble': currentLanguage === 'english' ? 'Marble' : 'മാർബിൾ',
+                    'granite': currentLanguage === 'english' ? 'Granite / Marbonit' : 'ഗ്രാനൈറ്റ് / മാർബോണിറ്റ്',
+                    'ceramic': currentLanguage === 'english' ? 'Ceramic Tile' : 'സെറാമിക് ടൈൽ'
+                };
                 summaryHTML += `
-                    <p><strong>Location:</strong> ${formData.productDetails.location}</p>
-                    <p><strong>Tile Types:</strong> ${formData.productDetails.types.join(', ')}</p>
-                    <p><strong>Quantity:</strong> ${formData.productDetails.quantity}</p>
+                    <p><strong>${currentLanguage === 'english' ? 'Tile Type:' : 'ടൈൽ തരം:'}</strong> ${tileTypeMap[formData.productDetails.type]}</p>
+                    <p><strong>${currentLanguage === 'english' ? 'Quantity:' : 'അളവ്:'}</strong> ${formData.productDetails.quantity}</p>
                 `;
             } else if (formData.product === 'water-proof') {
+                const locationMap = {
+                    'home': currentLanguage === 'english' ? 'Home' : 'വീട്',
+                    'building': currentLanguage === 'english' ? 'Building' : 'കെട്ടിടം',
+                    'water-tank': currentLanguage === 'english' ? 'Water Tank' : 'വാട്ടർ ടാങ്ക്',
+                    'other': currentLanguage === 'english' ? 'Other' : 'മറ്റുള്ളവ'
+                };
                 summaryHTML += `
-                    <p><strong>Location:</strong> ${formData.productDetails.location}</p>
-                    <p><strong>Quantity:</strong> ${formData.productDetails.quantity}</p>
+                    <p><strong>${currentLanguage === 'english' ? 'Location:' : 'സ്ഥലം:'}</strong> ${locationMap[formData.productDetails.location]}</p>
+                    <p><strong>${currentLanguage === 'english' ? 'Quantity:' : 'അളവ്:'}</strong> ${formData.productDetails.quantity}</p>
                 `;
             } else if (formData.product === 'h4-shield') {
                 summaryHTML += `
-                    <p><strong>Quantity:</strong> ${formData.productDetails.quantity}</p>
+                    <p><strong>${currentLanguage === 'english' ? 'Quantity:' : 'അളവ്:'}</strong> ${formData.productDetails.quantity}</p>
                 `;
             }
             
@@ -1427,9 +1641,9 @@
         // Function to get product name
         function getProductName(productKey) {
             const productNames = {
-                'tile-adhesive': 'Tile Adhesive',
-                'water-proof': 'Water Proof',
-                'h4-shield': 'H4 ShieldX'
+                'tile-adhesive': currentLanguage === 'english' ? 'Tile Adhesive' : 'ടൈൽ അഡ്ഹീസീവ്',
+                'water-proof': currentLanguage === 'english' ? 'Water Proof' : 'വാട്ടർ പ്രൂഫ്',
+                'h4-shield': currentLanguage === 'english' ? 'H4 ShieldX' : 'എച്ച് 4 ഷീൽഡ് എക്സ്'
             };
             return productNames[productKey] || productKey;
         }
@@ -1437,43 +1651,99 @@
         // Function to send WhatsApp message
         function sendWhatsAppMessage() {
             // Create message content
-            let message = `*New Order Inquiry - Eterna Cloud*\n\n`;
-            message += `*Customer Details:*\n`;
-            message += `Name: ${formData.name}\n`;
-            message += `Address: ${formData.address}\n`;
-            message += `City: ${formData.city}, District: ${formData.district}\n`;
-            message += `State: ${formData.state}, Pincode: ${formData.pincode}\n`;
-            message += `Mobile: ${formData.mobile}, WhatsApp: ${formData.whatsapp}\n\n`;
-            message += `*Product Details:*\n`;
-            message += `Product: ${getProductName(formData.product)}\n`;
+            let message = `*${currentLanguage === 'english' ? 'New Order Inquiry - AV Chem Chemical & Manufacturing' : 'പുതിയ ഓർഡർ അന്വേഷണം - എവി കെം കെമിക്കൽ ആൻഡ് മാനുഫാക്ചറിംഗ്'}*\n\n`;
+            message += `*${currentLanguage === 'english' ? 'Customer Details:' : 'ഉപഭോക്താവിന്റെ വിവരങ്ങൾ:'}*\n`;
+            message += `${currentLanguage === 'english' ? 'Name' : 'പേര്'}: ${formData.name}\n`;
+            message += `${currentLanguage === 'english' ? 'Address' : 'വിലാസം'}: ${formData.address}\n`;
+            message += `${currentLanguage === 'english' ? 'City' : 'നഗരം'}: ${formData.city}, ${currentLanguage === 'english' ? 'District' : 'ജില്ല'}: ${formData.district}\n`;
+            message += `${currentLanguage === 'english' ? 'State' : 'സംസ്ഥാനം'}: ${formData.state}, ${currentLanguage === 'english' ? 'Pincode' : 'പിൻകോഡ്'}: ${formData.pincode}\n`;
+            message += `${currentLanguage === 'english' ? 'Mobile' : 'മൊബൈൽ'}: ${formData.mobile}, WhatsApp: ${formData.whatsapp || 'N/A'}\n\n`;
+            message += `*${currentLanguage === 'english' ? 'Product Details:' : 'ഉൽപ്പന്ന വിവരങ്ങൾ:'}*\n`;
+            message += `${currentLanguage === 'english' ? 'Product' : 'ഉൽപ്പന്നം'}: ${getProductName(formData.product)}\n`;
             
             if (formData.product === 'tile-adhesive') {
-                message += `Location: ${formData.productDetails.location}\n`;
-                message += `Tile Types: ${formData.productDetails.types.join(', ')}\n`;
-                message += `Quantity: ${formData.productDetails.quantity}\n`;
+                const tileTypeMap = {
+                    'marble': currentLanguage === 'english' ? 'Marble' : 'Marble',
+                    'granite': currentLanguage === 'english' ? 'Granite / Marbonit' : 'Granite / Marbonit',
+                    'ceramic': currentLanguage === 'english' ? 'Ceramic Tile' : 'Ceramic Tile'
+                };
+                message += `${currentLanguage === 'english' ? 'Tile Type' : 'ടൈൽ തരം'}: ${tileTypeMap[formData.productDetails.type]}\n`;
+                message += `${currentLanguage === 'english' ? 'Quantity' : 'അളവ്'}: ${formData.productDetails.quantity}\n`;
             } else if (formData.product === 'water-proof') {
-                message += `Location: ${formData.productDetails.location}\n`;
-                message += `Quantity: ${formData.productDetails.quantity}\n`;
+                const locationMap = {
+                    'home': currentLanguage === 'english' ? 'Home' : 'Home',
+                    'building': currentLanguage === 'english' ? 'Building' : 'Building',
+                    'water-tank': currentLanguage === 'english' ? 'Water Tank' : 'Water Tank',
+                    'other': currentLanguage === 'english' ? 'Other' : 'Other'
+                };
+                message += `${currentLanguage === 'english' ? 'Location' : 'സ്ഥലം'}: ${locationMap[formData.productDetails.location]}\n`;
+                message += `${currentLanguage === 'english' ? 'Quantity' : 'അളവ്'}: ${formData.productDetails.quantity}\n`;
             } else if (formData.product === 'h4-shield') {
-                message += `Quantity: ${formData.productDetails.quantity}\n`;
+                message += `${currentLanguage === 'english' ? 'Quantity' : 'അളവ്'}: ${formData.productDetails.quantity}\n`;
             }
             
-            message += `\n*Submitted on:* ${new Date().toLocaleString()}`;
+            message += `\n*${currentLanguage === 'english' ? 'Submitted on' : 'സമർപ്പിച്ച തീയതി'}:* ${new Date().toLocaleString()}`;
             
             // Encode message for URL
             const encodedMessage = encodeURIComponent(message);
             
             // Send to company WhatsApp (9745838382)
-            const companyWhatsAppURL = `https://wa.me/9745838382?text=${encodedMessage}`;
+            const companyWhatsAppURL = `https://wa.me/919745838382?text=${encodedMessage}`;
             
-            // Send to customer WhatsApp
-            const customerWhatsAppURL = `https://wa.me/91${formData.whatsapp}?text=${encodedMessage}`;
+            // Send to customer WhatsApp (if provided)
+            if (formData.whatsapp) {
+                const customerWhatsAppURL = `https://wa.me/91${formData.whatsapp}?text=${encodedMessage}`;
+                window.open(customerWhatsAppURL, '_blank');
+            }
             
-            // Open both WhatsApp messages in new tabs
+            // Open company WhatsApp in new tab
             window.open(companyWhatsAppURL, '_blank');
-            window.open(customerWhatsAppURL, '_blank');
             
             return true;
+        }
+        
+        // Function to share order details
+        function shareOrderDetails() {
+            // Create message content
+            let message = `*${currentLanguage === 'english' ? 'Order Summary - AV Chem Chemical & Manufacturing' : 'ഓർഡർ സംഗ്രഹം - എവി കെം കെമിക്കൽ ആൻഡ് മാനുഫാക്ചറിംഗ്'}*\n\n`;
+            
+            // Add summary details
+            message += `*${currentLanguage === 'english' ? 'Product Ordered:' : 'ഓർഡർ ചെയ്ത ഉൽപ്പന്നം:'}* ${getProductName(formData.product)}\n`;
+            
+            if (formData.product === 'tile-adhesive') {
+                const tileTypeMap = {
+                    'marble': currentLanguage === 'english' ? 'Marble' : 'Marble',
+                    'granite': currentLanguage === 'english' ? 'Granite / Marbonit' : 'Granite / Marbonit',
+                    'ceramic': currentLanguage === 'english' ? 'Ceramic Tile' : 'Ceramic Tile'
+                };
+                message += `*${currentLanguage === 'english' ? 'Tile Type:' : 'ടൈൽ തരം:'}* ${tileTypeMap[formData.productDetails.type]}\n`;
+                message += `*${currentLanguage === 'english' ? 'Quantity:' : 'അളവ്:'}* ${formData.productDetails.quantity}\n`;
+            } else if (formData.product === 'water-proof') {
+                const locationMap = {
+                    'home': currentLanguage === 'english' ? 'Home' : 'Home',
+                    'building': currentLanguage === 'english' ? 'Building' : 'Building',
+                    'water-tank': currentLanguage === 'english' ? 'Water Tank' : 'Water Tank',
+                    'other': currentLanguage === 'english' ? 'Other' : 'Other'
+                };
+                message += `*${currentLanguage === 'english' ? 'Location:' : 'സ്ഥലം:'}* ${locationMap[formData.productDetails.location]}\n`;
+                message += `*${currentLanguage === 'english' ? 'Quantity:' : 'അളവ്:'}* ${formData.productDetails.quantity}\n`;
+            } else if (formData.product === 'h4-shield') {
+                message += `*${currentLanguage === 'english' ? 'Quantity:' : 'അളവ്:'}* ${formData.productDetails.quantity}\n`;
+            }
+            
+            message += `\n*${currentLanguage === 'english' ? 'Contact AV Chem:' : 'എവി കെമുമായി ബന്ധപ്പെടുക:'}*\n`;
+            message += `📞 +91 79073 44030\n`;
+            message += `📱 WhatsApp: +91 97458 38382\n`;
+            message += `✉️ avchemtirur@gmail.com\n`;
+            
+            // Encode message for URL
+            const encodedMessage = encodeURIComponent(message);
+            
+            // Create share URL
+            const shareURL = `https://wa.me/?text=${encodedMessage}`;
+            
+            // Open share dialog
+            window.open(shareURL, '_blank');
         }
         
         // Function to reset form
@@ -1483,12 +1753,11 @@
                 name: '',
                 address: '',
                 city: '',
-                landmark: '',
+                pincode: '',
                 district: '',
                 state: '',
                 mobile: '',
                 whatsapp: '',
-                pincode: '',
                 product: '',
                 productDetails: {}
             };
@@ -1510,10 +1779,6 @@
             document.getElementById('tileDetails').style.display = 'none';
             document.getElementById('waterDetails').style.display = 'none';
             document.getElementById('shieldDetails').style.display = 'none';
-            
-            // Hide whatsapp group
-            whatsappGroup.style.display = 'none';
-            whatsappSameCheckbox.checked = false;
             
             // Remove selected product
             productOptions.forEach(opt => opt.classList.remove('selected'));
@@ -1537,6 +1802,9 @@
         
         // Start animation
         setInterval(animateProductFolders, 3000);
+        
+        // Initialize with English content
+        updateContent('english');
     </script>
 </body>
                                 </html>
