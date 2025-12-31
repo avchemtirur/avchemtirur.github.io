@@ -4,68 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AV Chem Chemical & Manufacturing</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        /* Import a stylish font for the Logo */
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap');
+        :root {
+            --primary-color: #0d1b2a;
+            --accent-color: #e0e1dd;
+            --text-gold: #c5a059; /* Argent CF style aesthetic */
+        }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: #f4f7f6;
+            background-color: #ffffff;
             color: #333;
-            line-height: 1.6;
         }
 
-        /* Header Styling */
+        /* Header & Navigation */
         header {
-            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-            color: white;
-            padding: 1.5rem 0;
+            background-color: var(--primary-color);
+            padding: 20px 0;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
 
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        /* New Font for Logo */
         .logo-text {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            letter-spacing: 1px;
-            color: #ffcc00;
+            font-family: 'Crimson Pro', serif; /* Argent CF lookalike */
+            font-size: 24px;
+            color: var(--text-gold);
+            text-align: center;
             text-transform: uppercase;
-        }
-
-        .logo-text small {
-            display: block;
-            font-size: 0.8rem;
-            font-family: 'Poppins', sans-serif;
-            color: #fff;
-            text-transform: capitalize;
             letter-spacing: 2px;
+            margin-bottom: 15px;
         }
 
         nav ul {
             display: flex;
+            justify-content: center;
             list-style: none;
             gap: 20px;
         }
@@ -73,335 +55,253 @@
         nav ul li a {
             color: white;
             text-decoration: none;
-            font-weight: 500;
-            transition: 0.3s;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
         }
 
-        nav ul li a:hover {
-            color: #ffcc00;
+        /* Sections */
+        section {
+            padding: 60px 20px;
+            min-height: 80vh;
+            display: none; /* Hidden by default */
         }
 
-        /* Hero Section */
-        .hero {
+        section.active {
+            display: block; /* Show only active section */
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
             text-align: center;
-            padding: 4rem 1rem;
-            background: #fff;
         }
 
-        .hero h1 {
-            margin-bottom: 2rem;
-            font-size: 2.5rem;
-            color: #1a365d;
+        h2 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: var(--primary-color);
         }
 
-        /* Product Cards Alignment */
-        .products-grid {
+        /* Home Content */
+        .address-box {
+            background: #f9f9f9;
+            padding: 30px;
+            border-radius: 10px;
+            line-height: 2;
+            font-size: 18px;
+            border: 1px solid #ddd;
+        }
+
+        /* Product Cards */
+        .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+            grid-template-columns: 1fr;
+            gap: 25px;
         }
 
         .product-card {
-            background: white;
+            border: 1px solid #eee;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            cursor: pointer;
             transition: 0.3s;
-            text-align: center;
-            padding-bottom: 1.5rem;
-            border: 1px solid #eee;
         }
 
-        .product-card:hover {
-            transform: translateY(-10px);
-        }
+        .product-card:hover { transform: scale(1.02); }
 
         .product-card img {
             width: 100%;
-            height: 250px;
+            height: 300px;
             object-fit: cover;
         }
 
-        .product-card h3 {
-            margin: 1rem 0;
-            color: #1a365d;
-        }
+        .product-info { padding: 20px; }
 
-        .product-card p {
-            padding: 0 1rem;
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 1rem;
-        }
-
-        .btn-order {
-            background: #1a365d;
-            color: white;
-            padding: 0.6rem 1.5rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 600;
-        }
-
-        /* Modal / Order Sheet Styling */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 2000;
-            overflow-y: auto;
-            padding: 20px;
-        }
-
-        .order-sheet {
-            background: white;
-            max-width: 500px;
-            margin: 30px auto;
-            border-radius: 10px;
-            padding: 2rem;
-            position: relative;
-        }
-
-        .order-sheet h2 {
-            text-align: center;
-            margin-bottom: 1.5rem;
-            color: #1a365d;
-            border-bottom: 2px solid #ffcc00;
-            padding-bottom: 10px;
-        }
-
+        /* Form Styling */
         .form-group {
+            text-align: left;
             margin-bottom: 15px;
         }
 
-        .form-group label {
-            display: block;
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
+        label { display: block; margin-bottom: 5px; font-weight: 600; }
 
-        .form-group input, .form-group textarea, .form-group select {
+        input, textarea, select {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            font-size: 1rem;
+            font-size: 16px;
         }
 
-        .btn-group {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .btn-confirm {
-            flex: 2;
+        .btn-submit {
             background: #28a745;
             color: white;
             border: none;
-            padding: 12px;
-            border-radius: 5px;
+            padding: 15px 30px;
+            font-size: 18px;
             font-weight: bold;
-            cursor: pointer;
-        }
-
-        .btn-cancel {
-            flex: 1;
-            background: #dc3545;
-            color: white;
-            border: none;
-            padding: 12px;
             border-radius: 5px;
-            font-weight: bold;
             cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
         }
 
-        /* Footer */
-        footer {
-            background: #0f2027;
-            color: white;
-            text-align: center;
-            padding: 2rem 0;
-            margin-top: 3rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .logo-text { font-size: 1.4rem; }
-            nav ul { gap: 10px; font-size: 0.8rem; }
+        /* Contact Icons */
+        .contact-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            padding: 15px;
+            margin: 10px 0;
+            background: #eee;
+            text-decoration: none;
+            color: #333;
+            border-radius: 8px;
+            font-weight: 600;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <div class="logo-text">
-                    AV Chem Chemical & Manufacturing
-                    <small>Quality Chemical Products</small>
-                </div>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+<header>
+    <div class="logo-text">AV Chem Chemical & Manufacturing</div>
+    <nav>
+        <ul>
+            <li><a href="#" onclick="showSection('home')">Home</a></li>
+            <li><a href="#" onclick="showSection('contact')">Contact</a></li>
+            <li><a href="#" onclick="showSection('enquiry')">Dealer Enquiry</a></li>
+        </ul>
+    </nav>
+</header>
 
-    <section class="hero container">
-        <h1>Our Premium Solutions</h1>
-        
-        <div class="products-grid">
-            <div class="product-card">
-                <img src="https://via.placeholder.com/300x250/1a365d/ffffff?text=Tile+Adhesive" alt="Tile Adhesive">
-                <h3>Tile Adhesive</h3>
-                <p>High-strength bonding for all types of tiles and stones.</p>
-                <button class="btn-order" onclick="openOrder('Tile Adhesive')">Order Now</button>
+<section id="home" class="active">
+    <div class="container">
+        <h2>Our Products</h2>
+        <div class="product-grid">
+            <div class="product-card" onclick="showSection('tile-page')">
+                <img src="https://i.ibb.co/rKHXNsmq/tile-adhesive.jpg" alt="Tile Adhesive">
+                <div class="product-info"><h3>Tile Adhesive</h3><p>Click to View Details</p></div>
             </div>
-
-            <div class="product-card">
+            <div class="product-card" onclick="showSection('water-page')">
                 <img src="https://i.ibb.co/4wNWypt9/waterproof1.jpg" alt="Water Proof">
-                <h3>Water Proof</h3>
-                <p>Advanced waterproofing solutions for roofs and tanks.</p>
-                <button class="btn-order" onclick="openOrder('Water Proof')">Order Now</button>
+                <div class="product-info"><h3>Water Proof</h3><p>Click to View Details</p></div>
             </div>
-
-            <div class="product-card">
-                <img src="https://i.ibb.co/8DKx8LkL/about-avchem.jpg" alt="H4 ShieldX">
-                <h3>H4 ShieldX</h3>
-                <p>Extreme protection coating for modern infrastructure.</p>
-                <button class="btn-order" onclick="openOrder('H4 ShieldX')">Order Now</button>
+            <div class="product-card" onclick="showSection('h4-page')">
+                <img src="https://i.ibb.co/MkVJvMPN/h4-shield.jpg" alt="H4 ShieldX">
+                <div class="product-info"><h3>H4 ShieldX</h3><p>Click to View Details</p></div>
             </div>
         </div>
-    </section>
-
-    <div id="orderModal" class="modal">
-        <div class="order-sheet">
-            <h2>Order Enquiry Sheet</h2>
-            <form id="orderForm">
-                <div class="form-group">
-                    <label>Full Name</label>
-                    <input type="text" id="custName" placeholder="Enter your name" required>
-                </div>
-                <div class="form-group">
-                    <label>Address</label>
-                    <textarea id="custAddress" rows="2" placeholder="Enter full address" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label>City</label>
-                    <input type="text" id="custCity" placeholder="City" required>
-                </div>
-                <div style="display: flex; gap: 10px;">
-                    <div class="form-group" style="flex: 1;">
-                        <label>Pincode</label>
-                        <input type="number" id="custPin" placeholder="6-digits" inputmode="numeric" required>
-                    </div>
-                    <div class="form-group" style="flex: 1;">
-                        <label>District</label>
-                        <input type="text" id="custDist" placeholder="District" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>State</label>
-                    <input type="text" id="custState" value="Kerala" required>
-                </div>
-                <div class="form-group">
-                    <label>Contact Number</label>
-                    <input type="tel" id="custMobile" placeholder="Phone number" inputmode="numeric" required>
-                </div>
-                <div class="form-group">
-                    <label>Select Product</label>
-                    <select id="selectedProduct">
-                        <option value="Tile Adhesive">Tile Adhesive</option>
-                        <option value="Water Proof">Water Proof</option>
-                        <option value="H4 ShieldX">H4 ShieldX</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Quantity</label>
-                    <input type="text" id="orderQty" placeholder="e.g. 10 Bags / 5 Liters" required>
-                </div>
-
-                <div class="btn-group">
-                    <button type="button" class="btn-cancel" onclick="closeOrder()">Cancel</button>
-                    <button type="submit" class="btn-confirm">Confirm & Send</button>
-                </div>
-            </form>
+        <br><br>
+        <h2>Our Office</h2>
+        <div class="address-box">
+            <strong>AV Chem Chemical & Manufacturing</strong><br>
+            Mukkilapeedika, Kannamkulam, BP Angadi<br>
+            Tirur, Malappuram (Dist), Kerala<br>
+            PIN: 676102
         </div>
     </div>
+</section>
 
-    <footer id="contact">
-        <div class="container">
-            <p>AV Chem Chemical & Manufacturing</p>
-            <p>Mukkilapeedika, BP Angadi, Tirur, Malappuram, Kerala</p>
-            <p>Contact: +91 97458 38382</p>
-            <br>
-            <p>&copy; 2023 All Rights Reserved.</p>
-        </div>
-    </footer>
+<section id="tile-page">
+    <div class="container">
+        <h2>Tile Adhesive Details</h2>
+        <img src="https://i.ibb.co/rKHXNsmq/tile-adhesive.jpg" style="width:100%; border-radius:15px;">
+        <p style="margin-top:20px;">Premium quality tile adhesive for all surfaces.</p>
+        <button onclick="showSection('enquiry')" class="btn-submit" style="background:var(--primary-color)">Enquire Now</button>
+        <p><a href="#" onclick="showSection('home')">Back to Home</a></p>
+    </div>
+</section>
 
-    <script>
-        const modal = document.getElementById('orderModal');
-        const orderForm = document.getElementById('orderForm');
+<section id="water-page">
+    <div class="container">
+        <h2>Water Proofing Solutions</h2>
+        <img src="https://i.ibb.co/4wNWypt9/waterproof1.jpg" style="width:100%; border-radius:15px;">
+        <p style="margin-top:20px;">Advanced waterproofing for roofs and tanks.</p>
+        <button onclick="showSection('enquiry')" class="btn-submit" style="background:var(--primary-color)">Enquire Now</button>
+        <p><a href="#" onclick="showSection('home')">Back to Home</a></p>
+    </div>
+</section>
 
-        function openOrder(productName) {
-            modal.style.display = 'block';
-            document.getElementById('selectedProduct').value = productName;
-        }
+<section id="h4-page">
+    <div class="container">
+        <h2>H4 ShieldX Technology</h2>
+        <img src="https://i.ibb.co/MkVJvMPN/h4-shield.jpg" style="width:100%; border-radius:15px;">
+        <p style="margin-top:20px;">The ultimate protection for your buildings.</p>
+        <button onclick="showSection('enquiry')" class="btn-submit" style="background:var(--primary-color)">Enquire Now</button>
+        <p><a href="#" onclick="showSection('home')">Back to Home</a></p>
+    </div>
+</section>
 
-        function closeOrder() {
-            modal.style.display = 'none';
-        }
+<section id="contact">
+    <div class="container">
+        <h2>Contact Us</h2>
+        <a href="tel:+917907344030" class="contact-link">📞 Call: +91 7907344030</a>
+        <a href="https://wa.me/919745838382" class="contact-link">💬 WhatsApp: +91 97458 38382</a>
+        <a href="mailto:avchemtirur@gmail.com" class="contact-link">📧 Email: avchemtirur@gmail.com</a>
+    </div>
+</section>
 
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                closeOrder();
-            }
-        }
+<section id="enquiry">
+    <div class="container">
+        <h2>Dealer Enquiry</h2>
+        <form onsubmit="sendWhatsApp(event)">
+            <div class="form-group"><label>Name</label><input type="text" id="name" required></div>
+            <div class="form-group"><label>Address</label><textarea id="address" required></textarea></div>
+            <div class="form-group"><label>City</label><input type="text" id="city" required></div>
+            <div class="form-group"><label>Pincode</label><input type="number" id="pincode" required></div>
+            <div class="form-group"><label>Mobile Number</label><input type="tel" id="mobile" required></div>
+            <div class="form-group">
+                <label>Product</label>
+                <select id="product">
+                    <option value="Tile Adhesive">Tile Adhesive</option>
+                    <option value="Water Proof">Water Proof</option>
+                    <option value="H4 ShieldX">H4 ShieldX</option>
+                </select>
+            </div>
+            <div class="form-group"><label>Quantity</label><input type="text" id="qty" placeholder="e.g. 50 Bags" required></div>
+            <button type="submit" class="btn-submit">Submit Enquiry</button>
+        </form>
+    </div>
+</section>
 
-        orderForm.onsubmit = function(e) {
-            e.preventDefault();
+<script>
+    function showSection(sectionId) {
+        // Hide all sections
+        const sections = document.querySelectorAll('section');
+        sections.forEach(s => s.classList.remove('active'));
+        
+        // Show target section
+        document.getElementById(sectionId).classList.add('active');
+        window.scrollTo(0,0);
+    }
 
-            // Collect Data
-            const name = document.getElementById('custName').value;
-            const address = document.getElementById('custAddress').value;
-            const city = document.getElementById('custCity').value;
-            const pin = document.getElementById('custPin').value;
-            const dist = document.getElementById('custDist').value;
-            const state = document.getElementById('custState').value;
-            const mobile = document.getElementById('custMobile').value;
-            const product = document.getElementById('selectedProduct').value;
-            const qty = document.getElementById('orderQty').value;
+    function sendWhatsApp(event) {
+        event.preventDefault();
+        const name = document.getElementById('name').value;
+        const address = document.getElementById('address').value;
+        const city = document.getElementById('city').value;
+        const pin = document.getElementById('pincode').value;
+        const mobile = document.getElementById('mobile').value;
+        const product = document.getElementById('product').value;
+        const qty = document.getElementById('qty').value;
 
-            // Create WhatsApp Message
-            const message = `*New Order Enquiry - AV Chem*%0A%0A` +
-                            `*Name:* ${name}%0A` +
-                            `*Address:* ${address}%0A` +
-                            `*City:* ${city}%0A` +
-                            `*Pincode:* ${pin}%0A` +
-                            `*District:* ${dist}%0A` +
-                            `*State:* ${state}%0A` +
-                            `*Mobile:* ${mobile}%0A%0A` +
-                            `*Product:* ${product}%0A` +
-                            `*Quantity:* ${qty}`;
+        const message = `*Dealer Enquiry - AV Chem*%0A` +
+                        `*Name:* ${name}%0A` +
+                        `*Address:* ${address}%0A` +
+                        `*City:* ${city}%0A` +
+                        `*Pincode:* ${pin}%0A` +
+                        `*Mobile:* ${mobile}%0A` +
+                        `*Product:* ${product}%0A` +
+                        `*Quantity:* ${qty}`;
+        
+        window.open(`https://wa.me/919745838382?text=${message}`, '_blank');
+    }
+</script>
 
-            // Send to WhatsApp (Replace with your number)
-            window.open(`https://wa.me/919745838382?text=${message}`, '_blank');
-            closeOrder();
-        }
-    </script>
 </body>
 </html>
 
