@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>H4 Rewards</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+    margin:0;
+    font-family:'Poppins',sans-serif;
+    background:#111;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+.container{
+    width:90%;
+    max-width:420px;
+    background:#1b1b1b;
+    padding:25px;
+    border-radius:22px;
+    box-shadow:0 0 25px rgba(0,0,0,0.5);
+}
+
+.logo{
+    text-align:center;
+    font-size:36px;
+    font-weight:700;
+    color:#f5b400;
+}
+
+.tagline{
+    text-align:center;
+    color:#bbb;
+    margin-bottom:25px;
+}
+
+.section{
+    margin-bottom:22px;
+}
+
+.review-box{
+    background:#222;
+    padding:18px;
+    border-radius:16px;
+    text-align:center;
+}
+
+.review-btn{
+    display:inline-block;
+    margin-top:12px;
+    background:#f5b400;
+    color:black;
+    padding:12px 20px;
+    border-radius:12px;
+    text-decoration:none;
+    font-weight:600;
+}
+
+.claim-btn{
+    width:100%;
+    margin-top:18px;
+    background:#28a745;
+    color:white;
+    border:none;
+    padding:15px;
+    border-radius:14px;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    opacity:0.5;
+}
+
+.claim-btn.active{
+    opacity:1;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    margin-top:12px;
+    border:none;
+    border-radius:12px;
+    background:#2b2b2b;
+    color:white;
+    font-size:15px;
+    box-sizing:border-box;
+}
+
+.submit-btn{
+    width:100%;
+    margin-top:18px;
+    background:#f5b400;
+    color:black;
+    border:none;
+    padding:15px;
+    border-radius:14px;
+    font-size:16px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.points-box{
+    margin-top:25px;
+    background:#222;
+    padding:18px;
+    border-radius:16px;
+    text-align:center;
+}
+
+.footer{
+    text-align:center;
+    margin-top:20px;
+    color:#888;
+    font-size:12px;
+}
+
+.hidden{
+    display:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="logo">H4</div>
+
+<div class="tagline">
+Construction Solutions Rewards
+</div>
+
+<div class="section review-box">
+
+<h3>⭐ Support Us With Your Review</h3>
+
+<p>
+Give your valuable feedback on Google and claim your reward points.
+</p>
+
+<a class="review-btn"
+href="https://g.page/r/CQvfi-3pi0lFEBM/review"
+target="_blank"
+onclick="enableClaim()">
+Give Google Review
+</a>
+
+<button id="claimBtn"
+class="claim-btn"
+disabled
+onclick="showForm()">
+Claim Reward
+</button>
+
+</div>
+
+<div id="rewardForm" class="hidden">
+
+<input type="text" placeholder="Your Name">
+
+<input type="tel" placeholder="Phone Number">
+
+<input type="text" placeholder="Coupon Code (Example: H41001)">
+
+<button class="submit-btn" onclick="submitReward()">
+Submit Coupon
+</button>
+
+</div>
+
+<div id="successBox" class="points-box hidden">
+
+<h2>🎉 Congratulations!</h2>
+
+<p>
+Your coupon has been submitted successfully.
+</p>
+
+<h3>+10 Reward Points Added</h3>
+
+<p>
+Cashback & rewards will be updated soon.
+</p>
+
+</div>
+
+<div class="points-box">
+
+<h3>🎁 Reward Benefits</h3>
+
+<p>
+✔ Earn Cashback<br>
+✔ Get Reward Points<br>
+✔ Win Gifts & Offers
+</p>
+
+</div>
+
+<div class="footer">
+H4 Construction Solutions
+</div>
+
+</div>
+
+<script>
+
+function enableClaim(){
+
+document.getElementById("claimBtn")
+.disabled = false;
+
+document.getElementById("claimBtn")
+.classList.add("active");
+
+}
+
+function showForm(){
+
+document.getElementById("rewardForm")
+.classList.remove("hidden");
+
+}
+
+function submitReward(){
+
+document.getElementById("rewardForm")
+.classList.add("hidden");
+
+document.getElementById("successBox")
+.classList.remove("hidden");
+
+}
+
+</script>
+
+</body>
+</html>
