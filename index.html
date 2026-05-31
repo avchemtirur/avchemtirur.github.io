@@ -85,6 +85,29 @@
             letter-spacing: 1px;
         }
 
+        .nav-right-buttons {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .btn-lang {
+            background: transparent;
+            border: 1px solid var(--muted-gray);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn-lang:hover {
+            border-color: var(--gold-yellow);
+            color: var(--gold-yellow);
+        }
+
         .btn-header {
             border: 1.5px solid var(--gold-yellow);
             padding: 10px 24px;
@@ -105,7 +128,7 @@
             box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
         }
 
-        /* Industrial Hero Section */
+        /* Hero Section */
         .hero-banner {
             max-width: 1200px;
             margin: 30px auto;
@@ -149,7 +172,7 @@
         .hero-image {
             flex: 1;
             min-width: 320px;
-            background: url('hero-industrial-bg.jpg') center/cover no-repeat;
+            background: url('avchem-chemical-manufacturing-industrial-plant.jpg') center/cover no-repeat;
             min-height: 400px;
             position: relative;
         }
@@ -172,7 +195,7 @@
         }
 
         .section-title span {
-            color: var(--traffic-purple);
+            color: var(--gold-yellow);
         }
 
         .products-grid {
@@ -180,7 +203,7 @@
             margin: auto;
             padding: 0 20px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
         }
 
@@ -190,30 +213,44 @@
             overflow: hidden;
             transition: 0.3s;
             border: 1px solid rgba(255, 255, 255, 0.03);
-            text-align: center;
+            display: flex;
+            flex-direction: column;
         }
 
         .product-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(160, 32, 240, 0.2);
+            box-shadow: 0 15px 35px rgba(160, 32, 240, 0.15);
             border-color: var(--traffic-purple);
         }
 
         .product-card img {
             width: 100%;
-            height: 240px;
-            object-fit: cover;
+            height: 260px;
+            object-fit: contain;
             background: #fff;
+            padding: 10px;
         }
 
         .product-info {
             padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .product-info h3 {
             color: white;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             font-size: 20px;
+            font-weight: 600;
+        }
+
+        .product-info p {
+            font-size: 13.5px;
+            color: var(--muted-gray);
+            margin-bottom: 20px;
+            line-height: 1.6;
         }
 
         .btn-card {
@@ -226,6 +263,9 @@
             width: 100%;
             font-weight: 600;
             transition: 0.3s;
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 0.5px;
         }
 
         .product-card:hover .btn-card {
@@ -235,7 +275,7 @@
             box-shadow: 0 4px 15px rgba(123, 44, 191, 0.4);
         }
 
-        /* Premium Company Footer */
+        /* Company Footer */
         footer {
             background: #050506;
             border-top: 1px solid rgba(255, 255, 255, 0.03);
@@ -497,50 +537,66 @@
                 <img src="h4-logo.png" alt="H4 Solutions Brand Logo - Avchem Chemical & Manufacturing Tirur">
                 <div class="logo-text">AV CHEM</div>
             </div>
-            <nav>
+            <div class="nav-right-buttons">
+                <!-- Malayalam / English Language Switcher Toggle Button -->
+                <button class="btn-lang" id="langBtn" onclick="toggleLanguage()">EN / ML</button>
                 <button class="btn-header" onclick="openModal('')">Dealer Enquiry</button>
-            </nav>
+            </div>
         </div>
     </header>
 
-    <!-- Industrial Hero Section with New Colors -->
+    <!-- Industrial Hero Section -->
     <section class="hero-banner">
         <div class="hero-content">
-            <h1>Premium Construction <span>Chemical Solutions</span></h1>
-            <p>Experience heavy-duty architectural durability engineered for expert results. Manufacturing global-grade tile solutions, 15-year warranty waterproofing shields, and high-gloss seamless flooring.</p>
+            <h1 id="heroTitle">Premium Construction <span>Chemical Solutions</span></h1>
+            <p id="heroDesc">Experience heavy-duty architectural durability engineered for expert results. Manufacturing global-grade tile solutions, 15-year warranty waterproofing shields, and high-gloss seamless flooring.</p>
             <button onclick="openModal('')" style="background:var(--purple-gradient); border:none; padding:14px 30px; color:white; border-radius:30px; font-weight:600; cursor:pointer; width:fit-content; align-self:center; box-shadow: 0 4px 20px rgba(123, 44, 191, 0.4); text-transform:uppercase; font-size:14px; letter-spacing:0.5px;">Get Quotation</button>
         </div>
         <div class="hero-image"></div>
     </section>
 
-    <!-- Products Section -->
-    <div class="section-title">Our <span>Industrial Range</span></div>
+    <!-- Products Range (Our Industry മാറ്റി H4 Construction Solution ആക്കിയത് ഇവിടെയാണ്) -->
+    <div class="section-title" id="rangeTitle">H4 <span>Construction Solution</span></div>
     <div class="products-grid">
+        
+        <!-- Tile Adhesive Card -->
         <div class="product-card">
-            <img src="tile-adhesive-bag.png" alt="H4 Premium Tile Adhesive Bag - Avchem Tirur">
+            <!-- ഒപ്റ്റിമൈസ് ചെയ്ത പുതിയ ഫയൽ നെയിം ലിങ്ക് ചെയ്തിരിക്കുന്നു -->
+            <img src="h4-premium-tile-adhesive-bag-avchem-kerala.png" alt="H4 Premium Tile Adhesive Bag - Avchem Tirur">
             <div class="product-info">
-                <h3>Tile Adhesive</h3>
+                <h3 id="prodTitle1">Tile Adhesive</h3>
+                <p id="prodDesc1">ഉയർന്ന ബോണ്ടിംഗ് ശേഷിയുള്ള പ്രീമിയം ടൈൽ ഒട്ടിക്കുന്ന gum</p>
                 <button class="btn-card" onclick="openModal('Tile Adhesive')">Enquire Now</button>
             </div>
         </div>
+        
+        <!-- Waterproofing Card -->
         <div class="product-card">
-            <img src="waterproof-bag.png" alt="H4 High-End Waterproofing System - Avchem Tirur">
+            <!-- ഒപ്റ്റിമൈസ് ചെയ്ത പുതിയ ഫയൽ നെയിം ലിങ്ക് ചെയ്തിരിക്കുന്നു -->
+            <img src="h4-advanced-waterproofing-system-warranty.png" alt="H4 High-End Waterproofing System - Avchem Tirur">
             <div class="product-info">
-                <h3>Waterproofing</h3>
+                <h3 id="prodTitle2">Waterproofing</h3>
+                <p id="prodDesc2">കഠിനമായ ചൂടിനെയും കനത്ത മഴയെയും പ്രതിരോധിക്കുന്ന 15 വർഷം വാറന്റിയുള്ള പ്രൊട്ടക്ഷൻ</p>
                 <button class="btn-card" onclick="openModal('Waterproofing')">Enquire Now</button>
             </div>
         </div>
+        
+        <!-- Epoxy Flooring Card -->
         <div class="product-card">
             <img src="epoxy-image.png" alt="H4 ShieldX Seamless Epoxy Flooring - Avchem Tirur">
             <div class="product-info">
-                <h3>Epoxy Flooring</h3>
+                <h3 id="prodTitle3">Epoxy Flooring</h3>
+                <p id="prodDesc3">ടൈലുകൾക്കും മാർബിളുകൾക്കും പകരം, നിങ്ങളുടെ മനസ്സിലുള്ള കളറുകളും ഡിസൈനുകളും ജോയിന്റുകൾ ഇല്ലാതെ തറയിൽ കോട്ടിംഗ് ചെയ്ത് കണ്ണാടി പോലെയുള്ള തിളക്കവും മനോഹരമായ 3D/മാറ്റ്/ഗ്ലോസ്സി ഡിസൈനുകളും നൽകുന്ന ലക്ഷ്വറി ഫ്ലോറിംഗ്</p>
                 <button class="btn-card" onclick="openModal('Epoxy Flooring')">Enquire Now</button>
             </div>
         </div>
+        
+        <!-- Crack Filler Card -->
         <div class="product-card">
             <img src="crack-filler-image.png" alt="H4 Technical Crack Filler - Avchem Tirur">
             <div class="product-info">
-                <h3>Crack Filler</h3>
+                <h3 id="prodTitle4">Crack Filler</h3>
+                <p id="prodDesc4">Strong weather-proof crack sealing. ഭിത്തികളിലെയും തറയിലെയും വിള്ളലുകൾ പെർഫെക്റ്റ് ആയി അടച്ചു തീർക്കുന്നു.</p>
                 <button class="btn-card" onclick="openModal('Crack Filler')">Enquire Now</button>
             </div>
         </div>
@@ -550,46 +606,46 @@
     <div class="modal-overlay" id="formModal" onclick="closeModal(event)">
         <div class="form-container" onclick="event.stopPropagation()">
             <button class="close-modal" onclick="document.getElementById('formModal').style.display='none'">×</button>
-            <h2 style="color:white; text-align:center; margin-bottom:25px; font-weight:700;">Dealer Enquiry Portal</h2>
+            <h2 id="modalTitle" style="color:white; text-align:center; margin-bottom:25px; font-weight:700;">Dealer Enquiry Portal</h2>
             
             <div class="form-group">
-                <label>Customer Name *</label>
-                <input type="text" id="customerName" class="form-control" placeholder="Enter name (മലയാളത്തിലും നൽകാം)">
+                <label id="lblName">Customer Name *</label>
+                <input type="text" id="customerName" class="form-control" placeholder="Enter name">
                 <div id="nameError" class="error-text">Enter Customer Name</div>
             </div>
 
             <div class="form-group">
-                <label>Contact Number *</label>
+                <label id="lblContact">Contact Number *</label>
                 <input type="tel" id="contactNumber" maxlength="10" inputmode="numeric" class="form-control" placeholder="10 Digit Number">
                 <div id="contactError" class="error-text">Enter Valid Contact Number</div>
             </div>
 
             <div class="form-group">
-                <label>WhatsApp Number *</label>
+                <label id="lblWhatsapp">WhatsApp Number *</label>
                 <input type="tel" id="whatsappNumber" maxlength="10" inputmode="numeric" class="form-control" placeholder="WhatsApp Number">
                 <div id="whatsappError" class="error-text">Enter Valid WhatsApp Number</div>
             </div>
 
             <div class="form-group">
-                <label>Area / City *</label>
+                <label id="lblCity">Area / City *</label>
                 <input type="text" id="city" class="form-control" placeholder="e.g. Tirur">
                 <div id="cityError" class="error-text">Enter Area / City</div>
             </div>
 
             <div class="form-group">
-                <label>Pincode *</label>
+                <label id="lblPincode">Pincode *</label>
                 <input type="tel" id="pincode" maxlength="6" inputmode="numeric" class="form-control" placeholder="6 Digit Code">
                 <div id="pinError" class="error-text">Enter Valid Pincode</div>
             </div>
 
             <div class="form-group">
-                <label>District *</label>
+                <label id="lblDistrict">District *</label>
                 <input type="text" id="district" class="form-control" placeholder="e.g. Malappuram">
                 <div id="districtError" class="error-text">Enter District</div>
             </div>
 
             <div class="form-group">
-                <label>Select Item *</label>
+                <label id="lblItem">Select Item *</label>
                 <select id="item" class="form-control">
                     <option value="">Select</option>
                     <option value="Tile Adhesive">Tile Adhesive</option>
@@ -601,7 +657,7 @@
             </div>
 
             <div class="form-group">
-                <label>Unit *</label>
+                <label id="lblUnit">Unit *</label>
                 <select id="unit" class="form-control">
                     <option value="">Select</option>
                     <option>KG</option>
@@ -612,12 +668,12 @@
             </div>
 
             <div class="form-group">
-                <label>Quantity *</label>
+                <label id="lblQty">Quantity *</label>
                 <input type="number" id="quantity" class="form-control" placeholder="Enter quantity">
                 <div id="qtyError" class="error-text">Enter Quantity</div>
             </div>
 
-            <button class="btn-submit" onclick="submitForm()">Confirm & Download PDF</button>
+            <button class="btn-submit" id="btnSubmit" onclick="submitForm()">Confirm & Download PDF</button>
         </div>
     </div>
 
@@ -688,7 +744,7 @@
                 <tbody>
                     <tr>
                         <td style="text-align: center;">
-                            <img id="pdf_prod_img" src="tile-adhesive-bag.png" class="pdf-prod-img" alt="Product Image">
+                            <img id="pdf_prod_img" src="h4-premium-tile-adhesive-bag-avchem-kerala.png" class="pdf-prod-img" alt="Product Image">
                         </td>
                         <td style="font-weight: 600; font-size: 11px; color:#1A365D;">
                             <span id="pdf_item"></span><br>
@@ -702,7 +758,7 @@
 
             <div style="font-size:9px; color:#666; margin-top:15px; line-height:1.4;">
                 <strong>Notes / Terms:</strong><br>
-                This is an automated dealer enquiry slip generated through AV CHEM web platform. Final distribution pricing will be forwarded to your registered WhatsApp number.
+                This is an automated dealer enquiry slip generated through AV CHEM web portal. Final distribution pricing will be forwarded to your registered WhatsApp number.
             </div>
 
             <div class="pdf-footer">
@@ -713,6 +769,54 @@
     </div>
 
     <script>
+        let currentLang = 'EN';
+
+        function toggleLanguage() {
+            if (currentLang === 'EN') {
+                // Switch to Malayalam
+                document.getElementById('langBtn').innerText = 'ML / EN';
+                document.getElementById('heroTitle').innerHTML = 'പ്രീമിയം കൺസ്ട്രക്ഷൻ <span>കെമിക്കൽ സൊല്യൂഷൻസ്</span>';
+                document.getElementById('heroDesc').innerText = 'ഉയർന്ന നിലവാരമുള്ള ഉൽപ്പന്നങ്ങൾ നേരിട്ട് ഫാക്ടറിയിൽ നിന്നും ലഭ്യമാക്കുന്നു. 15 വർഷം ഈടുനിൽക്കുന്ന വാട്ടർപ്രൂഫിംഗ് സിസ്റ്റംസ്, മികച്ച ടൈൽ അഡീസിവുകൾ, എപ്പോക്സി സൊല്യൂഷനുകൾ.';
+                document.getElementById('rangeTitle').innerHTML = 'H4 <span>കൺസ്ട്രക്ഷൻ സൊല്യൂഷൻ</span>';
+                
+                // Form Labels
+                document.getElementById('modalTitle').innerText = 'ഡീലർ എൻക്വയറി ഫോം';
+                document.getElementById('lblName').innerText = 'കസ്റ്റമർ പേര് *';
+                document.getElementById('lblContact').innerText = 'ഫോൺ നമ്പർ *';
+                document.getElementById('lblWhatsapp').innerText = 'വാട്സാപ്പ് നമ്പർ *';
+                document.getElementById('lblCity').innerText = 'സ്ഥലം / നഗരം *';
+                document.getElementById('lblPincode').innerText = 'പിൻകോഡ് *';
+                document.getElementById('lblDistrict').innerText = 'ജില്ല *';
+                document.getElementById('lblItem').innerText = 'ഉൽപ്പന്നം തിരഞ്ഞെടുക്കുക *';
+                document.getElementById('lblUnit').innerText = 'യൂണിറ്റ് *';
+                document.getElementById('lblQty').innerText = 'ആവശ്യമായ അളവ് *';
+                document.getElementById('btnSubmit').innerText = 'സ്ഥിരീകരിക്കുക & PDF ഡൗൺലോഡ് ചെയ്യുക';
+                
+                currentLang = 'ML';
+            } else {
+                // Switch back to English
+                document.getElementById('langBtn').innerText = 'EN / ML';
+                document.getElementById('heroTitle').innerHTML = 'Premium Construction <span>Chemical Solutions</span>';
+                document.getElementById('heroDesc').innerText = 'Experience heavy-duty architectural durability engineered for expert results. Manufacturing global-grade tile solutions, 15-year warranty waterproofing shields, and high-gloss seamless flooring.';
+                document.getElementById('rangeTitle').innerHTML = 'H4 <span>Construction Solution</span>';
+                
+                // Form Labels
+                document.getElementById('modalTitle').innerText = 'Dealer Enquiry Portal';
+                document.getElementById('lblName').innerText = 'Customer Name *';
+                document.getElementById('lblContact').innerText = 'Contact Number *';
+                document.getElementById('lblWhatsapp').innerText = 'WhatsApp Number *';
+                document.getElementById('lblCity').innerText = 'Area / City *';
+                document.getElementById('lblPincode').innerText = 'Pincode *';
+                document.getElementById('lblDistrict').innerText = 'District *';
+                document.getElementById('lblItem').innerText = 'Select Item *';
+                document.getElementById('lblUnit').innerText = 'Unit *';
+                document.getElementById('lblQty').innerText = 'Quantity *';
+                document.getElementById('btnSubmit').innerText = 'Confirm & Download PDF';
+                
+                currentLang = 'EN';
+            }
+        }
+
         function openModal(selectedItem) {
             document.getElementById('formModal').style.display = 'flex';
             if(selectedItem) {
@@ -764,8 +868,8 @@
             document.getElementById('pdf_qty').innerText = qty.value;
 
             let prodImgElement = document.getElementById('pdf_prod_img');
-            if(item.value === "Tile Adhesive") prodImgElement.src = "tile-adhesive-bag.png";
-            else if(item.value === "Waterproofing") prodImgElement.src = "waterproof-bag.png";
+            if(item.value === "Tile Adhesive") prodImgElement.src = "h4-premium-tile-adhesive-bag-avchem-kerala.png";
+            else if(item.value === "Waterproofing") prodImgElement.src = "h4-advanced-waterproofing-system-warranty.png";
             else if(item.value === "Epoxy Flooring") prodImgElement.src = "epoxy-image.png";
             else if(item.value === "Crack Filler") prodImgElement.src = "crack-filler-image.png";
 
