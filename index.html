@@ -1,2422 +1,1021 @@
 <!DOCTYPE html>
 <html lang="en">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AV Chem Chemical & Manufacturing</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-            background-color: #f8f9fa;
-            color: #333;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Header & Navigation */
-        header {
-            background: linear-gradient(135deg, #1a365d 0%, #2d4a7c 100%);
-            color: white;
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 2rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            font-family: 'Dancing Script', cursive;
-        }
-
-        .logo img {
-            height: 50px;
-            border-radius: 8px;
-        }
-
-        .logo-text {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .logo-main {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: white;
-        }
-
-        .logo-sub {
-            font-size: 0.8rem;
-            opacity: 0.9;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-            font-size: 0.95rem;
-        }
-
-        nav ul li a:hover {
-            background-color: rgba(255, 255, 255, 0.15);
-            transform: translateY(-2px);
-        }
-
-        nav ul li a.active {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .language-switcher {
-            display: flex;
-            gap: 5px;
-            margin-left: 1rem;
-        }
-
-        .lang-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            transition: all 0.3s;
-        }
-
-        .lang-btn.active {
-            background: white;
-            color: #1a365d;
-            font-weight: 600;
-        }
-
-        /* Main Screen */
-        .main-screen {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: calc(100vh - 120px);
-            padding: 3rem 0;
-            text-align: center;
-            position: relative;
-        }
-
-        .main-logo {
-            margin-bottom: 2rem;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        .main-logo img {
-            max-width: 250px;
-            border-radius: 15px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-        }
-
-        .main-title {
-            font-size: 3.5rem;
-            color: #1a365d;
-            margin-bottom: 1.5rem;
-            font-weight: 800;
-            font-family: 'Montserrat', sans-serif;
-            animation: fadeInUp 1s ease-out 0.3s both;
-        }
-
-        .main-subtitle {
-            font-size: 1.5rem;
-            color: #2d4a7c;
-            margin-bottom: 3rem;
-            max-width: 800px;
-            line-height: 1.8;
-            animation: fadeInUp 1s ease-out 0.5s both;
-        }
-
-        /* Products Section */
-        .products-section {
-            padding: 4rem 0;
-            background-color: #f1f5f9;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-            color: #1a365d;
-            font-size: 2.2rem;
-            font-weight: 800;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .products-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .product-folder {
-            background: white;
-            border-radius: 15px;
-            width: 320px;
-            padding: 0;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-            transition: all 0.4s ease;
-            cursor: pointer;
-            text-align: center;
-            overflow: hidden;
-            border: 3px solid transparent;
-            position: relative;
-        }
-
-        .product-folder:hover {
-            transform: translateY(-12px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-            border-color: #4dabf7;
-        }
-
-        .product-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .product-folder:hover .product-img {
-            transform: scale(1.05);
-        }
-
-        .product-content {
-            padding: 1.5rem;
-        }
-
-        .product-title {
-            font-size: 1.6rem;
-            margin-bottom: 1rem;
-            color: #1a365d;
-            font-weight: 700;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .product-desc {
-            color: #666;
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        .product-btn {
-            background: linear-gradient(135deg, #1a365d 0%, #2d4a7c 100%);
-            color: white;
-            border: none;
-            padding: 0.8rem 1.8rem;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 0.95rem;
-            width: 100%;
-        }
-
-        .product-btn:hover {
-            background: linear-gradient(135deg, #2d4a7c 0%, #3a4f8c 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(26, 54, 93, 0.3);
-        }
-
-        /* Home Content Section */
-        .home-content {
-            display: none;
-            padding: 4rem 0;
-            background-color: white;
-        }
-
-        .home-container {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 3rem;
-        }
-
-        .home-logo {
-            flex: 1;
-            min-width: 300px;
-            text-align: center;
-        }
-
-        .home-logo img {
-            max-width: 200px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            margin-bottom: 1.5rem;
-        }
-
-        .home-info {
-            flex: 2;
-            min-width: 300px;
-        }
-
-        .home-info h2 {
-            color: #1a365d;
-            margin-bottom: 1.5rem;
-            font-size: 2.2rem;
-            font-weight: 800;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .company-name {
-            font-family: 'Dancing Script', cursive;
-            font-size: 2.5rem;
-            color: #1a365d;
-            margin-bottom: 1rem;
-        }
-
-        .address-info {
-            background: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 10px;
-            margin-top: 1.5rem;
-            border-left: 4px solid #1a365d;
-        }
-
-        .address-info p {
-            margin-bottom: 0.5rem;
-            color: #555;
-        }
-
-        .back-btn {
-            background: #1a365d;
-            color: white;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-            margin-top: 2rem;
-            display: inline-block;
-        }
-
-        .back-btn:hover {
-            background: #2d4a7c;
-            transform: translateY(-2px);
-        }
-
-        /* Contact Section */
-        .contact {
-            display: none;
-            padding: 4rem 0;
-            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-        }
-
-        .contact-content {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            padding: 3rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .contact-content h2 {
-            color: #1a365d;
-            margin-bottom: 2rem;
-            font-size: 2.2rem;
-            text-align: center;
-            font-weight: 800;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .contact-details {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .contact-item {
-            background: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 10px;
-            text-align: center;
-            transition: transform 0.3s ease;
-            border: 1px solid #e2e8f0;
-        }
-
-        .contact-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .contact-icon {
-            font-size: 2rem;
-            color: #1a365d;
-            margin-bottom: 1rem;
-        }
-
-        .contact-text {
-            font-size: 1.1rem;
-            color: #333;
-            font-weight: 500;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #1a365d;
-            color: white;
-            padding: 3rem 0 1.5rem;
-        }
-
-        .footer-content {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-logo {
-            flex: 1;
-            min-width: 250px;
-        }
-
-        .footer-logo .logo {
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
-
-        .footer-links {
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .footer-links h3 {
-            margin-bottom: 1.2rem;
-            font-size: 1.3rem;
-            font-weight: 600;
-        }
-
-        .footer-links ul {
-            list-style: none;
-        }
-
-        .footer-links ul li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links ul li a {
-            color: #cbd5e0;
-            text-decoration: none;
-            transition: color 0.3s;
-            font-size: 0.95rem;
-        }
-
-        .footer-links ul li a:hover {
-            color: white;
-            padding-left: 5px;
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 1.5rem;
-            border-top: 1px solid #2d4a7c;
-            color: #cbd5e0;
-            font-size: 0.9rem;
-        }
-
-        /* Modal Styles for Dealer Enquiry */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            z-index: 2000;
-            overflow-y: auto;
-            padding: 20px;
-        }
-
-        .modal-content {
-            background-color: white;
-            margin: 2% auto;
-            width: 95%;
-            max-width: 800px;
-            border-radius: 15px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
-            animation: modalFade 0.4s;
-            position: relative;
-        }
-
-        @keyframes modalFade {
-            from {opacity: 0; transform: translateY(-30px);}
-            to {opacity: 1; transform: translateY(0);}
-        }
-
-        .modal-header {
-            padding: 1.5rem 2rem;
-            background: linear-gradient(135deg, #1a365d 0%, #2d4a7c 100%);
-            color: white;
-            border-radius: 15px 15px 0 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .modal-header h2 {
-            font-size: 1.6rem;
-            font-weight: 700;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .close-modal {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 2rem;
-            cursor: pointer;
-            line-height: 1;
-            padding: 0;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: background 0.3s;
-        }
-
-        .close-modal:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .modal-body {
-            padding: 2rem;
-            max-height: 70vh;
-            overflow-y: auto;
-        }
-
-        /* Form Styles */
-        .form-step {
-            display: none;
-        }
-
-        .form-step.active {
-            display: block;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: #333;
-            font-size: 0.95rem;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 0.9rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: all 0.3s;
-            background: #f8f9fa;
-        }
-
-        .form-control:focus {
-            border-color: #1a365d;
-            outline: none;
-            background: white;
-            box-shadow: 0 0 0 3px rgba(26, 54, 93, 0.1);
-        }
-
-        .form-control.error {
-            border-color: #e53e3e;
-            background-color: #fff5f5;
-        }
-
-        .error-message {
-            color: #e53e3e;
-            font-size: 0.85rem;
-            margin-top: 0.3rem;
-            display: none;
-        }
-
-        .form-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .form-col {
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .product-options {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .product-option {
-            flex: 1;
-            min-width: 150px;
-            text-align: center;
-            padding: 1.2rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s;
-            background: #f8f9fa;
-        }
-
-        .product-option:hover {
-            border-color: #1a365d;
-            background: #edf2f7;
-        }
-
-        .product-option.selected {
-            border-color: #1a365d;
-            background: #e6f0ff;
-            box-shadow: 0 5px 15px rgba(26, 54, 93, 0.1);
-        }
-
-        .product-option img {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 0.8rem;
-        }
-
-        .product-option h4 {
-            color: #1a365d;
-            font-size: 1.1rem;
-            font-weight: 600;
-        }
-
-        .quantity-group {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .quantity-group label {
-            min-width: 120px;
-        }
-
-        .quantity-input {
-            flex: 1;
-            display: flex;
-            gap: 0.5rem;
-            align-items: center;
-        }
-
-        .unit-select {
-            min-width: 120px;
-            padding: 0.9rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            background: #f8f9fa;
-        }
-
-        .form-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 2.5rem;
-            padding-top: 1.5rem;
-            border-top: 2px solid #e2e8f0;
-        }
-
-        .btn {
-            padding: 0.9rem 2rem;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            border: none;
-            transition: all 0.3s;
-            font-size: 1rem;
-            min-width: 140px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #1a365d 0%, #2d4a7c 100%);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: linear-gradient(135deg, #2d4a7c 0%, #3a4f8c 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(26, 54, 93, 0.3);
-        }
-
-        .btn-secondary {
-            background: #e2e8f0;
-            color: #4a5568;
-        }
-
-        .btn-secondary:hover {
-            background: #cbd5e0;
-            transform: translateY(-2px);
-        }
-
-        .btn-success {
-            background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
-            color: white;
-        }
-
-        .btn-success:hover {
-            background: linear-gradient(135deg, #2f855a 0%, #276749 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(56, 161, 105, 0.3);
-        }
-
-        .btn-cancel {
-            background: #a0aec0;
-            color: white;
-        }
-
-        .btn-cancel:hover {
-            background: #718096;
-            transform: translateY(-2px);
-        }
-
-        .final-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-        }
-
-        /* Summary Styles */
-        .summary-details {
-            background: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 10px;
-            border: 2px solid #e2e8f0;
-        }
-
-        .summary-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.8rem;
-            padding-bottom: 0.8rem;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .summary-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-
-        .summary-label {
-            font-weight: 600;
-            color: #4a5568;
-        }
-
-        .summary-value {
-            color: #1a365d;
-            font-weight: 500;
-            text-align: right;
-            max-width: 60%;
-        }
-
-        /* Success Message */
-        .success-message {
-            text-align: center;
-            padding: 3rem 1rem;
-        }
-
-        .success-icon {
-            font-size: 5rem;
-            color: #38a169;
-            margin-bottom: 1.5rem;
-            animation: bounce 1s ease infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .success-message h3 {
-            color: #1a365d;
-            margin-bottom: 1rem;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .success-message p {
-            color: #666;
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-        }
-
-        /* Product Detail Page */
-        .product-detail-page {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: white;
-            z-index: 3000;
-            overflow-y: auto;
-            padding: 20px;
-        }
-
-        .product-detail-content {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 2rem 0;
-        }
-
-        .product-detail-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 3px solid #1a365d;
-        }
-
-        .product-detail-main {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: start;
-        }
-
-        .product-detail-images {
-            position: relative;
-        }
-
-        .main-product-image {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            border-radius: 15px;
-            margin-bottom: 1rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        .product-image-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-        }
-
-        .product-thumbnail {
-            width: 100%;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: 2px solid transparent;
-        }
-
-        .product-thumbnail:hover,
-        .product-thumbnail.active {
-            border-color: #1a365d;
-            transform: scale(1.05);
-        }
-
-        .product-detail-info h2 {
-            color: #1a365d;
-            font-size: 2.2rem;
-            margin-bottom: 1rem;
-            font-weight: 800;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .product-detail-desc {
-            color: #666;
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-        }
-
-        .product-specs {
-            background: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 10px;
-            margin: 2rem 0;
-        }
-
-        .product-specs h3 {
-            color: #1a365d;
-            margin-bottom: 1rem;
-            font-size: 1.4rem;
-        }
-
-        .specs-list {
-            list-style: none;
-        }
-
-        .specs-list li {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid #e2e8f0;
-            color: #555;
-        }
-
-        .specs-list li:last-child {
-            border-bottom: none;
-        }
-
-        .specs-list li strong {
-            color: #1a365d;
-            min-width: 150px;
-            display: inline-block;
-        }
-
-        .product-text-content {
-            max-height: 400px;
-            overflow-y: auto;
-            padding-right: 1rem;
-        }
-
-        .product-text-content h4 {
-            color: #1a365d;
-            margin: 1.5rem 0 0.8rem;
-            font-size: 1.3rem;
-        }
-
-        .product-text-content p {
-            margin-bottom: 1rem;
-            color: #555;
-        }
-
-        /* Animation for main screen */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .product-detail-main {
-                grid-template-columns: 1fr;
-            }
-            
-            .product-detail-images {
-                order: 2;
-            }
-            
-            .product-detail-info {
-                order: 1;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-container {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .main-title {
-                font-size: 2.2rem;
-            }
-            
-            .product-folder {
-                width: 100%;
-                max-width: 350px;
-            }
-            
-            .modal-content {
-                margin: 5% auto;
-                width: 98%;
-            }
-            
-            .form-buttons {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .btn {
-                width: 100%;
-            }
-            
-            .final-buttons {
-                flex-direction: column;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .main-title {
-                font-size: 1.8rem;
-            }
-            
-            .section-title {
-                font-size: 1.8rem;
-            }
-            
-            .contact-content {
-                padding: 2rem 1rem;
-            }
-            
-            .product-options {
-                flex-direction: column;
-            }
-        }
-
-        /* Animation for images */
-        @keyframes floatAnimation {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
-        }
-
-        .floating-image {
-            animation: floatAnimation 6s ease-in-out infinite;
-        }
-
-        /* Show/Hide Sections */
-        .show-section {
-            display: block;
-        }
-        
-        .hide-section {
-            display: none;
-        }
-    </style>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+AV CHEM CHEMICAL & MANUFACTURING |
+Tile Adhesive | Waterproofing |
+H4 ShieldX Epoxy Flooring
+</title>
+
+<meta name="description"
+content="Premium Tile Adhesive, Waterproofing and H4 ShieldX Epoxy Flooring Solutions by AV CHEM CHEMICAL & MANUFACTURING, Tirur, Kerala">
+
+<meta name="keywords"
+content="Tile Adhesive Kerala,
+Waterproofing Kerala,
+Epoxy Flooring Kerala,
+H4 ShieldX,
+AV Chem Tirur">
+
+<meta name="robots"
+content="index,follow">
+
+<link rel="canonical"
+href="https://avchemtirur.github.io/">
+
+<meta property="og:title"
+content="AV CHEM CHEMICAL & MANUFACTURING">
+
+<meta property="og:description"
+content="Premium Construction Chemical Solutions">
+
+<meta property="og:type"
+content="website">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#F8F6F0;
+color:#222;
+overflow-x:hidden;
+}
+
+header{
+position:sticky;
+top:0;
+z-index:999;
+background:white;
+box-shadow:0 2px 20px rgba(0,0,0,.08);
+}
+
+.navbar{
+max-width:1200px;
+margin:auto;
+padding:15px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo{
+font-size:24px;
+font-weight:700;
+color:#1A365D;
+}
+
+nav{
+display:flex;
+gap:10px;
+}
+
+nav button{
+border:none;
+padding:10px 18px;
+border-radius:8px;
+background:#1A365D;
+color:white;
+cursor:pointer;
+}
+
+.hero{
+padding:80px 20px;
+text-align:center;
+}
+
+.hero h1{
+font-size:48px;
+color:#1A365D;
+}
+
+.hero p{
+max-width:700px;
+margin:auto;
+margin-top:20px;
+font-size:18px;
+}
+
+.products{
+display:grid;
+grid-template-columns:
+repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
+padding:40px;
+max-width:1200px;
+margin:auto;
+}
+
+.card{
+background:white;
+border-radius:20px;
+overflow:hidden;
+box-shadow:0 8px 30px rgba(0,0,0,.08);
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+}
+
+.card img{
+width:100%;
+height:220px;
+object-fit:cover;
+}
+
+.card-content{
+padding:20px;
+}
+
+.card-content h3{
+color:#1A365D;
+margin-bottom:10px;
+}
+
+.btn{
+background:#1A365D;
+color:white;
+padding:12px 18px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+width:100%;
+margin-top:15px;
+}
+
+.section{
+display:none;
+padding:50px 20px;
+max-width:1000px;
+margin:auto;
+}
+
+.active-section{
+display:block;
+}
+
+.home-box{
+background:white;
+padding:40px;
+border-radius:20px;
+box-shadow:0 5px 25px rgba(0,0,0,.08);
+}
+
+.home-box h2{
+color:#1A365D;
+margin-bottom:20px;
+}
+
+.contact-box{
+background:white;
+padding:40px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 5px 25px rgba(0,0,0,.08);
+}
+
+.modal{
+display:none;
+position:fixed;
+left:0;
+top:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.7);
+overflow:auto;
+z-index:9999;
+}
+
+.modal-content{
+background:white;
+max-width:700px;
+margin:30px auto;
+padding:25px;
+border-radius:20px;
+}
+
+.form-group{
+margin-bottom:15px;
+}
+
+.form-group label{
+display:block;
+margin-bottom:5px;
+font-weight:600;
+}
+
+.form-control{
+width:100%;
+padding:12px;
+border:1px solid #ddd;
+border-radius:8px;
+}
+
+.error{
+border:2px solid red;
+}
+
+.error-text{
+color:red;
+font-size:12px;
+display:none;
+}
+
+@media(max-width:768px){
+
+.hero h1{
+font-size:32px;
+}
+
+nav{
+flex-wrap:wrap;
+}
+
+}
+
+</style>
 </head>
+
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <img src="https://i.ibb.co/ds1N4ZsQ/logo-small.png" alt="AV Chem Logo" id="headerLogo">
-                <div class="logo-text">
-                    <span class="logo-main">AV Chem</span>
-                    <span class="logo-sub">Chemical & Manufacturing</span>
-                </div>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#" id="homeBtn" class="active">Home</a></li>
-                    <li><a href="#" id="contactBtn">Contact</a></li>
-                    <li><a href="#" id="dealerEnquiryBtn">Dealer Enquiry</a></li>
-                    <li class="language-switcher">
-                        <button class="lang-btn active" id="englishBtn">English</button>
-                        <button class="lang-btn" id="malayalamBtn">മലയാളം</button>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </header>
 
-    <!-- Main Screen -->
-    <section class="main-screen show-section" id="mainScreen">
-        <div class="container">
-            <div class="main-logo">
-                <img src="https://i.ibb.co/ds1N4ZsQ/logo-small.png" alt="AV Chem Logo" class="floating-image">
-            </div>
-            <h1 class="main-title">Premium Chemical Solutions for Modern Construction</h1>
-            <p class="main-subtitle">Manufacturing high-quality tile adhesives, waterproofing solutions, and protective coatings for the construction industry. Trusted by professionals across Kerala.</p>
-            
-            <!-- Product Folders -->
-            <div class="products-section">
-                <h2 class="section-title">Our Premium Products</h2>
-                <div class="products-container">
-                    <div class="product-folder" id="tileAdhesiveFolder">
-                        <img src="https://i.ibb.co/4R1QkfM1/tile-adhesive.jpg" alt="Tile Adhesive" class="product-img">
-                        <div class="product-content">
-                            <h3 class="product-title">Tile Adhesive</h3>
-                            <p class="product-desc">Advanced chemical bonding solutions for marble, porcelain, ceramic and granite tiles. Superior adhesion and waterproof properties.</p>
-                            <button class="product-btn">View Details</button>
-                        </div>
-                    </div>
-                    
-                    <div class="product-folder" id="waterProofFolder">
-                        <img src="https://i.ibb.co/KzybttY3/water-proof.jpg" alt="Water Proof" class="product-img">
-                        <div class="product-content">
-                            <h3 class="product-title">Water Proof</h3>
-                            <p class="product-desc">10-year guarantee waterproofing system with advanced chemical integration technology for roofs, terraces and bathrooms.</p>
-                            <button class="product-btn">View Details</button>
-                        </div>
-                    </div>
-                    
-                    <div class="product-folder" id="shieldXFolder">
-                        <img src="https://i.ibb.co/Z0mBj51/h4-shieldx.jpg" alt="H4 ShieldX" class="product-img">
-                        <div class="product-content">
-                            <h3 class="product-title">H4 ShieldX</h3>
-                            <p class="product-desc">3D epoxy flooring system with seamless, waterproof, and chemical-resistant properties for modern interior designs.</p>
-                            <button class="product-btn">View Details</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<header>
 
-    <!-- Home Content Section -->
-    <section class="home-content" id="homeContent">
-        <div class="container home-container">
-            <div class="home-logo">
-                <img src="https://i.ibb.co/W4GPYTMv/avlogo.jpg" alt="AV Chem Logo">
-                <button class="back-btn" id="homeBackBtn"><i class="fas fa-arrow-left"></i> Back to Main</button>
-            </div>
-            <div class="home-info">
-                <h2>About Our Company</h2>
-                <div class="company-name">AV Chem Chemical & Manufacturing</div>
-                <p>We are a leading manufacturer of premium construction chemicals in Kerala, specializing in tile adhesives, waterproofing solutions, and protective coatings. Our products are engineered using advanced chemical technology to deliver superior performance and durability.</p>
-                
-                <div class="address-info">
-                    <p><strong>Address:</strong> Mukkilapeedika, Kannam Kulam, Po BP Angadi</p>
-                    <p><strong>Pin Code:</strong> 676102</p>
-                    <p><strong>Location:</strong> Tirur, Dist. Malappuram, State Kerala</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<div class="navbar">
 
-    <!-- Contact Section -->
-    <section class="contact" id="contactSection">
-        <div class="container contact-content">
-            <h2>Contact Us</h2>
-            <div class="contact-details">
-                <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fas fa-phone-alt"></i>
-                    </div>
-                    <div class="contact-text">Call: +917907344030</div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fab fa-whatsapp"></i>
-                    </div>
-                    <div class="contact-text">WhatsApp: +919745838382</div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    <div class="contact-text">Email: avchemtirur@gmail.com</div>
-                </div>
-            </div>
-            <div style="text-align: center; margin-top: 2rem;">
-                <button class="back-btn" id="contactBackBtn"><i class="fas fa-arrow-left"></i> Back to Main</button>
-            </div>
-        </div>
-    </section>
+<div class="logo">
+AV CHEM
+</div>
 
-    <!-- Dealer Enquiry Modal -->
-    <div class="modal" id="dealerModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Dealer Enquiry Form</h2>
-                <button class="close-modal" id="closeModal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <!-- Step 1: Personal Details -->
-                <div class="form-step active" id="step1">
-                    <h3 style="color: #1a365d; margin-bottom: 1.5rem;">Personal Details</h3>
-                    <div class="form-row">
-                        <div class="form-col">
-                            <div class="form-group">
-                                <label for="name">Full Name *</label>
-                                <input type="text" id="name" class="form-control" placeholder="Enter your full name">
-                                <div class="error-message" id="nameError">Please enter your name</div>
-                            </div>
-                        </div>
-                        <div class="form-col">
-                            <div class="form-group">
-                                <label for="address">Address *</label>
-                                <input type="text" id="address" class="form-control" placeholder="Enter your address">
-                                <div class="error-message" id="addressError">Please enter your address</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-col">
-                            <div class="form-group">
-                                <label for="city">City *</label>
-                                <input type="text" id="city" class="form-control" placeholder="Enter your city">
-                                <div class="error-message" id="cityError">Please enter your city</div>
-                            </div>
-                        </div>
-                        <div class="form-col">
-                            <div class="form-group">
-                                <label for="pincode">Pin Code (6 digits) *</label>
-                                <input type="text" id="pincode" class="form-control" placeholder="Enter 6-digit pin code" maxlength="6">
-                                <div class="error-message" id="pincodeError">Please enter a valid 6-digit pin code</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-col">
-                            <div class="form-group">
-                                <label for="district">District *</label>
-                                <input type="text" id="district" class="form-control" placeholder="Enter your district">
-                                <div class="error-message" id="districtError">Please enter your district</div>
-                            </div>
-                        </div>
-                        <div class="form-col">
-                            <div class="form-group">
-                                <label for="state">State *</label>
-                                <input type="text" id="state" class="form-control" placeholder="Enter your state">
-                                <div class="error-message" id="stateError">Please enter your state</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-col">
-                            <div class="form-group">
-                                <label for="mobile">Mobile (10 digits) *</label>
-                                <input type="text" id="mobile" class="form-control" placeholder="Enter 10-digit mobile number" maxlength="10">
-                                <div class="error-message" id="mobileError">Please enter a valid 10-digit mobile number</div>
-                            </div>
-                        </div>
-                        <div class="form-col">
-                            <div class="form-group">
-                                <label for="whatsapp">WhatsApp (10 digits, optional)</label>
-                                <input type="text" id="whatsapp" class="form-control" placeholder="Enter WhatsApp number" maxlength="10">
-                                <div class="error-message" id="whatsappError">Please enter a valid 10-digit WhatsApp number</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group" style="margin-top: 2rem;">
-                        <div class="form-check">
-                            <input type="checkbox" id="whatsappSame" style="margin-right: 10px;">
-                            <label for="whatsappSame" style="font-weight: normal;">Same as Mobile Number</label>
-                        </div>
-                    </div>
-                    
-                    <div class="form-buttons">
-                        <button class="btn btn-cancel" id="cancelForm">Cancel</button>
-                        <button class="btn btn-primary" id="nextToStep2">Next</button>
-                    </div>
-                </div>
-                
-                <!-- Step 2: Product Selection -->
-                <div class="form-step" id="step2">
-                    <h3 style="color: #1a365d; margin-bottom: 1.5rem;">Product Selection</h3>
-                    <p style="margin-bottom: 1.5rem;">Please select the products you are interested in:</p>
-                    
-                    <div class="product-options">
-                        <div class="product-option" id="optionTileAdhesive">
-                            <img src="https://i.ibb.co/4R1QkfM1/tile-adhesive.jpg" alt="Tile Adhesive">
-                            <h4>Tile Adhesive</h4>
-                        </div>
-                        <div class="product-option" id="optionWaterProof">
-                            <img src="https://i.ibb.co/KzybttY3/water-proof.jpg" alt="Water Proof">
-                            <h4>Water Proof</h4>
-                        </div>
-                        <div class="product-option" id="optionShieldX">
-                            <img src="https://i.ibb.co/Z0mBj51/h4-shieldx.jpg" alt="H4 ShieldX">
-                            <h4>H4 ShieldX</h4>
-                        </div>
-                    </div>
-                    
-                    <!-- Tile Adhesive Quantity -->
-                    <div class="quantity-group" id="tileAdhesiveQty" style="display: none;">
-                        <label>Tile Adhesive Quantity:</label>
-                        <div class="quantity-input">
-                            <input type="number" id="tileAdhesiveAmount" class="form-control" placeholder="0" min="0">
-                            <select id="tileAdhesiveUnit" class="unit-select">
-                                <option value="kg">kg</option>
-                                <option value="sqft">Square Feet</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <!-- Water Proof Quantity -->
-                    <div class="quantity-group" id="waterProofQty" style="display: none;">
-                        <label>Water Proof Quantity:</label>
-                        <div class="quantity-input">
-                            <input type="number" id="waterProofAmount" class="form-control" placeholder="0" min="0">
-                            <select id="waterProofUnit" class="unit-select">
-                                <option value="kg">kg</option>
-                                <option value="sqft">Square Feet</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <!-- ShieldX Quantity -->
-                    <div class="quantity-group" id="shieldXQty" style="display: none;">
-                        <label>H4 ShieldX Quantity:</label>
-                        <div class="quantity-input">
-                            <input type="number" id="shieldXAmount" class="form-control" placeholder="0" min="0">
-                            <select id="shieldXUnit" class="unit-select">
-                                <option value="kg">kg</option>
-                                <option value="sqft">Square Feet</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="form-buttons">
-                        <button class="btn btn-secondary" id="backToStep1">Back</button>
-                        <button class="btn btn-primary" id="nextToStep3">Next</button>
-                    </div>
-                </div>
-                
-                <!-- Step 3: Summary -->
-                <div class="form-step" id="step3">
-                    <h3 style="color: #1a365d; margin-bottom: 1.5rem;">Order Summary</h3>
-                    <p style="margin-bottom: 1.5rem;">Please review your order details:</p>
-                    
-                    <div class="summary-details">
-                        <div class="summary-item">
-                            <span class="summary-label">Name:</span>
-                            <span class="summary-value" id="summaryName"></span>
-                        </div>
-                        <div class="summary-item">
-                            <span class="summary-label">Address:</span>
-                            <span class="summary-value" id="summaryAddress"></span>
-                        </div>
-                        <div class="summary-item">
-                            <span class="summary-label">City, District, State:</span>
-                            <span class="summary-value" id="summaryLocation"></span>
-                        </div>
-                        <div class="summary-item">
-                            <span class="summary-label">Pin Code:</span>
-                            <span class="summary-value" id="summaryPincode"></span>
-                        </div>
-                        <div class="summary-item">
-                            <span class="summary-label">Mobile:</span>
-                            <span class="summary-value" id="summaryMobile"></span>
-                        </div>
-                        <div class="summary-item">
-                            <span class="summary-label">WhatsApp:</span>
-                            <span class="summary-value" id="summaryWhatsapp"></span>
-                        </div>
-                        <div class="summary-item">
-                            <span class="summary-label">Selected Products:</span>
-                            <span class="summary-value" id="summaryProducts"></span>
-                        </div>
-                    </div>
-                    
-                    <div class="final-buttons">
-                        <button class="btn btn-secondary" id="backToStep2">Back</button>
-                        <button class="btn btn-success" id="confirmOrder">Confirm Order</button>
-                    </div>
-                </div>
-                
-                <!-- Success Message -->
-                <div class="form-step" id="successStep" style="display: none;">
-                    <div class="success-message">
-                        <div class="success-icon">
-                            <i class="fas fa-check-circle"></i>
-                        </div>
-                        <h3>Order Submitted Successfully!</h3>
-                        <p>Your dealer enquiry has been received. We will contact you shortly.</p>
-                        <p>A WhatsApp message has been sent to +919745838382 with your order details.</p>
-                        <button class="btn btn-primary" id="closeSuccess">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<nav>
 
-    <!-- Product Detail Pages -->
-    
-    <!-- Tile Adhesive Detail Page -->
-    <div class="product-detail-page" id="tileAdhesiveDetail">
-        <div class="container product-detail-content">
-            <div class="product-detail-header">
-                <h2>Tile Adhesive - H4 Series</h2>
-                <div>
-                    <div class="language-switcher" style="display: inline-block; margin-right: 1rem;">
-                        <button class="lang-btn active" id="tileEnglishBtn">English</button>
-                        <button class="lang-btn" id="tileMalayalamBtn">മലയാളം</button>
-                    </div>
-                    <button class="back-btn" id="tileBackBtn"><i class="fas fa-arrow-left"></i> Back</button>
-                </div>
-            </div>
-            
-            <div class="product-detail-main">
-                <div class="product-detail-images">
-                    <img src="https://i.ibb.co/VWsm4462/tile1.jpg" alt="Tile Adhesive" class="main-product-image" id="tileMainImage">
-                    <div class="product-image-grid">
-                        <img src="https://i.ibb.co/VWsm4462/tile1.jpg" alt="Tile Adhesive" class="product-thumbnail active" data-image="https://i.ibb.co/VWsm4462/tile1.jpg">
-                        <img src="https://i.ibb.co/0pWWbtdN/tile2.jpg" alt="Tile Adhesive" class="product-thumbnail" data-image="https://i.ibb.co/0pWWbtdN/tile2.jpg">
-                        <img src="https://i.ibb.co/TqdtYh1c/tile3.jpg" alt="Tile Adhesive" class="product-thumbnail" data-image="https://i.ibb.co/TqdtYh1c/tile3.jpg">
-                        <img src="https://i.ibb.co/ynjpVJ0z/tile4.jpg" alt="Tile Adhesive" class="product-thumbnail" data-image="https://i.ibb.co/ynjpVJ0z/tile4.jpg">
-                    </div>
-                </div>
-                
-                <div class="product-detail-info">
-                    <h2>Premium Tile Adhesive Solutions</h2>
-                    <div class="product-text-content" id="tileEnglishContent">
-                        <h4>Your tile is not ordinary. So our adhesive is not ordinary either.</h4>
-                        <p>You can weld with solder and connect with cement. But what your marble, porcelain, ceramic needs is a chemical alliance. H4 provides just that. Not for any tile, but the bonding science specifically designed for each tile.</p>
-                        
-                        <h4>Choose your tile, we have presented H4 accordingly</h4>
-                        
-                        <div class="product-specs">
-                            <h3>1. H4 PREMIUM | For Marble & Granite</h3>
-                            <ul class="specs-list">
-                                <li><strong>Model:</strong> The most prestigious and sensitive stones</li>
-                                <li><strong>Challenge:</strong> Weight, thermal expansion, staining</li>
-                                <li><strong>H4 Solution:</strong> "Flexible Shield Technology"</li>
-                                <li><strong>Chemistry Promise:</strong> Creates a non-alkaline polymer shield around the stone that expands and contracts with cold-heat stretching. Enhances marble shine and prevents staining in white colors.</li>
-                                <li><strong>Slogan:</strong> "Protecting your expectations, bonding with trust."</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="product-specs">
-                            <h3>2. H4 STANDARD | For Marbonite & Porcelain</h3>
-                            <ul class="specs-list">
-                                <li><strong>Model:</strong> Ultra-modern, toughest, glazed surface</li>
-                                <li><strong>Challenge:</strong> Adhesion on smooth, brass-like surface</li>
-                                <li><strong>H4 Solution:</strong> "Nano-Grip Fusion Technology"</li>
-                                <li><strong>Chemistry Promise:</strong> Micro-adhesion agents set to interact at atomic level with silica-based tile. Creates a chemical weld that overcomes mechanical grip. Suitable for high ceilings and thin beds.</li>
-                                <li><strong>Slogan:</strong> "Non-slip grip on smooth surfaces. Science that turns bonding into welding."</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="product-specs">
-                            <h3>3. H4 | For Ceramic Tiles</h3>
-                            <ul class="specs-list">
-                                <li><strong>Model:</strong> Classic, everywhere, traditional, economical</li>
-                                <li><strong>Challenge:</strong> Water absorption, shrinkage, easy breakage</li>
-                                <li><strong>H4 Solution:</strong> "Hydro-Balance & Mecha-Lock Technology"</li>
-                                <li><strong>Chemistry Promise:</strong> Intelligently handles water. Provides water when tile needs hydration, but prevents over-absorption. Also penetrates grooves on tile back to create both physical lock & chemical bond.</li>
-                                <li><strong>Slogan:</strong> "Newest safety for oldest tiles. Not just bonding, but protecting."</li>
-                            </ul>
-                        </div>
-                        
-                        <h4>Why H4?</h4>
-                        <p>• <strong>Wisdom-filled choice:</strong> Not one solution for all. We understand the language of the tile you choose.</p>
-                        <p>• <strong>Chemistry of trust:</strong> We don't make ordinary cement mixtures. We create specialized targeted bonding engineering.</p>
-                        <p>• <strong>Tiler-friendly:</strong> Each formula includes suitable workability, open time, no-sag properties for its tile group.</p>
-                        
-                        <h4>Free Consultation</h4>
-                        <p>Contact us for free consultation to plan the most suitable H4 Waterproofing solution for your home or camp.</p>
-                        <p><strong>Phone:</strong> +917907344030, 9745838382</p>
-                        <p><strong>Email:</strong> avchemtirur@gmail.com</p>
-                    </div>
-                    
-                    <div class="product-text-content" id="tileMalayalamContent" style="display: none;">
-                        <h4>നിങ്ങളുടെ ടൈൽ സാധാരണ ടൈൽ അല്ല. അതിനാൽ നമ്മുടെ അഡ്ഹീസീവും അങ്ങനെയല്ല.</h4>
-                        <p>സോൾഡർ വെൽഡ് ചെയ്യാനും സിമന്റ് കൊണ്ട് ബന്ധിപ്പിക്കാനും കഴിയും. പക്ഷേ, നിങ്ങളുടെ മാർബിളിന്‌, പോർസലെയിനിന്‌, സെറാമിക്കിന് വേണ്ടത് കെമിക്കൽ കൂട്ടായ്മയാണ്. H4 അതാണ് നൽകുന്നത്. ഏത് ടൈലിനും അല്ല, ഓരോ ടൈലിനും പ്രത്യേകം രൂപകല്പന ചെയ്ത ബോണ്ടിംഗ് ശാസ്ത്രം.</p>
-                        
-                        <h4>നിങ്ങളുടെ ടൈൽ തിരഞ്ഞെടുക്കൂ, ഞങ്ങൾ അതിനനുസരിച്ചുള്ള H4 അവതരിപ്പിച്ചിട്ടുണ്ട്</h4>
-                        
-                        <div class="product-specs">
-                            <h3>1. H4 PREMIUM | മാർബിൾ & ഗ്രാനൈറ്റിനായി</h3>
-                            <ul class="specs-list">
-                                <li><strong>മാതൃക:</strong> അതിപ്രതിഷ്ഠിതവും സംവേദനക്ഷമവുമായ കല്ലുകൾ</li>
-                                <li><strong>വെല്ലുവിളി:</strong> ഭാരം, താപവികാസം, കറ പിടിക്കൽ</li>
-                                <li><strong>H4 പ്രതിവിധി:</strong> "ഫ്ലെക്സിബിൾ ഷീൽഡ് ടെക്നോളജി"</li>
-                                <li><strong>കെമിസ്ട്രി വാഗ്ദാനം:</strong> കല്ലിനെ ചുറ്റി പക്വതയില്ലാത്ത ഒരു പൊളിമർ കവചം സൃഷ്ടിക്കുന്നു. അത് തണുപ്പ്-ചൂട് വലിച്ചുനീട്ടലിനൊപ്പം വികസിക്കുകയും ചുരുങ്ങുകയും ചെയ്യുന്നു. ആൽക്കലൈൻ സ്വഭാവം ഇല്ലാത്തതിനാൽ മാർബിളിലെ പ്രകാശമാനം കൂട്ടുകയും, വെള്ള നിറങ്ങളിൽ കറ പിടിക്കുന്നത് തടയുകയും ചെയ്യുന്നു.</li>
-                                <li><strong>സ്ലോഗൻ:</strong> "നിങ്ങളുടെ പ്രതിക്ഷയെ സംരക്ഷിക്കുന്ന, അതിനൊപ്പം വിശ്വസമർപ്പിക്കുന്ന ബന്ധം."</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="product-specs">
-                            <h3>2. H4 STANDARD | മാർബോണൈറ്റ് & പോർസലെയിനിനായി</h3>
-                            <ul class="specs-list">
-                                <li><strong>മാതൃക:</strong> അൾട്രാ-മോഡേൺ, ഏറ്റവും ടാഫ്, ഗ്ലേസ്ഡ് പ്രതലം</li>
-                                <li><strong>വെല്ലുവിളി:</strong> മിനുസമുള്ള പിച്ചള പോലുള്ള പ്രതലത്തിൽ പിടിച്ചുനിൽക്കുക</li>
-                                <li><strong>H4 പ്രതിവിധി:</strong> "നാനോ-ഗ്രിപ്പ് ഫ്യൂഷൻ ടെക്നോളജി"</li>
-                                <li><strong>കെമിസ്ട്രി വാഗ്ദാനം:</strong> സിലിക്ക അടിസ്ഥാനമായുള്ള ടൈലുമായി ആണവ തലത്തിൽ ഇടപഴകാൻ സജ്ജമാക്കിയ സൂക്ഷ്മ അണുബാധ്യതാ ഏജന്റുകൾ. ഇത് ഒരു രാസപരമായ വെൽഡ് സൃഷ്ടിക്കുന്നു, അത് മെക്കാനിക്കൽ പിടിത്തത്തെ മറികടക്കുന്നു. ഉയർന്ന മേൽത്തട്ട്, കനം കുറഞ്ഞ ബെഡ് എന്നിവയ്ക്കും അനുയോജ്യം.</li>
-                                <li><strong>സ്ലോഗൻ:</strong> "മിനുസമുള്ള പ്രതലത്തിലും തുളയ്ക്കാത്ത പിടുത്തം. ബോണ്ടിംഗിനെ വെൽഡിംഗായി മാറ്റുന്ന ശാസ്ത്രം."</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="product-specs">
-                            <h3>3. H4 | സെറാമിക് ടൈലുകൾക്കായി</h3>
-                            <ul class="specs-list">
-                                <li><strong>മാതൃക:</strong> ക്ലാസിക്, എല്ലായിടത്തും, സാമ്പ്രദായികം, ചെലവുകുറഞ്ഞത്</li>
-                                <li><strong>വെല്ലുവിളി:</strong> ജലം വലിച്ചെടുക്കുക, ചുരുങ്ങുക, എളുപ്പത്തിൽ പൊട്ടുക</li>
-                                <li><strong>H4 പ്രതിവിധി:</strong> "ഹൈഡ്രോ-ബാലൻസ് & മെക്കാ-ലോക്ക് ടെക്നോളജി"</li>
-                                <li><strong>കെമിസ്ട്രി വാഗ്ദാനം:</strong> ജലത്തെ ബുദ്ധിയുപയോഗിച്ച് കൈകാര്യം ചെയ്യുക. ടൈലിന് ഹൈഡ്രേഷൻ ആവശ്യമുള്ളപ്പോൾ വെള്ളം നൽകുക, എന്നാൽ അമിതമാകുമ്പോൾ വാട്ടർ ആഗിരണം തടയുക. ഒപ്പം, ടൈലിന്റെ പിൻഭാഗത്തെ ഗ്രൂവുകളിൽ കടന്നുകയറി, ഒരു ഫിസിക്കൽ ലോക്ക് & കെമിക്കൽ ബോണ്ട് രണ്ടും സൃഷ്ടിക്കുന്നു.</li>
-                                <li><strong>സ്ലോഗൻ:</strong> "ഏറ്റവും പഴയ ടൈലിനും ഏറ്റവും പുതിയ സുരക്ഷിതത്വം. പിടിത്തം മാത്രമല്ല, സംരക്ഷിക്കുകയും ചെയ്യുന്നു."</li>
-                            </ul>
-                        </div>
-                        
-                        <h4>എന്തുകൊണ്ട് H4?</h4>
-                        <p>• <strong>വിവേകത്തോടെയുള്ള തിരഞ്ഞെടുപ്പ്:</strong> എല്ലാത്തിനും ഒരേ പരിഹാരമല്ല. നിങ്ങൾ തിരഞ്ഞെടുക്കുന്ന ടൈലിന്റെ ഭാഷ ഞങ്ങൾ മനസ്സിലാക്കുന്നു.</p>
-                        <p>• <strong>വിശ്വാസത്തിന്റെ രസതന്ത്രം:</strong> ഞങ്ങൾ സാധാരണ സിമന്റ് മിശ്രിതങ്ങൾ ഉണ്ടാക്കുന്നില്ല. ഞങ്ങൾ പ്രത്യേക ടാർഗെറ്റഡ് ബോണ്ടിംഗ് എഞ്ചിനീയറിംഗ് സൃഷ്ടിക്കുന്നു.</p>
-                        <p>• <strong>ടൈലർ-ഫ്രണ്ട്‌ലി:</strong> ഓരോ ഫോർമുലയും അതിന്റെ ടൈൽ ഗ്രൂപ്പിനായി അനുയോജ്യമായ വർക്കബിലിറ്റി, ഒപ്പ് ടൈം, നോ-സാഗ് ഗുണങ്ങൾ ഉൾക്കൊള്ളുന്നു.</p>
-                        
-                        <h4>സൗജന്യ കൺസൾട്ടേഷനിനായി ഞങ്ങളെ സമീപിക്കുക</h4>
-                        <p>നിങ്ങളുടെ വീടിനോ കാമ്പിലോ ഏറ്റവും അനുയോജ്യമായ H4 Waterproofing സൊല്യൂഷൻ പ്ലാൻ ചെയ്യാൻ ഞങ്ങളുടെ പ്രത്യേകജ്ഞരെ വിളിക്കൂ</p>
-                        <p><strong>ഫോൺ:</strong> +917907344030, 9745838382</p>
-                        <p><strong>ഇമെയിൽ:</strong> avchemtirur@gmail.com</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Water Proof Detail Page -->
-    <div class="product-detail-page" id="waterProofDetail">
-        <div class="container product-detail-content">
-            <div class="product-detail-header">
-                <h2>Water Proof - H4 Series</h2>
-                <div>
-                    <div class="language-switcher" style="display: inline-block; margin-right: 1rem;">
-                        <button class="lang-btn active" id="waterEnglishBtn">English</button>
-                        <button class="lang-btn" id="waterMalayalamBtn">മലയാളം</button>
-                    </div>
-                    <button class="back-btn" id="waterBackBtn"><i class="fas fa-arrow-left"></i> Back</button>
-                </div>
-            </div>
-            
-            <div class="product-detail-main">
-                <div class="product-detail-images">
-                    <img src="https://i.ibb.co/yFKQFBmC/water1.jpg" alt="Water Proof" class="main-product-image" id="waterMainImage">
-                    <div class="product-image-grid">
-                        <img src="https://i.ibb.co/yFKQFBmC/water1.jpg" alt="Water Proof" class="product-thumbnail active" data-image="https://i.ibb.co/yFKQFBmC/water1.jpg">
-                        <img src="https://i.ibb.co/nMyKqLV5/water2.jpg" alt="Water Proof" class="product-thumbnail" data-image="https://i.ibb.co/nMyKqLV5/water2.jpg">
-                    </div>
-                </div>
-                
-                <div class="product-detail-info">
-                    <h2>H4 Waterproofing System</h2>
-                    <div class="product-text-content" id="waterEnglishContent">
-                        <h4>H4 Waterproof: Protection for decades built on the strength of chemistry!</h4>
-                        <p>Not just a house; your peace of mind for the next 10 years.</p>
-                        <p>Don't let the moisture of rain and the scorching heat mix into your dream home. AV Chem Chemical & Manufacturing presents a protective shield that stands beyond the boundaries of science: H4 Waterproof.</p>
-                        <p>This is not a paint. This is a chemical bonding system.</p>
-                        
-                        <div class="product-specs">
-                            <h3>Our Advanced Promise: 10-Year 100% Guarantee</h3>
-                            <p>Are all waterproofing solutions the same? Never.</p>
-                            <p>Traditional solutions dry up, crack, peel over time. In 2-3 years you'll hear that leakage sound again. H4 is different. The focus of our research is "Permanent Chemical Integration". It dissolves and merges with the internal structure of concrete, becoming one. Gives concrete a waterproof second skin.</p>
-                            <p>That's why we can confidently say: The next ten years, monsoon won't disturb your sleep.</p>
-                        </div>
-                        
-                        <h4>H4 Chemistry: Not ordinary paint, but a system</h4>
-                        <p>The strength of H4 lies in its molecular structure. It repels water at the surface itself (Water Repellency). But beyond that, chemical bonding gives it permanent protection.</p>
-                        
-                        <div class="product-specs">
-                            <h3>4 Additional Benefits of H4:</h3>
-                            <ul class="specs-list">
-                                <li><strong>Temperature Control:</strong> Advanced reflective pigments reflect up to 90% of solar heat. Reduces indoor temperature by 10°C to 40°C in summer, retains heat in winter.</li>
-                                <li><strong>Self-Sealing Cracks:</strong> Has elastomeric property. Stretches like an elastic shield across cracks and covers them.</li>
-                                <li><strong>Carbonation & Rust Protection:</strong> Acts as an integral barrier layer, preventing dangerous gases and moisture from reaching concrete.</li>
-                                <li><strong>Prevents Algae, Mold, Bacteria Growth:</strong> Creates an environment unfavorable for growth of these organisms.</li>
-                            </ul>
-                        </div>
-                        
-                        <h4>Where to Use? How to Use?</h4>
-                        <p><strong>Suitable Surfaces:</strong> Terrace, roof top, sunshade, balcony, exterior walls, water tanks, concrete terrace garden.</p>
-                        <p><strong>Special Note:</strong> Allow new concrete to age at least 21 days. Surface should be clean and dry before application.</p>
-                        
-                        <h4>AV Chem Chemical & Manufacturing: Chemistry of Trust</h4>
-                        <p>Many reduce quality to reduce price. We increase quality to build trust. Every can of H4 contains high-quality raw materials from around the world and continuous control from our research lab. Our 10-year guarantee is not a paper book, it's a symbol of our firm belief in our product.</p>
-                        <p>"Once you seek assurance. We protect for the next ten years."</p>
-                        
-                        <h4>Free Consultation</h4>
-                        <p>Contact us for free consultation to plan the most suitable H4 Waterproofing solution for your home or camp.</p>
-                        <p><strong>Phone:</strong> +917907344030, 9745838382</p>
-                        <p><strong>Email:</strong> avchemtirur@gmail.com</p>
-                    </div>
-                    
-                    <div class="product-text-content" id="waterMalayalamContent" style="display: none;">
-                        <h4>H4 Waterproof: കെമിസ്ട്രിയുടെ കരുത്തിൽ നിർമ്മിച്ച, പതിറ്റാണ്ടുകളുടെ സംരക്ഷണം!</h4>
-                        <p>വീട്, മാത്രമല്ല; അടുത്ത 10 വർഷത്തെ നിങ്ങളുടെ സമാധാനവും</p>
-                        <p>മഴയുട ഈർപ്പവും വെയിലിന്റെ ചുട്ടുപഴുപ്പും നിങ്ങളുടെ സ്വപ്നഭവനത്തിൽ ഇനി കലർത്തരുത്. AV Chem Chemical & Manufacturing അവതരിപ്പിക്കുന്നു, ശാസ്ത്രത്തിന്റെ അതിരുകൾ വിട്ട് നിൽക്കുന്ന ഒരു സംരക്ഷണ കവചം: H4 Waterproof.</p>
-                        <p>ഇത് ഒരു പെയിന്റ് അല്ല. ഇതൊരു കെമിക്കൽ ബോണ്ടിംഗ് സംവിധാനം ആണ്.</p>
-                        
-                        <div class="product-specs">
-                            <h3>ഞങ്ങളുടെ അഡ്വാൻസ് വാഗ്ദാനം: 10 വർഷത്തെ 100% ഗ്യാരണ്ടി</h3>
-                            <p>എല്ലാ വാട്ടർപ്രൂഫിംഗും ഒരുപോലെയാണോ? ഒരിക്കലുമില്ല.</p>
-                            <p>പരമ്പരാഗത ലായനികൾ കാലക്രമേണ വറ്റി പൊടിയും, ചുരുളും, പൊളിയും. 2-3 വർഷത്തിനുള്ളിൽ നിങ്ങൾ ആ ചോർച്ചയുടെ ശബ്ദം വീണ്ടും കേൾക്കും. H4 വ്യത്യസ്തമാണ്. ഞങ്ങളുടെ ഗവേഷണത്തിന്റെ കേന്ദ്രബിന്ദു, "പെർമനന്റ് കെമിക്കൽ ഇന്റഗ്രേഷൻ" ആണ്. ഇത് കോൺക്രീറ്റിന്റെ ആന്തരിക ഘടനയിൽ ദ്രവിച്ച് ചേർന്ന്, ഒന്നായി മാറുന്നു. കോൺക്രീറ്റിന് ജലവിരുദ്ധമായ ഒരു രണ്ടാം ചർമ്മം നൽകുന്നു.</p>
-                            <p>അതുകൊണ്ടാണ് ഞങ്ങൾക്ക് ധൈര്യമായി ഇത് പറയാൻ: അടുത്ത പത്തുവർഷം, മഴക്കാലം നിങ്ങളുടെ ഉറക്കം കെടുത്തില്ല.</p>
-                        </div>
-                        
-                        <h4>H4-ന്റെ രസതന്ത്രം: സാധാരണ ചായം അല്ല, ഒരു സംവിധാനം</h4>
-                        <p>H4-ന്റെ ശക്തി അതിന്റെ തന്മാത്രാ ഘടനയിൽ ഒളിഞ്ഞിരിക്കുന്നു. ഇത് ജലത്തെ ഉപരിതലത്തിൽ തന്നെ തിരികെ തള്ളുകയാണ് (Water Repellency). എന്നാൽ അതിനപ്പുറം, കെമിക്കൽ ബോണ്ടിംഗ് മൂലം ഇത് ശാശ്വതമായ സംരക്ഷണം നൽകുന്നു.</p>
-                        
-                        <div class="product-specs">
-                            <h3>H4 നൽകുന്ന 4 അധിക മാസ് ബെനിഫിറ്റ്സ്:</h3>
-                            <ul class="specs-list">
-                                <li><strong>താപനിലയെ നിയന്ത്രിക്കുന്നു:</strong> അത്യാധുനിക റിഫ്ലെക്ടീവ് പിഗ്മെന്റുകൾ സൂര്യരശ്മികളുടെ താപത്തിന്റെ 90% വരെ പ്രതിഫലിപ്പിക്കുന്നു. ഫലം: എയർകണ്ടീഷനർ ബിൽ കുറവ്, ഊർജ്ജ സംരക്ഷണം, ആരോഗ്യകരമായ അന്തരീക്ഷം.</li>
-                                <li><strong>വിള്ളലുകൾ സ്വയം അടയ്ക്കുന്നു:</strong> എലാസ്റ്റോമെറിക് ഗുണം ഉണ്ട്. ഒരു ഇലാസ്തിക കവചം പോലെ വിള്ളലുകൾക്ക് കുറുകെ വലിച്ചുനീട്ടി അവയെ മൂടുന്നു.</li>
-                                <li><strong>കാർബണേഷൻ & തുരുമ്പ് എതിരെ കവചം:</strong> ഒരു അവിഭാജ്യ അവരോധക പാളിയായി പ്രവർത്തിച്ച് ഈ അപകടകരമായ വാതകങ്ങളും ഈർപ്പവും കോൺക്രീറ്റിൽ എത്താതെ തടയുന്നു.</li>
-                                <li><strong>പായൽ, പൂപ്പൽ, ബാക്ടീരിയ എന്നിവയുടെ വർദ്ധനവ് തടയുന്നു:</strong> ഈ ജീവികളുടെ വളർച്ചയ്ക്ക് അനുകൂലമല്ലാത്ത ഒരു പരിതസ്ഥിതി സൃഷ്ടിക്കുന്നു.</li>
-                            </ul>
-                        </div>
-                        
-                        <h4>എവിടെയെല്ലാം? എങ്ങനെ ഉപയോഗിക്കാം?</h4>
-                        <p><strong>അനുയോജ്യമായ ഉപരിതലങ്ങൾ:</strong> ടെറസ്, റൂഫ് ടോപ്പ്, സൺഷെയ്ഡ്, ബാലക്കണി, എക്സ്റ്റീരിയർ വാൾസ്, വാട്ടർ ടാങ്കുകൾ, കോൺക്രീറ്റ് ടെറസ് ഗാർഡൻ.</p>
-                        <p><strong>പ്രത്യേക ശ്രദ്ധ:</strong> പുതിയ കോൺക്രീറ്റിന് കുറഞ്ഞത് 21 ദിവസം പ്രായമാകാൻ അനുവദിക്കുക. പ്രയോഗത്തിന് മുമ്പ് ഉപരിതലം വൃത്തിയും ഉണങ്ങിയതുമായിരിക്കണം.</p>
-                        
-                        <h4>AV Chem Chemical & Manufacturing: വിശ്വാസത്തിന്റെ രസതന്ത്രം</h4>
-                        <p>പലരും വില കുറയ്ക്കാൻ ഗുണനിലവാരം കുറയ്ക്കും. ഞങ്ങൾ വിശ്വാസം കെട്ടിപ്പടുക്കാൻ നിലവാരം ഉയർത്തുന്നു. H4-ന്റെ ഓരോ കെനിയിലും ലോകത്തിന്റെ വിവിധ ഭാഗങ്ങളിൽ നിന്നുള്ള ഉയർന്ന നിലവാരമുള്ള അസംസ്കൃത വസ്തുക്കളും ഞങ്ങളുടെ ഗവേഷണ ശാലയിലെ നിരന്തരമായ നിയന്ത്രണവും അടങ്ങിയിരിക്കുന്നു. ഞങ്ങളുടെ 10 വർഷത്തെ ഗ്യാരണ്ടി ഒരു കാഗിതിപ്പുസ്തകം അല്ല, ഇത് ഞങ്ങളുടെ ഉൽപ്പന്നത്തിലുള്ള ദൃഢമായ വിശ്വാസത്തിന്റെ പ്രതീകമാണ്.</p>
-                        <p>"ഒരു തവണ നിങ്ങൾ ഉറപ്പ് തേടുക. അടുത്ത പത്തുവർഷം ഞങ്ങൾ സംരക്ഷിക്കും."</p>
-                        
-                        <h4>സൗജന്യ കൺസൾട്ടേഷനിനായി ഞങ്ങളെ സമീപിക്കുക</h4>
-                        <p>നിങ്ങളുടെ വീടിനോ കാമ്പിലോ ഏറ്റവും അനുയോജ്യമായ H4 Waterproofing സൊല്യൂഷൻ പ്ലാൻ ചെയ്യാൻ ഞങ്ങളുടെ പ്രത്യേകജ്ഞരെ വിളിക്കൂ</p>
-                        <p><strong>ഫോൺ:</strong> +917907344030, 9745838382</p>
-                        <p><strong>ഇമെയിൽ:</strong> avchemtirur@gmail.com</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- H4 ShieldX Detail Page -->
-    <div class="product-detail-page" id="shieldXDetail">
-        <div class="container product-detail-content">
-            <div class="product-detail-header">
-                <h2>H4 ShieldX - 3D Epoxy Flooring</h2>
-                <div>
-                    <div class="language-switcher" style="display: inline-block; margin-right: 1rem;">
-                        <button class="lang-btn active" id="shieldEnglishBtn">English</button>
-                        <button class="lang-btn" id="shieldMalayalamBtn">മലയാളം</button>
-                    </div>
-                    <button class="back-btn" id="shieldBackBtn"><i class="fas fa-arrow-left"></i> Back</button>
-                </div>
-            </div>
-            
-            <div class="product-detail-main">
-                <div class="product-detail-images">
-                    <img src="https://i.ibb.co/k26cKq3j/shield1.jpg" alt="H4 ShieldX" class="main-product-image" id="shieldMainImage">
-                    <div class="product-image-grid">
-                        <img src="https://i.ibb.co/k26cKq3j/shield1.jpg" alt="H4 ShieldX" class="product-thumbnail active" data-image="https://i.ibb.co/k26cKq3j/shield1.jpg">
-                        <img src="https://i.ibb.co/HThpxwVt/shield2.jpg" alt="H4 ShieldX" class="product-thumbnail" data-image="https://i.ibb.co/HThpxwVt/shield2.jpg">
-                        <img src="https://i.ibb.co/m5nvwSCW/shield3.jpg" alt="H4 ShieldX" class="product-thumbnail" data-image="https://i.ibb.co/m5nvwSCW/shield3.jpg">
-                        <img src="https://i.ibb.co/67q2WFMv/shield4.jpg" alt="H4 ShieldX" class="product-thumbnail" data-image="https://i.ibb.co/67q2WFMv/shield4.jpg">
-                    </div>
-                </div>
-                
-                <div class="product-detail-info">
-                    <h2>H4 ShieldX - 3D Epoxy Flooring System</h2>
-                    <div class="product-text-content" id="shieldEnglishContent">
-                        <h4>You are about to begin a new era that will change the floor trends in Kerala!</h4>
-                        <p><strong>The New Era:</strong> When your floor becomes a work of art</p>
-                        <p>"We are not here to scatter your dreams underfoot, but to bond them permanently."</p>
-                        <p>H4 ShieldX is a scientific protection system. It is a strong, seamless single plastic layer created through a chemical reaction (cross-linking) when H4 ShieldX is mixed. This 100% solids system creates a floor that is waterproof (waterproof) and has continuous beauty.</p>
-                        
-                        <h4>Why is it rare and a new trend?</h4>
-                        <p>• <strong>Perfect for Kerala:</strong> Perfectly suited to face the high humidity and rain of this region. No joints or gaps means no water seepage or mold/insect infestation.</p>
-                        <p>• <strong>Art of Survival:</strong> Has excellent mechanical strength, chemical resistance, and can withstand high impact and abrasion. Suitable for heavy furniture, vehicles, shops, factories.</p>
-                        <p>• <strong>Your Dream Becomes Reality:</strong> 3D Floor - Any design like ocean depth, fantasy imaginations, galaxy lightning can come to life on your floor.</p>
-                        
-                        <div class="product-specs">
-                            <h3>We Promise: A Guaranteed Bond with Traditional Floors</h3>
-                            <p>Excellent adhesion (grip) that can be applied directly on old tiles or cement floor is the pinnacle of our system. This is the result of high quality professional work.</p>
-                            <p><strong>Key Features:</strong></p>
-                            <ul class="specs-list">
-                                <li>"No gap for water to enter, no defect to see."</li>
-                                <li>"Perfect combination of art, science and strength."</li>
-                                <li>"Your home will be fresh. Your floor will always be fresh."</li>
-                                <li>"Old floors will break. New ideas will bond."</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="product-specs">
-                            <h3>H4 ShieldX Applications</h3>
-                            <ul class="specs-list">
-                                <li><strong>Specialty:</strong> Visual impact reaching the third dimension. Personal photos, artworks, geometric designs can be integrated.</li>
-                                <li><strong>Suitable for:</strong> Showroom entrances, homes, theaters, high-end residential interiors, resorts.</li>
-                            </ul>
-                        </div>
-                        
-                        <h4>Conclusion</h4>
-                        <p>"On the land of Kerala, H4 ShieldX is the strongest defense against water. It is not your floor, it is the foundation of your future."</p>
-                        <p>"Be ready to leave tradition. Become the owner of your own creation. Contact us, your floor will start talking from tomorrow."</p>
-                        
-                        <h4>Free Consultation</h4>
-                        <p>Contact us for free consultation to plan the most suitable H4 Waterproofing solution for your home or camp.</p>
-                        <p><strong>Phone:</strong> +917907344030, 9745838382</p>
-                        <p><strong>Email:</strong> avchemtirur@gmail.com</p>
-                    </div>
-                    
-                    <div class="product-text-content" id="shieldMalayalamContent" style="display: none;">
-                        <h4>കേരളത്തിലെ ഫ്ലോർ ട്രെൻഡിന് മാറ്റം കുറിക്കാൻ പോകുന്ന ഒരു പുതിയ യുഗത്തിന് നിങ്ങൾ തുടക്കമിടുന്നു!</h4>
-                        <p><strong>പുതിയ യുഗം:</strong> നിങ്ങളുടെ നിലം ഒരു കലാസൃഷ്ടിയാകുമ്പോൾ</p>
-                        <p>"നിങ്ങളുടെ സ്വപ്നങ്ങളെ കാൽകീഴിൽ വാരിവിതറാനല്ല, അവയെ സ്ഥിരമായി ബോണ്ട് ചെയ്യാനാണ് ഞങ്ങൾ."</p>
-                        <p>H4 sheildX ഇത് ഒരു ശാസ്ത്രീയ സംരക്ഷണ സിസ്റ്റം ആണ്. H4 sheildX കലർത്തുമ്പോൾ സംഭവിക്കുന്ന ഒരു രാസപ്രതികരണത്തിലൂടെ (ക്രോസ്-ലിങ്കിംഗ്) സൃഷ്ടിക്കപ്പെടുന്ന, ഉറപ്പുള്ളതും തടസ്സമില്ലാത്തതുമായ ഒരു ഒറ്റ പ്ലാസ്റ്റിക് പാളിയാണ്. ഈ 100% സോളിഡ്സ് സിസ്റ്റം വെള്ളം കടത്താത്തതും (വാട്ടർപ്രൂഫ്) തുടർച്ചയായ സൗന്ദര്യവുമുള്ള ഒരു ഫ്ലോർ സൃഷ്ടിക്കുന്നു.</p>
-                        
-                        <h4>എന്തുകൊണ്ട് ഇത് അപൂർവ്വവും പുതിയ ട്രെൻഡും ആണ്?</h4>
-                        <p>• <strong>കേരളത്തിന് അനുയോജ്യം:</strong> ഈ പ്രദേശത്തിന്റെ ഉയർന്ന ഈർപ്പം, മഴ എന്നിവയെ നേരിടാൻ ഇത് തികച്ചും അനുയോജ്യമാണ്. ജോയിന്റുകളോ വിടവുകളോ ഇല്ലാത്തതിനാൽ, വെള്ളം കയറാനോ കുമിൾ/പുഴുക്കൾ പിടിക്കാനോ ഇടയില്ല.</p>
-                        <p>• <strong>അതിജീവനത്തിന്റെ കല:</strong> ഇതിന് മികച്ച മെക്കാനിക്കൽ ശക്തിയും, രാസപ്രതിരോധവും, ഉയർന്ന ആഘാതത്തെയും തിരുകലും ചെലുത്താൻ കഴിയുന്ന ഫ്ലോറുകൾ. ഭാരമേറിയ ഫർണിച്ചറുകൾ, വാഹനങ്ങൾ, കടകൾ, ഫാക്ടറികൾ എന്നിവയ്ക്ക് അനുയോജ്യം.</p>
-                        <p>• <strong>നിങ്ങളുടെ സ്വപ്നം റിയാലിറ്റി ആകുന്നു:</strong> 3D ഫ്ലോർ - സമുദ്രത്തിന്റെ ആഴം, മഴവിൽക്കല്പനകൾ, വ്യോമഗംഗയുടെ മിന്നൽ തുടങ്ങിയ ഏത് ഡിസൈനും നിങ്ങളുടെ നിലത്ത് ജീവൻ കൊള്ളിക്കാൻ കഴിയും.</p>
-                        
-                        <div class="product-specs">
-                            <h3>ഞങ്ങൾ വാഗ്ദാനം ചെയ്യുന്നത്: പരമ്പരാഗത നിലങ്ങൾക്കൊപ്പം ഒരു ഉറപ്പിത്ത ബന്ധം</h3>
-                            <p>പഴയ ടൈലുകളുടെയോ സിമന്റ് ഫ്ലോറിന്റെയോ മുകളിൽ നേരിട്ട് പ്രയോഗിക്കാവുന്ന മികച്ച അഡ്ഹീഷൻ (പിടുത്തം) ആണ് ഞങ്ങളുടെ സിസ്റ്റത്തിന്റെ കൊടുമുടി. ഇത് ഉയർന്ന ഗുണനിലവാരമുള്ള പ്രൊഫഷണൽ ജോലിയുടെ ഫലമാണ്.</p>
-                            <p><strong>പ്രധാന സവിശേഷതകൾ:</strong></p>
-                            <ul class="specs-list">
-                                <li>"വെള്ളം കയറാൻ ഒരു വിടവുമില്ല, കാണാൻ ഒരു വൈകല്യവുമില്ല."</li>
-                                <li>"കല, ശാസ്ത്രം, ശക്തി എന്നിവയുടെ തികഞ്ഞ സംയോജനം."</li>
-                                <li>"നിങ്ങളുടെ വീട് പുതുമയുള്ളതായിരിക്കും. നിങ്ങളുടെ ഫ്ലോർ എന്നും പുതുമയുള്ളതായിരിക്കും."</li>
-                                <li>"ഇനി പഴയ ഫ്ലോറുകൾ തകരും. പുതിയ ആശയങ്ങൾ ബോണ്ട് ചെയ്യും."</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="product-specs">
-                            <h3>H4 sheildX ആപ്ലിക്കേഷനുകൾ</h3>
-                            <ul class="specs-list">
-                                <li><strong>പ്രത്യേകത:</strong> മൂന്നാം മാനത്തിലേക്ക് എത്തുന്ന ദൃശ്യ ആഘാതം. വ്യക്തിഗതമായ ഫോട്ടോകൾ, കലാസൃഷ്ടികൾ, ജിയോമെട്രിക് ഡിസൈനുകൾ എന്നിവ സംയോജിപ്പിക്കാം.</li>
-                                <li><strong>അനുയോജ്യം:</strong> ഷോറൂമുകളുടെ എൻട്രൻസ്, വീട്, റ്റീയേറ്ററുകൾ, ഹൈ-എൻഡ് റസിഡൻഷ്യൽ ഇന്റീരിയർ, റിസോർട്ടുകൾ.</li>
-                            </ul>
-                        </div>
-                        
-                        <h4>ഉപസംഹാരം</h4>
-                        <p>"കേരളത്തിന്റെ ഭൂമിയിൽ, വെള്ളത്തിനെതിരെയുള്ള ഏറ്റവും ശക്തമായ പ്രതിരോധമാണ് h4 sheildX. അത് നിങ്ങളുടെ ഫ്ലോർ അല്ല, നിങ്ങളുടെ ഭാവിയുടെ അടിത്തറയാണ്."</p>
-                        <p>"പരമ്പരാഗതത്വം വിട്ടുമാറാൻ തയ്യാറാകുക. നിങ്ങളുടെ സ്വന്തം കലാസൃഷ്ടിയുടെ ഉടമയാകുക. ഞങ്ങളെ ബന്ധപ്പെടുക, നാളെ മുതൽ നിങ്ങളുടെ നിലം സംസാരിക്കാൻ തുടങ്ങും."</p>
-                        
-                        <h4>സൗജന്യ കൺസൾട്ടേഷനിനായി ഞങ്ങളെ സമീപിക്കുക</h4>
-                        <p>നിങ്ങളുടെ വീടിനോ കാമ്പിലോ ഏറ്റവും അനുയോജ്യമായ H4 Waterproofing സൊല്യൂഷൻ പ്ലാൻ ചെയ്യാൻ ഞങ്ങളുടെ പ്രത്യേകജ്ഞരെ വിളിക്കൂ</p>
-                        <p><strong>ഫോൺ:</strong> +917907344030, 9745838382</p>
-                        <p><strong>ഇമെയിൽ:</strong> avchemtirur@gmail.com</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<button onclick="showHome()">
+Home
+</button>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <div class="logo">
-                        <img src="https://i.ibb.co/ds1N4ZsQ/logo-small.png" alt="AV Chem Logo" style="height: 40px;">
-                        <div class="logo-text">
-                            <span class="logo-main">AV Chem</span>
-                            <span class="logo-sub">Chemical & Manufacturing</span>
-                        </div>
-                    </div>
-                    <p style="color: #cbd5e0; margin-top: 1rem;">Premium chemical solutions for modern construction. Trusted by professionals across Kerala.</p>
-                </div>
-                <div class="footer-links">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="#" id="footerHomeBtn">Home</a></li>
-                        <li><a href="#" id="footerContactBtn">Contact</a></li>
-                        <li><a href="#" id="footerDealerBtn">Dealer Enquiry</a></li>
-                        <li><a href="#" id="footerTileBtn">Tile Adhesive</a></li>
-                        <li><a href="#" id="footerWaterBtn">Water Proof</a></li>
-                        <li><a href="#" id="footerShieldBtn">H4 ShieldX</a></li>
-                    </ul>
-                </div>
-                <div class="footer-links">
-                    <h3>Contact Info</h3>
-                    <ul>
-                        <li><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i> Mukkilapeedika, Kannam Kulam</li>
-                        <li><i class="fas fa-phone" style="margin-right: 10px;"></i> +917907344030</li>
-                        <li><i class="fab fa-whatsapp" style="margin-right: 10px;"></i> +919745838382</li>
-                        <li><i class="fas fa-envelope" style="margin-right: 10px;"></i> avchemtirur@gmail.com</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2023 AV Chem Chemical & Manufacturing. All rights reserved.</p>
-                <p>Manufacturing high-quality construction chemicals in Kerala</p>
-            </div>
-        </div>
-    </footer>
+<button onclick="showContact()">
+Contact
+</button>
 
-    <script>
-        // Navigation and Section Management
-        document.addEventListener('DOMContentLoaded', function() {
-            // Get all sections
-            const mainScreen = document.getElementById('mainScreen');
-            const homeContent = document.getElementById('homeContent');
-            const contactSection = document.getElementById('contactSection');
-            const dealerModal = document.getElementById('dealerModal');
-            
-            // Get all navigation buttons
-            const homeBtn = document.getElementById('homeBtn');
-            const contactBtn = document.getElementById('contactBtn');
-            const dealerEnquiryBtn = document.getElementById('dealerEnquiryBtn');
-            const homeBackBtn = document.getElementById('homeBackBtn');
-            const contactBackBtn = document.getElementById('contactBackBtn');
-            const closeModal = document.getElementById('closeModal');
-            const cancelForm = document.getElementById('cancelForm');
-            
-            // Footer navigation buttons
-            const footerHomeBtn = document.getElementById('footerHomeBtn');
-            const footerContactBtn = document.getElementById('footerContactBtn');
-            const footerDealerBtn = document.getElementById('footerDealerBtn');
-            
-            // Product folder buttons
-            const tileAdhesiveFolder = document.getElementById('tileAdhesiveFolder');
-            const waterProofFolder = document.getElementById('waterProofFolder');
-            const shieldXFolder = document.getElementById('shieldXFolder');
-            
-            // Product detail pages
-            const tileAdhesiveDetail = document.getElementById('tileAdhesiveDetail');
-            const waterProofDetail = document.getElementById('waterProofDetail');
-            const shieldXDetail = document.getElementById('shieldXDetail');
-            
-            // Product detail back buttons
-            const tileBackBtn = document.getElementById('tileBackBtn');
-            const waterBackBtn = document.getElementById('waterBackBtn');
-            const shieldBackBtn = document.getElementById('shieldBackBtn');
-            
-            // Function to hide all sections
-            function hideAllSections() {
-                mainScreen.classList.remove('show-section');
-                mainScreen.classList.add('hide-section');
-                homeContent.classList.remove('show-section');
-                homeContent.classList.add('hide-section');
-                contactSection.classList.remove('show-section');
-                contactSection.classList.add('hide-section');
-                dealerModal.style.display = 'none';
-                
-                // Hide product detail pages
-                tileAdhesiveDetail.style.display = 'none';
-                waterProofDetail.style.display = 'none';
-                shieldXDetail.style.display = 'none';
-            }
-            
-            // Function to update active nav button
-            function updateActiveNav(activeBtn) {
-                // Remove active class from all nav buttons
-                const navButtons = document.querySelectorAll('nav ul li a');
-                navButtons.forEach(btn => {
-                    btn.classList.remove('active');
-                });
-                
-                // Add active class to clicked button
-                if (activeBtn) {
-                    activeBtn.classList.add('active');
-                }
-            }
-            
-            // Home button click
-            homeBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                hideAllSections();
-                homeContent.classList.remove('hide-section');
-                homeContent.classList.add('show-section');
-                updateActiveNav(homeBtn);
-            });
-            
-            // Footer home button click
-            footerHomeBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                hideAllSections();
-                homeContent.classList.remove('hide-section');
-                homeContent.classList.add('show-section');
-                updateActiveNav(homeBtn);
-            });
-            
-            // Home back button click
-            homeBackBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                hideAllSections();
-                mainScreen.classList.remove('hide-section');
-                mainScreen.classList.add('show-section');
-                updateActiveNav(null);
-            });
-            
-            // Contact button click
-            contactBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                hideAllSections();
-                contactSection.classList.remove('hide-section');
-                contactSection.classList.add('show-section');
-                updateActiveNav(contactBtn);
-            });
-            
-            // Footer contact button click
-            footerContactBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                hideAllSections();
-                contactSection.classList.remove('hide-section');
-                contactSection.classList.add('show-section');
-                updateActiveNav(contactBtn);
-            });
-            
-            // Contact back button click
-            contactBackBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                hideAllSections();
-                mainScreen.classList.remove('hide-section');
-                mainScreen.classList.add('show-section');
-                updateActiveNav(null);
-            });
-            
-            // Dealer enquiry button click
-            dealerEnquiryBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                dealerModal.style.display = 'block';
-                updateActiveNav(dealerEnquiryBtn);
-            });
-            
-            // Footer dealer button click
-            footerDealerBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                dealerModal.style.display = 'block';
-                updateActiveNav(dealerEnquiryBtn);
-            });
-            
-            // Close modal button click
-            closeModal.addEventListener('click', function() {
-                dealerModal.style.display = 'none';
-            });
-            
-            // Cancel form button click
-            cancelForm.addEventListener('click', function() {
-                dealerModal.style.display = 'none';
-                // Reset form to step 1
-                document.getElementById('step1').classList.add('active');
-                document.getElementById('step2').classList.remove('active');
-                document.getElementById('step3').classList.remove('active');
-                document.getElementById('successStep').style.display = 'none';
-            });
-            
-            // Product folder clicks
-            tileAdhesiveFolder.addEventListener('click', function() {
-                hideAllSections();
-                tileAdhesiveDetail.style.display = 'block';
-            });
-            
-            waterProofFolder.addEventListener('click', function() {
-                hideAllSections();
-                waterProofDetail.style.display = 'block';
-            });
-            
-            shieldXFolder.addEventListener('click', function() {
-                hideAllSections();
-                shieldXDetail.style.display = 'block';
-            });
-            
-            // Footer product links
-            document.getElementById('footerTileBtn').addEventListener('click', function(e) {
-                e.preventDefault();
-                hideAllSections();
-                tileAdhesiveDetail.style.display = 'block';
-            });
-            
-            document.getElementById('footerWaterBtn').addEventListener('click', function(e) {
-                e.preventDefault();
-                hideAllSections();
-                waterProofDetail.style.display = 'block';
-            });
-            
-            document.getElementById('footerShieldBtn').addEventListener('click', function(e) {
-                e.preventDefault();
-                hideAllSections();
-                shieldXDetail.style.display = 'block';
-            });
-            
-            // Product detail back buttons
-            tileBackBtn.addEventListener('click', function() {
-                tileAdhesiveDetail.style.display = 'none';
-                mainScreen.classList.remove('hide-section');
-                mainScreen.classList.add('show-section');
-            });
-            
-            waterBackBtn.addEventListener('click', function() {
-                waterProofDetail.style.display = 'none';
-                mainScreen.classList.remove('hide-section');
-                mainScreen.classList.add('show-section');
-            });
-            
-            shieldBackBtn.addEventListener('click', function() {
-                shieldXDetail.style.display = 'none';
-                mainScreen.classList.remove('hide-section');
-                mainScreen.classList.add('show-section');
-            });
-            
-            // Language switcher for main header
-            const englishBtn = document.getElementById('englishBtn');
-            const malayalamBtn = document.getElementById('malayalamBtn');
-            
-            englishBtn.addEventListener('click', function() {
-                englishBtn.classList.add('active');
-                malayalamBtn.classList.remove('active');
-                // In a real implementation, you would change all text to English
-                alert('Language changed to English');
-            });
-            
-            malayalamBtn.addEventListener('click', function() {
-                malayalamBtn.classList.add('active');
-                englishBtn.classList.remove('active');
-                // In a real implementation, you would change all text to Malayalam
-                alert('Language changed to Malayalam');
-            });
-            
-            // Product detail language switchers
-            // Tile Adhesive
-            const tileEnglishBtn = document.getElementById('tileEnglishBtn');
-            const tileMalayalamBtn = document.getElementById('tileMalayalamBtn');
-            const tileEnglishContent = document.getElementById('tileEnglishContent');
-            const tileMalayalamContent = document.getElementById('tileMalayalamContent');
-            
-            tileEnglishBtn.addEventListener('click', function() {
-                tileEnglishBtn.classList.add('active');
-                tileMalayalamBtn.classList.remove('active');
-                tileEnglishContent.style.display = 'block';
-                tileMalayalamContent.style.display = 'none';
-            });
-            
-            tileMalayalamBtn.addEventListener('click', function() {
-                tileMalayalamBtn.classList.add('active');
-                tileEnglishBtn.classList.remove('active');
-                tileEnglishContent.style.display = 'none';
-                tileMalayalamContent.style.display = 'block';
-            });
-            
-            // Water Proof
-            const waterEnglishBtn = document.getElementById('waterEnglishBtn');
-            const waterMalayalamBtn = document.getElementById('waterMalayalamBtn');
-            const waterEnglishContent = document.getElementById('waterEnglishContent');
-            const waterMalayalamContent = document.getElementById('waterMalayalamContent');
-            
-            waterEnglishBtn.addEventListener('click', function() {
-                waterEnglishBtn.classList.add('active');
-                waterMalayalamBtn.classList.remove('active');
-                waterEnglishContent.style.display = 'block';
-                waterMalayalamContent.style.display = 'none';
-            });
-            
-            waterMalayalamBtn.addEventListener('click', function() {
-                waterMalayalamBtn.classList.add('active');
-                waterEnglishBtn.classList.remove('active');
-                waterEnglishContent.style.display = 'none';
-                waterMalayalamContent.style.display = 'block';
-            });
-            
-            // ShieldX
-            const shieldEnglishBtn = document.getElementById('shieldEnglishBtn');
-            const shieldMalayalamBtn = document.getElementById('shieldMalayalamBtn');
-            const shieldEnglishContent = document.getElementById('shieldEnglishContent');
-            const shieldMalayalamContent = document.getElementById('shieldMalayalamContent');
-            
-            shieldEnglishBtn.addEventListener('click', function() {
-                shieldEnglishBtn.classList.add('active');
-                shieldMalayalamBtn.classList.remove('active');
-                shieldEnglishContent.style.display = 'block';
-                shieldMalayalamContent.style.display = 'none';
-            });
-            
-            shieldMalayalamBtn.addEventListener('click', function() {
-                shieldMalayalamBtn.classList.add('active');
-                shieldEnglishBtn.classList.remove('active');
-                shieldEnglishContent.style.display = 'none';
-                shieldMalayalamContent.style.display = 'block';
-            });
-            
-            // Image thumbnail switching for product detail pages
-            // Tile Adhesive
-            const tileThumbnails = document.querySelectorAll('#tileAdhesiveDetail .product-thumbnail');
-            const tileMainImage = document.getElementById('tileMainImage');
-            
-            tileThumbnails.forEach(thumb => {
-                thumb.addEventListener('click', function() {
-                    // Remove active class from all thumbnails
-                    tileThumbnails.forEach(t => t.classList.remove('active'));
-                    // Add active class to clicked thumbnail
-                    this.classList.add('active');
-                    // Change main image
-                    tileMainImage.src = this.getAttribute('data-image');
-                });
-            });
-            
-            // Water Proof
-            const waterThumbnails = document.querySelectorAll('#waterProofDetail .product-thumbnail');
-            const waterMainImage = document.getElementById('waterMainImage');
-            
-            waterThumbnails.forEach(thumb => {
-                thumb.addEventListener('click', function() {
-                    // Remove active class from all thumbnails
-                    waterThumbnails.forEach(t => t.classList.remove('active'));
-                    // Add active class to clicked thumbnail
-                    this.classList.add('active');
-                    // Change main image
-                    waterMainImage.src = this.getAttribute('data-image');
-                });
-            });
-            
-            // ShieldX
-            const shieldThumbnails = document.querySelectorAll('#shieldXDetail .product-thumbnail');
-            const shieldMainImage = document.getElementById('shieldMainImage');
-            
-            shieldThumbnails.forEach(thumb => {
-                thumb.addEventListener('click', function() {
-                    // Remove active class from all thumbnails
-                    shieldThumbnails.forEach(t => t.classList.remove('active'));
-                    // Add active class to clicked thumbnail
-                    this.classList.add('active');
-                    // Change main image
-                    shieldMainImage.src = this.getAttribute('data-image');
-                });
-            });
-            
-            // Dealer Enquiry Form Logic
-            const nextToStep2 = document.getElementById('nextToStep2');
-            const backToStep1 = document.getElementById('backToStep1');
-            const nextToStep3 = document.getElementById('nextToStep3');
-            const backToStep2 = document.getElementById('backToStep2');
-            const confirmOrder = document.getElementById('confirmOrder');
-            const closeSuccess = document.getElementById('closeSuccess');
-            
-            const step1 = document.getElementById('step1');
-            const step2 = document.getElementById('step2');
-            const step3 = document.getElementById('step3');
-            const successStep = document.getElementById('successStep');
-            
-            // Product selection
-            const optionTileAdhesive = document.getElementById('optionTileAdhesive');
-            const optionWaterProof = document.getElementById('optionWaterProof');
-            const optionShieldX = document.getElementById('optionShieldX');
-            
-            const tileAdhesiveQty = document.getElementById('tileAdhesiveQty');
-            const waterProofQty = document.getElementById('waterProofQty');
-            const shieldXQty = document.getElementById('shieldXQty');
-            
-            let selectedProducts = [];
-            
-            // Toggle product selection
-            optionTileAdhesive.addEventListener('click', function() {
-                this.classList.toggle('selected');
-                if (this.classList.contains('selected')) {
-                    tileAdhesiveQty.style.display = 'flex';
-                    selectedProducts.push('Tile Adhesive');
-                } else {
-                    tileAdhesiveQty.style.display = 'none';
-                    selectedProducts = selectedProducts.filter(p => p !== 'Tile Adhesive');
-                }
-            });
-            
-            optionWaterProof.addEventListener('click', function() {
-                this.classList.toggle('selected');
-                if (this.classList.contains('selected')) {
-                    waterProofQty.style.display = 'flex';
-                    selectedProducts.push('Water Proof');
-                } else {
-                    waterProofQty.style.display = 'none';
-                    selectedProducts = selectedProducts.filter(p => p !== 'Water Proof');
-                }
-            });
-            
-            optionShieldX.addEventListener('click', function() {
-                this.classList.toggle('selected');
-                if (this.classList.contains('selected')) {
-                    shieldXQty.style.display = 'flex';
-                    selectedProducts.push('H4 ShieldX');
-                } else {
-                    shieldXQty.style.display = 'none';
-                    selectedProducts = selectedProducts.filter(p => p !== 'H4 ShieldX');
-                }
-            });
-            
-            // Same as mobile checkbox
-            const whatsappSame = document.getElementById('whatsappSame');
-            const whatsappInput = document.getElementById('whatsapp');
-            const mobileInput = document.getElementById('mobile');
-            
-            whatsappSame.addEventListener('change', function() {
-                if (this.checked) {
-                    whatsappInput.value = mobileInput.value;
-                    whatsappInput.disabled = true;
-                } else {
-                    whatsappInput.disabled = false;
-                }
-            });
-            
-            // Form validation functions
-            function validateStep1() {
-                let isValid = true;
-                
-                // Name validation
-                const name = document.getElementById('name').value.trim();
-                if (name === '') {
-                    document.getElementById('nameError').style.display = 'block';
-                    document.getElementById('name').classList.add('error');
-                    isValid = false;
-                } else {
-                    document.getElementById('nameError').style.display = 'none';
-                    document.getElementById('name').classList.remove('error');
-                }
-                
-                // Address validation
-                const address = document.getElementById('address').value.trim();
-                if (address === '') {
-                    document.getElementById('addressError').style.display = 'block';
-                    document.getElementById('address').classList.add('error');
-                    isValid = false;
-                } else {
-                    document.getElementById('addressError').style.display = 'none';
-                    document.getElementById('address').classList.remove('error');
-                }
-                
-                // City validation
-                const city = document.getElementById('city').value.trim();
-                if (city === '') {
-                    document.getElementById('cityError').style.display = 'block';
-                    document.getElementById('city').classList.add('error');
-                    isValid = false;
-                } else {
-                    document.getElementById('cityError').style.display = 'none';
-                    document.getElementById('city').classList.remove('error');
-                }
-                
-                // Pincode validation
-                const pincode = document.getElementById('pincode').value.trim();
-                const pincodeRegex = /^\d{6}$/;
-                if (!pincodeRegex.test(pincode)) {
-                    document.getElementById('pincodeError').style.display = 'block';
-                    document.getElementById('pincode').classList.add('error');
-                    isValid = false;
-                } else {
-                    document.getElementById('pincodeError').style.display = 'none';
-                    document.getElementById('pincode').classList.remove('error');
-                }
-                
-                // District validation
-                const district = document.getElementById('district').value.trim();
-                if (district === '') {
-                    document.getElementById('districtError').style.display = 'block';
-                    document.getElementById('district').classList.add('error');
-                    isValid = false;
-                } else {
-                    document.getElementById('districtError').style.display = 'none';
-                    document.getElementById('district').classList.remove('error');
-                }
-                
-                // State validation
-                const state = document.getElementById('state').value.trim();
-                if (state === '') {
-                    document.getElementById('stateError').style.display = 'block';
-                    document.getElementById('state').classList.add('error');
-                    isValid = false;
-                } else {
-                    document.getElementById('stateError').style.display = 'none';
-                    document.getElementById('state').classList.remove('error');
-                }
-                
-                // Mobile validation
-                const mobile = document.getElementById('mobile').value.trim();
-                const mobileRegex = /^\d{10}$/;
-                if (!mobileRegex.test(mobile)) {
-                    document.getElementById('mobileError').style.display = 'block';
-                    document.getElementById('mobile').classList.add('error');
-                    isValid = false;
-                } else {
-                    document.getElementById('mobileError').style.display = 'none';
-                    document.getElementById('mobile').classList.remove('error');
-                }
-                
-                // WhatsApp validation (optional)
-                const whatsapp = document.getElementById('whatsapp').value.trim();
-                if (whatsapp !== '' && !mobileRegex.test(whatsapp)) {
-                    document.getElementById('whatsappError').style.display = 'block';
-                    document.getElementById('whatsapp').classList.add('error');
-                    isValid = false;
-                } else {
-                    document.getElementById('whatsappError').style.display = 'none';
-                    document.getElementById('whatsapp').classList.remove('error');
-                }
-                
-                return isValid;
-            }
-            
-            function validateStep2() {
-                // Check if at least one product is selected
-                if (selectedProducts.length === 0) {
-                    alert('Please select at least one product');
-                    return false;
-                }
-                
-                // Check if quantities are entered for selected products
-                let allQuantitiesValid = true;
-                
-                if (optionTileAdhesive.classList.contains('selected')) {
-                    const tileAmount = document.getElementById('tileAdhesiveAmount').value;
-                    if (!tileAmount || parseInt(tileAmount) <= 0) {
-                        alert('Please enter quantity for Tile Adhesive');
-                        allQuantitiesValid = false;
-                    }
-                }
-                
-                if (optionWaterProof.classList.contains('selected')) {
-                    const waterAmount = document.getElementById('waterProofAmount').value;
-                    if (!waterAmount || parseInt(waterAmount) <= 0) {
-                        alert('Please enter quantity for Water Proof');
-                        allQuantitiesValid = false;
-                    }
-                }
-                
-                if (optionShieldX.classList.contains('selected')) {
-                    const shieldAmount = document.getElementById('shieldXAmount').value;
-                    if (!shieldAmount || parseInt(shieldAmount) <= 0) {
-                        alert('Please enter quantity for H4 ShieldX');
-                        allQuantitiesValid = false;
-                    }
-                }
-                
-                return allQuantitiesValid;
-            }
-            
-            // Form step navigation
-            nextToStep2.addEventListener('click', function() {
-                if (validateStep1()) {
-                    step1.classList.remove('active');
-                    step2.classList.add('active');
-                }
-            });
-            
-            backToStep1.addEventListener('click', function() {
-                step2.classList.remove('active');
-                step1.classList.add('active');
-            });
-            
-            nextToStep3.addEventListener('click', function() {
-                if (validateStep2()) {
-                    // Update summary
-                    document.getElementById('summaryName').textContent = document.getElementById('name').value;
-                    document.getElementById('summaryAddress').textContent = document.getElementById('address').value;
-                    document.getElementById('summaryLocation').textContent = `${document.getElementById('city').value}, ${document.getElementById('district').value}, ${document.getElementById('state').value}`;
-                    document.getElementById('summaryPincode').textContent = document.getElementById('pincode').value;
-                    document.getElementById('summaryMobile').textContent = document.getElementById('mobile').value;
-                    
-                    const whatsappValue = document.getElementById('whatsapp').value;
-                    document.getElementById('summaryWhatsapp').textContent = whatsappValue ? whatsappValue : 'Not provided';
-                    
-                    // Build products summary
-                    let productsSummary = '';
-                    selectedProducts.forEach(product => {
-                        let quantity = '';
-                        let unit = '';
-                        
-                        if (product === 'Tile Adhesive') {
-                            quantity = document.getElementById('tileAdhesiveAmount').value;
-                            unit = document.getElementById('tileAdhesiveUnit').value;
-                        } else if (product === 'Water Proof') {
-                            quantity = document.getElementById('waterProofAmount').value;
-                            unit = document.getElementById('waterProofUnit').value;
-                        } else if (product === 'H4 ShieldX') {
-                            quantity = document.getElementById('shieldXAmount').value;
-                            unit = document.getElementById('shieldXUnit').value;
-                        }
-                        
-                        productsSummary += `${product}: ${quantity} ${unit}<br>`;
-                    });
-                    
-                    document.getElementById('summaryProducts').innerHTML = productsSummary;
-                    
-                    step2.classList.remove('active');
-                    step3.classList.add('active');
-                }
-            });
-            
-            backToStep2.addEventListener('click', function() {
-                step3.classList.remove('active');
-                step2.classList.add('active');
-            });
-            
-            confirmOrder.addEventListener('click', function() {
-                // In a real implementation, you would send this data to a server
-                // For this example, we'll simulate a successful order
-                
-                // Create WhatsApp message
-                const name = document.getElementById('name').value;
-                const mobile = document.getElementById('mobile').value;
-                const products = selectedProducts.join(', ');
-                
-                // This would be the actual WhatsApp message in a real implementation
-                const whatsappMessage = `New Dealer Enquiry:\nName: ${name}\nMobile: ${mobile}\nProducts: ${products}\n\nOrder details sent to +919745838382`;
-                
-                // Show success message
-                step3.classList.remove('active');
-                successStep.style.display = 'block';
-                
-                // In a real implementation, you would actually send the WhatsApp message
-                console.log('WhatsApp message to be sent:', whatsappMessage);
-                alert('Order confirmed! WhatsApp message would be sent to +919745838382 with order details.');
-            });
-            
-            closeSuccess.addEventListener('click', function() {
-                dealerModal.style.display = 'none';
-                // Reset form
-                successStep.style.display = 'none';
-                step1.classList.add('active');
-                
-                // Clear form fields
-                document.getElementById('name').value = '';
-                document.getElementById('address').value = '';
-                document.getElementById('city').value = '';
-                document.getElementById('pincode').value = '';
-                document.getElementById('district').value = '';
-                document.getElementById('state').value = '';
-                document.getElementById('mobile').value = '';
-                document.getElementById('whatsapp').value = '';
-                document.getElementById('whatsappSame').checked = false;
-                document.getElementById('whatsapp').disabled = false;
-                
-                // Reset product selections
-                optionTileAdhesive.classList.remove('selected');
-                optionWaterProof.classList.remove('selected');
-                optionShieldX.classList.remove('selected');
-                tileAdhesiveQty.style.display = 'none';
-                waterProofQty.style.display = 'none';
-                shieldXQty.style.display = 'none';
-                selectedProducts = [];
-                
-                document.getElementById('tileAdhesiveAmount').value = '';
-                document.getElementById('waterProofAmount').value = '';
-                document.getElementById('shieldXAmount').value = '';
-            });
-            
-            // Close modal when clicking outside
-            window.addEventListener('click', function(event) {
-                if (event.target === dealerModal) {
-                    dealerModal.style.display = 'none';
-                }
-            });
-        });
-    </script>
+<button onclick="openDealer()">
+Dealer Enquiry
+</button>
+
+<button id="langBtn">
+EN / ML
+</button>
+
+</nav>
+
+</div>
+
+</header>
+
+<section class="hero">
+
+<h1>
+Premium Construction Chemical Solutions
+</h1>
+
+<p>
+Tile Adhesive,
+Waterproofing &
+H4 ShieldX Epoxy Flooring
+Solutions
+</p>
+
+</section>
+
+<div class="products">
+
+<div class="card">
+
+<img
+src="tile-adhesive.jpg"
+alt="H4 Tile Adhesive for Marble Granite and Ceramic Tiles"
+loading="lazy">
+
+<div class="card-content">
+
+<h3>Tile Adhesive</h3>
+
+<p>
+Premium bonding solution
+for tiles.
+</p>
+
+<button class="btn">
+View Details
+</button>
+
+</div>
+</div>
+
+<div class="card">
+
+<img
+src="waterproof.jpg"
+alt="H4 Waterproofing Solutions"
+loading="lazy">
+
+<div class="card-content">
+
+<h3>Waterproofing</h3>
+
+<p>
+Advanced waterproof
+protection system.
+</p>
+
+<button class="btn">
+View Details
+</button>
+
+</div>
+</div>
+
+<div class="card">
+
+<img
+src="epoxy.jpg"
+alt="H4 ShieldX Epoxy Flooring"
+loading="lazy">
+
+<div class="card-content">
+
+<h3>
+H4 ShieldX
+Epoxy Flooring
+</h3>
+
+<p>
+Premium seamless epoxy
+flooring.
+</p>
+
+<button class="btn">
+View Details
+</button>
+
+</div>
+</div>
+
+</div>
+
+<section
+id="homeSection"
+class="section">
+
+<div class="home-box">
+
+<h2>
+AV CHEM CHEMICAL &
+MANUFACTURING
+</h2>
+
+<p>
+
+Mukkilapeedika,
+Kannam Kulam,
+BP Angadi,
+
+<br><br>
+
+Tirur,
+Malappuram,
+
+<br><br>
+
+Kerala - 676102
+
+<br><br>
+
+Mobile:
++91 79073 44030
+
+<br>
+
+WhatsApp:
++91 97458 38382
+
+<br>
+
+Email:
+avchemtirur@gmail.com
+
+</p>
+
+</div>
+
+</section>
+
+<section
+id="contactSection"
+class="section">
+
+<div class="contact-box">
+
+<h2>
+Contact
+</h2>
+
+<p>
+
+Please use Dealer Enquiry
+for all Product and
+Dealership enquiries.
+
+</p>
+<!-- CUSTOMER NAME -->
+
+<div class="form-group">
+<label>Customer Name *</label>
+
+<input
+type="text"
+id="customerName"
+class="form-control">
+
+<div
+id="nameError"
+class="error-text">
+Enter Customer Name
+</div>
+</div>
+
+<!-- CONTACT -->
+
+<div class="form-group">
+
+<label>
+Contact Number *
+</label>
+
+<input
+type="tel"
+id="contactNumber"
+maxlength="10"
+inputmode="numeric"
+class="form-control">
+
+<div
+id="contactError"
+class="error-text">
+Enter Valid 10 Digit Number
+</div>
+
+</div>
+
+<!-- WHATSAPP -->
+
+<div class="form-group">
+
+<label>
+WhatsApp Number *
+</label>
+
+<input
+type="tel"
+id="whatsappNumber"
+maxlength="10"
+inputmode="numeric"
+class="form-control">
+
+<div
+id="whatsappError"
+class="error-text">
+Enter Valid WhatsApp Number
+</div>
+
+</div>
+
+<!-- CITY -->
+
+<div class="form-group">
+
+<label>
+Area / City *
+</label>
+
+<input
+type="text"
+id="city"
+class="form-control">
+
+<div
+id="cityError"
+class="error-text">
+Enter Area / City
+</div>
+
+</div>
+
+<!-- PINCODE -->
+
+<div class="form-group">
+
+<label>
+Pincode *
+</label>
+
+<input
+type="tel"
+id="pincode"
+maxlength="6"
+inputmode="numeric"
+class="form-control">
+
+<div
+id="pinError"
+class="error-text">
+Enter Valid 6 Digit Pincode
+</div>
+
+</div>
+
+<!-- DISTRICT -->
+
+<div class="form-group">
+
+<label>
+District *
+</label>
+
+<input
+type="text"
+id="district"
+class="form-control">
+
+<div
+id="districtError"
+class="error-text">
+Enter District
+</div>
+
+</div>
+
+<!-- ITEM -->
+
+<div class="form-group">
+
+<label>
+Select Item *
+</label>
+
+<select
+id="item"
+class="form-control">
+
+<option value="">
+Select
+</option>
+
+<option>
+Tile Adhesive
+</option>
+
+<option>
+Waterproofing
+</option>
+
+<option>
+Epoxy Flooring
+</option>
+
+</select>
+
+<div
+id="itemError"
+class="error-text">
+Select Item
+</div>
+
+</div>
+
+<!-- UNIT -->
+
+<div class="form-group">
+
+<label>
+Unit *
+</label>
+
+<select
+id="unit"
+class="form-control">
+
+<option value="">
+Select
+</option>
+
+<option>
+KG
+</option>
+
+<option>
+Bag
+</option>
+
+<option>
+Square Feet
+</option>
+
+</select>
+
+<div
+id="unitError"
+class="error-text">
+Select Unit
+</div>
+
+</div>
+
+<!-- QUANTITY -->
+
+<div class="form-group">
+
+<label>
+Quantity *
+</label>
+
+<input
+type="number"
+id="quantity"
+class="form-control">
+
+<div
+id="qtyError"
+class="error-text">
+Enter Quantity
+</div>
+
+</div>
+
+<button
+class="btn"
+onclick="submitForm()">
+
+Confirm
+
+</button>
+
+</div>
+</div>
+
+<script>
+
+function showHome(){
+
+document
+.getElementById(
+'homeSection')
+.style.display='block';
+
+document
+.getElementById(
+'contactSection')
+.style.display='none';
+
+}
+
+function showContact(){
+
+document
+.getElementById(
+'contactSection')
+.style.display='block';
+
+document
+.getElementById(
+'homeSection')
+.style.display='none';
+
+}
+
+function openDealer(){
+
+document
+.getElementById(
+'dealerModal')
+.style.display='block';
+
+}
+
+window.onclick=function(e){
+
+let modal=
+document.getElementById(
+'dealerModal');
+
+if(e.target==modal){
+
+modal.style.display='none';
+
+}
+
+}
+
+function submitForm(){
+
+let valid=true;
+
+let name=
+document.getElementById(
+'customerName');
+
+let contact=
+document.getElementById(
+'contactNumber');
+
+let whatsapp=
+document.getElementById(
+'whatsappNumber');
+
+let city=
+document.getElementById(
+'city');
+
+let pincode=
+document.getElementById(
+'pincode');
+
+let district=
+document.getElementById(
+'district');
+
+let item=
+document.getElementById(
+'item');
+
+let unit=
+document.getElementById(
+'unit');
+
+let qty=
+document.getElementById(
+'quantity');
+
+document
+.querySelectorAll(
+'.error-text')
+.forEach(el=>
+el.style.display='none');
+
+if(name.value==""){
+document.getElementById(
+'nameError')
+.style.display='block';
+valid=false;
+}
+
+if(!/^\d{10}$/
+.test(contact.value)){
+
+document
+.getElementById(
+'contactError')
+.style.display='block';
+
+valid=false;
+}
+
+if(!/^\d{10}$/
+.test(whatsapp.value)){
+
+document
+.getElementById(
+'whatsappError')
+.style.display='block';
+
+valid=false;
+}
+
+if(city.value==""){
+document
+.getElementById(
+'cityError')
+.style.display='block';
+valid=false;
+}
+
+if(!/^\d{6}$/
+.test(pincode.value)){
+
+document
+.getElementById(
+'pinError')
+.style.display='block';
+
+valid=false;
+}
+
+if(district.value==""){
+
+document
+.getElementById(
+'districtError')
+.style.display='block';
+
+valid=false;
+
+}
+
+if(item.value==""){
+
+document
+.getElementById(
+'itemError')
+.style.display='block';
+
+valid=false;
+
+}
+
+if(unit.value==""){
+
+document
+.getElementById(
+'unitError')
+.style.display='block';
+
+valid=false;
+
+}
+
+if(qty.value==""){
+
+document
+.getElementById(
+'qtyError')
+.style.display='block';
+
+valid=false;
+
+}
+
+if(!valid) return;
+
+let msg=`
+
+AV CHEM CHEMICAL
+& MANUFACTURING
+
+Dealer Enquiry
+
+Customer Name:
+${name.value}
+
+Contact:
+${contact.value}
+
+WhatsApp:
+${whatsapp.value}
+
+City:
+${city.value}
+
+District:
+${district.value}
+
+Pincode:
+${pincode.value}
+
+Item:
+${item.value}
+
+Unit:
+${unit.value}
+
+Quantity:
+${qty.value}
+
+`;
+
+window.open(
+
+'https://wa.me/919745838382?text='+
+
+encodeURIComponent(msg)
+
+);
+
+alert(
+'Dealer Enquiry Ready. WhatsApp Opening...'
+);
+
+}
+
+</script>
+
 </body>
-                        </html>
+</html>
+
+</div>
+
+</section>
+
+<div
+id="dealerModal"
+class="modal">
+
+<div class="modal-content">
+
+<h2>
+Dealer Enquiry Form
+</h2>
+// PDF GENERATE
+
+const { jsPDF } = window.jspdf;
+
+let pdf = new jsPDF();
+
+pdf.setFontSize(18);
+
+pdf.text(
+"AV CHEM CHEMICAL & MANUFACTURING",
+10,
+20
+);
+
+pdf.setFontSize(12);
+
+pdf.text(
+"Dealer Enquiry Form",
+10,
+35
+);
+
+pdf.text(
+`Customer Name : ${name.value}`,
+10,
+50
+);
+
+pdf.text(
+`Contact Number : ${contact.value}`,
+10,
+60
+);
+
+pdf.text(
+`WhatsApp Number : ${whatsapp.value}`,
+10,
+70
+);
+
+pdf.text(
+`City : ${city.value}`,
+10,
+80
+);
+
+pdf.text(
+`District : ${district.value}`,
+10,
+90
+);
+
+pdf.text(
+`Pincode : ${pincode.value}`,
+10,
+100
+);
+
+pdf.text(
+`Item : ${item.value}`,
+10,
+110
+);
+
+pdf.text(
+`Unit : ${unit.value}`,
+10,
+120
+);
+
+pdf.text(
+`Quantity : ${qty.value}`,
+10,
+130
+);
+
+pdf.text(
+"Thank You For Your Enquiry",
+10,
+155
+);
+
+pdf.save(
+"AVCHEM_Dealer_Enquiry.pdf"
+);
