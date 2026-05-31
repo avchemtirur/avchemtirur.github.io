@@ -15,8 +15,8 @@
     <meta property="og:description" content="Premium Construction Chemical Solutions">
     <meta property="og:type" content="website">
 
-    <!-- jsPDF Library for PDF Generation -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- html2pdf Library (മലയാളം PDF-ൽ പെർഫെക്റ്റ് ആയി വരാൻ ഇത് നിർബന്ധമാണ്) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <style>
         *{
@@ -149,24 +149,6 @@
             color: #1A365D;
             margin-bottom: 20px;
         }
-        .modal{
-            display:none;
-            position:fixed;
-            left:0;
-            top:0;
-            width:100%;
-            height:100%;
-            background:rgba(0,0,0,.7);
-            overflow:auto;
-            z-index:9999;
-        }
-        .modal-content{
-            background:white;
-            max-width:600px;
-            margin:30px auto;
-            padding:25px;
-            border-radius:20px;
-        }
         .form-group{
             margin-bottom:15px;
         }
@@ -181,22 +163,130 @@
             border:1px solid #ddd;
             border-radius:8px;
         }
-        .error{
-            border:2px solid red;
-        }
         .error-text{
             color:red;
             font-size:12px;
             display:none;
             margin-top: 5px;
         }
+
+        /* ----------------------------------------------------
+           നിങ്ങൾ കാണിച്ച ചിത്രങ്ങൾ പോലെയുള്ള PREMIUM PDF STYLE
+        ------------------------------------------------------- */
+        #pdf-template {
+            display: none;
+            width: 210mm;
+            padding: 20mm;
+            background: white;
+            color: #222;
+        }
+        
+        .pdf-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 3px solid #1A365D;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        .pdf-company-title {
+            color: #1A365D;
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .pdf-company-details {
+            font-size: 11px;
+            color: #444;
+            margin-top: 5px;
+            line-height: 1.4;
+        }
+
+        .pdf-doc-type {
+            text-align: right;
+        }
+
+        .pdf-doc-type h2 {
+            color: #1A365D;
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .pdf-meta-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+
+        .pdf-meta-box {
+            width: 48%;
+            background: #F8FAFC;
+            padding: 12px;
+            border-radius: 6px;
+            border-left: 3px solid #1A365D;
+        }
+
+        .pdf-meta-box h4 {
+            color: #1A365D;
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            border-bottom: 1px solid #E2E8F0;
+            padding-bottom: 2026-03;
+        }
+
+        .pdf-meta-box p {
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        .pdf-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+        }
+
+        .pdf-table th {
+            background: #1A365D;
+            color: white;
+            text-align: left;
+            padding: 10px;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        .pdf-table td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #E2E8F0;
+            font-size: 13px;
+        }
+
+        .pdf-table tr:nth-child(even) td {
+            background: #F8FAFC;
+        }
+
+        .pdf-footer {
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .pdf-signature {
+            text-align: center;
+            width: 150px;
+            border-top: 1px solid #333;
+            padding-top: 5px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
         @media(max-width:768px){
-            .hero h1{
-                font-size:32px;
-            }
-            nav{
-                flex-wrap:wrap;
-            }
+            .hero h1{ font-size:32px; }
+            nav{ flex-wrap:wrap; }
         }
     </style>
 </head>
@@ -347,6 +437,74 @@
         </div>
     </section>
 
+    <!-- HIDDEN PREMIUM LAYOUT FOR PDF (മലയാളം സപ്പോർട്ട് ചെയ്യും) -->
+    <div id="pdf-template">
+        <div class="pdf-header">
+            <div>
+                <div class="pdf-company-title">AV CHEM CHEMICAL & MANUFACTURING</div>
+                <div class="pdf-company-details">
+                    Mukkilapeedika, Kannam Kulam, BP Angadi,<br>
+                    Tirur, Malappuram, Kerala - 676102<br>
+                    Mob: +91 79073 44030 | Email: avchemtirur@gmail.com
+                </div>
+            </div>
+            <div class="pdf-doc-type">
+                <h2>QUOTATION</h2>
+                <p style="font-size:11px; color:#555; margin-top:3px;" id="pdf_date"></p>
+            </div>
+        </div>
+
+        <div class="pdf-meta-container">
+            <div class="pdf-meta-box">
+                <h4>Quotation To</h4>
+                <p><strong>Name:</strong> <span id="pdf_name"></span></p>
+                <p><strong>Location:</strong> <span id="pdf_location"></span></p>
+                <p><strong>Contact:</strong> <span id="pdf_phone"></span></p>
+            </div>
+            <div class="pdf-meta-box" style="text-align: right; border-left: none; border-right: 3px solid #1A365D;">
+                <h4>Document Info</h4>
+                <p><strong>Status:</strong> Request Pending</p>
+                <p><strong>Format:</strong> Digital Dealer Slip</p>
+                <p><strong>Verified:</strong> Connected via Web</p>
+            </div>
+        </div>
+
+        <table class="pdf-table">
+            <thead>
+                <tr>
+                    <th style="width: 10%;">Sl.No</th>
+                    <th style="width: 55%;">Product / Service Description</th>
+                    <th style="width: 15%; text-align: center;">Unit</th>
+                    <th style="width: 20%; text-align: right;">Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td style="font-weight: 600;" id="pdf_item"></td>
+                    <td style="text-align: center;" id="pdf_unit"></td>
+                    <td style="text-align: right; font-weight: 600;" id="pdf_qty"></td>
+                </tr>
+                <tr><td>2</td><td>--</td><td style="text-align: center;">--</td><td style="text-align: right;">--</td></tr>
+                <tr><td>3</td><td>--</td><td style="text-align: center;">--</td><td style="text-align: right;">--</td></tr>
+            </tbody>
+        </table>
+
+        <div style="font-size:11px; color:#666; margin-top:30px; line-height:1.5;">
+            <strong>Notes / Terms:</strong><br>
+            This is an automated dealer enquiry slip generated through AV CHEM web platform. Final commercial pricing, loading details, and dealership terms will be forwarded to your registered WhatsApp number.
+        </div>
+
+        <div class="pdf-footer">
+            <div style="font-size: 11px; color: #555; font-style: italic;">
+                Thank you for your business enquiry.
+            </div>
+            <div class="pdf-signature">
+                Authorized Signatory
+            </div>
+        </div>
+    </div>
+
     <script>
         function showHome(){
             document.getElementById('homeSection').style.display='block';
@@ -356,11 +514,9 @@
         function showContact(){
             document.getElementById('contactSection').style.display='block';
             document.getElementById('homeSection').style.display='none';
-            // Scroll to form smoothly
             document.getElementById('contactSection').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Show home by default on load
         window.onload = function() {
             showHome();
         }
@@ -378,79 +534,50 @@
             let unit= document.getElementById('unit');
             let qty= document.getElementById('quantity');
 
-            // Hide all errors first
             document.querySelectorAll('.error-text').forEach(el=> el.style.display='none');
 
-            if(name.value.trim()==""){
-                document.getElementById('nameError').style.display='block';
-                valid=false;
-            }
-            if(!/^\d{10}$/.test(contact.value)){
-                document.getElementById('contactError').style.display='block';
-                valid=false;
-            }
-            if(!/^\d{10}$/.test(whatsapp.value)){
-                document.getElementById('whatsappError').style.display='block';
-                valid=false;
-            }
-            if(city.value.trim()==""){
-                document.getElementById('cityError').style.display='block';
-                valid=false;
-            }
-            if(!/^\d{6}$/.test(pincode.value)){
-                document.getElementById('pinError').style.display='block';
-                valid=false;
-            }
-            if(district.value.trim()==""){
-                document.getElementById('districtError').style.display='block';
-                valid=false;
-            }
-            if(item.value==""){
-                document.getElementById('itemError').style.display='block';
-                valid=false;
-            }
-            if(unit.value==""){
-                document.getElementById('unitError').style.display='block';
-                valid=false;
-            }
-            if(qty.value==""){
-                document.getElementById('qtyError').style.display='block';
-                valid=false;
-            }
+            if(name.value.trim()==""){ document.getElementById('nameError').style.display='block'; valid=false; }
+            if(!/^\d{10}$/.test(contact.value)){ document.getElementById('contactError').style.display='block'; valid=false; }
+            if(!/^\d{10}$/.test(whatsapp.value)){ document.getElementById('whatsappError').style.display='block'; valid=false; }
+            if(city.value.trim()==""){ document.getElementById('cityError').style.display='block'; valid=false; }
+            if(!/^\d{6}$/.test(pincode.value)){ document.getElementById('pinError').style.display='block'; valid=false; }
+            if(district.value.trim()==""){ document.getElementById('districtError').style.display='block'; valid=false; }
+            if(item.value==""){ document.getElementById('itemError').style.display='block'; valid=false; }
+            if(unit.value==""){ document.getElementById('unitError').style.display='block'; valid=false; }
+            if(qty.value==""){ document.getElementById('qtyError').style.display='block'; valid=false; }
 
             if(!valid) return;
 
-            // 1. GENERATE PDF NOW
-            try {
-                const { jsPDF } = window.jspdf;
-                let pdf = new jsPDF();
+            // 1. PDF ലേഔട്ടിലേക്ക് ഡാറ്റ മാറ്റുന്നു
+            let today = new Date();
+            document.getElementById('pdf_date').innerText = "Date: " + today.toLocaleDateString('en-IN');
+            document.getElementById('pdf_name').innerText = name.value;
+            document.getElementById('pdf_location').innerText = city.value + ", " + district.value + " - " + pincode.value;
+            document.getElementById('pdf_phone').innerText = "+91 " + contact.value;
+            document.getElementById('pdf_item').innerText = item.value + " Solutions";
+            document.getElementById('pdf_unit').innerText = unit.value;
+            document.getElementById('pdf_qty').innerText = qty.value;
 
-                pdf.setFontSize(18);
-                pdf.text("AV CHEM CHEMICAL & MANUFACTURING", 10, 20);
+            // 2. HTML ടേബിൾ വെച്ച് പ്രീമിയം PDF ഉണ്ടാക്കുന്നു
+            const element = document.getElementById('pdf-template');
+            element.style.display = 'block'; // താൽക്കാലികമായി കാണിക്കുന്നു
 
-                pdf.setFontSize(12);
-                pdf.text("Dealer Enquiry Form", 10, 35);
-                pdf.text(`Customer Name : ${name.value}`, 10, 50);
-                pdf.text(`Contact Number : ${contact.value}`, 10, 60);
-                pdf.text(`WhatsApp Number : ${whatsapp.value}`, 10, 70);
-                pdf.text(`City : ${city.value}`, 10, 80);
-                pdf.text(`District : ${district.value}`, 10, 90);
-                pdf.text(`Pincode : ${pincode.value}`, 10, 100);
-                pdf.text(`Item : ${item.value}`, 10, 110);
-                pdf.text(`Unit : ${unit.value}`, 10, 120);
-                pdf.text(`Quantity : ${qty.value}`, 10, 130);
-                pdf.text("Thank You For Your Enquiry", 10, 155);
+            const opt = {
+                margin:       10,
+                filename:     'AVCHEM_Quotation_' + name.value + '.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, useCORS: true },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
 
-                pdf.save("AVCHEM_Dealer_Enquiry.pdf");
-            } catch (error) {
-                console.error("PDF generation failed:", error);
-            }
+            html2pdf().set(opt).from(element).save().then(() => {
+                element.style.display = 'none'; // കഴിഞ്ഞാൽ ഒളിപ്പിക്കുന്നു
+            });
 
-            // 2. OPEN WHATSAPP
+            // 3. വാട്സാപ്പ് മെസ്സേജ് അയക്കുന്നു
             let msg = `AV CHEM CHEMICAL & MANUFACTURING\n\nDealer Enquiry\n\nCustomer Name: ${name.value}\nContact: ${contact.value}\nWhatsApp: ${whatsapp.value}\nCity: ${city.value}\nDistrict: ${district.value}\nPincode: ${pincode.value}\nItem: ${item.value}\nUnit: ${unit.value}\nQuantity: ${qty.value}`;
 
             window.open('https://wa.me/919745838382?text=' + encodeURIComponent(msg));
-            alert('Dealer Enquiry PDF Generated & WhatsApp Opening...');
         }
     </script>
 </body>
