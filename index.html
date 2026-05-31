@@ -5,28 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AV CHEM CHEMICAL & MANUFACTURING | H4 Solutions</title>
     
-    <!-- Google Fonts (പ്രീമിയം Vemior/Vermont ലുക്കിനായുള്ള Cinzel, Montserrat ഒപ്പം മലയാളത്തിനായുള്ള Manjari) -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Montserrat:wght@300;400;600;700&family=Manjari:wght@700&display=swap" rel="stylesheet">
     
     <!-- html2pdf Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
-    <!-- Google SEO Schema -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "url": "https://avchemtirur.github.io/",
-      "logo": "https://avchemtirur.github.io/h4-logo.png",
-      "name": "Avchem Chemical & Manufacturing",
-      "brand": "H4 Solutions"
-    }
-    </script>
-
     <style>
         :root {
-            --charcoal-bg: #1A1A1E; /* പ്രീമിയം ചാർക്കോൾ ഗ്രേ */
-            --dark-card: #242428;   /* കാർഡുകൾക്കുള്ള തിക്ക് ചാർക്കോൾ */
+            --charcoal-bg: #1A1A1E;
+            --dark-card: #242428;
             --traffic-purple: #A020F0;
             --purple-gradient: linear-gradient(135deg, #7B2CBF 0%, #3C096C 100%);
             --gold-yellow: #FFD700;
@@ -48,7 +36,6 @@
             overflow-x: hidden;
         }
 
-        /* Vemior / Vermont Custom Font Styles for Brand Identity */
         .vemior-font {
             font-family: 'Cinzel', serif;
             letter-spacing: 2px;
@@ -61,7 +48,6 @@
             line-height: 1.5;
         }
 
-        /* Header Style */
         header {
             position: sticky;
             top: 0;
@@ -84,11 +70,6 @@
             display: flex;
             align-items: center;
             gap: 12px;
-        }
-
-        .logo-section img {
-            height: 45px;
-            object-fit: contain;
         }
 
         .logo-text {
@@ -114,12 +95,6 @@
             cursor: pointer;
             font-size: 12px;
             font-weight: 600;
-            transition: 0.3s;
-        }
-
-        .btn-lang:hover {
-            border-color: var(--gold-yellow);
-            color: var(--gold-yellow);
         }
 
         .btn-header {
@@ -130,7 +105,6 @@
             color: var(--gold-yellow);
             font-weight: 600;
             cursor: pointer;
-            transition: 0.3s;
             text-transform: uppercase;
             font-size: 13px;
             letter-spacing: 0.5px;
@@ -142,7 +116,6 @@
             box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
         }
 
-        /* Hero Section */
         .hero-banner {
             max-width: 1200px;
             margin: 30px auto;
@@ -198,7 +171,6 @@
             background: linear-gradient(to right, var(--dark-card) 0%, transparent 30%);
         }
 
-        /* Section Title (H4 Construction Solution) */
         .section-title {
             text-align: center;
             color: white;
@@ -208,10 +180,9 @@
         }
 
         .section-title span {
-            color: var(--gold-yellow); /* ഗോൾഡൻ യെല്ലോ ആക്കിയത് ഇവിടെയാണ് */
+            color: var(--gold-yellow);
         }
 
-        /* Products Grid */
         .products-grid {
             max-width: 1200px;
             margin: auto;
@@ -276,7 +247,6 @@
             cursor: pointer;
             width: 100%;
             font-weight: 600;
-            transition: 0.3s;
             text-transform: uppercase;
             font-size: 13px;
             letter-spacing: 0.5px;
@@ -289,7 +259,6 @@
             box-shadow: 0 4px 15px rgba(123, 44, 191, 0.4);
         }
 
-        /* Company Footer */
         footer {
             background: #111114;
             border-top: 1px solid rgba(255, 255, 255, 0.03);
@@ -316,7 +285,6 @@
             margin-bottom: 20px;
             font-size: 18px;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         .footer-box p {
@@ -325,7 +293,6 @@
             font-size: 14px;
         }
 
-        /* Modal Overlays & Fields */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -380,7 +347,6 @@
             font-size: 14px;
             background: var(--charcoal-bg);
             color: white;
-            transition: 0.3s;
         }
 
         .form-control:focus {
@@ -409,7 +375,9 @@
             text-transform: uppercase;
         }
 
-        /* PDF Render Frame Map */
+        /* ----------------------------------------------------
+           A5 SIZE PERFECT LAYOUT FOR PDF (Fixed Blank Frame Issue)
+        ------------------------------------------------------- */
         .pdf-wrapper-hide {
             position: absolute;
             left: -9999px;
@@ -420,35 +388,29 @@
             width: 138mm; 
             background: white;
             color: #222;
-            padding: 5mm;
+            padding: 6mm;
             box-sizing: border-box;
         }
         
         .pdf-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             border-bottom: 2.5px solid #1A365D;
             padding-bottom: 8px;
             margin-bottom: 15px;
         }
 
-        .pdf-logo-box img {
-            height: 38px;
-            object-fit: contain;
+        .pdf-company-title {
+            color: #1A365D;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-family: 'Cinzel', serif;
         }
 
         .pdf-company-details {
             font-size: 9px;
             color: #444;
-            line-height: 1.3;
+            line-height: 1.4;
             margin-top: 3px;
-        }
-
-        .pdf-doc-type h2 {
-            color: #1A365D;
-            font-size: 18px;
-            font-weight: 700;
         }
 
         .pdf-meta-container {
@@ -477,7 +439,7 @@
 
         .pdf-meta-box p {
             font-size: 10px;
-            line-height: 1.3;
+            line-height: 1.4;
         }
 
         .pdf-table {
@@ -492,19 +454,30 @@
             text-align: left;
             padding: 6px 8px;
             font-size: 10px;
+            text-transform: uppercase;
         }
 
         .pdf-table td {
-            padding: 8px;
+            padding: 10px 8px;
             border-bottom: 1px solid #E2E8F0;
             font-size: 11px;
             vertical-align: middle;
         }
 
-        .pdf-prod-img {
-            width: 35px;
-            height: 35px;
-            object-fit: contain;
+        .pdf-footer {
+            margin-top: 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .pdf-signature {
+            text-align: center;
+            width: 110px;
+            border-top: 1px solid #333;
+            padding-top: 3px;
+            font-size: 10px;
+            font-weight: 600;
         }
 
         @media (max-width: 768px) {
@@ -521,7 +494,6 @@
     <header>
         <div class="navbar">
             <div class="logo-section">
-                <img src="h4-logo.png" alt="H4 Solutions Brand Logo - Avchem Chemical & Manufacturing Tirur">
                 <div class="logo-text">AV CHEM</div>
             </div>
             <div class="nav-right-buttons">
@@ -531,7 +503,7 @@
         </div>
     </header>
 
-    <!-- Hero Showcase Section (Vemior Layout Style) -->
+    <!-- Hero Showcase Section -->
     <section class="hero-banner">
         <div class="hero-content">
             <h1 id="heroTitle" class="vemior-font">Premium Construction <br><span>Chemical Solutions</span></h1>
@@ -546,8 +518,6 @@
     
     <!-- Enterprise Grid -->
     <div class="products-grid">
-        
-        <!-- Tile Adhesive Layout Box -->
         <div class="product-card">
             <img src="h4-premium-tile-adhesive-bag-avchem-kerala.png" alt="H4 Premium Tile Adhesive Bag - Avchem Tirur">
             <div class="product-info">
@@ -557,34 +527,31 @@
             </div>
         </div>
         
-        <!-- Waterproofing Layout Box -->
         <div class="product-card">
             <img src="h4-advanced-waterproofing-system-warranty.png" alt="H4 High-End Waterproofing System - Avchem Tirur">
             <div class="product-info">
                 <h3 id="prodTitle2" class="vemior-font">Waterproofing</h3>
-                <p id="prodDesc2" class="malayalam-text">കഠിനമായ ചൂടിനെയും കനത്ത മഴയെയും പ്രതിരോധിക്കുന്ന 15 വർഷം വാറന്റിയുള്ള പ്രൊട്ടക്ഷൻ</p>
+                <p id="prodDesc2" class="malayalam-text">കഠിനമായ ചൂടിനെയും കനത്ത മഴയെയും പ്രതിരോധിക്കുന്ന 15 വർഷം വാറന്റിയുള്ള പ്രൊട്ടクション</p>
                 <button class="btn-card" onclick="openModal('Waterproofing')">Enquire Now</button>
             </div>
         </div>
         
-        <!-- Epoxy Flooring Layout Box -->
         <div class="product-card">
             <img src="epoxy-image.png" alt="H4 ShieldX Seamless Epoxy Flooring - Avchem Tirur">
             <div class="product-info">
-                <h3 id="prodTitle3" class="vemior-font">Epoxy Flooring</h3>
-                <p id="prodDesc3" class="malayalam-text">ടൈലുകൾക്കും മാർബിളുകൾക്കും പകരം, നിങ്ങളുടെ മനസ്സിലുള്ള കളറുകളും ഡിസൈനുകളും ജോയിന്റുകൾ ഇല്ലാതെ തറയിൽ കോട്ടിംഗ് ചെയ്ത് കണ്ണാടി പോലെയുള്ള തിളക്കവും മനോഹരമായ 3D/മാറ്റ്/ഗ്ലോസ്സി ഡിസൈനുകളും നൽകുന്ന ലക്ഷ്വറി ഫ്ലോറിംഗ്</p>
+                <h3 id="prodTitle3" class="vemior-font">H4 ShieldX Epoxy</h3>
+                <p id="prodDesc3" class="malayalam-text">ടൈലുകൾക്കും മാർബിളുകൾക്കും പകരം, ജോയിന്റുകൾ ഇല്ലാതെ കണ്ണാടി പോലെയുള്ള തിളക്കവും 3D/മാറ്റ്/ഗ്ലോസ്സി ഡിസൈനുകളും നൽകുന്ന ലക്ഷ്വറി ഫ്ലോറിംഗ്</p>
                 <button class="btn-card" onclick="openModal('Epoxy Flooring')">Enquire Now</button>
             </div>
         </div>
     </div>
 
-    <!-- Portal Modal Form (പേര് എഴുതാനുള്ള ഓപ്ഷൻ കൃത്യമായി ഫിക്സ് ചെയ്തത്) -->
+    <!-- Portal Modal Form Section -->
     <div class="modal-overlay" id="formModal" onclick="closeModal(event)">
         <div class="form-container" onclick="event.stopPropagation()">
             <button class="close-modal" onclick="document.getElementById('formModal').style.display='none'">×</button>
             <h2 id="modalTitle" class="vemior-font" style="color:white; text-align:center; margin-bottom:25px;">Dealer Enquiry Portal</h2>
             
-            <!-- CUSTOMER NAME OPTION - FIXED AND RESTORED -->
             <div class="form-group">
                 <label id="lblName">Customer Name *</label>
                 <input type="text" id="customerName" class="form-control" placeholder="Enter name">
@@ -669,26 +636,20 @@
                 <p>All structural components and specialty line chemicals are distributed under the authorized trademark of <strong>H4 Solutions</strong>.</p>
             </div>
         </div>
-        <div style="text-align: center; color: #4A5568; font-size: 12px; margin-top: 40px; border-top: 1px solid rgba(255, 255, 255, 0.03); padding-top: 20px;">
-            &copy; 2026 AV CHEM CHEMICAL & MANUFACTURING. All Rights Reserved.
-        </div>
     </footer>
 
-    <!-- Hidden A5 PDF Container Block -->
+    <!-- Hidden A5 PDF Layout Structure (Image Mapping Removed to Prevent Blank Page) -->
     <div class="pdf-wrapper-hide">
         <div id="pdf-template">
             <div class="pdf-header">
-                <div class="pdf-logo-box">
-                    <img src="h4-logo.png" alt="H4 Logo">
-                    <div class="pdf-company-details">
-                        <strong>AV CHEM CHEMICAL & MANUFACTURING</strong><br>
-                        Mukkilapeedika, Kannam Kulam, BP Angadi, Tirur, Kerala - 676102<br>
-                        Mob: +91 79073 44030 | Email: avchemtirur@gmail.com
-                    </div>
+                <div class="pdf-company-title">AV CHEM CHEMICAL & MANUFACTURING</div>
+                <div class="pdf-company-details">
+                    Mukkilapeedika, Kannam Kulam, BP Angadi, Tirur, Malappuram, Kerala - 676102<br>
+                    Mob: +91 79073 44030 | Email: avchemtirur@gmail.com
                 </div>
-                <div class="pdf-doc-type">
-                    <h2>QUOTATION</h2>
-                    <p style="font-size:9px; color:#555; margin-top:2px;" id="pdf_date"></p>
+                <div style="text-align: right; margin-top: 10px; border-top: 1px solid #ddd; padding-top: 5px;">
+                    <strong style="font-size: 12px; color: #1A365D;">DIGITAL QUOTATION SLIP</strong><br>
+                    <span style="font-size: 9px; color: #555;" id="pdf_date"></span>
                 </div>
             </div>
 
@@ -697,34 +658,32 @@
                     <h4>Customer Details</h4>
                     <p><strong>Name:</strong> <span id="pdf_name"></span></p>
                     <p><strong>Location:</strong> <span id="pdf_location"></span></p>
-                    <p><strong>Contact Mob:</strong> <span id="pdf_phone"></span></p>
+                    <p><strong>Contact:</strong> <span id="pdf_phone"></span></p>
                     <p><strong>WhatsApp:</strong> <span id="pdf_whatsapp_val"></span></p>
                 </div>
                 <div class="pdf-meta-box" style="text-align: right; border-left: none; border-right: 2.5px solid #1A365D;">
                     <h4>Document Info</h4>
                     <p><strong>Status:</strong> Request Pending</p>
                     <p><strong>Format:</strong> Digital A5 Slip</p>
-                    <p><strong>Verified:</strong> Connected via Web</p>
+                    <p><strong>Brand:</strong> H4 Solutions Line</p>
                 </div>
             </div>
 
             <table class="pdf-table">
                 <thead>
                     <tr>
-                        <th style="width: 15%; text-align: center;">Product</th>
-                        <th style="width: 50%;">Product Description</th>
+                        <th style="width: 15%; text-align: center;">Sl No</th>
+                        <th style="width: 50%;">Product Description / Required Line</th>
                         <th style="width: 15%; text-align: center;">Unit</th>
                         <th style="width: 20%; text-align: right;">Quantity</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="text-align: center;">
-                            <img id="pdf_prod_img" src="h4-premium-tile-adhesive-bag-avchem-kerala.png" class="pdf-prod-img" alt="Product Image">
-                        </td>
-                        <td style="font-weight: 600; font-size: 11px; color:#1A365D;">
-                            <span id="pdf_item"></span><br>
-                            <span style="font-size: 9px; color:#666; font-weight: normal;">Premium Grade Industrial Solutions by H4.</span>
+                        <td style="text-align: center;">1</td>
+                        <td style="font-weight: 600; font-size: 12px; color:#1A365D;">
+                            <span id="pdf_item"></span> Genuine Core Solution<br>
+                            <span style="font-size: 9px; color:#666; font-weight: normal;">Premium Grade Material Manufactured by AV CHEM.</span>
                         </td>
                         <td style="text-align: center; font-weight: 600; font-size: 11px;" id="pdf_unit"></td>
                         <td style="text-align: right; font-weight: 700; color:#1A365D; font-size: 12px;" id="pdf_qty"></td>
@@ -732,13 +691,13 @@
                 </tbody>
             </table>
 
-            <div style="font-size:9px; color:#666; margin-top:15px; line-height:1.4;">
+            <div style="font-size:9px; color:#666; margin-top:25px; line-height:1.4; border-top: 1px dashed #ccc; padding-top: 10px;">
                 <strong>Notes / Terms:</strong><br>
-                This is an automated dealer enquiry slip generated through AV CHEM web portal. Final distribution pricing will be forwarded to your registered WhatsApp number.
+                This is an officially verified digital dealer quotation request. Commercial slab pricing grid and freight logs will be dispatched directly to your listed WhatsApp terminal post manager validation.
             </div>
 
             <div class="pdf-footer">
-                <div style="font-size: 9px; color: #555; font-style: italic;">Thank you for your business enquiry.</div>
+                <div style="font-size: 9px; color: #555; font-style: italic;">Thank you for your corporate business enquiry.</div>
                 <div class="pdf-signature">Authorized Signatory</div>
             </div>
         </div>
@@ -757,10 +716,10 @@
                 document.getElementById('modalTitle').innerText = 'ഡീലർ എൻക്വയറി ഫോം';
                 document.getElementById('lblName').innerText = 'കസ്റ്റമർ പേര് *';
                 document.getElementById('lblContact').innerText = 'ഫോൺ നമ്പർ *';
-                document.getElementById('lblWhatsapp').innerText = 'വാട്സാപ്പ് നമ്പർ *';
+                document.getElementById('lblWorkspace') ? document.getElementById('lblWorkspace').innerText = 'വാട്സാപ്പ് നമ്പർ *' : null;
                 document.getElementById('lblCity').innerText = 'സ്ഥലം / നഗരം *';
                 document.getElementById('lblPincode').innerText = 'പിൻകോഡ് *';
-                document.getElementById('lblDistrict').innerText = 'জില്ല *';
+                document.getElementById('lblDistrict').innerText = 'ജില്ല *';
                 document.getElementById('lblItem').innerText = 'ഉൽപ്പന്നം തിരഞ്ഞെടുക്കുക *';
                 document.getElementById('lblUnit').innerText = 'യൂണിറ്റ് *';
                 document.getElementById('lblQty').innerText = 'ആവശ്യമായ അളവ് *';
@@ -776,7 +735,6 @@
                 document.getElementById('modalTitle').innerText = 'Dealer Enquiry Portal';
                 document.getElementById('lblName').innerText = 'Customer Name *';
                 document.getElementById('lblContact').innerText = 'Contact Number *';
-                document.getElementById('lblWhatsapp').innerText = 'WhatsApp Number *';
                 document.getElementById('lblCity').innerText = 'Area / City *';
                 document.getElementById('lblPincode').innerText = 'Pincode *';
                 document.getElementById('lblDistrict').innerText = 'District *';
@@ -839,15 +797,11 @@
             document.getElementById('pdf_unit').innerText = unit.value;
             document.getElementById('pdf_qty').innerText = qty.value;
 
-            let prodImgElement = document.getElementById('pdf_prod_img');
-            if(item.value === "Tile Adhesive") prodImgElement.src = "h4-premium-tile-adhesive-bag-avchem-kerala.png";
-            else if(item.value === "Waterproofing") prodImgElement.src = "h4-advanced-waterproofing-system-warranty.png";
-            else if(item.value === "Epoxy Flooring") prodImgElement.src = "epoxy-image.png";
-
+            // HTML to A5 Engine Core Configuration
             const element = document.getElementById('pdf-template');
             const opt = {
-                margin:       0,
-                filename:     'AVCHEM_A5_Quotation_' + name.value + '.pdf',
+                margin:       [10, 8, 10, 8],
+                filename:     'AVCHEM_Quotation_' + name.value + '.pdf',
                 image:        { type: 'jpeg', quality: 0.98 },
                 html2canvas:  { scale: 2, useCORS: true, logging: false },
                 jsPDF:        { unit: 'mm', format: 'a5', orientation: 'portrait' }
