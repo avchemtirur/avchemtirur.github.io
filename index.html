@@ -1,1021 +1,457 @@
 <!DOCTYPE html>
 <html lang="en">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+    <title>AV CHEM CHEMICAL & MANUFACTURING | Tile Adhesive | Waterproofing | H4 ShieldX Epoxy Flooring</title>
+    <meta name="description" content="Premium Tile Adhesive, Waterproofing and H4 ShieldX Epoxy Flooring Solutions by AV CHEM CHEMICAL & MANUFACTURING, Tirur, Kerala">
+    <meta name="keywords" content="Tile Adhesive Kerala, Waterproofing Kerala, Epoxy Flooring Kerala, H4 ShieldX, AV Chem Tirur">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://avchemtirur.github.io/">
 
-<title>
-AV CHEM CHEMICAL & MANUFACTURING |
-Tile Adhesive | Waterproofing |
-H4 ShieldX Epoxy Flooring
-</title>
+    <!-- Open Graph Tags for Social Media -->
+    <meta property="og:title" content="AV CHEM CHEMICAL & MANUFACTURING">
+    <meta property="og:description" content="Premium Construction Chemical Solutions">
+    <meta property="og:type" content="website">
 
-<meta name="description"
-content="Premium Tile Adhesive, Waterproofing and H4 ShieldX Epoxy Flooring Solutions by AV CHEM CHEMICAL & MANUFACTURING, Tirur, Kerala">
+    <!-- jsPDF Library for PDF Generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-<meta name="keywords"
-content="Tile Adhesive Kerala,
-Waterproofing Kerala,
-Epoxy Flooring Kerala,
-H4 ShieldX,
-AV Chem Tirur">
-
-<meta name="robots"
-content="index,follow">
-
-<link rel="canonical"
-href="https://avchemtirur.github.io/">
-
-<meta property="og:title"
-content="AV CHEM CHEMICAL & MANUFACTURING">
-
-<meta property="og:description"
-content="Premium Construction Chemical Solutions">
-
-<meta property="og:type"
-content="website">
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
-
-body{
-background:#F8F6F0;
-color:#222;
-overflow-x:hidden;
-}
-
-header{
-position:sticky;
-top:0;
-z-index:999;
-background:white;
-box-shadow:0 2px 20px rgba(0,0,0,.08);
-}
-
-.navbar{
-max-width:1200px;
-margin:auto;
-padding:15px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
-
-.logo{
-font-size:24px;
-font-weight:700;
-color:#1A365D;
-}
-
-nav{
-display:flex;
-gap:10px;
-}
-
-nav button{
-border:none;
-padding:10px 18px;
-border-radius:8px;
-background:#1A365D;
-color:white;
-cursor:pointer;
-}
-
-.hero{
-padding:80px 20px;
-text-align:center;
-}
-
-.hero h1{
-font-size:48px;
-color:#1A365D;
-}
-
-.hero p{
-max-width:700px;
-margin:auto;
-margin-top:20px;
-font-size:18px;
-}
-
-.products{
-display:grid;
-grid-template-columns:
-repeat(auto-fit,minmax(280px,1fr));
-gap:25px;
-padding:40px;
-max-width:1200px;
-margin:auto;
-}
-
-.card{
-background:white;
-border-radius:20px;
-overflow:hidden;
-box-shadow:0 8px 30px rgba(0,0,0,.08);
-transition:.3s;
-}
-
-.card:hover{
-transform:translateY(-8px);
-}
-
-.card img{
-width:100%;
-height:220px;
-object-fit:cover;
-}
-
-.card-content{
-padding:20px;
-}
-
-.card-content h3{
-color:#1A365D;
-margin-bottom:10px;
-}
-
-.btn{
-background:#1A365D;
-color:white;
-padding:12px 18px;
-border:none;
-border-radius:10px;
-cursor:pointer;
-width:100%;
-margin-top:15px;
-}
-
-.section{
-display:none;
-padding:50px 20px;
-max-width:1000px;
-margin:auto;
-}
-
-.active-section{
-display:block;
-}
-
-.home-box{
-background:white;
-padding:40px;
-border-radius:20px;
-box-shadow:0 5px 25px rgba(0,0,0,.08);
-}
-
-.home-box h2{
-color:#1A365D;
-margin-bottom:20px;
-}
-
-.contact-box{
-background:white;
-padding:40px;
-border-radius:20px;
-text-align:center;
-box-shadow:0 5px 25px rgba(0,0,0,.08);
-}
-
-.modal{
-display:none;
-position:fixed;
-left:0;
-top:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,.7);
-overflow:auto;
-z-index:9999;
-}
-
-.modal-content{
-background:white;
-max-width:700px;
-margin:30px auto;
-padding:25px;
-border-radius:20px;
-}
-
-.form-group{
-margin-bottom:15px;
-}
-
-.form-group label{
-display:block;
-margin-bottom:5px;
-font-weight:600;
-}
-
-.form-control{
-width:100%;
-padding:12px;
-border:1px solid #ddd;
-border-radius:8px;
-}
-
-.error{
-border:2px solid red;
-}
-
-.error-text{
-color:red;
-font-size:12px;
-display:none;
-}
-
-@media(max-width:768px){
-
-.hero h1{
-font-size:32px;
-}
-
-nav{
-flex-wrap:wrap;
-}
-
-}
-
-</style>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins',sans-serif;
+        }
+        body{
+            background:#F8F6F0;
+            color:#222;
+            overflow-x:hidden;
+        }
+        header{
+            position:sticky;
+            top:0;
+            z-index:999;
+            background:white;
+            box-shadow:0 2px 20px rgba(0,0,0,.08);
+        }
+        .navbar{
+            max-width:1200px;
+            margin:auto;
+            padding:15px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+        .logo{
+            font-size:24px;
+            font-weight:700;
+            color:#1A365D;
+        }
+        nav{
+            display:flex;
+            gap:10px;
+        }
+        nav button{
+            border:none;
+            padding:10px 18px;
+            border-radius:8px;
+            background:#1A365D;
+            color:white;
+            cursor:pointer;
+        }
+        .hero{
+            padding:80px 20px;
+            text-align:center;
+        }
+        .hero h1{
+            font-size:48px;
+            color:#1A365D;
+        }
+        .hero p{
+            max-width:700px;
+            margin:auto;
+            margin-top:20px;
+            font-size:18px;
+        }
+        .products{
+            display:grid;
+            grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+            gap:25px;
+            padding:40px;
+            max-width:1200px;
+            margin:auto;
+        }
+        .card{
+            background:white;
+            border-radius:20px;
+            overflow:hidden;
+            box-shadow:0 8px 30px rgba(0,0,0,.08);
+            transition:.3s;
+        }
+        .card:hover{
+            transform:translateY(-8px);
+        }
+        .card img{
+            width:100%;
+            height:220px;
+            object-fit:cover;
+        }
+        .card-content{
+            padding:20px;
+        }
+        .card-content h3{
+            color:#1A365D;
+            margin-bottom:10px;
+        }
+        .btn{
+            background:#1A365D;
+            color:white;
+            padding:12px 18px;
+            border:none;
+            border-radius:10px;
+            cursor:pointer;
+            width:100%;
+            margin-top:15px;
+        }
+        .section{
+            display:none;
+            padding:50px 20px;
+            max-width:1000px;
+            margin:auto;
+        }
+        .active-section{
+            display:block;
+        }
+        .home-box{
+            background:white;
+            padding:40px;
+            border-radius:20px;
+            box-shadow:0 5px 25px rgba(0,0,0,.08);
+        }
+        .home-box h2{
+            color:#1A365D;
+            margin-bottom:20px;
+        }
+        .contact-box{
+            background:white;
+            padding:40px;
+            border-radius:20px;
+            text-align:left;
+            box-shadow:0 5px 25px rgba(0,0,0,.08);
+            max-width: 600px;
+            margin: auto;
+        }
+        .contact-box h2 {
+            text-align: center;
+            color: #1A365D;
+            margin-bottom: 20px;
+        }
+        .modal{
+            display:none;
+            position:fixed;
+            left:0;
+            top:0;
+            width:100%;
+            height:100%;
+            background:rgba(0,0,0,.7);
+            overflow:auto;
+            z-index:9999;
+        }
+        .modal-content{
+            background:white;
+            max-width:600px;
+            margin:30px auto;
+            padding:25px;
+            border-radius:20px;
+        }
+        .form-group{
+            margin-bottom:15px;
+        }
+        .form-group label{
+            display:block;
+            margin-bottom:5px;
+            font-weight:600;
+        }
+        .form-control{
+            width:100%;
+            padding:12px;
+            border:1px solid #ddd;
+            border-radius:8px;
+        }
+        .error{
+            border:2px solid red;
+        }
+        .error-text{
+            color:red;
+            font-size:12px;
+            display:none;
+            margin-top: 5px;
+        }
+        @media(max-width:768px){
+            .hero h1{
+                font-size:32px;
+            }
+            nav{
+                flex-wrap:wrap;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<header>
-
-<div class="navbar">
-
-<div class="logo">
-AV CHEM
-</div>
-
-<nav>
-
-<button onclick="showHome()">
-Home
-</button>
-
-<button onclick="showContact()">
-Contact
-</button>
-
-<button onclick="openDealer()">
-Dealer Enquiry
-</button>
-
-<button id="langBtn">
-EN / ML
-</button>
-
-</nav>
-
-</div>
-
-</header>
-
-<section class="hero">
-
-<h1>
-Premium Construction Chemical Solutions
-</h1>
-
-<p>
-Tile Adhesive,
-Waterproofing &
-H4 ShieldX Epoxy Flooring
-Solutions
-</p>
-
-</section>
-
-<div class="products">
-
-<div class="card">
-
-<img
-src="tile-adhesive.jpg"
-alt="H4 Tile Adhesive for Marble Granite and Ceramic Tiles"
-loading="lazy">
-
-<div class="card-content">
-
-<h3>Tile Adhesive</h3>
-
-<p>
-Premium bonding solution
-for tiles.
-</p>
-
-<button class="btn">
-View Details
-</button>
-
-</div>
-</div>
-
-<div class="card">
-
-<img
-src="waterproof.jpg"
-alt="H4 Waterproofing Solutions"
-loading="lazy">
-
-<div class="card-content">
-
-<h3>Waterproofing</h3>
-
-<p>
-Advanced waterproof
-protection system.
-</p>
-
-<button class="btn">
-View Details
-</button>
-
-</div>
-</div>
-
-<div class="card">
-
-<img
-src="epoxy.jpg"
-alt="H4 ShieldX Epoxy Flooring"
-loading="lazy">
-
-<div class="card-content">
-
-<h3>
-H4 ShieldX
-Epoxy Flooring
-</h3>
-
-<p>
-Premium seamless epoxy
-flooring.
-</p>
-
-<button class="btn">
-View Details
-</button>
-
-</div>
-</div>
-
-</div>
-
-<section
-id="homeSection"
-class="section">
-
-<div class="home-box">
-
-<h2>
-AV CHEM CHEMICAL &
-MANUFACTURING
-</h2>
-
-<p>
-
-Mukkilapeedika,
-Kannam Kulam,
-BP Angadi,
-
-<br><br>
-
-Tirur,
-Malappuram,
-
-<br><br>
-
-Kerala - 676102
-
-<br><br>
-
-Mobile:
-+91 79073 44030
-
-<br>
-
-WhatsApp:
-+91 97458 38382
-
-<br>
-
-Email:
-avchemtirur@gmail.com
-
-</p>
-
-</div>
-
-</section>
-
-<section
-id="contactSection"
-class="section">
-
-<div class="contact-box">
-
-<h2>
-Contact
-</h2>
-
-<p>
-
-Please use Dealer Enquiry
-for all Product and
-Dealership enquiries.
-
-</p>
-<!-- CUSTOMER NAME -->
-
-<div class="form-group">
-<label>Customer Name *</label>
-
-<input
-type="text"
-id="customerName"
-class="form-control">
-
-<div
-id="nameError"
-class="error-text">
-Enter Customer Name
-</div>
-</div>
-
-<!-- CONTACT -->
-
-<div class="form-group">
-
-<label>
-Contact Number *
-</label>
-
-<input
-type="tel"
-id="contactNumber"
-maxlength="10"
-inputmode="numeric"
-class="form-control">
-
-<div
-id="contactError"
-class="error-text">
-Enter Valid 10 Digit Number
-</div>
-
-</div>
-
-<!-- WHATSAPP -->
-
-<div class="form-group">
-
-<label>
-WhatsApp Number *
-</label>
-
-<input
-type="tel"
-id="whatsappNumber"
-maxlength="10"
-inputmode="numeric"
-class="form-control">
-
-<div
-id="whatsappError"
-class="error-text">
-Enter Valid WhatsApp Number
-</div>
-
-</div>
-
-<!-- CITY -->
-
-<div class="form-group">
-
-<label>
-Area / City *
-</label>
-
-<input
-type="text"
-id="city"
-class="form-control">
-
-<div
-id="cityError"
-class="error-text">
-Enter Area / City
-</div>
-
-</div>
-
-<!-- PINCODE -->
-
-<div class="form-group">
-
-<label>
-Pincode *
-</label>
-
-<input
-type="tel"
-id="pincode"
-maxlength="6"
-inputmode="numeric"
-class="form-control">
-
-<div
-id="pinError"
-class="error-text">
-Enter Valid 6 Digit Pincode
-</div>
-
-</div>
-
-<!-- DISTRICT -->
-
-<div class="form-group">
-
-<label>
-District *
-</label>
-
-<input
-type="text"
-id="district"
-class="form-control">
-
-<div
-id="districtError"
-class="error-text">
-Enter District
-</div>
-
-</div>
-
-<!-- ITEM -->
-
-<div class="form-group">
-
-<label>
-Select Item *
-</label>
-
-<select
-id="item"
-class="form-control">
-
-<option value="">
-Select
-</option>
-
-<option>
-Tile Adhesive
-</option>
-
-<option>
-Waterproofing
-</option>
-
-<option>
-Epoxy Flooring
-</option>
-
-</select>
-
-<div
-id="itemError"
-class="error-text">
-Select Item
-</div>
-
-</div>
-
-<!-- UNIT -->
-
-<div class="form-group">
-
-<label>
-Unit *
-</label>
-
-<select
-id="unit"
-class="form-control">
-
-<option value="">
-Select
-</option>
-
-<option>
-KG
-</option>
-
-<option>
-Bag
-</option>
-
-<option>
-Square Feet
-</option>
-
-</select>
-
-<div
-id="unitError"
-class="error-text">
-Select Unit
-</div>
-
-</div>
-
-<!-- QUANTITY -->
-
-<div class="form-group">
-
-<label>
-Quantity *
-</label>
-
-<input
-type="number"
-id="quantity"
-class="form-control">
-
-<div
-id="qtyError"
-class="error-text">
-Enter Quantity
-</div>
-
-</div>
-
-<button
-class="btn"
-onclick="submitForm()">
-
-Confirm
-
-</button>
-
-</div>
-</div>
-
-<script>
-
-function showHome(){
-
-document
-.getElementById(
-'homeSection')
-.style.display='block';
-
-document
-.getElementById(
-'contactSection')
-.style.display='none';
-
-}
-
-function showContact(){
-
-document
-.getElementById(
-'contactSection')
-.style.display='block';
-
-document
-.getElementById(
-'homeSection')
-.style.display='none';
-
-}
-
-function openDealer(){
-
-document
-.getElementById(
-'dealerModal')
-.style.display='block';
-
-}
-
-window.onclick=function(e){
-
-let modal=
-document.getElementById(
-'dealerModal');
-
-if(e.target==modal){
-
-modal.style.display='none';
-
-}
-
-}
-
-function submitForm(){
-
-let valid=true;
-
-let name=
-document.getElementById(
-'customerName');
-
-let contact=
-document.getElementById(
-'contactNumber');
-
-let whatsapp=
-document.getElementById(
-'whatsappNumber');
-
-let city=
-document.getElementById(
-'city');
-
-let pincode=
-document.getElementById(
-'pincode');
-
-let district=
-document.getElementById(
-'district');
-
-let item=
-document.getElementById(
-'item');
-
-let unit=
-document.getElementById(
-'unit');
-
-let qty=
-document.getElementById(
-'quantity');
-
-document
-.querySelectorAll(
-'.error-text')
-.forEach(el=>
-el.style.display='none');
-
-if(name.value==""){
-document.getElementById(
-'nameError')
-.style.display='block';
-valid=false;
-}
-
-if(!/^\d{10}$/
-.test(contact.value)){
-
-document
-.getElementById(
-'contactError')
-.style.display='block';
-
-valid=false;
-}
-
-if(!/^\d{10}$/
-.test(whatsapp.value)){
-
-document
-.getElementById(
-'whatsappError')
-.style.display='block';
-
-valid=false;
-}
-
-if(city.value==""){
-document
-.getElementById(
-'cityError')
-.style.display='block';
-valid=false;
-}
-
-if(!/^\d{6}$/
-.test(pincode.value)){
-
-document
-.getElementById(
-'pinError')
-.style.display='block';
-
-valid=false;
-}
-
-if(district.value==""){
-
-document
-.getElementById(
-'districtError')
-.style.display='block';
-
-valid=false;
-
-}
-
-if(item.value==""){
-
-document
-.getElementById(
-'itemError')
-.style.display='block';
-
-valid=false;
-
-}
-
-if(unit.value==""){
-
-document
-.getElementById(
-'unitError')
-.style.display='block';
-
-valid=false;
-
-}
-
-if(qty.value==""){
-
-document
-.getElementById(
-'qtyError')
-.style.display='block';
-
-valid=false;
-
-}
-
-if(!valid) return;
-
-let msg=`
-
-AV CHEM CHEMICAL
-& MANUFACTURING
-
-Dealer Enquiry
-
-Customer Name:
-${name.value}
-
-Contact:
-${contact.value}
-
-WhatsApp:
-${whatsapp.value}
-
-City:
-${city.value}
-
-District:
-${district.value}
-
-Pincode:
-${pincode.value}
-
-Item:
-${item.value}
-
-Unit:
-${unit.value}
-
-Quantity:
-${qty.value}
-
-`;
-
-window.open(
-
-'https://wa.me/919745838382?text='+
-
-encodeURIComponent(msg)
-
-);
-
-alert(
-'Dealer Enquiry Ready. WhatsApp Opening...'
-);
-
-}
-
-</script>
-
+    <header>
+        <div class="navbar">
+            <div class="logo">AV CHEM</div>
+            <nav>
+                <button onclick="showHome()">Home</button>
+                <button onclick="showContact()">Dealer Enquiry</button>
+                <button id="langBtn">EN / ML</button>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>Premium Construction Chemical Solutions</h1>
+        <p>Tile Adhesive, Waterproofing & H4 ShieldX Epoxy Flooring Solutions</p>
+    </section>
+
+    <!-- Products Grid -->
+    <div class="products">
+        <div class="card">
+            <img src="tile-adhesive.jpg" alt="H4 Tile Adhesive for Marble Granite and Ceramic Tiles" loading="lazy">
+            <div class="card-content">
+                <h3>Tile Adhesive</h3>
+                <p>Premium bonding solution for tiles.</p>
+                <button class="btn" onclick="showContact()">View Details</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="waterproof.jpg" alt="H4 Waterproofing Solutions" loading="lazy">
+            <div class="card-content">
+                <h3>Waterproofing</h3>
+                <p>Advanced waterproof protection system.</p>
+                <button class="btn" onclick="showContact()">View Details</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="epoxy.jpg" alt="H4 ShieldX Epoxy Flooring" loading="lazy">
+            <div class="card-content">
+                <h3>H4 ShieldX Epoxy Flooring</h3>
+                <p>Premium seamless epoxy flooring.</p>
+                <button class="btn" onclick="showContact()">View Details</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Home Section (Address) -->
+    <section id="homeSection" class="section">
+        <div class="home-box">
+            <h2>AV CHEM CHEMICAL & MANUFACTURING</h2>
+            <p>
+                Mukkilapeedika, Kannam Kulam, BP Angadi,<br><br>
+                Tirur, Malappuram,<br><br>
+                Kerala - 676102<br><br>
+                Mobile: +91 79073 44030<br>
+                WhatsApp: +91 97458 38382<br>
+                Email: avchemtirur@gmail.com
+            </p>
+        </div>
+    </section>
+
+    <!-- Dealer Enquiry / Contact Section -->
+    <section id="contactSection" class="section">
+        <div class="contact-box">
+            <h2>Dealer Enquiry Form</h2>
+            <p style="text-align:center; margin-bottom:20px; color:#666;">Please fill all fields to generate PDF & Send via WhatsApp</p>
+
+            <!-- CUSTOMER NAME -->
+            <div class="form-group">
+                <label>Customer Name *</label>
+                <input type="text" id="customerName" class="form-control">
+                <div id="nameError" class="error-text">Enter Customer Name</div>
+            </div>
+
+            <!-- CONTACT -->
+            <div class="form-group">
+                <label>Contact Number *</label>
+                <input type="tel" id="contactNumber" maxlength="10" inputmode="numeric" class="form-control">
+                <div id="contactError" class="error-text">Enter Valid 10 Digit Number</div>
+            </div>
+
+            <!-- WHATSAPP -->
+            <div class="form-group">
+                <label>WhatsApp Number *</label>
+                <input type="tel" id="whatsappNumber" maxlength="10" inputmode="numeric" class="form-control">
+                <div id="whatsappError" class="error-text">Enter Valid WhatsApp Number</div>
+            </div>
+
+            <!-- CITY -->
+            <div class="form-group">
+                <label>Area / City *</label>
+                <input type="text" id="city" class="form-control">
+                <div id="cityError" class="error-text">Enter Area / City</div>
+            </div>
+
+            <!-- PINCODE -->
+            <div class="form-group">
+                <label>Pincode *</label>
+                <input type="tel" id="pincode" maxlength="6" inputmode="numeric" class="form-control">
+                <div id="pinError" class="error-text">Enter Valid 6 Digit Pincode</div>
+            </div>
+
+            <!-- DISTRICT -->
+            <div class="form-group">
+                <label>District *</label>
+                <input type="text" id="district" class="form-control">
+                <div id="districtError" class="error-text">Enter District</div>
+            </div>
+
+            <!-- ITEM -->
+            <div class="form-group">
+                <label>Select Item *</label>
+                <select id="item" class="form-control">
+                    <option value="">Select</option>
+                    <option>Tile Adhesive</option>
+                    <option>Waterproofing</option>
+                    <option>Epoxy Flooring</option>
+                </select>
+                <div id="itemError" class="error-text">Select Item</div>
+            </div>
+
+            <!-- UNIT -->
+            <div class="form-group">
+                <label>Unit *</label>
+                <select id="unit" class="form-control">
+                    <option value="">Select</option>
+                    <option>KG</option>
+                    <option>Bag</option>
+                    <option>Square Feet</option>
+                </select>
+                <div id="unitError" class="error-text">Select Unit</div>
+            </div>
+
+            <!-- QUANTITY -->
+            <div class="form-group">
+                <label>Quantity *</label>
+                <input type="number" id="quantity" class="form-control">
+                <div id="qtyError" class="error-text">Enter Quantity</div>
+            </div>
+
+            <button class="btn" onclick="submitForm()">Confirm & Download PDF</button>
+        </div>
+    </section>
+
+    <script>
+        function showHome(){
+            document.getElementById('homeSection').style.display='block';
+            document.getElementById('contactSection').style.display='none';
+        }
+
+        function showContact(){
+            document.getElementById('contactSection').style.display='block';
+            document.getElementById('homeSection').style.display='none';
+            // Scroll to form smoothly
+            document.getElementById('contactSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Show home by default on load
+        window.onload = function() {
+            showHome();
+        }
+
+        function submitForm(){
+            let valid=true;
+
+            let name= document.getElementById('customerName');
+            let contact= document.getElementById('contactNumber');
+            let whatsapp= document.getElementById('whatsappNumber');
+            let city= document.getElementById('city');
+            let pincode= document.getElementById('pincode');
+            let district= document.getElementById('district');
+            let item= document.getElementById('item');
+            let unit= document.getElementById('unit');
+            let qty= document.getElementById('quantity');
+
+            // Hide all errors first
+            document.querySelectorAll('.error-text').forEach(el=> el.style.display='none');
+
+            if(name.value.trim()==""){
+                document.getElementById('nameError').style.display='block';
+                valid=false;
+            }
+            if(!/^\d{10}$/.test(contact.value)){
+                document.getElementById('contactError').style.display='block';
+                valid=false;
+            }
+            if(!/^\d{10}$/.test(whatsapp.value)){
+                document.getElementById('whatsappError').style.display='block';
+                valid=false;
+            }
+            if(city.value.trim()==""){
+                document.getElementById('cityError').style.display='block';
+                valid=false;
+            }
+            if(!/^\d{6}$/.test(pincode.value)){
+                document.getElementById('pinError').style.display='block';
+                valid=false;
+            }
+            if(district.value.trim()==""){
+                document.getElementById('districtError').style.display='block';
+                valid=false;
+            }
+            if(item.value==""){
+                document.getElementById('itemError').style.display='block';
+                valid=false;
+            }
+            if(unit.value==""){
+                document.getElementById('unitError').style.display='block';
+                valid=false;
+            }
+            if(qty.value==""){
+                document.getElementById('qtyError').style.display='block';
+                valid=false;
+            }
+
+            if(!valid) return;
+
+            // 1. GENERATE PDF NOW
+            try {
+                const { jsPDF } = window.jspdf;
+                let pdf = new jsPDF();
+
+                pdf.setFontSize(18);
+                pdf.text("AV CHEM CHEMICAL & MANUFACTURING", 10, 20);
+
+                pdf.setFontSize(12);
+                pdf.text("Dealer Enquiry Form", 10, 35);
+                pdf.text(`Customer Name : ${name.value}`, 10, 50);
+                pdf.text(`Contact Number : ${contact.value}`, 10, 60);
+                pdf.text(`WhatsApp Number : ${whatsapp.value}`, 10, 70);
+                pdf.text(`City : ${city.value}`, 10, 80);
+                pdf.text(`District : ${district.value}`, 10, 90);
+                pdf.text(`Pincode : ${pincode.value}`, 10, 100);
+                pdf.text(`Item : ${item.value}`, 10, 110);
+                pdf.text(`Unit : ${unit.value}`, 10, 120);
+                pdf.text(`Quantity : ${qty.value}`, 10, 130);
+                pdf.text("Thank You For Your Enquiry", 10, 155);
+
+                pdf.save("AVCHEM_Dealer_Enquiry.pdf");
+            } catch (error) {
+                console.error("PDF generation failed:", error);
+            }
+
+            // 2. OPEN WHATSAPP
+            let msg = `AV CHEM CHEMICAL & MANUFACTURING\n\nDealer Enquiry\n\nCustomer Name: ${name.value}\nContact: ${contact.value}\nWhatsApp: ${whatsapp.value}\nCity: ${city.value}\nDistrict: ${district.value}\nPincode: ${pincode.value}\nItem: ${item.value}\nUnit: ${unit.value}\nQuantity: ${qty.value}`;
+
+            window.open('https://wa.me/919745838382?text=' + encodeURIComponent(msg));
+            alert('Dealer Enquiry PDF Generated & WhatsApp Opening...');
+        }
+    </script>
 </body>
 </html>
-
-</div>
-
-</section>
-
-<div
-id="dealerModal"
-class="modal">
-
-<div class="modal-content">
-
-<h2>
-Dealer Enquiry Form
-</h2>
-// PDF GENERATE
-
-const { jsPDF } = window.jspdf;
-
-let pdf = new jsPDF();
-
-pdf.setFontSize(18);
-
-pdf.text(
-"AV CHEM CHEMICAL & MANUFACTURING",
-10,
-20
-);
-
-pdf.setFontSize(12);
-
-pdf.text(
-"Dealer Enquiry Form",
-10,
-35
-);
-
-pdf.text(
-`Customer Name : ${name.value}`,
-10,
-50
-);
-
-pdf.text(
-`Contact Number : ${contact.value}`,
-10,
-60
-);
-
-pdf.text(
-`WhatsApp Number : ${whatsapp.value}`,
-10,
-70
-);
-
-pdf.text(
-`City : ${city.value}`,
-10,
-80
-);
-
-pdf.text(
-`District : ${district.value}`,
-10,
-90
-);
-
-pdf.text(
-`Pincode : ${pincode.value}`,
-10,
-100
-);
-
-pdf.text(
-`Item : ${item.value}`,
-10,
-110
-);
-
-pdf.text(
-`Unit : ${unit.value}`,
-10,
-120
-);
-
-pdf.text(
-`Quantity : ${qty.value}`,
-10,
-130
-);
-
-pdf.text(
-"Thank You For Your Enquiry",
-10,
-155
-);
-
-pdf.save(
-"AVCHEM_Dealer_Enquiry.pdf"
-);
