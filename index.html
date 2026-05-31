@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AV CHEM CHEMICAL & MANUFACTURING | H4 Solutions</title>
     
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts (പ്രീമിയം Vemior/Vermont ലുക്കിനായുള്ള Cinzel, Montserrat ഒപ്പം മലയാളത്തിനായുള്ള Manjari) -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Montserrat:wght@300;400;600;700&family=Manjari:wght@700&display=swap" rel="stylesheet">
     
     <!-- html2pdf Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -25,8 +25,8 @@
 
     <style>
         :root {
-            --premium-black: #0A0A0B;
-            --dark-card: #141416;
+            --charcoal-bg: #1A1A1E; /* പ്രീമിയം ചാർക്കോൾ ഗ്രേ */
+            --dark-card: #242428;   /* കാർഡുകൾക്കുള്ള തിക്ക് ചാർക്കോൾ */
             --traffic-purple: #A020F0;
             --purple-gradient: linear-gradient(135deg, #7B2CBF 0%, #3C096C 100%);
             --gold-yellow: #FFD700;
@@ -39,13 +39,26 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
         }
 
         body {
-            background: var(--premium-black);
+            background: var(--charcoal-bg);
             color: var(--light-text);
+            font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
+        }
+
+        /* Vemior / Vermont Custom Font Styles for Brand Identity */
+        .vemior-font {
+            font-family: 'Cinzel', serif;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .malayalam-text {
+            font-family: 'Manjari', sans-serif;
+            font-weight: 700;
+            line-height: 1.5;
         }
 
         /* Header Style */
@@ -53,7 +66,7 @@
             position: sticky;
             top: 0;
             z-index: 999;
-            background: rgba(10, 10, 11, 0.95);
+            background: rgba(26, 26, 30, 0.95);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
@@ -82,6 +95,7 @@
             font-size: 22px;
             font-weight: 700;
             color: white;
+            font-family: 'Cinzel', serif;
             letter-spacing: 1px;
         }
 
@@ -124,7 +138,7 @@
 
         .btn-header:hover {
             background: var(--gold-gradient);
-            color: var(--premium-black);
+            color: var(--charcoal-bg);
             box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
         }
 
@@ -151,11 +165,11 @@
         }
 
         .hero-content h1 {
-            font-size: 42px;
+            font-size: 38px;
             color: white;
             font-weight: 700;
             margin-bottom: 20px;
-            line-height: 1.2;
+            line-height: 1.3;
         }
 
         .hero-content h1 span {
@@ -184,20 +198,20 @@
             background: linear-gradient(to right, var(--dark-card) 0%, transparent 30%);
         }
 
-        /* Products Section */
+        /* Section Title (H4 Construction Solution) */
         .section-title {
             text-align: center;
             color: white;
-            margin: 50px 0 30px 0;
-            font-size: 32px;
+            margin: 60px 0 30px 0;
+            font-size: 34px;
             font-weight: 700;
-            letter-spacing: 0.5px;
         }
 
         .section-title span {
-            color: var(--gold-yellow);
+            color: var(--gold-yellow); /* ഗോൾഡൻ യെല്ലോ ആക്കിയത് ഇവിടെയാണ് */
         }
 
+        /* Products Grid */
         .products-grid {
             max-width: 1200px;
             margin: auto;
@@ -242,13 +256,13 @@
         .product-info h3 {
             color: white;
             margin-bottom: 10px;
-            font-size: 20px;
-            font-weight: 600;
+            font-size: 22px;
+            font-weight: 700;
         }
 
         .product-info p {
-            font-size: 13.5px;
-            color: var(--muted-gray);
+            font-size: 14px;
+            color: var(--light-text);
             margin-bottom: 20px;
             line-height: 1.6;
         }
@@ -277,7 +291,7 @@
 
         /* Company Footer */
         footer {
-            background: #050506;
+            background: #111114;
             border-top: 1px solid rgba(255, 255, 255, 0.03);
             padding: 50px 20px;
             margin-top: 80px;
@@ -311,9 +325,7 @@
             font-size: 14px;
         }
 
-        /* ----------------------------------------------------
-           POP-UP MODAL WINDOW FOR DEALER FORM
-        ------------------------------------------------------- */
+        /* Modal Overlays & Fields */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -355,7 +367,7 @@
         .form-group label {
             display: block;
             margin-bottom: 6px;
-            font-weight: 500;
+            font-weight: 600;
             color: #CBD5E0;
             font-size: 13px;
         }
@@ -366,7 +378,7 @@
             border: 1.5px solid rgba(255, 255, 255, 0.1);
             border-radius: 10px;
             font-size: 14px;
-            background: var(--premium-black);
+            background: var(--charcoal-bg);
             color: white;
             transition: 0.3s;
         }
@@ -385,7 +397,7 @@
 
         .btn-submit {
             background: var(--gold-gradient);
-            color: var(--premium-black);
+            color: var(--charcoal-bg);
             padding: 14px;
             border: none;
             border-radius: 10px;
@@ -395,18 +407,9 @@
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: 0.3s;
         }
 
-        .btn-submit:hover {
-            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
-            transform: translateY(-1px);
-        }
-
-        /* ----------------------------------------------------
-           A5 SIZE PERFECT LAYOUT FOR PDF
-        ------------------------------------------------------- */
+        /* PDF Render Frame Map */
         .pdf-wrapper-hide {
             position: absolute;
             left: -9999px;
@@ -504,22 +507,6 @@
             object-fit: contain;
         }
 
-        .pdf-footer {
-            margin-top: 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-        }
-
-        .pdf-signature {
-            text-align: center;
-            width: 110px;
-            border-top: 1px solid #333;
-            padding-top: 3px;
-            font-size: 10px;
-            font-weight: 600;
-        }
-
         @media (max-width: 768px) {
             .hero-banner { flex-direction: column-reverse; }
             .hero-content { padding: 35px 20px; text-align: center; }
@@ -530,7 +517,7 @@
 </head>
 <body>
 
-    <!-- Header -->
+    <!-- Header Section -->
     <header>
         <div class="navbar">
             <div class="logo-section">
@@ -538,76 +525,66 @@
                 <div class="logo-text">AV CHEM</div>
             </div>
             <div class="nav-right-buttons">
-                <!-- Malayalam / English Language Switcher Toggle Button -->
                 <button class="btn-lang" id="langBtn" onclick="toggleLanguage()">EN / ML</button>
                 <button class="btn-header" onclick="openModal('')">Dealer Enquiry</button>
             </div>
         </div>
     </header>
 
-    <!-- Industrial Hero Section -->
+    <!-- Hero Showcase Section (Vemior Layout Style) -->
     <section class="hero-banner">
         <div class="hero-content">
-            <h1 id="heroTitle">Premium Construction <span>Chemical Solutions</span></h1>
+            <h1 id="heroTitle" class="vemior-font">Premium Construction <br><span>Chemical Solutions</span></h1>
             <p id="heroDesc">Experience heavy-duty architectural durability engineered for expert results. Manufacturing global-grade tile solutions, 15-year warranty waterproofing shields, and high-gloss seamless flooring.</p>
-            <button onclick="openModal('')" style="background:var(--purple-gradient); border:none; padding:14px 30px; color:white; border-radius:30px; font-weight:600; cursor:pointer; width:fit-content; align-self:center; box-shadow: 0 4px 20px rgba(123, 44, 191, 0.4); text-transform:uppercase; font-size:14px; letter-spacing:0.5px;">Get Quotation</button>
+            <button onclick="openModal('')" style="background:var(--purple-gradient); border:none; padding:14px 30px; color:white; border-radius:30px; font-weight:600; cursor:pointer; width:fit-content; align-self:center; box-shadow: 0 4px 20px rgba(123, 44, 191, 0.4); text-transform:uppercase; font-size:14px; letter-spacing: 1px;">Get Quotation</button>
         </div>
         <div class="hero-image"></div>
     </section>
 
-    <!-- Products Range (Our Industry മാറ്റി H4 Construction Solution ആക്കിയത് ഇവിടെയാണ്) -->
-    <div class="section-title" id="rangeTitle">H4 <span>Construction Solution</span></div>
+    <!-- Custom Brand Section Header -->
+    <div class="section-title vemior-font" id="rangeTitle">H4 <span>Construction Solution</span></div>
+    
+    <!-- Enterprise Grid -->
     <div class="products-grid">
         
-        <!-- Tile Adhesive Card -->
+        <!-- Tile Adhesive Layout Box -->
         <div class="product-card">
-            <!-- ഒപ്റ്റിമൈസ് ചെയ്ത പുതിയ ഫയൽ നെയിം ലിങ്ക് ചെയ്തിരിക്കുന്നു -->
             <img src="h4-premium-tile-adhesive-bag-avchem-kerala.png" alt="H4 Premium Tile Adhesive Bag - Avchem Tirur">
             <div class="product-info">
-                <h3 id="prodTitle1">Tile Adhesive</h3>
-                <p id="prodDesc1">ഉയർന്ന ബോണ്ടിംഗ് ശേഷിയുള്ള പ്രീമിയം ടൈൽ ഒട്ടിക്കുന്ന gum</p>
+                <h3 id="prodTitle1" class="vemior-font">Tile Adhesive</h3>
+                <p id="prodDesc1" class="malayalam-text">ഉയർന്ന ബോണ്ടിംഗ് ശേഷിയുള്ള പ്രീമിയം ടൈൽ ഒട്ടിക്കുന്ന gum</p>
                 <button class="btn-card" onclick="openModal('Tile Adhesive')">Enquire Now</button>
             </div>
         </div>
         
-        <!-- Waterproofing Card -->
+        <!-- Waterproofing Layout Box -->
         <div class="product-card">
-            <!-- ഒപ്റ്റിമൈസ് ചെയ്ത പുതിയ ഫയൽ നെയിം ലിങ്ക് ചെയ്തിരിക്കുന്നു -->
             <img src="h4-advanced-waterproofing-system-warranty.png" alt="H4 High-End Waterproofing System - Avchem Tirur">
             <div class="product-info">
-                <h3 id="prodTitle2">Waterproofing</h3>
-                <p id="prodDesc2">കഠിനമായ ചൂടിനെയും കനത്ത മഴയെയും പ്രതിരോധിക്കുന്ന 15 വർഷം വാറന്റിയുള്ള പ്രൊട്ടക്ഷൻ</p>
+                <h3 id="prodTitle2" class="vemior-font">Waterproofing</h3>
+                <p id="prodDesc2" class="malayalam-text">കഠിനമായ ചൂടിനെയും കനത്ത മഴയെയും പ്രതിരോധിക്കുന്ന 15 വർഷം വാറന്റിയുള്ള പ്രൊട്ടക്ഷൻ</p>
                 <button class="btn-card" onclick="openModal('Waterproofing')">Enquire Now</button>
             </div>
         </div>
         
-        <!-- Epoxy Flooring Card -->
+        <!-- Epoxy Flooring Layout Box -->
         <div class="product-card">
             <img src="epoxy-image.png" alt="H4 ShieldX Seamless Epoxy Flooring - Avchem Tirur">
             <div class="product-info">
-                <h3 id="prodTitle3">Epoxy Flooring</h3>
-                <p id="prodDesc3">ടൈലുകൾക്കും മാർബിളുകൾക്കും പകരം, നിങ്ങളുടെ മനസ്സിലുള്ള കളറുകളും ഡിസൈനുകളും ജോയിന്റുകൾ ഇല്ലാതെ തറയിൽ കോട്ടിംഗ് ചെയ്ത് കണ്ണാടി പോലെയുള്ള തിളക്കവും മനോഹരമായ 3D/മാറ്റ്/ഗ്ലോസ്സി ഡിസൈനുകളും നൽകുന്ന ലക്ഷ്വറി ഫ്ലോറിംഗ്</p>
+                <h3 id="prodTitle3" class="vemior-font">Epoxy Flooring</h3>
+                <p id="prodDesc3" class="malayalam-text">ടൈലുകൾക്കും മാർബിളുകൾക്കും പകരം, നിങ്ങളുടെ മനസ്സിലുള്ള കളറുകളും ഡിസൈനുകളും ജോയിന്റുകൾ ഇല്ലാതെ തറയിൽ കോട്ടിംഗ് ചെയ്ത് കണ്ണാടി പോലെയുള്ള തിളക്കവും മനോഹരമായ 3D/മാറ്റ്/ഗ്ലോസ്സി ഡിസൈനുകളും നൽകുന്ന ലക്ഷ്വറി ഫ്ലോറിംഗ്</p>
                 <button class="btn-card" onclick="openModal('Epoxy Flooring')">Enquire Now</button>
-            </div>
-        </div>
-        
-        <!-- Crack Filler Card -->
-        <div class="product-card">
-            <img src="crack-filler-image.png" alt="H4 Technical Crack Filler - Avchem Tirur">
-            <div class="product-info">
-                <h3 id="prodTitle4">Crack Filler</h3>
-                <p id="prodDesc4">Strong weather-proof crack sealing. ഭിത്തികളിലെയും തറയിലെയും വിള്ളലുകൾ പെർഫെക്റ്റ് ആയി അടച്ചു തീർക്കുന്നു.</p>
-                <button class="btn-card" onclick="openModal('Crack Filler')">Enquire Now</button>
             </div>
         </div>
     </div>
 
-    <!-- Modal Form Section -->
+    <!-- Portal Modal Form (പേര് എഴുതാനുള്ള ഓപ്ഷൻ കൃത്യമായി ഫിക്സ് ചെയ്തത്) -->
     <div class="modal-overlay" id="formModal" onclick="closeModal(event)">
         <div class="form-container" onclick="event.stopPropagation()">
             <button class="close-modal" onclick="document.getElementById('formModal').style.display='none'">×</button>
-            <h2 id="modalTitle" style="color:white; text-align:center; margin-bottom:25px; font-weight:700;">Dealer Enquiry Portal</h2>
+            <h2 id="modalTitle" class="vemior-font" style="color:white; text-align:center; margin-bottom:25px;">Dealer Enquiry Portal</h2>
             
+            <!-- CUSTOMER NAME OPTION - FIXED AND RESTORED -->
             <div class="form-group">
                 <label id="lblName">Customer Name *</label>
                 <input type="text" id="customerName" class="form-control" placeholder="Enter name">
@@ -651,7 +628,6 @@
                     <option value="Tile Adhesive">Tile Adhesive</option>
                     <option value="Waterproofing">Waterproofing</option>
                     <option value="Epoxy Flooring">Epoxy Flooring</option>
-                    <option value="Crack Filler">Crack Filler</option>
                 </select>
                 <div id="itemError" class="error-text">Select Item</div>
             </div>
@@ -698,7 +674,7 @@
         </div>
     </footer>
 
-    <!-- Hidden A5 PDF Layout -->
+    <!-- Hidden A5 PDF Container Block -->
     <div class="pdf-wrapper-hide">
         <div id="pdf-template">
             <div class="pdf-header">
@@ -773,20 +749,18 @@
 
         function toggleLanguage() {
             if (currentLang === 'EN') {
-                // Switch to Malayalam
                 document.getElementById('langBtn').innerText = 'ML / EN';
-                document.getElementById('heroTitle').innerHTML = 'പ്രീമിയം കൺസ്ട്രക്ഷൻ <span>കെമിക്കൽ സൊല്യൂഷൻസ്</span>';
+                document.getElementById('heroTitle').innerHTML = 'പ്രീമിയം കൺസ്ട്രക്ഷൻ <br><span>കെമിക്കൽ സൊല്യൂഷൻസ്</span>';
                 document.getElementById('heroDesc').innerText = 'ഉയർന്ന നിലവാരമുള്ള ഉൽപ്പന്നങ്ങൾ നേരിട്ട് ഫാക്ടറിയിൽ നിന്നും ലഭ്യമാക്കുന്നു. 15 വർഷം ഈടുനിൽക്കുന്ന വാട്ടർപ്രൂഫിംഗ് സിസ്റ്റംസ്, മികച്ച ടൈൽ അഡീസിവുകൾ, എപ്പോക്സി സൊല്യൂഷനുകൾ.';
                 document.getElementById('rangeTitle').innerHTML = 'H4 <span>കൺസ്ട്രക്ഷൻ സൊല്യൂഷൻ</span>';
                 
-                // Form Labels
                 document.getElementById('modalTitle').innerText = 'ഡീലർ എൻക്വയറി ഫോം';
                 document.getElementById('lblName').innerText = 'കസ്റ്റമർ പേര് *';
                 document.getElementById('lblContact').innerText = 'ഫോൺ നമ്പർ *';
                 document.getElementById('lblWhatsapp').innerText = 'വാട്സാപ്പ് നമ്പർ *';
                 document.getElementById('lblCity').innerText = 'സ്ഥലം / നഗരം *';
                 document.getElementById('lblPincode').innerText = 'പിൻകോഡ് *';
-                document.getElementById('lblDistrict').innerText = 'ജില്ല *';
+                document.getElementById('lblDistrict').innerText = 'জില്ല *';
                 document.getElementById('lblItem').innerText = 'ഉൽപ്പന്നം തിരഞ്ഞെടുക്കുക *';
                 document.getElementById('lblUnit').innerText = 'യൂണിറ്റ് *';
                 document.getElementById('lblQty').innerText = 'ആവശ്യമായ അളവ് *';
@@ -794,13 +768,11 @@
                 
                 currentLang = 'ML';
             } else {
-                // Switch back to English
                 document.getElementById('langBtn').innerText = 'EN / ML';
-                document.getElementById('heroTitle').innerHTML = 'Premium Construction <span>Chemical Solutions</span>';
+                document.getElementById('heroTitle').innerHTML = 'Premium Construction <br><span>Chemical Solutions</span>';
                 document.getElementById('heroDesc').innerText = 'Experience heavy-duty architectural durability engineered for expert results. Manufacturing global-grade tile solutions, 15-year warranty waterproofing shields, and high-gloss seamless flooring.';
                 document.getElementById('rangeTitle').innerHTML = 'H4 <span>Construction Solution</span>';
                 
-                // Form Labels
                 document.getElementById('modalTitle').innerText = 'Dealer Enquiry Portal';
                 document.getElementById('lblName').innerText = 'Customer Name *';
                 document.getElementById('lblContact').innerText = 'Contact Number *';
@@ -871,7 +843,6 @@
             if(item.value === "Tile Adhesive") prodImgElement.src = "h4-premium-tile-adhesive-bag-avchem-kerala.png";
             else if(item.value === "Waterproofing") prodImgElement.src = "h4-advanced-waterproofing-system-warranty.png";
             else if(item.value === "Epoxy Flooring") prodImgElement.src = "epoxy-image.png";
-            else if(item.value === "Crack Filler") prodImgElement.src = "crack-filler-image.png";
 
             const element = document.getElementById('pdf-template');
             const opt = {
