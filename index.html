@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AV CHEM CHEMICAL & MANUFACTURING | H4 Solutions</title>
     
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
+    <!-- html2pdf Library (A5 PDF-ൽ മലയാളം പെർഫെക്റ്റ് ആക്കാൻ) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <style>
@@ -73,6 +75,7 @@
             cursor: pointer;
         }
 
+        /* Hero Banner Style */
         .hero-banner {
             max-width: 1200px;
             margin: 25px auto;
@@ -222,7 +225,7 @@
         }
 
         #pdf-template {
-            width: 138mm; /* A5 വിഡ്ത്ത് അനുസരിച്ച് ഒതുക്കിയത് */
+            width: 138mm; 
             background: white;
             color: #222;
             padding: 5mm;
@@ -368,6 +371,7 @@
         <div class="product-card"><img src="crack-filler-image.png" alt="Crack Filler"><div class="product-info"><h3>Crack Filler</h3><button class="btn-action" onclick="scrollToForm()">Enquire Now</button></div></div>
     </div>
 
+    <!-- Portal Form Section -->
     <section class="form-container" id="enquiryForm">
         <h2 style="color:var(--navy); text-align:center; margin-bottom:20px;">Dealer Enquiry Portal</h2>
         
@@ -439,6 +443,7 @@
         <button class="btn-submit" onclick="submitForm()">Confirm & Download Premium PDF</button>
     </section>
 
+    <!-- Hidden Wrapper mapped to A5 Structure -->
     <div class="pdf-wrapper-hide">
         <div id="pdf-template">
             <div class="pdf-header">
@@ -565,7 +570,7 @@
                 filename:     'AVCHEM_A5_Quotation_' + name.value + '.pdf',
                 image:        { type: 'jpeg', quality: 0.98 },
                 html2canvas:  { scale: 2, useCORS: true, logging: false },
-                jsPDF:        { unit: 'mm', format: 'a5', orientation: 'portrait' } // Perfect A5 sizing mapping
+                jsPDF:        { unit: 'mm', format: 'a5', orientation: 'portrait' } 
             };
 
             html2pdf().set(opt).from(element).save();
