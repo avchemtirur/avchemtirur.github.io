@@ -2,38 +2,50 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AV CHEM CHEMICAL & MANUFACTURING | H4 Solutions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>AV CHEM CHEMICAL & MANUFACTURING | Premium Construction Solutions Kerala | H4 ShieldX Epoxy</title>
     
-    <meta name="description" content="AV CHEM CHEMICAL & MANUFACTURING Kerala. Premium Tile Adhesive, Waterproofing Solutions and H4 ShieldX Epoxy Flooring.">
-    <meta name="keywords" content="Tile Adhesive Kerala, Waterproofing Kerala, Epoxy Flooring Kerala, AV CHEM, H4 Solutions">
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="AV CHEM CHEMICAL & MANUFACTURING - Kerala's trusted manufacturer of Tile Adhesive, Waterproofing & H4 ShieldX Epoxy Flooring. Premium quality, factory price, dealer enquiry & PDF quotation.">
+    <meta name="keywords" content="Tile Adhesive Kerala, Waterproofing Kerala, Epoxy Flooring Kerala, AV CHEM, H4 Solutions, Construction Chemicals Malappuram">
     <meta name="robots" content="index,follow">
+    <meta name="author" content="AV CHEM">
+    <meta name="geo.region" content="IN-KL">
+    <meta name="geo.placename" content="Tirur, Malappuram">
     
+    <!-- Canonical & Open Graph -->
     <link rel="canonical" href="https://avchemtirur.github.io/">
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Montserrat:wght@300;400;600;700&family=Manjari:wght@700&display=swap" rel="stylesheet">
+    <meta property="og:title" content="AV CHEM CHEMICAL & MANUFACTURING | H4 Solutions">
+    <meta property="og:description" content="Premium Tile Adhesive, Waterproofing & Epoxy Flooring Manufacturer in Kerala. Get dealer quote & professional PDF.">
+    <meta property="og:image" content="https://avchemtirur.github.io/h4-logo.png">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AV CHEM - Premium Construction Chemicals">
     
-    <!-- html2pdf Library -->
+    <!-- Google Fonts + Thunchan / Manjari Malayalam -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Montserrat:wght@300;400;600;700;800&family=Manjari:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
     <style>
-        :root {
-            --charcoal-bg: #1A1A1E;
-            --dark-card: #242428;
-            --traffic-purple: #A020F0;
-            --purple-gradient: linear-gradient(135deg, #7B2CBF 0%, #3C096C 100%);
-            --gold-yellow: #FFD700;
-            --gold-gradient: linear-gradient(135deg, #FFD700 0%, #FFAA00 100%);
-            --light-text: #F4F7F9;
-            --muted-gray: #A0AEC0;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             scroll-behavior: smooth;
+        }
+
+        :root {
+            --charcoal-bg: #0F0F13;
+            --dark-card: #1E1E24;
+            --traffic-purple: #B14EFF;
+            --purple-gradient: linear-gradient(135deg, #8A2BE2, #4B0082);
+            --gold-yellow: #FFD966;
+            --gold-gradient: linear-gradient(135deg, #FFD966, #FFB347);
+            --light-text: #F8FAFC;
+            --muted-gray: #B0B8C5;
         }
 
         body {
@@ -43,13 +55,11 @@
             overflow-x: hidden;
         }
 
-        a {
-            text-decoration: none;
-        }
-
-        img {
-            max-width: 100%;
-            display: block;
+        /* Malayalam font class */
+        .malayalam-font {
+            font-family: 'Manjari', sans-serif;
+            font-weight: 700;
+            line-height: 1.5;
         }
 
         .vemior-font {
@@ -57,29 +67,23 @@
             letter-spacing: 1px;
         }
 
-        .malayalam-text {
-            font-family: 'Manjari', sans-serif;
-            font-weight: 700;
-            line-height: 1.6;
-        }
-
-        /* Header Style */
+        /* Sticky Navigation Premium */
         header {
             position: sticky;
             top: 0;
             z-index: 9999;
-            background: rgba(26, 26, 30, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(15, 15, 19, 0.96);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
         }
 
         .navbar {
-            max-width: 1300px;
+            max-width: 1350px;
             margin: auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 20px;
+            padding: 12px 25px;
         }
 
         .logo-area {
@@ -87,893 +91,437 @@
             align-items: center;
             gap: 15px;
         }
-
         .logo {
-            width: 60px;
+            width: 55px;
             height: auto;
-            object-fit: contain;
         }
-
         .brand {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 800;
-            color: white;
             font-family: 'Cinzel', serif;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
-
-        .brand-sub {
-            font-size: 10px;
-            letter-spacing: 2px;
-            color: var(--muted-gray);
-        }
-
-        nav {
+        .nav-links {
             display: flex;
+            gap: 28px;
             align-items: center;
-            gap: 25px;
+            flex-wrap: wrap;
         }
-
-        nav a {
+        .nav-links a {
             color: var(--light-text);
             font-weight: 600;
-            font-size: 15px;
-            transition: .3s;
+            transition: 0.3s;
+            font-size: 14px;
         }
-
-        nav a:hover {
-            color: var(--gold-yellow);
-        }
-
-        .dealer-btn {
+        .nav-links a:hover { color: var(--gold-yellow); }
+        .dealer-nav-btn {
             background: var(--gold-gradient);
-            padding: 12px 24px;
-            border-radius: 30px;
+            padding: 10px 24px;
+            border-radius: 40px;
             font-weight: 700;
-            color: var(--charcoal-bg) !important;
-            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.2);
+            color: #0F0F13 !important;
             border: none;
             cursor: pointer;
-            transition: 0.3s;
         }
-
-        .dealer-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
-        }
-
         #langBtn {
-            border: 1px solid var(--muted-gray);
-            padding: 10px 18px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: 700;
             background: transparent;
+            border: 1px solid var(--muted-gray);
+            padding: 8px 16px;
+            border-radius: 30px;
             color: white;
-            font-size: 13px;
-            transition: 0.3s;
+            font-weight: 600;
+            cursor: pointer;
         }
 
-        #langBtn:hover {
-            border-color: var(--gold-yellow);
-            color: var(--gold-yellow);
-        }
-
-        /* Hero Style */
+        /* Hero */
         .hero {
             max-width: 1300px;
             margin: auto;
-            padding: 60px 20px;
+            padding: 70px 30px;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            align-items: center;
             gap: 50px;
+            align-items: center;
         }
-
-        .premium-tag {
-            display: inline-block;
-            background: rgba(255, 215, 0, 0.1);
-            border: 1px solid var(--gold-yellow);
+        .gold-tag {
+            background: rgba(255, 217, 102, 0.12);
+            border-left: 3px solid var(--gold-yellow);
             padding: 8px 20px;
-            border-radius: 30px;
+            border-radius: 40px;
+            display: inline-block;
             font-weight: 700;
             color: var(--gold-yellow);
             margin-bottom: 20px;
-            font-size: 13px;
-            letter-spacing: 1px;
         }
+        .hero h1 { font-size: 48px; line-height: 1.2; margin-bottom: 15px; }
+        .hero h2 { font-size: 22px; color: var(--muted-gray); margin-bottom: 20px; font-weight: 400; }
+        .hero p { line-height: 1.7; color: #CBD5E0; margin-bottom: 30px; }
+        .btn-group { display: flex; gap: 18px; flex-wrap: wrap; }
+        .btn-call { background: var(--purple-gradient); padding: 14px 28px; border-radius: 40px; font-weight: 700; color: white; transition: 0.3s; }
+        .btn-wa { background: #25D366; padding: 14px 28px; border-radius: 40px; font-weight: 700; }
+        .hero-banner { border-radius: 28px; filter: drop-shadow(0 15px 35px rgba(0,0,0,0.5)); animation: floatGold 5s ease-in-out infinite; }
+        @keyframes floatGold { 0%{ transform: translateY(0px); } 50%{ transform: translateY(-12px); } 100%{ transform: translateY(0px); } }
 
-        .hero h1 {
-            font-size: 46px;
-            line-height: 1.2;
-            margin-bottom: 15px;
-            color: white;
-        }
-
-        .hero h2 {
-            font-size: 24px;
-            line-height: 1.4;
-            margin-bottom: 20px;
-            color: var(--muted-gray);
-            font-weight: 400;
-        }
-
-        .hero p {
-            font-size: 16px;
-            line-height: 1.8;
-            color: #CBD5E0;
-            margin-bottom: 30px;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .call-btn {
-            background: var(--purple-gradient);
-            color: white;
-            padding: 14px 30px;
-            border-radius: 30px;
-            font-weight: 700;
-            box-shadow: 0 6px 20px rgba(123, 44, 191, 0.3);
-            transition: 0.3s;
-        }
-
-        .call-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .wa-btn {
-            background: #25D366;
-            color: white;
-            padding: 14px 30px;
-            border-radius: 30px;
-            font-weight: 700;
-            transition: 0.3s;
-        }
-
-        .wa-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .hero-banner {
-            max-width: 500px;
-            margin: auto;
-            border-radius: 20px;
-            animation: float 4s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0); }
-        }
-
-        /* Products Section */
-        .products {
+        /* sections */
+        .section {
             max-width: 1300px;
-            margin: auto;
-            padding: 60px 20px;
+            margin: 70px auto;
+            padding: 0 25px;
         }
-
         .section-title {
             text-align: center;
-            font-size: 36px;
-            margin-bottom: 40px;
-            color: white;
+            font-size: 38px;
+            margin-bottom: 50px;
         }
-
-        .section-title span {
-            color: var(--gold-yellow);
-        }
-
+        .section-title span { color: var(--gold-yellow); }
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+            gap: 35px;
         }
-
-        .product-card {
+        .prod-card {
             background: var(--dark-card);
-            border-radius: 25px;
+            border-radius: 32px;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            transition: .4s;
+            transition: 0.4s;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .prod-card:hover { transform: translateY(-10px); border-color: var(--traffic-purple); box-shadow: 0 20px 35px rgba(177, 78, 255, 0.2); }
+        .prod-card img { width: 100%; height: 260px; object-fit: contain; background: white; padding: 15px; }
+        .prod-info { padding: 25px; }
+        .prod-info h3 { font-size: 24px; margin-bottom: 12px; }
+        .prod-info p { font-size: 14px; line-height: 1.6; color: var(--muted-gray); margin-bottom: 20px; }
+        .enq-btn { background: transparent; border: 1.5px solid rgba(255,215,0,0.4); padding: 12px; width: 100%; border-radius: 40px; font-weight: 700; cursor: pointer; transition: 0.3s; color: white; }
+        .enq-btn:hover { background: var(--gold-gradient); color: #0F0F13; border-color: transparent; }
+
+        /* Why Choose, Mission & Glassmorphism */
+        .why-grid, .mission-vision {
             display: flex;
-            flex-direction: column;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
         }
-
-        .product-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--traffic-purple);
-            box-shadow: 0 15px 35px rgba(160, 32, 240, 0.15);
-        }
-
-        .product-card img {
-            height: 280px;
-            width: 100%;
-            object-fit: contain;
-            background: white;
-            padding: 15px;
-        }
-
-        .product-content {
-            padding: 25px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .product-content h3 {
-            margin-bottom: 12px;
-            color: white;
-            font-size: 22px;
-        }
-
-        .product-content p {
-            line-height: 1.7;
-            color: var(--light-text);
-            margin-bottom: 20px;
-            font-size: 14px;
-        }
-
-        .btn-card {
-            background: transparent;
-            color: var(--light-text);
-            border: 1.5px solid rgba(255, 255, 255, 0.1);
-            padding: 12px 20px;
-            border-radius: 10px;
-            cursor: pointer;
-            width: 100%;
-            font-weight: 600;
+        .glass-card {
+            background: rgba(30, 30, 36, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 28px;
+            padding: 30px;
             text-align: center;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: 0.3s;
+            flex: 1;
+            min-width: 240px;
+            border: 1px solid rgba(255,215,0,0.2);
         }
-
-        .product-card:hover .btn-card {
-            background: var(--purple-gradient);
-            border-color: transparent;
-            box-shadow: 0 4px 15px rgba(123, 44, 191, 0.4);
+        .review-slider {
+            display: flex;
+            overflow-x: auto;
+            gap: 25px;
+            padding: 20px 10px;
+            scroll-snap-type: x mandatory;
         }
-
-        /* Modal Overlay System */
+        .review-card {
+            min-width: 280px;
+            background: var(--dark-card);
+            padding: 25px;
+            border-radius: 28px;
+            scroll-snap-align: start;
+            border-left: 4px solid var(--gold-yellow);
+        }
+        .map-embed {
+            border-radius: 30px;
+            overflow: hidden;
+            margin-top: 25px;
+        }
+        footer {
+            background: #09090C;
+            padding: 40px;
+            text-align: center;
+            border-top: 1px solid rgba(255,215,0,0.1);
+        }
+        .floating-wa {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #25D366;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            z-index: 999;
+        }
+        /* Modal */
         .modal-overlay {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(5px);
-            z-index: 10000;
+            background: rgba(0,0,0,0.9);
+            backdrop-filter: blur(6px);
+            z-index: 100000;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+        }
+        .form-modal {
+            background: var(--dark-card);
+            max-width: 560px;
+            width: 90%;
+            padding: 30px;
+            border-radius: 32px;
+            border: 1px solid rgba(255,215,0,0.3);
+            max-height: 90vh;
             overflow-y: auto;
         }
-
-        .form-container {
-            background: var(--dark-card);
+        .form-group { margin-bottom: 18px; }
+        .form-group label { font-weight: 600; display: block; margin-bottom: 6px; font-size: 13px; color: var(--muted-gray); }
+        .form-control, select.form-control {
             width: 100%;
-            max-width: 550px;
-            padding: 35px;
-            border-radius: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            position: relative;
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 20px; right: 20px;
-            background: transparent;
-            border: none;
-            color: var(--muted-gray);
-            font-size: 26px;
-            cursor: pointer;
-        }
-
-        .form-group {
-            margin-bottom: 16px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 6px;
-            font-weight: 600;
-            color: #CBD5E0;
-            font-size: 13px;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1.5px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            font-size: 14px;
-            background: var(--charcoal-bg);
+            padding: 12px 14px;
+            border-radius: 14px;
+            background: #2A2A30;
+            border: 1px solid #3F3F46;
             color: white;
         }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--traffic-purple);
-        }
-
-        .error-text {
-            color: #E53E3E;
-            font-size: 11px;
-            display: none;
-            margin-top: 4px;
-        }
-
-        .btn-submit {
+        .error-text { color: #F87171; font-size: 11px; display: none; margin-top: 5px; }
+        .btn-submit-gold {
             background: var(--gold-gradient);
-            color: var(--charcoal-bg);
+            width: 100%;
             padding: 14px;
             border: none;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 15px;
-            width: 100%;
-            cursor: pointer;
-            text-transform: uppercase;
+            border-radius: 40px;
+            font-weight: 800;
+            color: #0F0F13;
         }
-
-        .about-box {
-            background: var(--dark-card);
-            padding: 40px;
-            border-radius: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            max-width: 1100px;
-            margin: auto;
-            font-size: 17px;
-            line-height: 1.9;
-            color: #E2E8F0;
-        }
-
-        .contact-box {
-            max-width: 1200px;
-            margin: auto;
-            text-align: center;
-            background: var(--dark-card);
-            padding: 40px;
-            border-radius: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.03);
-        }
-
-        .review-box {
-            background: var(--dark-card);
-            padding: 40px;
-            border-radius: 25px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            max-width: 600px;
-            margin: auto;
-        }
-
-        .floating-wa {
-            position: fixed;
-            right: 20px;
-            bottom: 20px;
-            width: 60px;
-            height: 60px;
-            background: #25D366;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 28px;
-            color: white;
-            z-index: 9998;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-        }
-
-        footer {
-            background: #0F0F12;
-            color: var(--muted-gray);
-            padding: 50px 20px;
-            text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.03);
-        }
-
-        footer h3 {
-            color: white;
-        }
-
-        /* PDF Sizing Config */
-        .pdf-wrapper-hide {
-            position: absolute;
-            left: -9999px;
-            top: -9999px;
-        }
-
+        /* pdf hidden */
+        .pdf-hidden { position: absolute; left: -9999px; top: -9999px; }
         #pdf-template {
-            width: 138mm; 
             background: white;
-            color: #222;
-            padding: 6mm;
-            box-sizing: border-box;
+            width: 148mm;
+            padding: 8mm;
+            font-family: 'Montserrat', sans-serif;
+            color: #111;
         }
-        
-        .pdf-header {
-            border-bottom: 2.5px solid #1A365D;
-            padding-bottom: 8px;
-            margin-bottom: 15px;
-        }
-
-        .pdf-company-title {
-            color: #1A365D;
-            font-size: 14px;
-            font-weight: 700;
-            text-transform: uppercase;
-            font-family: 'Cinzel', serif;
-        }
-
-        .pdf-company-details {
-            font-size: 9px;
-            color: #444;
-            line-height: 1.4;
-            margin-top: 3px;
-        }
-
-        .pdf-meta-container {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            gap: 10px;
-        }
-
-        .pdf-meta-box {
-            width: 50%;
-            background: #F8FAFC;
-            padding: 8px;
-            border-radius: 4px;
-            border-left: 2.5px solid #1A365D;
-        }
-
-        .pdf-meta-box h4 {
-            color: #1A365D;
-            font-size: 10px;
-            text-transform: uppercase;
-            margin-bottom: 3px;
-            border-bottom: 1px solid #E2E8F0;
-            padding-bottom: 2px;
-        }
-
-        .pdf-meta-box p {
-            font-size: 10px;
-            line-height: 1.4;
-        }
-
-        .pdf-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 15px;
-        }
-
-        .pdf-table th {
-            background: #1A365D;
-            color: white;
-            text-align: left;
-            padding: 6px 8px;
-            font-size: 10px;
-            text-transform: uppercase;
-        }
-
-        .pdf-table td {
-            padding: 10px 8px;
-            border-bottom: 1px solid #E2E8F0;
-            font-size: 11px;
-            vertical-align: middle;
-        }
-
-        .pdf-footer {
-            margin-top: 35px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-        }
-
-        .pdf-signature {
-            text-align: center;
-            width: 110px;
-            border-top: 1px solid #333;
-            padding-top: 3px;
-            font-size: 10px;
-            font-weight: 600;
-        }
-
-        @media(max-width:900px) {
-            .hero {
-                grid-template-columns: 1fr;
-                text-align: center;
-                padding: 40px 20px;
-            }
-            .hero h1 { font-size: 32px; }
-            .hero h2 { font-size: 20px; }
-            .hero-buttons { justify-content: center; }
-            nav { display: none; }
-        }
+        .pdf-header { border-bottom: 3px solid #7B2CBF; margin-bottom: 15px; }
+        .pdf-logo-title { font-weight: 800; font-size: 18px; color: #2D2A5E; }
+        @media (max-width: 880px) { .hero { grid-template-columns: 1fr; text-align: center; } .nav-links { display: none; } .navbar { justify-content: space-between; } .hero h1 { font-size: 32px; } }
     </style>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ChemicalManufacturingCompany",
+      "name": "AV CHEM CHEMICAL & MANUFACTURING",
+      "image": "https://avchemtirur.github.io/h4-logo.png",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Mukkilapeedika, Kannam Kulam, BP Angadi",
+        "addressLocality": "Tirur",
+        "addressRegion": "Kerala",
+        "postalCode": "676102",
+        "addressCountry": "IN"
+      },
+      "telephone": "+917907344030",
+      "url": "https://avchemtirur.github.io/",
+      "priceRange": "₹₹",
+      "sameAs": ["https://wa.me/919745838382"]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "H4 ShieldX Epoxy Flooring",
+      "brand": "AV CHEM",
+      "description": "Luxury epoxy flooring with mirror finish, jointless design for premium spaces.",
+      "offers": {"@type": "Offer", "availability": "https://schema.org/InStock", "price": "0", "priceCurrency": "INR"}
+    }
+    </script>
 </head>
 <body>
 
-    <!-- Header Interface -->
-    <header>
-        <div class="navbar">
-            <div class="logo-area">
-                <img src="h4-logo.png" alt="H4 Solutions Brand Logo" class="logo">
-                <div>
-                    <h2 class="brand">AV CHEM</h2>
-                    <p class="brand-sub">CHEMICAL & MANUFACTURING</p>
-                </div>
-            </div>
-            <nav>
-                <a href="#home">Home</a>
-                <a href="#products">Products</a>
-                <a href="#about">About</a>
-                <a href="#reviews">Reviews</a>
-                <a href="#contact">Contact</a>
-                <button class="dealer-btn" onclick="openModal('')">Dealer Enquiry</button>
-                <button id="langBtn" onclick="toggleLanguage()">EN / മലയാളം</button>
-            </nav>
+<header>
+    <div class="navbar">
+        <div class="logo-area">
+            <img src="https://placehold.co/400x400?text=H4" alt="H4 Solutions Logo" class="logo">
+            <div><div class="brand">AV CHEM</div><div style="font-size:10px;">CHEMICAL & MFG</div></div>
         </div>
-    </header>
-
-    <!-- Hero Module -->
-    <section id="home" class="hero">
-        <div class="hero-left">
-            <span class="premium-tag">H4 SOLUTIONS</span>
-            <h1 id="heroTitle" class="vemior-font">AV CHEM CHEMICAL & <br>MANUFACTURING</h1>
-            <h2 id="heroSub">Premium Tile Adhesive, Waterproofing & H4 ShieldX Epoxy Flooring Solutions In Kerala</h2>
-            <p id="heroText">Manufacturing premium construction chemicals from Tirur, Malappuram, Kerala.</p>
-            <div class="hero-buttons">
-                <a href="tel:+917907344030" class="call-btn">📞 Call Now</a>
-                <a href="https://wa.me/919745838382" target="_blank" class="wa-btn">💬 WhatsApp</a>
-            </div>
-        </div>
-        <div class="hero-right">
-            <img src="avchem-chemical-manufacturing-industrial-plant.jpg" alt="AV CHEM Company Factory" class="hero-banner">
-        </div>
-    </section>
-
-    <!-- Product Grid Scope -->
-    <section id="products" class="products">
-        <div class="section-title var-font" id="rangeTitle">H4 <span>Construction Solution</span></div>
-        <div class="product-grid">
-            
-            <div class="product-card">
-                <img src="h4-premium-tile-adhesive-bag-avchem-kerala.png" alt="H4 Tile Adhesive">
-                <div class="product-content">
-                    <h3 id="prodTitle1" class="vemior-font">Tile Adhesive</h3>
-                    <p id="prodDesc1" class="malayalam-text">ഉയർന്ന ബോണ്ടിംഗ് ശേഷിയുള്ള പ്രീമിയം ടൈൽ ഒട്ടിക്കുന്ന gum</p>
-                    <button class="btn-card" onclick="openModal('Tile Adhesive')">Get Quotation</button>
-                </div>
-            </div>
-            
-            <div class="product-card">
-                <img src="h4-advanced-waterproofing-system-warranty.png" alt="H4 Waterproofing">
-                <div class="product-content">
-                    <h3 id="prodTitle2" class="vemior-font">Waterproofing</h3>
-                    <p id="prodDesc2" class="malayalam-text">കഠിനമായ ചൂടിനെയും കനത്ത മഴയെയും പ്രതിരോധിക്കുന്ന 15 വർഷം വാറന്റിയുള്ള പ്രൊട്ടക്ഷൻ</p>
-                    <button class="btn-card" onclick="openModal('Waterproofing')">Get Quotation</button>
-                </div>
-            </div>
-            
-            <div class="product-card">
-                <img src="epoxy-image.png" alt="H4 ShieldX Epoxy">
-                <div class="product-content">
-                    <h3 id="prodTitle3" class="vemior-font">H4 ShieldX Epoxy</h3>
-                    <p id="prodDesc3" class="malayalam-text">ടൈലുകൾക്കും മാർബിളുകൾക്കും പകരം, ജോയിന്റുകൾ ഇല്ലാതെ കണ്ണാടി പോലെയുള്ള തിളക്കവും 3D/മാറ്റ്/გ്ലോസ്സി ഡിസൈനുകളും നൽകുന്ന ലക്ഷ്വറി ഫ്ലോറിംഗ്</p>
-                    <button class="btn-card" onclick="openModal('Epoxy Flooring')">Get Quotation</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Content Sections -->
-    <section id="about" class="products">
-        <h2 class="section-title vemior-font">About AV CHEM</h2>
-        <div class="about-box">
-            <p>AV CHEM CHEMICAL & MANUFACTURING is a Kerala based construction chemical manufacturer located at Mukkilapeedika, Kannam Kulam, BP Angadi, Tirur, Malappuram, Kerala - 676102. We manufacture and supply premium quality Tile Adhesive, Waterproofing Solutions and H4 ShieldX Epoxy Flooring Systems.</p>
-        </div>
-    </section>
-
-    <section id="contact" class="products">
-        <div class="contact-box">
-            <h2 class="section-title vemior-font">Contact AV CHEM</h2>
-            <p style="line-height:1.8; margin-bottom:25px;">
-                AV CHEM CHEMICAL & MANUFACTURING<br>
-                Mukkilapeedika, Kannam Kulam, BP Angadi, Tirur, Kerala - 676102<br><br>
-                📞 +91 79073 44030 &nbsp;|&nbsp; 💬 +91 97458 38382
-            </p>
-        </div>
-    </section>
-
-    <section id="reviews" class="products">
-        <div class="review-box">
-            <h3 style="color:var(--gold-yellow); margin-bottom:10px;">★★★★★ Google Reviews</h3>
-            <button class="dealer-btn" onclick="window.open('https://g.page/r/CQvfi-3pi0lFEBM/review', '_blank')">Write Review</button>
-        </div>
-    </section>
-
-    <!-- Pop-up Modal Portal -->
-    <div class="modal-overlay" id="formModal" onclick="closeModal(event)">
-        <div class="form-container" onclick="event.stopPropagation()">
-            <button class="close-modal" onclick="document.getElementById('formModal').style.display='none'">×</button>
-            <h2 id="modalTitle" class="vemior-font" style="color:white; text-align:center; margin-bottom:25px;">Dealer Enquiry Portal</h2>
-            
-            <div class="form-group">
-                <label id="lblName">Customer Name *</label>
-                <input type="text" id="customerName" class="form-control" placeholder="Enter name">
-                <div id="nameError" class="error-text">Enter Customer Name</div>
-            </div>
-
-            <div class="form-group">
-                <label id="lblContact">Contact Number *</label>
-                <input type="tel" id="contactNumber" maxlength="10" inputmode="numeric" class="form-control">
-                <div id="contactError" class="error-text">Enter Contact Number</div>
-            </div>
-
-            <div class="form-group">
-                <label id="lblWhatsapp">WhatsApp Number *</label>
-                <input type="tel" id="whatsappNumber" maxlength="10" inputmode="numeric" class="form-control">
-                <div id="whatsappError" class="error-text">Enter WhatsApp Number</div>
-            </div>
-
-            <div class="form-group">
-                <label id="lblCity">Area / City *</label>
-                <input type="text" id="city" class="form-control">
-                <div id="cityError" class="error-text">Enter City</div>
-            </div>
-
-            <div class="form-group">
-                <label id="lblPincode">Pincode *</label>
-                <input type="tel" id="pincode" maxlength="6" inputmode="numeric" class="form-control">
-                <div id="pinError" class="error-text">Enter Pincode</div>
-            </div>
-
-            <div class="form-group">
-                <label id="lblDistrict">District *</label>
-                <input type="text" id="district" class="form-control">
-                <div id="districtError" class="error-text">Enter District</div>
-            </div>
-
-            <div class="form-group">
-                <label id="lblItem">Select Item *</label>
-                <select id="item" class="form-control">
-                    <option value="">Select</option>
-                    <option value="Tile Adhesive">Tile Adhesive</option>
-                    <option value="Waterproofing">Waterproofing</option>
-                    <option value="Epoxy Flooring">Epoxy Flooring</option>
-                </select>
-                <div id="itemError" class="error-text">Select Item</div>
-            </div>
-
-            <div class="form-group">
-                <label id="lblUnit">Unit *</label>
-                <select id="unit" class="form-control">
-                    <option value="">Select</option>
-                    <option>KG</option>
-                    <option>Bag</option>
-                    <option>Square Feet</option>
-                </select>
-                <div id="unitError" class="error-text">Select Unit</div>
-            </div>
-
-            <div class="form-group">
-                <label id="lblQty">Quantity *</label>
-                <input type="number" id="quantity" class="form-control">
-                <div id="qtyError" class="error-text">Enter Quantity</div>
-            </div>
-
-            <button class="btn-submit" id="btnSubmit" onclick="submitForm()">Confirm & Download PDF</button>
+        <div class="nav-links">
+            <a href="#home">Home</a><a href="#products">Products</a><a href="#about">About</a><a href="#reviews">Reviews</a><a href="#contact">Contact</a>
+            <button class="dealer-nav-btn" onclick="openDealerModal()">Dealer Enquiry</button>
+            <button id="langBtn" onclick="toggleLang()">EN / മലയാളം</button>
         </div>
     </div>
+</header>
 
-    <a href="https://wa.me/919745838382" class="floating-wa" target="_blank">💬</a>
-
-    <!-- Footer -->
-    <footer>
-        <p>© 2026 AV CHEM CHEMICAL & MANUFACTURING. All Rights Reserved.</p>
-    </footer>
-
-    <!-- Hidden A5 PDF Layout Render Scope -->
-    <div class="pdf-wrapper-hide">
-        <div id="pdf-template">
-            <div class="pdf-header">
-                <div class="pdf-company-title">AV CHEM CHEMICAL & MANUFACTURING</div>
-                <div class="pdf-company-details">
-                    Mukkilapeedika, Kannam Kulam, BP Angadi, Tirur, Malappuram, Kerala - 676102<br>
-                    Mob: +91 79073 44030 | Email: avchemtirur@gmail.com
-                </div>
-                <div style="text-align: right; margin-top: 10px; border-top: 1px solid #ddd; padding-top: 5px;">
-                    <strong style="font-size: 11px; color: #1A365D;">DIGITAL QUOTATION SLIP</strong><br>
-                    <span style="font-size: 9px; color: #555;" id="pdf_date"></span>
-                </div>
-            </div>
-
-            <div class="pdf-meta-container">
-                <div class="pdf-meta-box">
-                    <h4>Customer Details</h4>
-                    <p><strong>Name:</strong> <span id="pdf_name"></span></p>
-                    <p><strong>Location:</strong> <span id="pdf_location"></span></p>
-                    <p><strong>Contact:</strong> <span id="pdf_phone"></span></p>
-                    <p><strong>WhatsApp:</strong> <span id="pdf_whatsapp_val"></span></p>
-                </div>
-                <div class="pdf-meta-box" style="text-align: right; border-left: none; border-right: 2.5px solid #1A365D;">
-                    <h4>Document Info</h4>
-                    <p><strong>Status:</strong> Request Pending</p>
-                    <p><strong>Format:</strong> Digital A5 Slip</p>
-                    <p><strong>Brand:</strong> H4 Solutions Line</p>
-                </div>
-            </div>
-
-            <table class="pdf-table">
-                <thead>
-                    <tr>
-                        <th style="width: 15%; text-align: center;">Sl No</th>
-                        <th style="width: 50%;">Product Description</th>
-                        <th style="width: 15%; text-align: center;">Unit</th>
-                        <th style="width: 20%; text-align: right;">Quantity</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td style="text-align: center;">1</td>
-                        <td style="font-weight: 600; font-size: 12px; color:#1A365D;">
-                            <span id="pdf_item"></span> Genuine Core Solution<br>
-                            <span style="font-size: 9px; color:#666; font-weight: normal;">Premium Grade Material Manufactured by AV CHEM.</span>
-                        </td>
-                        <td style="text-align: center; font-weight: 600; font-size: 11px;" id="pdf_unit"></td>
-                        <td style="text-align: right; font-weight: 700; color:#1A365D; font-size: 12px;" id="pdf_qty"></td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="pdf-footer">
-                <div style="font-size: 9px; color: #555; font-style: italic;">Thank you for your enquiry.</div>
-                <div class="pdf-signature">Authorized Signatory</div>
-            </div>
+<section id="home" class="hero">
+    <div>
+        <div class="gold-tag"><i class="fas fa-crown"></i> H4 PREMIUM SOLUTIONS</div>
+        <h1 class="vemior-font" id="heroTitle">AV CHEM CHEMICAL & <br>MANUFACTURING</h1>
+        <h2 id="heroSub">Tile Adhesive, Waterproofing & H4 ShieldX Epoxy Flooring</h2>
+        <p id="heroText">Industry-leading construction chemicals manufactured in Tirur, Malappuram, Kerala. Trusted quality & factory pricing.</p>
+        <div class="btn-group">
+            <a href="tel:+917907344030" class="btn-call"><i class="fas fa-phone-alt"></i> Call Now</a>
+            <a href="https://wa.me/919745838382" target="_blank" class="btn-wa"><i class="fab fa-whatsapp"></i> WhatsApp</a>
         </div>
     </div>
+    <div><img src="https://placehold.co/600x500/FFFFFF/8A2BE2?text=AV+CHEM+FACTORY" alt="AV CHEM Manufacturing Plant" class="hero-banner"></div>
+</section>
 
-    <!-- Core Dynamic Functional Modules Layout Logic -->
-    <script>
-        let currentLang = 'EN';
+<!-- Products -->
+<section id="products" class="section">
+    <div class="section-title vemior-font">H4 <span>Construction Solutions</span></div>
+    <div class="product-grid">
+        <div class="prod-card"><img src="https://placehold.co/500x400/EEEEEE/333?text=H4+Tile+Adhesive" alt="H4 Premium Tile Adhesive Kerala"><div class="prod-info"><h3>Tile Adhesive</h3><p class="malayalam-font">ഉയർന്ന ബോണ്ടിംഗ് ശേഷി, ഈർപ്പം പ്രതിരോധം, വേഗത്തിലുള്ള സെറ്റിംഗ്. Ideal for all tiles & stone cladding.</p><button class="enq-btn" onclick="openDealerModalWithProduct('Tile Adhesive')">Get Quotation →</button></div></div>
+        <div class="prod-card"><img src="https://placehold.co/500x400/EEEEEE/333?text=H4+Waterproofing" alt="H4 Waterproofing System"><div class="prod-info"><h3>Waterproofing</h3><p class="malayalam-font">15 years warranty, liquid applied crystalline technology. Protects from heavy monsoon & heat.</p><button class="enq-btn" onclick="openDealerModalWithProduct('Waterproofing')">Get Quotation →</button></div></div>
+        <div class="prod-card"><img src="https://placehold.co/500x400/EEEEEE/333?text=H4+ShieldX+Epoxy" alt="H4 ShieldX Epoxy Flooring"><div class="prod-info"><h3>H4 ShieldX Epoxy</h3><p class="malayalam-font">Luxury mirror-finish epoxy flooring, jointless, stain resistant, 3D/Matte designs available.</p><button class="enq-btn" onclick="openDealerModalWithProduct('Epoxy Flooring')">Get Quotation →</button></div></div>
+    </div>
+</section>
 
-        const translations = {
-            EN: {
-                heroTitle: "AV CHEM CHEMICAL & <br>MANUFACTURING",
-                heroSub: "Premium Tile Adhesive, Waterproofing & H4 ShieldX Epoxy Flooring Solutions In Kerala",
-                heroText: "Manufacturing premium construction chemicals from Tirur, Malappuram, Kerala.",
-                modalTitle: "Dealer Enquiry Portal",
-                lblName: "Customer Name *",
-                lblContact: "Contact Number *",
-                lblWhatsapp: "WhatsApp Number *",
-                lblCity: "Area / City *",
-                lblPincode: "Pincode *",
-                lblDistrict: "District *",
-                lblItem: "Select Item *",
-                lblUnit: "Unit *",
-                lblQty: "Quantity *",
-                btnSubmit: "Confirm & Download PDF"
-            },
-            ML: {
-                heroTitle: "പ്രീമിയം കൺസ്ട്രക്ഷൻ <br><span>കെമിക്കൽ സൊല്യൂഷൻസ്</span>",
-                heroSub: "ഉയർന്ന നിലവാരമുള്ള ഉൽപ്പന്നങ്ങൾ നേരിട്ട് ഫാക്ടറിയിൽ നിന്നും ലഭ്യമാക്കുന്നു.",
-                heroText: "തിരൂർ, മലപ്പുറം ആസ്ഥാനമായി പ്രവർത്തിക്കുന്ന പ്രീമിയം കൺസ്ട്രക്ഷൻ കെമിക്കൽ നിർമ്മാതാക്കൾ.",
-                modalTitle: "ഡീലർ എൻക്വയറി ഫോം",
-                lblName: "കസ്റ്റമർ പേര് *",
-                lblContact: "ഫോൺ നമ്പർ *",
-                lblWhatsapp: "വാട്സാപ്പ് നമ്പർ *",
-                lblCity: "സ്ഥലം / നഗരം *",
-                lblPincode: "പിൻകോഡ് *",
-                lblDistrict: "ജില്ല *",
-                lblItem: "ഉൽപ്പന്നം തിരഞ്ഞെടുക്കുക *",
-                lblUnit: "യൂണിറ്റ് *",
-                lblQty: "ആവശ്യമായ അളവ് *",
-                btnSubmit: "സ്ഥിരീകരിക്കുക & PDF ഡൗൺലോഡ് ചെയ്യുക"
-            }
-        };
+<!-- Why Choose AV CHEM, Mission Vision -->
+<section class="section">
+    <div class="section-title">Why <span>AV CHEM</span></div>
+    <div class="why-grid">
+        <div class="glass-card"><i class="fas fa-flask" style="font-size:40px; color:#FFD966;"></i><h3 style="margin:15px 0">German Technology</h3><p>Advanced chemical formulations</p></div>
+        <div class="glass-card"><i class="fas fa-truck" style="font-size:40px; color:#FFD966;"></i><h3>Pan Kerala Supply</h3><p>Direct from factory in Tirur</p></div>
+        <div class="glass-card"><i class="fas fa-award" style="font-size:40px; color:#FFD966;"></i><h3>15+ Years Expertise</h3><p>Trusted by contractors</p></div>
+    </div>
+    <div style="display:flex; gap:30px; flex-wrap:wrap; margin-top: 50px;">
+        <div class="glass-card"><h3><i class="fas fa-bullseye"></i> Mission</h3><p>To deliver world-class construction chemicals at affordable prices, empowering Kerala’s infrastructure.</p></div>
+        <div class="glass-card"><h3><i class="fas fa-eye"></i> Vision</h3><p>Become the most reliable chemical partner for builders & homeowners across South India.</p></div>
+    </div>
+</section>
 
-        function toggleLanguage() {
-            if (currentLang === 'EN') {
-                document.getElementById('langBtn').innerText = 'ML / EN';
-                document.getElementById('rangeTitle').innerHTML = 'H4 <span>കൺസ്ട്രക്ഷൻ സൊല്യൂഷൻ</span>';
-                currentLang = 'ML';
-            } else {
-                document.getElementById('langBtn').innerText = 'EN / മലയാളം';
-                document.getElementById('rangeTitle').innerHTML = 'H4 <span>Construction Solution</span>';
-                currentLang = 'EN';
-            }
-            
-            const t = translations[currentLang];
-            document.getElementById('heroTitle').innerHTML = t.heroTitle;
-            document.getElementById('heroSub').innerText = t.heroSub;
-            document.getElementById('heroText').innerText = t.heroText;
-            document.getElementById('modalTitle').innerText = t.modalTitle;
-            document.getElementById('lblName').innerText = t.lblName;
-            document.getElementById('lblContact').innerText = t.lblContact;
-            document.getElementById('lblWhatsapp').innerText = t.lblWhatsapp;
-            document.getElementById('lblCity').innerText = t.lblCity;
-            document.getElementById('lblPincode').innerText = t.lblPincode;
-            document.getElementById('lblDistrict').innerText = t.lblDistrict;
-            document.getElementById('lblItem').innerText = t.lblItem;
-            document.getElementById('lblUnit').innerText = t.lblUnit;
-            document.getElementById('lblQty').innerText = t.lblQty;
-            document.getElementById('btnSubmit').innerText = t.btnSubmit;
-        }
+<!-- Google Reviews & Customer Slider -->
+<section id="reviews" class="section">
+    <div class="section-title">Customer <span>Testimonials</span></div>
+    <div class="review-slider">
+        <div class="review-card"><i class="fas fa-star" style="color:#FFD966;"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><p style="margin:12px 0">"Best tile adhesive in Malappuram! Excellent bonding." - Shihab, Tirur</p></div>
+        <div class="review-card"><i class="fas fa-star" style="color:#FFD966;"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><p>"H4 ShieldX Epoxy transformed our showroom floor. Mirror gloss finish." - Fathima, Kozhikode</p></div>
+        <div class="review-card"><i class="fas fa-star" style="color:#FFD966;"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><p>"Waterproofing solved terrace leakage. Highly professional." - Haris, Malappuram</p></div>
+    </div>
+    <div style="text-align:center; margin-top:30px"><button class="dealer-nav-btn" onclick="window.open('https://g.page/r/CQvfi-3pi0lFEBM/review', '_blank')">⭐ Write Google Review</button></div>
+</section>
 
-        function openModal(selectedItem) {
-            document.getElementById('formModal').style.display = 'flex';
-            if(selectedItem) {
-                document.getElementById('item').value = selectedItem;
-            }
-        }
+<!-- Contact + Google Map Embed -->
+<section id="contact" class="section">
+    <div class="section-title">Get in <span>Touch</span></div>
+    <div style="background: var(--dark-card); border-radius: 32px; padding: 30px; text-align:center;">
+        <p><i class="fas fa-map-marker-alt"></i> Mukkilapeedika, Kannam Kulam, BP Angadi, Tirur, Kerala - 676102</p>
+        <p style="margin:15px 0"><i class="fas fa-phone-alt"></i> <a href="tel:+917907344030" style="color:var(--gold-yellow)">+91 79073 44030</a> &nbsp;|&nbsp; <i class="fab fa-whatsapp"></i> <a href="https://wa.me/919745838382" style="color:#25D366">+91 97458 38382</a> &nbsp;|&nbsp; <i class="far fa-envelope"></i> avchemtirur@gmail.com</p>
+        <div class="map-embed"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3913.445560541217!2d75.978445!3d10.885397!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba7b8d9f6a5e28d%3A0xcb9f3f86ebe55b2!2sTirur%2C%20Kerala!5e0!3m2!1sen!2sin!4v1650000000000!5m2!1sen!2sin" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div>
+    </div>
+</section>
 
-        function closeModal(event) {
-            if(event.target.id === 'formModal') {
-                document.getElementById('formModal').style.display = 'none';
-            }
-        }
+<footer><p>© 2026 AV CHEM CHEMICAL & MANUFACTURING. All Rights Reserved. | H4 Solutions Premium Construction Range</p></footer>
+<a href="https://wa.me/919745838382" class="floating-wa" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
-        function submitForm(){
-            let valid=true;
+<!-- Dealer Modal -->
+<div id="dealerModal" class="modal-overlay" onclick="closeModalIfOutside(event)">
+    <div class="form-modal" onclick="event.stopPropagation()">
+        <div style="display:flex; justify-content:space-between;"><h3 class="vemior-font" id="modalTitle">Dealer Enquiry Portal</h3><button onclick="closeDealerModal()" style="background:none; border:none; font-size:28px; color:white;">&times;</button></div>
+        <div class="form-group"><label id="lblName">Customer Name *</label><input type="text" id="custName" class="form-control"><div id="errName" class="error-text">Required</div></div>
+        <div class="form-group"><label id="lblContact">Contact Number *</label><input type="tel" id="custContact" maxlength="10" class="form-control"><div id="errContact" class="error-text">10 digit mobile</div></div>
+        <div class="form-group"><label id="lblWhatsapp">WhatsApp Number *</label><input type="tel" id="custWhatsapp" maxlength="10" class="form-control"><div id="errWhatsapp" class="error-text">Valid WhatsApp number</div></div>
+        <div class="form-group"><label id="lblCity">Area / City *</label><input type="text" id="custCity" class="form-control"><div id="errCity" class="error-text">Required</div></div>
+        <div class="form-group"><label id="lblDistrict">District *</label><input type="text" id="custDistrict" class="form-control"><div id="errDistrict" class="error-text">Required</div></div>
+        <div class="form-group"><label id="lblPincode">Pincode *</label><input type="text" id="custPincode" maxlength="6" class="form-control"><div id="errPincode" class="error-text">6 digit</div></div>
+        <div class="form-group"><label id="lblItem">Product *</label><select id="custItem" class="form-control"><option value="">Select</option><option>Tile Adhesive</option><option>Waterproofing</option><option>Epoxy Flooring</option></select><div id="errItem" class="error-text">Select</div></div>
+        <div class="form-group"><label id="lblUnit">Unit *</label><select id="custUnit" class="form-control"><option>KG</option><option>Bag</option><option>Square Feet</option></select><div id="errUnit" class="error-text">Select</div></div>
+        <div class="form-group"><label id="lblQty">Quantity *</label><input type="number" id="custQty" class="form-control"><div id="errQty" class="error-text">Enter quantity</div></div>
+        <button class="btn-submit-gold" id="submitFormBtn">Confirm & Download PDF + WhatsApp</button>
+    </div>
+</div>
 
-            let name= document.getElementById('customerName');
-            let contact= document.getElementById('contactNumber');
-            let whatsapp= document.getElementById('whatsappNumber');
-            let city= document.getElementById('city');
-            let pincode= document.getElementById('pincode');
-            let district= document.getElementById('district');
-            let item= document.getElementById('item');
-            let unit= document.getElementById('unit');
-            let qty= document.getElementById('quantity');
+<!-- PDF template hidden -->
+<div class="pdf-hidden">
+    <div id="pdf-template">
+        <div class="pdf-header"><div class="pdf-logo-title">AV CHEM CHEMICAL & MANUFACTURING</div><div>Mukkilapeedika, Tirur, Kerala - 676102 | Ph: +91 79073 44030</div><hr><div><strong>OFFICIAL QUOTATION SLIP</strong> <span id="pdfDate" style="float:right"></span></div></div>
+        <div style="margin: 15px 0; background:#f5f5f5; padding:8px;"><strong>Customer:</strong> <span id="pdfCustName"></span><br><strong>Location:</strong> <span id="pdfLocation"></span> | <strong>Contact:</strong> <span id="pdfPhone"></span> | <strong>WhatsApp:</strong> <span id="pdfWa"></span></div>
+        <table style="width:100%; border-collapse:collapse; margin:12px 0"><thead><tr style="background:#7B2CBF; color:white"><th>Product</th><th>Unit</th><th>Qty</th></tr></thead><tbody><tr><td><strong id="pdfProductName">-</strong></td><td id="pdfUnitShow">-</td><td id="pdfQtyShow">-</td></tr></tbody></table>
+        <div style="margin-top: 35px;"><hr><div style="display:flex; justify-content:space-between;"><span>Authorised Signatory</span><span>www.avchem.com</span></div></div>
+    </div>
+</div>
 
-            document.querySelectorAll('.error-text').forEach(el=> el.style.display='none');
+<script>
+    let currentLanguage = 'EN';
+    const translations = {
+        EN: { modalTitle:"Dealer Enquiry Portal", lblName:"Customer Name *", lblContact:"Contact Number *", lblWhatsapp:"WhatsApp Number *", lblCity:"Area / City *", lblDistrict:"District *", lblPincode:"Pincode *", lblItem:"Product *", lblUnit:"Unit *", lblQty:"Quantity *", heroTitle:"AV CHEM CHEMICAL & <br>MANUFACTURING", heroSub:"Tile Adhesive, Waterproofing & H4 ShieldX Epoxy Flooring", heroText:"Manufacturing premium construction chemicals from Tirur, Malappuram, Kerala." },
+        ML: { modalTitle:"ഡീലർ അന്വേഷണം", lblName:"ഉപഭോക്താവിന്റെ പേര് *", lblContact:"ഫോൺ നമ്പർ *", lblWhatsapp:"വാട്സാപ്പ് നമ്പർ *", lblCity:"സ്ഥലം / നഗരം *", lblDistrict:"ജില്ല *", lblPincode:"പിൻകോഡ് *", lblItem:"ഉൽപ്പന്നം *", lblUnit:"യൂണിറ്റ് *", lblQty:"അളവ് *", heroTitle:"എ.വി. കെം കെമിക്കൽ & മാനുഫാക്ചറിംഗ്", heroSub:"പ്രീമിയം ടൈൽ അഡീസീവ്, വാട്ടർപ്രൂഫിംഗ് & എപ്പോക്സി ഫ്ലോറിംഗ്", heroText:"തിരൂർ, മലപ്പുറം ആസ്ഥാനമായുള്ള പ്രീമിയം കൺസ്ട്രക്ഷൻ കെമിക്കൽ നിർമ്മാതാവ്." }
+    };
+    function toggleLang() {
+        currentLanguage = currentLanguage === 'EN' ? 'ML' : 'EN';
+        const t = translations[currentLanguage];
+        document.getElementById('heroTitle').innerHTML = t.heroTitle;
+        document.getElementById('heroSub').innerText = t.heroSub;
+        document.getElementById('heroText').innerText = t.heroText;
+        document.getElementById('modalTitle').innerText = t.modalTitle;
+        document.getElementById('lblName').innerText = t.lblName;
+        document.getElementById('lblContact').innerText = t.lblContact;
+        document.getElementById('lblWhatsapp').innerText = t.lblWhatsapp;
+        document.getElementById('lblCity').innerText = t.lblCity;
+        document.getElementById('lblDistrict').innerText = t.lblDistrict;
+        document.getElementById('lblPincode').innerText = t.lblPincode;
+        document.getElementById('lblItem').innerText = t.lblItem;
+        document.getElementById('lblUnit').innerText = t.lblUnit;
+        document.getElementById('lblQty').innerText = t.lblQty;
+        document.getElementById('langBtn').innerHTML = currentLanguage === 'EN' ? "EN / മലയാളം" : "ML / EN";
+    }
+    function openDealerModal() { document.getElementById('dealerModal').style.display = 'flex'; }
+    function openDealerModalWithProduct(prod) { openDealerModal(); if(prod) document.getElementById('custItem').value = prod; }
+    function closeDealerModal() { document.getElementById('dealerModal').style.display = 'none'; }
+    function closeModalIfOutside(e) { if(e.target.classList.contains('modal-overlay')) closeDealerModal(); }
+    document.getElementById('submitFormBtn').addEventListener('click', function(){
+        let valid = true;
+        const name = document.getElementById('custName').value.trim();
+        const contact = document.getElementById('custContact').value.trim();
+        const wa = document.getElementById('custWhatsapp').value.trim();
+        const city = document.getElementById('custCity').value.trim();
+        const district = document.getElementById('custDistrict').value.trim();
+        const pincode = document.getElementById('custPincode').value.trim();
+        const item = document.getElementById('custItem').value;
+        const unit = document.getElementById('custUnit').value;
+        const qty = document.getElementById('custQty').value;
 
-            if(name.value.trim()==""){ document.getElementById('nameError').style.display='block'; valid=false; }
-            if(!/^\d{10}$/.test(contact.value)){ document.getElementById('contactError').style.display='block'; valid=false; }
-            if(!/^\d{10}$/.test(whatsapp.value)){ document.getElementById('whatsappError').style.display='block'; valid=false; }
-            if(city.value.trim()==""){ document.getElementById('cityError').style.display='block'; valid=false; }
-            if(!/^\d{6}$/.test(pincode.value)){ document.getElementById('pinError').style.display='block'; valid=false; }
-            if(district.value.trim()==""){ document.getElementById('districtError').style.display='block'; valid=false; }
-            if(item.value==""){ document.getElementById('itemError').style.display='block'; valid=false; }
-            if(unit.value==""){ document.getElementById('unitError').style.display='block'; valid=false; }
-            if(qty.value==""){ document.getElementById('qtyError').style.display='block'; valid=false; }
+        document.querySelectorAll('.error-text').forEach(e=> e.style.display='none');
+        if(!name) { document.getElementById('errName').style.display='block'; valid=false; }
+        if(!/^\d{10}$/.test(contact)) { document.getElementById('errContact').style.display='block'; valid=false; }
+        if(!/^\d{10}$/.test(wa)) { document.getElementById('errWhatsapp').style.display='block'; valid=false; }
+        if(!city) { document.getElementById('errCity').style.display='block'; valid=false; }
+        if(!district) { document.getElementById('errDistrict').style.display='block'; valid=false; }
+        if(!/^\d{6}$/.test(pincode)) { document.getElementById('errPincode').style.display='block'; valid=false; }
+        if(!item) { document.getElementById('errItem').style.display='block'; valid=false; }
+        if(!unit) { document.getElementById('errUnit').style.display='block'; valid=false; }
+        if(!qty || qty<=0) { document.getElementById('errQty').style.display='block'; valid=false; }
+        if(!valid) return;
 
-            if(!valid) return;
+        // fill pdf
+        const today = new Date().toLocaleString();
+        document.getElementById('pdfDate').innerText = today;
+        document.getElementById('pdfCustName').innerText = name;
+        document.getElementById('pdfLocation').innerText = `${city}, ${district} - ${pincode}`;
+        document.getElementById('pdfPhone').innerText = contact;
+        document.getElementById('pdfWa').innerText = wa;
+        document.getElementById('pdfProductName').innerText = `H4 ${item}`;
+        document.getElementById('pdfUnitShow').innerText = unit;
+        document.getElementById('pdfQtyShow').innerText = qty;
 
-            let today = new Date();
-            document.getElementById('pdf_date').innerText = "Date: " + today.toLocaleDateString('en-IN');
-            document.getElementById('pdf_name').innerText = name.value;
-            document.getElementById('pdf_location').innerText = city.value + ", " + district.value + " - " + pincode.value;
-            document.getElementById('pdf_phone').innerText = "+91 " + contact.value;
-            document.getElementById('pdf_whatsapp_val').innerText = "+91 " + whatsapp.value;
-            document.getElementById('pdf_item').innerText = "H4 " + item.value;
-            document.getElementById('pdf_unit').innerText = unit.value;
-            document.getElementById('pdf_qty').innerText = qty.value;
+        const element = document.getElementById('pdf-template');
+        const opt = { margin: [8,8,8,8], filename: `AVCHEM_QUOTATION_${name}.pdf`, image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2 }, jsPDF: { unit: 'mm', format: 'a5', orientation: 'portrait' } };
+        html2pdf().set(opt).from(element).save().then(() => {
+            closeDealerModal();
+        });
 
-            const element = document.getElementById('pdf-template');
-            const opt = {
-                margin:       [10, 8, 10, 8],
-                filename:     'AVCHEM_Quotation_' + name.value + '.pdf',
-                image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true, logging: false },
-                jsPDF:        { unit: 'mm', format: 'a5', orientation: 'portrait' }
-            };
-
-            html2pdf().set(opt).from(element).save().then(() => {
-                document.getElementById('formModal').style.display = 'none';
-            });
-
-            let msg = `AV CHEM CHEMICAL & MANUFACTURING\n\nDealer Enquiry\n\nCustomer Name: ${name.value}\nContact: ${contact.value}\nWhatsApp: ${whatsapp.value}\nCity: ${city.value}\nDistrict: ${district.value}\nPincode: ${pincode.value}\nItem: ${item.value}\nUnit: ${unit.value}\nQuantity: ${qty.value}`;
-            window.open('https://wa.me/919745838382?text=' + encodeURIComponent(msg));
-        }
-    </script>
+        const waMsg = `Hello AV CHEM,%0A*Dealer Enquiry*%0A Name: ${name}%0A Contact: ${contact}%0A WhatsApp: ${wa}%0A Location: ${city}, ${district} PIN:${pincode}%0A Product: ${item} (${unit})%0A Quantity: ${qty}%0A Request for quotation.`;
+        window.open(`https://wa.me/919745838382?text=${waMsg}`);
+    });
+    window.onload = ()=>{
+        if(localStorage.getItem('lang') === 'ML') toggleLang();
+    }
+</script>
 </body>
 </html>
