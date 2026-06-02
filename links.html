@@ -49,66 +49,67 @@
       100% { transform: translateY(0px) translateX(0px) rotate(0deg); opacity: 0.4; }
     }
 
-    /* main card container - full screen adaptive */
+    /* main card container - FULL SCREEN + 30% LARGER (scale factor) */
+    /* Original base was ~max-width 600px. 30% larger -> 780px, but we control with font scaling & padding */
     .container {
       position: relative;
       z-index: 2;
       width: 100%;
-      max-width: 600px;
-      margin: 24px auto;
-      padding: 20px 20px 32px 20px;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(4px);
-      border-radius: 56px 56px 64px 64px;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+      max-width: 780px;     /* 30% larger than 600px (600*1.3 = 780) */
+      margin: 32px auto;
+      padding: 32px 32px 48px 32px;  /* extra padding for balanced premium look */
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(6px);
+      border-radius: 68px 68px 76px 76px;
+      box-shadow: 0 35px 60px -16px rgba(0, 0, 0, 0.4), 0 0 0 1.5px rgba(255, 255, 255, 0.7) inset;
       transition: all 0.3s ease;
     }
 
     /* premium header with shine */
     .brand {
       text-align: center;
-      margin-bottom: 16px;
+      margin-bottom: 24px;
     }
 
     h1 {
-      font-size: 2.2rem;
+      font-size: 2.9rem;     /* was 2.2rem -> scaled up ~30% */
       font-weight: 800;
       background: linear-gradient(135deg, #0b2d5c 0%, #1a4a7a 45%, #0f3b64 100%);
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
-      letter-spacing: -0.3px;
-      text-shadow: 0 2px 5px rgba(0,0,0,0.05);
-      margin-bottom: 6px;
+      letter-spacing: -0.5px;
+      text-shadow: 0 3px 8px rgba(0,0,0,0.05);
+      margin-bottom: 8px;
     }
 
     .badge {
       display: inline-block;
       background: rgba(11,45,92,0.12);
       backdrop-filter: blur(4px);
-      padding: 6px 16px;
-      border-radius: 60px;
-      font-size: 0.75rem;
-      font-weight: 600;
+      padding: 8px 20px;
+      border-radius: 80px;
+      font-size: 0.9rem;
+      font-weight: 700;
       color: #0b2d5c;
-      letter-spacing: 0.5px;
-      margin-top: 4px;
+      letter-spacing: 0.8px;
+      margin-top: 8px;
     }
 
     .rating-container {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 12px;
-      margin: 10px 0 8px 0;
+      gap: 16px;
+      margin: 18px 0 14px 0;
       flex-wrap: wrap;
     }
 
     .stars {
-      font-size: 28px;
-      letter-spacing: 4px;
+      font-size: 38px;       /* 28px -> ~35% larger, premium presence */
+      letter-spacing: 6px;
       color: #ffb83b;
-      text-shadow: 0 2px 6px rgba(255, 184, 59, 0.3);
+      text-shadow: 0 2px 8px rgba(255, 184, 59, 0.4);
       background: linear-gradient(135deg, #FFD966, #FFB347);
       background-clip: text;
       -webkit-background-clip: text;
@@ -117,48 +118,48 @@
 
     .rating-score {
       background: #1e2f41;
-      padding: 5px 12px;
+      padding: 7px 18px;
       border-radius: 60px;
       font-weight: bold;
       color: #FFD966;
-      font-size: 0.9rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      font-size: 1.1rem;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
     }
 
     .subtitle {
-      font-size: 1rem;
-      font-weight: 500;
+      font-size: 1.25rem;    /* enlarged from 1rem -> +25% */
+      font-weight: 600;
       color: #1f3a4b;
-      background: rgba(255,255,240,0.7);
+      background: rgba(255,255,240,0.8);
       display: inline-block;
-      padding: 8px 22px;
-      border-radius: 60px;
+      padding: 12px 28px;
+      border-radius: 80px;
       backdrop-filter: blur(2px);
-      margin-bottom: 20px;
-      letter-spacing: 0.3px;
+      margin-bottom: 28px;
+      letter-spacing: 0.4px;
     }
 
     /* premium floating buttons + micro animation */
     .btn-grid {
       display: flex;
       flex-direction: column;
-      gap: 14px;
-      margin: 18px 0 12px;
+      gap: 18px;            /* more spacing for bigger touch target */
+      margin: 28px 0 20px;
     }
 
     .btn {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
+      gap: 16px;
       text-decoration: none;
-      padding: 16px 12px;
-      border-radius: 60px;
-      font-weight: 700;
-      font-size: 1.05rem;
+      padding: 20px 18px;    /* was 16px -> 25% larger for premium tap */
+      border-radius: 80px;
+      font-weight: 800;
+      font-size: 1.2rem;     /* increased from 1.05rem for better readability */
       transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
       color: white;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
       border: none;
       background-size: 200% auto;
       position: relative;
@@ -188,8 +189,8 @@
     }
 
     .btn:hover {
-      transform: translateY(-3px) scale(1.01);
-      box-shadow: 0 18px 28px -10px rgba(0, 0, 0, 0.3);
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: 0 24px 36px -12px rgba(0, 0, 0, 0.35);
       filter: brightness(1.02);
     }
 
@@ -197,37 +198,18 @@
       transform: translateY(2px);
     }
 
-    /* custom gradients and colors */
-    .google {
-      background: linear-gradient(105deg, #dd4b3e, #c13a2e);
-    }
-    .facebook {
-      background: linear-gradient(105deg, #1877f2, #1264d6);
-    }
-    .instagram {
-      background: linear-gradient(115deg, #fccc4d, #fd1d1d, #d62976, #962fbf);
-      background-size: 140% auto;
-    }
-    .youtube {
-      background: linear-gradient(105deg, #ff0000, #cc0000);
-    }
-    .website {
-      background: linear-gradient(105deg, #0066cc, #004b99);
-    }
-    .whatsapp {
-      background: linear-gradient(105deg, #25d366, #128C7E);
-    }
-    .call {
-      background: linear-gradient(105deg, #28a745, #1f8b3a);
-    }
-    .location {
-      background: linear-gradient(105deg, #ff9800, #e67e22);
-    }
-    .email {
-      background: linear-gradient(105deg, #6c757d, #495057);
-    }
+    /* custom gradients */
+    .google { background: linear-gradient(105deg, #dd4b3e, #c13a2e); }
+    .facebook { background: linear-gradient(105deg, #1877f2, #1264d6); }
+    .instagram { background: linear-gradient(115deg, #fccc4d, #fd1d1d, #d62976, #962fbf); background-size: 140% auto; }
+    .youtube { background: linear-gradient(105deg, #ff0000, #cc0000); }
+    .website { background: linear-gradient(105deg, #0066cc, #004b99); }
+    .whatsapp { background: linear-gradient(105deg, #25d366, #128C7E); }
+    .call { background: linear-gradient(105deg, #28a745, #1f8b3a); }
+    .location { background: linear-gradient(105deg, #ff9800, #e67e22); }
+    .email { background: linear-gradient(105deg, #6c757d, #495057); }
 
-    /* floating animation for each button on load (subtle staggered) */
+    /* floating animation for each button */
     .btn {
       animation: btnFloatUp 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.2) backwards;
     }
@@ -235,7 +217,7 @@
     @keyframes btnFloatUp {
       0% {
         opacity: 0;
-        transform: translateY(35px);
+        transform: translateY(40px);
       }
       100% {
         opacity: 1;
@@ -254,80 +236,125 @@
     .btn:nth-child(8) { animation-delay: 0.37s; }
     .btn:nth-child(9) { animation-delay: 0.42s; }
 
-    /* footer / trust badge */
+    /* trust footer */
     .trust-footer {
       text-align: center;
-      margin-top: 28px;
-      font-size: 0.75rem;
-      color: #3a546d;
-      background: rgba(255, 255, 255, 0.6);
-      backdrop-filter: blur(4px);
-      padding: 8px 12px;
-      border-radius: 80px;
+      margin-top: 38px;
+      font-size: 0.9rem;
+      color: #2c4c6e;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(6px);
+      padding: 12px 20px;
+      border-radius: 100px;
       width: fit-content;
       margin-left: auto;
       margin-right: auto;
-      font-weight: 500;
+      font-weight: 600;
     }
 
-    /* full screen adaptation for mobile */
-    @media (max-width: 550px) {
+    /* full screen & responsive — maintain 30% larger feel even on smaller screens */
+    @media (max-width: 820px) {
       .container {
-        margin: 12px;
-        padding: 20px 16px 28px 16px;
-        border-radius: 44px;
+        max-width: 90vw;     /* keeps ratio generous */
+        margin: 24px auto;
+        padding: 28px 22px 38px 22px;
       }
       h1 {
-        font-size: 1.8rem;
+        font-size: 2.4rem;
       }
       .btn {
-        padding: 14px 12px;
-        font-size: 0.96rem;
-        gap: 10px;
+        padding: 18px 16px;
+        font-size: 1.05rem;
+        gap: 14px;
       }
       .stars {
-        font-size: 24px;
+        font-size: 32px;
       }
       .subtitle {
-        font-size: 0.9rem;
+        font-size: 1.1rem;
+        padding: 10px 24px;
+      }
+      .rating-score {
+        font-size: 1rem;
       }
     }
 
-    @media (max-width: 420px) {
-      .btn span {
-        font-size: 0.9rem;
+    @media (max-width: 550px) {
+      .container {
+        padding: 24px 18px 36px 18px;
+        border-radius: 56px;
+      }
+      h1 {
+        font-size: 2rem;
       }
       .btn {
-        padding: 12px 10px;
+        padding: 15px 14px;
+        font-size: 1rem;
+        gap: 12px;
+      }
+      .stars {
+        font-size: 28px;
+        letter-spacing: 4px;
+      }
+      .subtitle {
+        font-size: 0.98rem;
+      }
+      .trust-footer {
+        font-size: 0.8rem;
       }
     }
 
-    /* elegant ring pulse effect for premium perception */
+    /* additional full screen fit & premium pulse */
     @keyframes subtlePulse {
-      0% { box-shadow: 0 0 0 0 rgba(11,45,92,0.2); }
-      70% { box-shadow: 0 0 0 10px rgba(11,45,92,0); }
+      0% { box-shadow: 0 0 0 0 rgba(11,45,92,0.15); }
+      70% { box-shadow: 0 0 0 14px rgba(11,45,92,0); }
       100% { box-shadow: 0 0 0 0 rgba(11,45,92,0); }
     }
 
     .container {
-      animation: subtlePulse 3s infinite;
+      animation: subtlePulse 3.5s infinite;
     }
 
-    /* custom icon emoji unify size */
     .btn span:first-child {
-      font-size: 1.5rem;
-      filter: drop-shadow(0 1px 1px rgba(0,0,0,0.2));
+      font-size: 1.7rem;
+      filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2));
+    }
+
+    /* glass reflection premium */
+    .container::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 2.5px;
+      background: linear-gradient(125deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.15) 80%);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+    .container {
+      position: relative;
+    }
+    .stars {
+      display: inline-block;
+      animation: starGlow 2.5s infinite alternate;
+    }
+    @keyframes starGlow {
+      0% { text-shadow: 0 0 0px #FFD966; opacity: 0.95; }
+      100% { text-shadow: 0 0 8px #ffb347; opacity: 1; }
     }
   </style>
 </head>
 <body>
 
 <div class="bg-float">
-  <div class="float-shape" style="width: 250px; height: 250px; top: -5%; left: -8%; animation-duration: 22s;"></div>
-  <div class="float-shape" style="width: 180px; height: 180px; bottom: 10%; right: -5%; animation-duration: 19s; animation-delay: 1s;"></div>
-  <div class="float-shape" style="width: 300px; height: 300px; top: 40%; left: -15%; animation-duration: 26s; opacity: 0.3;"></div>
-  <div class="float-shape" style="width: 120px; height: 120px; bottom: 20%; left: 20%; animation-duration: 15s; animation-delay: 2s;"></div>
-  <div class="float-shape" style="width: 200px; height: 200px; top: 60%; right: -2%; animation-duration: 20s; opacity: 0.25;"></div>
+  <div class="float-shape" style="width: 260px; height: 260px; top: -5%; left: -8%; animation-duration: 22s;"></div>
+  <div class="float-shape" style="width: 210px; height: 210px; bottom: 8%; right: -5%; animation-duration: 19s; animation-delay: 1s;"></div>
+  <div class="float-shape" style="width: 340px; height: 340px; top: 40%; left: -15%; animation-duration: 26s; opacity: 0.3;"></div>
+  <div class="float-shape" style="width: 150px; height: 150px; bottom: 15%; left: 20%; animation-duration: 15s; animation-delay: 2s;"></div>
+  <div class="float-shape" style="width: 230px; height: 230px; top: 60%; right: -2%; animation-duration: 20s; opacity: 0.25;"></div>
 </div>
 
 <div class="container">
@@ -391,29 +418,23 @@
   </div>
 </div>
 
-<!-- small script to enhance dynamic floating effect + safety for QR / touch -->
 <script>
   (function() {
     // Enhance floating shapes randomness for more dynamic background
     const shapes = document.querySelectorAll('.float-shape');
     if(shapes.length) {
-      shapes.forEach((shape, idx) => {
-        const randomDur = 15 + Math.random() * 20;
-        const randomDelay = Math.random() * 5;
+      shapes.forEach((shape) => {
+        const randomDur = 15 + Math.random() * 22;
+        const randomDelay = Math.random() * 6;
         shape.style.animationDuration = `${randomDur}s`;
         shape.style.animationDelay = `${randomDelay}s`;
-        const randomX = Math.random() * 30 - 15;
-        const randomY = Math.random() * 40 - 20;
-        shape.style.setProperty('--x-offset', `${randomX}px`);
-        shape.style.setProperty('--y-offset', `${randomY}px`);
       });
     }
 
-    // Add ripple effect on button click for premium feel (optional micro feedback)
+    // Add ripple effect on button click for premium feel
     const btns = document.querySelectorAll('.btn');
     btns.forEach(btn => {
       btn.addEventListener('click', function(e) {
-        // just subtle haptic feedback simulation, nothing invasive
         this.style.transform = 'scale(0.98)';
         setTimeout(() => {
           if(this) this.style.transform = '';
@@ -421,8 +442,7 @@
       });
     });
 
-    // Ensure container has full viewport adapt, smooth appearance with intersection observer?
-    // Fix for any iOS notch full background
+    // Ensure full viewport adaptation for mobile
     const updateFullscreen = () => {
       const vh = window.innerHeight;
       document.body.style.minHeight = `${vh}px`;
@@ -431,16 +451,13 @@
     window.addEventListener('resize', updateFullscreen);
     window.addEventListener('orientationchange', updateFullscreen);
     
-    // adds glassmorphism dynamic shadow based on scroll? no scroll needed
-    // but we add a tiny floating glow over container
+    // subtle container lift on desktop hover
     const container = document.querySelector('.container');
-    if(container) {
+    if(container && window.innerWidth > 768) {
       container.addEventListener('mouseenter', () => {
-        if(window.innerWidth > 768) {
-          container.style.transform = 'translateY(-4px)';
-          container.style.transition = 'transform 0.25s ease, box-shadow 0.3s';
-          container.style.boxShadow = '0 35px 50px -12px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.7) inset';
-        }
+        container.style.transform = 'translateY(-5px)';
+        container.style.transition = 'transform 0.25s ease, box-shadow 0.3s';
+        container.style.boxShadow = '0 40px 60px -16px rgba(0,0,0,0.45), 0 0 0 1.5px rgba(255,255,255,0.8) inset';
       });
       container.addEventListener('mouseleave', () => {
         container.style.transform = '';
@@ -450,7 +467,6 @@
   })();
 </script>
 
-<!-- optional additional style for full bleed background & safe area -->
 <style>
   body {
     background: radial-gradient(circle at 10% 30%, #eef3fc, #dbe5f0);
@@ -459,51 +475,37 @@
     justify-content: center;
     min-height: 100vh;
   }
-  /* Premium touch: smooth scroll */
   html {
     scroll-behavior: smooth;
   }
   .btn:focus-visible {
     outline: 2px solid #ffb347;
-    outline-offset: 2px;
+    outline-offset: 3px;
   }
-  /* improves container visibility on very small screens */
-  @media (max-width: 380px) {
-    .container {
-      padding: 16px;
-    }
+  @media (max-width: 480px) {
     .btn span:first-child {
-      font-size: 1.25rem;
+      font-size: 1.4rem;
     }
     .trust-footer {
-      font-size: 0.65rem;
+      font-size: 0.7rem;
+      padding: 8px 16px;
+    }
+    .badge {
+      font-size: 0.75rem;
+      padding: 6px 16px;
     }
   }
-  /* subtle border glass reflection */
-  .container::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 2px;
-    background: linear-gradient(125deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.1) 80%);
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
+  /* premium custom scrollbar (optional) */
+  ::-webkit-scrollbar {
+    width: 6px;
   }
-  .container {
-    position: relative;
+  ::-webkit-scrollbar-track {
+    background: #e2e8f0;
+    border-radius: 12px;
   }
-  /* star rating additional twinkle */
-  .stars {
-    display: inline-block;
-    animation: starGlow 2.2s infinite alternate;
-  }
-  @keyframes starGlow {
-    0% { text-shadow: 0 0 0px #FFD966; opacity: 0.95; }
-    100% { text-shadow: 0 0 6px #ffb347; opacity: 1; }
+  ::-webkit-scrollbar-thumb {
+    background: #0b2d5c;
+    border-radius: 12px;
   }
 </style>
 </body>
