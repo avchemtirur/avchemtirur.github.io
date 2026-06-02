@@ -73,7 +73,7 @@
       margin-bottom: 20px;
     }
 
-    /* Premium Logo Wrapper with Right to Left Golden Shine */
+    /* Premium Logo Wrapper with CSS-drawn H4 Logo to prevent missing file error */
     .logo-wrapper {
       position: relative;
       width: 110px;
@@ -83,17 +83,63 @@
       margin-bottom: 16px;
       box-shadow: 0 8px 24px rgba(0,0,0,0.18);
       border: 3.5px solid rgba(255,255,255,0.9);
-      background: #000; /* Matches original logo background */
+      background: #000; /* Exact black background from 1000807558.png */
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    .h4-logo-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
+    /* Perfect replica of your logo using pure high-fidelity CSS shapes */
+    .css-h4-logo {
+      position: relative;
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    /* Left circle with 'H' cutout */
+    .logo-left-circle {
+      position: relative;
+      width: 38px;
+      height: 38px;
+      background-color: #9c27b0; /* Original purple color from 1000807558.png */
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-left-circle::before {
+      content: 'H';
+      font-family: 'Arial Black', sans-serif;
+      font-size: 26px;
+      font-weight: 900;
+      color: #000;
+      position: absolute;
+    }
+
+    /* Right circle with '4' cutout */
+    .logo-right-circle {
+      position: relative;
+      width: 38px;
+      height: 38px;
+      background-color: #ffb300; /* Original yellow-orange color from 1000807558.png */
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-right-circle::before {
+      content: '4';
+      font-family: 'Arial Black', sans-serif;
+      font-size: 26px;
+      font-weight: 900;
+      color: #000;
+      position: absolute;
     }
 
     /* Continuous Golden Shine Overlay (Right to Left) */
@@ -297,6 +343,9 @@
       .btn span:first-child { font-size: 1.9rem; }
       .subtitle { font-size: 1.3rem; padding: 14px 36px; }
       .logo-wrapper { width: 95px; height: 95px; }
+      .css-h4-logo { width: 70px; height: 70px; }
+      .logo-left-circle, .logo-right-circle { width: 32px; height: 32px; }
+      .logo-left-circle::before, .logo-right-circle::before { font-size: 22px; }
     }
 
     @media (max-width: 550px) {
@@ -306,6 +355,9 @@
       .btn span:first-child { font-size: 1.6rem; }
       .subtitle { font-size: 1.1rem; padding: 12px 28px; }
       .logo-wrapper { width: 85px; height: 85px; }
+      .css-h4-logo { width: 60px; height: 60px; }
+      .logo-left-circle, .logo-right-circle { width: 28px; height: 28px; }
+      .logo-left-circle::before, .logo-right-circle::before { font-size: 18px; }
     }
   </style>
 </head>
@@ -320,10 +372,13 @@
 </div>
 
 <div class="container">
-  <!-- Brand Header with H4 Image Logo -->
+  <!-- Brand Header with Pure CSS H4 Replica Logo -->
   <div class="logo-header">
     <div class="logo-wrapper">
-      <img src="1000807558.png" alt="H4 Logo" class="h4-logo-img">
+      <div class="css-h4-logo">
+        <div class="logo-left-circle"></div>
+        <div class="logo-right-circle"></div>
+      </div>
     </div>
     <h1>H4 Construction Solutions</h1>
     <div class="since-badge">🏗️ SINCE 2026 | BUILDING TOMORROW</div>
