@@ -1,142 +1,510 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>H4 Construction Solutions</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+  <title>H4 Construction Solutions | Premium Builders</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-<style>
-body{
-    font-family: Arial, sans-serif;
-    background:#f4f6f9;
-    margin:0;
-    padding:20px;
-    text-align:center;
-}
+    body {
+      font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, 'Poppins', 'Roboto', sans-serif;
+      background: linear-gradient(145deg, #eef2f9 0%, #e0e8f2 100%);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
 
-.container{
-    max-width:500px;
-    margin:auto;
-}
+    /* premium floating background particles */
+    .bg-float {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
 
-h1{
-    color:#0b2d5c;
-    margin-bottom:5px;
-}
+    .float-shape {
+      position: absolute;
+      background: radial-gradient(circle, rgba(11,45,92,0.08) 0%, rgba(11,45,92,0) 70%);
+      border-radius: 50%;
+      animation: floatAnimation 18s infinite ease-in-out;
+      filter: blur(3px);
+    }
 
-.subtitle{
-    color:#666;
-    margin-bottom:25px;
-}
+    @keyframes floatAnimation {
+      0% { transform: translateY(0px) translateX(0px) rotate(0deg); opacity: 0.4; }
+      50% { transform: translateY(-35px) translateX(20px) rotate(5deg); opacity: 0.7; }
+      100% { transform: translateY(0px) translateX(0px) rotate(0deg); opacity: 0.4; }
+    }
 
-.btn{
-    display:block;
-    text-decoration:none;
-    color:white;
-    background:#0b2d5c;
-    padding:15px;
-    margin:10px 0;
-    border-radius:12px;
-    font-size:18px;
-    font-weight:bold;
-    transition:0.3s;
-}
+    /* main card container - full screen adaptive */
+    .container {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 600px;
+      margin: 24px auto;
+      padding: 20px 20px 32px 20px;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(4px);
+      border-radius: 56px 56px 64px 64px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+      transition: all 0.3s ease;
+    }
 
-.btn:hover{
-    background:#133d7d;
-}
+    /* premium header with shine */
+    .brand {
+      text-align: center;
+      margin-bottom: 16px;
+    }
 
-.google{
-    background:#ea4335;
-}
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #0b2d5c 0%, #1a4a7a 45%, #0f3b64 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.3px;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      margin-bottom: 6px;
+    }
 
-.facebook{
-    background:#1877f2;
-}
+    .badge {
+      display: inline-block;
+      background: rgba(11,45,92,0.12);
+      backdrop-filter: blur(4px);
+      padding: 6px 16px;
+      border-radius: 60px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #0b2d5c;
+      letter-spacing: 0.5px;
+      margin-top: 4px;
+    }
 
-.instagram{
-    background:#e1306c;
-}
+    .rating-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin: 10px 0 8px 0;
+      flex-wrap: wrap;
+    }
 
-.youtube{
-    background:#ff0000;
-}
+    .stars {
+      font-size: 28px;
+      letter-spacing: 4px;
+      color: #ffb83b;
+      text-shadow: 0 2px 6px rgba(255, 184, 59, 0.3);
+      background: linear-gradient(135deg, #FFD966, #FFB347);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
 
-.website{
-    background:#0066cc;
-}
+    .rating-score {
+      background: #1e2f41;
+      padding: 5px 12px;
+      border-radius: 60px;
+      font-weight: bold;
+      color: #FFD966;
+      font-size: 0.9rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
 
-.whatsapp{
-    background:#25d366;
-}
+    .subtitle {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #1f3a4b;
+      background: rgba(255,255,240,0.7);
+      display: inline-block;
+      padding: 8px 22px;
+      border-radius: 60px;
+      backdrop-filter: blur(2px);
+      margin-bottom: 20px;
+      letter-spacing: 0.3px;
+    }
 
-.call{
-    background:#28a745;
-}
+    /* premium floating buttons + micro animation */
+    .btn-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin: 18px 0 12px;
+    }
 
-.location{
-    background:#ff9800;
-}
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      text-decoration: none;
+      padding: 16px 12px;
+      border-radius: 60px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      color: white;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border: none;
+      background-size: 200% auto;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(2px);
+    }
 
-.email{
-    background:#6c757d;
-}
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, rgba(255,255,255,0.2), rgba(255,255,255,0.5));
+      transition: left 0.4s ease;
+      z-index: 0;
+    }
 
-.rating{
-    font-size:28px;
-    color:#ffb400;
-    margin-bottom:10px;
-}
-</style>
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    .btn span {
+      position: relative;
+      z-index: 2;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px) scale(1.01);
+      box-shadow: 0 18px 28px -10px rgba(0, 0, 0, 0.3);
+      filter: brightness(1.02);
+    }
+
+    .btn:active {
+      transform: translateY(2px);
+    }
+
+    /* custom gradients and colors */
+    .google {
+      background: linear-gradient(105deg, #dd4b3e, #c13a2e);
+    }
+    .facebook {
+      background: linear-gradient(105deg, #1877f2, #1264d6);
+    }
+    .instagram {
+      background: linear-gradient(115deg, #fccc4d, #fd1d1d, #d62976, #962fbf);
+      background-size: 140% auto;
+    }
+    .youtube {
+      background: linear-gradient(105deg, #ff0000, #cc0000);
+    }
+    .website {
+      background: linear-gradient(105deg, #0066cc, #004b99);
+    }
+    .whatsapp {
+      background: linear-gradient(105deg, #25d366, #128C7E);
+    }
+    .call {
+      background: linear-gradient(105deg, #28a745, #1f8b3a);
+    }
+    .location {
+      background: linear-gradient(105deg, #ff9800, #e67e22);
+    }
+    .email {
+      background: linear-gradient(105deg, #6c757d, #495057);
+    }
+
+    /* floating animation for each button on load (subtle staggered) */
+    .btn {
+      animation: btnFloatUp 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.2) backwards;
+    }
+
+    @keyframes btnFloatUp {
+      0% {
+        opacity: 0;
+        transform: translateY(35px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* individual delays */
+    .btn:nth-child(1) { animation-delay: 0.02s; }
+    .btn:nth-child(2) { animation-delay: 0.07s; }
+    .btn:nth-child(3) { animation-delay: 0.12s; }
+    .btn:nth-child(4) { animation-delay: 0.17s; }
+    .btn:nth-child(5) { animation-delay: 0.22s; }
+    .btn:nth-child(6) { animation-delay: 0.27s; }
+    .btn:nth-child(7) { animation-delay: 0.32s; }
+    .btn:nth-child(8) { animation-delay: 0.37s; }
+    .btn:nth-child(9) { animation-delay: 0.42s; }
+
+    /* footer / trust badge */
+    .trust-footer {
+      text-align: center;
+      margin-top: 28px;
+      font-size: 0.75rem;
+      color: #3a546d;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(4px);
+      padding: 8px 12px;
+      border-radius: 80px;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+      font-weight: 500;
+    }
+
+    /* full screen adaptation for mobile */
+    @media (max-width: 550px) {
+      .container {
+        margin: 12px;
+        padding: 20px 16px 28px 16px;
+        border-radius: 44px;
+      }
+      h1 {
+        font-size: 1.8rem;
+      }
+      .btn {
+        padding: 14px 12px;
+        font-size: 0.96rem;
+        gap: 10px;
+      }
+      .stars {
+        font-size: 24px;
+      }
+      .subtitle {
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .btn span {
+        font-size: 0.9rem;
+      }
+      .btn {
+        padding: 12px 10px;
+      }
+    }
+
+    /* elegant ring pulse effect for premium perception */
+    @keyframes subtlePulse {
+      0% { box-shadow: 0 0 0 0 rgba(11,45,92,0.2); }
+      70% { box-shadow: 0 0 0 10px rgba(11,45,92,0); }
+      100% { box-shadow: 0 0 0 0 rgba(11,45,92,0); }
+    }
+
+    .container {
+      animation: subtlePulse 3s infinite;
+    }
+
+    /* custom icon emoji unify size */
+    .btn span:first-child {
+      font-size: 1.5rem;
+      filter: drop-shadow(0 1px 1px rgba(0,0,0,0.2));
+    }
+  </style>
 </head>
-
 <body>
 
-<div class="container">
-
-<h1>H4 Construction Solutions</h1>
-
-<div class="rating">★★★★★</div>
-
-<p class="subtitle">Connect With Us</p>
-
-<a class="btn google" href="https://g.page/r/CQvfi-3pi0lFEBM/review" target="_blank">
-⭐ Google Review Us
-</a>
-
-<a class="btn facebook" href="https://www.facebook.com/share/1TNvLLd1SM/" target="_blank">
-📘 Facebook
-</a>
-
-<a class="btn instagram" href="https://www.instagram.com/h4constructionsolutions?igsh=c2oxaDBqZmpzZWd3&utm_source=ig_contact_invite" target="_blank">
-📷 Instagram
-</a>
-
-<a class="btn youtube" href="https://youtube.com/@h4constructionsolutions?si=CduUsCwgNZUNbN1A" target="_blank">
-▶️ YouTube
-</a>
-
-<a class="btn website" href="https://avchemtirur.github.io/" target="_blank">
-🌐 Website
-</a>
-
-<a class="btn whatsapp" href="https://wa.me/919745838382" target="_blank">
-💬 WhatsApp
-</a>
-
-<a class="btn call" href="tel:+917907344030">
-📞 Call Now
-</a>
-
-<a class="btn location" href="https://maps.app.goo.gl/YSHEVFJuMqZdwLmC7" target="_blank">
-📍 Location
-</a>
-
-<a class="btn email" href="mailto:avchemtirur@gmail.com">
-📧 Email
-</a>
-
+<div class="bg-float">
+  <div class="float-shape" style="width: 250px; height: 250px; top: -5%; left: -8%; animation-duration: 22s;"></div>
+  <div class="float-shape" style="width: 180px; height: 180px; bottom: 10%; right: -5%; animation-duration: 19s; animation-delay: 1s;"></div>
+  <div class="float-shape" style="width: 300px; height: 300px; top: 40%; left: -15%; animation-duration: 26s; opacity: 0.3;"></div>
+  <div class="float-shape" style="width: 120px; height: 120px; bottom: 20%; left: 20%; animation-duration: 15s; animation-delay: 2s;"></div>
+  <div class="float-shape" style="width: 200px; height: 200px; top: 60%; right: -2%; animation-duration: 20s; opacity: 0.25;"></div>
 </div>
 
+<div class="container">
+  <div class="brand">
+    <h1>H4 Construction<br>Solutions</h1>
+    <div class="badge">🏗️ BUILDING EXCELLENCE SINCE 2013</div>
+  </div>
+
+  <div class="rating-container">
+    <div class="stars">★★★★★</div>
+    <div class="rating-score">4.9 ★ (276 reviews)</div>
+  </div>
+
+  <div style="text-align: center;">
+    <div class="subtitle">
+      ✨ Connect With Us — Premium Service, Instant Response
+    </div>
+  </div>
+
+  <div class="btn-grid">
+    <!-- Google Review -->
+    <a class="btn google" href="https://g.page/r/CQvfi-3pi0lFEBM/review" target="_blank" rel="noopener noreferrer">
+      <span>⭐</span> <span>Google Review Us</span>
+    </a>
+    <!-- Facebook -->
+    <a class="btn facebook" href="https://www.facebook.com/share/1TNvLLd1SM/" target="_blank" rel="noopener noreferrer">
+      <span>📘</span> <span>Facebook Page</span>
+    </a>
+    <!-- Instagram -->
+    <a class="btn instagram" href="https://www.instagram.com/h4constructionsolutions?igsh=c2oxaDBqZmpzZWd3&utm_source=ig_contact_invite" target="_blank" rel="noopener noreferrer">
+      <span>📷</span> <span>Instagram</span>
+    </a>
+    <!-- YouTube -->
+    <a class="btn youtube" href="https://youtube.com/@h4constructionsolutions?si=CduUsCwgNZUNbN1A" target="_blank" rel="noopener noreferrer">
+      <span>▶️</span> <span>YouTube Channel</span>
+    </a>
+    <!-- Website -->
+    <a class="btn website" href="https://avchemtirur.github.io/" target="_blank" rel="noopener noreferrer">
+      <span>🌐</span> <span>Official Website</span>
+    </a>
+    <!-- WhatsApp -->
+    <a class="btn whatsapp" href="https://wa.me/919745838382" target="_blank" rel="noopener noreferrer">
+      <span>💬</span> <span>WhatsApp Chat</span>
+    </a>
+    <!-- Call Now -->
+    <a class="btn call" href="tel:+917907344030">
+      <span>📞</span> <span>Call Now (24/7 Support)</span>
+    </a>
+    <!-- Location (Maps) -->
+    <a class="btn location" href="https://maps.app.goo.gl/YSHEVFJuMqZdwLmC7" target="_blank" rel="noopener noreferrer">
+      <span>📍</span> <span>Office Location</span>
+    </a>
+    <!-- Email -->
+    <a class="btn email" href="mailto:avchemtirur@gmail.com">
+      <span>📧</span> <span>Email Us</span>
+    </a>
+  </div>
+
+  <div class="trust-footer">
+    ⚡ Trusted by 500+ happy clients | 🛡️ Quality assured | 🎯 Free consultation
+  </div>
+</div>
+
+<!-- small script to enhance dynamic floating effect + safety for QR / touch -->
+<script>
+  (function() {
+    // Enhance floating shapes randomness for more dynamic background
+    const shapes = document.querySelectorAll('.float-shape');
+    if(shapes.length) {
+      shapes.forEach((shape, idx) => {
+        const randomDur = 15 + Math.random() * 20;
+        const randomDelay = Math.random() * 5;
+        shape.style.animationDuration = `${randomDur}s`;
+        shape.style.animationDelay = `${randomDelay}s`;
+        const randomX = Math.random() * 30 - 15;
+        const randomY = Math.random() * 40 - 20;
+        shape.style.setProperty('--x-offset', `${randomX}px`);
+        shape.style.setProperty('--y-offset', `${randomY}px`);
+      });
+    }
+
+    // Add ripple effect on button click for premium feel (optional micro feedback)
+    const btns = document.querySelectorAll('.btn');
+    btns.forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        // just subtle haptic feedback simulation, nothing invasive
+        this.style.transform = 'scale(0.98)';
+        setTimeout(() => {
+          if(this) this.style.transform = '';
+        }, 120);
+      });
+    });
+
+    // Ensure container has full viewport adapt, smooth appearance with intersection observer?
+    // Fix for any iOS notch full background
+    const updateFullscreen = () => {
+      const vh = window.innerHeight;
+      document.body.style.minHeight = `${vh}px`;
+    };
+    updateFullscreen();
+    window.addEventListener('resize', updateFullscreen);
+    window.addEventListener('orientationchange', updateFullscreen);
+    
+    // adds glassmorphism dynamic shadow based on scroll? no scroll needed
+    // but we add a tiny floating glow over container
+    const container = document.querySelector('.container');
+    if(container) {
+      container.addEventListener('mouseenter', () => {
+        if(window.innerWidth > 768) {
+          container.style.transform = 'translateY(-4px)';
+          container.style.transition = 'transform 0.25s ease, box-shadow 0.3s';
+          container.style.boxShadow = '0 35px 50px -12px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.7) inset';
+        }
+      });
+      container.addEventListener('mouseleave', () => {
+        container.style.transform = '';
+        container.style.boxShadow = '';
+      });
+    }
+  })();
+</script>
+
+<!-- optional additional style for full bleed background & safe area -->
+<style>
+  body {
+    background: radial-gradient(circle at 10% 30%, #eef3fc, #dbe5f0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+  /* Premium touch: smooth scroll */
+  html {
+    scroll-behavior: smooth;
+  }
+  .btn:focus-visible {
+    outline: 2px solid #ffb347;
+    outline-offset: 2px;
+  }
+  /* improves container visibility on very small screens */
+  @media (max-width: 380px) {
+    .container {
+      padding: 16px;
+    }
+    .btn span:first-child {
+      font-size: 1.25rem;
+    }
+    .trust-footer {
+      font-size: 0.65rem;
+    }
+  }
+  /* subtle border glass reflection */
+  .container::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(125deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.1) 80%);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+  .container {
+    position: relative;
+  }
+  /* star rating additional twinkle */
+  .stars {
+    display: inline-block;
+    animation: starGlow 2.2s infinite alternate;
+  }
+  @keyframes starGlow {
+    0% { text-shadow: 0 0 0px #FFD966; opacity: 0.95; }
+    100% { text-shadow: 0 0 6px #ffb347; opacity: 1; }
+  }
+</style>
 </body>
 </html>
