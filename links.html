@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
-  <title>H4 Construction Solutions | Premium Builders Est.2026</title>
+  <title>H4 Construction Solutions | Premium Builders</title>
   <style>
     * {
       margin: 0;
@@ -13,7 +13,7 @@
 
     body {
       font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, 'Poppins', 'Roboto', sans-serif;
-      background: linear-gradient(145deg, #eef2f9 0%, #e0e8f2 100%);
+      background: radial-gradient(circle at 10% 30%, #eef3fc, #dbe5f0);
       margin: 0;
       padding: 20px;
       min-height: 100vh;
@@ -61,7 +61,7 @@
       backdrop-filter: blur(8px);
       border-radius: 72px 72px 80px 80px;
       box-shadow: 0 35px 60px -16px rgba(0, 0, 0, 0.4), 0 0 0 2px rgba(255, 255, 255, 0.8) inset;
-      transition: all 0.3s ease;
+      animation: subtlePulse 5s infinite;
     }
 
     /* Logo + Brand Section */
@@ -73,25 +73,57 @@
       margin-bottom: 20px;
     }
 
-    .h4-logo {
-      width: 85px;
-      height: 85px;
-      background: linear-gradient(135deg, #0b2d5c 0%, #1a4a7a 100%);
+    /* Premium Logo Wrapper with Right to Left Golden Shine */
+    .logo-wrapper {
+      position: relative;
+      width: 110px;
+      height: 110px;
       border-radius: 50%;
+      overflow: hidden;
+      margin-bottom: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+      border: 3.5px solid rgba(255,255,255,0.9);
+      background: #000; /* Matches original logo background */
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 16px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-      border: 3px solid rgba(255,255,255,0.5);
     }
 
-    .h4-logo span {
-      font-size: 48px;
-      font-weight: 800;
-      color: white;
-      letter-spacing: 2px;
-      text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    .h4-logo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Continuous Golden Shine Overlay (Right to Left) */
+    .logo-wrapper::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 30%;
+      height: 200%;
+      background: linear-gradient(
+        to left,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 215, 0, 0.4) 30%,
+        rgba(255, 255, 255, 0.7) 50%,
+        rgba(255, 215, 0, 0.4) 70%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      transform: rotate(30deg);
+      animation: goldenShine 4s infinite linear;
+      pointer-events: none;
+    }
+
+    @keyframes goldenShine {
+      0% {
+        left: 150%;
+      }
+      100% {
+        left: -150%;
+      }
     }
 
     h1 {
@@ -105,6 +137,7 @@
       text-shadow: 0 4px 12px rgba(0,0,0,0.08);
       margin-bottom: 8px;
       line-height: 1.2;
+      text-align: center;
     }
 
     .since-badge {
@@ -118,49 +151,7 @@
       color: #0b2d5c;
       letter-spacing: 1px;
       margin-top: 6px;
-    }
-
-    /* Auto Rating Section - Dynamically Fetched (Simulated realistic but can be replaced with actual API) */
-    .rating-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 20px;
-      margin: 24px 0 20px 0;
-      flex-wrap: wrap;
-      background: rgba(255,255,245,0.5);
-      padding: 12px 24px;
-      border-radius: 100px;
-      backdrop-filter: blur(2px);
-    }
-
-    .stars {
-      font-size: 44px;
-      letter-spacing: 6px;
-      background: linear-gradient(135deg, #FFD966, #FFB347);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-      text-shadow: 0 2px 10px rgba(255, 184, 59, 0.3);
-      cursor: default;
-    }
-
-    .rating-score {
-      background: #1e2f41;
-      padding: 8px 20px;
-      border-radius: 60px;
-      font-weight: bold;
-      color: #FFD966;
-      font-size: 1.3rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      font-family: monospace;
-    }
-
-    .rating-source {
-      font-size: 0.75rem;
-      color: #3a5a7a;
-      font-weight: 500;
-      letter-spacing: 0.3px;
+      text-align: center;
     }
 
     /* SUBTITLE */
@@ -181,7 +172,7 @@
       max-width: 95%;
     }
 
-    /* BUTTONS - EXTRA LARGE + BORDER HEIGHT INCREASED 20% */
+    /* BUTTONS */
     .btn-grid {
       display: flex;
       flex-direction: column;
@@ -202,15 +193,15 @@
       transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
       color: white;
       box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.25);
-      border: 3px solid rgba(255, 255, 255, 0.6);  /* BORDER ADDED & height increased: normal 0 → 3px thickness (height increased by ~20% proportion) */
+      border: 3px solid rgba(255, 255, 255, 0.6);
       background-size: 200% auto;
       position: relative;
       overflow: hidden;
       backdrop-filter: blur(2px);
       letter-spacing: 0.3px;
+      animation: btnFloatUp 0.85s cubic-bezier(0.2, 0.9, 0.4, 1.2) backwards;
     }
 
-    /* Extra border thickness for better visibility */
     .btn:hover {
       border-color: rgba(255, 255, 255, 0.95);
       transform: translateY(-4px) scale(1.01);
@@ -258,11 +249,6 @@
     .location { background: linear-gradient(105deg, #ff9800, #e67e22); }
     .email { background: linear-gradient(105deg, #6c757d, #495057); }
 
-    /* button float anim */
-    .btn {
-      animation: btnFloatUp 0.85s cubic-bezier(0.2, 0.9, 0.4, 1.2) backwards;
-    }
-
     @keyframes btnFloatUp {
       0% { opacity: 0; transform: translateY(45px); }
       100% { opacity: 1; transform: translateY(0); }
@@ -278,41 +264,10 @@
     .btn:nth-child(8) { animation-delay: 0.39s; }
     .btn:nth-child(9) { animation-delay: 0.44s; }
 
-    /* trust footer */
-    .trust-footer {
-      text-align: center;
-      margin-top: 44px;
-      font-size: 1.05rem;
-      color: #2c4c6e;
-      background: rgba(255, 255, 255, 0.75);
-      backdrop-filter: blur(8px);
-      padding: 16px 28px;
-      border-radius: 120px;
-      width: fit-content;
-      margin-left: auto;
-      margin-right: auto;
-      font-weight: 700;
-      letter-spacing: 0.3px;
-    }
-
-    /* star glow */
-    .stars {
-      display: inline-block;
-      animation: starGlow 3.5s infinite alternate;
-    }
-    @keyframes starGlow {
-      0% { text-shadow: 0 0 0px #FFD966; opacity: 0.95; }
-      100% { text-shadow: 0 0 12px #ffb347; opacity: 1; }
-    }
-
-    /* container pulse */
     @keyframes subtlePulse {
       0% { box-shadow: 0 0 0 0 rgba(11,45,92,0.12); }
       70% { box-shadow: 0 0 0 18px rgba(11,45,92,0); }
       100% { box-shadow: 0 0 0 0 rgba(11,45,92,0); }
-    }
-    .container {
-      animation: subtlePulse 5s infinite;
     }
 
     .container::after {
@@ -329,17 +284,19 @@
       pointer-events: none;
     }
 
+    .btn:focus-visible {
+      outline: 3px solid #ffb347;
+      outline-offset: 4px;
+    }
+
     /* responsive */
     @media (max-width: 700px) {
       .container { padding: 32px 24px 44px; }
       h1 { font-size: 2.6rem; }
       .btn { padding: 20px 18px; font-size: 1.3rem; gap: 16px; border-width: 2.5px; }
       .btn span:first-child { font-size: 1.9rem; }
-      .stars { font-size: 38px; }
-      .rating-score { font-size: 1.2rem; }
       .subtitle { font-size: 1.3rem; padding: 14px 36px; }
-      .h4-logo { width: 70px; height: 70px; }
-      .h4-logo span { font-size: 40px; }
+      .logo-wrapper { width: 95px; height: 95px; }
     }
 
     @media (max-width: 550px) {
@@ -347,24 +304,8 @@
       h1 { font-size: 2.2rem; }
       .btn { padding: 18px 16px; font-size: 1.15rem; gap: 12px; border-width: 2px; }
       .btn span:first-child { font-size: 1.6rem; }
-      .stars { font-size: 32px; letter-spacing: 4px; }
-      .rating-score { font-size: 1rem; padding: 6px 14px; }
       .subtitle { font-size: 1.1rem; padding: 12px 28px; }
-      .h4-logo { width: 60px; height: 60px; }
-      .h4-logo span { font-size: 34px; }
-    }
-
-    body {
-      background: radial-gradient(circle at 10% 30%, #eef3fc, #dbe5f0);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 12px;
-    }
-    .btn:focus-visible {
-      outline: 3px solid #ffb347;
-      outline-offset: 4px;
+      .logo-wrapper { width: 85px; height: 85px; }
     }
   </style>
 </head>
@@ -379,20 +320,13 @@
 </div>
 
 <div class="container">
-  <!-- Logo Added at Top -->
+  <!-- Brand Header with H4 Image Logo -->
   <div class="logo-header">
-    <div class="h4-logo">
-      <span>H4</span>
+    <div class="logo-wrapper">
+      <img src="1000807558.png" alt="H4 Logo" class="h4-logo-img">
     </div>
     <h1>H4 Construction Solutions</h1>
     <div class="since-badge">🏗️ SINCE 2026 | BUILDING TOMORROW</div>
-  </div>
-
-  <!-- AUTO RATING SECTION - FAKE RATING REMOVED, DYNAMIC CALCULATION BASED ON REAL-TIME FEEDBACK SIMULATION -->
-  <div class="rating-container" id="ratingWidget">
-    <div class="stars" id="starDisplay">★★★★★</div>
-    <div class="rating-score" id="ratingValue">4.85 ★</div>
-    <div class="rating-source">⭐ Live | Based on 342 customer reviews</div>
   </div>
 
   <div style="text-align: center;">
@@ -402,7 +336,7 @@
   </div>
 
   <div class="btn-grid">
-    <a class="btn google" href="https://g.page/r/CQvfi-3pi0lFEBM/review" target="_blank" rel="noopener noreferrer">
+    <a class="btn google" href="https://g.page/r/CVoWeipN49m2EAE/review" target="_blank" rel="noopener noreferrer">
       <span>⭐</span> <span>Google Review Us</span>
     </a>
     <a class="btn facebook" href="https://www.facebook.com/share/1TNvLLd1SM/" target="_blank" rel="noopener noreferrer">
@@ -430,119 +364,10 @@
       <span>📧</span> <span>Email Us</span>
     </a>
   </div>
-
-  <div class="trust-footer">
-    ⚡ Trusted by 500+ happy clients | 🛡️ Quality assured | 🎯 Free consultation
-  </div>
 </div>
 
 <script>
   (function() {
-    // ---------- AUTO RATING SYSTEM (No fake static rating) ----------
-    // This function calculates a dynamic rating based on real 'review data simulation' 
-    // that could be fetched from a Google Reviews API or a backend. For demonstration,
-    // we use a realistic algorithm that slightly fluctuates based on timestamp & positive feedback signals,
-    // ensuring no static fake rating — it changes on each load (representing live aggregate).
-    // In production, this can be replaced with actual API call to Google Places or Trustpilot.
-    
-    function getAutoRating() {
-      // Simulate real aggregate score between 4.70 and 4.95 (based on recent customer satisfaction)
-      // This represents a genuine dynamic rating that could come from a database.
-      // Use current time seconds to generate a organic but stable rating per session.
-      const now = new Date();
-      const seed = now.getUTCMinutes() + now.getUTCHours() * 60;
-      // Organic variation: 4.70 to 4.95 range, not fake static like 5.0 always
-      let baseRating = 4.75 + ( (seed % 25) / 100 ); 
-      if (baseRating > 4.95) baseRating = 4.94;
-      if (baseRating < 4.70) baseRating = 4.72;
-      // Round to 2 decimals
-      return Math.round(baseRating * 100) / 100;
-    }
-    
-    function getStarRepresentation(rating) {
-      const fullStars = Math.floor(rating);
-      const partial = rating - fullStars;
-      let starString = '';
-      for (let i = 0; i < fullStars; i++) starString += '★';
-      if (partial >= 0.25) {
-        if (partial >= 0.75) starString += '★';
-        else if (partial >= 0.25) starString += '⭐'; // half star visual using half symbol (unicode)
-        else starString += '☆';
-      } else {
-        starString += '☆';
-      }
-      while (starString.length < 5) starString += '☆';
-      // Replace half-star representation for better UX: use special half-star if needed
-      if (partial >= 0.25 && partial < 0.75) {
-        starString = starString.substring(0, fullStars) + '½' + starString.substring(fullStars+1);
-      }
-      return starString;
-    }
-    
-    function updateRatingUI() {
-      const ratingElem = document.getElementById('ratingValue');
-      const starElem = document.getElementById('starDisplay');
-      if (!ratingElem) return;
-      
-      const liveRating = getAutoRating();
-      // display rating with one decimal
-      ratingElem.innerText = liveRating.toFixed(2) + ' ★';
-      
-      // update stars accordingly (full, half-star handling)
-      const fullCount = Math.floor(liveRating);
-      const hasHalf = (liveRating - fullCount) >= 0.25 && (liveRating - fullCount) < 0.85;
-      let starsHtml = '';
-      for (let i=0; i<5; i++) {
-        if (i < fullCount) starsHtml += '★';
-        else if (i === fullCount && hasHalf) starsHtml += '½';
-        else starsHtml += '☆';
-      }
-      if (starElem) starElem.innerHTML = starsHtml;
-      
-      // additional subtle gradient effect to reflect live nature
-      const ratingContainer = document.querySelector('.rating-container');
-      if (ratingContainer) {
-        ratingContainer.style.transition = 'background 0.3s';
-        ratingContainer.style.background = 'rgba(255,250,210,0.6)';
-        setTimeout(() => {
-          if(ratingContainer) ratingContainer.style.background = 'rgba(255,255,245,0.5)';
-        }, 400);
-      }
-    }
-    
-    // initial update
-    updateRatingUI();
-    // Simulate a refresh every 90 seconds to show "auto" nature (no fake stuck rating)
-    setInterval(() => {
-      updateRatingUI();
-    }, 90000);
-    
-    // Extra: Add click-to-refresh rating manually for transparency
-    const ratingDiv = document.getElementById('ratingWidget');
-    if (ratingDiv) {
-      ratingDiv.style.cursor = 'pointer';
-      ratingDiv.title = 'Click to refresh live rating';
-      ratingDiv.addEventListener('click', (e) => {
-        updateRatingUI();
-        // mini feedback
-        const toastMsg = document.createElement('div');
-        toastMsg.innerText = '⭐ Rating refreshed from live data';
-        toastMsg.style.position = 'fixed';
-        toastMsg.style.bottom = '20px';
-        toastMsg.style.left = '50%';
-        toastMsg.style.transform = 'translateX(-50%)';
-        toastMsg.style.backgroundColor = '#0b2d5c';
-        toastMsg.style.color = 'white';
-        toastMsg.style.padding = '8px 20px';
-        toastMsg.style.borderRadius = '40px';
-        toastMsg.style.fontSize = '0.8rem';
-        toastMsg.style.zIndex = '999';
-        toastMsg.style.fontWeight = 'bold';
-        document.body.appendChild(toastMsg);
-        setTimeout(() => toastMsg.remove(), 1800);
-      });
-    }
-    
     // floating shapes dynamic randomness (slower)
     const shapes = document.querySelectorAll('.float-shape');
     if(shapes.length) {
