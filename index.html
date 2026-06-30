@@ -1,320 +1,315 @@
 python3 << 'PYEOF'
-import base64, io, os
-from PIL import Image
+import os
 
 base = '/home/claude/avchem3/images'
+imgs = {}
+for k in ['tile','h4logo','water','shieldx','avlogo']:
+    with open(f'{base}/{k}.b64','r') as f:
+        imgs[k] = f.read().strip()
 
-configs = {
-  'tile':    {'src': 'tile.png',    'fmt': 'JPEG', 'quality': 70, 'max_w': 480},
-  'h4logo':  {'src': 'h4logo.png',  'fmt': 'PNG',  'quality': 90, 'max_w': 200},
-  'water':   {'src': 'water.png',   'fmt': 'JPEG', 'quality': 70, 'max_w': 480},
-  'shieldx': {'src': 'shieldx.png', 'fmt': 'JPEG', 'quality': 70, 'max_w': 480},
-  'avlogo':  {'src': 'avlogo.png',  'fmt': 'PNG',  'quality': 90, 'max_w': 180},
-}
-
-result = {}
-for k, cfg in configs.items():
-    img = Image.open(f"{base}/{cfg['src']}")
-    if cfg['fmt'] == 'JPEG' and img.mode in ('RGBA', 'LA'):
-        bg = Image.new('RGB', img.size, (255,255,255))
-        bg.paste(img, mask=img.split()[-1])
-        img = bg
-    elif cfg['fmt'] == 'JPEG':
-        img = img.convert('RGB')
-    max_w = cfg['max_w']
-    if img.width > max_w:
-        ratio = max_w / img.width
-        img = img.resize((max_w, int(img.height * ratio)), Image.LANCZOS)
-    buf = io.BytesIO()
-    if cfg['fmt'] == 'JPEG':
-        img.save(buf, 'JPEG', quality=cfg['quality'], optimize=True)
-        mime = 'image/jpeg'
-    else:
-        img.save(buf, 'PNG', optimize=True)
-        mime = 'image/png'
-    data = base64.b64encode(buf.getvalue()).decode()
-    result[k] = f"data:{mime};base64,{data}"
-
-IMG_TILE = result['tile']
-IMG_H4LOGO = result['h4logo']
-IMG_WATER = result['water']
-IMG_SHIELDX = result['shieldx']
-IMG_AVLOGO = result['avlogo']
+# Google Maps embed for exact location
+# Using the provided URL: https://maps.app.goo.gl/ZsVZeqeN47kupohA8
+# Converting to embed format for Mukkilapeedika, Tirur, Malappuram
+MAPS_EMBED = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3912.5!2d75.9922!3d10.9105!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba7d15b1e2d1b1b%3A0x0!2sMukkilapeedika%2C%20Kannamkulam%2C%20Tirur%2C%20Malappuram%2C%20Kerala%20676101!5e0!3m2!1sen!2sin!4v1720000000000!5m2!1sen!2sin"
 
 HTML = f'''<!DOCTYPE html>
-<html lang="en" id="htmlRoot">
+<html lang="en" id="hr">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>AV CHEM Chemical & Manufacturing | H4 Tile Adhesive, Waterproofing, Epoxy Flooring – Tirur, Malappuram, Kerala</title>
-<meta name="description" content="AV CHEM Chemical & Manufacturing – H4 Tile Adhesive, H4 Waterproofing & H4 ShieldX Epoxy Flooring. Manufactured in Tirur, Malappuram, Kerala. Call +917907344030."/>
-<meta name="keywords" content="tile adhesive Kerala, waterproofing Malappuram, epoxy flooring Tirur, H4 ShieldX, AV CHEM, construction chemicals Kerala, ടൈൽ അഡ്ഹസീവ്, വാട്ടർപ്രൂഫിംഗ്"/>
+<title>AV CHEM Chemical & Manufacturing | H4 Tile Adhesive Waterproofing Epoxy Flooring Tirur Malappuram Kerala</title>
+<meta name="description" content="AV CHEM Chemical & Manufacturing, Tirur, Malappuram, Kerala. H4 Tile Adhesive, H4 Waterproofing & H4 ShieldX Epoxy Flooring. Dealer enquiry: +917907344030."/>
+<meta name="keywords" content="tile adhesive Kerala,waterproofing Malappuram,epoxy flooring Tirur,H4 ShieldX,AV CHEM,construction chemicals Kerala,ടൈൽ അഡ്ഹസീവ്,വാട്ടർപ്രൂഫിംഗ്,എപ്പോക്സി ഫ്ലോറിംഗ്"/>
 <meta name="robots" content="index,follow,max-image-preview:large"/>
 <meta name="author" content="AV CHEM Chemical & Manufacturing"/>
 <link rel="canonical" href="https://avchemchemical.com/"/>
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://avchemchemical.com/"/>
 <meta property="og:title" content="AV CHEM Chemical & Manufacturing | Tirur, Kerala"/>
-<meta property="og:description" content="H4 Tile Adhesive, Waterproofing & H4 ShieldX Epoxy Flooring. Dealer enquiries welcome."/>
+<meta property="og:description" content="H4 Tile Adhesive, Waterproofing & H4 ShieldX Epoxy Flooring — Tirur, Malappuram, Kerala."/>
 <meta property="og:image" content="https://avchemchemical.com/og-image.jpg"/>
-<meta property="og:locale" content="en_IN"/>
 <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="AV CHEM | Tirur, Kerala"/>
+<meta name="twitter:description" content="H4 Tile Adhesive, Waterproofing & Epoxy Flooring — Kerala."/>
 <link rel="manifest" href="manifest.json"/>
 <meta name="theme-color" content="#7B2D8B"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-title" content="AV CHEM"/>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%237B2D8B'/%3E%3Ccircle cx='35' cy='50' r='22' fill='%23C9A84C'/%3E%3Ccircle cx='65' cy='50' r='22' fill='%23E8A000'/%3E%3Ctext y='57' x='50' text-anchor='middle' font-size='24' font-family='Arial Black,sans-serif' font-weight='900' fill='white'%3EH4%3C/text%3E%3C/svg%3E"/>
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAAiSCJsAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAAAeZJREFUeJzt0TEBAAAAwqD1T+1nBqAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeAMBuAAGkAAAAASUVORK5CYII="/>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%237B2D8B'/%3E%3Ccircle cx='36' cy='50' r='20' fill='%23CC44AA'/%3E%3Ccircle cx='64' cy='50' r='20' fill='%23E8A000'/%3E%3Ctext y='56' x='50' text-anchor='middle' font-size='22' font-family='Arial Black' font-weight='900' fill='white'%3EH4%3C/text%3E%3C/svg%3E"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&family=Noto+Sans+Malayalam:wght@400;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@300;400;500;600&family=Noto+Sans+Malayalam:wght@400;600;700&display=swap" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
-<!-- GA4: <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script> -->
-<!-- GSC: <meta name="google-site-verification" content="YOUR_CODE"/> -->
+<!-- ANALYTICS: Replace with your IDs -->
+<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script> -->
+<!-- <meta name="google-site-verification" content="YOUR_CODE"/> -->
 <script type="application/ld+json">
 {{"@context":"https://schema.org","@graph":[
-  {{"@type":"Organization","@id":"https://avchemchemical.com/#org","name":"AV CHEM Chemical & Manufacturing","url":"https://avchemchemical.com/","logo":"https://avchemchemical.com/images/avlogo.png","sameAs":["https://www.facebook.com/share/1TNvLLd1SM/","https://www.instagram.com/h4constructionsolutions","https://youtube.com/@h4constructionsolutions"],"contactPoint":[{{"@type":"ContactPoint","telephone":"+91-7907344030","contactType":"sales","areaServed":"IN","availableLanguage":["English","Malayalam"]}},{{"@type":"ContactPoint","telephone":"+91-9745838382","contactType":"customer support","contactOption":"WhatsApp"}}]}},
-  {{"@type":"LocalBusiness","@id":"https://avchemchemical.com/#biz","name":"AV CHEM Chemical & Manufacturing","image":"https://avchemchemical.com/og-image.jpg","address":{{"@type":"PostalAddress","streetAddress":"Mukkilapeedika, Kannamkulam","addressLocality":"Tirur","addressRegion":"Kerala","postalCode":"676101","addressCountry":"IN","addressSubregion":"Malappuram"}},"telephone":"+917907344030","url":"https://avchemchemical.com/","openingHours":"Mo-Sa 09:00-18:00","priceRange":"₹₹","email":"avchemtirur@gmail.com","geo":{{"@type":"GeoCoordinates","latitude":10.9147,"longitude":76.0061}}}},
-  {{"@type":"FAQPage","mainEntity":[{{"@type":"Question","name":"Where is AV CHEM?","acceptedAnswer":{{"@type":"Answer","text":"Mukkilapeedika, Kannamkulam, Tirur, Malappuram, Kerala, India."}}}},{{"@type":"Question","name":"What products does AV CHEM make?","acceptedAnswer":{{"@type":"Answer","text":"H4 Tile Adhesive, H4 Waterproofing, H4 ShieldX Epoxy Flooring."}}}}]}}
+  {{"@type":"Organization","@id":"https://avchemchemical.com/#org","name":"AV CHEM Chemical & Manufacturing","url":"https://avchemchemical.com/","email":"avchemtirur@gmail.com","sameAs":["https://www.facebook.com/share/1TNvLLd1SM/","https://www.instagram.com/h4constructionsolutions","https://youtube.com/@h4constructionsolutions","https://goo.gl/maps/Nfr8EsghauyJN"],"contactPoint":[{{"@type":"ContactPoint","telephone":"+91-7907344030","contactType":"sales","areaServed":"IN","availableLanguage":["English","Malayalam"]}},{{"@type":"ContactPoint","telephone":"+91-9745838382","contactType":"customer support","contactOption":"WhatsApp"}}]}},
+  {{"@type":"LocalBusiness","@id":"https://avchemchemical.com/#biz","name":"AV CHEM Chemical & Manufacturing","image":"https://avchemchemical.com/og-image.jpg","address":{{"@type":"PostalAddress","streetAddress":"Mukkilapeedika, Kannamkulam","addressLocality":"Tirur","addressRegion":"Kerala","postalCode":"676101","addressCountry":"IN"}},"telephone":"+917907344030","url":"https://avchemchemical.com/","openingHours":"Mo-Sa 09:00-18:00","priceRange":"₹₹","geo":{{"@type":"GeoCoordinates","latitude":10.9105,"longitude":75.9922}}}},
+  {{"@type":"FAQPage","mainEntity":[{{"@type":"Question","name":"Where is AV CHEM Chemical & Manufacturing?","acceptedAnswer":{{"@type":"Answer","text":"Mukkilapeedika, Kannamkulam, Tirur, Malappuram, Kerala 676101."}}}},{{"@type":"Question","name":"What products does AV CHEM make?","acceptedAnswer":{{"@type":"Answer","text":"H4 Tile Adhesive, H4 Waterproofing Solution, and H4 ShieldX Epoxy Flooring."}}}},{{"@type":"Question","name":"How to become an AV CHEM dealer?","acceptedAnswer":{{"@type":"Answer","text":"Call +917907344030 or WhatsApp +919745838382 or fill the dealer enquiry form on our website."}}}}]}}
 ]}}
 </script>
 <style>
 :root{{
-  --pur:#7B2D8B;--pur2:#5A1F6B;--pur3:#3D1F6E;--pur-l:#9B4DAB;--pur-p:#F8F0FA;
-  --gold:#C9A84C;--gold-l:#E8B800;--gold-d:#A07830;
-  --w:#fff;--ow:#FAFAF7;--cream:#F7F4ED;
-  --txt:#1A1209;--mid:#4A3F2F;--lite:#8A7D6A;
-  --fb:'DM Sans',sans-serif;--fd:'Cormorant Garamond',Georgia,serif;--fm:'Noto Sans Malayalam',sans-serif;
+  --pur:#7B2D8B;--pur2:#5A1F6B;--pur3:#3D1260;--pl:#9B4DAB;--pp:#F8F0FA;
+  --g:#C9A84C;--gl:#E8B800;--gd:#A07830;
+  --w:#fff;--ow:#FAFAF7;--cr:#F7F4ED;
+  --tx:#1A1209;--md:#4A3F2F;--lt:#8A7D6A;
+  --fb:'DM Sans',sans-serif;--fd:'Cormorant Garamond',serif;--fm:'Noto Sans Malayalam',sans-serif;
   --r:14px;--rs:8px;
 }}
 *,*::before,*::after{{box-sizing:border-box;margin:0;padding:0}}
-html{{scroll-behavior:smooth;font-size:16px}}
-body{{font-family:var(--fb);background:var(--ow);color:var(--txt);overflow-x:hidden;line-height:1.6}}
-::-webkit-scrollbar{{width:4px}}::-webkit-scrollbar-track{{background:var(--cream)}}::-webkit-scrollbar-thumb{{background:var(--gold);border-radius:4px}}
+html{{scroll-behavior:smooth}}
+body{{font-family:var(--fb);background:var(--ow);color:var(--tx);overflow-x:hidden;line-height:1.6;font-size:16px}}
+::-webkit-scrollbar{{width:4px}}::-webkit-scrollbar-track{{background:var(--cr)}}::-webkit-scrollbar-thumb{{background:var(--g);border-radius:4px}}
 img{{max-width:100%;height:auto;display:block}}a{{text-decoration:none;color:inherit}}
+
 /* LANG TOGGLE */
-.lang-btn{{display:inline-flex;align-items:center;gap:5px;background:rgba(123,45,139,.1);border:1.5px solid rgba(123,45,139,.3);color:var(--pur);font-family:var(--fb);font-size:.78rem;font-weight:600;padding:.28rem .7rem;border-radius:50px;cursor:pointer;transition:all .2s;white-space:nowrap}}
-.lang-btn:hover{{background:var(--pur);color:#fff}}
+.lbtn{{display:inline-flex;align-items:center;gap:5px;background:rgba(123,45,139,.1);border:1.5px solid rgba(123,45,139,.3);color:var(--pur);font-family:var(--fb);font-size:.76rem;font-weight:600;padding:.26rem .65rem;border-radius:50px;cursor:pointer;transition:all .2s;white-space:nowrap;line-height:1.4}}
+.lbtn:hover{{background:var(--pur);color:#fff;border-color:var(--pur)}}
+
 /* NAVBAR */
-#nav{{position:fixed;top:0;left:0;right:0;z-index:1000;height:66px;padding:0 4vw;display:flex;align-items:center;justify-content:space-between;gap:.8rem;background:rgba(255,255,255,.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(123,45,139,.12);transition:box-shadow .3s}}
-#nav.scrolled{{box-shadow:0 4px 24px rgba(123,45,139,.12)}}
-.nl{{display:flex;align-items:center;gap:.8rem}}
+#nav{{position:fixed;top:0;left:0;right:0;z-index:1000;height:64px;padding:0 4vw;display:flex;align-items:center;justify-content:space-between;gap:.7rem;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);border-bottom:1.5px solid rgba(123,45,139,.1);transition:box-shadow .3s}}
+#nav.sc{{box-shadow:0 4px 24px rgba(123,45,139,.12)}}
+.nl{{display:flex;align-items:center;gap:.7rem}}
 .nb{{display:flex;flex-direction:column;line-height:1.1}}
-.nb .company{{font-family:var(--fd);font-size:1.05rem;font-weight:700;color:var(--pur3);letter-spacing:.03em}}
-.nb .tagline{{font-size:.63rem;color:var(--gold-d);letter-spacing:.1em;text-transform:uppercase;font-weight:500}}
-.logo-img{{width:36px;height:36px;object-fit:contain;border-radius:6px}}
-.av-logo-img{{width:32px;height:32px;object-fit:contain}}
-.nav-links{{display:flex;gap:1.6rem;list-style:none;align-items:center}}
-.nav-links a{{font-size:.82rem;font-weight:500;color:var(--mid);position:relative;transition:color .2s;padding:.2rem 0}}
-.nav-links a::after{{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1.5px;background:var(--gold);transition:width .3s}}
-.nav-links a:hover{{color:var(--pur)}}
-.nav-links a:hover::after{{width:100%}}
-.ncta{{background:linear-gradient(135deg,var(--pur),var(--pur-l));color:#fff!important;padding:.4rem 1rem;border-radius:50px;font-size:.79rem!important;font-weight:600!important;transition:transform .2s,box-shadow .2s!important}}
-.ncta:hover{{transform:translateY(-1px);box-shadow:0 4px 14px rgba(123,45,139,.4)!important}}
-.ncta::after{{display:none!important}}
+.nb .co{{font-family:var(--fd);font-size:1rem;font-weight:700;color:var(--pur3);letter-spacing:.03em}}
+.nb .tg{{font-size:.6rem;color:var(--gd);letter-spacing:.09em;text-transform:uppercase;font-weight:500}}
+.avl{{width:30px;height:30px;object-fit:contain;border-radius:5px}}
+.h4nl{{width:44px;height:26px;object-fit:contain}}
+.nlinks{{display:flex;gap:1.5rem;list-style:none;align-items:center}}
+.nlinks a{{font-size:.8rem;font-weight:500;color:var(--md);position:relative;transition:color .2s;padding:.15rem 0}}
+.nlinks a::after{{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1.5px;background:var(--g);transition:width .3s}}
+.nlinks a:hover{{color:var(--pur)}}.nlinks a:hover::after{{width:100%}}
+.nc{{background:linear-gradient(135deg,var(--pur),var(--pl));color:#fff!important;padding:.38rem .95rem;border-radius:50px;font-size:.77rem!important;font-weight:600!important;transition:transform .2s,box-shadow .2s!important}}
+.nc:hover{{transform:translateY(-1px);box-shadow:0 4px 12px rgba(123,45,139,.4)!important}}
+.nc::after{{display:none!important}}
 .ham{{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}}
 .ham span{{display:block;width:24px;height:2px;background:var(--pur);border-radius:2px;transition:all .3s}}
-.mob-menu{{display:none;position:fixed;top:66px;left:0;right:0;background:#fff;border-bottom:2px solid var(--gold);padding:1.2rem 5vw;z-index:999;flex-direction:column;gap:.75rem;box-shadow:0 8px 30px rgba(0,0,0,.1)}}
-.mob-menu.open{{display:flex}}
-.mob-menu a{{color:var(--txt);font-size:.93rem;font-weight:500;padding:.45rem 0;border-bottom:1px solid var(--cream)}}
-/* HERO */
-#hero{{min-height:100vh;padding:90px 5vw 70px;background:linear-gradient(145deg,#1A0535 0%,#2D0F55 35%,#4A1A6B 65%,#7B2D8B 100%);display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden}}
-.orb{{position:absolute;border-radius:50%;filter:blur(70px);opacity:.3;pointer-events:none;animation:floatO 9s ease-in-out infinite}}
-.o1{{width:480px;height:480px;background:radial-gradient(circle,rgba(232,184,0,.7),transparent 70%);top:-160px;right:-120px}}
-.o2{{width:320px;height:320px;background:radial-gradient(circle,rgba(123,45,139,.8),transparent 70%);bottom:-80px;left:-60px;animation-delay:4s;animation-duration:12s}}
-.o3{{width:180px;height:180px;background:radial-gradient(circle,rgba(201,168,76,.6),transparent 70%);top:55%;left:18%;animation-duration:7s;animation-delay:2s}}
-@keyframes floatO{{0%,100%{{transform:translateY(0)}}50%{{transform:translateY(-28px)}}}}
-.hero-c{{position:relative;z-index:2;max-width:820px}}
-.hbadge{{display:inline-flex;align-items:center;gap:.5rem;background:rgba(232,184,0,.15);border:1px solid rgba(232,184,0,.4);color:#FFD700;font-size:.72rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;padding:.38rem .95rem;border-radius:50px;margin-bottom:1.4rem}}
-.hbadge::before{{content:'';width:6px;height:6px;background:#FFD700;border-radius:50%;animation:pls 2s infinite}}
-@keyframes pls{{0%,100%{{opacity:1;transform:scale(1)}}50%{{opacity:.4;transform:scale(.6)}}}}
-.h4-hero-logo{{width:90px;height:54px;object-fit:contain;margin:0 auto 1rem;filter:drop-shadow(0 4px 12px rgba(232,184,0,.4))}}
-.htitle{{font-family:var(--fd);font-size:clamp(2.5rem,6.5vw,5rem);font-weight:700;color:#fff;line-height:1.05;margin-bottom:.45rem}}
-.htitle .gt{{background:linear-gradient(135deg,#FFD700,#FFF5A0,#E8B800);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}}
-.hml{{font-family:var(--fm);font-size:clamp(1rem,2.2vw,1.35rem);color:rgba(255,255,255,.78);margin-bottom:.6rem}}
-.htag{{font-size:clamp(.85rem,1.7vw,1rem);color:rgba(255,255,255,.5);margin-bottom:2.2rem;letter-spacing:.02em}}
-.hpills{{display:flex;flex-wrap:wrap;gap:.55rem;justify-content:center;margin-bottom:2.2rem}}
-.hpill{{background:rgba(255,255,255,.07);border:1px solid rgba(232,184,0,.3);color:rgba(255,255,255,.85);padding:.32rem .9rem;border-radius:50px;font-size:.79rem;font-weight:500;backdrop-filter:blur(8px);transition:all .25s;cursor:default}}
-.hpill:hover{{background:rgba(232,184,0,.18);border-color:#FFD700;color:#FFD700}}
-.hctas{{display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap}}
-.btn-p{{background:linear-gradient(135deg,var(--gold),var(--gold-d));color:#fff;padding:.8rem 1.8rem;border-radius:50px;font-weight:600;font-size:.9rem;border:none;cursor:pointer;transition:all .3s;display:inline-flex;align-items:center;gap:.45rem;box-shadow:0 4px 18px rgba(201,168,76,.45)}}
-.btn-p:hover{{transform:translateY(-2px);box-shadow:0 8px 28px rgba(201,168,76,.55)}}
-.btn-o{{background:transparent;color:#fff;padding:.8rem 1.8rem;border-radius:50px;font-weight:500;font-size:.9rem;border:1.5px solid rgba(255,255,255,.4);cursor:pointer;transition:all .3s;display:inline-flex;align-items:center;gap:.45rem}}
-.btn-o:hover{{background:rgba(255,255,255,.1);border-color:#fff}}
-.scroll-ind{{position:absolute;bottom:1.8rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.4rem;color:rgba(255,255,255,.35);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase}}
-.scroll-line{{width:1px;height:36px;background:linear-gradient(to bottom,rgba(232,184,0,.6),transparent);animation:scrl 2s ease-in-out infinite}}
-@keyframes scrl{{0%,100%{{opacity:1}}50%{{opacity:.25}}}}
+.mm{{display:none;position:fixed;top:64px;left:0;right:0;background:#fff;border-bottom:2px solid var(--g);padding:1.1rem 5vw;z-index:999;flex-direction:column;gap:.7rem;box-shadow:0 8px 28px rgba(0,0,0,.1)}}
+.mm.open{{display:flex}}
+.mm a{{color:var(--tx);font-size:.91rem;font-weight:500;padding:.4rem 0;border-bottom:1px solid var(--cr)}}
+
 /* SOCIAL BAR */
-#social-bar{{background:linear-gradient(135deg,var(--pur2),var(--pur3));padding:.7rem 5vw;display:flex;align-items:center;justify-content:center;gap:1.5rem;flex-wrap:wrap}}
-.soc-link{{display:flex;align-items:center;gap:.45rem;color:rgba(255,255,255,.8);font-size:.8rem;font-weight:500;transition:color .2s}}
-.soc-link:hover{{color:var(--gold-l)}}
-.soc-icon{{font-size:1.1rem}}
+#sb{{background:linear-gradient(135deg,var(--pur2),var(--pur3));padding:.6rem 5vw;display:flex;align-items:center;justify-content:center;gap:1.4rem;flex-wrap:wrap}}
+.sl{{display:flex;align-items:center;gap:.4rem;color:rgba(255,255,255,.78);font-size:.77rem;font-weight:500;transition:color .2s}}
+.sl:hover{{color:var(--gl)}}
+
+/* HERO */
+#hero{{min-height:100vh;padding:88px 5vw 70px;background:linear-gradient(145deg,#1A0535,#2D0F55 35%,#4A1A6B 65%,#7B2D8B);display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden}}
+.orb{{position:absolute;border-radius:50%;filter:blur(70px);opacity:.3;pointer-events:none;animation:fo 9s ease-in-out infinite}}
+.o1{{width:460px;height:460px;background:radial-gradient(circle,rgba(232,184,0,.7),transparent 70%);top:-150px;right:-100px}}
+.o2{{width:300px;height:300px;background:radial-gradient(circle,rgba(123,45,139,.8),transparent 70%);bottom:-70px;left:-50px;animation-delay:4s;animation-duration:12s}}
+.o3{{width:170px;height:170px;background:radial-gradient(circle,rgba(201,168,76,.6),transparent 70%);top:55%;left:18%;animation-duration:7s;animation-delay:2s}}
+@keyframes fo{{0%,100%{{transform:translateY(0)}}50%{{transform:translateY(-26px)}}}}
+.hc{{position:relative;z-index:2;max-width:820px}}
+.hbdg{{display:inline-flex;align-items:center;gap:.45rem;background:rgba(232,184,0,.15);border:1px solid rgba(232,184,0,.4);color:#FFD700;font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:.35rem .9rem;border-radius:50px;margin-bottom:1.3rem}}
+.hbdg::before{{content:'';width:6px;height:6px;background:#FFD700;border-radius:50%;animation:ps 2s infinite}}
+@keyframes ps{{0%,100%{{opacity:1}}50%{{opacity:.3}}}}
+.h4hl{{width:88px;height:52px;object-fit:contain;margin:0 auto .9rem;filter:drop-shadow(0 4px 10px rgba(232,184,0,.4))}}
+.ht{{font-family:var(--fd);font-size:clamp(2.4rem,6vw,4.8rem);font-weight:700;color:#fff;line-height:1.06;margin-bottom:.4rem}}
+.ht .gt{{background:linear-gradient(135deg,#FFD700,#FFF5A0,#E8B800);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}}
+.hml{{font-family:var(--fm);font-size:clamp(.95rem,2vw,1.3rem);color:rgba(255,255,255,.78);margin-bottom:.55rem}}
+.htg{{font-size:clamp(.8rem,1.6vw,.95rem);color:rgba(255,255,255,.5);margin-bottom:2rem;letter-spacing:.02em}}
+.hps{{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-bottom:2rem}}
+.hp{{background:rgba(255,255,255,.07);border:1px solid rgba(232,184,0,.3);color:rgba(255,255,255,.85);padding:.3rem .85rem;border-radius:50px;font-size:.77rem;font-weight:500;transition:all .25s;cursor:default}}
+.hp:hover{{background:rgba(232,184,0,.18);border-color:#FFD700;color:#FFD700}}
+.hcts{{display:flex;gap:.85rem;justify-content:center;flex-wrap:wrap}}
+.bp{{background:linear-gradient(135deg,var(--g),var(--gd));color:#fff;padding:.78rem 1.7rem;border-radius:50px;font-weight:600;font-size:.88rem;border:none;cursor:pointer;transition:all .3s;display:inline-flex;align-items:center;gap:.4rem;box-shadow:0 4px 16px rgba(201,168,76,.45);text-decoration:none}}
+.bp:hover{{transform:translateY(-2px);box-shadow:0 8px 26px rgba(201,168,76,.55)}}
+.bo{{background:transparent;color:#fff;padding:.78rem 1.7rem;border-radius:50px;font-weight:500;font-size:.88rem;border:1.5px solid rgba(255,255,255,.4);cursor:pointer;transition:all .3s;display:inline-flex;align-items:center;gap:.4rem;text-decoration:none}}
+.bo:hover{{background:rgba(255,255,255,.1);border-color:#fff}}
+.si{{position:absolute;bottom:1.6rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.38rem;color:rgba(255,255,255,.35);font-size:.67rem;letter-spacing:.1em;text-transform:uppercase}}
+.sl2{{width:1px;height:34px;background:linear-gradient(to bottom,rgba(232,184,0,.6),transparent);animation:sc 2s ease-in-out infinite}}
+@keyframes sc{{0%,100%{{opacity:1}}50%{{opacity:.2}}}}
+
 /* STATS */
-#stats{{background:linear-gradient(135deg,var(--pur),var(--pur2));padding:48px 5vw}}
-.stats-g{{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1.8rem;text-align:center}}
-.sn{{font-family:var(--fd);font-size:2.5rem;font-weight:700;color:var(--gold-l);line-height:1;display:block}}
-.sl{{font-size:.78rem;color:rgba(255,255,255,.6);margin-top:.3rem;letter-spacing:.04em}}
-/* SECTION */
-.sec{{padding:80px 5vw}}
-.lbl{{font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-d);margin-bottom:.45rem}}
-.stitle{{font-family:var(--fd);font-size:clamp(1.8rem,3.8vw,2.8rem);font-weight:700;color:var(--pur3);line-height:1.15;margin-bottom:.8rem}}
-.ssub{{font-size:.93rem;color:var(--lite);max-width:500px;line-height:1.75}}
-.div{{width:52px;height:3px;background:linear-gradient(to right,var(--gold),var(--gold-l));border-radius:3px;margin:1rem 0}}
-.ctr{{text-align:center}}.ctr .ssub{{margin:0 auto}}.ctr .div{{margin:1rem auto}}
+#stats{{background:linear-gradient(135deg,var(--pur),var(--pur2));padding:44px 5vw}}
+.sg{{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1.6rem;text-align:center}}
+.sn{{font-family:var(--fd);font-size:2.4rem;font-weight:700;color:var(--gl);line-height:1;display:block}}
+.ss{{font-size:.76rem;color:rgba(255,255,255,.6);margin-top:.28rem;letter-spacing:.04em}}
+
+/* SECTION BASE */
+.sec{{padding:75px 5vw}}
+.lb{{font-size:.7rem;font-weight:600;letter-spacing:.17em;text-transform:uppercase;color:var(--gd);margin-bottom:.42rem}}
+.st{{font-family:var(--fd);font-size:clamp(1.75rem,3.6vw,2.7rem);font-weight:700;color:var(--pur3);line-height:1.15;margin-bottom:.75rem}}
+.sb{{font-size:.91rem;color:var(--lt);max-width:500px;line-height:1.75}}
+.dv{{width:50px;height:3px;background:linear-gradient(to right,var(--g),var(--gl));border-radius:3px;margin:1rem 0}}
+.ct{{text-align:center}}.ct .sb{{margin:0 auto}}.ct .dv{{margin:1rem auto}}
+
 /* PRODUCTS */
-#products{{background:var(--cream)}}
-.pg{{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.8rem;max-width:1080px;margin:0 auto}}
-.pc{{background:#fff;border-radius:var(--r);overflow:hidden;box-shadow:0 2px 18px rgba(123,45,139,.07);transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s}}
-.pc:hover{{transform:translateY(-7px);box-shadow:0 12px 36px rgba(123,45,139,.15)}}
-.piw{{position:relative;height:240px;overflow:hidden;background:var(--cream);display:flex;align-items:center;justify-content:center}}
-.pi{{width:100%;height:100%;object-fit:contain;object-position:center;padding:1rem;transition:transform .5s ease;background:#fff}}
+#products{{background:var(--cr)}}
+.pg{{display:grid;grid-template-columns:repeat(auto-fit,minmax(275px,1fr));gap:1.7rem;max-width:1060px;margin:0 auto}}
+.pc{{background:#fff;border-radius:var(--r);overflow:hidden;box-shadow:0 2px 16px rgba(123,45,139,.07);transition:transform .32s cubic-bezier(.34,1.56,.64,1),box-shadow .32s}}
+.pc:hover{{transform:translateY(-7px);box-shadow:0 12px 34px rgba(123,45,139,.15)}}
+.piw{{position:relative;height:240px;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center}}
+.pi{{width:100%;height:100%;object-fit:contain;object-position:center;padding:.8rem;transition:transform .5s ease}}
 .pc:hover .pi{{transform:scale(1.06)}}
-.pbadge{{position:absolute;top:.8rem;right:.8rem;font-size:.64rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:.28rem .75rem;border-radius:50px;z-index:2}}
-.pb{{padding:1.4rem}}
-.pname{{font-family:var(--fd);font-size:1.4rem;font-weight:700;color:var(--pur);margin-bottom:.2rem}}
-.pml{{font-family:var(--fm);font-size:.85rem;color:var(--gold-d);margin-bottom:.7rem}}
-.pdesc{{font-size:.85rem;color:var(--lite);line-height:1.7;margin-bottom:.85rem}}
-.pf{{list-style:none;margin-bottom:1rem}}
-.pf li{{font-size:.8rem;color:var(--mid);padding:.18rem 0;display:flex;align-items:center;gap:.45rem}}
-.pf li::before{{content:'✦';color:var(--gold);font-size:.6rem;flex-shrink:0}}
-.benq{{width:100%;background:linear-gradient(135deg,var(--pur),var(--pur-l));color:#fff;border:none;padding:.7rem;border-radius:var(--rs);font-family:var(--fb);font-size:.87rem;font-weight:600;cursor:pointer;transition:all .3s;letter-spacing:.02em}}
-.benq:hover{{background:linear-gradient(135deg,var(--gold-d),var(--gold));transform:translateY(-1px);box-shadow:0 4px 14px rgba(201,168,76,.35)}}
+.pbg{{position:absolute;top:.75rem;right:.75rem;font-size:.62rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:.25rem .7rem;border-radius:50px;z-index:2}}
+.pb{{padding:1.35rem}}
+.pn{{font-family:var(--fd);font-size:1.38rem;font-weight:700;color:var(--pur);margin-bottom:.2rem}}
+.pm{{font-family:var(--fm);font-size:.83rem;color:var(--gd);margin-bottom:.65rem}}
+.pd{{font-size:.83rem;color:var(--lt);line-height:1.7;margin-bottom:.8rem}}
+.pfl{{list-style:none;margin-bottom:.95rem}}
+.pfl li{{font-size:.78rem;color:var(--md);padding:.17rem 0;display:flex;align-items:center;gap:.42rem}}
+.pfl li::before{{content:'✦';color:var(--g);font-size:.58rem;flex-shrink:0}}
+.beq{{width:100%;background:linear-gradient(135deg,var(--pur),var(--pl));color:#fff;border:none;padding:.68rem;border-radius:var(--rs);font-family:var(--fb);font-size:.85rem;font-weight:600;cursor:pointer;transition:all .3s;letter-spacing:.02em}}
+.beq:hover{{background:linear-gradient(135deg,var(--gd),var(--g));transform:translateY(-1px);box-shadow:0 4px 12px rgba(201,168,76,.35)}}
+
 /* WHY */
 #why{{background:#fff}}
-.wg{{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:center;max-width:1080px;margin:0 auto}}
-.wfeats{{display:flex;flex-direction:column;gap:1.2rem}}
-.wfeat{{display:flex;gap:.9rem;align-items:flex-start;padding:1rem;border-radius:var(--rs);border:1px solid rgba(201,168,76,.15);transition:all .3s}}
-.wfeat:hover{{border-color:var(--gold);background:rgba(201,168,76,.04);transform:translateX(4px)}}
-.wicon{{width:42px;height:42px;background:linear-gradient(135deg,var(--gold-l),var(--gold));border-radius:var(--rs);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}}
-.wtext h4{{font-family:var(--fd);font-size:1rem;font-weight:700;color:var(--pur);margin-bottom:.2rem}}
-.wtext p{{font-size:.82rem;color:var(--lite);line-height:1.6}}
-.coprofile{{background:linear-gradient(145deg,var(--pur),var(--pur2));border-radius:var(--r);padding:2.3rem;color:#fff;position:relative;overflow:hidden}}
-.coprofile::before{{content:'"';position:absolute;top:-.5rem;left:1.2rem;font-family:var(--fd);font-size:7rem;color:rgba(232,184,0,.12);line-height:1;pointer-events:none}}
-.coprofile h3{{font-family:var(--fd);font-size:1.5rem;font-weight:700;color:var(--gold-l);margin-bottom:.9rem}}
-.coprofile p{{font-size:.88rem;color:rgba(255,255,255,.8);line-height:1.8;margin-bottom:.8rem}}
-.mvcard{{background:rgba(255,255,255,.08);border:1px solid rgba(232,184,0,.25);border-radius:var(--rs);padding:.7rem .95rem;margin-top:.6rem}}
-.mvcard h5{{font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-l);margin-bottom:.2rem}}
-.mvcard p{{font-size:.81rem;color:rgba(255,255,255,.75);margin:0;line-height:1.5}}
+.wg{{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:center;max-width:1060px;margin:0 auto}}
+.wfs{{display:flex;flex-direction:column;gap:1.1rem}}
+.wf{{display:flex;gap:.85rem;align-items:flex-start;padding:.95rem;border-radius:var(--rs);border:1px solid rgba(201,168,76,.15);transition:all .3s}}
+.wf:hover{{border-color:var(--g);background:rgba(201,168,76,.04);transform:translateX(4px)}}
+.wi{{width:40px;height:40px;background:linear-gradient(135deg,var(--gl),var(--g));border-radius:var(--rs);display:flex;align-items:center;justify-content:center;font-size:1.15rem;flex-shrink:0}}
+.wt h4{{font-family:var(--fd);font-size:.98rem;font-weight:700;color:var(--pur);margin-bottom:.18rem}}
+.wt p{{font-size:.8rem;color:var(--lt);line-height:1.6}}
+.cop{{background:linear-gradient(145deg,var(--pur),var(--pur2));border-radius:var(--r);padding:2.2rem;color:#fff;position:relative;overflow:hidden}}
+.cop::before{{content:'"';position:absolute;top:-.5rem;left:1.1rem;font-family:var(--fd);font-size:7rem;color:rgba(232,184,0,.1);line-height:1;pointer-events:none}}
+.cop h3{{font-family:var(--fd);font-size:1.45rem;font-weight:700;color:var(--gl);margin-bottom:.85rem}}
+.cop p{{font-size:.87rem;color:rgba(255,255,255,.8);line-height:1.8;margin-bottom:.8rem}}
+.mvc{{background:rgba(255,255,255,.08);border:1px solid rgba(232,184,0,.25);border-radius:var(--rs);padding:.65rem .9rem;margin-top:.55rem}}
+.mvc h5{{font-size:.68rem;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:var(--gl);margin-bottom:.2rem}}
+.mvc p{{font-size:.79rem;color:rgba(255,255,255,.75);margin:0;line-height:1.5}}
+
 /* REVIEWS */
-#reviews{{background:var(--pur-p)}}
-.rev-setup{{max-width:880px;margin:2rem auto 0}}
-.rev-badge{{display:flex;align-items:center;gap:1rem;background:#fff;border-radius:var(--rs);padding:1.1rem 1.4rem;border:1px solid rgba(123,45,139,.15);margin-bottom:1.5rem}}
-.rev-badge .rlogo{{width:40px;height:40px;object-fit:contain}}
-.rinfo h4{{font-size:.95rem;font-weight:700;color:var(--txt);margin-bottom:.1rem}}
-.rinfo .stars{{color:#F5A623;font-size:1rem;letter-spacing:.04em}}
-.rinfo p{{font-size:.74rem;color:var(--lite)}}
-.rev-embed-box{{background:#fff;border-radius:var(--r);padding:2rem;border:1.5px dashed rgba(123,45,139,.25);text-align:center}}
-.rev-embed-box .reicon{{font-size:2.2rem;margin-bottom:.6rem}}
-.rev-embed-box h4{{font-family:var(--fd);font-size:1.1rem;color:var(--pur);margin-bottom:.6rem}}
-.rev-embed-box p{{font-size:.83rem;color:var(--mid);line-height:1.7;margin-bottom:.8rem}}
-.rev-embed-box a{{color:var(--pur);font-weight:600}}
-.gr-cta{{display:inline-flex;align-items:center;gap:.45rem;background:var(--pur);color:#fff;padding:.55rem 1.2rem;border-radius:50px;font-size:.82rem;font-weight:600;margin-top:.5rem;transition:all .3s}}
-.gr-cta:hover{{background:var(--gold-d);transform:translateY(-1px)}}
+#reviews{{background:var(--pp)}}
+.rv{{max-width:860px;margin:1.8rem auto 0}}
+.rbdg{{display:flex;align-items:center;gap:.9rem;background:#fff;border-radius:var(--rs);padding:1rem 1.3rem;border:1px solid rgba(123,45,139,.12);margin-bottom:1.4rem}}
+.rbl{{width:38px;height:38px;object-fit:contain}}
+.ri h4{{font-size:.92rem;font-weight:700;color:var(--tx);margin-bottom:.08rem}}
+.ri .rs{{color:#F5A623;font-size:.95rem}}
+.ri p{{font-size:.72rem;color:var(--lt)}}
+.reb{{background:#fff;border-radius:var(--r);padding:1.8rem;border:1.5px dashed rgba(123,45,139,.22);text-align:center}}
+.reb .rei{{font-size:2rem;margin-bottom:.5rem}}
+.reb h4{{font-family:var(--fd);font-size:1.05rem;color:var(--pur);margin-bottom:.5rem}}
+.reb p{{font-size:.81rem;color:var(--md);line-height:1.65;margin-bottom:.7rem}}
+.reb a{{color:var(--pur);font-weight:600}}
+.grc{{display:inline-flex;align-items:center;gap:.4rem;background:var(--pur);color:#fff;padding:.5rem 1.1rem;border-radius:50px;font-size:.8rem;font-weight:600;margin-top:.4rem;transition:all .3s}}
+.grc:hover{{background:var(--gd);transform:translateY(-1px)}}
+
 /* DEALER FORM */
 #dealer{{background:#fff}}
-.dw{{max-width:780px;margin:0 auto}}
-.dcard{{background:var(--ow);border:1px solid rgba(123,45,139,.15);border-radius:var(--r);padding:2.2rem}}
-.fg{{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}}
-.fi{{display:flex;flex-direction:column;gap:.32rem}}
+.dw{{max-width:760px;margin:0 auto}}
+.dc{{background:var(--ow);border:1px solid rgba(123,45,139,.12);border-radius:var(--r);padding:2rem}}
+.fg{{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;margin-bottom:.9rem}}
+.fi{{display:flex;flex-direction:column;gap:.3rem}}
 .fi.full{{grid-column:1/-1}}
-.flbl{{font-size:.77rem;font-weight:600;color:var(--mid);letter-spacing:.02em}}
-.flbl span{{color:var(--gold-d)}}
-.inp,.sel{{padding:.65rem .95rem;border:1.5px solid rgba(123,45,139,.15);border-radius:var(--rs);font-family:var(--fb);font-size:.87rem;color:var(--txt);background:#fff;transition:border-color .2s,box-shadow .2s;outline:none;width:100%}}
+.fl{{font-size:.75rem;font-weight:600;color:var(--md)}}
+.fl span{{color:var(--gd)}}
+.inp,.sel{{padding:.62rem .9rem;border:1.5px solid rgba(123,45,139,.15);border-radius:var(--rs);font-family:var(--fb);font-size:.85rem;color:var(--tx);background:#fff;transition:border-color .2s,box-shadow .2s;outline:none;width:100%}}
 .inp:focus,.sel:focus{{border-color:var(--pur);box-shadow:0 0 0 3px rgba(123,45,139,.1)}}
-.inp.err{{border-color:#e05353}}
-.qrow{{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.9rem;margin-bottom:1rem}}
-.srow{{display:flex;gap:.9rem;margin-top:1.3rem;flex-wrap:wrap}}
-.bsub{{flex:1;min-width:140px;background:linear-gradient(135deg,var(--pur),var(--pur-l));color:#fff;border:none;padding:.82rem 1.2rem;border-radius:var(--rs);font-family:var(--fb);font-size:.9rem;font-weight:600;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:.4rem}}
-.bsub:hover{{background:linear-gradient(135deg,var(--gold-d),var(--gold));box-shadow:0 4px 14px rgba(201,168,76,.35)}}
-.bwa{{flex:1;min-width:140px;background:#25D366;color:#fff;border:none;padding:.82rem 1.2rem;border-radius:var(--rs);font-family:var(--fb);font-size:.9rem;font-weight:600;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:.4rem}}
-.bwa:hover{{background:#128C7E;box-shadow:0 4px 14px rgba(37,211,102,.35)}}
-.sstatus{{margin-top:.7rem;padding:.55rem .95rem;border-radius:var(--rs);font-size:.8rem;font-weight:500;display:none}}
-.sstatus.ok{{background:#E8F8F0;color:#1a7a4a;border:1px solid #A8E0C0;display:block}}
-.sstatus.er{{background:#FFF0F0;color:#c0392b;border:1px solid #F0C0C0;display:block}}
+.qr{{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.8rem;margin-bottom:.8rem}}
+.sr{{display:flex;gap:.8rem;margin-top:1.2rem;flex-wrap:wrap}}
+.bsb{{flex:1;min-width:130px;background:linear-gradient(135deg,var(--pur),var(--pl));color:#fff;border:none;padding:.78rem 1.1rem;border-radius:var(--rs);font-family:var(--fb);font-size:.88rem;font-weight:600;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:.38rem}}
+.bsb:hover{{background:linear-gradient(135deg,var(--gd),var(--g));box-shadow:0 4px 12px rgba(201,168,76,.35)}}
+.bwa{{flex:1;min-width:130px;background:#25D366;color:#fff;border:none;padding:.78rem 1.1rem;border-radius:var(--rs);font-family:var(--fb);font-size:.88rem;font-weight:600;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:.38rem}}
+.bwa:hover{{background:#128C7E;box-shadow:0 4px 12px rgba(37,211,102,.35)}}
+.sst{{margin-top:.65rem;padding:.5rem .9rem;border-radius:var(--rs);font-size:.78rem;font-weight:500;display:none}}
+.sst.ok{{background:#E8F8F0;color:#1a7a4a;border:1px solid #A8E0C0;display:block}}
+.sst.er{{background:#FFF0F0;color:#c0392b;border:1px solid #F0C0C0;display:block}}
+
 /* CONTACT */
-#contact{{background:var(--cream)}}
-.cg{{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;max-width:1080px;margin:0 auto;align-items:start}}
-.ccards{{display:flex;flex-direction:column;gap:.9rem}}
-.ccard{{background:#fff;border-radius:var(--rs);padding:1rem 1.3rem;display:flex;align-items:center;gap:.9rem;border:1px solid rgba(123,45,139,.12);transition:all .3s;cursor:pointer}}
-.ccard:hover{{border-color:var(--gold);transform:translateX(4px);box-shadow:0 6px 20px rgba(123,45,139,.1)}}
-.cion{{width:42px;height:42px;border-radius:var(--rs);display:flex;align-items:center;justify-content:center;font-size:1.15rem;flex-shrink:0}}
-.cion.ca{{background:#FFF3E0}}.cion.wa{{background:#E8F8F0}}.cion.ad{{background:#F0E8FA}}.cion.em{{background:#FFF0F0}}.cion.ti{{background:#F0F4FF}}
-.cdet h4{{font-size:.7rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--lite);margin-bottom:.12rem}}
-.cdet p{{font-size:.9rem;font-weight:600;color:var(--txt)}}
-.mapw{{border-radius:var(--r);overflow:hidden;box-shadow:0 8px 32px rgba(123,45,139,.12);border:2px solid rgba(123,45,139,.12)}}
-.mapw iframe{{width:100%;height:350px;border:none;display:block}}
+#contact{{background:var(--cr)}}
+.cg{{display:grid;grid-template-columns:1fr 1fr;gap:2.4rem;max-width:1060px;margin:0 auto;align-items:start}}
+.ccs{{display:flex;flex-direction:column;gap:.8rem}}
+.cc{{background:#fff;border-radius:var(--rs);padding:.95rem 1.25rem;display:flex;align-items:center;gap:.85rem;border:1px solid rgba(123,45,139,.1);transition:all .3s;cursor:pointer;text-decoration:none;color:inherit}}
+.cc:hover{{border-color:var(--g);transform:translateX(4px);box-shadow:0 5px 18px rgba(123,45,139,.1)}}
+.ci{{width:40px;height:40px;border-radius:var(--rs);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}}
+.ci.ca{{background:#FFF3E0}}.ci.wa{{background:#E8F8F0}}.ci.em{{background:#FFF0F0}}.ci.ad{{background:#F0E8FA}}.ci.ti{{background:#F0F4FF}}
+.cd h4{{font-size:.68rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--lt);margin-bottom:.1rem}}
+.cd p{{font-size:.87rem;font-weight:600;color:var(--tx)}}
+.mw{{border-radius:var(--r);overflow:hidden;box-shadow:0 8px 30px rgba(123,45,139,.1);border:2px solid rgba(123,45,139,.1)}}
+.mw iframe{{width:100%;height:350px;border:none;display:block}}
+
 /* FAQ */
 #faq{{background:#fff}}
-.faqw{{max-width:680px;margin:0 auto}}
-.faqi{{border-bottom:1px solid rgba(123,45,139,.1)}}
-.faqq{{width:100%;background:none;border:none;padding:1rem 0;text-align:left;font-family:var(--fb);font-size:.95rem;font-weight:600;color:var(--pur);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem}}
-.faqi{{border-bottom:1px solid rgba(123,45,139,.1)}}
-.fqicon{{font-size:1.1rem;color:var(--gold);flex-shrink:0;transition:transform .3s}}
-.faqi.open .fqicon{{transform:rotate(45deg)}}
-.faqa{{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s;font-size:.87rem;color:var(--mid);line-height:1.7}}
-.faqi.open .faqa{{max-height:200px;padding-bottom:1rem}}
+.fw{{max-width:660px;margin:0 auto}}
+.fqi{{border-bottom:1px solid rgba(123,45,139,.1)}}
+.fqq{{width:100%;background:none;border:none;padding:.95rem 0;text-align:left;font-family:var(--fb);font-size:.92rem;font-weight:600;color:var(--pur);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem}}
+.fqi{{border-bottom:1px solid rgba(123,45,139,.1)}}
+.fqi .ic{{font-size:1rem;color:var(--g);flex-shrink:0;transition:transform .3s}}
+.fqi.open .ic{{transform:rotate(45deg)}}
+.fqa{{max-height:0;overflow:hidden;transition:max-height .35s ease;font-size:.85rem;color:var(--md);line-height:1.7}}
+.fqi.open .fqa{{max-height:180px;padding-bottom:.9rem}}
+
 /* FOOTER */
-footer{{background:linear-gradient(145deg,#0F0525,#2D0F55);color:rgba(255,255,255,.7);padding:55px 5vw 28px}}
-.fg2{{display:grid;grid-template-columns:2fr 1fr 1fr;gap:2.5rem;margin-bottom:2.5rem}}
-.fbn .cn{{font-family:var(--fd);font-size:1.45rem;font-weight:700;color:#fff}}
-.fbn .ct{{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.7rem}}
-.fbn p{{font-size:.82rem;line-height:1.7;max-width:270px}}
-.fbn .mlp{{font-family:var(--fm);font-size:.8rem;margin-top:.45rem;opacity:.65}}
-.fc h4{{font-size:.76rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-l);margin-bottom:.8rem}}
-.fc ul{{list-style:none;display:flex;flex-direction:column;gap:.5rem}}
-.fc ul li a{{color:rgba(255,255,255,.6);font-size:.84rem;transition:color .2s}}
-.fc ul li a:hover{{color:var(--gold-l)}}
-.fbot{{border-top:1px solid rgba(255,255,255,.1);padding-top:1.3rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.8rem}}
-.fbot p{{font-size:.77rem}}
-.gd{{display:inline-block;width:5px;height:5px;background:var(--gold);border-radius:50%;margin:0 .35rem;vertical-align:middle}}
-.foot-soc{{display:flex;gap:.8rem;margin-top:.8rem}}
-.fsoc{{width:34px;height:34px;background:rgba(255,255,255,.08);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:all .3s;color:rgba(255,255,255,.7)}}
-.fsoc:hover{{background:var(--gold);transform:translateY(-2px)}}
+footer{{background:linear-gradient(145deg,#0F0525,#2D0F55);color:rgba(255,255,255,.7);padding:52px 5vw 26px}}
+.fg2{{display:grid;grid-template-columns:2fr 1fr 1fr;gap:2.5rem;margin-bottom:2.4rem}}
+.fbn .cn{{font-family:var(--fd);font-size:1.4rem;font-weight:700;color:#fff}}
+.fbn .ct{{font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--g);display:block;margin-bottom:.65rem}}
+.fbn p{{font-size:.8rem;line-height:1.7;max-width:265px}}
+.fbn .mlp{{font-family:var(--fm);font-size:.78rem;margin-top:.4rem;opacity:.6}}
+.fc h4{{font-size:.74rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:var(--gl);margin-bottom:.75rem}}
+.fc ul{{list-style:none;display:flex;flex-direction:column;gap:.45rem}}
+.fc ul li a{{color:rgba(255,255,255,.6);font-size:.82rem;transition:color .2s}}
+.fc ul li a:hover{{color:var(--gl)}}
+.fbt{{border-top:1px solid rgba(255,255,255,.1);padding-top:1.2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.7rem}}
+.fbt p{{font-size:.75rem}}
+.gd{{display:inline-block;width:5px;height:5px;background:var(--g);border-radius:50%;margin:0 .32rem;vertical-align:middle}}
+.fsc{{display:flex;gap:.7rem;margin-top:.75rem}}
+.fsi{{width:32px;height:32px;background:rgba(255,255,255,.08);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.9rem;transition:all .3s;color:rgba(255,255,255,.7)}}
+.fsi:hover{{background:var(--g);transform:translateY(-2px)}}
+
 /* WA FLOAT */
-.wa-float{{position:fixed;bottom:1.8rem;right:1.8rem;width:54px;height:54px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 4px 18px rgba(37,211,102,.5);z-index:900;transition:transform .3s;animation:wap 3s ease-in-out infinite}}
-@keyframes wap{{0%,100%{{box-shadow:0 4px 18px rgba(37,211,102,.5)}}50%{{box-shadow:0 4px 28px rgba(37,211,102,.8)}}}}
-.wa-float:hover{{transform:scale(1.1) rotate(-5deg)}}
+.waf{{position:fixed;bottom:1.8rem;right:1.8rem;width:52px;height:52px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.45rem;box-shadow:0 4px 16px rgba(37,211,102,.5);z-index:900;transition:transform .3s;animation:wp 3s ease-in-out infinite}}
+@keyframes wp{{0%,100%{{box-shadow:0 4px 16px rgba(37,211,102,.5)}}50%{{box-shadow:0 4px 26px rgba(37,211,102,.8)}}}}
+.waf:hover{{transform:scale(1.1) rotate(-5deg)}}
+
 /* TOAST */
-#toast{{position:fixed;bottom:1.8rem;left:50%;transform:translateX(-50%) translateY(110px);background:var(--pur);color:#fff;padding:.7rem 1.3rem;border-radius:50px;font-size:.87rem;font-weight:500;z-index:9999;border:1px solid var(--gold);transition:transform .4s cubic-bezier(.34,1.56,.64,1);white-space:nowrap;pointer-events:none}}
+#toast{{position:fixed;bottom:1.7rem;left:50%;transform:translateX(-50%) translateY(100px);background:var(--pur);color:#fff;padding:.65rem 1.25rem;border-radius:50px;font-size:.84rem;font-weight:500;z-index:9999;border:1px solid var(--g);transition:transform .4s cubic-bezier(.34,1.56,.64,1);white-space:nowrap;pointer-events:none}}
 #toast.show{{transform:translateX(-50%) translateY(0)}}
+
 /* MODAL */
 .mov{{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(5px);z-index:2000;align-items:center;justify-content:center;padding:1rem}}
 .mov.open{{display:flex}}
-.modal{{background:#fff;border-radius:var(--r);padding:1.8rem;max-width:440px;width:100%;position:relative;animation:mIn .3s cubic-bezier(.34,1.56,.64,1)}}
-@keyframes mIn{{from{{transform:scale(.8);opacity:0}}to{{transform:scale(1);opacity:1}}}}
-.mx{{position:absolute;top:.9rem;right:.9rem;background:var(--cream);border:none;width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;color:var(--mid);transition:background .2s}}
-.mx:hover{{background:var(--pur-l);color:#fff}}
-.modal h3{{font-family:var(--fd);font-size:1.4rem;color:var(--pur);margin-bottom:.35rem}}
-.mform{{display:flex;flex-direction:column;gap:.7rem;margin-top:.85rem}}
-.mbtns{{display:flex;gap:.65rem;margin-top:.3rem}}
-/* ADMIN PANEL */
-#adminBtn{{position:fixed;bottom:5rem;left:1rem;width:32px;height:32px;background:rgba(0,0,0,.3);border:none;border-radius:50%;cursor:pointer;font-size:.8rem;z-index:800;color:transparent;transition:all .3s}}
-#adminBtn:hover{{background:rgba(123,45,139,.7);color:#fff}}
-.admin-panel{{display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;border-radius:var(--r);padding:1.8rem;z-index:3000;width:340px;box-shadow:0 20px 60px rgba(0,0,0,.3);border:2px solid var(--pur)}}
-.admin-panel.open{{display:block}}
-.admin-panel h3{{font-family:var(--fd);font-size:1.3rem;color:var(--pur);margin-bottom:1rem;border-bottom:2px solid var(--gold);padding-bottom:.5rem}}
-.admin-row{{display:flex;justify-content:space-between;align-items:center;padding:.6rem 0;border-bottom:1px solid var(--cream)}}
-.admin-row label{{font-size:.85rem;font-weight:500;color:var(--txt)}}
-.toggle{{position:relative;display:inline-block;width:44px;height:24px}}
-.toggle input{{opacity:0;width:0;height:0}}
-.tslider{{position:absolute;cursor:pointer;inset:0;background:#ccc;border-radius:24px;transition:.3s}}
-.tslider::before{{content:'';position:absolute;height:18px;width:18px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:.3s}}
-.toggle input:checked+.tslider{{background:var(--pur)}}
-.toggle input:checked+.tslider::before{{transform:translateX(20px)}}
-.admin-close{{margin-top:1rem;width:100%;background:var(--pur);color:#fff;border:none;padding:.6rem;border-radius:var(--rs);cursor:pointer;font-family:var(--fb);font-size:.87rem;font-weight:600}}
-.admin-close:hover{{background:var(--gold-d)}}
-.admin-pw{{display:flex;flex-direction:column;gap:.6rem;margin-bottom:1rem}}
-.admin-pw input{{padding:.55rem .8rem;border:1.5px solid rgba(123,45,139,.3);border-radius:var(--rs);font-family:var(--fb);font-size:.87rem;outline:none}}
-.admin-pw button{{background:var(--pur);color:#fff;border:none;padding:.55rem;border-radius:var(--rs);cursor:pointer;font-size:.87rem;font-weight:600}}
+.md{{background:#fff;border-radius:var(--r);padding:1.75rem;max-width:420px;width:100%;position:relative;animation:mi .3s cubic-bezier(.34,1.56,.64,1)}}
+@keyframes mi{{from{{transform:scale(.8);opacity:0}}to{{transform:scale(1);opacity:1}}}}
+.mx{{position:absolute;top:.85rem;right:.85rem;background:var(--cr);border:none;width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:.88rem;display:flex;align-items:center;justify-content:center;color:var(--md);transition:background .2s}}
+.mx:hover{{background:var(--pl);color:#fff}}
+.md h3{{font-family:var(--fd);font-size:1.35rem;color:var(--pur);margin-bottom:.32rem}}
+.mfm{{display:flex;flex-direction:column;gap:.65rem;margin-top:.8rem}}
+.mbt{{display:flex;gap:.6rem;margin-top:.3rem}}
+
+/* ADMIN */
+#admB{{position:fixed;bottom:5.2rem;left:1rem;width:28px;height:28px;background:transparent;border:none;border-radius:50%;cursor:pointer;font-size:.75rem;z-index:800;color:transparent;user-select:none}}
+#admB:hover{{background:rgba(123,45,139,.4);color:rgba(255,255,255,.5)}}
+.ap{{display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;border-radius:var(--r);padding:1.7rem;z-index:3000;width:330px;box-shadow:0 20px 60px rgba(0,0,0,.3);border:2px solid var(--pur)}}
+.ap.open{{display:block}}
+.ap h3{{font-family:var(--fd);font-size:1.25rem;color:var(--pur);margin-bottom:.9rem;border-bottom:2px solid var(--g);padding-bottom:.45rem}}
+.ar{{display:flex;justify-content:space-between;align-items:center;padding:.55rem 0;border-bottom:1px solid var(--cr)}}
+.ar label{{font-size:.82rem;font-weight:500;color:var(--tx)}}
+.tg2{{position:relative;display:inline-block;width:42px;height:22px}}
+.tg2 input{{opacity:0;width:0;height:0}}
+.ts{{position:absolute;cursor:pointer;inset:0;background:#ccc;border-radius:22px;transition:.3s}}
+.ts::before{{content:'';position:absolute;height:16px;width:16px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:.3s}}
+.tg2 input:checked+.ts{{background:var(--pur)}}
+.tg2 input:checked+.ts::before{{transform:translateX(20px)}}
+.ac{{margin-top:.9rem;width:100%;background:var(--pur);color:#fff;border:none;padding:.55rem;border-radius:var(--rs);cursor:pointer;font-family:var(--fb);font-size:.84rem;font-weight:600}}
+.ac:hover{{background:var(--gd)}}
+.apw{{display:flex;flex-direction:column;gap:.55rem;margin-bottom:.9rem}}
+.apw input{{padding:.5rem .75rem;border:1.5px solid rgba(123,45,139,.3);border-radius:var(--rs);font-family:var(--fb);font-size:.84rem;outline:none}}
+.apw button{{background:var(--pur);color:#fff;border:none;padding:.5rem;border-radius:var(--rs);cursor:pointer;font-size:.84rem;font-weight:600}}
+#admOv{{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:2999}}
+.aurl{{margin-top:.9rem;padding-top:.75rem;border-top:1px solid var(--cr)}}
+.aurl p{{font-size:.72rem;color:var(--md);margin-bottom:.4rem;font-weight:600}}
+.aurl .inp{{font-size:.7rem;margin-bottom:.35rem}}
+.aurl button{{width:100%;background:var(--pur);color:#fff;border:none;padding:.38rem;border-radius:var(--rs);cursor:pointer;font-size:.77rem;font-weight:600}}
+
 /* ANIMATIONS */
-.fu{{opacity:0;transform:translateY(35px);transition:opacity .65s ease,transform .65s ease}}
-.sl{{opacity:0;transform:translateX(-45px);transition:opacity .65s ease,transform .65s ease}}
-.sr{{opacity:0;transform:translateX(45px);transition:opacity .65s ease,transform .65s ease}}
-.animated{{opacity:1!important;transform:none!important}}
+.fu{{opacity:0;transform:translateY(32px);transition:opacity .6s ease,transform .6s ease}}
+.sl3{{opacity:0;transform:translateX(-42px);transition:opacity .65s ease,transform .65s ease}}
+.sr2{{opacity:0;transform:translateX(42px);transition:opacity .65s ease,transform .65s ease}}
+.ani{{opacity:1!important;transform:none!important}}
+
 /* RESPONSIVE */
 @media(max-width:900px){{.wg{{grid-template-columns:1fr;gap:2rem}}.cg{{grid-template-columns:1fr}}.fg2{{grid-template-columns:1fr 1fr}}.fbn{{grid-column:1/-1}}}}
-@media(max-width:700px){{.nav-links{{display:none}}.ham{{display:flex}}.fg{{grid-template-columns:1fr}}.qrow{{grid-template-columns:1fr 1fr}}.fg2{{grid-template-columns:1fr}}.srow{{flex-direction:column}}.mbtns{{flex-direction:column}}}}
-@media(max-width:480px){{.stats-g{{grid-template-columns:1fr 1fr}}.hctas{{flex-direction:column;align-items:center}}}}
-@media(prefers-reduced-motion:reduce){{*,.orb{{animation:none!important;transition:none!important}}.fu,.sl,.sr{{opacity:1;transform:none}}}}
+@media(max-width:700px){{.nlinks{{display:none}}.ham{{display:flex}}.fg{{grid-template-columns:1fr}}.qr{{grid-template-columns:1fr 1fr}}.fg2{{grid-template-columns:1fr}}.sr{{flex-direction:column}}.mbt{{flex-direction:column}}}}
+@media(max-width:480px){{.sg{{grid-template-columns:1fr 1fr}}.hcts{{flex-direction:column;align-items:center}}}}
+@media(prefers-reduced-motion:reduce){{*,.orb{{animation:none!important;transition:none!important}}.fu,.sl3,.sr2{{opacity:1;transform:none}}}}
 </style>
 </head>
 <body>
@@ -322,143 +317,144 @@ footer{{background:linear-gradient(145deg,#0F0525,#2D0F55);color:rgba(255,255,25
 <!-- NAVBAR -->
 <nav id="nav" role="navigation" aria-label="Main navigation">
   <div class="nl">
-    <button class="lang-btn" id="langBtn" onclick="toggleLang()" aria-label="Switch language">
+    <button class="lbtn" id="lb" onclick="toggleLang()" aria-label="Switch language / ഭാഷ മാറ്റുക">
       <span id="lf">🇮🇳</span><span id="lt">മലയാളം</span>
     </button>
-    <img src="{IMG_AVLOGO}" alt="AV CHEM Logo" class="av-logo-img"/>
+    <img src="{imgs['avlogo']}" alt="AV CHEM Chemical Manufacturing Logo Tirur Kerala" class="avl" width="30" height="30"/>
     <div class="nb">
-      <span class="company">AV CHEM</span>
-      <span class="tagline">Chemical &amp; Manufacturing</span>
+      <span class="co">AV CHEM</span>
+      <span class="tg">Chemical &amp; Manufacturing</span>
     </div>
   </div>
-  <ul class="nav-links">
-    <li><a href="#hero" data-en="Home" data-ml="ഹോം">Home</a></li>
-    <li><a href="#products" data-en="Products" data-ml="ഉൽപ്പന്നങ്ങൾ">Products</a></li>
-    <li><a href="#why" data-en="About" data-ml="ഞങ്ങളെ കുറിച്ച്">About</a></li>
-    <li><a href="#reviews" data-en="Reviews" data-ml="അവലോകനങ്ങൾ">Reviews</a></li>
-    <li><a href="#contact" data-en="Contact" data-ml="ബന്ധപ്പെടുക">Contact</a></li>
-    <li><a href="#dealer" class="ncta" data-en="Dealer Enquiry" data-ml="ഡീലർ അന്വേഷണം">Dealer Enquiry</a></li>
+  <ul class="nlinks">
+    <li><a href="#hero" data-k="home">Home</a></li>
+    <li><a href="#products" data-k="products">Products</a></li>
+    <li><a href="#why" data-k="about">About</a></li>
+    <li><a href="#reviews" data-k="reviews">Reviews</a></li>
+    <li><a href="#contact" data-k="contact">Contact</a></li>
+    <li><a href="#dealer" class="nc" data-k="dealer">Dealer Enquiry</a></li>
   </ul>
-  <button class="ham" aria-label="Menu" onclick="toggleMob()"><span></span><span></span><span></span></button>
+  <button class="ham" aria-label="Menu" onclick="tmob()"><span></span><span></span><span></span></button>
 </nav>
 
-<div class="mob-menu" id="mobMenu">
-  <a href="#hero" onclick="closeMob()" data-en="🏠 Home" data-ml="🏠 ഹോം">🏠 Home</a>
-  <a href="#products" onclick="closeMob()" data-en="🔬 Products" data-ml="🔬 ഉൽപ്പന്നങ്ങൾ">🔬 Products</a>
-  <a href="#why" onclick="closeMob()" data-en="🏢 About" data-ml="🏢 ഞങ്ങളെ കുറിച്ച്">🏢 About</a>
-  <a href="#reviews" onclick="closeMob()" data-en="⭐ Reviews" data-ml="⭐ അവലോകനങ്ങൾ">⭐ Reviews</a>
-  <a href="#contact" onclick="closeMob()" data-en="📍 Contact" data-ml="📍 ബന്ധപ്പെടുക">📍 Contact</a>
-  <a href="#dealer" onclick="closeMob()" style="color:var(--gold-d);font-weight:700" data-en="📋 Dealer Enquiry" data-ml="📋 ഡീലർ അന്വേഷണം">📋 Dealer Enquiry</a>
-  <div style="margin-top:.3rem">
-    <button class="lang-btn" onclick="toggleLang()"><span id="mlf">🇮🇳</span><span id="mlt">മലയാളം</span></button>
-  </div>
+<div class="mm" id="mm">
+  <a href="#hero" onclick="cmob()" data-k="mhome">🏠 Home</a>
+  <a href="#products" onclick="cmob()" data-k="mproducts">🔬 Products</a>
+  <a href="#why" onclick="cmob()" data-k="mabout">🏢 About</a>
+  <a href="#reviews" onclick="cmob()" data-k="mreviews">⭐ Reviews</a>
+  <a href="#contact" onclick="cmob()" data-k="mcontact">📍 Contact</a>
+  <a href="#dealer" onclick="cmob()" style="color:var(--gd);font-weight:700" data-k="mdealer">📋 Dealer Enquiry</a>
+  <button class="lbtn" onclick="toggleLang()" style="margin-top:.3rem"><span id="mlf">🇮🇳</span><span id="mlt">മലയാളം</span></button>
 </div>
 
-<!-- SOCIAL BAR -->
-<div id="social-bar">
-  <a href="mailto:avchemtirur@gmail.com" class="soc-link"><span class="soc-icon">📧</span>avchemtirur@gmail.com</a>
-  <a href="https://www.facebook.com/share/1TNvLLd1SM/" target="_blank" rel="noopener" class="soc-link"><span class="soc-icon">📘</span>Facebook</a>
-  <a href="https://www.instagram.com/h4constructionsolutions?igsh=c2oxaDBqZmpzZWd3" target="_blank" rel="noopener" class="soc-link"><span class="soc-icon">📸</span>Instagram</a>
-  <a href="https://youtube.com/@h4constructionsolutions" target="_blank" rel="noopener" class="soc-link"><span class="soc-icon">▶️</span>YouTube</a>
+<!-- SOCIAL BAR (admin toggleable) -->
+<div id="sb">
+  <a href="mailto:avchemtirur@gmail.com" class="sl">📧 avchemtirur@gmail.com</a>
+  <a href="https://www.facebook.com/share/1TNvLLd1SM/" target="_blank" rel="noopener" class="sl">📘 Facebook</a>
+  <a href="https://www.instagram.com/h4constructionsolutions?igsh=c2oxaDBqZmpzZWd3" target="_blank" rel="noopener" class="sl">📸 Instagram</a>
+  <a href="https://youtube.com/@h4constructionsolutions" target="_blank" rel="noopener" class="sl">▶️ YouTube</a>
 </div>
 
 <!-- HERO -->
 <section id="hero" aria-label="Hero">
   <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
-  <div class="hero-c">
-    <div class="hbadge" data-en="Kerala's Premium Construction Chemical Brand" data-ml="കേരളത്തിലെ പ്രീമിയം കൺസ്ട്രക്ഷൻ കെമിക്കൽ ബ്രാൻഡ്">Kerala's Premium Construction Chemical Brand</div>
-    <img src="{IMG_H4LOGO}" alt="H4 Brand Logo – AV CHEM Chemical Manufacturing" class="h4-hero-logo"/>
-    <h1 class="htitle"><span class="gt">AV CHEM</span><br/><span data-en="Chemical &amp; Manufacturing" data-ml="കെമിക്കൽ &amp; മാനുഫാക്ചറിംഗ്">Chemical &amp; Manufacturing</span></h1>
+  <div class="hc">
+    <div class="hbdg" data-k="badge">Kerala's Premium Construction Chemical Brand</div>
+    <img src="{imgs['h4logo']}" alt="H4 Brand Logo AV CHEM Chemical Manufacturing Kerala" class="h4hl" width="88" height="52"/>
+    <h1 class="ht">
+      <span class="gt">AV CHEM</span><br/>
+      <span data-k="chemMfg">Chemical &amp; Manufacturing</span>
+    </h1>
     <p class="hml">ടൈൽ അഡ്ഹസീവ്&nbsp;&nbsp;•&nbsp;&nbsp;വാട്ടർപ്രൂഫിംഗ്&nbsp;&nbsp;•&nbsp;&nbsp;എപ്പോക്സി ഫ്ലോറിംഗ്</p>
-    <p class="htag">Mukkilapeedika, Kannamkulam, Tirur, Malappuram — Kerala, India</p>
-    <div class="hpills">
-      <span class="hpill">🏗️ ടൈൽ അഡ്ഹസീവ്</span>
-      <span class="hpill">💧 വാട്ടർപ്രൂഫിംഗ്</span>
-      <span class="hpill">✨ H4 ShieldX Epoxy</span>
-      <span class="hpill">🇮🇳 <span data-en="Made in Kerala" data-ml="കേരളത്തിൽ നിർമ്മിച്ചത്">Made in Kerala</span></span>
+    <p class="htg">Mukkilapeedika, Kannamkulam, Tirur, Malappuram — Kerala, India</p>
+    <div class="hps">
+      <span class="hp">🏗️ ടൈൽ അഡ്ഹസീവ്</span>
+      <span class="hp">💧 വാട്ടർപ്രൂഫിംഗ്</span>
+      <span class="hp">✨ H4 ShieldX Epoxy</span>
+      <span class="hp">🇮🇳 <span data-k="madeIn">Made in Kerala</span></span>
     </div>
-    <div class="hctas">
-      <a href="#dealer" class="btn-p" data-en="📋 Dealer Enquiry" data-ml="📋 ഡീലർ അന്വേഷണം">📋 Dealer Enquiry</a>
-      <a href="tel:+917907344030" class="btn-o">📞 +91 79073 44030</a>
+    <div class="hcts">
+      <a href="#dealer" class="bp" data-k="dealerBtn">📋 Dealer Enquiry</a>
+      <a href="tel:+917907344030" class="bo">📞 +91 79073 44030</a>
     </div>
   </div>
-  <div class="scroll-ind"><div class="scroll-line"></div><span data-en="Scroll" data-ml="സ്ക്രോൾ">Scroll</span></div>
+  <div class="si"><div class="sl2"></div><span data-k="scroll">Scroll</span></div>
 </section>
 
 <!-- STATS -->
 <section id="stats" aria-label="Statistics">
-  <div class="stats-g">
-    <div class="fu"><span class="sn" data-count="3" data-suf="">0</span><span class="sl" data-en="Premium Products" data-ml="പ്രീമിയം ഉൽപ്പന്നങ്ങൾ">Premium Products</span></div>
-    <div class="fu"><span class="sn" data-en="Growing" data-ml="വളരുന്നു">Growing</span><span class="sl" data-en="Customer Base" data-ml="ഉപഭോക്തൃ ബേസ്">Customer Base</span></div>
-    <div class="fu"><span class="sn" data-count="14" data-suf="+">0</span><span class="sl" data-en="Districts Served" data-ml="ജില്ലകൾ">Districts Served</span></div>
-    <div class="fu"><span class="sn" data-count="100" data-suf="%">0%</span><span class="sl" data-en="Quality Assured" data-ml="ഗുണനിലവാര ഉറപ്പ്">Quality Assured</span></div>
+  <div class="sg">
+    <div class="fu"><span class="sn" data-cnt="3" data-sf="">0</span><span class="ss" data-k="sp1">Premium Products</span></div>
+    <div class="fu"><span class="sn" data-k="sp2">Growing</span><span class="ss" data-k="sp3">Customer Base</span></div>
+    <div class="fu"><span class="sn" data-cnt="14" data-sf="+">0</span><span class="ss" data-k="sp4">Districts Served</span></div>
+    <div class="fu"><span class="sn" data-cnt="100" data-sf="%">0%</span><span class="ss" data-k="sp5">Quality Assured</span></div>
   </div>
 </section>
 
 <!-- PRODUCTS -->
 <section id="products" class="sec" aria-label="Products">
-  <div class="ctr" style="margin-bottom:2.8rem">
-    <p class="lbl" data-en="Our Products" data-ml="ഞങ്ങളുടെ ഉൽപ്പന്നങ്ങൾ">Our Products</p>
-    <h2 class="stitle" data-en="Built for Kerala's Climate" data-ml="കേരളത്തിന്റെ കാലാവസ്ഥയ്ക്കായി">Built for Kerala's Climate</h2>
-    <div class="div"></div>
-    <p class="ssub" data-en="H4 Brand — engineered for Kerala's humid coastal and highland conditions." data-ml="H4 ബ്രാൻഡ് — കേരളത്തിന്റെ ഈർപ്പമുള്ള സ്ഥിതിഗതികൾക്കനുസൃതം.">H4 Brand — engineered for Kerala's humid coastal and highland conditions.</p>
+  <div class="ct" style="margin-bottom:2.6rem">
+    <p class="lb" data-k="ourProdLbl">Our Products</p>
+    <h2 class="st" data-k="builtFor">Built for Kerala's Climate</h2>
+    <div class="dv"></div>
+    <p class="sb" data-k="builtSub">H4 Brand — engineered for Kerala's humid coastal and highland conditions.</p>
   </div>
   <div class="pg">
     <!-- TILE ADHESIVE -->
-    <article class="pc fu" id="tile-adhesive">
+    <article class="pc fu" id="tile-adhesive" itemscope itemtype="https://schema.org/Product">
       <div class="piw">
-        <img src="{IMG_TILE}" alt="H4 Premium Tile Adhesive 20kg bag – Polymer Modified, Floor & Wall, Kerala" class="pi" loading="eager" width="480" height="640"/>
-        <span class="pbadge" style="background:linear-gradient(135deg,#D32F2F,#B71C1C);color:#fff" data-en="Best Seller" data-ml="ബെസ്റ്റ് സെല്ലർ">Best Seller</span>
+        <img src="{imgs['tile']}" alt="H4 Premium Tile Adhesive 20kg bag floor wall Kerala – AV CHEM Tirur" class="pi" itemprop="image" loading="eager" width="480" height="640"/>
+        <span class="pbg" style="background:linear-gradient(135deg,#D32F2F,#B71C1C);color:#fff" data-k="bestSeller">Best Seller</span>
       </div>
       <div class="pb">
-        <h3 class="pname">ടൈൽ അഡ്ഹസീവ്</h3>
-        <p class="pml">H4 Premium Tile Adhesive — 20 KG</p>
-        <p class="pdesc" data-en="Premium polymer modified dry mix tile adhesive for floor & wall. High bond strength, waterproof, suitable for large tiles. Sets in 12 hours." data-ml="ഫ്ലോർ & വാൾ ടൈൽ അഡ്ഹസീവ്. ഉയർന്ന ബോണ്ടിംഗ്, വാട്ടർപ്രൂഫ്, 12 മണിക്കൂറിൽ set ആകും.">Premium polymer modified tile adhesive for floor &amp; wall. Waterproof, high bond, sets in 12 hours.</p>
-        <ul class="pf">
-          <li data-en="Premium Polymer Modified Formula" data-ml="പ്രീമിയം പോളിമർ ഫോർമുല">Premium Polymer Modified Formula</li>
-          <li data-en="Non-slip, No Hollam Signed" data-ml="നോൺ-സ്ലിപ്, ഹോളം ഇല്ല">Non-slip, No Hollam</li>
-          <li data-en="Suitable for all tile types" data-ml="എല്ലാ ടൈൽ തരങ്ങൾക്കും">Suitable for all tile types</li>
-          <li data-en="Designed for long-term durability" data-ml="ദീർഘകാലം ഈടുനിൽക്കും">Designed for long-term durability</li>
+        <h3 class="pn" itemprop="name">ടൈൽ അഡ്ഹസീവ്</h3>
+        <p class="pm">H4 Tile Adhesive — 20 KG</p>
+        <p class="pd" itemprop="description" data-k="tileDesc">Premium polymer modified tile adhesive for floor & wall. Waterproof, high bond, sets in 12 hours.</p>
+        <ul class="pfl">
+          <li data-k="tf1">Premium Polymer Modified Formula</li>
+          <li data-k="tf2">Non-slip, No Hollam, Large Tile Use</li>
+          <li data-k="tf3">Suitable for all tile types</li>
+          <li data-k="tf4">Designed for long-term durability</li>
         </ul>
-        <button class="benq" onclick="openEnq('ടൈൽ അഡ്ഹസീവ് (H4 Tile Adhesive)')"><span data-en="Enquire Now →" data-ml="ഇപ്പോൾ അന്വേഷിക്കുക →">Enquire Now →</span></button>
+        <button class="beq" onclick="openEnq('ടൈൽ അഡ്ഹസീവ് (H4 Tile Adhesive)')"><span data-k="enqNow">Enquire Now →</span></button>
       </div>
     </article>
     <!-- WATERPROOFING -->
-    <article class="pc fu" id="waterproofing">
+    <article class="pc fu" id="waterproofing" itemscope itemtype="https://schema.org/Product">
       <div class="piw">
-        <img src="{IMG_WATER}" alt="H4 Waterproofing Solution 20kg bag – Roof, Terrace, Bathroom, Kerala" class="pi" loading="lazy" width="480" height="748"/>
-        <span class="pbadge" style="background:linear-gradient(135deg,#1565C0,#0D47A1);color:#fff" data-en="Monsoon Ready" data-ml="മൺസൂൺ റെഡി">Monsoon Ready</span>
+        <img src="{imgs['water']}" alt="H4 Waterproofing Solution 20kg bag roof terrace bathroom Kerala – AV CHEM" class="pi" itemprop="image" loading="lazy" width="480" height="748"/>
+        <span class="pbg" style="background:linear-gradient(135deg,#1565C0,#0D47A1);color:#fff" data-k="monsoon">Monsoon Ready</span>
       </div>
       <div class="pb">
-        <h3 class="pname">വാട്ടർപ്രൂഫിംഗ്</h3>
-        <p class="pml">H4 Waterproofing Solution — 20 KG</p>
-        <p class="pdesc" data-en="Economic, brush application waterproofing. Temperature controlled formula. Water resistant, durable. Ideal for roof, terrace, walls, bathroom." data-ml="ബ്രഷ് ആപ്ലിക്കേഷൻ, ടെംപറേച്ചർ കൺട്രോൾ. മേൽക്കൂര, ടെറസ്, ബാഥ്‌റൂം — economic & durable.">Brush application, temperature-controlled waterproofing. Ideal for roof, terrace, walls, bathrooms.</p>
-        <ul class="pf">
-          <li data-en="Economic & easy brush application" data-ml="Economic, ബ്രഷ് ആപ്ലിക്കേഷൻ">Economic &amp; easy brush application</li>
-          <li data-en="Water resistant & durable" data-ml="വാട്ടർ resistant, durable">Water resistant &amp; durable</li>
-          <li data-en="Temperature controlled formula" data-ml="ടെംപറേച്ചർ കൺട്രോൾ ഫോർമുല">Temperature controlled formula</li>
-          <li data-en="Designed for long-term durability" data-ml="ദീർഘകാലം ഈടുനിൽക്കും">Designed for long-term durability</li>
+        <h3 class="pn" itemprop="name">വാട്ടർപ്രൂഫിംഗ്</h3>
+        <p class="pm">H4 Waterproofing Solution — 20 KG</p>
+        <p class="pd" itemprop="description" data-k="waterDesc">Brush application waterproofing for roof, terrace, walls, bathroom. Water resistant and durable.</p>
+        <ul class="pfl">
+          <li data-k="wf1">Economic, easy brush application</li>
+          <li data-k="wf2">Water resistant &amp; durable</li>
+          <li data-k="wf3">Temperature controlled formula</li>
+          <li data-k="wf4">Designed for long-term durability</li>
         </ul>
-        <button class="benq" onclick="openEnq('വാട്ടർപ്രൂഫിംഗ് (H4 Waterproofing)')"><span data-en="Enquire Now →" data-ml="ഇപ്പോൾ അന്വേഷിക്കുക →">Enquire Now →</span></button>
+        <button class="beq" onclick="openEnq('വാട്ടർപ്രൂഫിംഗ് (H4 Waterproofing)')"><span data-k="enqNow">Enquire Now →</span></button>
       </div>
     </article>
     <!-- SHIELDX -->
-    <article class="pc fu" id="epoxy-flooring">
+    <article class="pc fu" id="epoxy-flooring" itemscope itemtype="https://schema.org/Product">
       <div class="piw">
-        <img src="{IMG_SHIELDX}" alt="H4 ShieldX Premium Epoxy & Waterproof Coating 20kg bucket – Roof, Floor, Wall, Kerala" class="pi" loading="lazy" width="480" height="480"/>
-        <span class="pbadge" style="background:linear-gradient(135deg,var(--pur),var(--pur-l));color:#fff">H4 ShieldX</span>
+        <img src="{imgs['shieldx']}" alt="H4 ShieldX Premium Epoxy Waterproof Coating 20kg bucket roof floor wall Kerala – AV CHEM" class="pi" itemprop="image" loading="lazy" width="480" height="480"/>
+        <span class="pbg" style="background:linear-gradient(135deg,#5A1F6B,#7B2D8B);color:var(--gl)">H4 ShieldX</span>
       </div>
       <div class="pb">
-        <h3 class="pname">എപ്പോക്സി ഫ്ലോറിംഗ്</h3>
-        <p class="pml">H4 ShieldX — Premium Epoxy & Waterproof Coating 20 KG</p>
-        <p class="pdesc" data-en="Industrial grade 2-component epoxy. 100% waterproof, high strength bond, chemical resistant, glossy finish. For roof, floor, wall, tank, tile." data-ml="Industrial grade 2-component epoxy. 100% waterproof, glossy finish. മേൽക്കൂര, ഫ്ലോർ, ടാങ്ക്, ടൈൽ — ഉചിതം.">Industrial grade premium epoxy. 100% waterproof, glossy finish, chemical resistant. For roof, floor, wall, tank.</p>
-        <ul class="pf">
-          <li data-en="100% Waterproof, Industrial Grade" data-ml="100% വാട്ടർപ്രൂഫ്, Industrial Grade">100% Waterproof, Industrial Grade</li>
-          <li data-en="High strength bond & chemical resistant" data-ml="ഉയർന്ന ശക്തി, കെമിക്കൽ resistant">High strength bond &amp; chemical resistant</li>
-          <li data-en="Glossy finish, anti-crack, UV resistant" data-ml="Glossy finish, anti-crack, UV resistant">Glossy finish, anti-crack, UV resistant</li>
-          <li data-en="Mix ratio 3:1 (Resin : Hardener)" data-ml="Mix ratio 3:1 (Resin : Hardener)">Mix ratio 3:1 (Resin : Hardener)</li>
+        <h3 class="pn" itemprop="name">എപ്പോക്സി ഫ്ലോറിംഗ്</h3>
+        <p class="pm">H4 ShieldX — Epoxy &amp; Waterproof Coating 20 KG</p>
+        <p class="pd" itemprop="description" data-k="epoxyDesc">Industrial grade premium epoxy. 100% waterproof, glossy finish, chemical resistant. For roof, floor, wall, tank.</p>
+        <ul class="pfl">
+          <li data-k="ef1">100% Waterproof, Industrial Grade</li>
+          <li data-k="ef2">High strength bond &amp; chemical resistant</li>
+          <li data-k="ef3">Glossy finish, anti-crack, UV resistant</li>
+          <li data-k="ef4">Mix ratio 3:1 (Resin : Hardener)</li>
         </ul>
-        <button class="benq" onclick="openEnq('എപ്പോക്സി ഫ്ലോറിംഗ് (H4 ShieldX)')"><span data-en="Enquire Now →" data-ml="ഇപ്പോൾ അന്വേഷിക്കുക →">Enquire Now →</span></button>
+        <button class="beq" onclick="openEnq('എപ്പോക്സി ഫ്ലോറിംഗ് (H4 ShieldX)')"><span data-k="enqNow">Enquire Now →</span></button>
       </div>
     </article>
   </div>
@@ -467,60 +463,59 @@ footer{{background:linear-gradient(145deg,#0F0525,#2D0F55);color:rgba(255,255,25
 <!-- WHY -->
 <section id="why" class="sec" aria-label="Why Choose AV CHEM">
   <div class="wg">
-    <div class="sl">
-      <p class="lbl" data-en="Why Choose Us" data-ml="ഞങ്ങളെ തിരഞ്ഞെടുക്കേണ്ടത് എന്തുകൊണ്ട്">Why Choose Us</p>
-      <h2 class="stitle" data-en="Kerala's Trusted Partner" data-ml="കേരളത്തിന്റെ വിശ്വസ്ത പങ്കാളി">Kerala's Trusted Partner</h2>
-      <div class="div"></div>
-      <div class="wfeats">
-        <div class="wfeat"><div class="wicon">🏭</div><div class="wtext"><h4 data-en="Local Manufacturing" data-ml="ലോക്കൽ മാനുഫാക്ചറിംഗ്">Local Manufacturing</h4><p data-en="Proudly made in Tirur, Malappuram — formulas tuned to Kerala's climate." data-ml="തിരൂർ, മലപ്പുറം — കേരളത്തിന്റെ കാലാവസ്ഥയ്ക്ക് ഉചിതം.">Proudly made in Tirur, Malappuram — formulas tuned to Kerala's climate.</p></div></div>
-        <div class="wfeat"><div class="wicon">🔬</div><div class="wtext"><h4 data-en="R&amp;D Formulated" data-ml="R&D ഫോർമുലേഷൻ">R&amp;D Formulated</h4><p data-en="Rigorous lab testing for humidity resistance, bonding strength and durability." data-ml="ഈർപ്പ resistance, bonding strength — lab tested.">Rigorous lab testing for humidity resistance and bonding strength.</p></div></div>
-        <div class="wfeat"><div class="wicon">🚚</div><div class="wtext"><h4 data-en="Growing Dealer Network" data-ml="ഡീലർ നെറ്റ്‌വർക്ക്">Growing Dealer Network</h4><p data-en="Expanding across all 14 Kerala districts with competitive margins." data-ml="14 ജില്ലകളിലും ഡീലർ നെറ്റ്‌വർക്ക്.">Expanding across all 14 Kerala districts with competitive margins.</p></div></div>
-        <div class="wfeat"><div class="wicon">🤝</div><div class="wtext"><h4 data-en="Direct Support" data-ml="നേരിട്ടുള്ള സഹായം">Direct Support</h4><p data-en="Technical support directly from our manufacturing team." data-ml="ഉൽപ്പാദന ടീമിൽ നിന്ന് നേരിട്ടുള്ള technical സഹായം.">Technical support directly from our manufacturing team.</p></div></div>
+    <div class="sl3">
+      <p class="lb" data-k="whyLbl">Why Choose Us</p>
+      <h2 class="st" data-k="whyTitle">Kerala's Trusted Partner</h2>
+      <div class="dv"></div>
+      <div class="wfs">
+        <div class="wf"><div class="wi">🏭</div><div class="wt"><h4 data-k="w1h">Local Manufacturing</h4><p data-k="w1p">Made in Tirur, Malappuram — formulas tuned for Kerala's climate.</p></div></div>
+        <div class="wf"><div class="wi">🔬</div><div class="wt"><h4 data-k="w2h">R&amp;D Formulated</h4><p data-k="w2p">Lab tested for humidity resistance, bonding strength and durability.</p></div></div>
+        <div class="wf"><div class="wi">🚚</div><div class="wt"><h4 data-k="w3h">Growing Dealer Network</h4><p data-k="w3p">Expanding across all 14 Kerala districts with competitive margins.</p></div></div>
+        <div class="wf"><div class="wi">🤝</div><div class="wt"><h4 data-k="w4h">Direct Support</h4><p data-k="w4p">Technical support directly from our manufacturing team.</p></div></div>
       </div>
     </div>
-    <div class="sr">
-      <div class="coprofile">
-        <h3 data-en="Our Story" data-ml="ഞങ്ങളുടെ കഥ">Our Story</h3>
-        <p data-en="AV CHEM Chemical & Manufacturing was founded with a vision to provide Kerala's builders with world-class construction chemicals, manufactured locally in Tirur, Malappuram, at honest prices." data-ml="AV CHEM — കേരളത്തിലെ ബിൽഡർമാർക്ക് ലോകനിലവാരത്തിലുള്ള കൺസ്ട്രക്ഷൻ കെമിക്കലുകൾ, honest prices-ൽ.">AV CHEM Chemical &amp; Manufacturing was founded to provide Kerala's builders with world-class construction chemicals, made locally in Tirur, Malappuram.</p>
-        <p data-en="Our H4 brand — Tile Adhesive, Waterproofing & H4 ShieldX — are engineered for Kerala's demanding coastal and monsoon conditions." data-ml="H4 ബ്രാൻഡ് — ടൈൽ അഡ്ഹസീവ്, വാട്ടർപ്രൂഫിംഗ്, H4 ShieldX — കേരളത്തിന്റെ monsoon conditions-നായി.">Our H4 brand — ടൈൽ അഡ്ഹസീവ്, വാട്ടർപ്രൂഫിംഗ് &amp; H4 ShieldX — engineered for Kerala's monsoon conditions.</p>
-        <div class="mvcard"><h5 data-en="Mission" data-ml="ദൗത്യം">Mission</h5><p data-en="Deliver construction chemicals that outlast and outperform across Kerala." data-ml="കേരളത്തിൽ ഉടനീളം മികവ് പ്രകടിപ്പിക്കുന്ന ഉൽപ്പന്നങ്ങൾ.">Deliver construction chemicals that outlast and outperform across Kerala.</p></div>
-        <div class="mvcard"><h5 data-en="Vision" data-ml="ദർശനം">Vision</h5><p data-en="Become Kerala's #1 trusted construction chemical brand with dealers in every district." data-ml="കേരളത്തിലെ #1 കൺസ്ട്രക്ഷൻ കെമിക്കൽ ബ്രാൻഡ്.">Become Kerala's #1 trusted construction chemical brand.</p></div>
+    <div class="sr2">
+      <div class="cop">
+        <h3 data-k="ourStory">Our Story</h3>
+        <p data-k="storyP1">AV CHEM Chemical &amp; Manufacturing was founded to provide Kerala's builders with world-class construction chemicals, made locally in Tirur, Malappuram.</p>
+        <p data-k="storyP2">Our H4 brand — ടൈൽ അഡ്ഹസീവ്, വാട്ടർപ്രൂഫിംഗ് &amp; H4 ShieldX — engineered for Kerala's monsoon conditions.</p>
+        <div class="mvc"><h5 data-k="mission">Mission</h5><p data-k="missionP">Deliver construction chemicals that outlast and outperform across Kerala.</p></div>
+        <div class="mvc"><h5 data-k="vision">Vision</h5><p data-k="visionP">Become Kerala's #1 trusted construction chemical brand.</p></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- REVIEWS -->
-<section id="reviews" class="sec" aria-label="Customer Reviews">
-  <div class="ctr" style="margin-bottom:1.8rem">
-    <p class="lbl" data-en="Reviews" data-ml="അവലോകനങ്ങൾ">Reviews</p>
-    <h2 class="stitle" data-en="Google Reviews" data-ml="Google അവലോകനങ്ങൾ">Google Reviews</h2>
-    <div class="div"></div>
+<!-- REVIEWS (admin toggleable) -->
+<section id="reviews" class="sec" aria-label="Google Reviews">
+  <div class="ct" style="margin-bottom:1.6rem">
+    <p class="lb" data-k="revLbl">Reviews</p>
+    <h2 class="st" data-k="revTitle">Google Reviews</h2>
+    <div class="dv"></div>
   </div>
-  <div class="rev-setup">
-    <div class="rev-badge fu">
-      <img src="{IMG_AVLOGO}" alt="AV CHEM Logo" class="rlogo"/>
-      <div class="rinfo">
+  <div class="rv">
+    <div class="rbdg fu">
+      <img src="{imgs['avlogo']}" alt="AV CHEM Logo" class="rbl" width="38" height="38"/>
+      <div class="ri">
         <h4>AV CHEM Chemical &amp; Manufacturing</h4>
-        <div class="stars">★★★★★</div>
-        <p data-en="Tirur, Malappuram, Kerala — Find us on Google Maps" data-ml="തിരൂർ, മലപ്പുറം — Google Maps-ൽ ഞങ്ങളെ കണ്ടെത്തുക">Tirur, Malappuram, Kerala — Find us on Google Maps</p>
+        <div class="rs">★★★★★</div>
+        <p data-k="revSub">Tirur, Malappuram, Kerala — Find us on Google Maps</p>
       </div>
     </div>
-    <!-- LIVE GOOGLE REVIEWS EMBED AREA -->
-    <!-- Option 1: Paste your Elfsight / EmbedSocial widget script here -->
-    <!-- <div class="elfsight-app-XXXX"></div> -->
-    <!-- Option 2: Paste Google Place Reviews embed from a widget provider -->
-    <div class="rev-embed-box fu">
-      <div class="reicon">🔵</div>
-      <h4 data-en="Real Google Reviews — Setup Required" data-ml="Google Reviews — Setup ആവശ്യമാണ്">Real Google Reviews — Setup Required</h4>
-      <p data-en="To embed live Google Reviews: Visit reviews.elfsight.com → Connect your Google Business → Get embed code → Paste above comment. Or use EmbedSocial, Widgetic, etc. Real reviews build Google Trust score." data-ml="Live Google Reviews embed: elfsight.com/google-reviews → Google Business connect → embed code copy → above-ൽ paste. Real reviews Google Trust score കൂട്ടും.">
-        <strong data-en="Quick setup:" data-ml="ദ്രുത setup:">Quick setup:</strong><br/>
-        1. <a href="https://goo.gl/maps/Nfr8EsghauyJN" target="_blank" rel="noopener" data-en="View your Google Maps listing" data-ml="Google Maps listing കാണുക">View your Google Maps listing</a><br/>
-        2. <a href="https://elfsight.com/google-reviews-widget/" target="_blank" rel="noopener">Elfsight Google Reviews widget</a> — free plan available<br/>
+    <!-- PASTE YOUR ELFSIGHT/EMBEDSOCIAL WIDGET SCRIPT HERE -->
+    <!-- Example: <div class="elfsight-app-XXXXXXXX"></div> -->
+    <!-- <script src="https://static.elfsight.com/platform/platform.js" defer></script> -->
+    <div class="reb fu">
+      <div class="rei">⭐</div>
+      <h4 data-k="revSetup">Real Google Reviews — Setup</h4>
+      <p data-k="revNote">
+        <strong>Quick setup:</strong><br/>
+        1. <a href="https://goo.gl/maps/Nfr8EsghauyJN" target="_blank" rel="noopener">View your Google Maps listing</a> — ask customers to leave reviews<br/>
+        2. <a href="https://elfsight.com/google-reviews-widget/" target="_blank" rel="noopener">Elfsight Google Reviews widget</a> (free plan available)<br/>
         3. Copy widget code → paste replacing this box<br/>
-        <em style="color:var(--gold-d)" data-en="Fake reviews = Google Trust down. Real reviews = Google Trust up." data-ml="Fake reviews = Trust ↓. Real reviews = Trust ↑.">Fake reviews = Trust ↓ &nbsp;|&nbsp; Real reviews = Trust ↑</em>
+        <em style="color:var(--gd)">Real reviews = Google Trust ↑ &nbsp;|&nbsp; Fake reviews = Trust ↓</em>
       </p>
-      <a href="https://goo.gl/maps/Nfr8EsghauyJN" target="_blank" rel="noopener" class="gr-cta">⭐ <span data-en="Leave a Google Review" data-ml="Google Review നൽകുക">Leave a Google Review</span></a>
+      <a href="https://goo.gl/maps/Nfr8EsghauyJN" target="_blank" rel="noopener" class="grc">⭐ <span data-k="leaveReview">Leave a Google Review</span></a>
     </div>
   </div>
 </section>
@@ -528,59 +523,59 @@ footer{{background:linear-gradient(145deg,#0F0525,#2D0F55);color:rgba(255,255,25
 <!-- DEALER FORM -->
 <section id="dealer" class="sec" aria-label="Dealer Enquiry">
   <div class="dw">
-    <div class="ctr" style="margin-bottom:2.2rem">
-      <p class="lbl" data-en="Dealer Portal" data-ml="ഡീലർ പോർട്ടൽ">Dealer Portal</p>
-      <h2 class="stitle" data-en="Become an AV CHEM Dealer" data-ml="AV CHEM ഡീലർ ആകുക">Become an AV CHEM Dealer</h2>
-      <div class="div"></div>
-      <p class="ssub" data-en="Fill the form — our team contacts you within 24 hours." data-ml="ഫോം പൂരിപ്പിക്കുക — 24 മണിക്കൂറിൽ ഞങ്ങൾ ബന്ധപ്പെടും.">Fill the form — our team contacts you within 24 hours.</p>
+    <div class="ct" style="margin-bottom:2rem">
+      <p class="lb" data-k="dealerLbl">Dealer Portal</p>
+      <h2 class="st" data-k="dealerTitle">Become an AV CHEM Dealer</h2>
+      <div class="dv"></div>
+      <p class="sb" data-k="dealerSub">Fill the form — our team contacts you within 24 hours.</p>
     </div>
-    <div class="dcard">
+    <div class="dc">
       <div class="fg">
-        <div class="fi"><label class="flbl"><span data-en="Name" data-ml="പേര്">Name</span> <span>*</span></label><input type="text" id="fName" class="inp" placeholder="Full Name" autocomplete="name"/></div>
-        <div class="fi"><label class="flbl"><span data-en="Area / City" data-ml="ഏരിയ / നഗരം">Area / City</span> <span>*</span></label><input type="text" id="fArea" class="inp" placeholder="e.g. Tirur, Kozhikode"/></div>
-        <div class="fi"><label class="flbl"><span data-en="Phone" data-ml="ഫോൺ">Phone</span> <span>*</span></label><input type="tel" id="fPhone" class="inp" placeholder="+91 XXXXX XXXXX" maxlength="13" autocomplete="tel"/></div>
-        <div class="fi"><label class="flbl"><span data-en="WhatsApp" data-ml="WhatsApp">WhatsApp</span> <span>*</span></label><input type="tel" id="fWa" class="inp" placeholder="+91 XXXXX XXXXX" maxlength="13"/></div>
-        <div class="fi"><label class="flbl"><span data-en="District" data-ml="ജില്ല">District</span> <span>*</span></label><select id="fDist" class="sel"><option value="">Select District</option><option>Thiruvananthapuram</option><option>Kollam</option><option>Pathanamthitta</option><option>Alappuzha</option><option>Kottayam</option><option>Idukki</option><option>Ernakulam</option><option>Thrissur</option><option>Palakkad</option><option>Malappuram</option><option>Kozhikode</option><option>Wayanad</option><option>Kannur</option><option>Kasaragod</option></select></div>
-        <div class="fi"><label class="flbl"><span data-en="Pincode" data-ml="പിൻകോഡ്">Pincode</span> <span>*</span></label><input type="text" id="fPin" class="inp" placeholder="6-digit Pincode" maxlength="6" inputmode="numeric"/></div>
-        <div class="fi full"><label class="flbl"><span data-en="Product" data-ml="ഉൽപ്പന്നം">Product</span> <span>*</span></label><select id="fProd" class="sel"><option value="">Select Product</option><option value="ടൈൽ അഡ്ഹസീവ്">ടൈൽ അഡ്ഹസീവ് (H4 Tile Adhesive)</option><option value="വാട്ടർപ്രൂഫിംഗ്">വാട്ടർപ്രൂഫിംഗ് (H4 Waterproofing)</option><option value="എപ്പോക്സി ഫ്ലോറിംഗ്">എപ്പോക്സി ഫ്ലോറിംഗ് (H4 ShieldX)</option><option value="എല്ലാം">എല്ലാം (All Products)</option></select></div>
+        <div class="fi"><label class="fl"><span data-k="fName">Name</span> <span>*</span></label><input type="text" id="fN" class="inp" placeholder="Full Name" autocomplete="name"/></div>
+        <div class="fi"><label class="fl"><span data-k="fArea">Area / City</span> <span>*</span></label><input type="text" id="fA" class="inp" placeholder="e.g. Tirur, Kozhikode"/></div>
+        <div class="fi"><label class="fl"><span data-k="fPhone">Phone</span> <span>*</span></label><input type="tel" id="fP" class="inp" placeholder="+91 XXXXX XXXXX" maxlength="13" autocomplete="tel"/></div>
+        <div class="fi"><label class="fl"><span data-k="fWa">WhatsApp</span> <span>*</span></label><input type="tel" id="fW" class="inp" placeholder="+91 XXXXX XXXXX" maxlength="13"/></div>
+        <div class="fi"><label class="fl"><span data-k="fDist">District</span> <span>*</span></label><select id="fD" class="sel"><option value="">Select District</option><option>Thiruvananthapuram</option><option>Kollam</option><option>Pathanamthitta</option><option>Alappuzha</option><option>Kottayam</option><option>Idukki</option><option>Ernakulam</option><option>Thrissur</option><option>Palakkad</option><option>Malappuram</option><option>Kozhikode</option><option>Wayanad</option><option>Kannur</option><option>Kasaragod</option></select></div>
+        <div class="fi"><label class="fl"><span data-k="fPin">Pincode</span> <span>*</span></label><input type="text" id="fPi" class="inp" placeholder="6-digit Pincode" maxlength="6" inputmode="numeric"/></div>
+        <div class="fi full"><label class="fl"><span data-k="fProd">Product</span> <span>*</span></label><select id="fPr" class="sel"><option value="">Select Product</option><option value="ടൈൽ അഡ്ഹസീവ്">ടൈൽ അഡ്ഹസീവ് (H4 Tile Adhesive)</option><option value="വാട്ടർപ്രൂഫിംഗ്">വാട്ടർപ്രൂഫിംഗ് (H4 Waterproofing)</option><option value="എപ്പോക്സി ഫ്ലോറിംഗ്">എപ്പോക്സി ഫ്ലോറിംഗ് (H4 ShieldX)</option><option value="എല്ലാം">എല്ലാം (All Products)</option></select></div>
       </div>
-      <div class="qrow">
-        <div class="fi"><label class="flbl" data-en="Unit" data-ml="യൂണിറ്റ്">Unit</label><select id="fUnit" class="sel"><option>KG</option><option>Bag</option><option>Sq.Ft</option><option>Litre</option></select></div>
-        <div class="fi"><label class="flbl" data-en="Quantity" data-ml="അളവ്">Quantity</label><input type="number" id="fQty" class="inp" placeholder="e.g. 100" min="1" inputmode="numeric"/></div>
-        <div class="fi"><label class="flbl" data-en="Requirement" data-ml="ആവൃത്തി">Requirement</label><select id="fReq" class="sel"><option data-en="Monthly" data-ml="പ്രതിമാസം">Monthly</option><option data-en="One-time" data-ml="ഒറ്റ തവണ">One-time</option><option data-en="Quarterly" data-ml="ത്രൈമാസ">Quarterly</option></select></div>
+      <div class="qr">
+        <div class="fi"><label class="fl" data-k="fUnit">Unit</label><select id="fU" class="sel"><option>KG</option><option>Bag</option><option>Sq.Ft</option><option>Litre</option></select></div>
+        <div class="fi"><label class="fl" data-k="fQty">Quantity</label><input type="number" id="fQ" class="inp" placeholder="e.g. 100" min="1" inputmode="numeric"/></div>
+        <div class="fi"><label class="fl" data-k="fReq">Requirement</label><select id="fR" class="sel"><option data-k="monthly">Monthly</option><option data-k="onetime">One-time</option><option data-k="quarterly">Quarterly</option></select></div>
       </div>
-      <div class="srow">
-        <button class="bsub" onclick="submitForm()">📄 <span data-en="PDF &amp; Submit" data-ml="PDF &amp; സബ്മിറ്റ്">PDF &amp; Submit</span></button>
-        <button class="bwa" onclick="sendWA()">💬 <span data-en="WhatsApp" data-ml="WhatsApp">WhatsApp</span></button>
+      <div class="sr">
+        <button class="bsb" onclick="subForm()">📄 <span data-k="pdfBtn">PDF &amp; Submit</span></button>
+        <button class="bwa" onclick="sendWA()">💬 <span data-k="waBtn">WhatsApp</span></button>
       </div>
-      <div id="ss" class="sstatus"></div>
-      <p style="font-size:.73rem;color:var(--lite);margin-top:.8rem;text-align:center" data-en="🔒 Data saved to Google Sheets • WhatsApp confirmation sent" data-ml="🔒 Google Sheet-ൽ save ആകും • WhatsApp confirmation ലഭിക്കും">🔒 Data saved to Google Sheets &nbsp;•&nbsp; WhatsApp confirmation sent</p>
+      <div id="ss" class="sst"></div>
+      <p style="font-size:.71rem;color:var(--lt);margin-top:.7rem;text-align:center" data-k="dataNote">🔒 Data saved to Google Sheets • WhatsApp confirmation sent</p>
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
 <section id="contact" class="sec" aria-label="Contact">
-  <div style="margin-bottom:2.2rem">
-    <p class="lbl" data-en="Get in Touch" data-ml="ബന്ധപ്പെടുക">Get in Touch</p>
-    <h2 class="stitle" data-en="Contact AV CHEM" data-ml="AV CHEM-മായി ബന്ധപ്പെടുക">Contact AV CHEM</h2>
-    <div class="div"></div>
+  <div style="margin-bottom:2rem">
+    <p class="lb" data-k="contactLbl">Get in Touch</p>
+    <h2 class="st" data-k="contactTitle">Contact AV CHEM</h2>
+    <div class="dv"></div>
   </div>
   <div class="cg">
-    <div class="ccards">
-      <a href="tel:+917907344030" class="ccard fu"><div class="cion ca">📞</div><div class="cdet"><h4 data-en="Call" data-ml="വിളിക്കുക">Call</h4><p>+91 79073 44030</p></div></a>
-      <a href="https://wa.me/919745838382?text=Hello%20AV%20CHEM%2C%20I%20am%20interested%20in%20your%20products." target="_blank" rel="noopener" class="ccard fu"><div class="cion wa">💬</div><div class="cdet"><h4>WhatsApp</h4><p>+91 97458 38382</p></div></a>
-      <a href="mailto:avchemtirur@gmail.com" class="ccard fu"><div class="cion em">📧</div><div class="cdet"><h4>Email</h4><p>avchemtirur@gmail.com</p></div></a>
-      <div class="ccard fu"><div class="cion ad">📍</div><div class="cdet"><h4 data-en="Address" data-ml="വിലാസം">Address</h4><p>Mukkilapeedika, Kannamkulam, Tirur, Malappuram, Kerala 676101</p></div></div>
-      <div class="ccard fu" style="background:var(--pur-p)"><div class="cion ti">🕐</div><div class="cdet"><h4 data-en="Hours" data-ml="സമയം">Hours</h4><p data-en="Mon–Sat: 9 AM – 6 PM" data-ml="തിങ്കൾ–ശനി: 9 AM – 6 PM">Mon–Sat: 9 AM – 6 PM</p></div></div>
+    <div class="ccs">
+      <a href="tel:+917907344030" class="cc fu"><div class="ci ca">📞</div><div class="cd"><h4 data-k="call">Call</h4><p>+91 79073 44030</p></div></a>
+      <a href="https://wa.me/919745838382?text=Hello%20AV%20CHEM%2C%20I%20am%20interested%20in%20your%20products." target="_blank" rel="noopener" class="cc fu"><div class="ci wa">💬</div><div class="cd"><h4>WhatsApp</h4><p>+91 97458 38382</p></div></a>
+      <a href="mailto:avchemtirur@gmail.com" class="cc fu"><div class="ci em">📧</div><div class="cd"><h4>Email</h4><p>avchemtirur@gmail.com</p></div></a>
+      <div class="cc fu"><div class="ci ad">📍</div><div class="cd"><h4 data-k="addr">Address</h4><p>Mukkilapeedika, Kannamkulam, Tirur, Malappuram, Kerala 676101</p></div></div>
+      <div class="cc fu" style="background:var(--pp)"><div class="ci ti">🕐</div><div class="cd"><h4 data-k="hours">Hours</h4><p data-k="hoursVal">Mon–Sat: 9 AM – 6 PM</p></div></div>
     </div>
-    <div class="mapw sr">
-      <!-- EXACT Google Business Map for Mukkilapeedika Tirur Malappuram -->
+    <div class="mw sr2">
+      <!-- Google Business Map: https://maps.app.goo.gl/ZsVZeqeN47kupohA8 -->
       <iframe
-        src="https://maps.google.com/maps?q=10.9147,76.0061&z=15&output=embed"
-        title="AV CHEM Chemical & Manufacturing — Mukkilapeedika, Kannamkulam, Tirur, Malappuram, Kerala"
+        src="{MAPS_EMBED}"
+        title="AV CHEM Chemical & Manufacturing location — Mukkilapeedika, Kannamkulam, Tirur, Malappuram, Kerala"
         loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"
-        aria-label="AV CHEM location map">
+        aria-label="AV CHEM office location on Google Maps">
       </iframe>
     </div>
   </div>
@@ -588,17 +583,17 @@ footer{{background:linear-gradient(145deg,#0F0525,#2D0F55);color:rgba(255,255,25
 
 <!-- FAQ -->
 <section id="faq" class="sec" aria-label="FAQ" style="background:#fff">
-  <div class="ctr" style="margin-bottom:2.2rem">
-    <p class="lbl">FAQ</p>
-    <h2 class="stitle" data-en="Common Questions" data-ml="പൊതുവായ ചോദ്യങ്ങൾ">Common Questions</h2>
-    <div class="div"></div>
+  <div class="ct" style="margin-bottom:2rem">
+    <p class="lb">FAQ</p>
+    <h2 class="st" data-k="faqTitle">Common Questions</h2>
+    <div class="dv"></div>
   </div>
-  <div class="faqw">
-    <div class="faqi"><button class="faqq" onclick="tfaq(this)" data-en="Where is AV CHEM and do you supply across Kerala?" data-ml="AV CHEM എവിടെ? Kerala മുഴുവൻ supply ഉണ്ടോ?">Where is AV CHEM and do you supply across Kerala?<span class="fqicon">+</span></button><div class="faqa" data-en="We are based in Mukkilapeedika, Kannamkulam, Tirur, Malappuram, Kerala. We supply across all 14 districts through our growing dealer network." data-ml="മുക്കിലപ്പീടിക, കണ്ണംകുളം, തിരൂർ, മലപ്പുറം, Kerala. 14 ജില്ലകളിലും supply ഉണ്ട്.">We are based in Mukkilapeedika, Kannamkulam, Tirur, Malappuram, Kerala. We supply across all 14 districts through our dealer network.</div></div>
-    <div class="faqi"><button class="faqq" onclick="tfaq(this)" data-en="What is H4 ShieldX Epoxy suitable for?" data-ml="H4 ShieldX Epoxy എവിടെ ഉപയോഗിക്കാം?">What is H4 ShieldX suitable for?<span class="fqicon">+</span></button><div class="faqa" data-en="H4 ShieldX is ideal for roof, floor, bathroom, water tank and tile applications. Industrial grade, 100% waterproof, glossy finish." data-ml="H4 ShieldX — മേൽക്കൂര, ഫ്ലോർ, ബാഥ്‌റൂം, ടാങ്ക്. Industrial grade, 100% waterproof, glossy.">H4 ShieldX is ideal for roof, floor, bathroom, water tank. Industrial grade, 100% waterproof, glossy finish.</div></div>
-    <div class="faqi"><button class="faqq" onclick="tfaq(this)" data-en="How to become a dealer?" data-ml="ഡീലർ ആകുന്നത് എങ്ങനെ?">How to become an AV CHEM dealer?<span class="fqicon">+</span></button><div class="faqa" data-en="Fill the Dealer Enquiry form or call +91 79073 44030 / WhatsApp +91 97458 38382. We respond within 24 hours with pricing and territory details." data-ml="Dealer Enquiry form പൂരിപ്പിക്കുക അല്ലെങ്കിൽ +91 79073 44030 / WhatsApp +91 97458 38382 വിളിക്കുക.">Fill the Dealer Enquiry form or call +91 79073 44030 / WhatsApp +91 97458 38382. We respond within 24 hours.</div></div>
-    <div class="faqi"><button class="faqq" onclick="tfaq(this)" data-en="Is H4 Tile Adhesive suitable for wet areas?" data-ml="ടൈൽ അഡ്ഹസീവ് wet areas-ൽ ഉപയോഗിക്കാമോ?">Is H4 ടൈൽ അഡ്ഹസീവ് for wet areas?<span class="fqicon">+</span></button><div class="faqa" data-en="Yes! H4 Tile Adhesive is polymer-modified and waterproof — perfect for bathrooms, kitchens, pool surrounds and exterior walls in Kerala's humid climate." data-ml="അതെ! H4 ടൈൽ അഡ്ഹസീവ് polymer-modified, waterproof — ബാഥ്‌റൂം, അടുക്കള, pool surrounds.">Yes! H4 Tile Adhesive is polymer-modified and waterproof — perfect for bathrooms, kitchens and exterior walls.</div></div>
-    <div class="faqi"><button class="faqq" onclick="tfaq(this)" data-en="What is the minimum order for dealers?" data-ml="ഡീലർ minimum order എത്ര?">Minimum order for dealers?<span class="fqicon">+</span></button><div class="faqa" data-en="MOQ is flexible for new dealers. Contact us directly for current pricing, MOQ and payment terms for your territory." data-ml="New dealers-ക്ക് MOQ flexible. Pricing, payment terms-നായി നേരിട്ട് ബന്ധപ്പെടുക.">MOQ is flexible for new dealers. Contact us directly for pricing and payment terms for your territory.</div></div>
+  <div class="fw">
+    <div class="fqi"><button class="fqq" onclick="tfaq(this)" data-kq="faq1q">Where is AV CHEM and do you supply across Kerala?<span class="ic">+</span></button><div class="fqa" data-kq="faq1a">We are based in Mukkilapeedika, Kannamkulam, Tirur, Malappuram, Kerala. We supply across all 14 districts through our dealer network.</div></div>
+    <div class="fqi"><button class="fqq" onclick="tfaq(this)" data-kq="faq2q">What is H4 ShieldX suitable for?<span class="ic">+</span></button><div class="fqa" data-kq="faq2a">H4 ShieldX is ideal for roof, floor, bathroom, water tank and tile. Industrial grade, 100% waterproof, glossy finish.</div></div>
+    <div class="fqi"><button class="fqq" onclick="tfaq(this)" data-kq="faq3q">How to become an AV CHEM dealer?<span class="ic">+</span></button><div class="fqa" data-kq="faq3a">Fill the Dealer Enquiry form or call +91 79073 44030 / WhatsApp +91 97458 38382. We respond within 24 hours.</div></div>
+    <div class="fqi"><button class="fqq" onclick="tfaq(this)" data-kq="faq4q">Is H4 Tile Adhesive suitable for wet areas?<span class="ic">+</span></button><div class="fqa" data-kq="faq4a">Yes! H4 Tile Adhesive is polymer-modified and waterproof — perfect for bathrooms, kitchens and exterior walls.</div></div>
+    <div class="fqi"><button class="fqq" onclick="tfaq(this)" data-kq="faq5q">Minimum order for dealers?<span class="ic">+</span></button><div class="fqa" data-kq="faq5a">MOQ is flexible for new dealers. Contact us for pricing and payment terms for your territory.</div></div>
   </div>
 </section>
 
@@ -606,392 +601,463 @@ footer{{background:linear-gradient(145deg,#0F0525,#2D0F55);color:rgba(255,255,25
 <footer>
   <div class="fg2">
     <div class="fbn">
-      <div style="display:flex;align-items:center;gap:.7rem;margin-bottom:.4rem">
-        <img src="{IMG_AVLOGO}" alt="AV CHEM Logo" style="width:36px;height:36px;object-fit:contain;border-radius:6px;background:rgba(255,255,255,.1);padding:3px"/>
-        <img src="{IMG_H4LOGO}" alt="H4 Logo" style="width:52px;height:31px;object-fit:contain"/>
+      <div style="display:flex;align-items:center;gap:.65rem;margin-bottom:.35rem">
+        <img src="{imgs['avlogo']}" alt="AV CHEM Logo" style="width:34px;height:34px;object-fit:contain;border-radius:5px;background:rgba(255,255,255,.1);padding:3px"/>
+        <img src="{imgs['h4logo']}" alt="H4 Logo" style="width:50px;height:30px;object-fit:contain"/>
       </div>
       <span class="cn">AV CHEM</span>
       <span class="ct">Chemical &amp; Manufacturing</span>
-      <p data-en="H4 Tile Adhesive, H4 Waterproofing & H4 ShieldX Epoxy Flooring — engineered for Kerala." data-ml="H4 ടൈൽ അഡ്ഹസീവ്, H4 വാട്ടർപ്രൂഫിംഗ്, H4 ShieldX — കേരളത്തിനായി.">H4 Tile Adhesive, H4 Waterproofing &amp; H4 ShieldX Epoxy Flooring — engineered for Kerala.</p>
+      <p data-k="footerP">H4 Tile Adhesive, H4 Waterproofing &amp; H4 ShieldX Epoxy Flooring — engineered for Kerala.</p>
       <p class="mlp">കേരളത്തിന്റെ ഗുണനിലവാരമുള്ള നിർമ്മാണ കെമിക്കൽ</p>
-      <div class="foot-soc">
-        <a href="https://www.facebook.com/share/1TNvLLd1SM/" target="_blank" rel="noopener" class="fsoc" aria-label="Facebook">📘</a>
-        <a href="https://www.instagram.com/h4constructionsolutions?igsh=c2oxaDBqZmpzZWd3" target="_blank" rel="noopener" class="fsoc" aria-label="Instagram">📸</a>
-        <a href="https://youtube.com/@h4constructionsolutions" target="_blank" rel="noopener" class="fsoc" aria-label="YouTube">▶️</a>
-        <a href="mailto:avchemtirur@gmail.com" class="fsoc" aria-label="Email">📧</a>
-        <a href="https://goo.gl/maps/Nfr8EsghauyJN" target="_blank" rel="noopener" class="fsoc" aria-label="Google Maps">🗺️</a>
+      <div class="fsc">
+        <a href="https://www.facebook.com/share/1TNvLLd1SM/" target="_blank" rel="noopener" class="fsi" aria-label="Facebook">📘</a>
+        <a href="https://www.instagram.com/h4constructionsolutions?igsh=c2oxaDBqZmpzZWd3" target="_blank" rel="noopener" class="fsi" aria-label="Instagram">📸</a>
+        <a href="https://youtube.com/@h4constructionsolutions" target="_blank" rel="noopener" class="fsi" aria-label="YouTube">▶️</a>
+        <a href="mailto:avchemtirur@gmail.com" class="fsi" aria-label="Email">📧</a>
+        <a href="https://goo.gl/maps/Nfr8EsghauyJN" target="_blank" rel="noopener" class="fsi" aria-label="Google Maps">🗺️</a>
       </div>
     </div>
     <div class="fc">
-      <h4 data-en="Products" data-ml="ഉൽപ്പന്നങ്ങൾ">Products</h4>
+      <h4 data-k="fprod">Products</h4>
       <ul>
         <li><a href="#tile-adhesive">ടൈൽ അഡ്ഹസീവ്</a></li>
         <li><a href="#waterproofing">വാട്ടർപ്രൂഫിംഗ്</a></li>
         <li><a href="#epoxy-flooring">H4 ShieldX Epoxy</a></li>
-        <li><a href="#dealer" data-en="Dealer Enquiry" data-ml="ഡീലർ അന്വേഷണം">Dealer Enquiry</a></li>
+        <li><a href="#dealer" data-k="dealer">Dealer Enquiry</a></li>
       </ul>
     </div>
     <div class="fc">
-      <h4 data-en="Contact" data-ml="ബന്ധപ്പെടുക">Contact</h4>
+      <h4 data-k="fcontact">Contact</h4>
       <ul>
         <li><a href="tel:+917907344030">📞 +91 79073 44030</a></li>
         <li><a href="https://wa.me/919745838382" target="_blank" rel="noopener">💬 +91 97458 38382</a></li>
         <li><a href="mailto:avchemtirur@gmail.com">📧 avchemtirur@gmail.com</a></li>
         <li><a href="sitemap.xml">🗺️ Sitemap</a></li>
-        <li><a href="privacy.html" data-en="Privacy Policy" data-ml="Privacy Policy">Privacy Policy</a></li>
+        <li><a href="privacy.html" data-k="privacy">Privacy Policy</a></li>
       </ul>
     </div>
   </div>
-  <div class="fbot">
-    <p>© 2026 AV CHEM Chemical &amp; Manufacturing<span class="gd"></span>Tirur, Malappuram, Kerala, India</p>
-    <p style="font-size:.72rem;color:rgba(255,255,255,.3)" data-en="Manufacturing Unit — Malappuram, Kerala" data-ml="നിർമ്മാണ യൂണിറ്റ് — മലപ്പുറം, Kerala">Manufacturing Unit — Malappuram, Kerala</p>
+  <div class="fbt">
+    <p>© 2026 AV CHEM Chemical &amp; Manufacturing<span class="gd"></span>Tirur, Malappuram, Kerala</p>
+    <p style="font-size:.7rem;color:rgba(255,255,255,.3)" data-k="footerMfg">Manufacturing Unit — Malappuram, Kerala</p>
   </div>
 </footer>
 
-<a href="https://wa.me/919745838382?text=Hello%20AV%20CHEM%2C%20I%20am%20interested%20in%20your%20products!" target="_blank" rel="noopener noreferrer" class="wa-float" aria-label="Chat on WhatsApp">💬</a>
+<!-- WhatsApp Float (admin toggleable) -->
+<a href="https://wa.me/919745838382?text=Hello%20AV%20CHEM%2C%20I%20am%20interested%20in%20your%20products!" target="_blank" rel="noopener noreferrer" class="waf" id="waf" aria-label="Chat on WhatsApp">💬</a>
+
+<!-- Toast -->
 <div id="toast" role="alert" aria-live="polite"></div>
 
-<!-- ENQUIRY MODAL -->
-<div class="mov" id="enqModal">
-  <div class="modal" role="dialog" aria-modal="true">
-    <button class="mx" onclick="closeMod()" aria-label="Close">✕</button>
-    <h3 id="modTitle">Enquiry</h3>
-    <p style="font-size:.82rem;color:var(--lite)" data-en="We respond within 2 hours." data-ml="2 മണിക്കൂറിൽ മറുപടി.">We respond within 2 hours.</p>
-    <div class="mform">
-      <input type="text" id="mName" class="inp" placeholder="Your Name *" autocomplete="name"/>
-      <input type="tel" id="mPhone" class="inp" placeholder="Phone Number *" autocomplete="tel"/>
-      <input type="text" id="mArea" class="inp" placeholder="Area / City *"/>
-      <div class="mbtns">
-        <button class="bsub" style="padding:.72rem;font-size:.85rem" onclick="subMod()">📩 <span data-en="Submit" data-ml="സബ്മിറ്റ്">Submit</span></button>
-        <button class="bwa" style="padding:.72rem;font-size:.85rem" onclick="modWA()">💬 WhatsApp</button>
+<!-- Enquiry Modal -->
+<div class="mov" id="em">
+  <div class="md" role="dialog" aria-modal="true">
+    <button class="mx" onclick="cm()" aria-label="Close">✕</button>
+    <h3 id="mt">Enquiry</h3>
+    <p style="font-size:.8rem;color:var(--lt)" data-k="respond">We respond within 2 hours.</p>
+    <div class="mfm">
+      <input type="text" id="mN" class="inp" placeholder="Your Name *" autocomplete="name"/>
+      <input type="tel" id="mPh" class="inp" placeholder="Phone Number *" autocomplete="tel"/>
+      <input type="text" id="mAr" class="inp" placeholder="Area / City *"/>
+      <div class="mbt">
+        <button class="bsb" style="padding:.7rem;font-size:.83rem" onclick="subMod()">📩 <span data-k="submit">Submit</span></button>
+        <button class="bwa" style="padding:.7rem;font-size:.83rem" onclick="modWA()">💬 WhatsApp</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ADMIN PANEL (hidden, secret button bottom-left) -->
-<button id="adminBtn" onclick="showAdminPw()" title="Admin" aria-label="Admin">⚙</button>
-<div id="adminOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:2999" onclick="closeAdmin()"></div>
-<div class="admin-panel" id="adminPanel">
+<!-- Admin secret button (invisible, bottom-left) -->
+<button id="admB" onclick="showAdmPw()" title="" aria-label="Admin">·</button>
+<div id="admOv" onclick="closeAdm()"></div>
+<div class="ap" id="admP">
   <h3>⚙️ Admin Panel</h3>
-  <div id="adminPwSection" class="admin-pw">
-    <input type="password" id="adminPw" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')checkPw()"/>
-    <button onclick="checkPw()">Login</button>
-    <p id="pwErr" style="font-size:.75rem;color:red;display:none">Incorrect password</p>
+  <div class="apw" id="admPwSec">
+    <input type="password" id="admPw" placeholder="Admin password" onkeydown="if(event.key==='Enter')chkPw()"/>
+    <button onclick="chkPw()">Login</button>
+    <p id="pwE" style="font-size:.72rem;color:red;display:none">Wrong password</p>
   </div>
-  <div id="adminControls" style="display:none">
-    <div class="admin-row"><label data-en="WhatsApp Float Button" data-ml="WA Float Button">WhatsApp Float Button</label><label class="toggle"><input type="checkbox" id="togWA" checked onchange="togSection('wa-float',this)"/><span class="tslider"></span></label></div>
-    <div class="admin-row"><label data-en="Social Bar" data-ml="Social Bar">Social Bar</label><label class="toggle"><input type="checkbox" id="togSoc" checked onchange="togSection('social-bar',this)"/><span class="tslider"></span></label></div>
-    <div class="admin-row"><label data-en="Reviews Section" data-ml="Reviews Section">Reviews Section</label><label class="toggle"><input type="checkbox" id="togRev" checked onchange="togSection('reviews',this)"/><span class="tslider"></span></label></div>
-    <div class="admin-row"><label data-en="Dealer Form" data-ml="Dealer Form">Dealer Form</label><label class="toggle"><input type="checkbox" id="togDealer" checked onchange="togSection('dealer',this)"/><span class="tslider"></span></label></div>
-    <div class="admin-row"><label data-en="FAQ Section" data-ml="FAQ Section">FAQ Section</label><label class="toggle"><input type="checkbox" id="togFaq" checked onchange="togSection('faq',this)"/><span class="tslider"></span></label></div>
-    <div class="admin-row"><label data-en="Stats Bar" data-ml="Stats Bar">Stats Bar</label><label class="toggle"><input type="checkbox" id="togStats" checked onchange="togSection('stats',this)"/><span class="tslider"></span></label></div>
-    <div style="margin-top:1rem;padding-top:.8rem;border-top:1px solid var(--cream)">
-      <p style="font-size:.75rem;color:var(--mid);margin-bottom:.5rem" data-en="Google Apps Script URL (for form)" data-ml="Google Apps Script URL">Google Apps Script URL:</p>
-      <input type="text" id="scriptUrl" class="inp" style="font-size:.72rem" placeholder="Paste your Apps Script URL here" value="YOUR_GOOGLE_APPS_SCRIPT_URL"/>
-      <button onclick="saveScriptUrl()" style="margin-top:.4rem;width:100%;background:var(--pur);color:#fff;border:none;padding:.4rem;border-radius:var(--rs);cursor:pointer;font-size:.8rem">Save URL</button>
+  <div id="admCtrl" style="display:none">
+    <div class="ar"><label>WhatsApp Float Button</label><label class="tg2"><input type="checkbox" id="tWA" checked onchange="togSec('waf',this)"/><span class="ts"></span></label></div>
+    <div class="ar"><label>Social Bar</label><label class="tg2"><input type="checkbox" id="tSB" checked onchange="togSec('sb',this)"/><span class="ts"></span></label></div>
+    <div class="ar"><label>Reviews Section</label><label class="tg2"><input type="checkbox" id="tRV" checked onchange="togSec('reviews',this)"/><span class="ts"></span></label></div>
+    <div class="ar"><label>Dealer Form</label><label class="tg2"><input type="checkbox" id="tDF" checked onchange="togSec('dealer',this)"/><span class="ts"></span></label></div>
+    <div class="ar"><label>FAQ Section</label><label class="tg2"><input type="checkbox" id="tFQ" checked onchange="togSec('faq',this)"/><span class="ts"></span></label></div>
+    <div class="ar"><label>Stats Bar</label><label class="tg2"><input type="checkbox" id="tST" checked onchange="togSec('stats',this)"/><span class="ts"></span></label></div>
+    <div class="aurl">
+      <p>Google Apps Script URL:</p>
+      <input type="text" id="sUrl" class="inp"/>
+      <button onclick="saveUrl()">Save URL</button>
     </div>
   </div>
-  <button class="admin-close" onclick="closeAdmin()" data-en="Close Admin" data-ml="അടയ്ക്കുക">Close Admin</button>
+  <button class="ac" onclick="closeAdm()">Close</button>
 </div>
 
 <script>
 // ═══ CONFIG ═══
-let SCRIPT_URL = localStorage.getItem('avScriptUrl') || 'YOUR_GOOGLE_APPS_SCRIPT_URL';
-const ADMIN_PW = 'avchem2026'; // Change this password
+let SURL = localStorage.getItem('avSurl') || '';
+const APWD = 'avchem2026'; // Change this!
 
-// ═══ LANGUAGE ═══
-let lang = localStorage.getItem('avLang') || 'en';
-
-const T = {{
+// ═══ TRANSLATIONS ═══
+const TR = {{
   en: {{
-    badge: "Kerala's Premium Construction Chemical Brand",
-    chemMfg: "Chemical &amp; Manufacturing",
-    home: "Home", products: "Products", about: "About", reviews: "Reviews",
-    contact: "Contact", dealer: "Dealer Enquiry",
-    madeIn: "Made in Kerala",
-    builtFor: "Built for Kerala's Climate",
-    builtSub: "H4 Brand — engineered for Kerala's humid coastal and highland conditions.",
-    whyUs: "Why Choose Us",
-    trustedPart: "Kerala's Trusted Partner",
-    ourStory: "Our Story",
-    storyP1: "AV CHEM Chemical & Manufacturing was founded to provide Kerala's builders with world-class construction chemicals, made locally in Tirur, Malappuram.",
-    storyP2: "Our H4 brand — ടൈൽ അഡ്ഹസീവ്, വാട്ടർപ്രൂഫിംഗ് & H4 ShieldX — engineered for Kerala's monsoon conditions.",
-    mission: "Mission", missionP: "Deliver construction chemicals that outlast and outperform across Kerala.",
-    vision: "Vision", visionP: "Become Kerala's #1 trusted construction chemical brand.",
-    revTitle: "Google Reviews",
-    dealerTitle: "Become an AV CHEM Dealer",
-    dealerSub: "Fill the form — our team contacts you within 24 hours.",
-    contactTitle: "Contact AV CHEM",
-    faqTitle: "Common Questions",
-    scroll: "Scroll",
-    enquireNow: "Enquire Now →",
-    pdfSubmit: "PDF & Submit",
-    waBtn: "WhatsApp",
-    submit: "Submit",
-    respond: "We respond within 2 hours.",
-    dataNote: "🔒 Data saved to Google Sheets • WhatsApp confirmation sent",
-    leaveReview: "Leave a Google Review",
-    hours: "Mon–Sat: 9 AM – 6 PM",
-    address: "Address",
-    dealerLbl: "Dealer Portal",
-    revLbl: "Reviews",
-    contactLbl: "Get in Touch",
+    badge:"Kerala's Premium Construction Chemical Brand",chemMfg:"Chemical &amp; Manufacturing",
+    home:"Home",products:"Products",about:"About",reviews:"Reviews",contact:"Contact",dealer:"Dealer Enquiry",
+    mhome:"🏠 Home",mproducts:"🔬 Products",mabout:"🏢 About",mreviews:"⭐ Reviews",mcontact:"📍 Contact",mdealer:"📋 Dealer Enquiry",
+    madeIn:"Made in Kerala",scroll:"Scroll",dealerBtn:"📋 Dealer Enquiry",
+    sp1:"Premium Products",sp2:"Growing",sp3:"Customer Base",sp4:"Districts Served",sp5:"Quality Assured",
+    ourProdLbl:"Our Products",builtFor:"Built for Kerala's Climate",
+    builtSub:"H4 Brand — engineered for Kerala's humid coastal and highland conditions.",
+    bestSeller:"Best Seller",monsoon:"Monsoon Ready",
+    tileDesc:"Premium polymer modified tile adhesive for floor & wall. Waterproof, high bond, sets in 12 hours.",
+    tf1:"Premium Polymer Modified Formula",tf2:"Non-slip, No Hollam, Large Tile Use",
+    tf3:"Suitable for all tile types",tf4:"Designed for long-term durability",
+    waterDesc:"Brush application waterproofing for roof, terrace, walls, bathroom. Water resistant and durable.",
+    wf1:"Economic, easy brush application",wf2:"Water resistant & durable",
+    wf3:"Temperature controlled formula",wf4:"Designed for long-term durability",
+    epoxyDesc:"Industrial grade premium epoxy. 100% waterproof, glossy finish, chemical resistant. For roof, floor, wall, tank.",
+    ef1:"100% Waterproof, Industrial Grade",ef2:"High strength bond & chemical resistant",
+    ef3:"Glossy finish, anti-crack, UV resistant",ef4:"Mix ratio 3:1 (Resin : Hardener)",
+    enqNow:"Enquire Now →",
+    whyLbl:"Why Choose Us",whyTitle:"Kerala's Trusted Partner",
+    w1h:"Local Manufacturing",w1p:"Made in Tirur, Malappuram — formulas tuned for Kerala's climate.",
+    w2h:"R&D Formulated",w2p:"Lab tested for humidity resistance, bonding strength and durability.",
+    w3h:"Growing Dealer Network",w3p:"Expanding across all 14 Kerala districts with competitive margins.",
+    w4h:"Direct Support",w4p:"Technical support directly from our manufacturing team.",
+    ourStory:"Our Story",
+    storyP1:"AV CHEM Chemical & Manufacturing was founded to provide Kerala's builders with world-class construction chemicals, made locally in Tirur, Malappuram.",
+    storyP2:"Our H4 brand — ടൈൽ അഡ്ഹസീവ്, വാട്ടർപ്രൂഫിംഗ് & H4 ShieldX — engineered for Kerala's monsoon conditions.",
+    mission:"Mission",missionP:"Deliver construction chemicals that outlast and outperform across Kerala.",
+    vision:"Vision",visionP:"Become Kerala's #1 trusted construction chemical brand.",
+    revLbl:"Reviews",revTitle:"Google Reviews",
+    revSub:"Tirur, Malappuram, Kerala — Find us on Google Maps",
+    revSetup:"Real Google Reviews — Setup",
+    revNote:'<strong>Quick setup:</strong><br/>1. <a href="https://goo.gl/maps/Nfr8EsghauyJN" target="_blank" rel="noopener">View your Google Maps listing</a> — ask customers to leave reviews<br/>2. <a href="https://elfsight.com/google-reviews-widget/" target="_blank" rel="noopener">Elfsight Google Reviews widget</a> (free)<br/>3. Copy code → paste replacing this box<br/><em style="color:var(--gd)">Real = Trust ↑ | Fake = Trust ↓</em>',
+    leaveReview:"Leave a Google Review",
+    dealerLbl:"Dealer Portal",dealerTitle:"Become an AV CHEM Dealer",
+    dealerSub:"Fill the form — our team contacts you within 24 hours.",
+    fName:"Name",fArea:"Area / City",fPhone:"Phone",fWa:"WhatsApp",fDist:"District",fPin:"Pincode",fProd:"Product",
+    fUnit:"Unit",fQty:"Quantity",fReq:"Requirement",
+    monthly:"Monthly",onetime:"One-time",quarterly:"Quarterly",
+    pdfBtn:"PDF & Submit",waBtn:"WhatsApp",
+    dataNote:"🔒 Data saved to Google Sheets • WhatsApp confirmation sent",
+    submit:"Submit",respond:"We respond within 2 hours.",
+    contactLbl:"Get in Touch",contactTitle:"Contact AV CHEM",
+    call:"Call",addr:"Address",hours:"Hours",hoursVal:"Mon–Sat: 9 AM – 6 PM",
+    faqTitle:"Common Questions",
+    faq1q:"Where is AV CHEM and do you supply across Kerala?",
+    faq1a:"We are based in Mukkilapeedika, Kannamkulam, Tirur, Malappuram, Kerala. We supply across all 14 districts through our dealer network.",
+    faq2q:"What is H4 ShieldX suitable for?",
+    faq2a:"H4 ShieldX is ideal for roof, floor, bathroom, water tank and tile. Industrial grade, 100% waterproof, glossy finish.",
+    faq3q:"How to become an AV CHEM dealer?",
+    faq3a:"Fill the Dealer Enquiry form or call +91 79073 44030 / WhatsApp +91 97458 38382. We respond within 24 hours.",
+    faq4q:"Is H4 Tile Adhesive suitable for wet areas?",
+    faq4a:"Yes! H4 Tile Adhesive is polymer-modified and waterproof — perfect for bathrooms, kitchens and exterior walls.",
+    faq5q:"Minimum order for dealers?",
+    faq5a:"MOQ is flexible for new dealers. Contact us for pricing and payment terms for your territory.",
+    fprod:"Products",fcontact:"Contact",privacy:"Privacy Policy",footerMfg:"Manufacturing Unit — Malappuram, Kerala",
+    footerP:"H4 Tile Adhesive, H4 Waterproofing & H4 ShieldX Epoxy Flooring — engineered for Kerala.",
   }},
   ml: {{
-    badge: "കേരളത്തിലെ പ്രീമിയം കൺസ്ട്രക്ഷൻ കെമിക്കൽ ബ്രാൻഡ്",
-    chemMfg: "കെമിക്കൽ &amp; മാനുഫാക്ചറിംഗ്",
-    home: "ഹോം", products: "ഉൽപ്പന്നങ്ങൾ", about: "ഞങ്ങളെ കുറിച്ച്", reviews: "അവലോകനങ്ങൾ",
-    contact: "ബന്ധപ്പെടുക", dealer: "ഡീലർ അന്വേഷണം",
-    madeIn: "കേരളത്തിൽ നിർമ്മിച്ചത്",
-    builtFor: "കേരളത്തിന്റെ കാലാവസ്ഥയ്ക്കായി",
-    builtSub: "H4 ബ്രാൻഡ് — കേരളത്തിന്റെ ഈർപ്പമുള്ള സ്ഥിതിഗതികൾക്കനുസൃതം.",
-    whyUs: "ഞങ്ങളെ തിരഞ്ഞെടുക്കേണ്ടത് എന്തുകൊണ്ട്",
-    trustedPart: "കേരളത്തിന്റെ വിശ്വസ്ത പങ്കാളി",
-    ourStory: "ഞങ്ങളുടെ കഥ",
-    storyP1: "AV CHEM — കേരളത്തിലെ ബിൽഡർമാർക്ക് ലോകനിലവാരത്തിലുള്ള കൺസ്ട്രക്ഷൻ കെമിക്കലുകൾ, honest prices-ൽ.",
-    storyP2: "H4 ബ്രാൻഡ് — ടൈൽ അഡ്ഹസീവ്, വാട്ടർപ്രൂഫിംഗ്, H4 ShieldX — കേരളത്തിന്റെ monsoon conditions-നായി.",
-    mission: "ദൗത്യം", missionP: "കേരളത്തിൽ ഉടനീളം മികവ് പ്രകടിപ്പിക്കുന്ന ഉൽപ്പന്നങ്ങൾ.",
-    vision: "ദർശനം", visionP: "കേരളത്തിലെ #1 കൺസ്ട്രക്ഷൻ കെമിക്കൽ ബ്രാൻഡ്.",
-    revTitle: "Google അവലോകനങ്ങൾ",
-    dealerTitle: "AV CHEM ഡീലർ ആകുക",
-    dealerSub: "ഫോം പൂരിപ്പിക്കുക — 24 മണിക്കൂറിൽ ഞങ്ങൾ ബന്ധപ്പെടും.",
-    contactTitle: "AV CHEM-മായി ബന്ധപ്പെടുക",
-    faqTitle: "പൊതുവായ ചോദ്യങ്ങൾ",
-    scroll: "സ്ക്രോൾ",
-    enquireNow: "ഇപ്പോൾ അന്വേഷിക്കുക →",
-    pdfSubmit: "PDF & സബ്മിറ്റ്",
-    waBtn: "WhatsApp",
-    submit: "സബ്മിറ്റ്",
-    respond: "2 മണിക്കൂറിൽ മറുപടി.",
-    dataNote: "🔒 Google Sheet-ൽ save ആകും • WhatsApp confirmation ലഭിക്കും",
-    leaveReview: "Google Review നൽകുക",
-    hours: "തിങ്കൾ–ശനി: 9 AM – 6 PM",
-    address: "വിലാസം",
-    dealerLbl: "ഡീലർ പോർട്ടൽ",
-    revLbl: "അവലോകനങ്ങൾ",
-    contactLbl: "ബന്ധപ്പെടുക",
+    badge:"കേരളത്തിലെ പ്രീമിയം കൺസ്ട്രക്ഷൻ കെമിക്കൽ ബ്രാൻഡ്",chemMfg:"കെമിക്കൽ &amp; മാനുഫാക്ചറിംഗ്",
+    home:"ഹോം",products:"ഉൽപ്പന്നങ്ങൾ",about:"ഞങ്ങളെ കുറിച്ച്",reviews:"അവലോകനങ്ങൾ",contact:"ബന്ധപ്പെടുക",dealer:"ഡീലർ അന്വേഷണം",
+    mhome:"🏠 ഹോം",mproducts:"🔬 ഉൽപ്പന്നങ്ങൾ",mabout:"🏢 ഞങ്ങളെ കുറിച്ച്",mreviews:"⭐ അവലോകനങ്ങൾ",mcontact:"📍 ബന്ധപ്പെടുക",mdealer:"📋 ഡീലർ അന്വേഷണം",
+    madeIn:"കേരളത്തിൽ നിർമ്മിച്ചത്",scroll:"സ്ക്രോൾ",dealerBtn:"📋 ഡീലർ അന്വേഷണം",
+    sp1:"പ്രീമിയം ഉൽപ്പന്നങ്ങൾ",sp2:"വളരുന്നു",sp3:"ഉപഭോക്തൃ ബേസ്",sp4:"ജില്ലകൾ",sp5:"ഗുണനിലവാര ഉറപ്പ്",
+    ourProdLbl:"ഞങ്ങളുടെ ഉൽപ്പന്നങ്ങൾ",builtFor:"കേരളത്തിന്റെ കാലാവസ്ഥയ്ക്കായി",
+    builtSub:"H4 ബ്രാൻഡ് — കേരളത്തിന്റെ ഈർപ്പമുള്ള സ്ഥിതിഗതികൾക്കനുസൃതം.",
+    bestSeller:"ബെസ്റ്റ് സെല്ലർ",monsoon:"മൺസൂൺ റെഡി",
+    tileDesc:"ഫ്ലോർ & വാൾ ടൈൽ അഡ്ഹസീവ്. ഉയർന്ന ബോണ്ടിംഗ്, വാട്ടർപ്രൂഫ്, 12 മണിക്കൂറിൽ set ആകും.",
+    tf1:"പ്രീമിയം പോളിമർ ഫോർമുല",tf2:"നോൺ-സ്ലിപ്, ഹോളം ഇല്ല",
+    tf3:"എല്ലാ ടൈൽ തരങ്ങൾക്കും",tf4:"ദീർഘകാലം ഈടുനിൽക്കും",
+    waterDesc:"ബ്രഷ് ആപ്ലിക്കേഷൻ. മേൽക്കൂര, ടെറസ്, ബാഥ്‌റൂം — economic & durable.",
+    wf1:"Economic, ബ്രഷ് ആപ്ലിക്കേഷൻ",wf2:"വാട്ടർ resistant, durable",
+    wf3:"ടെംപറേച്ചർ കൺട്രോൾ",wf4:"ദീർഘകാലം ഈടുനിൽക്കും",
+    epoxyDesc:"Industrial grade epoxy. 100% waterproof, glossy finish. മേൽക്കൂര, ഫ്ലോർ, ടാങ്ക്, ടൈൽ.",
+    ef1:"100% Waterproof, Industrial Grade",ef2:"ഉയർന്ന ശക്തി, കെമിക്കൽ resistant",
+    ef3:"Glossy finish, anti-crack, UV resistant",ef4:"Mix ratio 3:1 (Resin : Hardener)",
+    enqNow:"ഇപ്പോൾ അന്വേഷിക്കുക →",
+    whyLbl:"ഞങ്ങളെ തിരഞ്ഞെടുക്കേണ്ടത് എന്തുകൊണ്ട്",whyTitle:"കേരളത്തിന്റെ വിശ്വസ്ത പങ്കാളി",
+    w1h:"ലോക്കൽ മാനുഫാക്ചറിംഗ്",w1p:"തിരൂർ, മലപ്പുറം — Kerala-ക്കനുസൃതം.",
+    w2h:"R&D ഫോർമുലേഷൻ",w2p:"Lab tested — ഈർപ്പ resistance, bonding strength.",
+    w3h:"ഡീലർ നെറ്റ്‌വർക്ക്",w3p:"14 ജില്ലകളിലും expanding.",
+    w4h:"നേരിട്ടുള്ള സഹായം",w4p:"ഉൽപ്പാദന ടീമിൽ നിന്ന് technical സഹായം.",
+    ourStory:"ഞങ്ങളുടെ കഥ",
+    storyP1:"AV CHEM — കേരളത്തിലെ ബിൽഡർമാർക്ക് ലോകനിലവാരത്തിലുള്ള കൺസ്ട്രക്ഷൻ കെമിക്കലുകൾ.",
+    storyP2:"H4 ബ്രാൻഡ് — ടൈൽ അഡ്ഹസീവ്, വാട്ടർപ്രൂഫിംഗ്, H4 ShieldX — Kerala monsoon-നായി.",
+    mission:"ദൗത്യം",missionP:"കേരളത്തിൽ ഉടനീളം മികവ് പ്രകടിപ്പിക്കുന്ന ഉൽപ്പന്നങ്ങൾ.",
+    vision:"ദർശനം",visionP:"കേരളത്തിലെ #1 കൺസ്ട്രക്ഷൻ കെമിക്കൽ ബ്രാൻഡ്.",
+    revLbl:"അവലോകനങ്ങൾ",revTitle:"Google അവലോകനങ്ങൾ",
+    revSub:"തിരൂർ, മലപ്പുറം — Google Maps-ൽ ഞങ്ങളെ കണ്ടെത്തുക",
+    revSetup:"Google Reviews — Setup ആവശ്യം",
+    revNote:'<strong>ദ്രുത setup:</strong><br/>1. <a href="https://goo.gl/maps/Nfr8EsghauyJN" target="_blank">Google Maps listing</a> — customers-ൽ നിന്ന് reviews ശേഖരിക്കുക<br/>2. <a href="https://elfsight.com/google-reviews-widget/" target="_blank">Elfsight widget</a> (free)<br/>3. Code copy → paste<br/><em style="color:var(--gd)">Real reviews = Trust ↑ | Fake = ↓</em>',
+    leaveReview:"Google Review നൽകുക",
+    dealerLbl:"ഡീലർ പോർട്ടൽ",dealerTitle:"AV CHEM ഡീലർ ആകുക",
+    dealerSub:"ഫോം പൂരിപ്പിക്കുക — 24 മണിക്കൂറിൽ ഞങ്ങൾ ബന്ധപ്പെടും.",
+    fName:"പേര്",fArea:"ഏരിയ / നഗരം",fPhone:"ഫോൺ",fWa:"WhatsApp",fDist:"ജില്ല",fPin:"പിൻകോഡ്",fProd:"ഉൽപ്പന്നം",
+    fUnit:"യൂണിറ്റ്",fQty:"അളവ്",fReq:"ആവൃത്തി",
+    monthly:"പ്രതിമാസം",onetime:"ഒറ്റ തവണ",quarterly:"ത്രൈമാസ",
+    pdfBtn:"PDF & സബ്മിറ്റ്",waBtn:"WhatsApp",
+    dataNote:"🔒 Google Sheet-ൽ save ആകും • WhatsApp confirmation ലഭിക്കും",
+    submit:"സബ്മിറ്റ്",respond:"2 മണിക്കൂറിൽ മറുപടി.",
+    contactLbl:"ബന്ധപ്പെടുക",contactTitle:"AV CHEM-മായി ബന്ധപ്പെടുക",
+    call:"വിളിക്കുക",addr:"വിലാസം",hours:"സമയം",hoursVal:"തിങ്കൾ–ശനി: 9 AM – 6 PM",
+    faqTitle:"പൊതുവായ ചോദ്യങ്ങൾ",
+    faq1q:"AV CHEM എവിടെ? Kerala മുഴുവൻ supply ഉണ്ടോ?",
+    faq1a:"മുക്കിലപ്പീടിക, കണ്ണംകുളം, തിരൂർ, മലപ്പുറം, Kerala. 14 ജില്ലകളിലും supply ഉണ്ട്.",
+    faq2q:"H4 ShieldX Epoxy എവിടെ ഉപയോഗിക്കാം?",
+    faq2a:"H4 ShieldX — മേൽക്കൂര, ഫ്ലോർ, ബാഥ്‌റൂം, ടാങ്ക്. Industrial grade, 100% waterproof, glossy.",
+    faq3q:"ഡീലർ ആകുന്നത് എങ്ങനെ?",
+    faq3a:"Dealer Enquiry form പൂരിപ്പിക്കുക അല്ലെങ്കിൽ +91 79073 44030 / WA +91 97458 38382 വിളിക്കുക.",
+    faq4q:"ടൈൽ അഡ്ഹസീവ് wet areas-ൽ ഉപയോഗിക്കാമോ?",
+    faq4a:"അതെ! H4 ടൈൽ അഡ്ഹസീവ് polymer-modified, waterproof — ബാഥ്‌റൂം, അടുക്കള, exterior walls.",
+    faq5q:"ഡീലർ minimum order?",
+    faq5a:"New dealers-ക്ക് MOQ flexible. Pricing, payment terms-നായി നേരിട്ട് ബന്ധപ്പെടുക.",
+    fprod:"ഉൽപ്പന്നങ്ങൾ",fcontact:"ബന്ധപ്പെടുക",privacy:"Privacy Policy",footerMfg:"നിർമ്മാണ യൂണിറ്റ് — മലപ്പുറം, Kerala",
+    footerP:"H4 ടൈൽ അഡ്ഹസീവ്, H4 വാട്ടർപ്രൂഫിംഗ്, H4 ShieldX — കേരളത്തിനായി.",
   }}
 }};
 
+let lang = localStorage.getItem('avL') || 'en';
+
 function toggleLang() {{
   lang = lang === 'en' ? 'ml' : 'en';
-  localStorage.setItem('avLang', lang);
+  localStorage.setItem('avL', lang);
   applyLang();
 }}
 
 function applyLang() {{
-  const isML = lang === 'ml';
-  const t = T[lang];
-  document.getElementById('htmlRoot').setAttribute('lang', isML ? 'ml' : 'en');
+  const t = TR[lang], isML = lang === 'ml';
+  document.getElementById('hr').setAttribute('lang', isML ? 'ml' : 'en');
 
-  // Lang btn
-  ['lf','mlf'].forEach(id=>{{ const e=document.getElementById(id); if(e) e.textContent=isML?'🇬🇧':'🇮🇳'; }});
-  ['lt','mlt'].forEach(id=>{{ const e=document.getElementById(id); if(e) e.textContent=isML?'English':'മലയാളം'; }});
+  // Update lang button everywhere
+  ['lf','mlf'].forEach(id => {{ const e=document.getElementById(id); if(e) e.textContent=isML?'🇬🇧':'🇮🇳'; }});
+  ['lt','mlt'].forEach(id => {{ const e=document.getElementById(id); if(e) e.textContent=isML?'English':'മലയാളം'; }});
 
-  // All [data-en][data-ml] elements
-  document.querySelectorAll('[data-en][data-ml]').forEach(el => {{
-    const v = isML ? el.getAttribute('data-ml') : el.getAttribute('data-en');
-    if (!v) return;
-    if (el.tagName === 'INPUT') return;
-    if (el.children.length === 0) {{ el.innerHTML = v; return; }}
-    if (el.tagName === 'A' || el.tagName === 'BUTTON' || el.tagName === 'SPAN') el.innerHTML = v;
+  // Apply all data-k translations
+  document.querySelectorAll('[data-k]').forEach(el => {{
+    const k = el.getAttribute('data-k');
+    if (!t[k]) return;
+    if (el.tagName === 'INPUT' || el.tagName === 'SELECT') return;
+    el.innerHTML = t[k];
   }});
 
-  // Targeted key sections
-  const set = (sel, html) => {{ const e=document.querySelector(sel); if(e) e.innerHTML=html; }};
-  set('.hbadge', t.badge);
-  set('.scroll-ind span', t.scroll);
-  set('#hero .btn-p', '📋 ' + t.dealer);
+  // Apply FAQ question/answer (data-kq)
+  document.querySelectorAll('[data-kq]').forEach(el => {{
+    const k = el.getAttribute('data-kq');
+    if (!t[k]) return;
+    if (el.classList.contains('fqq')) {{
+      const ic = el.querySelector('.ic');
+      el.textContent = t[k];
+      if (ic) el.appendChild(ic);
+    }} else {{
+      el.textContent = t[k];
+    }}
+  }});
 }}
 
-document.addEventListener('DOMContentLoaded', () => {{
-  if(lang === 'ml') applyLang();
-}});
+// Apply on load
+document.addEventListener('DOMContentLoaded', () => {{ applyLang(); }});
 
-// ═══ NAVBAR ═══
-window.addEventListener('scroll', () => {{ document.getElementById('nav').classList.toggle('scrolled', scrollY > 40); }}, {{passive:true}});
-function toggleMob() {{ document.getElementById('mobMenu').classList.toggle('open'); }}
-function closeMob() {{ document.getElementById('mobMenu').classList.remove('open'); }}
+// ═══ NAVBAR SCROLL ═══
+window.addEventListener('scroll', () => {{ document.getElementById('nav').classList.toggle('sc', scrollY > 40); }}, {{passive:true}});
+
+// ═══ MOBILE MENU ═══
+function tmob() {{ document.getElementById('mm').classList.toggle('open'); }}
+function cmob() {{ document.getElementById('mm').classList.remove('open'); }}
 document.addEventListener('click', e => {{
-  const m=document.getElementById('mobMenu');
+  const m = document.getElementById('mm');
   if(m.classList.contains('open') && !m.contains(e.target) && !e.target.closest('.ham')) m.classList.remove('open');
 }});
 
 // ═══ INTERSECTION OBSERVER ═══
 const io = new IntersectionObserver(entries => {{
-  entries.forEach(e => {{ if(e.isIntersecting){{e.target.classList.add('animated');io.unobserve(e.target);}} }});
-}}, {{threshold:0.12}});
-document.querySelectorAll('.fu,.sl,.sr').forEach(el => io.observe(el));
+  entries.forEach(e => {{ if(e.isIntersecting){{ e.target.classList.add('ani'); io.unobserve(e.target); }} }});
+}}, {{threshold:0.1}});
+document.querySelectorAll('.fu,.sl3,.sr2').forEach(el => io.observe(el));
 
-// ═══ COUNTER ═══
-const cIO = new IntersectionObserver(entries => {{
-  entries.forEach(e => {{ if(e.isIntersecting) {{ e.target.querySelectorAll('[data-count]').forEach(animCount); cIO.unobserve(e.target); }} }});
+// Counter
+const cio = new IntersectionObserver(entries => {{
+  entries.forEach(e => {{ if(e.isIntersecting){{ e.target.querySelectorAll('[data-cnt]').forEach(animC); cio.unobserve(e.target); }} }});
 }}, {{threshold:0.5}});
 const sEl = document.getElementById('stats');
-if(sEl) cIO.observe(sEl);
-function animCount(el) {{
-  const target=parseInt(el.dataset.count), suf=el.dataset.suf||'';
-  let v=0; const step=target/(1400/16);
-  const t=setInterval(()=>{{ v+=step; if(v>=target){{el.textContent=target+suf;clearInterval(t);}} else el.textContent=Math.floor(v)+suf; }},16);
+if(sEl) cio.observe(sEl);
+
+function animC(el) {{
+  const target = parseInt(el.dataset.cnt), suf = el.dataset.sf || '';
+  let v = 0;
+  const step = target / (1300/16);
+  const t = setInterval(() => {{ v += step; if(v >= target) {{ el.textContent = target + suf; clearInterval(t); }} else el.textContent = Math.floor(v) + suf; }}, 16);
 }}
 
 // ═══ SMOOTH SCROLL ═══
-document.querySelectorAll('a[href^="#"]').forEach(a=>{{
-  a.addEventListener('click', e=>{{
-    const t=document.querySelector(a.getAttribute('href'));
-    if(t){{ e.preventDefault(); const top=t.getBoundingClientRect().top+scrollY-68; window.scrollTo({{top,behavior:'smooth'}}); }}
+document.querySelectorAll('a[href^="#"]').forEach(a => {{
+  a.addEventListener('click', e => {{
+    const tgt = document.querySelector(a.getAttribute('href'));
+    if(tgt) {{ e.preventDefault(); window.scrollTo({{top: tgt.getBoundingClientRect().top + scrollY - 66, behavior:'smooth'}}); }}
   }});
 }});
 
 // ═══ FAQ ═══
 function tfaq(btn) {{
-  const item=btn.parentElement, was=item.classList.contains('open');
-  document.querySelectorAll('.faqi').forEach(i=>i.classList.remove('open'));
+  const item = btn.parentElement, was = item.classList.contains('open');
+  document.querySelectorAll('.fqi').forEach(i => i.classList.remove('open'));
   if(!was) item.classList.add('open');
-  if(lang==='ml') {{
-    const ml=btn.getAttribute('data-ml');
-    if(ml){{ const icon=btn.querySelector('.fqicon'); btn.textContent=ml; btn.appendChild(icon); }}
-    const a=item.querySelector('.faqa'), aml=a.getAttribute('data-ml');
-    if(aml) a.textContent=aml;
-  }}
+  // Re-apply lang after toggle (icon gets re-appended)
+  const t = TR[lang], kq = btn.getAttribute('data-kq');
+  if(kq && t[kq]) {{ const ic = btn.querySelector('.ic'); btn.textContent = t[kq]; if(ic) btn.appendChild(ic); }}
 }}
 
 // ═══ MODAL ═══
-let curProd='';
-function openEnq(p) {{ curProd=p; document.getElementById('modTitle').textContent='Enquiry — '+p; document.getElementById('enqModal').classList.add('open'); document.body.style.overflow='hidden'; }}
-function closeMod() {{ document.getElementById('enqModal').classList.remove('open'); document.body.style.overflow=''; }}
-document.getElementById('enqModal').addEventListener('click',e=>{{ if(e.target===document.getElementById('enqModal')) closeMod(); }});
+let curProd = '';
+function openEnq(p) {{ curProd = p; document.getElementById('mt').textContent = (lang==='ml'?'അന്വേഷണം':'Enquiry') + ' — ' + p; document.getElementById('em').classList.add('open'); document.body.style.overflow='hidden'; }}
+function cm() {{ document.getElementById('em').classList.remove('open'); document.body.style.overflow=''; }}
+document.getElementById('em').addEventListener('click', e => {{ if(e.target === document.getElementById('em')) cm(); }});
 function subMod() {{
-  const n=document.getElementById('mName').value.trim(), p=document.getElementById('mPhone').value.trim(), a=document.getElementById('mArea').value.trim();
-  if(!n||!p||!a){{toast('⚠️ '+(lang==='ml'?'എല്ലാ ഫീൽഡുകളും':'Fill all fields'));return;}} modWA();
+  const n=document.getElementById('mN').value.trim(), p=document.getElementById('mPh').value.trim(), a=document.getElementById('mAr').value.trim();
+  if(!n||!p||!a) {{ toast('⚠️ ' + (lang==='ml'?'എല്ലാ ഫീൽഡുകളും':'Fill all fields')); return; }}
+  modWA();
 }}
 function modWA() {{
-  const n=document.getElementById('mName').value.trim()||'Customer',a=document.getElementById('mArea').value.trim()||'Kerala';
-  const msg=`Hello AV CHEM! 🙏\\n\\nProduct: *${{curProd}}*\\nName: ${{n}}\\nArea: ${{a}}\\n\\nPlease share pricing.`;
+  const n=document.getElementById('mN').value.trim()||'Customer', a=document.getElementById('mAr').value.trim()||'Kerala';
+  const msg = `Hello AV CHEM! 🙏\\n\\nProduct: *${{curProd}}*\\nName: ${{n}}\\nArea: ${{a}}\\n\\nPlease share pricing.`;
   window.open(`https://wa.me/919745838382?text=${{encodeURIComponent(msg)}}`,'_blank');
-  closeMod(); toast('✅ WhatsApp opening...');
+  cm(); toast('✅ WhatsApp opening...');
 }}
 
 // ═══ FORM ═══
-const vPhone=v=>/^(\\+91|91)?[6-9]\\d{{9}}$/.test(v.replace(/\\s/g,''));
-const vPin=v=>/^\\d{{6}}$/.test(v.trim());
+const vPh = v => /^(\\+91|91)?[6-9]\\d{{9}}$/.test(v.replace(/\\s/g,''));
+const vPi = v => /^\\d{{6}}$/.test(v.trim());
+
 function getF() {{
   return {{
-    name:document.getElementById('fName').value.trim(),
-    area:document.getElementById('fArea').value.trim(),
-    phone:document.getElementById('fPhone').value.trim(),
-    wa:document.getElementById('fWa').value.trim(),
-    district:document.getElementById('fDist').value,
-    pin:document.getElementById('fPin').value.trim(),
-    product:document.getElementById('fProd').value,
-    unit:document.getElementById('fUnit').value,
-    qty:document.getElementById('fQty').value.trim()||'—',
-    req:document.getElementById('fReq').value,
+    name: document.getElementById('fN').value.trim(),
+    area: document.getElementById('fA').value.trim(),
+    phone: document.getElementById('fP').value.trim(),
+    wa: document.getElementById('fW').value.trim(),
+    district: document.getElementById('fD').value,
+    pin: document.getElementById('fPi').value.trim(),
+    product: document.getElementById('fPr').value,
+    unit: document.getElementById('fU').value,
+    qty: document.getElementById('fQ').value.trim() || '—',
+    req: document.getElementById('fR').value,
   }};
 }}
+
 function valF(d) {{
-  const ml=lang==='ml';
-  if(!d.name){{toast('⚠️ '+(ml?'പേര് നൽകുക':'Enter your name'));return false;}}
-  if(!vPhone(d.phone)){{toast('⚠️ '+(ml?'ഫോൺ നമ്പർ ശരിയല്ല':'Invalid phone'));return false;}}
-  if(!vPhone(d.wa)){{toast('⚠️ '+(ml?'WhatsApp നമ്പർ ശരിയല്ല':'Invalid WhatsApp'));return false;}}
-  if(!d.area){{toast('⚠️ '+(ml?'ഏരിയ നൽകുക':'Enter your area'));return false;}}
-  if(!d.district){{toast('⚠️ '+(ml?'ജില്ല തിരഞ്ഞെടുക്കുക':'Select district'));return false;}}
-  if(!vPin(d.pin)){{toast('⚠️ '+(ml?'Pincode ശരിയല്ല':'Invalid pincode'));return false;}}
-  if(!d.product){{toast('⚠️ '+(ml?'ഉൽപ്പന്നം തിരഞ്ഞെടുക്കുക':'Select product'));return false;}}
+  const m = lang==='ml';
+  if(!d.name) {{ toast('⚠️ '+(m?'പേര് നൽകുക':'Enter name')); return false; }}
+  if(!vPh(d.phone)) {{ toast('⚠️ '+(m?'ഫോൺ നമ്പർ ശരിയല്ല':'Invalid phone')); return false; }}
+  if(!vPh(d.wa)) {{ toast('⚠️ '+(m?'WhatsApp നമ്പർ ശരിയല്ല':'Invalid WhatsApp')); return false; }}
+  if(!d.area) {{ toast('⚠️ '+(m?'ഏരിയ നൽകുക':'Enter area')); return false; }}
+  if(!d.district) {{ toast('⚠️ '+(m?'ജില്ല തിരഞ്ഞെടുക്കുക':'Select district')); return false; }}
+  if(!vPi(d.pin)) {{ toast('⚠️ '+(m?'Pincode ശരിയല്ല':'Invalid pincode')); return false; }}
+  if(!d.product) {{ toast('⚠️ '+(m?'ഉൽപ്പന്നം':'Select product')); return false; }}
   return true;
 }}
 
 async function saveSheet(d) {{
-  if(SCRIPT_URL==='YOUR_GOOGLE_APPS_SCRIPT_URL') return false;
+  if(!SURL) return false;
   try {{
-    await fetch(SCRIPT_URL,{{method:'POST',headers:{{'Content-Type':'application/json'}},body:JSON.stringify(d),mode:'no-cors'}});
+    await fetch(SURL, {{method:'POST', headers:{{'Content-Type':'application/json'}}, body:JSON.stringify(d), mode:'no-cors'}});
     return true;
-  }} catch(e) {{ console.error('Sheet:',e); return false; }}
+  }} catch(e) {{ console.error('Sheet:', e); return false; }}
 }}
 
 function genPDF(d) {{
   if(!window.jspdf) return;
-  const {{jsPDF}}=window.jspdf;
-  const doc=new jsPDF({{format:'a5',unit:'mm',orientation:'portrait'}});
-  const W=148,H=210,now=new Date();
+  const {{jsPDF}} = window.jspdf;
+  const doc = new jsPDF({{format:'a5', unit:'mm', orientation:'portrait'}});
+  const W=148, H=210, now=new Date();
   const ds=now.toLocaleDateString('en-IN',{{day:'2-digit',month:'short',year:'numeric'}});
   const ts=now.toLocaleTimeString('en-IN',{{hour:'2-digit',minute:'2-digit'}});
-  doc.setFillColor(123,45,139);doc.rect(0,0,W,34,'F');
-  doc.setFillColor(201,168,76);doc.rect(0,34,W,2,'F');
-  doc.setTextColor(255,255,255);doc.setFont('helvetica','bold');doc.setFontSize(16);
-  doc.text('AV CHEM',W/2,13,{{align:'center'}});
-  doc.setFontSize(7.5);doc.setTextColor(232,184,0);doc.setFont('helvetica','normal');
-  doc.text('CHEMICAL & MANUFACTURING',W/2,19,{{align:'center'}});
-  doc.setTextColor(200,200,220);doc.setFontSize(6.5);
-  doc.text('Mukkilapeedika, Kannamkulam, Tirur, Malappuram, Kerala',W/2,25,{{align:'center'}});
-  doc.text('+91 79073 44030  |  WA: +91 97458 38382  |  avchemtirur@gmail.com',W/2,30,{{align:'center'}});
-  doc.setTextColor(123,45,139);doc.setFont('helvetica','bold');doc.setFontSize(11);
-  doc.text('DEALER ENQUIRY',W/2,44,{{align:'center'}});
-  doc.setTextColor(140,125,106);doc.setFont('helvetica','normal');doc.setFontSize(7.5);
-  doc.text(`Date: ${{ds}}   Time: ${{ts}}`,W/2,51,{{align:'center'}});
-  doc.setDrawColor(201,168,76);doc.setLineWidth(.5);doc.line(12,55,W-12,55);
+  doc.setFillColor(123,45,139); doc.rect(0,0,W,33,'F');
+  doc.setFillColor(201,168,76); doc.rect(0,33,W,2,'F');
+  doc.setTextColor(255,255,255); doc.setFont('helvetica','bold'); doc.setFontSize(16);
+  doc.text('AV CHEM', W/2, 12, {{align:'center'}});
+  doc.setFontSize(7.5); doc.setTextColor(232,184,0); doc.setFont('helvetica','normal');
+  doc.text('CHEMICAL & MANUFACTURING', W/2, 18.5, {{align:'center'}});
+  doc.setTextColor(200,200,220); doc.setFontSize(6.5);
+  doc.text('Mukkilapeedika, Kannamkulam, Tirur, Malappuram, Kerala', W/2, 24, {{align:'center'}});
+  doc.text('+91 79073 44030  |  WA: +91 97458 38382  |  avchemtirur@gmail.com', W/2, 29.5, {{align:'center'}});
+  doc.setTextColor(123,45,139); doc.setFont('helvetica','bold'); doc.setFontSize(11);
+  doc.text('DEALER ENQUIRY', W/2, 43, {{align:'center'}});
+  doc.setTextColor(140,125,106); doc.setFont('helvetica','normal'); doc.setFontSize(7.5);
+  doc.text(`Date: ${{ds}}   Time: ${{ts}}`, W/2, 50, {{align:'center'}});
+  doc.setDrawColor(201,168,76); doc.setLineWidth(.5); doc.line(12,54,W-12,54);
   const rows=[['Name',d.name],['Phone',d.phone],['WhatsApp',d.wa],['Area',d.area],['District',d.district],['Pincode',d.pin]];
-  let y=63;
+  let y=62;
   rows.forEach(([l,v])=>{{
-    doc.setFillColor(243,238,255);doc.roundedRect(10,y-4,52,7,1,1,'F');
-    doc.setFont('helvetica','bold');doc.setTextColor(123,45,139);doc.setFontSize(8.5);doc.text(l,13,y);
-    doc.setFont('helvetica','normal');doc.setTextColor(26,18,9);doc.text(v||'—',65,y);y+=11;
+    doc.setFillColor(243,238,255); doc.roundedRect(10,y-4,52,7,1,1,'F');
+    doc.setFont('helvetica','bold'); doc.setTextColor(123,45,139); doc.setFontSize(8.5); doc.text(l,13,y);
+    doc.setFont('helvetica','normal'); doc.setTextColor(26,18,9); doc.text(v||'—',65,y); y+=11;
   }});
-  doc.setDrawColor(201,168,76);doc.line(12,y,W-12,y);y+=8;
-  doc.setFont('helvetica','bold');doc.setTextColor(123,45,139);doc.setFontSize(9);doc.text('PRODUCT',12,y);y+=8;
+  doc.setDrawColor(201,168,76); doc.line(12,y,W-12,y); y+=7;
+  doc.setFont('helvetica','bold'); doc.setTextColor(123,45,139); doc.setFontSize(9); doc.text('PRODUCT DETAILS',12,y); y+=8;
   [['Product',d.product],['Unit',d.unit],['Quantity',d.qty],['Requirement',d.req]].forEach(([l,v])=>{{
-    doc.setFillColor(255,250,235);doc.roundedRect(10,y-4,52,7,1,1,'F');
-    doc.setFont('helvetica','bold');doc.setTextColor(160,120,48);doc.setFontSize(8.5);doc.text(l,13,y);
-    doc.setFont('helvetica','normal');doc.setTextColor(26,18,9);doc.text(v||'—',65,y);y+=11;
+    doc.setFillColor(255,250,235); doc.roundedRect(10,y-4,52,7,1,1,'F');
+    doc.setFont('helvetica','bold'); doc.setTextColor(160,120,48); doc.setFontSize(8.5); doc.text(l,13,y);
+    doc.setFont('helvetica','normal'); doc.setTextColor(26,18,9); doc.text(v||'—',65,y); y+=11;
   }});
-  doc.setFillColor(123,45,139);doc.rect(0,H-20,W,20,'F');
-  doc.setFillColor(201,168,76);doc.rect(0,H-22,W,2,'F');
-  doc.setTextColor(255,255,255);doc.setFont('helvetica','bold');doc.setFontSize(8);
-  doc.text('Thank you! Our team will contact you within 24 hours.',W/2,H-13,{{align:'center'}});
-  doc.setFont('helvetica','normal');doc.setFontSize(7);doc.setTextColor(232,184,0);
-  doc.text('avchemtirur@gmail.com | wa.me/919745838382',W/2,H-8,{{align:'center'}});
+  doc.setFillColor(123,45,139); doc.rect(0,H-19,W,19,'F');
+  doc.setFillColor(201,168,76); doc.rect(0,H-21,W,2,'F');
+  doc.setTextColor(255,255,255); doc.setFont('helvetica','bold'); doc.setFontSize(8);
+  doc.text('Thank you! Our team will contact you within 24 hours.',W/2,H-12,{{align:'center'}});
+  doc.setFont('helvetica','normal'); doc.setFontSize(7); doc.setTextColor(232,184,0);
+  doc.text('avchemtirur@gmail.com  |  wa.me/919745838382',W/2,H-7,{{align:'center'}});
   doc.save(`AVCHEM_${{d.name.replace(/\\s+/g,'_')}}_${{now.toLocaleDateString('en-IN').replace(/\\//g,'-')}}.pdf`);
 }}
 
-async function submitForm() {{
-  const d=getF(); if(!valF(d)) return;
-  const btn=document.querySelector('.bsub');
-  btn.textContent='⏳...'; btn.disabled=true;
-  const saved=await saveSheet(d);
-  const ss=document.getElementById('ss');
-  if(SCRIPT_URL!=='YOUR_GOOGLE_APPS_SCRIPT_URL'){{
-    ss.className='sstatus '+(saved?'ok':'er');
-    ss.textContent=saved?(lang==='ml'?'✅ Google Sheet-ൽ save ആയി!':'✅ Saved to Google Sheet!'):(lang==='ml'?'⚠️ Sheet save failed':'⚠️ Sheet save failed. Check script URL.');
+async function subForm() {{
+  const d = getF(); if(!valF(d)) return;
+  const btn = document.querySelector('.bsb');
+  btn.textContent = '⏳...'; btn.disabled = true;
+  const saved = await saveSheet(d);
+  const ss = document.getElementById('ss');
+  if(SURL) {{
+    ss.className = 'sst ' + (saved ? 'ok' : 'er');
+    ss.textContent = saved ? (lang==='ml'?'✅ Google Sheet-ൽ save ആയി!':'✅ Saved to Google Sheet!') : (lang==='ml'?'⚠️ Sheet save failed':'⚠️ Sheet save failed. Check script URL in Admin panel.');
   }}
-  btn.textContent=lang==='ml'?'📄 PDF & സബ്മിറ്റ്':'📄 PDF & Submit'; btn.disabled=false;
+  btn.innerHTML = '📄 <span data-k="pdfBtn">' + TR[lang].pdfBtn + '</span>'; btn.disabled = false;
   if(window.jspdf) genPDF(d);
   toast(lang==='ml'?'✅ PDF ഡൗൺലോഡ് ആയി!':'✅ PDF downloaded!');
 }}
 
 function sendWA() {{
-  const d=getF(); if(!valF(d)) return;
-  const msg=`🏗️ *AV CHEM Dealer Enquiry*\\n\\n👤 *Name:* ${{d.name}}\\n📞 *Phone:* ${{d.phone}}\\n💬 *WA:* ${{d.wa}}\\n📍 *Area:* ${{d.area}}\\n🗺️ *District:* ${{d.district}}\\n📮 *Pincode:* ${{d.pin}}\\n\\n🔬 *Product:* ${{d.product}}\\n📦 *Unit:* ${{d.unit}}\\n🔢 *Qty:* ${{d.qty}}\\n📅 *Req:* ${{d.req}}\\n\\n_AV CHEM Website_`;
+  const d = getF(); if(!valF(d)) return;
+  const msg = `🏗️ *AV CHEM Dealer Enquiry*\\n\\n👤 *Name:* ${{d.name}}\\n📞 *Phone:* ${{d.phone}}\\n💬 *WA:* ${{d.wa}}\\n📍 *Area:* ${{d.area}}\\n🗺️ *District:* ${{d.district}}\\n📮 *Pin:* ${{d.pin}}\\n\\n🔬 *Product:* ${{d.product}}\\n📦 *Unit:* ${{d.unit}}\\n🔢 *Qty:* ${{d.qty}}\\n📅 *Req:* ${{d.req}}\\n\\n_AV CHEM Website_`;
   window.open(`https://wa.me/919745838382?text=${{encodeURIComponent(msg)}}`,'_blank');
   toast(lang==='ml'?'✅ WhatsApp തുറക്കുന്നു...':'✅ Opening WhatsApp...');
 }}
 
-function toast(msg){{ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),3000); }}
+function toast(msg) {{ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),3000); }}
 
 // ═══ ADMIN PANEL ═══
-let adminUnlocked=false;
-function showAdminPw(){{ document.getElementById('adminPanel').classList.add('open'); document.getElementById('adminOverlay').style.display='block'; document.getElementById('adminPwSection').style.display=adminUnlocked?'none':'flex'; document.getElementById('adminControls').style.display=adminUnlocked?'block':'none'; }}
-function closeAdmin(){{ document.getElementById('adminPanel').classList.remove('open'); document.getElementById('adminOverlay').style.display='none'; }}
-function checkPw(){{ const pw=document.getElementById('adminPw').value; if(pw===ADMIN_PW){{ adminUnlocked=true; document.getElementById('adminPwSection').style.display='none'; document.getElementById('adminControls').style.display='block'; document.getElementById('pwErr').style.display='none'; }} else {{ document.getElementById('pwErr').style.display='block'; }} }}
-function togSection(id,cb){{ const el=id==='wa-float'?document.querySelector('.wa-float'):document.getElementById(id); if(el) el.style.display=cb.checked?'':'none'; }}
-function saveScriptUrl(){{ SCRIPT_URL=document.getElementById('scriptUrl').value.trim(); localStorage.setItem('avScriptUrl',SCRIPT_URL); toast('✅ Script URL saved!'); }}
-document.getElementById('scriptUrl').value=SCRIPT_URL!=='YOUR_GOOGLE_APPS_SCRIPT_URL'?SCRIPT_URL:'';
+let admUnlocked = false;
+function showAdmPw() {{ document.getElementById('admP').classList.add('open'); document.getElementById('admOv').style.display='block'; document.getElementById('admPwSec').style.display=admUnlocked?'none':'flex'; document.getElementById('admCtrl').style.display=admUnlocked?'block':'none'; if(!admUnlocked) document.getElementById('admPw').focus(); }}
+function closeAdm() {{ document.getElementById('admP').classList.remove('open'); document.getElementById('admOv').style.display='none'; }}
+function chkPw() {{ if(document.getElementById('admPw').value===APWD) {{ admUnlocked=true; document.getElementById('admPwSec').style.display='none'; document.getElementById('admCtrl').style.display='block'; document.getElementById('pwE').style.display='none'; }} else {{ document.getElementById('pwE').style.display='block'; }} }}
+function togSec(id, cb) {{ const el=document.getElementById(id); if(el) el.style.display=cb.checked?'':'none'; localStorage.setItem('avSec_'+id, cb.checked?'1':'0'); }}
+function saveUrl() {{ SURL=document.getElementById('sUrl').value.trim(); localStorage.setItem('avSurl',SURL); toast('✅ Script URL saved! Test form now.'); }}
+// Load saved URL into input
+document.getElementById('sUrl').value = SURL;
+// Restore admin section states
+['waf','sb','reviews','dealer','faq','stats'].forEach(id => {{
+  const saved = localStorage.getItem('avSec_'+id);
+  if(saved === '0') {{ const el=document.getElementById(id); if(el) el.style.display='none'; const cb=document.getElementById('t'+id.charAt(0).toUpperCase()+id.slice(1,2).toUpperCase()+id.slice(2)); if(!cb){{ const cb2=document.getElementById(id==='waf'?'tWA':id==='sb'?'tSB':id==='reviews'?'tRV':id==='dealer'?'tDF':id==='faq'?'tFQ':'tST'); if(cb2) cb2.checked=false; }} }}
+}});
+
+// PWA Service Worker hint
+if('serviceWorker' in navigator && location.protocol==='https:') {{
+  // navigator.serviceWorker.register('/sw.js');
+}}
 </script>
 </body>
 </html>'''
 
-with open('/home/claude/avchem3/index.html', 'w', encoding='utf-8') as f:
+with open('/home/claude/avchem3/index_final.html', 'w', encoding='utf-8') as f:
     f.write(HTML)
 
-print(f"HTML written: {len(HTML)} chars ({len(HTML)//1024} KB)")
+size = os.path.getsize('/home/claude/avchem3/index_final.html')
+print(f"✅ Final HTML: {size:,} bytes ({size//1024} KB)")
 PYEOF
