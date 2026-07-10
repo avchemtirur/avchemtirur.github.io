@@ -183,14 +183,19 @@ function defaultData(){
     settings:{
       companyName:'AV CHEM Chemical & Manufacturing',
       address:'Mukkilapeedika, Kannamkulam, Tirur, Malappuram, Kerala',
-      gstin:'', pan:'', mobile:'', whatsapp:'', website:'',
+      gstin:'', pan:'', mobile:'', whatsapp:'', email:'', website:'',
       brandLogo:'', companyLogo:'', watermark:'', qrImage:'',
       theme:'goldblack',
       customTheme:{gold:'#C9962B', ink:'#161513', rust:'#B5502E'},
       invoiceTemplate:'design1',
       invoicePrefix:'H4', invoiceSeq: 1,
       gstDefault: 18,
-      currency:'₹'
+      currency:'₹',
+      bank:{holder:'', account:'', bank:'', branch:'', ifsc:'', upi:''},
+      showBankDefault:false,
+      marketingQr:'',
+      marketingMessage:'Thank you for choosing H4.\n\n⭐ Please scan the QR code and leave a Google Review.\nYour feedback helps us improve and serve you better.',
+      showMarketingDefault:true
     },
     users:[
       {id:1, name:'Admin', username:'admin', password:'admin123', role:'Admin'}
@@ -220,6 +225,12 @@ function loadDB(){
     if(!parsed.activityLog) parsed.activityLog = [];
     if(!parsed.settings.customTheme) parsed.settings.customTheme = d.settings.customTheme;
     if(!parsed.settings.invoiceTemplate) parsed.settings.invoiceTemplate = 'design1';
+    if(!parsed.settings.bank) parsed.settings.bank = d.settings.bank;
+    if(parsed.settings.showBankDefault===undefined) parsed.settings.showBankDefault = false;
+    if(parsed.settings.marketingQr===undefined) parsed.settings.marketingQr = '';
+    if(!parsed.settings.marketingMessage) parsed.settings.marketingMessage = d.settings.marketingMessage;
+    if(parsed.settings.showMarketingDefault===undefined) parsed.settings.showMarketingDefault = true;
+    if(parsed.settings.email===undefined) parsed.settings.email = '';
     return parsed;
   }catch(e){ console.error('DB load failed', e); return defaultData(); }
 }
@@ -436,7 +447,12 @@ function renderBilling(prefillInvoice){
   const inv = prefillInvoice || {};
   const cust = inv.customer || {};
   const charges = inv.charges || {labour:0,transport:0,loading:0,packing:0,other:0};
+  const chargesEnabled = inv.chargesEnabled!==undefined ? inv.chargesEnabled : true;
   const discount = inv.discount || {type:'flat', value:0};
+  const discountEnabled = inv.discountEnabled!==undefined ? inv.discountEnabled : (discount.type && discount.type!=='off');
+  const warranty = inv.warrantyInfo || {enabled:false, value:1, unit:'Years'};
+  const showBank = inv.showBank!==undefined ? inv.showBank : s.showBankDefault;
+  const showMkt = inv.showMarketingQr!==undefined ? inv.showMarketingQr : s.showMarketingDefault;
 
   document.getElementById('content').innerHTML = `
   <div class="grid-2" style="align-items:start;">
@@ -461,14 +477,25 @@ function renderBilling(prefillInvoice){
     <div class="card">
       <div class="section-title">Invoice Info</div>
       <div class="grid-2">
-        <div class="field"><label>Invoice Number</label><input id="iNumber" class="mono" value="${inv.number || (s.invoicePrefix+'-'+String(s.invoiceSeq).padStart(4,'0'))}" ${inv.number?'':'readonly'}></div>
+        <div class="field"><label>Invoice Number (editable)</label><input id="iNumber" class="mono" value="${esc(inv.number) || (s.invoicePrefix+'-'+String(s.invoiceSeq).padStart(4,'0'))}"></div>
         <div class="field"><label>Date</label><input id="iDate" type="date" value="${inv.date || todayISO()}"></div>
       </div>
-      <div class="grid-2">
-        <div class="field"><label>Due Date</label><input id="iDue" type="date" value="${inv.dueDate||''}"></div>
-        <div class="field"><label>Warranty</label><input id="iWarranty" placeholder="e.g. 5 Years" value="${esc(inv.warranty)||''}"></div>
-      </div>
+      <div class="field"><label>Due Date</label><input id="iDue" type="date" value="${inv.dueDate||''}"></div>
       <div class="field"><label>Notes</label><textarea id="iNotes" rows="2">${esc(inv.notes)||''}</textarea></div>
+
+      <div class="section-title" style="margin-top:14px;">Warranty</div>
+      <label class="small"><input type="checkbox" id="warrantyEnabled" ${warranty.enabled?'checked':''} onchange="toggleWarranty()"> Enable warranty on this invoice</label>
+      <div id="warrantyFields" style="display:${warranty.enabled?'flex':'none'};gap:8px;margin-top:8px;align-items:end;">
+        <div class="field" style="width:90px;margin-bottom:0;"><label>Value</label><input id="warrantyValue" type="number" min="1" value="${warranty.value||1}"></div>
+        <div class="field" style="width:130px;margin-bottom:0;"><label>Unit</label>
+          <select id="warrantyUnit"><option ${warranty.unit==='Years'?'selected':''}>Years</option><option ${warranty.unit==='Months'?'selected':''}>Months</option></select>
+        </div>
+        <div class="small" style="padding-bottom:10px;">Expiry auto-calculated from invoice date.</div>
+      </div>
+
+      <div class="section-title" style="margin-top:14px;">Invoice Extras</div>
+      <label class="small" style="display:block;margin-bottom:6px;"><input type="checkbox" id="showBank" ${showBank?'checked':''}> Show bank details on this invoice</label>
+      <label class="small" style="display:block;"><input type="checkbox" id="showMkt" ${showMkt?'checked':''}> Show marketing QR (Scan &amp; Connect) on this invoice</label>
     </div>
   </div>
 
@@ -493,7 +520,7 @@ function renderBilling(prefillInvoice){
     </div>
     <div class="table-wrap">
       <table id="cartTable">
-        <thead><tr><th>Item</th><th>Qty</th><th>Unit</th><th>Rate</th><th>GST%</th><th>Amount</th><th></th></tr></thead>
+        <thead><tr><th>Item</th><th>HSN</th><th>Qty</th><th>Unit</th><th>Rate</th><th>GST</th><th>Amount</th><th></th></tr></thead>
         <tbody id="cartBody"></tbody>
       </table>
     </div>
@@ -502,23 +529,28 @@ function renderBilling(prefillInvoice){
   <div class="grid-2" style="margin-top:16px;align-items:start;">
     <div class="card">
       <div class="section-title">Additional Charges</div>
-      <div class="grid-2">
-        <div class="field"><label>Labour</label><input id="chLabour" type="number" value="${charges.labour||0}" oninput="recalc()"></div>
-        <div class="field"><label>Transportation</label><input id="chTransport" type="number" value="${charges.transport||0}" oninput="recalc()"></div>
+      <label class="small" style="display:block;margin-bottom:10px;"><input type="checkbox" id="chargesEnabled" ${chargesEnabled?'checked':''} onchange="toggleCharges()"> Enable additional charges</label>
+      <div id="chargesFields" style="display:${chargesEnabled?'block':'none'};">
+        <div class="grid-2">
+          <div class="field"><label>Labour</label><input id="chLabour" type="number" value="${charges.labour||0}" oninput="recalc()"></div>
+          <div class="field"><label>Transportation</label><input id="chTransport" type="number" value="${charges.transport||0}" oninput="recalc()"></div>
+        </div>
+        <div class="grid-2">
+          <div class="field"><label>Loading/Unloading</label><input id="chLoading" type="number" value="${charges.loading||0}" oninput="recalc()"></div>
+          <div class="field"><label>Packing Charge</label><input id="chPacking" type="number" value="${charges.packing||0}" oninput="recalc()"></div>
+        </div>
+        <div class="field"><label>Other Charges</label><input id="chOther" type="number" value="${charges.other||0}" oninput="recalc()"></div>
       </div>
-      <div class="grid-2">
-        <div class="field"><label>Loading/Unloading</label><input id="chLoading" type="number" value="${charges.loading||0}" oninput="recalc()"></div>
-        <div class="field"><label>Packing Charge</label><input id="chPacking" type="number" value="${charges.packing||0}" oninput="recalc()"></div>
-      </div>
-      <div class="field"><label>Other Charges</label><input id="chOther" type="number" value="${charges.other||0}" oninput="recalc()"></div>
 
       <div class="section-title" style="margin-top:16px;">Discount</div>
-      <div style="display:flex;gap:10px;align-items:center;margin-bottom:10px;">
-        <label class="small"><input type="radio" name="discType" value="flat" ${discount.type==='flat'?'checked':''} onchange="recalc()"> Flat ₹</label>
-        <label class="small"><input type="radio" name="discType" value="percent" ${discount.type==='percent'?'checked':''} onchange="recalc()"> Percentage %</label>
-        <label class="small"><input type="radio" name="discType" value="off" ${(!discount.type||discount.type==='off')?'checked':''} onchange="recalc()"> Off</label>
+      <label class="small" style="display:block;margin-bottom:10px;"><input type="checkbox" id="discountEnabled" ${discountEnabled?'checked':''} onchange="toggleDiscount()"> Enable discount</label>
+      <div id="discountFields" style="display:${discountEnabled?'block':'none'};">
+        <div style="display:flex;gap:10px;align-items:center;margin-bottom:10px;">
+          <label class="small"><input type="radio" name="discType" value="flat" ${discount.type==='flat'?'checked':''} onchange="recalc()"> Flat ₹</label>
+          <label class="small"><input type="radio" name="discType" value="percent" ${discount.type==='percent'?'checked':''} onchange="recalc()"> Percentage %</label>
+        </div>
+        <div class="field"><label>Discount Value</label><input id="discValue" type="number" value="${discount.value||0}" oninput="recalc()"></div>
       </div>
-      <div class="field"><label>Discount Value</label><input id="discValue" type="number" value="${discount.value||0}" oninput="recalc()"></div>
     </div>
 
     <div class="card">
@@ -554,6 +586,7 @@ function renderBilling(prefillInvoice){
   `;
   renderCart();
 }
+const GST_SLABS = [0,5,12,18,28];
 function addCartItem(){
   const sel = document.getElementById('prodSelect');
   const qty = parseFloat(document.getElementById('prodQty').value)||0;
@@ -561,7 +594,7 @@ function addCartItem(){
   const p = DB.products.find(x=>x.id==sel.value);
   const pType = (document.getElementById('priceType')||{}).value || 'Retail';
   const rate = pType==='Dealer' ? p.dealerPrice : p.retailPrice;
-  CART.push({id:uid(), name:p.name, unit:p.unit, qty, rate, gst:p.gst!==undefined?p.gst:DB.settings.gstDefault, productId:p.id, category:p.category});
+  CART.push({id:uid(), name:p.name, unit:p.unit, qty, rate, gst:p.gst!==undefined?p.gst:DB.settings.gstDefault, hsn:p.hsn||'', productId:p.id, category:p.category});
   renderCart();
 }
 function addCustomItem(){
@@ -569,39 +602,52 @@ function addCustomItem(){
   const qty = parseFloat(prompt('Quantity:','1'))||1;
   const rate = parseFloat(prompt('Rate (₹):','0'))||0;
   const gst = parseFloat(prompt('GST %:', DB.settings.gstDefault))||0;
-  CART.push({id:uid(), name, unit:'Pcs', qty, rate, gst, productId:null});
+  CART.push({id:uid(), name, unit:'Pcs', qty, rate, gst, hsn:'', productId:null});
   renderCart();
 }
 function removeCartItem(id){ CART = CART.filter(i=>i.id!==id); renderCart(); }
 function updateCartItem(id, field, val){
   const it = CART.find(i=>i.id===id); if(!it) return;
-  it[field] = (field==='name'||field==='unit') ? val : parseFloat(val)||0;
+  it[field] = (field==='name'||field==='unit'||field==='hsn') ? val : parseFloat(val)||0;
   renderCart();
 }
+function setItemGst(id, gst){ const it = CART.find(i=>i.id===id); if(!it) return; it.gst = gst; renderCart(); }
 function renderCart(){
   const body = document.getElementById('cartBody');
   if(!body) return;
   body.innerHTML = CART.map(it=>{
     const amt = it.qty*it.rate;
+    const pills = GST_SLABS.map(g=>`<span onclick="setItemGst(${it.id},${g})" style="cursor:pointer;font-size:9px;padding:1px 5px;border-radius:8px;border:1px solid ${it.gst===g?'var(--gold)':'var(--line-light)'};background:${it.gst===g?'var(--gold)':'#fff'};color:${it.gst===g?'#fff':'#666'};margin-right:2px;display:inline-block;">${g===0?'Off':g+'%'}</span>`).join('');
     return `<tr>
-      <td><input value="${esc(it.name)}" onchange="updateCartItem(${it.id},'name',this.value)" style="border:1px solid var(--line-light);padding:4px 6px;width:150px;"></td>
-      <td><input type="number" value="${it.qty}" onchange="updateCartItem(${it.id},'qty',this.value)" style="border:1px solid var(--line-light);padding:4px 6px;width:60px;"></td>
-      <td><input value="${esc(it.unit)}" onchange="updateCartItem(${it.id},'unit',this.value)" style="border:1px solid var(--line-light);padding:4px 6px;width:70px;"></td>
-      <td><input type="number" value="${it.rate}" onchange="updateCartItem(${it.id},'rate',this.value)" style="border:1px solid var(--line-light);padding:4px 6px;width:80px;"></td>
-      <td><input type="number" value="${it.gst}" onchange="updateCartItem(${it.id},'gst',this.value)" style="border:1px solid var(--line-light);padding:4px 6px;width:55px;"></td>
+      <td><input value="${esc(it.name)}" onchange="updateCartItem(${it.id},'name',this.value)" style="border:1px solid var(--line-light);padding:4px 6px;width:130px;"></td>
+      <td><input value="${esc(it.hsn||'')}" onchange="updateCartItem(${it.id},'hsn',this.value)" style="border:1px solid var(--line-light);padding:4px 6px;width:60px;" placeholder="HSN"></td>
+      <td><input type="number" value="${it.qty}" onchange="updateCartItem(${it.id},'qty',this.value)" style="border:1px solid var(--line-light);padding:4px 6px;width:55px;"></td>
+      <td><input value="${esc(it.unit)}" onchange="updateCartItem(${it.id},'unit',this.value)" style="border:1px solid var(--line-light);padding:4px 6px;width:65px;"></td>
+      <td><input type="number" value="${it.rate}" onchange="updateCartItem(${it.id},'rate',this.value)" style="border:1px solid var(--line-light);padding:4px 6px;width:75px;"></td>
+      <td>
+        <input type="number" value="${it.gst}" onchange="updateCartItem(${it.id},'gst',this.value)" style="border:1px solid var(--line-light);padding:4px 6px;width:48px;margin-bottom:2px;">
+        <div>${pills}</div>
+      </td>
       <td class="mono">${fmt(amt)}</td>
       <td><button class="btn btn-danger btn-sm" onclick="removeCartItem(${it.id})">✕</button></td>
     </tr>`;
-  }).join('') || '<tr><td colspan="7" class="small">No items added yet.</td></tr>';
+  }).join('') || '<tr><td colspan="8" class="small">No items added yet.</td></tr>';
   recalc();
 }
+function toggleWarranty(){ document.getElementById('warrantyFields').style.display = document.getElementById('warrantyEnabled').checked ? 'flex' : 'none'; }
+function toggleCharges(){ document.getElementById('chargesFields').style.display = document.getElementById('chargesEnabled').checked ? 'block' : 'none'; recalc(); }
+function toggleDiscount(){ document.getElementById('discountFields').style.display = document.getElementById('discountEnabled').checked ? 'block' : 'none'; recalc(); }
 function computeTotals(){
   const sub = CART.reduce((s,i)=>s+i.qty*i.rate,0);
   const gstAmt = CART.reduce((s,i)=>s+(i.qty*i.rate*(i.gst||0)/100),0);
-  const chLabour = numVal('chLabour'), chTransport = numVal('chTransport'), chLoading=numVal('chLoading'), chPacking=numVal('chPacking'), chOther=numVal('chOther');
+  const chargesEl = document.getElementById('chargesEnabled');
+  const chargesOn = chargesEl ? chargesEl.checked : true;
+  const chLabour = chargesOn?numVal('chLabour'):0, chTransport = chargesOn?numVal('chTransport'):0, chLoading=chargesOn?numVal('chLoading'):0, chPacking=chargesOn?numVal('chPacking'):0, chOther=chargesOn?numVal('chOther'):0;
   const chargesTotal = chLabour+chTransport+chLoading+chPacking+chOther;
-  const discType = (document.querySelector('input[name=discType]:checked')||{}).value || 'off';
-  const discValRaw = numVal('discValue');
+  const discEl = document.getElementById('discountEnabled');
+  const discOn = discEl ? discEl.checked : false;
+  const discType = discOn ? ((document.querySelector('input[name=discType]:checked')||{}).value || 'flat') : 'off';
+  const discValRaw = discOn ? numVal('discValue') : 0;
   let discAmt = 0;
   if(discType==='flat') discAmt = discValRaw;
   else if(discType==='percent') discAmt = (sub+chargesTotal)*discValRaw/100;
@@ -623,6 +669,12 @@ function paymentStatusFor(grand, paid){
   if(paid>=grand) return 'Paid';
   return 'Partial';
 }
+function calcExpiryDate(startDate, value, unit){
+  const d = new Date(startDate);
+  if(unit==='Months') d.setMonth(d.getMonth()+Number(value));
+  else d.setFullYear(d.getFullYear()+Number(value));
+  return d.toISOString().slice(0,10);
+}
 function saveInvoice(preview){
   const name = document.getElementById('cName').value.trim();
   if(!name){ alert('Please enter a customer name.'); return; }
@@ -641,20 +693,30 @@ function saveInvoice(preview){
   else { Object.assign(cust, customer); }
 
   const status = paymentStatusFor(t.grand, t.paid);
-  const invNumber = document.getElementById('iNumber').value;
+  const invNumber = document.getElementById('iNumber').value.trim() || (DB.settings.invoicePrefix+'-'+String(DB.settings.invoiceSeq).padStart(4,'0'));
+  const invDate = document.getElementById('iDate').value || todayISO();
+  const warrantyEnabled = document.getElementById('warrantyEnabled').checked;
+  const warrantyValue = numVal('warrantyValue')||1;
+  const warrantyUnit = document.getElementById('warrantyUnit').value;
+  const warrantyInfo = {enabled:warrantyEnabled, value:warrantyValue, unit:warrantyUnit,
+    expiryDate: warrantyEnabled ? calcExpiryDate(invDate, warrantyValue, warrantyUnit) : null};
 
   const invoiceObj = {
     id: EDIT_INVOICE_ID || uid(),
     number: invNumber,
-    date: document.getElementById('iDate').value || todayISO(),
+    date: invDate,
     dueDate: document.getElementById('iDue').value,
-    warranty: document.getElementById('iWarranty').value,
+    warrantyInfo,
     notes: document.getElementById('iNotes').value,
     customer, customerId: cust.id,
     priceType: (document.getElementById('priceType')||{}).value || 'Retail',
     items: JSON.parse(JSON.stringify(CART)),
     charges: t.charges,
+    chargesEnabled: document.getElementById('chargesEnabled').checked,
     discount: {type: t.discType, value: t.discValRaw, amount: t.discAmt},
+    discountEnabled: document.getElementById('discountEnabled').checked,
+    showBank: document.getElementById('showBank').checked,
+    showMarketingQr: document.getElementById('showMkt').checked,
     subTotal: t.sub, gstAmount: t.gstAmt, chargesTotal: t.chargesTotal,
     grandTotal: t.grand, paidAmount: t.paid, balanceDue: t.balance,
     paymentMode: document.getElementById('payMode').value,
@@ -712,7 +774,7 @@ function duplicateInvoice(id){
   const copy = JSON.parse(JSON.stringify(inv));
   copy.id=null; copy.number = DB.settings.invoicePrefix+'-'+String(DB.settings.invoiceSeq).padStart(4,'0');
   copy.date = todayISO(); copy.paidAmount=0; copy.balanceDue=copy.grandTotal; copy.paymentStatus='Pending';
-  go('billing'); EDIT_INVOICE_ID=null; renderBilling(copy); document.getElementById('iNumber').removeAttribute('readonly');
+  go('billing'); EDIT_INVOICE_ID=null; renderBilling(copy);
 }
 function cancelInvoice(id){
   if(!confirm('Cancel this invoice? Stock will not be restored automatically.')) return;
@@ -726,41 +788,97 @@ function openInvoicePreview(id){
   const tmpl = s.invoiceTemplate || 'design1';
   const accent = tmpl==='custom' ? s.customTheme.gold : 'var(--gold)';
   const rustColor = tmpl==='custom' ? s.customTheme.rust : 'var(--rust)';
-  const itemsHtml = inv.items.map((it,idx)=>`<tr><td>${idx+1}</td><td>${esc(it.name)}</td><td>${it.qty}</td><td>${esc(it.unit)}</td><td class="mono">${fmt(it.rate)}</td><td>${it.gst}%</td><td class="mono">${fmt(it.qty*it.rate)}</td></tr>`).join('');
-  const chargesRows = Object.entries(inv.charges||{}).filter(([k,v])=>v>0).map(([k,v])=>`<tr><td colspan="6" style="text-align:right;">${k.charAt(0).toUpperCase()+k.slice(1)}</td><td class="mono">${fmt(v)}</td></tr>`).join('');
+  const inkColor = tmpl==='custom' ? s.customTheme.ink : 'var(--ink)';
+
+  const isTax = tmpl==='taxinvoice';
+  let itemsHtml, tableHead;
+  if(isTax){
+    tableHead = `<tr><th>#</th><th>Item</th><th>HSN</th><th>Qty</th><th>Rate</th><th>Taxable</th><th>CGST</th><th>SGST</th><th>Total</th></tr>`;
+    itemsHtml = inv.items.map((it,idx)=>{
+      const taxable = it.qty*it.rate, gstAmt = taxable*(it.gst||0)/100, half = gstAmt/2, total = taxable+gstAmt;
+      return `<tr><td>${idx+1}</td><td>${esc(it.name)}</td><td>${esc(it.hsn||'-')}</td><td>${it.qty} ${esc(it.unit)}</td><td class="mono">${fmt(it.rate)}</td><td class="mono">${fmt(taxable)}</td><td class="mono">${fmt(half)}</td><td class="mono">${fmt(half)}</td><td class="mono">${fmt(total)}</td></tr>`;
+    }).join('');
+  } else {
+    tableHead = `<tr><th>#</th><th>Item</th><th>HSN</th><th>Qty</th><th>Unit</th><th>Rate</th><th>GST</th><th>Amount</th></tr>`;
+    itemsHtml = inv.items.map((it,idx)=>`<tr><td>${idx+1}</td><td>${esc(it.name)}</td><td>${esc(it.hsn||'-')}</td><td>${it.qty}</td><td>${esc(it.unit)}</td><td class="mono">${fmt(it.rate)}</td><td>${it.gst}%</td><td class="mono">${fmt(it.qty*it.rate)}</td></tr>`).join('');
+  }
+  const colspan = isTax ? 8 : 7;
+  const chargesRows = Object.entries(inv.charges||{}).filter(([k,v])=>v>0).map(([k,v])=>`<tr><td colspan="${colspan}" style="text-align:right;">${k.charAt(0).toUpperCase()+k.slice(1)}</td><td class="mono">${fmt(v)}</td></tr>`).join('');
 
   let headHtml;
   if(tmpl==='design2'){
-    // Centered, stacked header
     headHtml = `<div class="inv-head" style="flex-direction:column;align-items:center;text-align:center;border-bottom:3px double ${accent};">
       ${s.companyLogo?`<img src="${s.companyLogo}" style="height:48px;margin-bottom:6px;">`:''}
       <div style="font-family:'Oswald';font-weight:700;font-size:22px;">${esc(s.companyName)}</div>
       <div class="small">${esc(s.address)}</div>
-      <div class="small">${s.mobile?('Mob: '+esc(s.mobile)+' '):''}${s.gstin?('GSTIN: '+esc(s.gstin)):''}</div>
+      <div class="small">${headerContactLine(s)}</div>
       <div style="font-family:'Oswald';font-size:20px;color:${accent};margin-top:10px;letter-spacing:.15em;">INVOICE</div>
       <div class="mono small">${inv.number} &nbsp;·&nbsp; ${inv.date}${inv.dueDate?(' · Due '+inv.dueDate):''}</div>
     </div>`;
   } else if(tmpl==='design3'){
-    // Minimal, left aligned, thin rule only
     headHtml = `<div class="inv-head" style="border-bottom:1px solid var(--line-light);">
       <div>
         <div style="font-family:'Inter';font-weight:700;font-size:17px;">${esc(s.companyName)}</div>
         <div class="small">${esc(s.address)}</div>
-        <div class="small">${s.mobile?('Mob: '+esc(s.mobile)+' '):''}${s.gstin?('GSTIN: '+esc(s.gstin)):''}</div>
+        <div class="small">${headerContactLine(s)}</div>
       </div>
       <div style="text-align:right;">
         <div style="font-family:'Inter';font-weight:700;font-size:15px;letter-spacing:.1em;color:#555;">INVOICE ${inv.number}</div>
         <div class="small">Date: ${inv.date}${inv.dueDate?(' · Due: '+inv.dueDate):''}</div>
       </div>
     </div>`;
+  } else if(tmpl==='modern'){
+    headHtml = `<div class="inv-head" style="border-bottom:none;background:linear-gradient(90deg, ${accent}22, transparent);border-radius:4px 4px 0 0;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        ${s.companyLogo?`<img src="${s.companyLogo}" style="height:50px;">`:''}
+        <div>
+          <div style="font-family:'Oswald';font-weight:700;font-size:21px;color:${accent};">${esc(s.companyName)}</div>
+          <div class="small">${esc(s.address)}</div>
+          <div class="small">${headerContactLine(s)}</div>
+        </div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-family:'Oswald';font-size:26px;letter-spacing:.05em;">Invoice</div>
+        <div class="mono small">#${inv.number}</div>
+        <div class="small">${inv.date}</div>
+      </div>
+    </div><div style="height:4px;background:${accent};"></div>`;
+  } else if(tmpl==='bold'){
+    headHtml = `<div style="border-bottom:6px solid ${accent};padding:20px 24px;display:flex;justify-content:space-between;align-items:flex-start;">
+      <div>
+        ${s.companyLogo?`<img src="${s.companyLogo}" style="height:40px;margin-bottom:6px;">`:''}
+        <div style="font-family:'Oswald';font-weight:700;font-size:16px;letter-spacing:.08em;">${esc(s.companyName)}</div>
+        <div class="small">${esc(s.address)}</div>
+        <div class="small">${headerContactLine(s)}</div>
+      </div>
+      <div style="background:${accent};color:#161513;padding:8px 18px;font-family:'Oswald';font-size:24px;letter-spacing:.1em;">INVOICE</div>
+    </div>
+    <div style="padding:10px 24px;background:#faf8f2;display:flex;justify-content:space-between;font-size:12px;">
+      <div>Invoice # <b class="mono">${inv.number}</b></div><div>Date: ${inv.date}</div>
+    </div>`;
+  } else if(isTax){
+    headHtml = `<div style="text-align:center;padding:10px 0 0;font-size:12px;letter-spacing:.1em;color:#555;">TAX INVOICE</div>
+    <div class="inv-head" style="border-bottom:3px solid ${accent};">
+      <div>
+        ${s.gstin?`<div class="small">GSTIN: ${esc(s.gstin)}</div>`:''}
+        ${s.companyLogo?`<img src="${s.companyLogo}" style="height:40px;margin:4px 0;">`:''}
+        <div style="font-family:'Oswald';font-weight:700;font-size:19px;">${esc(s.companyName)}</div>
+        <div class="small">${esc(s.address)}</div>
+        <div class="small">${headerContactLine(s)}</div>
+      </div>
+      <div style="text-align:right;">
+        <div class="small">Inv No: <b class="mono">${inv.number}</b></div>
+        <div class="small">Inv Date: ${inv.date}</div>
+        <div class="small">Payment Mode: ${inv.paymentMode}</div>
+      </div>
+    </div>`;
   } else {
-    // design1 (classic) and custom share the classic layout, custom uses custom accent colors
     headHtml = `<div class="inv-head" style="border-bottom:3px solid ${accent};">
       <div>
         ${s.companyLogo?`<img src="${s.companyLogo}" style="height:44px;margin-bottom:6px;">`:''}
         <div style="font-family:'Oswald';font-weight:700;font-size:20px;">${esc(s.companyName)}</div>
         <div class="small">${esc(s.address)}</div>
-        <div class="small">${s.mobile?('Mob: '+esc(s.mobile)+' '):''}${s.gstin?('GSTIN: '+esc(s.gstin)):''}</div>
+        <div class="small">${headerContactLine(s)}</div>
       </div>
       <div style="text-align:right;">
         <div style="font-family:'Oswald';font-size:22px;color:${accent};">INVOICE</div>
@@ -770,6 +888,25 @@ function openInvoicePreview(id){
       </div>
     </div>`;
   }
+
+  const warranty = inv.warrantyInfo;
+  const warrantyHtml = (warranty && warranty.enabled) ? `<div class="small">Warranty: ${warranty.value} ${warranty.unit} (valid till ${warranty.expiryDate})</div>` : '';
+
+  const bank = s.bank || {};
+  const showBank = inv.showBank && (bank.holder || bank.account || bank.upi);
+  const bankHtml = showBank ? `
+    <div class="card" style="border:1px solid var(--line-light);padding:12px 14px;margin-top:16px;">
+      <div class="small" style="font-weight:700;text-transform:uppercase;margin-bottom:6px;">Bank Details</div>
+      <div class="small">${bank.holder?`Account Holder: ${esc(bank.holder)}<br>`:''}${bank.account?`Account No: ${esc(bank.account)}<br>`:''}${bank.bank?`Bank: ${esc(bank.bank)}${bank.branch?(', '+esc(bank.branch)):''}<br>`:''}${bank.ifsc?`IFSC: ${esc(bank.ifsc)}<br>`:''}${bank.upi?`UPI ID: ${esc(bank.upi)}`:''}</div>
+    </div>` : '';
+
+  const showMkt = inv.showMarketingQr && s.marketingQr;
+  const mktHtml = showMkt ? `
+    <div style="text-align:right;">
+      <div style="font-weight:700;font-size:12px;color:${accent};margin-bottom:4px;">⭐ Scan &amp; Connect with H4</div>
+      <img src="${s.marketingQr}" style="height:80px;">
+      <div class="small" style="max-width:220px;margin-top:4px;white-space:pre-line;">${esc(s.marketingMessage)}</div>
+    </div>` : '';
 
   const html = `
     <div class="modal-head no-print"><h3 style="margin:0;">Invoice ${inv.number} <span class="small">(${tmpl})</span></h3><button class="x-close" onclick="closeModal()">✕</button></div>
@@ -788,18 +925,18 @@ function openInvoicePreview(id){
             <div style="text-align:right;">
               <div class="small">Payment Mode: ${inv.paymentMode}</div>
               <div class="small">Status: ${inv.paymentStatus}</div>
-              ${inv.warranty?`<div class="small">Warranty: ${esc(inv.warranty)}</div>`:''}
+              ${warrantyHtml}
             </div>
           </div>
           <table class="inv-table" style="margin-top:14px;">
-            <thead><tr><th>#</th><th>Item</th><th>Qty</th><th>Unit</th><th>Rate</th><th>GST</th><th>Amount</th></tr></thead>
+            <thead>${tableHead}</thead>
             <tbody>${itemsHtml}${chargesRows}</tbody>
           </table>
           <div style="display:flex;justify-content:flex-end;margin-top:12px;">
             <table style="width:280px;font-size:13px;">
               <tr><td>Sub Total</td><td class="mono" style="text-align:right;">${fmt(inv.subTotal)}</td></tr>
               <tr><td>Charges</td><td class="mono" style="text-align:right;">${fmt(inv.chargesTotal)}</td></tr>
-              <tr><td>GST</td><td class="mono" style="text-align:right;">${fmt(inv.gstAmount)}</td></tr>
+              ${isTax ? `<tr><td>CGST</td><td class="mono" style="text-align:right;">${fmt(inv.gstAmount/2)}</td></tr><tr><td>SGST</td><td class="mono" style="text-align:right;">${fmt(inv.gstAmount/2)}</td></tr>` : `<tr><td>GST</td><td class="mono" style="text-align:right;">${fmt(inv.gstAmount)}</td></tr>`}
               <tr><td>Discount</td><td class="mono" style="text-align:right;">-${fmt(inv.discount.amount)}</td></tr>
               <tr style="font-weight:700;"><td>Grand Total</td><td class="mono" style="text-align:right;">${fmt(inv.grandTotal)}</td></tr>
               <tr><td>Paid</td><td class="mono" style="text-align:right;">${fmt(inv.paidAmount)}</td></tr>
@@ -808,9 +945,11 @@ function openInvoicePreview(id){
           </div>
           <div class="small" style="margin-top:8px;font-style:italic;">${amountInWords(inv.grandTotal)}</div>
           ${inv.notes?`<div class="small" style="margin-top:10px;"><b>Notes:</b> ${esc(inv.notes)}</div>`:''}
-          <div style="display:flex;justify-content:space-between;margin-top:34px;">
-            <div>${s.qrImage?`<img src="${s.qrImage}" style="height:80px;"><div class="small">Scan to pay</div>`:''}</div>
-            <div style="text-align:center;"><div style="height:40px;"></div><div class="small" style="border-top:1px solid #ccc;padding-top:4px;">Authorized Signature</div></div>
+          ${bankHtml}
+          <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:34px;gap:12px;">
+            <div>${s.qrImage?`<img src="${s.qrImage}" style="height:70px;"><div class="small">Scan to pay</div>`:''}</div>
+            ${mktHtml}
+            <div style="text-align:center;min-width:140px;"><div style="height:40px;"></div><div class="small" style="border-top:1px solid #ccc;padding-top:4px;">Authorized Signature</div></div>
           </div>
         </div>
       </div>
@@ -822,6 +961,15 @@ function openInvoicePreview(id){
       </div>
     </div>`;
   openModal(html);
+}
+function headerContactLine(s){
+  const parts = [];
+  if(s.mobile) parts.push('Mob: '+esc(s.mobile));
+  if(s.whatsapp) parts.push('WA: '+esc(s.whatsapp));
+  if(s.email) parts.push(esc(s.email));
+  if(s.website) parts.push(esc(s.website));
+  if(s.gstin) parts.push('GSTIN: '+esc(s.gstin));
+  return parts.join(' &nbsp;·&nbsp; ');
 }
 function shareWhatsApp(id){
   const inv = DB.invoices.find(i=>i.id===id);
@@ -921,7 +1069,7 @@ function renderProducts(){
   </div>`;
 }
 function editProductModal(id){
-  const p = id ? DB.products.find(x=>x.id===id) : {name:'',category:'',unit:'',dealerPrice:0,retailPrice:0,stock:0,gst:DB.settings.gstDefault};
+  const p = id ? DB.products.find(x=>x.id===id) : {name:'',category:'',unit:'',dealerPrice:0,retailPrice:0,stock:0,gst:DB.settings.gstDefault,hsn:''};
   const cats = ['Tile Adhesive','Waterproofing','Epoxy Flooring','Crack Filler','SBR','Home Care'];
   openModal(`
     <div class="modal-head"><h3 style="margin:0;">${id?'Edit':'Add'} Product</h3><button class="x-close" onclick="closeModal()">✕</button></div>
@@ -939,6 +1087,7 @@ function editProductModal(id){
         <div class="field"><label>Stock</label><input id="mpStock" type="number" value="${p.stock}"></div>
         <div class="field"><label>GST %</label><input id="mpGst" type="number" value="${p.gst}"></div>
       </div>
+      <div class="field"><label>HSN Code (optional)</label><input id="mpHsn" value="${esc(p.hsn||'')}"></div>
       <button class="btn btn-gold" onclick="saveProduct(${id||'null'})">Save</button>
     </div>`);
 }
@@ -946,7 +1095,7 @@ function saveProduct(id){
   const data = {name:document.getElementById('mpName').value.trim(), category:document.getElementById('mpCategory').value,
     unit:document.getElementById('mpUnit').value.trim(), dealerPrice:parseFloat(document.getElementById('mpDealer').value)||0,
     retailPrice:parseFloat(document.getElementById('mpRetail').value)||0, stock:parseFloat(document.getElementById('mpStock').value)||0,
-    gst:parseFloat(document.getElementById('mpGst').value)||0};
+    gst:parseFloat(document.getElementById('mpGst').value)||0, hsn:document.getElementById('mpHsn').value.trim()};
   if(!data.name){ alert('Name required.'); return; }
   if(id){ Object.assign(DB.products.find(p=>p.id===id), data); logActivity('Product Change', `Updated ${data.name}`); }
   else { DB.products.push({id:uid(), ...data}); logActivity('Product Change', `Added ${data.name}`); }
@@ -1094,9 +1243,10 @@ function val(id){ const el=document.getElementById(id); return el?el.value:''; }
 /* ================= NOTIFICATIONS ================= */
 function getNotifications(){
   const list = [];
+  const today = todayISO();
   DB.products.filter(p=>Number(p.stock)<=DB.lowStockThreshold).forEach(p=>list.push({type:'Low Stock', msg:`${p.name} — only ${p.stock} left`}));
   DB.invoices.filter(i=>i.paymentStatus!=='Paid' && !i.cancelled).forEach(i=>list.push({type:'Pending Payment', msg:`${i.number} — ${esc(i.customer.name)} owes ${fmt(i.balanceDue)}`}));
-  DB.invoices.filter(i=>i.warranty && i.dueDate===todayISO()).forEach(i=>list.push({type:'Warranty', msg:`${i.number} warranty checkpoint today`}));
+  DB.invoices.filter(i=>i.warrantyInfo && i.warrantyInfo.enabled && i.warrantyInfo.expiryDate===today).forEach(i=>list.push({type:'Warranty', msg:`${i.number} — warranty expires today`}));
   return list;
 }
 function updateNotifCount(){ const el=document.getElementById('notifCount'); if(el) el.textContent = getNotifications().length; }
@@ -1164,7 +1314,10 @@ function renderSettings(){
         <div class="field"><label>Mobile</label><input id="sMobile" value="${esc(s.mobile)}"></div>
         <div class="field"><label>WhatsApp</label><input id="sWhatsapp" value="${esc(s.whatsapp)}"></div>
       </div>
-      <div class="field"><label>Website</label><input id="sWebsite" value="${esc(s.website)}"></div>
+      <div class="grid-2">
+        <div class="field"><label>Email</label><input id="sEmail" value="${esc(s.email)}"></div>
+        <div class="field"><label>Website</label><input id="sWebsite" value="${esc(s.website)}"></div>
+      </div>
       <div class="grid-2">
         <div class="field"><label>Invoice Prefix</label><input id="sPrefix" value="${esc(s.invoicePrefix)}"></div>
         <div class="field"><label>Default GST %</label><input id="sGstDefault" type="number" value="${s.gstDefault}"></div>
@@ -1194,7 +1347,9 @@ function renderSettings(){
 
       <div class="section-title" style="margin-top:16px;">Invoice Template</div>
       <div class="grid-3">
-        ${[['design1','Design 1 — Classic'],['design2','Design 2 — Centered'],['design3','Design 3 — Minimal'],['custom','Custom — Uses your theme colors']].map(([k,label])=>`
+        ${[['design1','Design 1 — Classic'],['design2','Design 2 — Centered'],['design3','Design 3 — Minimal'],
+           ['modern','Modern — Colour Block'],['bold','Bold — Yellow Accent'],['taxinvoice','Tax Invoice — GST Breakup'],
+           ['custom','Custom — Your Theme Colours']].map(([k,label])=>`
           <label class="small" style="border:1px solid var(--line-light);padding:10px;border-radius:3px;cursor:pointer;display:block;${s.invoiceTemplate===k?'border-color:var(--gold);background:var(--paper-2);':''}">
             <input type="radio" name="invTemplate" value="${k}" ${s.invoiceTemplate===k?'checked':''} onchange="setInvoiceTemplate('${k}')"> ${label}
           </label>`).join('')}
@@ -1202,6 +1357,33 @@ function renderSettings(){
 
       <div class="field" style="margin-top:14px;"><label>Low Stock Threshold</label><input id="sLowStock" type="number" value="${DB.lowStockThreshold}"></div>
       <button class="btn btn-gold" onclick="saveSettings()">Save Branding</button>
+    </div>
+  </div>
+  <div class="grid-2" style="margin-top:16px;">
+    <div class="card">
+      <div class="section-title">Bank Details (Optional)</div>
+      <div class="grid-2">
+        <div class="field"><label>Account Holder</label><input id="bkHolder" value="${esc(s.bank.holder)}"></div>
+        <div class="field"><label>Account Number</label><input id="bkAccount" value="${esc(s.bank.account)}"></div>
+      </div>
+      <div class="grid-2">
+        <div class="field"><label>Bank Name</label><input id="bkBank" value="${esc(s.bank.bank)}"></div>
+        <div class="field"><label>Branch</label><input id="bkBranch" value="${esc(s.bank.branch)}"></div>
+      </div>
+      <div class="grid-2">
+        <div class="field"><label>IFSC Code</label><input id="bkIfsc" value="${esc(s.bank.ifsc)}"></div>
+        <div class="field"><label>UPI ID</label><input id="bkUpi" value="${esc(s.bank.upi)}"></div>
+      </div>
+      <label class="small"><input type="checkbox" id="bkShowDefault" ${s.showBankDefault?'checked':''}> Show bank details on invoices by default</label><br>
+      <button class="btn btn-gold" style="margin-top:12px;" onclick="saveSettings()">Save Bank Details</button>
+    </div>
+    <div class="card">
+      <div class="section-title">Marketing QR (Invoice Footer)</div>
+      <div class="small" style="margin-bottom:8px;">Shown bottom-right on printed invoices — e.g. a QR code linking to your Google Review page or WhatsApp.</div>
+      <div class="field"><label>Marketing QR Image</label><input type="file" accept="image/*" onchange="fileToBase64(this,'marketingQr')">${s.marketingQr?`<img src="${s.marketingQr}" style="height:70px;margin-top:6px;display:block;">`:''}</div>
+      <div class="field"><label>Customer Message</label><textarea id="mktMessage" rows="4">${esc(s.marketingMessage)}</textarea></div>
+      <label class="small"><input type="checkbox" id="mktShowDefault" ${s.showMarketingDefault?'checked':''}> Show marketing QR on invoices by default</label><br>
+      <button class="btn btn-gold" style="margin-top:12px;" onclick="saveSettings()">Save Marketing QR</button>
     </div>
   </div>`;
 }
@@ -1226,10 +1408,20 @@ function saveSettings(){
   s.pan = document.getElementById('sPan').value;
   s.mobile = document.getElementById('sMobile').value;
   s.whatsapp = document.getElementById('sWhatsapp').value;
+  s.email = document.getElementById('sEmail').value;
   s.website = document.getElementById('sWebsite').value;
   s.invoicePrefix = document.getElementById('sPrefix').value || 'H4';
   s.gstDefault = parseFloat(document.getElementById('sGstDefault').value)||0;
   DB.lowStockThreshold = parseFloat(document.getElementById('sLowStock').value)||15;
+  const bkHolder = document.getElementById('bkHolder'); if(bkHolder){
+    s.bank = {holder:bkHolder.value, account:document.getElementById('bkAccount').value, bank:document.getElementById('bkBank').value,
+      branch:document.getElementById('bkBranch').value, ifsc:document.getElementById('bkIfsc').value, upi:document.getElementById('bkUpi').value};
+    s.showBankDefault = document.getElementById('bkShowDefault').checked;
+  }
+  const mktMsg = document.getElementById('mktMessage'); if(mktMsg){
+    s.marketingMessage = mktMsg.value;
+    s.showMarketingDefault = document.getElementById('mktShowDefault').checked;
+  }
   saveDB(); logActivity('Settings Change', 'Company/branding settings updated'); toast('Settings saved.');
 }
 
