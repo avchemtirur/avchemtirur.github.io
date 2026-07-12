@@ -1,0 +1,196 @@
+/* ============================================================
+   H4 COUPON — Reusable Material 3 components
+   Buttons, cards, text fields, chips, snackbar, dialogs, list items
+   ============================================================ */
+
+/* ---- Buttons ---- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  height:44px;padding:0 20px;
+  border-radius:var(--md-shape-full);
+  font-size:14px;font-weight:600;letter-spacing:.02em;
+  border:none;cursor:pointer;
+  transition:background var(--md-motion-fast), box-shadow var(--md-motion-fast);
+  white-space:nowrap;
+}
+.btn:active{transform:scale(.98);}
+.btn:disabled{opacity:.4;cursor:not-allowed;}
+.btn-block{width:100%;}
+.btn-filled{background:var(--md-primary);color:var(--md-on-primary);}
+.btn-filled:active{box-shadow:var(--md-elev-1);}
+.btn-tonal{background:var(--md-secondary-container);color:var(--md-on-secondary-container);}
+.btn-outlined{background:transparent;border:1px solid var(--md-outline);color:var(--md-primary);}
+.btn-text{background:transparent;color:var(--md-primary);height:40px;padding:0 12px;}
+.btn-danger{background:var(--md-error);color:var(--md-on-error);}
+.btn-sm{height:36px;padding:0 14px;font-size:13px;}
+.btn-icon{
+  width:44px;height:44px;padding:0;border-radius:50%;
+  background:var(--md-surface-container-high);color:var(--md-on-surface);border:none;cursor:pointer;
+}
+
+/* ---- FAB ---- */
+.fab{
+  position:fixed;
+  right:calc(50% - (min(var(--md-max-width),100vw) / 2) + 20px);
+  bottom:calc(var(--md-bottomnav-h) + 20px);
+  width:56px;height:56px;border-radius:var(--md-shape-lg);
+  background:var(--md-primary-container);color:var(--md-on-primary-container);
+  display:flex;align-items:center;justify-content:center;
+  font-size:24px;border:none;cursor:pointer;box-shadow:var(--md-elev-2);
+  z-index:25;
+}
+
+/* ---- Cards ---- */
+.card{
+  background:var(--md-surface-container-low);
+  border-radius:var(--md-shape-lg);
+  padding:16px;
+  box-shadow:var(--md-elev-1);
+}
+.card-outlined{
+  background:var(--md-surface);
+  border:1px solid var(--md-outline-variant);
+  border-radius:var(--md-shape-lg);
+  padding:16px;
+  box-shadow:none;
+}
+.card-title{font-size:var(--md-title-sm-size);font-weight:600;margin-bottom:10px;}
+
+/* ---- KPI stat card ---- */
+.stat-card{
+  background:var(--md-surface-container-low);
+  border-radius:var(--md-shape-lg);
+  padding:14px 16px;
+  box-shadow:var(--md-elev-1);
+}
+.stat-card .stat-label{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--md-on-surface-variant);font-weight:600;}
+.stat-card .stat-value{font-size:24px;font-weight:700;margin-top:4px;}
+
+/* ---- Text fields (MD3 outlined) ---- */
+.field{position:relative;margin-bottom:16px;}
+.field label{
+  display:block;font-size:12px;font-weight:600;color:var(--md-on-surface-variant);
+  margin-bottom:6px;
+}
+.field input,.field select,.field textarea{
+  width:100%;
+  height:52px;
+  padding:0 16px;
+  border-radius:var(--md-shape-sm);
+  border:1px solid var(--md-outline);
+  background:var(--md-surface);
+  color:var(--md-on-surface);
+  font-size:16px; /* prevents mobile zoom-on-focus */
+  outline:none;
+  transition:border-color var(--md-motion-fast);
+}
+.field textarea{height:auto;padding:12px 16px;resize:vertical;min-height:80px;}
+.field input:focus,.field select:focus,.field textarea:focus{
+  border-color:var(--md-primary);border-width:2px;padding-left:15px;
+}
+.field .hint{font-size:11px;color:var(--md-on-surface-variant);margin-top:4px;}
+.field .error-text{font-size:11px;color:var(--md-error);margin-top:4px;}
+.field.has-error input{border-color:var(--md-error);}
+
+/* ---- Chips ---- */
+.chip{
+  display:inline-flex;align-items:center;gap:4px;
+  height:28px;padding:0 12px;border-radius:var(--md-shape-full);
+  font-size:12px;font-weight:600;
+  background:var(--md-surface-container-high);color:var(--md-on-surface-variant);
+}
+.chip-success{background:#D6EFD8;color:var(--md-success);}
+.chip-error{background:var(--md-error-container);color:var(--md-on-error-container);}
+.chip-primary{background:var(--md-primary-container);color:var(--md-on-primary-container);}
+
+/* ---- List items ---- */
+.list-item{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 4px;
+  border-bottom:1px solid var(--md-outline-variant);
+}
+.list-item:last-child{border-bottom:none;}
+.list-item__avatar{
+  width:40px;height:40px;border-radius:50%;
+  background:var(--md-primary-container);color:var(--md-on-primary-container);
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;flex-shrink:0;
+}
+.list-item__body{flex:1;min-width:0;}
+.list-item__title{font-size:14px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.list-item__subtitle{font-size:12px;color:var(--md-on-surface-variant);}
+.list-item__trail{flex-shrink:0;}
+
+/* ---- Empty state ---- */
+.empty-state{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:48px 20px;color:var(--md-on-surface-variant);
+}
+.empty-state__icon{font-size:44px;margin-bottom:12px;opacity:.6;}
+.empty-state__title{font-size:15px;font-weight:600;color:var(--md-on-surface);margin-bottom:4px;}
+
+/* ---- Snackbar / Toast ---- */
+#snackbar-host{
+  position:fixed;left:50%;transform:translateX(-50%);
+  bottom:calc(var(--md-bottomnav-h) + 12px);
+  z-index:200;display:flex;flex-direction:column;gap:8px;align-items:center;
+  width:100%;max-width:var(--md-max-width);padding:0 16px;
+  pointer-events:none;
+}
+.snackbar{
+  pointer-events:auto;
+  background:var(--md-inverse-surface);color:var(--md-inverse-on-surface);
+  padding:14px 16px;border-radius:var(--md-shape-sm);
+  font-size:13px;box-shadow:var(--md-elev-3);
+  max-width:100%;
+  animation:snackbar-in var(--md-motion-med) var(--md-motion-emphasis);
+}
+@keyframes snackbar-in{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+
+/* ---- Modal / Dialog ---- */
+.modal-scrim{
+  position:fixed;inset:0;background:rgba(0,0,0,.4);
+  display:flex;align-items:flex-end;justify-content:center;
+  z-index:100;
+}
+@media(min-width:560px){.modal-scrim{align-items:center;}}
+.modal-sheet{
+  background:var(--md-surface-container-high);
+  width:100%;max-width:var(--md-max-width);
+  border-radius:var(--md-shape-xl) var(--md-shape-xl) 0 0;
+  padding:20px 20px calc(20px + env(safe-area-inset-bottom,0px));
+  max-height:88vh;overflow-y:auto;
+  animation:sheet-in var(--md-motion-med) var(--md-motion-emphasis);
+}
+@media(min-width:560px){.modal-sheet{border-radius:var(--md-shape-xl);}}
+@keyframes sheet-in{from{transform:translateY(24px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+.modal-sheet__title{font-size:var(--md-title-size);font-weight:600;margin-bottom:14px;}
+.modal-sheet__actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px;}
+
+/* ---- Segmented control ---- */
+.segmented{display:flex;border:1px solid var(--md-outline);border-radius:var(--md-shape-full);overflow:hidden;}
+.segmented__opt{flex:1;text-align:center;padding:10px 0;font-size:13px;font-weight:600;cursor:pointer;color:var(--md-on-surface-variant);}
+.segmented__opt.active{background:var(--md-secondary-container);color:var(--md-on-secondary-container);}
+
+/* ---- Badge / points pill ---- */
+.points-pill{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--md-tertiary-container);color:var(--md-on-tertiary-container);
+  padding:6px 14px;border-radius:var(--md-shape-full);font-weight:700;font-size:14px;
+}
+
+/* ---- Skeleton (loading) ---- */
+.skeleton{background:linear-gradient(90deg,var(--md-surface-container) 25%,var(--md-surface-container-high) 37%,var(--md-surface-container) 63%);
+  background-size:400% 100%;animation:skeleton-loading 1.4s ease infinite;border-radius:var(--md-shape-sm);}
+@keyframes skeleton-loading{0%{background-position:100% 50%;}100%{background-position:0 50%;}}
+
+/* ---- Divider ---- */
+.divider{height:1px;background:var(--md-outline-variant);border:none;margin:12px 0;}
+
+/* ---- Build-pending notice (used by scaffolded views awaiting full build-out) ---- */
+.build-pending{
+  border:1.5px dashed var(--md-outline);
+  border-radius:var(--md-shape-lg);
+  padding:20px;text-align:center;color:var(--md-on-surface-variant);
+  font-size:13px;
+}
+.build-pending b{color:var(--md-on-surface);}
