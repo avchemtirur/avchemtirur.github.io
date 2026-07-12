@@ -194,3 +194,27 @@
   font-size:13px;
 }
 .build-pending b{color:var(--md-on-surface);}
+
+/* ---- Coupon code chip (monospace, tap-to-copy) — reusable across
+   Batch Generator, QR Generator, Verification and History modules ---- */
+.code-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;}
+.code-tag{
+  font-family:'Courier New',monospace;
+  font-size:13px;font-weight:700;letter-spacing:.02em;
+  background:var(--md-surface-container-high);
+  color:var(--md-on-surface);
+  border:1px solid var(--md-outline-variant);
+  border-radius:var(--md-shape-sm);
+  padding:9px 10px;
+  display:flex;align-items:center;justify-content:space-between;gap:6px;
+  cursor:pointer;
+  user-select:all;
+}
+.code-tag:active{background:var(--md-primary-container);}
+.code-tag__copy{font-size:13px;opacity:.6;flex-shrink:0;}
+
+/* ---- Batch summary row ---- */
+.summary-row{display:flex;justify-content:space-between;padding:7px 0;font-size:13px;border-bottom:1px solid var(--md-outline-variant);}
+.summary-row:last-child{border-bottom:none;}
+.summary-row .k{color:var(--md-on-surface-variant);}
+.summary-row .v{font-weight:600;}
