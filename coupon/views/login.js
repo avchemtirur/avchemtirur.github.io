@@ -60,7 +60,5 @@
   window.CouponViews.login = { render };
 
 })();
-window.CouponViews = window.CouponViews || {};
-window.CouponViews.login = { render };
 
-console.log("LOGIN REGISTERED", window.CouponViews);
+
