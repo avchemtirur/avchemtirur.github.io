@@ -1,0 +1,123 @@
+/* ============================================================
+   H4 COUPON — Base styles, resets, layout scaffolding
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box;}
+html,body{height:100%;}
+body{
+  margin:0;
+  font-family:var(--md-font);
+  background:var(--md-surface);
+  color:var(--md-on-surface);
+  font-size:var(--md-body-size);
+  line-height:1.45;
+  -webkit-tap-highlight-color:transparent;
+}
+h1,h2,h3,h4,p,ul,ol{margin:0;}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;}
+input,select,textarea{font-family:inherit;}
+img{max-width:100%;display:block;}
+
+/* ---- App shell ---- */
+#app{
+  min-height:100%;
+  display:flex;
+  flex-direction:column;
+  max-width:var(--md-max-width);
+  margin:0 auto;
+  background:var(--md-surface);
+  position:relative;
+}
+
+/* ---- Top App Bar ---- */
+.topbar{
+  height:var(--md-topbar-h);
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:0 8px 0 16px;
+  background:var(--md-surface-container-low);
+  border-bottom:1px solid var(--md-outline-variant);
+  position:sticky;
+  top:0;
+  z-index:30;
+}
+.topbar__title{
+  font-size:var(--md-title-size);
+  font-weight:500;
+  flex:1;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.topbar__icon-btn{
+  width:44px;height:44px;border-radius:var(--md-shape-full);
+  display:flex;align-items:center;justify-content:center;
+  background:transparent;border:none;color:var(--md-on-surface);
+  font-size:20px;cursor:pointer;
+}
+.topbar__icon-btn:active{background:var(--md-surface-container-high);}
+
+/* ---- View container ---- */
+#view{
+  flex:1;
+  padding:16px 16px calc(var(--md-bottomnav-h) + 24px) 16px;
+  overflow-y:auto;
+}
+#view.no-bottom-pad{padding-bottom:24px;}
+
+/* ---- Bottom Navigation (Material 3) ---- */
+.bottomnav{
+  position:sticky;
+  bottom:0;
+  left:0;right:0;
+  height:var(--md-bottomnav-h);
+  background:var(--md-surface-container);
+  border-top:1px solid var(--md-outline-variant);
+  display:flex;
+  z-index:30;
+}
+.bottomnav__item{
+  flex:1;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:2px;
+  color:var(--md-on-surface-variant);
+  cursor:pointer;
+  border:none;background:transparent;
+  padding:8px 0 10px;
+  position:relative;
+}
+.bottomnav__icon{
+  font-size:20px;
+  width:44px;height:28px;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:var(--md-shape-lg);
+  transition:background var(--md-motion-fast);
+}
+.bottomnav__label{font-size:11px;font-weight:500;}
+.bottomnav__item.active{color:var(--md-on-surface);}
+.bottomnav__item.active .bottomnav__icon{background:var(--md-secondary-container);color:var(--md-on-secondary-container);}
+
+/* ---- More sheet trigger (for overflow nav items) ---- */
+.bottomnav__item .badge-dot{
+  position:absolute;top:4px;right:22%;
+  width:8px;height:8px;border-radius:50%;
+  background:var(--md-error);
+}
+
+/* ---- Utility layout ---- */
+.stack{display:flex;flex-direction:column;gap:12px;}
+.row{display:flex;align-items:center;gap:10px;}
+.row-between{display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.mt-8{margin-top:8px;} .mt-16{margin-top:16px;} .mt-24{margin-top:24px;}
+.center{display:flex;align-items:center;justify-content:center;}
+.text-center{text-align:center;}
+.muted{color:var(--md-on-surface-variant);}
+.small{font-size:var(--md-body-sm-size);color:var(--md-on-surface-variant);}
+.label{font-size:var(--md-label-size);text-transform:uppercase;letter-spacing:.06em;color:var(--md-on-surface-variant);font-weight:600;}
+.hidden{display:none !important;}
+
+/* ---- Scrollbar (desktop preview) ---- */
+::-webkit-scrollbar{width:6px;height:6px;}
+::-webkit-scrollbar-thumb{background:var(--md-outline-variant);border-radius:4px;}
