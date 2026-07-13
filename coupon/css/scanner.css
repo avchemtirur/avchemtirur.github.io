@@ -1,0 +1,51 @@
+<div class="scanner-page">
+
+  <div class="scanner-header">
+    <h2>Scan Coupon</h2>
+    <p>Scan QR Code or Barcode</p>
+  </div>
+
+  <div class="scanner-camera">
+
+    <video
+      id="scannerVideo"
+      autoplay
+      playsinline
+      muted>
+    </video>
+
+    <div class="scanner-overlay">
+
+      <div class="scan-frame"></div>
+
+      <div class="scan-text">
+        Align QR Code or Barcode inside the frame
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="scanner-actions">
+
+    <button
+      id="switchCameraBtn"
+      class="btn btn-tonal">
+      📷 Switch Camera
+    </button>
+
+    <button
+      id="torchBtn"
+      class="btn btn-tonal">
+      🔦 Torch
+    </button>
+
+  </div>
+
+  <div
+    id="scannerStatus"
+    class="scanner-status">
+    Ready to Scan
+  </div>
+
+</div>
