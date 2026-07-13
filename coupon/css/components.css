@@ -218,3 +218,220 @@
 .summary-row:last-child{border-bottom:none;}
 .summary-row .k{color:var(--md-on-surface-variant);}
 .summary-row .v{font-weight:600;}
+
+/* ============================================================
+   H4 COUPON — Reward Engine popup styles & animations
+   (Module 06 · Part 3B — additive, appended only)
+   ============================================================ */
+
+/* ---- Full-screen overlay shell ---- */
+.reward-overlay{
+  position:fixed;inset:0;z-index:500;
+  display:flex;align-items:center;justify-content:center;
+  padding:24px;text-align:center;color:#fff;
+  overflow:hidden;
+}
+.reward-overlay.bg-empty{background:linear-gradient(160deg,#3a3a3a,#161513);}
+.reward-overlay.bg-win{background:linear-gradient(160deg,var(--md-primary),#2B1745);}
+.reward-overlay.bg-cash{background:linear-gradient(160deg,#8A6510,#2B1B00);}
+.reward-overlay.bg-jackpot{background:radial-gradient(circle at 50% 28%, #FFD700 0%, #6A3FA0 55%, #1A0033 100%);}
+.reward-overlay.bg-used{background:linear-gradient(160deg,#5C1A1A,#1A0A0A);}
+.reward-overlay.bg-invalid{background:linear-gradient(160deg,#5C1A1A,#2A0A0A);}
+.reward-overlay.bg-expired{background:linear-gradient(160deg,#4A4A4A,#1A1A1A);}
+
+/* ---- Glassmorphism card ---- */
+.glass{
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.22);
+  box-shadow:0 8px 32px rgba(0,0,0,.28);
+}
+.reward-card{
+  position:relative;z-index:2;
+  max-width:380px;width:100%;
+  border-radius:var(--md-shape-xl);
+  padding:32px 24px;
+}
+.reward-card-inner{ position:relative; }
+
+/* ---- Icon / emoji ---- */
+.reward-icon,.reward-emoji{
+  font-size:64px;line-height:1;
+}
+.reward-icon.bounce,.reward-emoji.bounce{animation:emoji-bounce 900ms ease-in-out infinite;}
+
+/* ---- Text blocks ---- */
+.reward-title{
+  font-size:24px;font-weight:800;margin-top:12px;letter-spacing:.02em;
+  color:#fff;
+}
+.reward-message,.reward-sub{
+  font-size:14px;line-height:1.55;opacity:.92;color:#fff;
+}
+.reward-value{
+  font-size:38px;font-weight:800;margin:14px 0;
+  background:linear-gradient(90deg,#FFD700,#FFF3C4);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  line-height:1.2;
+}
+.reward-ml{
+  font-size:13.5px;opacity:.88;margin-top:16px;line-height:1.7;
+  border-top:1px solid rgba(255,255,255,.22);padding-top:16px;color:#fff;
+}
+.reward-actions{
+  display:flex;flex-direction:column;gap:10px;margin-top:22px;
+}
+.reward-continue-btn{margin-top:22px;}
+
+/* ---- Screen flash (jackpot open) ---- */
+.screen-flash{
+  position:fixed;inset:0;background:#fff;z-index:600;
+  pointer-events:none;
+  animation:screen-flash-anim 350ms ease-out forwards;
+}
+
+/* ---- Confetti / coin particles ---- */
+.confetti-piece{
+  position:absolute;top:-12px;width:8px;height:14px;opacity:.95;
+  border-radius:1px;pointer-events:none;
+  animation:confetti-fall linear forwards;
+  will-change:transform,opacity;
+}
+.coin-piece{
+  position:absolute;top:-30px;font-size:22px;
+  pointer-events:none;
+  animation:coin-fall linear forwards;
+  will-change:transform;
+}
+
+/* ============================================================
+   Per-reward accent effects
+   ============================================================ */
+
+/* Points */
+.bg-win .reward-value{ text-shadow:0 0 18px rgba(255,215,0,.55); }
+
+/* Cash */
+.bg-cash .reward-value{ text-shadow:0 0 18px rgba(255,196,80,.6); }
+
+/* Gift */
+#giftEmoji{ display:inline-block; transition:transform 200ms ease; }
+
+/* Discount */
+.bg-win .reward-value{ animation:glow-pulse 1.8s ease-in-out infinite; }
+
+/* Jackpot */
+.bg-jackpot .reward-card{
+  border:1px solid rgba(255,215,0,.45);
+  box-shadow:0 0 60px rgba(255,215,0,.35), 0 8px 32px rgba(0,0,0,.4);
+}
+.bg-jackpot .reward-title{ color:#FFD700; }
+
+/* Success (generic, reusable by future modules) */
+.reward-success-glow{ box-shadow:0 0 24px rgba(76,125,43,.5); }
+
+/* ---- Status popup accents ---- */
+.reward-card-inner.red-pulse{ animation:red-pulse 1.2s ease-in-out infinite; }
+.bg-expired{ animation:grey-fade-in 700ms ease-out; }
+.bg-expired .reward-card{ filter:saturate(.6); }
+
+/* ============================================================
+   Animation utility classes
+   ============================================================ */
+.fade-scale-in{ animation:fade-scale-in 420ms cubic-bezier(.2,0,0,1); }
+.slide-up-in{ animation:slide-up-in 420ms cubic-bezier(.2,0,0,1); }
+.shake-anim{ animation:shake-anim 500ms; }
+.red-pulse{ animation:red-pulse 1.2s ease-in-out infinite; }
+.grey-fade{ animation:grey-fade-in 700ms ease-out; }
+.glow-pulse{ animation:glow-pulse 1.6s ease-in-out infinite; }
+.trophy-rotate{ display:inline-block; animation:trophy-rotate 3s ease-in-out infinite; }
+
+/* ============================================================
+   Keyframes
+   ============================================================ */
+@keyframes fade-scale-in{
+  from{ opacity:0; transform:scale(.85); }
+  to{ opacity:1; transform:scale(1); }
+}
+@keyframes slide-up-in{
+  from{ opacity:0; transform:translateY(40px); }
+  to{ opacity:1; transform:translateY(0); }
+}
+@keyframes shake-anim{
+  10%,90%{ transform:translateX(-2px); }
+  20%,80%{ transform:translateX(4px); }
+  30%,50%,70%{ transform:translateX(-8px); }
+  40%,60%{ transform:translateX(8px); }
+}
+@keyframes red-pulse{
+  0%,100%{ box-shadow:0 0 0 0 rgba(255,80,80,.5); }
+  50%{ box-shadow:0 0 0 22px rgba(255,80,80,0); }
+}
+@keyframes grey-fade-in{
+  from{ opacity:0; }
+  to{ opacity:1; }
+}
+@keyframes glow-pulse{
+  0%,100%{ text-shadow:0 0 10px rgba(255,215,0,.4); }
+  50%{ text-shadow:0 0 28px rgba(255,215,0,.9); }
+}
+@keyframes trophy-rotate{
+  0%,100%{ transform:rotate(-8deg); }
+  50%{ transform:rotate(8deg); }
+}
+@keyframes emoji-bounce{
+  0%,100%{ transform:translateY(0); }
+  50%{ transform:translateY(-14px); }
+}
+@keyframes screen-flash-anim{
+  from{ opacity:.9; }
+  to{ opacity:0; }
+}
+@keyframes confetti-fall{
+  to{ transform:translateY(112vh) rotate(600deg); opacity:.25; }
+}
+@keyframes coin-fall{
+  to{ transform:translateY(112vh) rotate(360deg); }
+}
+
+/* ============================================================
+   Responsive mobile layout
+   ============================================================ */
+@media (max-width:400px){
+  .reward-card{ padding:26px 18px; border-radius:var(--md-shape-lg); }
+  .reward-icon,.reward-emoji{ font-size:52px; }
+  .reward-title{ font-size:20px; }
+  .reward-value{ font-size:30px; }
+  .reward-message,.reward-sub{ font-size:13px; }
+  .reward-ml{ font-size:12.5px; }
+}
+@media (max-height:600px){
+  .reward-card{ padding:18px 18px; }
+  .reward-icon,.reward-emoji{ font-size:42px; }
+}
+
+/* ============================================================
+   Dark mode compatibility
+   ============================================================ */
+[data-theme="dark"] .glass{
+  background:rgba(0,0,0,.28);
+  border-color:rgba(255,255,255,.14);
+}
+[data-theme="dark"] .reward-overlay.bg-expired{
+  background:linear-gradient(160deg,#2A2A2A,#0D0D0D);
+}
+[data-theme="dark"] .confetti-piece{ opacity:.85; }
+
+/* ============================================================
+   Reduced-motion accessibility
+   ============================================================ */
+@media (prefers-reduced-motion: reduce){
+  .reward-icon.bounce,.reward-emoji.bounce,
+  .fade-scale-in,.slide-up-in,.shake-anim,.red-pulse,
+  .grey-fade,.glow-pulse,.trophy-rotate,
+  .confetti-piece,.coin-piece,.screen-flash{
+    animation-duration:1ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:1ms !important;
+  }
+}
