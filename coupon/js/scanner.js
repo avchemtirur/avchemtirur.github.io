@@ -1,426 +1,485 @@
 ```javascript
-window.CouponScanner = class {
-  constructor(options = {}) {
-    this.video = null;
-    this.stream = null;
-    this.facingMode = options.facingMode || 'environment';
-    this.torchEnabled = false;
-    this.isActive = false;
-    this.capabilities = {};
-    this.scanning = false;
-    this.scanCanvas = null;
-    this.scanContext = null;
-    this.lastScannedCode = null;
-    this.lastScannedTime = 0;
-    this.scanCooldown = 1500;
-    this.scanCallbacks = [];
-    this.errorCallbacks = [];
-    this.animationFrameId = null;
-    this.barcodeDetector = null;
-    this.detectorReady = false;
-    this.jsqrLoaded = false;
-  }
+window.CouponViews = window.CouponViews || {};
 
-  async init(videoElement) {
-    if (!videoElement) {
-      throw new Error('Video element required');
-    }
+window.CouponViews.scan = {
+  scanner: null,
+  videoElement: null,
+  isScanning: false,
+  isValidating: false,
+  lastScannedCode: null,
+  scannedCodes: new Set(),
+  successSoundUrl: 'data:audio/wav;base64,UklGRiYAAABXQVZFZm10IBAAAAABAAEAQB8AAAB9AAACABAAZGF0YCIAAAAAAAAAAAAAAAAAAAAA',
 
-    this.video = videoElement;
-    this.setupScanCanvas();
-    await this.initializeBarcodeDetector();
+  init: function() {
+    this.checkRegistration();
+    this.render();
+    this.setupScanner();
+  },
 
-    try {
-      const devices = await navigator.mediaDevices.enumerateDevices();
-      this.capabilities = this.detectCapabilities(devices);
-
-      return await this.requestCameraPermission();
-    } catch (error) {
-      console.error('[Scanner] Init failed:', error);
-      throw error;
-    }
-  }
-
-  setupScanCanvas() {
-    this.scanCanvas = document.createElement('canvas');
-    this.scanContext = this.scanCanvas.getContext('2d', { willReadFrequently: true });
-  }
-
-  async initializeBarcodeDetector() {
-    try {
-      if ('BarcodeDetector' in window) {
-        this.barcodeDetector = new BarcodeDetector({
-          formats: ['qr_code', 'code_128']
-        });
-        this.detectorReady = true;
-        console.log('[Scanner] BarcodeDetector initialized');
-      } else {
-        console.warn('[Scanner] BarcodeDetector not available, attempting jsQR fallback');
-        await this.loadJsQRFallback();
+  checkRegistration: function() {
+    if (typeof CouponDB === 'undefined' || !CouponDB.customerSession || !CouponDB.customerSession.isRegistered) {
+      console.warn('[Scan] No registered customer found, redirecting to registration');
+      if (typeof CouponRouter !== 'undefined' && typeof CouponRouter.navigate === 'function') {
+        CouponRouter.navigate('#/register');
       }
-    } catch (error) {
-      console.warn('[Scanner] BarcodeDetector initialization failed:', error);
-      await this.loadJsQRFallback();
+      return false;
     }
-  }
+    return true;
+  },
 
-  async loadJsQRFallback() {
-    return new Promise((resolve) => {
-      if (typeof jsQR !== 'undefined') {
-        this.jsqrLoaded = true;
-        console.log('[Scanner] jsQR already loaded');
-        resolve();
+  render: function() {
+    const container = document.getElementById('app');
+    if (!container) {
+      console.error('[Scan] App container not found');
+      return;
+    }
+
+    container.innerHTML = `
+      <div class="scan-wrapper">
+        <div class="scan-header">
+          <h1 class="scan-title">Scan Coupon</h1>
+          <p class="scan-subtitle">Position QR or Barcode within frame</p>
+        </div>
+
+        <div class="scan-video-container">
+          <video
+            id="scanVideo"
+            class="scan-video"
+            autoplay
+            muted
+            playsinline
+            aria-label="Camera feed for scanning"
+          ></video>
+
+          <div class="scan-overlay">
+            <div class="scan-frame"></div>
+            <p class="scan-hint">Align barcode with the frame</p>
+          </div>
+
+          <div id="scanLoading" class="scan-loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>Validating coupon...</p>
+          </div>
+        </div>
+
+        <div class="scan-controls">
+          <button id="switchCameraBtn" class="scan-btn scan-btn-secondary" title="Switch Camera">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+              <circle cx="12" cy="13" r="4"></circle>
+            </svg>
+          </button>
+
+          <button id="torchBtn" class="scan-btn scan-btn-secondary" title="Toggle Torch">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="1"></circle>
+              <path d="M12 8v-5"></path>
+              <path d="M4.22 4.22l-3.54 3.54"></path>
+              <path d="M1 12h-5"></path>
+              <path d="M4.22 19.78l-3.54-3.54"></path>
+              <path d="M12 16v5"></path>
+              <path d="M19.78 19.78l3.54-3.54"></path>
+              <path d="M23 12h5"></path>
+              <path d="M19.78 4.22l3.54 3.54"></path>
+            </svg>
+          </button>
+
+          <button id="stopScanBtn" class="scan-btn scan-btn-primary" title="Cancel Scan">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <div id="scanError" class="scan-error" role="alert" style="display: none;"></div>
+      </div>
+
+      <div id="scanDialog" class="scan-dialog" style="display: none;">
+        <div class="scan-dialog-overlay" id="dialogOverlay"></div>
+        <div class="scan-dialog-content">
+          <div id="dialogIcon" class="scan-dialog-icon"></div>
+          <h2 id="dialogTitle" class="scan-dialog-title"></h2>
+          <p id="dialogMessage" class="scan-dialog-message"></p>
+          <button id="dialogBtn" class="btn btn-primary btn-block">OK</button>
+        </div>
+      </div>
+    `;
+  },
+
+  setupScanner: function() {
+    const videoElement = document.getElementById('scanVideo');
+    if (!videoElement) {
+      console.error('[Scan] Video element not found');
+      return;
+    }
+
+    this.videoElement = videoElement;
+    this.initializeCouponScanner();
+    this.attachControls();
+  },
+
+  async initializeCouponScanner() {
+    try {
+      if (typeof CouponScanner === 'undefined') {
+        console.error('[Scan] CouponScanner not available');
+        this.showError('Camera system not available. Please try again.');
         return;
       }
 
-      const script = document.createElement('script');
-      script.src = 'https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js';
+      this.scanner = new CouponScanner({
+        facingMode: 'environment'
+      });
 
-      script.onload = () => {
-        if (typeof jsQR !== 'undefined') {
-          this.jsqrLoaded = true;
-          console.log('[Scanner] jsQR fallback loaded successfully');
-          resolve();
-        } else {
-          console.error('[Scanner] jsQR loaded but not available globally');
-          resolve();
-        }
-      };
+      const initResult = await this.scanner.init(this.videoElement);
 
-      script.onerror = () => {
-        console.error('[Scanner] Failed to load jsQR fallback');
-        resolve();
-      };
-
-      script.crossOrigin = 'anonymous';
-      document.head.appendChild(script);
-    });
-  }
-
-  detectCapabilities(devices) {
-    const videoDevices = devices.filter(d => d.kind === 'videoinput');
-    return {
-      hasCamera: videoDevices.length > 0,
-      hasFrontCamera: videoDevices.some(d => d.label.toLowerCase().includes('front')),
-      hasRearCamera: videoDevices.some(d => d.label.toLowerCase().includes('back') || d.label.toLowerCase().includes('rear')),
-      cameras: videoDevices.length
-    };
-  }
-
-  async requestCameraPermission() {
-    try {
-      const constraints = {
-        video: { facingMode: this.facingMode },
-        audio: false
-      };
-
-      this.stream = await navigator.mediaDevices.getUserMedia(constraints);
-
-      if (this.video) {
-        this.video.srcObject = this.stream;
-        await this.video.play();
+      if (!initResult.granted) {
+        this.showError('Camera permission denied. Please enable camera access.');
+        return;
       }
 
-      this.isActive = true;
-      return { granted: true, stream: this.stream };
-    } catch (error) {
-      console.error('[Scanner] Permission request failed:', error);
-      return {
-        granted: false,
-        error: error.name === 'NotAllowedError' ? 'permission_denied' : 'camera_unavailable'
-      };
-    }
-  }
+      this.scanner.onScan((code) => this.handleScan(code));
+      this.scanner.onError((error) => this.handleScanError(error));
 
-  stop() {
-    if (!this.stream) {
+      this.scanner.startScanning();
+      this.isScanning = true;
+    } catch (error) {
+      console.error('[Scan] Scanner initialization failed:', error);
+      this.showError('Failed to initialize camera. Please try again.');
+    }
+  },
+
+  attachControls: function() {
+    const switchBtn = document.getElementById('switchCameraBtn');
+    if (switchBtn) {
+      switchBtn.addEventListener('click', () => this.switchCamera());
+    }
+
+    const torchBtn = document.getElementById('torchBtn');
+    if (torchBtn) {
+      torchBtn.addEventListener('click', () => this.toggleTorch());
+    }
+
+    const stopBtn = document.getElementById('stopScanBtn');
+    if (stopBtn) {
+      stopBtn.addEventListener('click', () => this.cancelScan());
+    }
+
+    const dialogOverlay = document.getElementById('dialogOverlay');
+    if (dialogOverlay) {
+      dialogOverlay.addEventListener('click', () => this.closeDialog());
+    }
+
+    const dialogBtn = document.getElementById('dialogBtn');
+    if (dialogBtn) {
+      dialogBtn.addEventListener('click', () => this.closeDialog());
+    }
+  },
+
+  async handleScan(code) {
+    if (this.isValidating || this.lastScannedCode === code) {
       return;
     }
 
-    this.stopScanning();
-    this.stream.getTracks().forEach(track => track.stop());
-    this.stream = null;
-    this.isActive = false;
-    this.torchEnabled = false;
+    this.lastScannedCode = code;
+    this.isValidating = true;
 
-    if (this.video) {
-      this.video.srcObject = null;
+    this.scanner.stopScanning();
+    this.showLoading(true);
+
+    try {
+      await new Promise(resolve => setTimeout(resolve, 500));
+
+      const validationResult = this.validateCoupon(code);
+
+      if (!validationResult.valid) {
+        this.showLoading(false);
+        this.showDialog(
+          validationResult.title,
+          validationResult.message,
+          'error',
+          () => {
+            this.lastScannedCode = null;
+            this.isValidating = false;
+            this.scanner.startScanning();
+          }
+        );
+        return;
+      }
+
+      this.playSuccessSound();
+      this.vibrate();
+
+      await this.saveScanData(code, validationResult.coupon);
+
+      this.showLoading(false);
+      this.showDialog(
+        'Coupon Valid',
+        'Proceeding to rewards...',
+        'success',
+        () => {
+          if (typeof CouponRouter !== 'undefined' && typeof CouponRouter.navigate === 'function') {
+            CouponRouter.navigate('#/reward');
+          }
+        }
+      );
+    } catch (error) {
+      console.error('[Scan] Error during validation:', error);
+      this.showLoading(false);
+      this.showDialog(
+        'Error',
+        'Failed to validate coupon. Please try again.',
+        'error',
+        () => {
+          this.lastScannedCode = null;
+          this.isValidating = false;
+          this.scanner.startScanning();
+        }
+      );
     }
-  }
+  },
+
+  validateCoupon: function(code) {
+    try {
+      if (!code || code.trim() === '') {
+        return {
+          valid: false,
+          title: 'Invalid Code',
+          message: 'Scanned code is empty or invalid.'
+        };
+      }
+
+      if (this.scannedCodes.has(code)) {
+        return {
+          valid: false,
+          title: 'Duplicate Scan',
+          message: 'This coupon has already been scanned.'
+        };
+      }
+
+      if (typeof CouponDB === 'undefined' || !CouponDB.coupons) {
+        return {
+          valid: false,
+          title: 'System Error',
+          message: 'Coupon database not available.'
+        };
+      }
+
+      const coupon = CouponDB.coupons.find(c => c.code === code || c.serial === code);
+
+      if (!coupon) {
+        return {
+          valid: false,
+          title: 'Coupon Not Found',
+          message: 'This coupon does not exist in our system.'
+        };
+      }
+
+      if (coupon.status !== 'ACTIVE') {
+        return {
+          valid: false,
+          title: 'Invalid Coupon',
+          message: 'This coupon is not active.'
+        };
+      }
+
+      const currentDate = new Date();
+      if (coupon.expiryDate && new Date(coupon.expiryDate) < currentDate) {
+        return {
+          valid: false,
+          title: 'Coupon Expired',
+          message: 'This coupon has expired. Please try another.'
+        };
+      }
+
+      if (coupon.isRedeemed) {
+        return {
+          valid: false,
+          title: 'Coupon Already Used',
+          message: 'This coupon has already been redeemed.'
+        };
+      }
+
+      this.scannedCodes.add(code);
+
+      return {
+        valid: true,
+        coupon: coupon,
+        title: 'Coupon Valid',
+        message: 'Coupon validated successfully.'
+      };
+    } catch (error) {
+      console.error('[Scan] Validation error:', error);
+      return {
+        valid: false,
+        title: 'Validation Error',
+        message: 'An error occurred while validating the coupon.'
+      };
+    }
+  },
+
+  async saveScanData(code, coupon) {
+    try {
+      if (typeof CouponDB === 'undefined' || !CouponDB.customerSession) {
+        throw new Error('Customer session not found');
+      }
+
+      const scanData = {
+        code: code,
+        couponType: coupon.type || 'standard',
+        serial: coupon.serial || code,
+        couponCode: coupon.code || code,
+        scanTime: new Date().toISOString(),
+        deviceTime: Date.now(),
+        customerId: CouponDB.customerSession.sessionId
+      };
+
+      if (!CouponDB.customerSession.scans) {
+        CouponDB.customerSession.scans = [];
+      }
+
+      CouponDB.customerSession.scans.push(scanData);
+      CouponDB.customerSession.lastScan = scanData;
+
+      return true;
+    } catch (error) {
+      console.error('[Scan] Error saving scan data:', error);
+      throw error;
+    }
+  },
+
+  handleScanError: function(error) {
+    console.error('[Scan] Scanner error:', error);
+    if (!this.isValidating) {
+      this.showError('Camera error. Please try again.');
+    }
+  },
 
   async switchCamera() {
-    return new Promise(async (resolve, reject) => {
-      try {
-        if (!this.stream) {
-          reject({ error: 'no_stream', message: 'No active stream' });
-          return;
-        }
-
-        this.facingMode = this.facingMode === 'environment' ? 'user' : 'environment';
-        this.stream.getTracks().forEach(track => track.stop());
-
-        const constraints = {
-          video: { facingMode: this.facingMode },
-          audio: false
-        };
-
-        this.stream = await navigator.mediaDevices.getUserMedia(constraints);
-
-        if (this.video) {
-          this.video.srcObject = this.stream;
-          await this.video.play();
-        }
-
-        resolve({ switched: true, facingMode: this.facingMode });
-      } catch (error) {
-        console.error('[Scanner] Switch camera failed:', error);
-        reject({ error: 'switch_failed', message: error.message });
-      }
-    });
-  }
-
-  async enableTorch() {
-    return new Promise(async (resolve, reject) => {
-      try {
-        if (!this.stream) {
-          reject({ error: 'no_stream', message: 'No active stream' });
-          return;
-        }
-
-        const track = this.stream.getVideoTracks()[0];
-        if (!track) {
-          reject({ error: 'no_track', message: 'No video track' });
-          return;
-        }
-
-        const capabilities = track.getCapabilities?.() || {};
-        if (!capabilities.torch) {
-          reject({ error: 'torch_unsupported', message: 'Device does not support torch' });
-          return;
-        }
-
-        await track.applyConstraints({ advanced: [{ torch: true }] });
-        this.torchEnabled = true;
-        resolve({ torchEnabled: true });
-      } catch (error) {
-        console.error('[Scanner] Enable torch failed:', error);
-        reject({ error: 'torch_failed', message: error.message });
-      }
-    });
-  }
-
-  async disableTorch() {
-    return new Promise(async (resolve, reject) => {
-      try {
-        if (!this.stream) {
-          reject({ error: 'no_stream', message: 'No active stream' });
-          return;
-        }
-
-        const track = this.stream.getVideoTracks()[0];
-        if (!track) {
-          reject({ error: 'no_track', message: 'No video track' });
-          return;
-        }
-
-        await track.applyConstraints({ advanced: [{ torch: false }] });
-        this.torchEnabled = false;
-        resolve({ torchEnabled: false });
-      } catch (error) {
-        console.error('[Scanner] Disable torch failed:', error);
-        reject({ error: 'torch_failed', message: error.message });
-      }
-    });
-  }
+    try {
+      this.scanner.stopScanning();
+      await this.scanner.switchCamera();
+      this.scanner.startScanning();
+    } catch (error) {
+      console.error('[Scan] Camera switch failed:', error);
+      this.showDialog(
+        'Camera Switch Failed',
+        'Unable to switch camera. Please try again.',
+        'error',
+        () => this.scanner.startScanning()
+      );
+    }
+  },
 
   async toggleTorch() {
-    return this.torchEnabled ? this.disableTorch() : this.enableTorch();
-  }
-
-  async restart() {
-    return new Promise(async (resolve, reject) => {
-      try {
-        if (this.stream) {
-          this.stream.getTracks().forEach(track => track.stop());
-          this.torchEnabled = false;
-        }
-
-        this.facingMode = 'environment';
-
-        const perm = await this.requestCameraPermission();
-        if (!perm.granted) {
-          reject({ error: 'permission_denied', message: 'Camera permission required' });
-          return;
-        }
-
-        resolve({ restarted: true, facingMode: this.facingMode });
-      } catch (error) {
-        console.error('[Scanner] Restart failed:', error);
-        reject({ error: 'restart_failed', message: error.message });
-      }
-    });
-  }
-
-  async destroy() {
     try {
-      this.stopScanning();
-      if (this.torchEnabled) {
-        await this.disableTorch().catch(() => {});
+      await this.scanner.toggleTorch();
+      const torchBtn = document.getElementById('torchBtn');
+      if (torchBtn) {
+        torchBtn.classList.toggle('active', this.scanner.torchEnabled);
       }
-      this.stop();
-      this.scanCallbacks = [];
-      this.errorCallbacks = [];
     } catch (error) {
-      console.error('[Scanner] Destroy failed:', error);
+      console.error('[Scan] Torch toggle failed:', error);
+      this.showDialog(
+        'Torch Not Available',
+        'Your device does not support torch functionality.',
+        'error'
+      );
     }
-  }
+  },
 
-  getCapabilities() {
-    return this.capabilities;
-  }
+  cancelScan: function() {
+    if (this.scanner) {
+      this.scanner.destroy();
+    }
+    if (typeof CouponRouter !== 'undefined' && typeof CouponRouter.navigate === 'function') {
+      CouponRouter.navigate('#/register');
+    }
+  },
 
-  isStreamActive() {
-    return this.isActive && this.stream !== null;
-  }
+  showLoading: function(show) {
+    const loadingEl = document.getElementById('scanLoading');
+    if (loadingEl) {
+      loadingEl.style.display = show ? 'flex' : 'none';
+    }
+  },
 
-  startScanning() {
-    if (this.scanning || !this.isStreamActive()) {
-      console.warn('[Scanner] Cannot start scanning - stream not active');
+  showError: function(message) {
+    const errorEl = document.getElementById('scanError');
+    if (errorEl) {
+      errorEl.textContent = message;
+      errorEl.style.display = 'block';
+      setTimeout(() => {
+        errorEl.style.display = 'none';
+      }, 4000);
+    }
+  },
+
+  showDialog: function(title, message, type = 'info', onClose = null) {
+    const dialog = document.getElementById('scanDialog');
+    const titleEl = document.getElementById('dialogTitle');
+    const messageEl = document.getElementById('dialogMessage');
+    const iconEl = document.getElementById('dialogIcon');
+
+    if (!dialog || !titleEl || !messageEl || !iconEl) {
       return;
     }
 
-    this.scanning = true;
-    this.scanLoop();
-  }
+    titleEl.textContent = title;
+    messageEl.textContent = message;
 
-  stopScanning() {
-    this.scanning = false;
-    if (this.animationFrameId) {
-      cancelAnimationFrame(this.animationFrameId);
-      this.animationFrameId = null;
-    }
-  }
-
-  scanLoop() {
-    if (!this.scanning) {
-      return;
+    if (type === 'success') {
+      iconEl.innerHTML = '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+      iconEl.className = 'scan-dialog-icon icon-success';
+    } else if (type === 'error') {
+      iconEl.innerHTML = '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>';
+      iconEl.className = 'scan-dialog-icon icon-error';
+    } else {
+      iconEl.innerHTML = '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>';
+      iconEl.className = 'scan-dialog-icon icon-info';
     }
 
-    this.scanFrame();
-    this.animationFrameId = requestAnimationFrame(() => this.scanLoop());
-  }
+    this.dialogCallback = onClose;
+    dialog.style.display = 'flex';
+  },
 
-  async scanFrame() {
-    if (!this.video || !this.scanCanvas || !this.scanContext) {
-      return null;
+  closeDialog: function() {
+    const dialog = document.getElementById('scanDialog');
+    if (dialog) {
+      dialog.style.display = 'none';
     }
+    if (this.dialogCallback && typeof this.dialogCallback === 'function') {
+      this.dialogCallback();
+    }
+    this.dialogCallback = null;
+  },
 
+  playSuccessSound: function() {
     try {
-      if (this.video.readyState !== this.video.HAVE_ENOUGH_DATA) {
-        return null;
-      }
-
-      this.scanCanvas.width = this.video.videoWidth;
-      this.scanCanvas.height = this.video.videoHeight;
-
-      this.scanContext.drawImage(this.video, 0, 0, this.scanCanvas.width, this.scanCanvas.height);
-
-      let result = null;
-
-      if (this.detectorReady && this.barcodeDetector) {
-        result = await this.detectWithBarcodeDetector();
-      } else if (this.jsqrLoaded && typeof jsQR !== 'undefined') {
-        result = await this.detectWithJsQR();
-      }
-
-      if (result) {
-        return this.handleScannedCode(result);
-      }
-
-      return null;
+      const audio = new Audio(this.successSoundUrl);
+      audio.volume = 0.3;
+      audio.play().catch(e => console.warn('[Scan] Could not play sound:', e));
     } catch (error) {
-      console.error('[Scanner] Scan frame error:', error);
-      this.fireErrorCallbacks({ error: 'scan_failed', message: error.message });
-      return null;
+      console.warn('[Scan] Audio not available:', error);
     }
-  }
+  },
 
-  async detectWithBarcodeDetector() {
+  vibrate: function() {
+    if (navigator.vibrate) {
+      navigator.vibrate([50, 100, 50]);
+    }
+  },
+
+  destroy: function() {
     try {
-      const barcodes = await this.barcodeDetector.detect(this.scanCanvas);
-      if (barcodes && barcodes.length > 0) {
-        return barcodes[0].rawValue;
+      if (this.scanner) {
+        this.scanner.destroy();
       }
-      return null;
+      this.isScanning = false;
+      this.isValidating = false;
     } catch (error) {
-      console.error('[Scanner] BarcodeDetector error:', error);
-      return null;
+      console.error('[Scan] Destroy error:', error);
     }
-  }
-
-  async detectWithJsQR() {
-    try {
-      const imageData = this.scanContext.getImageData(0, 0, this.scanCanvas.width, this.scanCanvas.height);
-      const code = jsQR(imageData.data, imageData.width, imageData.height);
-      if (code && code.data) {
-        return code.data;
-      }
-      return null;
-    } catch (error) {
-      console.error('[Scanner] jsQR error:', error);
-      return null;
-    }
-  }
-
-  handleScannedCode(codeValue) {
-    if (!codeValue || codeValue.trim() === '') {
-      return null;
-    }
-
-    const now = Date.now();
-    const timeSinceLastScan = now - this.lastScannedTime;
-
-    if (codeValue === this.lastScannedCode && timeSinceLastScan < this.scanCooldown) {
-      return null;
-    }
-
-    this.lastScannedCode = codeValue;
-    this.lastScannedTime = now;
-
-    this.fireScanCallbacks(codeValue);
-    return codeValue;
-  }
-
-  onScan(callback) {
-    if (typeof callback === 'function') {
-      this.scanCallbacks.push(callback);
-    }
-  }
-
-  onError(callback) {
-    if (typeof callback === 'function') {
-      this.errorCallbacks.push(callback);
-    }
-  }
-
-  fireScanCallbacks(scannedCode) {
-    this.scanCallbacks.forEach(callback => {
-      try {
-        callback(scannedCode);
-      } catch (error) {
-        console.error('[Scanner] Scan callback error:', error);
-      }
-    });
-  }
-
-  fireErrorCallbacks(error) {
-    this.errorCallbacks.forEach(callback => {
-      try {
-        callback(error);
-      } catch (err) {
-        console.error('[Scanner] Error callback error:', err);
-      }
-    });
   }
 };
 ```
