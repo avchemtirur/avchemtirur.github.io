@@ -128,7 +128,7 @@ async requestCameraPermission() {
       video: { facingMode: this.facingMode || 'environment' },
       audio: false
     });
-    this._cameraStream = stream;
+    this.stream = stream;
     this.hasCamera = true;
     this.cameraReady = true;
     return { granted: true, stream };
@@ -196,28 +196,31 @@ async detectCameraCapabilities() {
 async switchCamera() {
   return new Promise(async (resolve, reject) => {
     try {
-      if (!this._cameraStream) {
-        reject({ error: 'no_stream', message: 'No active camera stream' });
+      if (!this._Stream) {
+        reject({ error: 'no_stream', message: 'No active  stream' });
         return;
       }
 
       this.facingMode = this.facingMode === 'environment' ? 'user' : 'environment';
       
       // Stop current stream
-      this._cameraStream.getTracks().forEach(t => t.stop());
+      this.Stream.getTracks().forEach(t => t.stop());
 
       // Request new stream
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: this.facingMode },
-        audio: false
-      });
+const stream = await navigator.mediaDevices.getUserMedia({
+  video: {
+    facingMode: this.facingMode
+  },
+  audio: false
+});
 
-      this._cameraStream = stream;
+      this.stream = stream;
       
       // If video element exists, update source
-      if (this.videoElement) {
-        this.videoElement.srcObject = stream;
-      }
+      if (this.video) {
+    this.video.srcObject = stream;
+    await this.video.play();
+}
 
       resolve({ switched: true, facingMode: this.facingMode });
     } catch (err) {
@@ -230,12 +233,12 @@ async switchCamera() {
 async enableTorch() {
   return new Promise(async (resolve, reject) => {
     try {
-      if (!this._cameraStream) {
-        reject({ error: 'no_stream', message: 'No active camera stream' });
+      if (this.Stream) {
+        reject({ error: 'no_stream', message: 'No active  stream' });
         return;
       }
 
-      const track = this._cameraStream.getVideoTracks()[0];
+      const track = this.Stream.getVideoTracks()[0];
       if (!track) {
         reject({ error: 'no_track', message: 'No video track available' });
         return;
@@ -260,12 +263,12 @@ async enableTorch() {
 async disableTorch() {
   return new Promise(async (resolve, reject) => {
     try {
-      if (!this._cameraStream) {
-        reject({ error: 'no_stream', message: 'No active camera stream' });
+      if (this.Stream) {
+        reject({ error: 'nostream', message: 'No active  stream' });
         return;
       }
 
-      const track = this._cameraStream.getVideoTracks()[0];
+      const track = this.stream.getVideoTracks()[0];
       if (!track) {
         reject({ error: 'no_track', message: 'No video track available' });
         return;
@@ -289,8 +292,8 @@ async restart() {
   return new Promise(async (resolve, reject) => {
     try {
       // Stop all tracks
-      if (this._cameraStream) {
-        this._cameraStream.getTracks().forEach(t => t.stop());
+      if (this.stream) {
+        this.Stream.getTracks().forEach(t => t.stop());
         this.torchEnabled = false;
       }
 
@@ -318,8 +321,8 @@ async destroy() {
     if (this.torchEnabled) {
       await this.disableTorch().catch(() => {});
     }
-    if (this._cameraStream) {
-      this._cameraStream.getTracks().forEach(t => t.stop());
+    if (this.Stream) {
+      this.Stream.getTracks().forEach(t => t.stop());
     }
   } catch (err) {
     console.error('[Scanner] Destroy failed:', err);
