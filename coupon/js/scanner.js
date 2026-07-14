@@ -195,7 +195,7 @@ async detectCameraCapabilities() {
 async switchCamera() {
   return new Promise(async (resolve, reject) => {
     try {
-      if (this._Stream) {
+      if (!this.stream) {
         reject({ error: 'no_stream', message: 'No active  stream' });
         return;
       }
@@ -262,7 +262,7 @@ async enableTorch() {
 async disableTorch() {
   return new Promise(async (resolve, reject) => {
     try {
-      if (this.Stream) {
+      if (!this.stream) {
         reject({ error: 'nostream', message: 'No active  stream' });
         return;
       }
@@ -320,7 +320,7 @@ async destroy() {
     if (this.torchEnabled) {
       await this.disableTorch().catch(() => {});
     }
-    if (this.Stream) {
+   if (!this.stream) {
       this.Stream.getTracks().forEach(t => t.stop());
     }
   } catch (err) {
