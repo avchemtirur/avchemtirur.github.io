@@ -40,10 +40,9 @@ class CouponScanner {
 
         this.video = document.getElementById(videoId);
 
-        if (this.video) {
-
-            throw new Error("Scanner video element not found.");
-
+        if (!this.video) {
+    throw new Error("Scanner video element not found.");
+}
         }
 
         await this.loadCameras();
@@ -182,7 +181,7 @@ async detectCameraCapabilities() {
       // Cleanup test stream
       track.stop();
     } catch (e) {
-      // Torch detection failed, assume unsupported
+      // Torch detection fai😭led, assume unsupported
     }
 
     this.capabilities = capabilities;
