@@ -1,4 +1,3 @@
-```javascript
 window.CouponViews = window.CouponViews || {};
 
 window.CouponViews.scan = {
@@ -482,4 +481,3 @@ window.CouponViews.scan = {
     }
   }
 };
-```
