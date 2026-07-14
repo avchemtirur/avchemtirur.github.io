@@ -1,3 +1,4 @@
+```javascript
 window.CouponScanner = class {
   constructor(options = {}) {
     this.video = null;
@@ -6,6 +7,18 @@ window.CouponScanner = class {
     this.torchEnabled = false;
     this.isActive = false;
     this.capabilities = {};
+    
+    this.scanning = false;
+    this.scanCanvas = null;
+    this.scanContext = null;
+    this.lastScannedCode = null;
+    this.lastScannedTime = 0;
+    this.scanCooldown = 1500;
+    this.scanCallbacks = [];
+    this.errorCallbacks = [];
+    this.animationFrameId = null;
+    this.barcodeDetector = null;
+    this.detectorReady = false;
   }
 
   async init(videoElement) {
@@ -14,6 +27,8 @@ window.CouponScanner = class {
     }
 
     this.video = videoElement;
+    this.setupScanCanvas();
+    await this.initializeBarcodeDetector();
 
     try {
       const devices = await navigator.mediaDevices.enumerateDevices();
@@ -24,6 +39,45 @@ window.CouponScanner = class {
       console.error('[Scanner] Init failed:', error);
       throw error;
     }
+  }
+
+  setupScanCanvas() {
+    this.scanCanvas = document.createElement('canvas');
+    this.scanContext = this.scanCanvas.getContext('2d', { willReadFrequently: true });
+  }
+
+  async initializeBarcodeDetector() {
+    try {
+      if ('BarcodeDetector' in window) {
+        this.barcodeDetector = new BarcodeDetector({
+          formats: ['qr_code', 'code_128']
+        });
+        this.detectorReady = true;
+      } else {
+        console.warn('[Scanner] BarcodeDetector not available, will use jsQR fallback');
+        this.detectorReady = await this.loadJsQRFallback();
+      }
+    } catch (error) {
+      console.warn('[Scanner] BarcodeDetector initialization failed:', error);
+      this.detectorReady = await this.loadJsQRFallback();
+    }
+  }
+
+  async loadJsQRFallback() {
+    return new Promise((resolve) => {
+      if (typeof jsQR !== 'undefined') {
+        resolve(true);
+      } else {
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js';
+        script.onload = () => resolve(true);
+        script.onerror = () => {
+          console.error('[Scanner] Failed to load jsQR fallback');
+          resolve(false);
+        };
+        document.head.appendChild(script);
+      }
+    });
   }
 
   detectCapabilities(devices) {
@@ -66,6 +120,7 @@ window.CouponScanner = class {
       return;
     }
 
+    this.stopScanning();
     this.stream.getTracks().forEach(track => track.stop());
     this.stream = null;
     this.isActive = false;
@@ -191,6 +246,7 @@ window.CouponScanner = class {
 
   async destroy() {
     try {
+      this.stopScanning();
       if (this.torchEnabled) {
         await this.disableTorch().catch(() => {});
       }
@@ -207,4 +263,144 @@ window.CouponScanner = class {
   isStreamActive() {
     return this.isActive && this.stream !== null;
   }
+
+  startScanning() {
+    if (this.scanning || !this.isStreamActive()) {
+      return;
+    }
+
+    this.scanning = true;
+    this.scanLoop();
+  }
+
+  stopScanning() {
+    this.scanning = false;
+    if (this.animationFrameId) {
+      cancelAnimationFrame(this.animationFrameId);
+      this.animationFrameId = null;
+    }
+  }
+
+  scanLoop() {
+    if (!this.scanning) {
+      return;
+    }
+
+    this.scanFrame();
+    this.animationFrameId = requestAnimationFrame(() => this.scanLoop());
+  }
+
+  async scanFrame() {
+    if (!this.video || !this.scanCanvas || !this.scanContext) {
+      return null;
+    }
+
+    try {
+      if (this.video.readyState !== this.video.HAVE_ENOUGH_DATA) {
+        return null;
+      }
+
+      this.scanCanvas.width = this.video.videoWidth;
+      this.scanCanvas.height = this.video.videoHeight;
+
+      this.scanContext.drawImage(this.video, 0, 0, this.scanCanvas.width, this.scanCanvas.height);
+
+      let result = null;
+
+      if (this.detectorReady && this.barcodeDetector) {
+        result = await this.detectWithBarcodeDetector();
+      } else if (typeof jsQR !== 'undefined') {
+        result = await this.detectWithJsQR();
+      }
+
+      if (result) {
+        return this.handleScannedCode(result);
+      }
+
+      return null;
+    } catch (error) {
+      console.error('[Scanner] Scan frame error:', error);
+      this.fireErrorCallbacks({ error: 'scan_failed', message: error.message });
+      return null;
+    }
+  }
+
+  async detectWithBarcodeDetector() {
+    try {
+      const barcodes = await this.barcodeDetector.detect(this.scanCanvas);
+      if (barcodes && barcodes.length > 0) {
+        return barcodes[0].rawValue;
+      }
+      return null;
+    } catch (error) {
+      console.error('[Scanner] BarcodeDetector error:', error);
+      return null;
+    }
+  }
+
+  async detectWithJsQR() {
+    try {
+      const imageData = this.scanContext.getImageData(0, 0, this.scanCanvas.width, this.scanCanvas.height);
+      const code = jsQR(imageData.data, imageData.width, imageData.height);
+      if (code && code.data) {
+        return code.data;
+      }
+      return null;
+    } catch (error) {
+      console.error('[Scanner] jsQR error:', error);
+      return null;
+    }
+  }
+
+  handleScannedCode(codeValue) {
+    if (!codeValue || codeValue.trim() === '') {
+      return null;
+    }
+
+    const now = Date.now();
+    const timeSinceLastScan = now - this.lastScannedTime;
+
+    if (codeValue === this.lastScannedCode && timeSinceLastScan < this.scanCooldown) {
+      return null;
+    }
+
+    this.lastScannedCode = codeValue;
+    this.lastScannedTime = now;
+
+    this.fireScanCallbacks(codeValue);
+    return codeValue;
+  }
+
+  onScan(callback) {
+    if (typeof callback === 'function') {
+      this.scanCallbacks.push(callback);
+    }
+  }
+
+  onError(callback) {
+    if (typeof callback === 'function') {
+      this.errorCallbacks.push(callback);
+    }
+  }
+
+  fireScanCallbacks(scannedCode) {
+    this.scanCallbacks.forEach(callback => {
+      try {
+        callback(scannedCode);
+      } catch (error) {
+        console.error('[Scanner] Scan callback error:', error);
+      }
+    });
+  }
+
+  fireErrorCallbacks(error) {
+    this.errorCallbacks.forEach(callback => {
+      try {
+        callback(error);
+      } catch (err) {
+        console.error('[Scanner] Error callback error:', err);
+      }
+    });
+  }
 };
+```
