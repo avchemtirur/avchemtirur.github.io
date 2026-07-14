@@ -2,21 +2,21 @@ window.CouponViews = window.CouponViews || {};
 
 window.CouponViews.register = {
   districts: [
-    'Alappuzha',
-    'Ernakulam',
-    'Idukki',
-    'Kannur',
-    'Kasaragod',
-    'Kottayam',
-    'Kozhikode',
-    'Malappuram',
-    'Palakkad',
-    'Pathanamthitta',
-    'Thiruvananthapuram',
-    'Thrissur',
-    'Wayanad'
-  ],
-
+  'Alappuzha',
+  'Ernakulam',
+  'Idukki',
+  'Kannur',
+  'Kasaragod',
+  'Kollam',
+  'Kottayam',
+  'Kozhikode',
+  'Malappuram',
+  'Palakkad',
+  'Pathanamthitta',
+  'Thiruvananthapuram',
+  'Thrissur',
+  'Wayanad'
+]
   validationRules: {
     name: {
       minLength: 3,
