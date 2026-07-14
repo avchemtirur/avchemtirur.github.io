@@ -292,7 +292,7 @@ async restart() {
     try {
       // Stop all tracks
       if (this.stream) {
-        this.Stream.getTracks().forEach(t => t.stop());
+        this.stream.getTracks().forEach(t => t.stop());
         this.torchEnabled = false;
       }
 
