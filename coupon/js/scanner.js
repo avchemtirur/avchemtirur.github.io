@@ -40,7 +40,7 @@ class CouponScanner {
 
         this.video = document.getElementById(videoId);
 
-        if (!this.video) {
+        if (this.video) {
 
             throw new Error("Scanner video element not found.");
 
@@ -96,7 +96,7 @@ class CouponScanner {
 
     stop() {
 
-        if (!this.stream) return;
+        if (this.stream) return;
 
         this.stream.getTracks().forEach(track => {
 
@@ -196,7 +196,7 @@ async detectCameraCapabilities() {
 async switchCamera() {
   return new Promise(async (resolve, reject) => {
     try {
-      if (!this._Stream) {
+      if (this._Stream) {
         reject({ error: 'no_stream', message: 'No active  stream' });
         return;
       }
