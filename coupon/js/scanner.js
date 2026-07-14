@@ -7,7 +7,6 @@ window.CouponScanner = class {
     this.torchEnabled = false;
     this.isActive = false;
     this.capabilities = {};
-    
     this.scanning = false;
     this.scanCanvas = null;
     this.scanContext = null;
@@ -19,6 +18,7 @@ window.CouponScanner = class {
     this.animationFrameId = null;
     this.barcodeDetector = null;
     this.detectorReady = false;
+    this.jsqrLoaded = false;
   }
 
   async init(videoElement) {
@@ -33,7 +33,7 @@ window.CouponScanner = class {
     try {
       const devices = await navigator.mediaDevices.enumerateDevices();
       this.capabilities = this.detectCapabilities(devices);
-      
+
       return await this.requestCameraPermission();
     } catch (error) {
       console.error('[Scanner] Init failed:', error);
@@ -53,30 +53,47 @@ window.CouponScanner = class {
           formats: ['qr_code', 'code_128']
         });
         this.detectorReady = true;
+        console.log('[Scanner] BarcodeDetector initialized');
       } else {
-        console.warn('[Scanner] BarcodeDetector not available, will use jsQR fallback');
-        this.detectorReady = await this.loadJsQRFallback();
+        console.warn('[Scanner] BarcodeDetector not available, attempting jsQR fallback');
+        await this.loadJsQRFallback();
       }
     } catch (error) {
       console.warn('[Scanner] BarcodeDetector initialization failed:', error);
-      this.detectorReady = await this.loadJsQRFallback();
+      await this.loadJsQRFallback();
     }
   }
 
   async loadJsQRFallback() {
     return new Promise((resolve) => {
       if (typeof jsQR !== 'undefined') {
-        resolve(true);
-      } else {
-        const script = document.createElement('script');
-        script.src = 'https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js';
-        script.onload = () => resolve(true);
-        script.onerror = () => {
-          console.error('[Scanner] Failed to load jsQR fallback');
-          resolve(false);
-        };
-        document.head.appendChild(script);
+        this.jsqrLoaded = true;
+        console.log('[Scanner] jsQR already loaded');
+        resolve();
+        return;
       }
+
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js';
+
+      script.onload = () => {
+        if (typeof jsQR !== 'undefined') {
+          this.jsqrLoaded = true;
+          console.log('[Scanner] jsQR fallback loaded successfully');
+          resolve();
+        } else {
+          console.error('[Scanner] jsQR loaded but not available globally');
+          resolve();
+        }
+      };
+
+      script.onerror = () => {
+        console.error('[Scanner] Failed to load jsQR fallback');
+        resolve();
+      };
+
+      script.crossOrigin = 'anonymous';
+      document.head.appendChild(script);
     });
   }
 
@@ -84,8 +101,8 @@ window.CouponScanner = class {
     const videoDevices = devices.filter(d => d.kind === 'videoinput');
     return {
       hasCamera: videoDevices.length > 0,
-      hasFrontCamera: videoDevices.some(d => d.label.includes('front')),
-      hasRearCamera: videoDevices.some(d => d.label.includes('back') || d.label.includes('rear')),
+      hasFrontCamera: videoDevices.some(d => d.label.toLowerCase().includes('front')),
+      hasRearCamera: videoDevices.some(d => d.label.toLowerCase().includes('back') || d.label.toLowerCase().includes('rear')),
       cameras: videoDevices.length
     };
   }
@@ -251,6 +268,8 @@ window.CouponScanner = class {
         await this.disableTorch().catch(() => {});
       }
       this.stop();
+      this.scanCallbacks = [];
+      this.errorCallbacks = [];
     } catch (error) {
       console.error('[Scanner] Destroy failed:', error);
     }
@@ -266,6 +285,7 @@ window.CouponScanner = class {
 
   startScanning() {
     if (this.scanning || !this.isStreamActive()) {
+      console.warn('[Scanner] Cannot start scanning - stream not active');
       return;
     }
 
@@ -309,7 +329,7 @@ window.CouponScanner = class {
 
       if (this.detectorReady && this.barcodeDetector) {
         result = await this.detectWithBarcodeDetector();
-      } else if (typeof jsQR !== 'undefined') {
+      } else if (this.jsqrLoaded && typeof jsQR !== 'undefined') {
         result = await this.detectWithJsQR();
       }
 
