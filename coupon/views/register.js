@@ -1,22 +1,23 @@
+```javascript
 window.CouponViews = window.CouponViews || {};
 
 window.CouponViews.register = {
   districts: [
-  'Alappuzha',
-  'Ernakulam',
-  'Idukki',
-  'Kannur',
-  'Kasaragod',
-  'Kollam',
-  'Kottayam',
-  'Kozhikode',
-  'Malappuram',
-  'Palakkad',
-  'Pathanamthitta',
-  'Thiruvananthapuram',
-  'Thrissur',
-  'Wayanad'
-]
+    'Alappuzha',
+    'Ernakulam',
+    'Idukki',
+    'Kannur',
+    'Kasaragod',
+    'Kottayam',
+    'Kozhikode',
+    'Malappuram',
+    'Palakkad',
+    'Pathanamthitta',
+    'Thiruvananthapuram',
+    'Thrissur',
+    'Wayanad'
+  ],
+
   validationRules: {
     name: {
       minLength: 3,
@@ -60,10 +61,19 @@ window.CouponViews.register = {
     }
   },
 
+  isSaving: false,
+  formState: {
+    name: '',
+    mobile: '',
+    location: '',
+    district: ''
+  },
+
   init: function() {
     this.render();
     this.setupForm();
     this.restoreSessionData();
+    this.checkFormValidity();
   },
 
   render: function() {
@@ -78,7 +88,7 @@ window.CouponViews.register = {
         <div class="register-container">
           <div class="register-header">
             <h1 class="register-title">Customer Registration</h1>
-            <p class="register-subtitle">Join our rewards program and get exclusive offers</p>
+            <p class="register-subtitle">Complete your profile to access exclusive coupons</p>
           </div>
 
           <form id="registerForm" class="register-form" novalidate>
@@ -97,8 +107,9 @@ window.CouponViews.register = {
                 maxlength="50"
                 aria-label="Full Name"
                 aria-describedby="customerNameError"
+                required
               />
-              <div id="customerNameError" class="form-error" role="alert"></div>
+              <div id="customerNameError" class="form-error" role="alert" aria-live="polite"></div>
             </div>
 
             <div class="form-group">
@@ -118,9 +129,10 @@ window.CouponViews.register = {
                   maxlength="10"
                   aria-label="Mobile Number"
                   aria-describedby="customerMobileError"
+                  required
                 />
               </div>
-              <div id="customerMobileError" class="form-error" role="alert"></div>
+              <div id="customerMobileError" class="form-error" role="alert" aria-live="polite"></div>
             </div>
 
             <div class="form-group">
@@ -137,8 +149,9 @@ window.CouponViews.register = {
                 maxlength="100"
                 aria-label="Location"
                 aria-describedby="customerLocationError"
+                required
               />
-              <div id="customerLocationError" class="form-error" role="alert"></div>
+              <div id="customerLocationError" class="form-error" role="alert" aria-live="polite"></div>
             </div>
 
             <div class="form-group">
@@ -151,14 +164,17 @@ window.CouponViews.register = {
                 class="form-control form-select"
                 aria-label="District"
                 aria-describedby="customerDistrictError"
+                required
               >
                 <option value="">Select your district</option>
               </select>
-              <div id="customerDistrictError" class="form-error" role="alert"></div>
+              <div id="customerDistrictError" class="form-error" role="alert" aria-live="polite"></div>
             </div>
 
-            <button type="submit" class="btn btn-primary btn-block">
-              Continue
+            <div id="formError" class="form-error form-error-block" role="alert" style="display: none;"></div>
+
+            <button type="submit" id="submitBtn" class="btn btn-primary btn-block" disabled>
+              <span>Continue to Scanner</span>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <line x1="5" y1="12" x2="19" y2="12"></line>
                 <polyline points="12 5 19 12 12 19"></polyline>
@@ -208,6 +224,9 @@ window.CouponViews.register = {
       nameInput.addEventListener('blur', () => this.validateField('name'));
       nameInput.addEventListener('input', (e) => {
         e.target.value = e.target.value.replace(/[^a-zA-Z\s'-]/g, '');
+        this.formState.name = e.target.value;
+        this.validateField('name');
+        this.checkFormValidity();
       });
     }
 
@@ -216,6 +235,9 @@ window.CouponViews.register = {
       mobileInput.addEventListener('blur', () => this.validateField('mobile'));
       mobileInput.addEventListener('input', (e) => {
         e.target.value = e.target.value.replace(/\D/g, '').slice(0, 10);
+        this.formState.mobile = e.target.value;
+        this.validateField('mobile');
+        this.checkFormValidity();
       });
     }
 
@@ -224,12 +246,20 @@ window.CouponViews.register = {
       locationInput.addEventListener('blur', () => this.validateField('location'));
       locationInput.addEventListener('input', (e) => {
         e.target.value = e.target.value.slice(0, 100);
+        this.formState.location = e.target.value;
+        this.validateField('location');
+        this.checkFormValidity();
       });
     }
 
     const districtSelect = document.getElementById('customerDistrict');
     if (districtSelect) {
-      districtSelect.addEventListener('change', () => this.validateField('district'));
+      districtSelect.addEventListener('change', (e) => {
+        this.formState.district = e.target.value;
+        this.validateField('district');
+        this.checkFormValidity();
+      });
+      districtSelect.addEventListener('blur', () => this.validateField('district'));
     }
   },
 
@@ -296,23 +326,99 @@ window.CouponViews.register = {
   validateAllFields: function() {
     const fields = ['name', 'mobile', 'location', 'district'];
     let allValid = true;
+    let firstInvalidField = null;
 
     fields.forEach(fieldName => {
       if (!this.validateField(fieldName)) {
         allValid = false;
+        if (!firstInvalidField) {
+          const fieldElementMap = {
+            name: 'customerName',
+            mobile: 'customerMobile',
+            location: 'customerLocation',
+            district: 'customerDistrict'
+          };
+          firstInvalidField = document.getElementById(fieldElementMap[fieldName]);
+        }
       }
     });
+
+    if (firstInvalidField && !allValid) {
+      firstInvalidField.focus();
+    }
 
     return allValid;
   },
 
-  onFormSubmit: function(e) {
+  checkFormValidity: function() {
+    const fields = ['name', 'mobile', 'location', 'district'];
+    let allValid = true;
+
+    fields.forEach(fieldName => {
+      const fieldElementMap = {
+        name: 'customerName',
+        mobile: 'customerMobile',
+        location: 'customerLocation',
+        district: 'customerDistrict'
+      };
+
+      const field = document.getElementById(fieldElementMap[fieldName]);
+      if (!field) return;
+
+      const value = field.value.trim();
+      const rules = this.validationRules[fieldName];
+
+      if (!rules || !rules.required) {
+        return;
+      }
+
+      if (!value) {
+        allValid = false;
+        return;
+      }
+
+      if (fieldName === 'name') {
+        if (value.length < rules.minLength || value.length > rules.maxLength || !rules.pattern.test(value)) {
+          allValid = false;
+        }
+      } else if (fieldName === 'mobile') {
+        if (value.length !== rules.length || !rules.pattern.test(value)) {
+          allValid = false;
+        }
+      } else if (fieldName === 'location') {
+        if (value.length < rules.minLength || value.length > rules.maxLength || !rules.pattern.test(value)) {
+          allValid = false;
+        }
+      }
+    });
+
+    const submitBtn = document.getElementById('submitBtn');
+    if (submitBtn) {
+      submitBtn.disabled = !allValid;
+    }
+  },
+
+  async onFormSubmit(e) {
     e.preventDefault();
 
-    if (!this.validateAllFields()) {
-      CouponUtils.toast('Please fill all fields correctly', 'error');
+    if (this.isSaving) {
       return;
     }
+
+    if (!this.validateAllFields()) {
+      const formError = document.getElementById('formError');
+      if (formError) {
+        formError.textContent = 'Please fill all required fields correctly';
+        formError.style.display = 'block';
+      }
+      CouponUtils.toast('Please correct the errors and try again', 'error');
+      return;
+    }
+
+    this.isSaving = true;
+    const submitBtn = document.getElementById('submitBtn');
+    const originalText = submitBtn.textContent;
+    submitBtn.disabled = true;
 
     const nameValue = document.getElementById('customerName').value.trim();
     const mobileValue = document.getElementById('customerMobile').value.trim();
@@ -325,7 +431,8 @@ window.CouponViews.register = {
       location: locationValue,
       district: districtValue,
       registeredAt: new Date().toISOString(),
-      sessionId: this.generateSessionId()
+      sessionId: this.generateSessionId(),
+      isRegistered: true
     };
 
     try {
@@ -339,6 +446,12 @@ window.CouponViews.register = {
 
       Object.assign(CouponDB.customerSession, customerData);
 
+      const formError = document.getElementById('formError');
+      if (formError) {
+        formError.style.display = 'none';
+        formError.textContent = '';
+      }
+
       CouponUtils.toast('Registration successful!', 'success');
 
       setTimeout(() => {
@@ -350,7 +463,15 @@ window.CouponViews.register = {
       }, 600);
     } catch (error) {
       console.error('[Register] Error saving customer data:', error);
+      const formError = document.getElementById('formError');
+      if (formError) {
+        formError.textContent = 'Failed to save registration. Please try again.';
+        formError.style.display = 'block';
+      }
       CouponUtils.toast('Failed to save registration. Please try again.', 'error');
+      submitBtn.disabled = false;
+    } finally {
+      this.isSaving = false;
     }
   },
 
@@ -366,6 +487,7 @@ window.CouponViews.register = {
         const nameField = document.getElementById('customerName');
         if (nameField) {
           nameField.value = session.name;
+          this.formState.name = session.name;
         }
       }
 
@@ -373,6 +495,7 @@ window.CouponViews.register = {
         const mobileField = document.getElementById('customerMobile');
         if (mobileField) {
           mobileField.value = session.mobile;
+          this.formState.mobile = session.mobile;
         }
       }
 
@@ -380,6 +503,7 @@ window.CouponViews.register = {
         const locationField = document.getElementById('customerLocation');
         if (locationField) {
           locationField.value = session.location;
+          this.formState.location = session.location;
         }
       }
 
@@ -387,6 +511,7 @@ window.CouponViews.register = {
         const districtField = document.getElementById('customerDistrict');
         if (districtField) {
           districtField.value = session.district;
+          this.formState.district = session.district;
         }
       }
     } catch (error) {
@@ -400,3 +525,4 @@ window.CouponViews.register = {
     return 'sess_' + timestamp + '_' + randomStr;
   }
 };
+```
