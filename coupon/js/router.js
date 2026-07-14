@@ -14,7 +14,13 @@
   // title      -> topbar title
   // adminOnly  -> only role === 'Admin' may access
   const ROUTES = {
-    '/login':      { view:'login',      protected:false, navKey:null,        title:'H4 Coupon',        chrome:false },
+    '/login':      { view:'login',      protected:false, navKey:null,        title:'H4 Coupon',        chrome:false },'/register': {
+  view: 'register',
+  protected: false,
+  navKey: null,
+  title: 'Customer Registration',
+  chrome: false
+},
     '/dashboard':  { view:'dashboard',  protected:true,  navKey:'dashboard', title:'Dashboard',         chrome:true  },
     '/scanner':    { view:'scanner',    protected:true,  navKey:'scanner',   title:'Scan Coupon',       chrome:true  },
     '/verify':     { view:'verify',     protected:true,  navKey:null,        title:'Verify Coupon',     chrome:true  },
