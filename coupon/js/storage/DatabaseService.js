@@ -368,4 +368,4 @@ if (!window.__h4DatabaseService) {
   window.__h4DatabaseService = new DatabaseService('localStorage');
 }
 
-const db = window.__h4DatabaseService;
+export { DatabaseService, db };
