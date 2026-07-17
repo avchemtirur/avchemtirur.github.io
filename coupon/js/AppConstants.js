@@ -6,7 +6,7 @@ const AppConstants = {
   // App Info
   APP_NAME: 'H4 Coupon',
   APP_VERSION: '2.0.0',
-  ORGANIZATION: 'AV CHEM',
+  ORGANIZATION: 'AV CHEM CHEMICAL &  MANUFACTURING ',
 
   // Storage
   STORAGE_QUOTA_WARNING: 0.8,
