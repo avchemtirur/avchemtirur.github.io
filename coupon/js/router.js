@@ -22,12 +22,7 @@
   chrome: false
 },
     '/dashboard':  { view:'dashboard',  protected:true,  navKey:'dashboard', title:'Dashboard',         chrome:true  },
-    '/'/scanner': {
-  view:'scanner',
-  protected:false,
-  navKey:'scanner',
-  title:'Scan Coupon',
-  chrome:true
+    '/scanner':    { view:'scanner',    protected:false, navKey:'scanner',   title:'Scan Coupon',       chrome:true  },
 },
     '/verify':     { view:'verify',     protected:false, navKey:null,        title:'Verify Coupon',     chrome:true  },
     '/customers':  { view:'customers',  protected:true,  navKey:'customers', title:'Customers',         chrome:true  },
