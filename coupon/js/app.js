@@ -12,10 +12,15 @@
 
   function boot(){
     applyTheme();
-    if(!window.location.hash){
-      const session = CouponDB.getSession();
-      window.location.hash = session ? '/dashboard' : '/login';
-    }
+    if (!window.location.hash) {
+  const session = CouponDB.getSession();
+
+  if (session) {
+    window.location.hash = '/dashboard';
+  } else {
+    window.location.hash = '/scanner';
+  }
+}
     CouponRouter.resolve();
   }
 
