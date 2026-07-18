@@ -22,8 +22,14 @@
   chrome: false
 },
     '/dashboard':  { view:'dashboard',  protected:true,  navKey:'dashboard', title:'Dashboard',         chrome:true  },
-    '/scanner':    { view:'scanner',    protected:true,  navKey:'scanner',   title:'Scan Coupon',       chrome:true  },
-    '/verify':     { view:'verify',     protected:true,  navKey:null,        title:'Verify Coupon',     chrome:true  },
+    '/'/scanner': {
+  view:'scanner',
+  protected:false,
+  navKey:'scanner',
+  title:'Scan Coupon',
+  chrome:true
+},
+    '/verify':     { view:'verify',     protected:false, navKey:null,        title:'Verify Coupon',     chrome:true  },
     '/customers':  { view:'customers',  protected:true,  navKey:'customers', title:'Customers',         chrome:true  },
     '/points':     { view:'points',     protected:true,  navKey:null,        title:'Points',            chrome:true  },
     '/rewards':    { view:'rewards',    protected:true,  navKey:'rewards',   title:'Rewards',           chrome:true  },
