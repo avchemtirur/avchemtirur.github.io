@@ -82,10 +82,11 @@ h4_branding_animations = {
 h4_branding_global_settings = {
   appName: "H4 Coupon System",
   appVersion: "2.0.0",
-  companyName: "AV CHEM",
-  companyEmail: "support@h4.com",
-  companyPhone: "+919895123456",
-  companyWebsite: "https://h4.local",
+  companyName: "AV CHEM CHEMICAL &  MANUFACTURING ",
+  companyEmail: "avchemtirur@gmail com ",
+  companyPhone: "+917907344030",
+  companyWebsite:https://avchemtirur.github.io/
+",
   
   features: {
     darkMode: true,
@@ -96,7 +97,7 @@ h4_branding_global_settings = {
   },
   
   defaults: {
-    defaultTheme: "theme_1234567890",
+    defaultTheme: "theme_+917907344030",
     defaultLanguage: "en",
     defaultAnimation: "fadeIn",
     defaultShadow: "md"
