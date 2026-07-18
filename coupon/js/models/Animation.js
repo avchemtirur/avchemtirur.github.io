@@ -232,14 +232,14 @@ class Animation {
     // WHERE: After timeline property
     // Event callbacks for animation lifecycle
     this.events = {
-      beforeStart: data.events?.beforeStart || null,    // function callback
-      onStart: data.events?.onStart || null,
-      onPause: data.events?.onPause || null,
-      onResume: data.events?.onResume || null,
-      onComplete: data.events?.onComplete || null,
-      onCancel: data.events?.onCancel || null,
-      onDestroy: data.events?.onDestroy || null
-    };
+  beforeStart: data.events?.beforeStart || "beforeStart",
+  onStart: data.events?.onStart || "onStart",
+  onPause: data.events?.onPause || "onPause",
+  onResume: data.events?.onResume || "onResume",
+  onComplete: data.events?.onComplete || "onComplete",
+  onCancel: data.events?.onCancel || "onCancel",
+  onDestroy: data.events?.onDestroy || "onDestroy"
+};
   }
 
   /**
