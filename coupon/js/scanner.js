@@ -1,4 +1,4 @@
-window.CouponViews = window.CouponViews || {};
+window.CouponViews.scanner = { window.CouponViews || {};
 
 window.CouponViews.scan = {
   scanner: null,
@@ -26,8 +26,8 @@ window.CouponViews.scan = {
     return true;
   },
 
-  render: function() {
-    const container = document.getElementById('app');
+  render: function(container) { 
+    container.innerHTML = `
     if (!container) {
       console.error('[Scan] App container not found');
       return;
