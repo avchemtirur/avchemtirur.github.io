@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>📋 SRS – Coupon & Reward Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+    <style>
+        /* ============================================================
+                   DESIGN TOKENS (mirrored in CSS)
+                   ============================================================ */
+        :root {
+            /* Colors */
+            --primary: #1A73E8;
+            --primary-container: #D2E3FC;
+            --secondary: #34A853;
+            --error: #EA4335;
+            --warning: #FBBC04;
+            --bg: #F4F6F9;
+            --surface: #FFFFFF;
+            --on-surface: #1F1F1F;
+            --on-surface-variant: #5F6368;
+
+            /* Typography */
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+            /* Border Radius */
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 16px;
+            --radius-full: 9999px;
+
+            /* Elevation / Shadows */
+            --shadow-1: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --shadow-3: 0 6px 20px rgba(0, 0, 0, 0.08);
+            --shadow-5: 0 12px 40px rgba(0, 0, 0, 0.12);
+
+            /* Spacing */
+            --space-xxs: 2px;
+            --space-xs: 4px;
+            --space-s: 8px;
+            --space-m: 16px;
+            --space-l: 24px;
+            --space-xl: 32px;
+            --space-xxl: 48px;
+        }
+
+        /* ============================================================
+                   RESET & BASE
+                   ============================================================ */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background: var(--bg);
+            color: var(--on-surface);
+            line-height: 1.6;
+            padding: var(--space-l);
+        }
+
+        /* ============================================================
+                   LAYOUT
+                   ============================================================ */
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            background: var(--surface);
+            padding: var(--space-l) var(--space-xl);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-1);
+            margin-bottom: var(--space-xl);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .header h1 span {
+            color: var(--primary);
+        }
+
+        .header .badge {
+            background: var(--primary-container);
+            color: var(--primary);
+            padding: 4px 14px;
+            border-radius: var(--radius-full);
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* Quick Nav */
+        .quick-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-s);
+            margin-bottom: var(--space-xl);
+        }
+
+        .quick-nav a {
+            background: var(--surface);
+            padding: 6px 16px;
+            border-radius: var(--radius-full);
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--on-surface-variant);
+            text-decoration: none;
+            box-shadow: var(--shadow-1);
+            transition: 0.2s;
+        }
+
+        .quick-nav a:hover {
+            background: var(--primary);
+            color: #fff;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-3);
+        }
+
+        /* Grid */
+        .section {
+            margin-bottom: var(--space-xxl);
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: var(--space-m);
+            display: flex;
+            align-items: center;
+            gap: var(--space-s);
+        }
+
+        .section-title .count {
+            background: var(--primary-container);
+            color: var(--primary);
+            font-size: 14px;
+            font-weight: 600;
+            padding: 0 12px;
+            border-radius: var(--radius-full);
+            line-height: 28px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: var(--space-m);
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: var(--space-m);
+        }
+
+        /* Cards */
+        .card {
+            background: var(--surface);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-1);
+            padding: var(--space-m) var(--space-l);
+            transition: 0.2s;
+            border: 1px solid rgba(0, 0, 0, 0.02);
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-3);
+            transform: translateY(-2px);
+        }
+
+        .card .card-title {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: var(--space-xs);
+            display: flex;
+            align-items: center;
+            gap: var(--space-s);
+        }
+
+        .card .card-title .id {
+            font-family: monospace;
+            background: var(--bg);
+            padding: 0 8px;
+            border-radius: var(--radius-sm);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--on-surface-variant);
+        }
+
+        .card p,
+        .card li {
+            font-size: 14px;
+            color: var(--on-surface-variant);
+        }
+
+        .card ul {
+            padding-left: var(--space-l);
+            margin-top: var(--space-xs);
+        }
+
+        .card ul li {
+            margin-bottom: 2px;
+        }
+
+        .card .tag {
+            display: inline-block;
+            background: var(--bg);
+            padding: 0 10px;
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--on-surface-variant);
+        }
+
+        .tag-success {
+            background: #E6F4EA;
+            color: var(--secondary);
+        }
+        .tag-error {
+            background: #FCE8E6;
+            color: var(--error);
+        }
+        .tag-warning {
+            background: #FEF7E0;
+            color: #B45F06;
+        }
+        .tag-primary {
+            background: var(--primary-container);
+            color: var(--primary);
+        }
+
+        /* Tables */
+        .table-wrap {
+            overflow-x: auto;
+            background: var(--surface);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-1);
+            padding: 0;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            min-width: 600px;
+        }
+
+        thead {
+            background: var(--bg);
+        }
+
+        th {
+            text-align: left;
+            padding: 14px var(--space-m);
+            font-weight: 600;
+            font-size: 13px;
+            color: var(--on-surface-variant);
+            border-bottom: 2px solid #e9ecf0;
+        }
+
+        td {
+            padding: 12px var(--space-m);
+            border-bottom: 1px solid #f0f2f5;
+            vertical-align: top;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .code {
+            font-family: 'Menlo', 'Cascadia Code', monospace;
+            background: var(--bg);
+            padding: 0 6px;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            color: var(--on-surface);
+        }
+
+        /* Design Tokens – visual swatches */
+        .token-swatch {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-m);
+            margin-top: var(--space-s);
+        }
+
+        .swatch-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        .swatch {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-1);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .swatch-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--on-surface-variant);
+        }
+
+        .swatch-value {
+            font-size: 11px;
+            color: var(--on-surface-variant);
+            background: var(--bg);
+            padding: 0 6px;
+            border-radius: var(--radius-sm);
+        }
+
+        /* Spacing demo */
+        .spacing-demo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-m);
+            flex-wrap: wrap;
+            margin-top: var(--space-s);
+        }
+
+        .spacing-box {
+            background: var(--primary-container);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            body {
+                padding: var(--space-m);
+            }
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--space-s);
+            }
+            .header h1 {
+                font-size: 22px;
+            }
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+            .quick-nav a {
+                font-size: 12px;
+                padding: 4px 12px;
+            }
+            .section-title {
+                font-size: 19px;
+            }
+        }
+
+        /* print-friendly */
+        @media print {
+            .quick-nav {
+                display: none;
+            }
+            .card:hover {
+                transform: none;
+                box-shadow: var(--shadow-1);
+            }
+            body {
+                background: #fff;
+                padding: 0.5in;
+            }
+            .header {
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+        }
+
+        /* misc */
+        .mt-s {
+            margin-top: var(--space-s);
+        }
+        .mb-s {
+            margin-bottom: var(--space-s);
+        }
+        .fw-600 {
+            font-weight: 600;
+        }
+        .text-small {
+            font-size: 13px;
+            color: var(--on-surface-variant);
+        }
+        .flex-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-s);
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- ============================================================
+        HEADER
+        ============================================================ -->
+        <header class="header">
+            <div>
+                <h1>📋 <span>Coupon &amp; Reward</span> SRS</h1>
+                <div class="text-small" style="margin-top:2px;">Requirements Specification &bull; v1.0 &bull; 2026</div>
+            </div>
+            <div class="flex-row">
+                <span class="badge">🎯 AI‑Ready</span>
+                <span class="badge" style="background:#E6F4EA;color:#1E7E34;">✅ 32 sections</span>
+            </div>
+        </header>
+
+        <!-- ============================================================
+        QUICK NAV
+        ============================================================ -->
+        <nav class="quick-nav">
+            <a href="#fr">FR</a>
+            <a href="#nfr">NFR</a>
+            <a href="#roles">Roles</a>
+            <a href="#business">Business Rules</a>
+            <a href="#validation">Validation</a>
+            <a href="#errors">Error Codes</a>
+            <a href="#ui">UI Components</a>
+            <a href="#tokens">Design Tokens</a>
+        </nav>
+
+        <!-- ============================================================
+        25. FUNCTIONAL REQUIREMENTS
+        ============================================================ -->
+        <section class="section" id="fr">
+            <div class="section-title">
+                25. Functional Requirements (FR)
+                <span class="count">9</span>
+            </div>
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title"><span class="id">FR-001</span> Login</div>
+                    <p>OTP‑based login (Mobile). Google/Social option. Session timeout 15 min.</p>
+                </div>
+                <div class="card">
+                    <div class="card-title"><span class="id">FR-002</span> QR Scan</div>
+                    <p>Camera scan + Torch On/Off + Gallery pick. Shows Coupon details (Name, Expiry, Status).</p>
+                </div>
+                <div class="card">
+                    <div class="card-title"><span class="id">FR-003</span> Coupon Verification</div>
+                    <p>Validity check (Expiry, Status, Dealer). Valid → "Activate/Verify" button enabled.</p>
+                </div>
+                <div class="card">
+                    <div class="card-title"><span class="id">FR-004</span> Reward Redemption</div>
+                    <p>Show total Points. Min 100 pts to redeem. Deduct points &amp; log transaction.</p>
+                </div>
+                <div class="card">
+                    <div class="card-title"><span class="id">FR-005</span> Customer Registration</div>
+                    <p>Register with Mobile, Name, Email. First‑time bonus: 10 Welcome Points.</p>
+                </div>
+                <div class="card">
+                    <div class="card-title"><span class="id">FR-006</span> Dashboard</div>
+                    <p>Role‑based summary cards: Total Scans, Active Coupons, Customers, Points Redeemed.</p>
+                </div>
+                <div class="card">
+                    <div class="card-title"><span class="id">FR-007</span> Dealer &amp; Staff Mgmt</div>
+                    <p>Super Admin manages Dealers. Dealer manages own Staff (CRUD).</p>
+                </div>
+                <div class="card">
+                    <div class="card-title"><span class="id">FR-008</span> Transaction History</div>
+                    <p>Detailed log with filters: Timestamp, User, Coupon Code, Status.</p>
+                </div>
+                <div class="card">
+                    <div class="card-title"><span class="id">FR-009</span> Push Notifications</div>
+                    <p>In‑app + Firebase for Verified, Points Credited, Redeemed, Expiry alerts.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        26. NON-FUNCTIONAL REQUIREMENTS
+        ============================================================ -->
+        <section class="section" id="nfr">
+            <div class="section-title">
+                26. Non-Functional Requirements (NFR)
+                <span class="count">9</span>
+            </div>
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-title">⚡ Performance</div>
+                    <p>QR scan decode ≤ 2s &bull; API response &lt; 300ms.</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">🔒 Security</div>
+                    <p>HTTPS (TLS 1.2/1.3) &bull; Encrypted mobile in DB &bull; JWT auth.</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">🛡️ Reliability</div>
+                    <p>99.9% uptime &bull; Auto‑restart on crash with error logging.</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">🌐 Availability</div>
+                    <p>24×7 &bull; Maintenance window pre‑announced (2 AM–3 AM).</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">📴 Offline Capability</div>
+                    <p>Local SQLite storage &bull; Background sync when network returns.</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">📈 Scalability</div>
+                    <p>1 000 concurrent users &bull; Horizontal scaling with load balancer.</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">🔧 Maintainability</div>
+                    <p>MVVM/Clean Architecture &bull; Timber logging for debugging.</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">♿ Accessibility</div>
+                    <p>Color contrast 4.5:1 &bull; TalkBack / VoiceOver support.</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">📱 Compatibility</div>
+                    <p>Android 8+ (API 26) &bull; iOS 13+ &bull; Mobile + Tablet.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        27. USER ROLES & PERMISSIONS
+        ============================================================ -->
+        <section class="section" id="roles">
+            <div class="section-title">
+                27. User Roles &amp; Permissions
+                <span class="count">6</span>
+            </div>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Role</th><th>Permissions (Can do)</th><th>Restrictions (Cannot do)</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Super Admin</strong> <span class="tag tag-primary">full</span></td>
+                            <td>Full access &bull; Manage all data &bull; Reports &bull; System settings</td>
+                            <td>— (double‑confirm delete)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Admin</strong> <span class="tag tag-primary">high</span></td>
+                            <td>Coupon CRUD &bull; Dealer mgmt &bull; Dashboard &bull; Activity monitoring</td>
+                            <td>No system settings &bull; Cannot delete other Admins</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Staff</strong> <span class="tag tag-success">medium</span></td>
+                            <td>Customer reg &bull; QR scan &amp; verify &bull; Redeem &bull; Daily report</td>
+                            <td>No coupon create/edit/delete &bull; No dealer settings</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Dealer</strong> <span class="tag tag-warning">medium</span></td>
+                            <td>Manage own Staff &bull; Own coupon stats &bull; Payout requests</td>
+                            <td>No access to other dealers &bull; No Super Admin settings</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Distributor</strong> <span class="tag">read‑only</span></td>
+                            <td>View territory performance &bull; Download incentive reports</td>
+                            <td>Cannot verify coupons &bull; Cannot register customers</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Customer</strong> <span class="tag">read‑only</span></td>
+                            <td>Profile &bull; Scan (collect points) &bull; Reward history &bull; Redeem</td>
+                            <td>No staff/dealer data &bull; No reward settings</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        28. BUSINESS RULES
+        ============================================================ -->
+        <section class="section" id="business">
+            <div class="section-title">
+                28. Business Rules
+                <span class="count">7</span>
+            </div>
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title">🔁 Unique Redemption</div>
+                    <p>One coupon code can be verified <strong>only once</strong> per customer. Duplicate → <span class="tag tag-error">ERR002</span></p>
+                </div>
+                <div class="card">
+                    <div class="card-title">⏳ Points Expiry</div>
+                    <p>Points validity = <strong>1 year</strong>. Expired points auto‑reset.</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">📊 Minimum Threshold</div>
+                    <p>Customer needs <strong>≥ 100 Points</strong> to redeem a reward.</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">🚫 Cancelled Coupon</div>
+                    <p>Cancelled coupons <strong>cannot</strong> be scanned/verified. Shows <span class="tag tag-error">ERR001</span></p>
+                </div>
+                <div class="card">
+                    <div class="card-title">📅 Daily Scan Limit</div>
+                    <p>Each Staff can scan max <strong>500</strong> coupons per day (anti‑abuse).</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">🎁 New User Bonus</div>
+                    <p>First‑time registration → <strong>10 Bonus Points</strong> (one‑time).</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">↩️ Reverse Points</div>
+                    <p>Product return → points deducted (negative points log).</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        29. VALIDATION RULES
+        ============================================================ -->
+        <section class="section" id="validation">
+            <div class="section-title">
+                29. Validation Rules
+                <span class="count">7</span>
+            </div>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Field</th><th>Validation Rules</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Coupon Code</strong></td>
+                            <td>Required &bull; Unique &bull; Auto‑uppercase &bull; Format <span class="code">H4C-000AV001</span> &bull; Max 15</td>
+                        </tr>
+                        <tr><td><strong>Customer Mobile</strong></td>
+                            <td>Required &bull; Exactly 10 digits &bull; Unique &bull; No country code</td>
+                        </tr>
+                        <tr><td><strong>Customer Name</strong></td>
+                            <td>Required &bull; 2–50 chars &bull; Alphabets &amp; spaces only</td>
+                        </tr>
+                        <tr><td><strong>Amount (Points)</strong></td>
+                            <td>Required &bull; Positive integer &bull; Min 1 &bull; Max 10 000</td>
+                        </tr>
+                        <tr><td><strong>Scan Timestamp</strong></td>
+                            <td>Must be within coupon <em>Valid From – Valid To</em></td>
+                        </tr>
+                        <tr><td><strong>Staff Code</strong></td>
+                            <td>Required &bull; 4–20 alphanumeric &bull; Must belong to active Dealer</td>
+                        </tr>
+                        <tr><td><strong>Email</strong></td>
+                            <td>Optional &bull; If present, valid format <span class="code">user@domain.com</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        30. ERROR CODES & MESSAGES
+        ============================================================ -->
+        <section class="section" id="errors">
+            <div class="section-title">
+                30. Error Codes &amp; Messages
+                <span class="count">10</span>
+            </div>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Code</th><th>Type</th><th>Message</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><span class="tag tag-error">ERR001</span></td><td>Invalid Coupon</td><td>അസാധുവായ കൂപ്പൺ കോഡ്. ദയവായി ശരിയായ QR സ്കാൻ ചെയ്യുക.</td></tr>
+                        <tr><td><span class="tag tag-error">ERR002</span></td><td>Already Used</td><td>ഈ കൂപ്പൺ ഇതിനകം ഉപയോഗിച്ചു. Duplicate Scan അനുവദനീയമല്ല.</td></tr>
+                        <tr><td><span class="tag tag-error">ERR003</span></td><td>Camera Permission</td><td>ക്യാമറ ആക്സസ് അനുവദിക്കണം. Settings-ൽ പോയി Permission On ചെയ്യുക.</td></tr>
+                        <tr><td><span class="tag tag-error">ERR004</span></td><td>QR Decode Failed</td><td>QR കോഡ് വായിക്കാൻ സാധിച്ചില്ല. മറ്റൊരു ചിത്രം ശ്രമിക്കുക.</td></tr>
+                        <tr><td><span class="tag tag-error">ERR005</span></td><td>Duplicate Customer</td><td>ഈ മൊബൈൽ നമ്പർ ഇതിനകം രജിസ്റ്റർ ചെയ്തിട്ടുണ്ട്. Login ചെയ്യുക.</td></tr>
+                        <tr><td><span class="tag tag-warning">ERR006</span></td><td>Network Error</td><td>ഇന്റർനെറ്റ് കണക്ഷൻ ഇല്ല. Offline mode-ൽ Data സംരക്ഷിച്ചു.</td></tr>
+                        <tr><td><span class="tag tag-warning">ERR007</span></td><td>Session Expired</td><td>നിങ്ങളുടെ സെഷൻ കാലഹരണപ്പെട്ടു. വീണ്ടും Login ചെയ്യുക.</td></tr>
+                        <tr><td><span class="tag tag-warning">ERR008</span></td><td>Insufficient Points</td><td>പോയിന്റുകൾ അപര്യാപ്തം. 100 Points വേണം. നിലവിലുള്ളത്: {X}.</td></tr>
+                        <tr><td><span class="tag tag-error">ERR009</span></td><td>Invalid Mobile</td><td>10 അക്കങ്ങൾ മാത്രമുള്ള സാധുവായ മൊബൈൽ നമ്പർ നൽകുക.</td></tr>
+                        <tr><td><span class="tag tag-error">ERR010</span></td><td>Dealer Inactive</td><td>ഈ Dealer-ന്റെ അക്കൗണ്ട് നിർജ്ജീവമാണ്. അഡ്മിനെ ബന്ധപ്പെടുക.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        31. UI COMPONENT LIBRARY
+        ============================================================ -->
+        <section class="section" id="ui">
+            <div class="section-title">
+                31. UI Component Library
+                <span class="count">10</span>
+            </div>
+            <div class="grid-2">
+                <div class="card"><div class="card-title">📱 App Bar</div><p>Top bar: Nav Drawer toggle, Screen title, Action buttons (Notifications, Search).</p></div>
+                <div class="card"><div class="card-title">🗂️ Navigation Drawer</div><p>Side menu: Avatar/Name/Email + items: Dashboard, Scan, History, Reports, Settings, Logout.</p></div>
+                <div class="card"><div class="card-title">⬇️ Bottom Navigation</div><p>Tabs: Home, QR Scan (center FAB), History, Profile.</p></div>
+                <div class="card"><div class="card-title">🃏 Cards</div><p>Rounded corners + elevation. Used for coupon lists, transactions, dealer profiles.</p></div>
+                <div class="card"><div class="card-title">💬 Dialogs</div><p>Confirmation (Redeem/Delete), full‑screen QR scanner, alert dialogs.</p></div>
+                <div class="card"><div class="card-title">🍬 Snackbars</div><p>Success (green), Error (red), Info (blue) — positioned at bottom.</p></div>
+                <div class="card"><div class="card-title">🔘 Buttons</div><p>Primary (solid), Outlined (secondary), Text (link), Disabled (grey).</p></div>
+                <div class="card"><div class="card-title">✏️ Text Fields</div><p>Outlined with floating labels, error text below, clear button (X).</p></div>
+                <div class="card"><div class="card-title">🔍 Search</div><p>Debounced (500ms), auto‑suggestions, clear &amp; cancel buttons.</p></div>
+                <div class="card"><div class="card-title">📊 Data Tables</div><p>Sortable columns, pagination (load more on scroll).</p></div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        32. DESIGN TOKENS
+        ============================================================ -->
+        <section class="section" id="tokens">
+            <div class="section-title">
+                32. Design Tokens
+                <span class="count">6 categories</span>
+            </div>
+
+            <!-- Colors -->
+            <div class="card" style="margin-bottom:var(--space-m);">
+                <div class="card-title">🎨 Colors</div>
+                <div class="token-swatch">
+                    <div class="swatch-item"><div class="swatch" style="background:#1A73E8;"></div><span class="swatch-label">Primary</span><span class="swatch-value">#1A73E8</span></div>
+                    <div class="swatch-item"><div class="swatch" style="background:#D2E3FC;"></div><span class="swatch-label">Primary Container</span><span class="swatch-value">#D2E3FC</span></div>
+                    <div class="swatch-item"><div class="swatch" style="background:#34A853;"></div><span class="swatch-label">Secondary</span><span class="swatch-value">#34A853</span></div>
+                    <div class="swatch-item"><div class="swatch" style="background:#EA4335;"></div><span class="swatch-label">Error</span><span class="swatch-value">#EA4335</span></div>
+                    <div class="swatch-item"><div class="swatch" style="background:#FBBC04;"></div><span class="swatch-label">Warning</span><span class="swatch-value">#FBBC04</span></div>
+                    <div class="swatch-item"><div class="swatch" style="background:#F8F9FA;border-color:#ddd;"></div><span class="swatch-label">Background</span><span class="swatch-value">#F8F9FA</span></div>
+                    <div class="swatch-item"><div class="swatch" style="background:#FFFFFF;border-color:#ddd;"></div><span class="swatch-label">Surface</span><span class="swatch-value">#FFFFFF</span></div>
+                    <div class="swatch-item"><div class="swatch" style="background:#1F1F1F;"></div><span class="swatch-label">On‑Surface</span><span class="swatch-value">#1F1F1F</span></div>
+                    <div class="swatch-item"><div class="swatch" style="background:#5F6368;"></div><span class="swatch-label">On‑Surface‑Variant</span><span class="swatch-value">#5F6368</span></div>
+                </div>
+            </div>
+
+            <!-- Typography -->
+            <div class="card" style="margin-bottom:var(--space-m);">
+                <div class="card-title">🔤 Typography <span style="font-weight:400;font-size:14px;color:var(--on-surface-variant);">(Inter / Roboto)</span></div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-s);">
+                    <div><strong>Headline Large</strong><br><span style="font-size:24px;font-weight:700;line-height:32px;">The quick brown fox</span><br><span class="text-small">24sp / 700 / 32dp</span></div>
+                    <div><strong>Title Medium</strong><br><span style="font-size:18px;font-weight:600;line-height:24px;">The quick brown fox</span><br><span class="text-small">18sp / 600 / 24dp</span></div>
+                    <div><strong>Body Large</strong><br><span style="font-size:16px;font-weight:400;line-height:24px;">The quick brown fox</span><br><span class="text-small">16sp / 400 / 24dp</span></div>
+                    <div><strong>Body Medium</strong><br><span style="font-size:14px;font-weight:400;line-height:20px;">The quick brown fox</span><br><span class="text-small">14sp / 400 / 20dp</span></div>
+                    <div><strong>Label Small</strong><br><span style="font-size:11px;font-weight:500;line-height:16px;">THE QUICK BROWN FOX</span><br><span class="text-small">11sp / 500 / 16dp</span></div>
+                </div>
+            </div>
+
+            <!-- Border Radius + Elevation + Spacing -->
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-m);">
+                <div class="card">
+                    <div class="card-title">📐 Border Radius</div>
+                    <ul>
+                        <li><strong>Small</strong> 4dp – Buttons, Chips</li>
+                        <li><strong>Medium</strong> 8dp – Cards, Input fields</li>
+                        <li><strong>Large</strong> 16dp – Dialogs, Bottom sheets</li>
+                        <li><strong>Full</strong> 50% – Avatars, FAB</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-title">⬆️ Elevation &amp; Shadows</div>
+                    <ul>
+                        <li><strong>Level 0</strong> – Flat surfaces</li>
+                        <li><strong>Level 1</strong> 2dp – Cards (subtle lift)</li>
+                        <li><strong>Level 3</strong> 6dp – Dropdown menus</li>
+                        <li><strong>Level 5</strong> 12dp – Dialogs, Modal sheets</li>
+                    </ul>
+                </div>
+                <div class="card" style="grid-column:1/2;">
+                    <div class="card-title">↔️ Spacing</div>
+                    <div class="spacing-demo">
+                        <div class="spacing-box" style="width:2px;height:32px;">XXS</div>
+                        <div class="spacing-box" style="width:4px;height:32px;">XS</div>
+                        <div class="spacing-box" style="width:8px;height:32px;">S</div>
+                        <div class="spacing-box" style="width:16px;height:32px;">M</div>
+                        <div class="spacing-box" style="width:24px;height:32px;">L</div>
+                        <div class="spacing-box" style="width:32px;height:32px;">XL</div>
+                        <div class="spacing-box" style="width:48px;height:32px;">XXL</div>
+                    </div>
+                    <div class="text-small" style="margin-top:var(--space-xs);">2 &nbsp; 4 &nbsp; 8 &nbsp; 16 &nbsp; 24 &nbsp; 32 &nbsp; 48 dp</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">🖼️ Icons</div>
+                    <p>Material Design Outlined (<em>unselected</em>) and Filled (<em>selected</em>).<br>Consistent stroke width: <strong>2dp</strong>.</p>
+                    <div style="display:flex;gap:var(--space-m);margin-top:var(--space-s);font-size:28px;">
+                        <span>🏠</span><span>📷</span><span>📋</span><span>👤</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        FOOTER
+        ============================================================ -->
+        <footer style="margin-top:var(--space-xxl);padding:var(--space-m) 0;border-top:1px solid #e9ecf0;text-align:center;font-size:14px;color:var(--on-surface-variant);">
+            Coupon &amp; Reward Management System &bull; Requirements Specification &bull; Generated 2026
+        </footer>
+
+    </div>
+    <!-- end container -->
+</body>
+</html>
