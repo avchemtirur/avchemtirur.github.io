@@ -1,1616 +1,1405 @@
-```javascript
-window.CouponViews = window.CouponViews || {};
-
-window.CouponViews.reward = {
-  featureSettings: {},
-  rewardProbabilities: {},
-  currentReward: null,
-  customerSession: null,
-  wallet: null,
-  lastScan: null,
-  scratchCanvas: null,
-  scratchContext: null,
-  scratchPercentage: 0,
-  isSpinning: false,
-  confettiPieces: [],
-  animationFrameId: null,
-
-  init: function() {
-    this.loadFeatureSettings();
-    this.loadRewardProbabilities();
-    this.loadCustomerSession();
-    this.loadWallet();
-    this.getLastScan();
-
-    if (!this.customerSession || !this.lastScan) {
-      this.redirectToRegister();
-      return;
-    }
-
-    this.decideReward();
-    this.render();
-    this.showRewardScreen();
-  },
-
-  loadFeatureSettings: function() {
-    try {
-      if (typeof CouponDB !== 'undefined' && CouponDB.settings && CouponDB.settings.features) {
-        this.featureSettings = CouponDB.settings.features;
-      } else {
-        this.featureSettings = this.getDefaultSettings();
-      }
-    } catch (error) {
-      console.error('[Reward] Error loading feature settings:', error);
-      this.featureSettings = this.getDefaultSettings();
-    }
-  },
-
-  getDefaultSettings: function() {
-    return {
-      rewardSystem: true,
-      instantGift: true,
-      scratchCard: true,
-      luckyDraw: true,
-      points: true,
-      wallet: true,
-      rewardHistory: true,
-      redeemSystem: true,
-      betterLuck: true,
-      animation: true,
-      sound: true,
-      vibration: true
-    };
-  },
-
-  loadRewardProbabilities: function() {
-    try {
-      if (typeof CouponDB !== 'undefined' && CouponDB.rewardProbabilities) {
-        this.rewardProbabilities = CouponDB.rewardProbabilities;
-      } else {
-        this.rewardProbabilities = this.getDefaultProbabilities();
-      }
-    } catch (error) {
-      console.error('[Reward] Error loading probabilities:', error);
-      this.rewardProbabilities = this.getDefaultProbabilities();
-    }
-  },
-
-  getDefaultProbabilities: function() {
-    return {
-      INSTANT_GIFT: 5,
-      LUCKY_DRAW: 10,
-      SCRATCH_CARD: 20,
-      POINTS: 60,
-      BETTER_LUCK: 5
-    };
-  },
-
-  loadCustomerSession: function() {
-    try {
-      if (typeof CouponDB !== 'undefined' && CouponDB.customerSession) {
-        this.customerSession = CouponDB.customerSession;
-      }
-    } catch (error) {
-      console.error('[Reward] Error loading customer session:', error);
-    }
-  },
-
-  loadWallet: function() {
-    try {
-      const walletData = localStorage.getItem('coupon_wallet_' + (this.customerSession?.sessionId || 'default'));
-      if (walletData) {
-        this.wallet = JSON.parse(walletData);
-      } else {
-        this.wallet = this.createNewWallet();
-      }
-    } catch (error) {
-      console.error('[Reward] Error loading wallet:', error);
-      this.wallet = this.createNewWallet();
-    }
-  },
-
-  createNewWallet: function() {
-    return {
-      customerId: this.customerSession?.sessionId || 'unknown',
-      customerName: this.customerSession?.name || '',
-      mobile: this.customerSession?.mobile || '',
-      totalPoints: 0,
-      todayPoints: 0,
-      lifetimePoints: 0,
-      rewards: [],
-      giftHistory: [],
-      couponHistory: [],
-      redeemedRewards: [],
-      createdAt: new Date().toISOString(),
-      lastUpdated: new Date().toISOString()
-    };
-  },
-
-  getLastScan: function() {
-    try {
-      if (typeof CouponDB !== 'undefined' && CouponDB.customerSession && CouponDB.customerSession.lastScan) {
-        this.lastScan = CouponDB.customerSession.lastScan;
-      }
-    } catch (error) {
-      console.error('[Reward] Error getting last scan:', error);
-    }
-  },
-
-  decideReward: function() {
-    if (!this.featureSettings.rewardSystem) {
-      this.currentReward = {
-        type: 'NO_REWARD',
-        message: 'Reward system is currently disabled'
-      };
-      return;
-    }
-
-    const rewardType = this.getRewardType();
-
-    switch (rewardType) {
-      case 'INSTANT_GIFT':
-        this.currentReward = this.generateInstantGift();
-        break;
-      case 'LUCKY_DRAW':
-        this.currentReward = this.generateLuckyDraw();
-        break;
-      case 'SCRATCH_CARD':
-        this.currentReward = this.generateScratchCard();
-        break;
-      case 'POINTS':
-        this.currentReward = this.generatePoints();
-        break;
-      case 'BETTER_LUCK':
-        this.currentReward = this.generateBetterLuck();
-        break;
-      default:
-        this.currentReward = this.generateBetterLuck();
-    }
-  },
-
-  getRewardType: function() {
-    const random = Math.random() * 100;
-    let cumulativeProbability = 0;
-
-    const rewardTypes = [
-      { type: 'INSTANT_GIFT', enabled: this.featureSettings.instantGift },
-      { type: 'LUCKY_DRAW', enabled: this.featureSettings.luckyDraw },
-      { type: 'SCRATCH_CARD', enabled: this.featureSettings.scratchCard },
-      { type: 'POINTS', enabled: this.featureSettings.points },
-      { type: 'BETTER_LUCK', enabled: this.featureSettings.betterLuck }
-    ];
-
-    for (const reward of rewardTypes) {
-      if (!reward.enabled) continue;
-
-      const probability = this.rewardProbabilities[reward.type] || 0;
-      cumulativeProbability += probability;
-
-      if (random <= cumulativeProbability) {
-        return reward.type;
-      }
-    }
-
-    return 'BETTER_LUCK';
-  },
-
-  generateInstantGift: function() {
-    const gifts = [
-      { name: 'AV CHEM T-Shirt', value: '₹299' },
-      { name: 'AV CHEM Cap', value: '₹149' },
-      { name: 'AV CHEM Mug', value: '₹199' },
-      { name: 'AV CHEM Sticker Pack', value: '₹99' },
-      { name: 'AV CHEM Pen Set', value: '₹249' }
-    ];
-
-    const randomGift = gifts[Math.floor(Math.random() * gifts.length)];
-
-    return {
-      type: 'INSTANT_GIFT',
-      gift: randomGift,
-      rewardId: this.generateRewardId(),
-      claimed: false,
-      claimedAt: null,
-      status: 'PENDING'
-    };
-  },
-
-  generateLuckyDraw: function() {
-    const prizes = [
-      { name: 'Waterproofing Kit', value: '₹2999', icon: '🎁' },
-      { name: 'Tile Adhesive Set', value: '₹1999', icon: '🎁' },
-      { name: 'Epoxy Flooring Kit', value: '₹3499', icon: '🎁' },
-      { name: '₹500 Store Voucher', value: '₹500', icon: '🎫' },
-      { name: '₹250 Store Voucher', value: '₹250', icon: '🎫' }
-    ];
-
-    const randomPrize = prizes[Math.floor(Math.random() * prizes.length)];
-
-    return {
-      type: 'LUCKY_DRAW',
-      prizes: prizes,
-      selectedPrize: randomPrize,
-      rewardId: this.generateRewardId(),
-      claimed: false,
-      claimedAt: null,
-      status: 'PENDING',
-      spun: false
-    };
-  },
-
-  generateScratchCard: function() {
-    const rewards = [
-      { name: '₹50 Discount', value: 50 },
-      { name: '₹100 Discount', value: 100 },
-      { name: '₹25 Discount', value: 25 },
-      { name: 'Free Sample', value: 0 },
-      { name: 'Better Luck Next Time', value: 0 }
-    ];
-
-    const randomReward = rewards[Math.floor(Math.random() * rewards.length)];
-
-    return {
-      type: 'SCRATCH_CARD',
-      reward: randomReward,
-      rewardId: this.generateRewardId(),
-      claimed: false,
-      claimedAt: null,
-      status: 'PENDING',
-      scratched: false
-    };
-  },
-
-  generatePoints: function() {
-    const points = [50, 100, 150, 200, 250][Math.floor(Math.random() * 5)];
-
-    return {
-      type: 'POINTS',
-      points: points,
-      rewardId: this.generateRewardId(),
-      claimed: false,
-      claimedAt: null,
-      status: 'PENDING'
-    };
-  },
-
-  generateBetterLuck: function() {
-    return {
-      type: 'BETTER_LUCK',
-      message: 'Better Luck Next Time!',
-      rewardId: this.generateRewardId(),
-      claimed: true,
-      claimedAt: new Date().toISOString(),
-      status: 'COMPLETED'
-    };
-  },
-
-  generateRewardId: function() {
-    return 'reward_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-  },
-
-  checkDuplicate: function() {
-    if (!this.lastScan || !this.wallet.couponHistory) {
-      return false;
-    }
-
-    return this.wallet.couponHistory.some(c => c.code === this.lastScan.code);
-  },
-
-  render: function() {
-    const container = document.getElementById('app');
-    if (!container) {
-      console.error('[Reward] App container not found');
-      return;
-    }
-
-    container.innerHTML = `
-      <div class="reward-wrapper">
-        <div class="reward-container">
-          <div id="rewardContent"></div>
-          <div id="confettiContainer" class="confetti-container"></div>
-        </div>
-      </div>
-    `;
-  },
-
-  showRewardScreen: function() {
-    if (!this.currentReward) {
-      this.showBetterLuck();
-      return;
-    }
-
-    switch (this.currentReward.type) {
-      case 'INSTANT_GIFT':
-        this.showInstantGift();
-        break;
-      case 'LUCKY_DRAW':
-        this.showLuckyDraw();
-        break;
-      case 'SCRATCH_CARD':
-        this.showScratchCard();
-        break;
-      case 'POINTS':
-        this.showPoints();
-        break;
-      case 'BETTER_LUCK':
-        this.showBetterLuck();
-        break;
-      default:
-        this.showBetterLuck();
-    }
-  },
-
-  showInstantGift: function() {
-    const content = document.getElementById('rewardContent');
-    if (!content) return;
-
-    content.innerHTML = `
-      <div class="reward-card reward-card-gift">
-        <div class="reward-header">
-          <h2 class="reward-title">Congratulations!</h2>
-          <p class="reward-subtitle">You won an instant gift</p>
-        </div>
-
-        <div class="gift-container">
-          <div class="gift-icon">🎁</div>
-          <h3 class="gift-name">${this.currentReward.gift.name}</h3>
-          <p class="gift-value">${this.currentReward.gift.value}</p>
-        </div>
-
-        <div class="reward-info">
-          <p class="reward-id">Reward ID: ${this.currentReward.rewardId}</p>
-          <p class="reward-time">Claimed at: ${new Date().toLocaleString()}</p>
-        </div>
-
-        <button id="claimGiftBtn" class="btn btn-primary btn-block">Claim Gift</button>
-        <button id="continueScanBtn" class="btn btn-secondary btn-block">Continue Scanning</button>
-      </div>
-    `;
-
-    if (this.featureSettings.animation) {
-      this.playAnimation('scaleIn');
-      this.playConfetti();
-    }
-
-    if (this.featureSettings.sound) {
-      this.playSound('success');
-    }
-
-    if (this.featureSettings.vibration) {
-      this.vibrate([100, 200, 100]);
-    }
-
-    const claimBtn = document.getElementById('claimGiftBtn');
-    if (claimBtn) {
-      claimBtn.addEventListener('click', () => this.claimGift());
-    }
-
-    const continueBtn = document.getElementById('continueScanBtn');
-    if (continueBtn) {
-      continueBtn.addEventListener('click', () => this.continueScan());
-    }
-  },
-
-  showLuckyDraw: function() {
-    const content = document.getElementById('rewardContent');
-    if (!content) return;
-
-    content.innerHTML = `
-      <div class="reward-card reward-card-draw">
-        <div class="reward-header">
-          <h2 class="reward-title">Lucky Draw!</h2>
-          <p class="reward-subtitle">Spin to reveal your prize</p>
-        </div>
-
-        <div class="wheel-container">
-          <canvas id="wheelCanvas" class="spin-wheel" width="300" height="300"></canvas>
-          <button id="spinBtn" class="btn-spin" ${this.currentReward.spun ? 'disabled' : ''}>
-            SPIN
-          </button>
-        </div>
-
-        <div id="prizeDisplay" class="prize-display" style="display: none;">
-          <p class="prize-label">You Won:</p>
-          <p id="prizeName" class="prize-name"></p>
-          <p id="prizeValue" class="prize-value"></p>
-        </div>
-
-        <button id="claimDrawBtn" class="btn btn-primary btn-block" style="display: none;">Claim Prize</button>
-        <button id="continueScanBtn" class="btn btn-secondary btn-block">Continue Scanning</button>
-      </div>
-    `;
-
-    if (this.featureSettings.animation) {
-      this.playAnimation('fadeIn');
-    }
-
-    this.drawSpinWheel();
-
-    const spinBtn = document.getElementById('spinBtn');
-    if (spinBtn) {
-      spinBtn.addEventListener('click', () => this.spinWheel());
-    }
-
-    const claimBtn = document.getElementById('claimDrawBtn');
-    if (claimBtn) {
-      claimBtn.addEventListener('click', () => this.claimDraw());
-    }
-
-    const continueBtn = document.getElementById('continueScanBtn');
-    if (continueBtn) {
-      continueBtn.addEventListener('click', () => this.continueScan());
-    }
-  },
-
-  drawSpinWheel: function() {
-    const canvas = document.getElementById('wheelCanvas');
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    const centerX = canvas.width / 2;
-    const centerY = canvas.height / 2;
-    const radius = 120;
-
-    const prizes = this.currentReward.prizes;
-    const sliceAngle = (2 * Math.PI) / prizes.length;
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    prizes.forEach((prize, index) => {
-      const startAngle = index * sliceAngle;
-      const endAngle = startAngle + sliceAngle;
-
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, radius, startAngle, endAngle);
-      ctx.lineTo(centerX, centerY);
-      ctx.fillStyle = index % 2 === 0 ? '#6A3FA0' : '#8A6510';
-      ctx.fill();
-
-      ctx.strokeStyle = '#fff';
-      ctx.lineWidth = 2;
-      ctx.stroke();
-
-      ctx.save();
-      ctx.translate(centerX, centerY);
-      ctx.rotate(startAngle + sliceAngle / 2);
-      ctx.textAlign = 'right';
-      ctx.fillStyle = '#fff';
-      ctx.font = 'bold 12px Arial';
-      ctx.fillText(prize.name.substring(0, 10), radius - 20, 5);
-      ctx.restore();
-    });
-
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, 15, 0, 2 * Math.PI);
-    ctx.fillStyle = '#fff';
-    ctx.fill();
-
-    ctx.beginPath();
-    ctx.moveTo(centerX, centerY - 20);
-    ctx.lineTo(centerX - 10, centerY - 5);
-    ctx.lineTo(centerX + 10, centerY - 5);
-    ctx.closePath();
-    ctx.fillStyle = '#6A3FA0';
-    ctx.fill();
-  },
-
-  spinWheel: function() {
-    if (this.isSpinning || this.currentReward.spun) return;
-
-    this.isSpinning = true;
-    const spinBtn = document.getElementById('spinBtn');
-    if (spinBtn) spinBtn.disabled = true;
-
-    const canvas = document.getElementById('wheelCanvas');
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    const centerX = canvas.width / 2;
-    const centerY = canvas.height / 2;
-    const radius = 120;
-
-    let rotation = 0;
-    let spinSpeed = 30;
-    const targetRotation = Math.random() * 360 + 1440;
-
-    const animate = () => {
-      rotation += spinSpeed;
-      spinSpeed *= 0.98;
-
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.save();
-      ctx.translate(centerX, centerY);
-      ctx.rotate((rotation * Math.PI) / 180);
-      ctx.translate(-centerX, -centerY);
-
-      const prizes = this.currentReward.prizes;
-      const sliceAngle = (2 * Math.PI) / prizes.length;
-
-      prizes.forEach((prize, index) => {
-        const startAngle = index * sliceAngle;
-        const endAngle = startAngle + sliceAngle;
-
-        ctx.beginPath();
-        ctx.arc(centerX, centerY, radius, startAngle, endAngle);
-        ctx.lineTo(centerX, centerY);
-        ctx.fillStyle = index % 2 === 0 ? '#6A3FA0' : '#8A6510';
-        ctx.fill();
-
-        ctx.strokeStyle = '#fff';
-        ctx.lineWidth = 2;
-        ctx.stroke();
-      });
-
-      ctx.restore();
-
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, 15, 0, 2 * Math.PI);
-      ctx.fillStyle = '#fff';
-      ctx.fill();
-
-      ctx.beginPath();
-      ctx.moveTo(centerX, centerY - 20);
-      ctx.lineTo(centerX - 10, centerY - 5);
-      ctx.lineTo(centerX + 10, centerY - 5);
-      ctx.closePath();
-      ctx.fillStyle = '#6A3FA0';
-      ctx.fill();
-
-      if (spinSpeed > 0.1) {
-        this.animationFrameId = requestAnimationFrame(animate);
-      } else {
-        this.isSpinning = false;
-        this.currentReward.spun = true;
-        this.showWheelPrize();
-
-        if (this.featureSettings.sound) {
-          this.playSound('success');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reward Management – Admin Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        /* ============================================================
+                   DESIGN TOKENS
+                   ============================================================ */
+        :root {
+            --primary: #6C3B9E;
+            --primary-light: #8B5CF6;
+            --primary-dark: #5B2B8E;
+            --primary-container: #EDE7F6;
+            --secondary: #34A853;
+            --error: #EA4335;
+            --warning: #FBBC04;
+            --bg: #F3F4F6;
+            --surface: #FFFFFF;
+            --on-surface: #1F1F1F;
+            --on-surface-variant: #5F6368;
+            --sidebar-bg: #1E1B2E;
+            --sidebar-hover: #2D2A44;
+            --sidebar-active: #6C3B9E;
+            --sidebar-text: #A8A4C2;
+            --sidebar-text-active: #FFFFFF;
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            --radius-full: 9999px;
+            --shadow-1: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --shadow-3: 0 6px 20px rgba(0, 0, 0, 0.08);
+            --shadow-5: 0 12px 40px rgba(0, 0, 0, 0.12);
+            --space-xxs: 2px;
+            --space-xs: 4px;
+            --space-s: 8px;
+            --space-m: 16px;
+            --space-l: 24px;
+            --space-xl: 32px;
+            --space-xxl: 48px;
+            --sidebar-width: 260px;
+            --header-height: 64px;
         }
 
-        if (this.featureSettings.vibration) {
-          this.vibrate([100, 200, 100]);
+        /* ============================================================
+                   RESET & BASE
+                   ============================================================ */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
-      }
-    };
-
-    animate();
-  },
-
-  showWheelPrize: function() {
-    const prizeDisplay = document.getElementById('prizeDisplay');
-    const prizeName = document.getElementById('prizeName');
-    const prizeValue = document.getElementById('prizeValue');
-    const claimBtn = document.getElementById('claimDrawBtn');
-
-    if (prizeDisplay && prizeName && prizeValue) {
-      prizeName.textContent = this.currentReward.selectedPrize.name;
-      prizeValue.textContent = this.currentReward.selectedPrize.value;
-      prizeDisplay.style.display = 'block';
-    }
-
-    if (claimBtn) {
-      claimBtn.style.display = 'block';
-    }
-  },
-
-  showScratchCard: function() {
-    const content = document.getElementById('rewardContent');
-    if (!content) return;
-
-    content.innerHTML = `
-      <div class="reward-card reward-card-scratch">
-        <div class="reward-header">
-          <h2 class="reward-title">Scratch Card</h2>
-          <p class="reward-subtitle">Scratch to reveal your reward</p>
-        </div>
-
-        <div class="scratch-container">
-          <canvas id="scratchCanvas" class="scratch-canvas" width="300" height="200"></canvas>
-          <div class="scratch-content">
-            <p class="scratch-label">Your Reward:</p>
-            <p id="scratchReward" class="scratch-reward">${this.currentReward.reward.name}</p>
-            <p id="scratchValue" class="scratch-value">${this.currentReward.reward.value > 0 ? '₹' + this.currentReward.reward.value : ''}</p>
-          </div>
-        </div>
-
-        <div id="scratchInfo" class="scratch-info" style="display: none;">
-          <p id="scratchPercentageText">Scratched: 0%</p>
-        </div>
-
-        <button id="claimScratchBtn" class="btn btn-primary btn-block" style="display: none;">Claim Reward</button>
-        <button id="continueScanBtn" class="btn btn-secondary btn-block">Continue Scanning</button>
-      </div>
-    `;
-
-    if (this.featureSettings.animation) {
-      this.playAnimation('fadeIn');
-    }
-
-    this.initScratchCanvas();
-
-    const continueBtn = document.getElementById('continueScanBtn');
-    if (continueBtn) {
-      continueBtn.addEventListener('click', () => this.continueScan());
-    }
-
-    const claimBtn = document.getElementById('claimScratchBtn');
-    if (claimBtn) {
-      claimBtn.addEventListener('click', () => this.claimScratch());
-    }
-  },
-
-  initScratchCanvas: function() {
-    const canvas = document.getElementById('scratchCanvas');
-    if (!canvas) return;
-
-    this.scratchCanvas = canvas;
-    this.scratchContext = canvas.getContext('2d');
-
-    const ctx = this.scratchContext;
-    ctx.fillStyle = '#D8D3C7';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    ctx.fillStyle = '#999';
-    ctx.font = 'bold 16px Arial';
-    ctx.textAlign = 'center';
-    ctx.fillText('SCRATCH HERE', canvas.width / 2, canvas.height / 2);
-
-    let isDrawing = false;
-
-    const getMousePos = (e) => {
-      const rect = canvas.getBoundingClientRect();
-      const scaleX = canvas.width / rect.width;
-      const scaleY = canvas.height / rect.height;
-      return {
-        x: (e.clientX - rect.left) * scaleX,
-        y: (e.clientY - rect.top) * scaleY
-      };
-    };
-
-    const scratch = (x, y) => {
-      const imageData = ctx.getImageData(Math.max(0, x - 20), Math.max(0, y - 20), 40, 40);
-      const data = imageData.data;
-      let transparentPixels = 0;
-
-      for (let i = 3; i < data.length; i += 4) {
-        if (data[i] === 0) {
-          transparentPixels++;
+        html {
+            scroll-behavior: smooth;
         }
-      }
+        body {
+            font-family: var(--font-family);
+            background: var(--bg);
+            color: var(--on-surface);
+            line-height: 1.6;
+            display: flex;
+            min-height: 100vh;
+        }
 
-      ctx.clearRect(Math.max(0, x - 20), Math.max(0, y - 20), 40, 40);
-      this.updateScratchPercentage();
-    };
+        /* ============================================================
+                   SIDEBAR
+                   ============================================================ */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--sidebar-bg);
+            color: var(--sidebar-text);
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+        .sidebar-brand {
+            padding: var(--space-l) var(--space-m);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            align-items: center;
+            gap: var(--space-s);
+        }
+        .sidebar-brand .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
+        .sidebar-brand .logo span {
+            color: var(--primary-light);
+        }
+        .sidebar-brand .badge {
+            font-size: 10px;
+            background: var(--primary);
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .sidebar-nav {
+            flex: 1;
+            padding: var(--space-m) 0;
+        }
+        .sidebar-nav .nav-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: rgba(255, 255, 255, 0.3);
+            padding: var(--space-m) var(--space-m) var(--space-xs);
+            font-weight: 600;
+        }
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: var(--space-m);
+            padding: 10px var(--space-m);
+            color: var(--sidebar-text);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: 0.2s;
+            border-left: 3px solid transparent;
+            margin: 1px 0;
+            cursor: pointer;
+        }
+        .sidebar-nav a:hover {
+            background: var(--sidebar-hover);
+            color: #fff;
+        }
+        .sidebar-nav a.active {
+            background: var(--sidebar-hover);
+            color: var(--sidebar-text-active);
+            border-left-color: var(--primary-light);
+        }
+        .sidebar-nav a i {
+            width: 20px;
+            text-align: center;
+            font-size: 16px;
+            opacity: 0.7;
+        }
+        .sidebar-nav a.active i {
+            opacity: 1;
+        }
+        .sidebar-nav a .nav-count {
+            margin-left: auto;
+            font-size: 11px;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 0 8px;
+            border-radius: var(--radius-full);
+            color: var(--sidebar-text);
+        }
+        .sidebar-nav a.active .nav-count {
+            background: var(--primary);
+            color: #fff;
+        }
 
-    canvas.addEventListener('mousedown', (e) => {
-      isDrawing = true;
-      const pos = getMousePos(e);
-      scratch(pos.x, pos.y);
-    });
+        .sidebar-footer {
+            padding: var(--space-m);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.3);
+            text-align: center;
+        }
 
-    canvas.addEventListener('mousemove', (e) => {
-      if (!isDrawing) return;
-      const pos = getMousePos(e);
-      scratch(pos.x, pos.y);
-    });
+        /* ============================================================
+                   MAIN CONTENT
+                   ============================================================ */
+        .main-content {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+        }
 
-    canvas.addEventListener('mouseup', () => {
-      isDrawing = false;
-    });
+        /* Header */
+        .top-header {
+            background: var(--surface);
+            padding: 0 var(--space-xl);
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #e9ecf0;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            flex-shrink: 0;
+        }
+        .top-header .left {
+            display: flex;
+            align-items: center;
+            gap: var(--space-m);
+        }
+        .top-header .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 22px;
+            color: var(--on-surface);
+            cursor: pointer;
+            padding: 4px;
+        }
+        .top-header .page-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .top-header .page-title span {
+            color: var(--on-surface-variant);
+            font-weight: 400;
+            font-size: 14px;
+        }
+        .top-header .right {
+            display: flex;
+            align-items: center;
+            gap: var(--space-m);
+        }
+        .top-header .right .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--primary-container);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+        }
 
-    canvas.addEventListener('touchstart', (e) => {
-      isDrawing = true;
-      const touch = e.touches[0];
-      const mouseEvent = new MouseEvent('mousemove', {
-        clientX: touch.clientX,
-        clientY: touch.clientY
-      });
-      canvas.dispatchEvent(mouseEvent);
-    });
+        /* Page Content */
+        .page-content {
+            padding: var(--space-xl);
+            flex: 1;
+        }
 
-    canvas.addEventListener('touchmove', (e) => {
-      if (!isDrawing) return;
-      e.preventDefault();
-      const touch = e.touches[0];
-      const pos = getMousePos(touch);
-      scratch(pos.x, pos.y);
-    });
+        /* ============================================================
+                   REWARD FORM
+                   ============================================================ */
+        .form-container {
+            max-width: 820px;
+            margin: 0 auto;
+        }
+        .form-card {
+            background: var(--surface);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-1);
+            padding: var(--space-xl);
+            border: 1px solid #f0f2f5;
+        }
+        .form-card .form-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: var(--space-l);
+            display: flex;
+            align-items: center;
+            gap: var(--space-s);
+        }
+        .form-card .form-title .tag {
+            font-size: 12px;
+            font-weight: 500;
+            background: var(--primary-container);
+            color: var(--primary);
+            padding: 0 12px;
+            border-radius: var(--radius-full);
+            line-height: 26px;
+        }
 
-    canvas.addEventListener('touchend', () => {
-      isDrawing = false;
-    });
-  },
+        .form-group {
+            margin-bottom: var(--space-l);
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: var(--space-xs);
+            color: var(--on-surface);
+        }
+        .form-group label .required {
+            color: var(--error);
+        }
+        .form-group .hint {
+            font-size: 12px;
+            color: var(--on-surface-variant);
+            margin-top: 4px;
+        }
 
-  updateScratchPercentage: function() {
-    if (!this.scratchCanvas || !this.scratchContext) return;
+        .form-control {
+            width: 100%;
+            padding: 10px 14px;
+            border: 2px solid #e9ecf0;
+            border-radius: var(--radius-md);
+            font-size: 14px;
+            font-family: var(--font-family);
+            transition: 0.2s;
+            background: var(--surface);
+            color: var(--on-surface);
+        }
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(108, 59, 158, 0.12);
+        }
+        .form-control::placeholder {
+            color: #B0B3B8;
+        }
 
-    const imageData = this.scratchContext.getImageData(0, 0, this.scratchCanvas.width, this.scratchCanvas.height);
-    const data = imageData.data;
-    let transparentPixels = 0;
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%235F6368' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 36px;
+        }
 
-    for (let i = 3; i < data.length; i += 4) {
-      if (data[i] === 0) {
-        transparentPixels++;
-      }
-    }
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
 
-    this.scratchPercentage = Math.round((transparentPixels / (data.length / 4)) * 100);
+        /* Image upload area */
+        .image-upload-area {
+            display: flex;
+            align-items: center;
+            gap: var(--space-m);
+            flex-wrap: wrap;
+        }
+        .image-preview {
+            width: 100px;
+            height: 100px;
+            border-radius: var(--radius-md);
+            background: var(--bg);
+            border: 2px dashed #d0d3d8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: #B0B3B8;
+            overflow: hidden;
+            flex-shrink: 0;
+            position: relative;
+        }
+        .image-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .image-preview .placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 12px;
+            color: #B0B3B8;
+        }
+        .image-preview .placeholder i {
+            font-size: 28px;
+            margin-bottom: 4px;
+        }
 
-    const percentageText = document.getElementById('scratchPercentageText');
-    if (percentageText) {
-      percentageText.textContent = `Scratched: ${this.scratchPercentage}%`;
-    }
+        .image-actions {
+            display: flex;
+            gap: var(--space-s);
+            flex-wrap: wrap;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-s);
+            padding: 8px 20px;
+            border-radius: var(--radius-md);
+            font-size: 13px;
+            font-weight: 600;
+            font-family: var(--font-family);
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+            text-decoration: none;
+            background: var(--bg);
+            color: var(--on-surface);
+        }
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-1);
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+        }
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #e9ecf0;
+            color: var(--on-surface);
+        }
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        .btn-success {
+            background: var(--secondary);
+            color: #fff;
+        }
+        .btn-success:hover {
+            background: #2D9248;
+        }
+        .btn-sm {
+            padding: 5px 14px;
+            font-size: 12px;
+        }
 
-    if (this.scratchPercentage >= 50) {
-      this.showScratchReward();
-    }
-  },
+        /* Color Picker row */
+        .color-picker-row {
+            display: flex;
+            align-items: center;
+            gap: var(--space-m);
+            flex-wrap: wrap;
+        }
+        .color-picker-row input[type="color"] {
+            width: 48px;
+            height: 48px;
+            border: 2px solid #e9ecf0;
+            border-radius: var(--radius-md);
+            padding: 2px;
+            cursor: pointer;
+            background: var(--surface);
+        }
+        .color-picker-row .color-hex {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--on-surface-variant);
+            background: var(--bg);
+            padding: 2px 12px;
+            border-radius: var(--radius-sm);
+        }
 
-  showScratchReward: function() {
-    const scratchInfo = document.getElementById('scratchInfo');
-    const claimBtn = document.getElementById('claimScratchBtn');
+        /* Slider row */
+        .slider-row {
+            display: flex;
+            align-items: center;
+            gap: var(--space-m);
+            flex-wrap: wrap;
+        }
+        .slider-row input[type="range"] {
+            flex: 1;
+            min-width: 120px;
+            height: 6px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: #e9ecf0;
+            border-radius: var(--radius-full);
+            outline: none;
+        }
+        .slider-row input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            border: 2px solid #fff;
+            box-shadow: var(--shadow-1);
+        }
+        .slider-row .slider-value {
+            font-weight: 600;
+            font-size: 14px;
+            min-width: 48px;
+            text-align: center;
+            color: var(--on-surface);
+        }
 
-    if (scratchInfo) {
-      scratchInfo.style.display = 'block';
-    }
+        /* Dimension inputs */
+        .dimension-row {
+            display: flex;
+            align-items: center;
+            gap: var(--space-m);
+            flex-wrap: wrap;
+        }
+        .dimension-row .dim-group {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+        .dimension-row .dim-group label {
+            font-weight: 500;
+            font-size: 13px;
+            color: var(--on-surface-variant);
+            margin: 0;
+        }
+        .dimension-row .dim-group input {
+            width: 80px;
+            padding: 6px 10px;
+            border: 2px solid #e9ecf0;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            font-family: var(--font-family);
+            text-align: center;
+        }
+        .dimension-row .dim-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
 
-    if (claimBtn) {
-      claimBtn.style.display = 'block';
-    }
+        /* Animation select row */
+        .anim-row {
+            display: flex;
+            align-items: center;
+            gap: var(--space-m);
+            flex-wrap: wrap;
+        }
+        .anim-row select {
+            width: 160px;
+        }
+        .anim-row .anim-tags {
+            display: flex;
+            gap: var(--space-xs);
+            flex-wrap: wrap;
+        }
+        .anim-row .anim-tags span {
+            font-size: 12px;
+            background: var(--bg);
+            padding: 2px 10px;
+            border-radius: var(--radius-full);
+            color: var(--on-surface-variant);
+        }
 
-    if (this.featureSettings.confetti) {
-      this.playConfetti();
-    }
+        /* Rich text editor mock */
+        .rich-editor {
+            border: 2px solid #e9ecf0;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+        }
+        .rich-editor .toolbar {
+            display: flex;
+            gap: var(--space-xs);
+            padding: var(--space-s) var(--space-m);
+            background: var(--bg);
+            border-bottom: 1px solid #e9ecf0;
+            flex-wrap: wrap;
+        }
+        .rich-editor .toolbar button {
+            background: none;
+            border: none;
+            padding: 4px 8px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 14px;
+            color: var(--on-surface-variant);
+            transition: 0.2s;
+        }
+        .rich-editor .toolbar button:hover {
+            background: var(--surface);
+            color: var(--on-surface);
+        }
+        .rich-editor .toolbar .sep {
+            width: 1px;
+            background: #d0d3d8;
+            margin: 0 4px;
+        }
+        .rich-editor textarea {
+            width: 100%;
+            border: none;
+            padding: var(--space-m);
+            font-size: 14px;
+            font-family: var(--font-family);
+            resize: vertical;
+            min-height: 100px;
+            color: var(--on-surface);
+            background: var(--surface);
+        }
+        .rich-editor textarea:focus {
+            outline: none;
+        }
 
-    if (this.featureSettings.sound) {
-      this.playSound('success');
-    }
+        /* Preview box */
+        .preview-box {
+            background: var(--bg);
+            border-radius: var(--radius-md);
+            padding: var(--space-l);
+            border: 2px dashed #d0d3d8;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: 0.3s;
+            position: relative;
+        }
+        .preview-box .preview-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--on-surface-variant);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: var(--space-s);
+        }
+        .preview-box .preview-content {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--on-surface);
+        }
+        .preview-box .preview-content .sub {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--on-surface-variant);
+        }
+        .preview-box .preview-image {
+            width: 80px;
+            height: 80px;
+            border-radius: var(--radius-md);
+            background: var(--primary-container);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: var(--primary);
+            margin-bottom: var(--space-s);
+        }
 
-    if (this.featureSettings.vibration) {
-      this.vibrate([100, 50, 100]);
-    }
-  },
+        .form-actions {
+            display: flex;
+            gap: var(--space-m);
+            margin-top: var(--space-l);
+            padding-top: var(--space-l);
+            border-top: 1px solid #e9ecf0;
+            flex-wrap: wrap;
+        }
+        .form-actions .btn {
+            padding: 10px 32px;
+            font-size: 14px;
+        }
 
-  showPoints: function() {
-    const content = document.getElementById('rewardContent');
-    if (!content) return;
+        /* ============================================================
+                   MODULES GRID (for sidebar preview)
+                   ============================================================ */
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: var(--space-s);
+            margin-top: var(--space-m);
+            padding: var(--space-m);
+            background: var(--bg);
+            border-radius: var(--radius-md);
+        }
+        .modules-grid .module-chip {
+            font-size: 13px;
+            padding: 6px 14px;
+            background: var(--surface);
+            border-radius: var(--radius-full);
+            border: 1px solid #e9ecf0;
+            display: flex;
+            align-items: center;
+            gap: var(--space-s);
+            color: var(--on-surface-variant);
+        }
+        .modules-grid .module-chip i {
+            font-size: 14px;
+            color: var(--primary-light);
+        }
 
-    content.innerHTML = `
-      <div class="reward-card reward-card-points">
-        <div class="reward-header">
-          <h2 class="reward-title">Points Earned!</h2>
-          <p class="reward-subtitle">Added to your wallet</p>
+        /* ============================================================
+                   RESPONSIVE
+                   ============================================================ */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                transform: translateX(-100%);
+                height: 100vh;
+                width: 280px;
+                box-shadow: var(--shadow-5);
+                transition: transform 0.3s ease;
+            }
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            .top-header .menu-toggle {
+                display: block;
+            }
+            .page-content {
+                padding: var(--space-m);
+            }
+            .form-card {
+                padding: var(--space-m);
+            }
+            .image-upload-area {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .color-picker-row,
+            .slider-row,
+            .dimension-row,
+            .anim-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .dimension-row .dim-group input {
+                width: 100px;
+            }
+            .form-actions {
+                flex-direction: column;
+            }
+            .form-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            .top-header .page-title span {
+                display: none;
+            }
+        }
+
+        /* overlay for mobile */
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 99;
+        }
+        .sidebar-overlay.active {
+            display: block;
+        }
+
+        /* ============================================================
+                   ANIMATION PREVIEW
+                   ============================================================ */
+        .anim-preview-box {
+            display: inline-block;
+            padding: 12px 24px;
+            background: var(--primary);
+            color: #fff;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            transition: 0.4s;
+            cursor: default;
+        }
+        .anim-preview-box.fade {
+            animation: fadeAnim 1.2s ease infinite;
+        }
+        .anim-preview-box.slide {
+            animation: slideAnim 1.2s ease infinite;
+        }
+        .anim-preview-box.zoom {
+            animation: zoomAnim 1.2s ease infinite;
+        }
+        .anim-preview-box.bounce {
+            animation: bounceAnim 1.2s ease infinite;
+        }
+        .anim-preview-box.flip {
+            animation: flipAnim 1.2s ease infinite;
+        }
+        .anim-preview-box.rotate {
+            animation: rotateAnim 1.2s ease infinite;
+        }
+
+        @keyframes fadeAnim {
+            0%,
+            100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.3;
+            }
+        }
+        @keyframes slideAnim {
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(20px);
+            }
+        }
+        @keyframes zoomAnim {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+        }
+        @keyframes bounceAnim {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+        @keyframes flipAnim {
+            0%,
+            100% {
+                transform: rotateY(0);
+            }
+            50% {
+                transform: rotateY(180deg);
+            }
+        }
+        @keyframes rotateAnim {
+            0%,
+            100% {
+                transform: rotate(0deg);
+            }
+            50% {
+                transform: rotate(45deg);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================
+    SIDEBAR OVERLAY (mobile)
+    ============================================================ -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- ============================================================
+    SIDEBAR
+    ============================================================ -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <span class="logo">🎯 <span>Reward</span>Hub</span>
+            <span class="badge">v2</span>
         </div>
+        <nav class="sidebar-nav">
+            <div class="nav-label">Modules</div>
 
-        <div class="points-container">
-          <div class="points-display">
-            <p class="points-number">+${this.currentReward.points}</p>
-            <p class="points-label">Points</p>
-          </div>
+            <a href="#" class="active" data-module="reward">
+                <i class="fas fa-gift"></i> Reward Management
+                <span class="nav-count">4</span>
+            </a>
+            <a href="#" data-module="content">
+                <i class="fas fa-file-alt"></i> Content Management
+                <span class="nav-count">6</span>
+            </a>
+            <a href="#" data-module="points">
+                <i class="fas fa-coins"></i> Points Management
+                <span class="nav-count">5</span>
+            </a>
+            <a href="#" data-module="customer">
+                <i class="fas fa-users"></i> Customer Management
+                <span class="nav-count">4</span>
+            </a>
+            <a href="#" data-module="product">
+                <i class="fas fa-box"></i> Product Management
+                <span class="nav-count">4</span>
+            </a>
+            <a href="#" data-module="design">
+                <i class="fas fa-palette"></i> Design Studio
+                <span class="nav-count">9</span>
+            </a>
+            <a href="#" data-module="media">
+                <i class="fas fa-images"></i> Media Library ⭐
+                <span class="nav-count">4</span>
+            </a>
+            <a href="#" data-module="settings">
+                <i class="fas fa-cog"></i> System Settings
+                <span class="nav-count">13</span>
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            &copy; 2026 RewardHub • v2.0
+        </div>
+    </aside>
 
-          <div class="wallet-summary">
-            <div class="wallet-item">
-              <span class="wallet-label">Today's Points:</span>
-              <span class="wallet-value">${this.wallet.todayPoints + this.currentReward.points}</span>
+    <!-- ============================================================
+    MAIN CONTENT
+    ============================================================ -->
+    <main class="main-content">
+
+        <!-- Top Header -->
+        <header class="top-header">
+            <div class="left">
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <span class="page-title">
+                    Reward Management
+                    <span>— Create &amp; customize rewards</span>
+                </span>
             </div>
-            <div class="wallet-item">
-              <span class="wallet-label">Total Points:</span>
-              <span class="wallet-value">${this.wallet.totalPoints + this.currentReward.points}</span>
+            <div class="right">
+                <span style="font-size:13px;color:var(--on-surface-variant);">Admin</span>
+                <div class="avatar">A</div>
             </div>
-          </div>
+        </header>
+
+        <!-- Page Content -->
+        <div class="page-content">
+
+            <!-- ============================================================
+            REWARD FORM
+            ============================================================ -->
+            <div class="form-container" id="rewardForm">
+                <div class="form-card">
+                    <div class="form-title">
+                        <i class="fas fa-pen-fancy" style="color:var(--primary);"></i> Create New Reward
+                        <span class="tag">Draft</span>
+                    </div>
+
+                    <!-- Reward Name -->
+                    <div class="form-group">
+                        <label>Reward Name <span class="required">*</span></label>
+                        <input type="text" class="form-control" id="rewardName" placeholder="e.g. Premium Voucher, Gift Card, Merchandise" value="Summer Voucher 2026" />
+                    </div>
+
+                    <!-- Reward Image -->
+                    <div class="form-group">
+                        <label>Reward Image</label>
+                        <div class="image-upload-area">
+                            <div class="image-preview" id="imagePreview">
+                                <div class="placeholder">
+                                    <i class="fas fa-image"></i>
+                                    <span>No image</span>
+                                </div>
+                            </div>
+                            <div class="image-actions">
+                                <button class="btn btn-primary btn-sm" onclick="uploadImage()">
+                                    <i class="fas fa-upload"></i> Upload
+                                </button>
+                                <button class="btn btn-outline btn-sm" onclick="changeImage()">
+                                    <i class="fas fa-exchange-alt"></i> Change
+                                </button>
+                            </div>
+                        </div>
+                        <div class="hint">Recommended: 400×300px, PNG or JPG, max 2MB</div>
+                    </div>
+
+                    <!-- Description (Rich Text Editor) -->
+                    <div class="form-group">
+                        <label>Description</label>
+                        <div class="rich-editor">
+                            <div class="toolbar">
+                                <button title="Bold"><b>B</b></button>
+                                <button title="Italic"><i>I</i></button>
+                                <button title="Underline"><u>U</u></button>
+                                <span class="sep"></span>
+                                <button title="Bullet list"><i class="fas fa-list-ul"></i></button>
+                                <button title="Numbered list"><i class="fas fa-list-ol"></i></button>
+                                <span class="sep"></span>
+                                <button title="Link"><i class="fas fa-link"></i></button>
+                                <button title="Image"><i class="fas fa-image"></i></button>
+                                <span style="margin-left:auto;font-size:12px;color:var(--on-surface-variant);">Rich Text</span>
+                            </div>
+                            <textarea id="rewardDescription" placeholder="Describe the reward in detail...">Get 20% off on your next purchase. Valid for 30 days. T&amp;C apply.</textarea>
+                        </div>
+                    </div>
+
+                    <!-- Text Color -->
+                    <div class="form-group">
+                        <label>Text Color</label>
+                        <div class="color-picker-row">
+                            <input type="color" id="textColor" value="#1F1F1F" />
+                            <span class="color-hex" id="textColorHex">#1F1F1F</span>
+                            <span style="font-size:13px;color:var(--on-surface-variant);">← Pick a color</span>
+                        </div>
+                    </div>
+
+                    <!-- Font Family -->
+                    <div class="form-group">
+                        <label>Font Family</label>
+                        <select class="form-control" id="fontFamily">
+                            <option value="Inter">Inter</option>
+                            <option value="Roboto">Roboto</option>
+                            <option value="Poppins" selected>Poppins</option>
+                            <option value="Noto Sans Malayalam">Noto Sans Malayalam</option>
+                            <option value="Georgia">Georgia</option>
+                            <option value="Arial">Arial</option>
+                        </select>
+                    </div>
+
+                    <!-- Font Size -->
+                    <div class="form-group">
+                        <label>Font Size</label>
+                        <div class="slider-row">
+                            <input type="range" id="fontSize" min="12" max="36" value="18" />
+                            <span class="slider-value" id="fontSizeValue">18px</span>
+                        </div>
+                    </div>
+
+                    <!-- Image Width & Height -->
+                    <div class="form-group">
+                        <label>Image Dimensions</label>
+                        <div class="dimension-row">
+                            <div class="dim-group">
+                                <label>Width</label>
+                                <input type="number" id="imgWidth" value="400" min="50" max="2000" /> px
+                            </div>
+                            <div class="dim-group">
+                                <label>Height</label>
+                                <input type="number" id="imgHeight" value="300" min="50" max="2000" /> px
+                            </div>
+                            <span style="font-size:13px;color:var(--on-surface-variant);">(recommended 400×300)</span>
+                        </div>
+                    </div>
+
+                    <!-- Animation -->
+                    <div class="form-group">
+                        <label>Animation</label>
+                        <div class="anim-row">
+                            <select class="form-control" id="animationSelect" style="width:180px;">
+                                <option value="none">None</option>
+                                <option value="fade" selected>Fade</option>
+                                <option value="slide">Slide</option>
+                                <option value="zoom">Zoom</option>
+                                <option value="bounce">Bounce</option>
+                                <option value="flip">Flip</option>
+                                <option value="rotate">Rotate</option>
+                            </select>
+                            <div class="anim-tags">
+                                <span>Speed: 1.2s</span>
+                                <span>Delay: 0ms</span>
+                                <span>Repeat: infinite</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Preview -->
+                    <div class="form-group">
+                        <label>Preview</label>
+                        <div class="preview-box" id="previewBox">
+                            <div class="preview-label">
+                                <i class="fas fa-eye"></i> Live Preview
+                            </div>
+                            <div class="preview-content" id="previewContent">
+                                <div class="preview-image" id="previewImageIcon">
+                                    <i class="fas fa-gift"></i>
+                                </div>
+                                <div id="previewText">Summer Voucher 2026</div>
+                                <div class="sub">20% off • Valid for 30 days</div>
+                            </div>
+                            <div style="margin-top:var(--space-s);font-size:12px;color:var(--on-surface-variant);">
+                                <span id="previewAnimTag">Animation: Fade</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="form-actions">
+                        <button class="btn btn-success" onclick="saveReward()">
+                            <i class="fas fa-save"></i> Save Reward
+                        </button>
+                        <button class="btn btn-outline" onclick="resetForm()">
+                            <i class="fas fa-undo"></i> Reset
+                        </button>
+                        <button class="btn btn-outline" style="margin-left:auto;" onclick="previewFull()">
+                            <i class="fas fa-expand"></i> Full Preview
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quick module reference -->
+                <div style="margin-top:var(--space-xl);">
+                    <div style="font-size:14px;font-weight:600;color:var(--on-surface-variant);margin-bottom:var(--space-s);">
+                        <i class="fas fa-th-large"></i> All Modules
+                    </div>
+                    <div class="modules-grid">
+                        <span class="module-chip"><i class="fas fa-file-alt"></i> Content Management</span>
+                        <span class="module-chip"><i class="fas fa-gift"></i> Reward Management</span>
+                        <span class="module-chip"><i class="fas fa-coins"></i> Points Management</span>
+                        <span class="module-chip"><i class="fas fa-users"></i> Customer Management</span>
+                        <span class="module-chip"><i class="fas fa-box"></i> Product Management</span>
+                        <span class="module-chip"><i class="fas fa-palette"></i> Design Studio</span>
+                        <span class="module-chip"><i class="fas fa-images"></i> Media Library ⭐</span>
+                        <span class="module-chip"><i class="fas fa-cog"></i> System Settings</span>
+                    </div>
+                    <!-- Sub-modules -->
+                    <div style="display:flex;flex-wrap:wrap;gap:var(--space-xs);margin-top:var(--space-s);padding:0 var(--space-s);">
+                        <span style="font-size:12px;color:var(--on-surface-variant);background:var(--surface);padding:2px 12px;border-radius:var(--radius-full);border:1px solid #e9ecf0;">Banners</span>
+                        <span style="font-size:12px;color:var(--on-surface-variant);background:var(--surface);padding:2px 12px;border-radius:var(--radius-full);border:1px solid #e9ecf0;">News</span>
+                        <span style="font-size:12px;color:var(--on-surface-variant);background:var(--surface);padding:2px 12px;border-radius:var(--radius-full);border:1px solid #e9ecf0;">Pages</span>
+                        <span style="font-size:12px;color:var(--on-surface-variant);background:var(--surface);padding:2px 12px;border-radius:var(--radius-full);border:1px solid #e9ecf0;">T&C</span>
+                        <span style="font-size:12px;color:var(--on-surface-variant);background:var(--surface);padding:2px 12px;border-radius:var(--radius-full);border:1px solid #e9ecf0;">Privacy</span>
+                        <span style="font-size:12px;color:var(--on-surface-variant);background:var(--surface);padding:2px 12px;border-radius:var(--radius-full);border:1px solid #e9ecf0;">FAQ</span>
+                        <span style="font-size:12px;color:var(--on-surface-variant);background:var(--surface);padding:2px 12px;border-radius:var(--radius-full);border:1px solid #e9ecf0;">Reward Categories</span>
+                        <span style="font-size:12px;color:var(--on-surface-variant);background:var(--surface);padding:2px 12px;border-radius:var(--radius-full);border:1px solid #e9ecf0;">Reward Stock</span>
+                        <span style="font-size:12px;color:var(--on-surface-variant);background:var(--surface);padding:2px 12px;border-radius:var(--radius-full);border:1px solid #e9ecf0;">Redemption Rules</span>
+                        <span style="font-size:12px;color:var(--on-surface-variant);background:var(--surface);padding:2px 12px;border-radius:var(--radius-full);border:1px solid #e9ecf0;">Signup Bonus</span>
+                        <span style="font-size:12px;color:var(--on-surface-variant);background:var(--surface);padding:2px 12px;border-radius:var(--radius-full);border:1px solid #e9ecf0;">Scan Points</span>
+                        <span style="font-size:12px;color:var(--on-surface-variant);background:var(--surface);padding:2px 12px;border-radius:var(--radius-full);border:1px solid #e9ecf0;">Referral Points</span>
+                        <span style="font-size:12px;color:var(--on-surface-variant);background:var(--surface);padding:2px 12px;border-radius:var(--radius-full);border:1px solid #e9ecf0;">Expiry Rules</span>
+                        <span style="font-size:12px;color:var(--on-surface-variant);background:var(--surface);padding:2px 12px;border-radius:var(--radius-full);border:1px solid #e9ecf0;">Customers</span>
+                        <span style="font-size:12px;color:var(--on-surface-variant);background:var(--surface);padding:2px 12px;border-radius:var(--radius-full);border:1px solid #e9ecf0;">Wallet</span>
+                        <span style="font-size:12px;color:var(--on-surface-variant);background:var(--surface);padding:2px 12px;border-radius:var(--radius-full);border:1px solid #e9ecf0;">Transactions</span>
+                        <span style="font-size:12px;color:var(--on-surface-variant);background:var(--surface);padding:2px 12px;border-radius:var(--radius-full);border:1px solid #e9ecf0;">Reward History</span>
+                        <span style="font-size:12px;color:var(--on-surface-variant);background:var(--surface);padding:2px 12px;border-radius:var(--radius-full);border:1px solid #e9ecf0;">Products</span>
+                        <span style="font-size:12px;color:var(--on-surface-variant);background:var(--surface);padding:2px 12px;border-radius:var(--radius-full);border:1px solid #e9ecf0;">Categories</span>
+                        <span style="font-size:12px;color:var(--on-surface-variant);background:var(--surface);padding:2px 12px;border-radius:var(--radius-full);border:1px solid #e9ecf0;">Coupon Series</span>
+                        <span style="font-size:12px;color:var(--on-surface-variant);background:var(--surface);padding:2px 12px;border-radius:var(--radius-full);border:1px solid #e9ecf0;">QR Codes</span>
+                        <span style="font-size:12px;color:var(--on-surface-variant);background:var(--surface);padding:2px 12px;border-radius:var(--radius-full);border:1px solid #e9ecf0;">Design Studio</span>
+                        <span style="font-size:12px;color:var(--on-surface-variant);background:var(--surface);padding:2px 12px;border-radius:var(--radius-full);border:1px solid #e9ecf0;">Media Library</span>
+                        <span style="font-size:12px;color:var(--on-surface-variant);background:var(--surface);padding:2px 12px;border-radius:var(--radius-full);border:1px solid #e9ecf0;">Settings</span>
+                    </div>
+                </div>
+            </div>
+
         </div>
-
-        <div class="reward-info">
-          <p class="reward-id">Reward ID: ${this.currentReward.rewardId}</p>
-          <p class="reward-time">Awarded at: ${new Date().toLocaleString()}</p>
-        </div>
-
-        <button id="continuePointsBtn" class="btn btn-primary btn-block">Continue Scanning</button>
-      </div>
-    `;
-
-    this.addPointsToWallet(this.currentReward.points);
-
-    if (this.featureSettings.animation) {
-      this.playAnimation('scaleIn');
-      this.playConfetti();
-    }
-
-    if (this.featureSettings.sound) {
-      this.playSound('success');
-    }
-
-    if (this.featureSettings.vibration) {
-      this.vibrate([100, 200, 100]);
-    }
-
-    const continueBtn = document.getElementById('continuePointsBtn');
-    if (continueBtn) {
-      continueBtn.addEventListener('click', () => this.continueScan());
-    }
-  },
-
-  showBetterLuck: function() {
-    const content = document.getElementById('rewardContent');
-    if (!content) return;
-
-    content.innerHTML = `
-      <div class="reward-card reward-card-better-luck">
-        <div class="reward-header">
-          <h2 class="reward-title">Better Luck Next Time!</h2>
-          <p class="reward-subtitle">Keep scanning to win rewards</p>
-        </div>
-
-        <div class="better-luck-container">
-          <div class="better-luck-icon">🍀</div>
-          <p class="better-luck-message">Don't worry, you'll win on your next scan!</p>
-        </div>
-
-        <div class="reward-info">
-          <p class="reward-id">Reward ID: ${this.currentReward.rewardId}</p>
-          <p class="reward-time">Attempted at: ${new Date().toLocaleString()}</p>
-        </div>
-
-        <button id="continueLuckBtn" class="btn btn-primary btn-block">Continue Scanning</button>
-      </div>
-    `;
-
-    if (this.featureSettings.animation) {
-      this.playAnimation('fadeIn');
-    }
-
-    if (this.featureSettings.sound) {
-      this.playSound('neutral');
-    }
-
-    const continueBtn = document.getElementById('continueLuckBtn');
-    if (continueBtn) {
-      continueBtn.addEventListener('click', () => this.continueScan());
-    }
-  },
-
-  addPointsToWallet: function(points) {
-    if (!this.featureSettings.points) return;
-
-    this.wallet.totalPoints += points;
-    this.wallet.todayPoints += points;
-    this.wallet.lastUpdated = new Date().toISOString();
-
-    this.currentReward.claimed = true;
-    this.currentReward.claimedAt = new Date().toISOString();
-    this.currentReward.status = 'COMPLETED';
-
-    this.saveRewardHistory();
-    this.saveWallet();
-  },
-
-  claimGift: function() {
-    this.currentReward.claimed = true;
-    this.currentReward.claimedAt = new Date().toISOString();
-    this.currentReward.status = 'CLAIMED';
-
-    if (this.featureSettings.rewardHistory) {
-      this.saveRewardHistory();
-    }
-
-    this.wallet.giftHistory.push({
-      rewardId: this.currentReward.rewardId,
-      gift: this.currentReward.gift,
-      claimedAt: this.currentReward.claimedAt
-    });
-
-    this.saveWallet();
-    this.showSuccessScreen('Gift Claimed Successfully');
-  },
-
-  claimDraw: function() {
-    this.currentReward.claimed = true;
-    this.currentReward.claimedAt = new Date().toISOString();
-    this.currentReward.status = 'CLAIMED';
-
-    if (this.featureSettings.rewardHistory) {
-      this.saveRewardHistory();
-    }
-
-    this.wallet.giftHistory.push({
-      rewardId: this.currentReward.rewardId,
-      prize: this.currentReward.selectedPrize,
-      claimedAt: this.currentReward.claimedAt
-    });
-
-    this.saveWallet();
-    this.showSuccessScreen('Prize Claimed Successfully');
-  },
-
-  claimScratch: function() {
-    this.currentReward.claimed = true;
-    this.currentReward.claimedAt = new Date().toISOString();
-    this.currentReward.scratched = true;
-    this.currentReward.status = 'CLAIMED';
-
-    if (this.currentReward.reward.value > 0) {
-      this.wallet.totalPoints += this.currentReward.reward.value;
-      this.wallet.todayPoints += this.currentReward.reward.value;
-    }
-
-    if (this.featureSettings.rewardHistory) {
-      this.saveRewardHistory();
-    }
-
-    this.saveWallet();
-    this.showSuccessScreen('Scratch Card Claimed Successfully');
-  },
-
-  saveRewardHistory: function() {
-    if (!this.featureSettings.rewardHistory) return;
-
-    try {
-      let history = [];
-      const historyData = localStorage.getItem('coupon_reward_history_' + (this.customerSession?.sessionId || 'default'));
-      if (historyData) {
-        history = JSON.parse(historyData);
-      }
-
-      history.push({
-        rewardId: this.currentReward.rewardId,
-        customerId: this.customerSession?.sessionId,
-        couponCode: this.lastScan?.code,
-        rewardType: this.currentReward.type,
-        details: JSON.stringify(this.currentReward),
-        status: this.currentReward.status,
-        timestamp: new Date().toISOString()
-      });
-
-      localStorage.setItem('coupon_reward_history_' + (this.customerSession?.sessionId || 'default'), JSON.stringify(history));
-    } catch (error) {
-      console.error('[Reward] Error saving reward history:', error);
-    }
-  },
-
-  saveWallet: function() {
-    try {
-      this.wallet.lastUpdated = new Date().toISOString();
-      localStorage.setItem('coupon_wallet_' + (this.customerSession?.sessionId || 'default'), JSON.stringify(this.wallet));
-    } catch (error) {
-      console.error('[Reward] Error saving wallet:', error);
-    }
-  },
-
-  showSuccessScreen: function(message) {
-    const content = document.getElementById('rewardContent');
-    if (!content) return;
-
-    content.innerHTML = `
-      <div class="reward-card reward-card-success">
-        <div class="success-icon">✓</div>
-        <h2 class="success-title">${message}</h2>
-        <p class="success-message">Thank you for using H4 Coupons</p>
-        <button id="finalContinueBtn" class="btn btn-primary btn-block">Continue Scanning</button>
-      </div>
-    `;
-
-    if (this.featureSettings.animation) {
-      this.playAnimation('slideUp');
-      this.playConfetti();
-    }
-
-    const continueBtn = document.getElementById('finalContinueBtn');
-    if (continueBtn) {
-      continueBtn.addEventListener('click', () => this.continueScan());
-    }
-  },
-
-  continueScan: function() {
-    this.destroy();
-    if (typeof CouponRouter !== 'undefined' && typeof CouponRouter.navigate === 'function') {
-      CouponRouter.navigate('#/customer-scan');
-    }
-  },
-
-  redirectToRegister: function() {
-    if (typeof CouponRouter !== 'undefined' && typeof CouponRouter.navigate === 'function') {
-      CouponRouter.navigate('#/register');
-    }
-  },
-
-  playAnimation: function(type) {
-    const container = document.querySelector('.reward-card');
-    if (!container) return;
-
-    const animations = {
-      scaleIn: 'animate-scale-in',
-      fadeIn: 'animate-fade-in',
-      slideUp: 'animate-slide-up'
-    };
-
-    const animationClass = animations[type] || 'animate-fade-in';
-    container.classList.add(animationClass);
-  },
-
-  playConfetti: function() {
-    if (!this.featureSettings.animation) return;
-
-    const container = document.getElementById('confettiContainer');
-    if (!container) return;
-
-    const confettiCount = 50;
-    for (let i = 0; i < confettiCount; i++) {
-      const confetti = document.createElement('div');
-      confetti.className = 'confetti';
-      confetti.style.left = Math.random() * 100 + '%';
-      confetti.style.backgroundColor = ['#6A3FA0', '#8A6510', '#E8A63D', '#5B6660'][Math.floor(Math.random() * 4)];
-      confetti.style.animationDelay = Math.random() * 0.5 + 's';
-      container.appendChild(confetti);
-
-      setTimeout(() => confetti.remove(), 2500);
-    }
-  },
-
-  playSound: function(type) {
-    if (!this.featureSettings.sound) return;
-
-    const sounds = {
-      success: 'M0,100 L50,50 L100,100',
-      neutral: 'M0,100 L50,75 L100,100'
-    };
-
-    try {
-      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-      const oscillator = audioContext.createOscillator();
-      const gainNode = audioContext.createGain();
-
-      oscillator.connect(gainNode);
-      gainNode.connect(audioContext.destination);
-
-      if (type === 'success') {
-        oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
-        oscillator.frequency.setValueAtTime(1000, audioContext.currentTime + 0.1);
-      } else {
-        oscillator.frequency.setValueAtTime(600, audioContext.currentTime);
-      }
-
-      gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
-
-      oscillator.start(audioContext.currentTime);
-      oscillator.stop(audioContext.currentTime + 0.2);
-    } catch (error) {
-      console.warn('[Reward] Audio not available:', error);
-    }
-  },
-
-  vibrate: function(pattern) {
-    if (!this.featureSettings.vibration) return;
-
-    if (navigator.vibrate) {
-      navigator.vibrate(pattern);
-    }
-  },
-
-  destroy: function() {
-    try {
-      if (this.animationFrameId) {
-        cancelAnimationFrame(this.animationFrameId);
-      }
-      this.currentReward = null;
-      this.lastScan = null;
-      this.scratchCanvas = null;
-      this.scratchContext = null;
-    } catch (error) {
-      console.error('[Reward] Destroy error:', error);
-    }
-  }
-};
-```
-
-```css
-.reward-wrapper {
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #f6f3ea 0%, #e8e3d4 100%);
-  padding: 20px;
-  font-family: 'IBM Plex Sans', sans-serif;
-}
-
-.reward-container {
-  width: 100%;
-  max-width: 500px;
-  position: relative;
-}
-
-.reward-card {
-  background: #fff;
-  border-radius: 16px;
-  padding: 32px 24px;
-  box-shadow: 0 4px 16px rgba(33, 35, 31, 0.1);
-}
-
-.reward-header {
-  text-align: center;
-  margin-bottom: 32px;
-}
-
-.reward-title {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 32px;
-  font-weight: 800;
-  color: #21231f;
-  margin: 0 0 8px;
-  text-transform: uppercase;
-  letter-spacing: -0.01em;
-}
-
-.reward-subtitle {
-  font-size: 14px;
-  color: #5b6660;
-  margin: 0;
-}
-
-.gift-container {
-  text-align: center;
-  margin: 32px 0;
-  padding: 24px;
-  background: #f6f3ea;
-  border-radius: 12px;
-}
-
-.gift-icon {
-  font-size: 64px;
-  margin-bottom: 16px;
-}
-
-.gift-name {
-  font-size: 20px;
-  font-weight: 600;
-  color: #21231f;
-  margin: 0 0 8px;
-}
-
-.gift-value {
-  font-size: 24px;
-  font-weight: 700;
-  color: #8a6510;
-  margin: 0;
-}
-
-.points-container {
-  text-align: center;
-  margin: 32px 0;
-}
-
-.points-display {
-  background: linear-gradient(135deg, #6a3fa0 0%, #8a6510 100%);
-  color: #fff;
-  padding: 40px 24px;
-  border-radius: 16px;
-  margin-bottom: 24px;
-}
-
-.points-number {
-  font-size: 48px;
-  font-weight: 800;
-  margin: 0;
-  font-family: 'Barlow Condensed', sans-serif;
-}
-
-.points-label {
-  font-size: 16px;
-  margin: 8px 0 0;
-}
-
-.wallet-summary {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-.wallet-item {
-  padding: 16px;
-  background: #f6f3ea;
-  border-radius: 8px;
-  text-align: center;
-}
-
-.wallet-label {
-  display: block;
-  font-size: 12px;
-  color: #5b6660;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 8px;
-}
-
-.wallet-value {
-  display: block;
-  font-size: 24px;
-  font-weight: 700;
-  color: #6a3fa0;
-}
-
-.wheel-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 32px 0;
-  position: relative;
-}
-
-.spin-wheel {
-  width: 300px;
-  height: 300px;
-  max-width: 100%;
-  margin: 0 auto;
-}
-
-.btn-spin {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: #6a3fa0;
-  color: #fff;
-  border: none;
-  font-weight: 700;
-  font-size: 14px;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(106, 63, 160, 0.3);
-  z-index: 10;
-  transition: all 0.2s ease;
-}
-
-.btn-spin:hover:not(:disabled) {
-  background: #8a6510;
-  transform: translateX(-50%) scale(1.05);
-}
-
-.btn-spin:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.prize-display {
-  text-align: center;
-  padding: 24px;
-  background: linear-gradient(135deg, #6a3fa0 0%, #8a6510 100%);
-  color: #fff;
-  border-radius: 12px;
-  margin-top: 16px;
-}
-
-.prize-label {
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin: 0 0 8px;
-  opacity: 0.9;
-}
-
-.prize-name {
-  font-size: 24px;
-  font-weight: 700;
-  margin: 0 0 8px;
-}
-
-.prize-value {
-  font-size: 20px;
-  margin: 0;
-}
-
-.scratch-container {
-  position: relative;
-  margin: 32px 0;
-  background: #f6f3ea;
-  border-radius: 12px;
-  padding: 20px;
-}
-
-.scratch-canvas {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  cursor: pointer;
-  touch-action: none;
-  user-select: none;
-}
-
-.scratch-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  pointer-events: none;
-}
-
-.scratch-label {
-  font-size: 12px;
-  color: #5b6660;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin: 0 0 8px;
-}
-
-.scratch-reward {
-  font-size: 20px;
-  font-weight: 700;
-  color: #21231f;
-  margin: 0;
-}
-
-.scratch-value {
-  font-size: 18px;
-  color: #8a6510;
-  margin: 4px 0 0;
-  font-weight: 700;
-}
-
-.scratch-info {
-  text-align: center;
-  padding: 16px;
-  background: #e8f5e9;
-  border-radius: 8px;
-  margin-top: 16px;
-}
-
-.scratch-percentage-text {
-  font-size: 14px;
-  color: #2e7d32;
-  font-weight: 600;
-  margin: 0;
-}
-
-.better-luck-container {
-  text-align: center;
-  padding: 40px 24px;
-  background: #f6f3ea;
-  border-radius: 12px;
-  margin: 32px 0;
-}
-
-.better-luck-icon {
-  font-size: 64px;
-  margin-bottom: 16px;
-}
-
-.better-luck-message {
-  font-size: 16px;
-  color: #5b6660;
-  margin: 0;
-  line-height: 1.5;
-}
-
-.success-icon {
-  width: 80px;
-  height: 80px;
-  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
-  color: #fff;
-  font-size: 48px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 24px;
-  font-weight: 700;
-}
-
-.success-title {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 28px;
-  font-weight: 800;
-  color: #21231f;
-  margin: 0 0 12px;
-  text-transform: uppercase;
-}
-
-.success-message {
-  font-size: 14px;
-  color: #5b6660;
-  margin: 0 0 32px;
-}
-
-.reward-info {
-  text-align: center;
-  padding: 16px 0;
-  border-top: 1px solid #d8d3c7;
-  margin-top: 24px;
-}
-
-.reward-id {
-  font-size: 12px;
-  color: #5b6660;
-  font-family: 'IBM Plex Mono', monospace;
-  margin: 0 0 4px;
-}
-
-.reward-time {
-  font-size: 12px;
-  color: #5b6660;
-  margin: 0;
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 8px;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 700;
-  font-size: 16px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  text-decoration: none;
-  user-select: none;
-}
-
-.btn-primary {
-  background: #6a3fa0;
-  color: #fff;
-}
-
-.btn-primary:hover {
-  background: #8a6510;
-  transform: translateY(-2px);
-}
-
-.btn-secondary {
-  background: #d8d3c7;
-  color: #21231f;
-}
-
-.btn-secondary:hover {
-  background: #c9c0b0;
-}
-
-.btn-block {
-  width: 100%;
-  margin-top: 16px;
-}
-
-.confetti-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.confetti {
-  position: absolute;
-  top: -10px;
-  width: 10px;
-  height: 10px;
-  background: #6a3fa0;
-  animation: fall 2.5s linear forwards;
-}
-
-@keyframes fall {
-  to {
-    transform: translateY(100vh) rotate(360deg);
-    opacity: 0;
-  }
-}
-
-@keyframes animate-scale-in {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes animate-fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes animate-slide-up {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.reward-card {
-  animation: animate-fade-in 0.3s ease;
-}
-
-@media (max-width: 600px) {
-  .reward-card {
-    padding: 24px 16px;
-  }
-
-  .reward-title {
-    font-size: 24px;
-  }
-
-  .points-number {
-    font-size: 36px;
-  }
-
-  .wallet-summary {
-    grid-template-columns: 1fr;
-  }
-
-  .spin-wheel {
-    width: 250px;
-    height: 250px;
-  }
-
-  .gift-name {
-    font-size: 18px;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .reward-wrapper {
-    background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
-  }
-
-  .reward-card {
-    background: #2a2a2a;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
-  }
-
-  .reward-title {
-    color: #fff;
-  }
-
-  .reward-subtitle,
-  .wallet-label,
-  .scratch-label {
-    color: #b0b0b0;
-  }
-
-  .gift-container,
-  .scratch-container,
-  .better-luck-container,
-  .wallet-item,
-  .scratch-info {
-    background: #333;
-  }
-
-  .gift-name,
-  .scratch-reward,
-  .success-title {
-    color: #fff;
-  }
-
-  .btn-secondary {
-    background: #444;
-    color: #fff;
-  }
-
-  .btn-secondary:hover {
-    background: #555;
-  }
-
-  .reward-info {
-    border-top-color: #444;
-  }
-}
-```
+    </main>
+
+    <!-- ============================================================
+    JAVASCRIPT
+    ============================================================ -->
+    <script>
+        // ============================================================
+        // SIDEBAR TOGGLE (mobile)
+        // ============================================================
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+
+        function toggleSidebar() {
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+
+        menuToggle.addEventListener('click', toggleSidebar);
+        overlay.addEventListener('click', toggleSidebar);
+
+        // Close sidebar on link click (mobile)
+        document.querySelectorAll('.sidebar-nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Highlight active
+                document.querySelectorAll('.sidebar-nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+
+                // Update page title
+                const name = this.textContent.trim().replace(/\d/g, '').trim();
+                const titleEl = document.querySelector('.top-header .page-title');
+                if (titleEl) {
+                    const span = titleEl.querySelector('span');
+                    titleEl.innerHTML = name + ' <span>— ' + name.toLowerCase() + ' module</span>';
+                }
+
+                if (window.innerWidth <= 768) {
+                    toggleSidebar();
+                }
+            });
+        });
+
+        // ============================================================
+        // COLOR PICKER
+        // ============================================================
+        const colorInput = document.getElementById('textColor');
+        const colorHex = document.getElementById('textColorHex');
+
+        colorInput.addEventListener('input', function() {
+            colorHex.textContent = this.value;
+            updatePreview();
+        });
+
+        // ============================================================
+        // FONT FAMILY
+        // ============================================================
+        const fontFamilySelect = document.getElementById('fontFamily');
+        fontFamilySelect.addEventListener('change', updatePreview);
+
+        // ============================================================
+        // FONT SIZE SLIDER
+        // ============================================================
+        const fontSizeSlider = document.getElementById('fontSize');
+        const fontSizeValue = document.getElementById('fontSizeValue');
+
+        fontSizeSlider.addEventListener('input', function() {
+            fontSizeValue.textContent = this.value + 'px';
+            updatePreview();
+        });
+
+        // ============================================================
+        // IMAGE DIMENSIONS
+        // ============================================================
+        document.getElementById('imgWidth').addEventListener('input', updatePreview);
+        document.getElementById('imgHeight').addEventListener('input', updatePreview);
+
+        // ============================================================
+        // ANIMATION
+        // ============================================================
+        const animSelect = document.getElementById('animationSelect');
+        animSelect.addEventListener('change', function() {
+            const anim = this.value;
+            const tag = document.getElementById('previewAnimTag');
+            const names = {
+                none: 'None',
+                fade: 'Fade',
+                slide: 'Slide',
+                zoom: 'Zoom',
+                bounce: 'Bounce',
+                flip: 'Flip',
+                rotate: 'Rotate'
+            };
+            tag.textContent = 'Animation: ' + (names[anim] || anim);
+            updatePreview();
+        });
+
+        // ============================================================
+        // REWARD NAME
+        // ============================================================
+        document.getElementById('rewardName').addEventListener('input', updatePreview);
+
+        // ============================================================
+        // PREVIEW UPDATE
+        // ============================================================
+        function updatePreview() {
+            const name = document.getElementById('rewardName').value || 'Reward Name';
+            const color = document.getElementById('textColor').value;
+            const font = document.getElementById('fontFamily').value;
+            const size = document.getElementById('fontSize').value;
+            const anim = document.getElementById('animationSelect').value;
+
+            const previewText = document.getElementById('previewText');
+            const previewIcon = document.getElementById('previewImageIcon');
+            const previewBox = document.getElementById('previewBox');
+
+            // Text styling
+            previewText.style.color = color;
+            previewText.style.fontFamily = font;
+            previewText.style.fontSize = size + 'px';
+            previewText.textContent = name;
+
+            // Animation
+            const animBox = previewBox;
+            // Remove all animation classes
+            const classes = ['fade', 'slide', 'zoom', 'bounce', 'flip', 'rotate'];
+            classes.forEach(c => animBox.classList.remove(c));
+            if (anim !== 'none') {
+                animBox.classList.add(anim);
+            } else {
+                animBox.style.animation = 'none';
+                // re-enable after a tick
+                setTimeout(() => {
+                    animBox.style.animation = '';
+                }, 10);
+            }
+
+            // Image dimensions (just visual feedback)
+            const w = document.getElementById('imgWidth').value || 400;
+            const h = document.getElementById('imgHeight').value || 300;
+            previewIcon.style.width = Math.min(80, w / 5) + 'px';
+            previewIcon.style.height = Math.min(80, h / 5) + 'px';
+        }
+
+        // ============================================================
+        // IMAGE UPLOAD MOCK
+        // ============================================================
+        function uploadImage() {
+            // Simulate file upload
+            const preview = document.getElementById('imagePreview');
+            preview.innerHTML = `
+                        <img src="https://placehold.co/400x300/6C3B9E/FFFFFF?text=Reward" alt="Reward image" />
+                    `;
+            // Also update the preview icon
+            const icon = document.getElementById('previewImageIcon');
+            icon.innerHTML = '<i class="fas fa-check-circle" style="color:#34A853;font-size:32px;"></i>';
+            icon.style.background = '#E6F4EA';
+            showToast('Image uploaded successfully!');
+        }
+
+        function changeImage() {
+            const preview = document.getElementById('imagePreview');
+            preview.innerHTML = `
+                        <div class="placeholder">
+                            <i class="fas fa-image"></i>
+                            <span>No image</span>
+                        </div>
+                    `;
+            const icon = document.getElementById('previewImageIcon');
+            icon.innerHTML = '<i class="fas fa-gift"></i>';
+            icon.style.background = 'var(--primary-container)';
+            showToast('Image removed. You can upload a new one.');
+        }
+
+        // ============================================================
+        // SAVE / RESET
+        // ============================================================
+        function saveReward() {
+            const name = document.getElementById('rewardName').value;
+            if (!name.trim()) {
+                showToast('Please enter a reward name.', 'error');
+                return;
+            }
+            showToast('✅ Reward "' + name + '" saved successfully!', 'success');
+        }
+
+        function resetForm() {
+            document.getElementById('rewardName').value = 'Summer Voucher 2026';
+            document.getElementById('textColor').value = '#1F1F1F';
+            document.getElementById('textColorHex').textContent = '#1F1F1F';
+            document.getElementById('fontFamily').value = 'Poppins';
+            document.getElementById('fontSize').value = '18';
+            document.getElementById('fontSizeValue').textContent = '18px';
+            document.getElementById('imgWidth').value = '400';
+            document.getElementById('imgHeight').value = '300';
+            document.getElementById('animationSelect').value = 'fade';
+            document.getElementById('rewardDescription').value = 'Get 20% off on your next purchase. Valid for 30 days. T&C apply.';
+            // Reset image
+            const preview = document.getElementById('imagePreview');
+            preview.innerHTML = `
+                        <div class="placeholder">
+                            <i class="fas fa-image"></i>
+                            <span>No image</span>
+                        </div>
+                    `;
+            const icon = document.getElementById('previewImageIcon');
+            icon.innerHTML = '<i class="fas fa-gift"></i>';
+            icon.style.background = 'var(--primary-container)';
+            updatePreview();
+            showToast('Form reset to defaults.', 'info');
+        }
+
+        function previewFull() {
+            showToast('🔍 Opening full preview...', 'info');
+            // In a real app, this would open a modal or new view
+        }
+
+        // ============================================================
+        // TOAST NOTIFICATION
+        // ============================================================
+        function showToast(message, type) {
+            const existing = document.querySelector('.toast-notification');
+            if (existing) existing.remove();
+
+            const toast = document.createElement('div');
+            toast.className = 'toast-notification';
+            const colors = {
+                success: '#34A853',
+                error: '#EA4335',
+                info: '#1A73E8'
+            };
+            const bg = colors[type] || '#1F1F1F';
+            toast.style.cssText = `
+                        position: fixed;
+                        bottom: 24px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        background: ${bg};
+                        color: #fff;
+                        padding: 12px 28px;
+                        border-radius: 12px;
+                        font-size: 14px;
+                        font-weight: 500;
+                        font-family: 'Inter', sans-serif;
+                        box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+                        z-index: 9999;
+                        animation: fadeAnim 0.4s ease;
+                        max-width: 90%;
+                        text-align: center;
+                    `;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.4s';
+                setTimeout(() => toast.remove(), 500);
+            }, 3000);
+        }
+
+        // ============================================================
+        // INIT
+        // ============================================================
+        updatePreview();
+
+        // Handle Enter key on inputs
+        document.querySelectorAll('input, select, textarea').forEach(el => {
+            el.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' && this.tagName !== 'TEXTAREA') {
+                    e.preventDefault();
+                }
+            });
+        });
+
+        // Auto-close sidebar on resize to desktop
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                sidebar.classList.remove('open');
+                overlay.classList.remove('active');
+            }
+        });
+
+        console.log('🎯 RewardHub Admin Panel loaded.');
+        console.log('📦 Modules: Content, Reward, Points, Customer, Product, Design, Media, Settings');
+    </script>
+
+</body>
+</html>
